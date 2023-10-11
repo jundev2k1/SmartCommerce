@@ -1,0 +1,43 @@
+@import 'baseStyle.css';
+@import 'animation.css';
+
+/*#region Responsive */
+
+@media (min-width: 768px) {
+    body {
+        font-size: 16px;
+    }
+}
+
+/*#endregion */
+
+/*#region Page style */
+#page-load {
+    position: relative;
+    display: flex;
+    height: 100vh;
+}
+
+.footer {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    bottom: 0;
+    width: 100%;
+    z-index: 97;
+}
+/*#endregion */
+
+/*#region Component */
+
+/*#region Button */
+
+.component-button {
+    padding: 4px 8px;
+    margin: 0 2px;
+}
+
+/*#endregion */
+
+
+/*#endregion */

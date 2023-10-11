@@ -1,0 +1,287 @@
+﻿@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap');
+
+:root {
+    /* Operating */
+    --site-mode-operating: #0b2c31;
+    --site-theme-operating: #fff;
+    --site-background-operating: #f4f2ff;
+    --site-popup-operating: #fff;
+    /* Mode */
+    --site-dark-mode: #242526;
+    --site-light-mode: #0b2c31;
+    /* Background */
+    --site-bg-dark-mode: #181a1b;
+    --site-bg-light-mode: #f4f2ff;
+    /* Themes */
+    --site-white-theme: #fff;
+    --site-milky-theme: #CAE7DF;
+    --site-pastel-theme: #F4ABAA;
+    --site-pink-theme: #E42C6A;
+    --site-orange-theme: #E56B1F;
+    --site-red-theme: #E12B38;
+    --site-yellow-theme: #FCD02C;
+    --site-green-theme: #3EB650;
+    --site-blue-theme: #3778C2;
+    /* My color */
+    --site-white: #fff;
+    --site-gray-50: #F9FAFB;
+    --site-gray-100: #F3F4F6;
+    --site-gray-200: #E5E7EB;
+    --site-gray-300: #D1D5DB;
+    --site-gray-400: #9CA3AF;
+    --site-gray-500: #6B7280;
+    --site-color-shadow: #00000076;
+    --site-primary: linear-gradient(to right, #673AB7 0%, #512DA8 51%, #673AB7 100%);
+    --site-danger: linear-gradient(to right, #FF512F 0%, #DD2476 51%, #FF512F 100%);
+    --site-info: linear-gradient(to right, #457fca 0%, #5691c8 51%, #457fca 100%);
+    --site-success: linear-gradient(to right, #76b852 0%, #8DC26F 51%, #76b852 100%);
+    --site-warning: linear-gradient(to right, #F2994A 0%, #F2C94C 51%, #F2994A 100%);
+    /* Border */
+    --site-border-rounded: 12px;
+    --site-border-full: 99999px;
+}
+
+/*#region Theme-Setting */
+/* Mode */
+.dark-mode {
+    --site-mode-operating: var(--site-dark-mode);
+    --site-background-operating: var(--site-bg-dark-mode);
+    --site-popup-operating: var(--site-white);
+    background: var(--site-background-operating);
+}
+
+.light-mode {
+    --site-mode-operating: var(--site-light-mode);
+    --site-background-operating: var(--site-white);
+    --site-popup-operating: var(--site-gray-100);
+    background: var(--site-background-operating);
+}
+
+/* Theme */
+.white-theme {
+    --site-theme-operating: var(--site-white-theme);
+}
+
+.milky-theme {
+    --site-theme-operating: var(--site-milky-theme);
+}
+
+.orange-theme {
+    --site-theme-operating: var(--site-orange-theme);
+}
+
+.blue-theme {
+    --site-theme-operating: var(--site-blue-theme);
+}
+
+.red-theme {
+    --site-theme-operating: var(--site-red-theme);
+}
+
+.yellow-theme {
+    --site-theme-operating: var(--site-yellow-theme);
+}
+
+.pink-theme {
+    --site-theme-operating: var(--site-pink-theme);
+}
+
+.pastel-theme {
+    --site-theme-operating: var(--site-pastel-theme);
+}
+
+.green-theme {
+    --site-theme-operating: var(--site-green-theme);
+}
+
+/* Basic color */
+.site-btn-primary {
+    background: var(--site-primary);
+    color: var(--site-white);
+}
+
+    .site-btn-primary:hover {
+        filter: brightness(0.9);
+        transition: .5s ease-in;
+    }
+
+.site-btn-danger {
+    background: var(--site-danger);
+    color: var(--site-white);
+}
+
+.site-btn-info {
+    background: var(--site-info);
+    color: var(--site-white);
+}
+
+.site-btn-success {
+    background: var(--site-success);
+    color: var(--site-white);
+}
+
+.site-btn-warning {
+    background: var(--site-warning);
+    color: var(--site-white);
+}
+/*#endregion */
+/* ========[CSS Customize]======= */
+/*#region Loading-Spinner */
+.loading-spinner {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 48px;
+    height: 48px;
+    border: 5px solid #FFF;
+    border-bottom-color: #FF3D00;
+    border-radius: 50%;
+    display: inline-block;
+    box-sizing: border-box;
+    animation: rotation 1s linear infinite;
+}
+
+@keyframes rotation {
+    0% {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+
+    100% {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
+}
+/*#endregion */
+
+/*#region Loading-bar */
+.loading-bar {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 120px;
+    height: 22px;
+    border-radius: 20px;
+    color: #514b82;
+    border: 2px solid;
+}
+
+    .loading-bar::before {
+        content: "";
+        position: absolute;
+        margin: 2px;
+        inset: 0 100% 0 0;
+        border-radius: inherit;
+        background: currentColor;
+        animation: loadingbar 2s infinite;
+    }
+
+@keyframes loadingbar {
+    100% {
+        inset: 0
+    }
+}
+/*#endregion */
+
+/*#region Loading-text */
+[class=loading-text]:before {
+    content: "Loading...";
+}
+
+.loading-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-weight: bold;
+    font-family: monospace;
+    font-size: 30px;
+    clip-path: inset(0 3ch 0 0);
+    animation: loadingText 1s steps(4) infinite;
+}
+
+@keyframes loadingText {
+    to {
+        clip-path: inset(0 -1ch 0 0)
+    }
+}
+/*#endregion */
+
+/* =======[Default customize]========= */
+
+/*#region Scroll style */
+
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 10px rgba(0,0,0,0.2);
+    border-radius: 10px;
+    background-color: var(--site-mode-operating);
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+    background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 4px rgba(0,0,0,.2);
+    background-color: var(--site-theme-operating);
+}
+
+/*#endregion */
+
+/*#region Tag setting */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    position: relative;
+    font-family: 'Quicksand', sans-serif;
+    font-size: 14px;
+    scroll-behavior: smooth;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+button {
+    color: inherit;
+    border: none;
+    background: none;
+}
+
+    button:active {
+        outline: none;
+    }
+
+ul, li {
+    list-style: none;
+    margin: 0;
+    padding: 0
+}
+/*#endregion */
+
+/*#region Class Customize */
+
+.show {
+    display: block !important;
+}
+
+.hide {
+    display: none !important;
+}
+
+.rounded {
+    border-radius: var(--site-border-rounded);
+}
+
+.border-full {
+    border-radius: var(--site-border-full);
+}
+
+/*#endregion */

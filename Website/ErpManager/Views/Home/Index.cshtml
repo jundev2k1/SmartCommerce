@@ -1,0 +1,15 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+    ViewData["CurrentPage"] = "dashboard-page";
+}
+
+<div class="text-center">
+    <a asp-route="Login">Login</a>
+</div>
+
+@await Component.InvokeAsync("Button", new ButtonComponent(){
+    Color = ButtonColor.Primary,
+    Content = "Test button",
+    Type = ButtonType.Button,
+    IsRounded = true
+})
