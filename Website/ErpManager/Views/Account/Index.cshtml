@@ -1,4 +1,5 @@
-﻿@{
+﻿@model LoginViewModel
+@{
     Layout = "_Layout_Login";
 }
 
@@ -137,19 +138,19 @@
                 <h2>@_localizer["Login_Title_SubTitle"]</h2>
             </div>
         </div>
-        <form name="login">
+        <form name="sign-in" asp-route="login" method="post">
             <div class="login-form">
                 <div class="input-group">
-                    <input name="login-id" type="text" placeholder="@_localizer["Login_Field_ID"]" />
+                    <input asp-for="@Model.LoginID" type="text" placeholder="@_localizer["Login_Field_ID"]" />
                     <span class="login-message"></span>
                 </div>
                 <div class="input-group">
-                    <input name="login-password" type="password" placeholder="@_localizer["Login_Field_Password"]" />
+                    <input asp-for="@Model.Password" type="password" placeholder="@_localizer["Login_Field_Password"]" />
                     <span class="login-message"></span>
                 </div>
                 <div class="input-group">
                     <div class="remember">
-                        <input name="login-remember" type="checkbox" />
+                        <input asp-for="@Model.RememberMe" type="checkbox" />
                         @_localizer["Login_Label_RememberMe"]
                     </div>
                     <div class="forget-password">

@@ -20,11 +20,8 @@ namespace ErpManager.Web.ViewModels.JSON
         [JsonProperty("icon")]
         public string Icon { get; set; } = string.Empty;
 
-        [JsonProperty("areas")]
-        public string Areas { get; set; } = string.Empty;
-
-        [JsonProperty("controller")]
-        public string controller { get; set; } = string.Empty;
+        [JsonProperty("url")]
+        public string Url { get; set; } = string.Empty;
 
         [JsonProperty("items")]
         public List<SubMenu> Items { get; set; } = new List<SubMenu>();

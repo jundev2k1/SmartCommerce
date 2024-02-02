@@ -3,13 +3,24 @@
     ViewData["CurrentPage"] = "dashboard-page";
 }
 
-<div class="text-center">
-    <a asp-route="Login">Login</a>
+<div class=" dash-board">
+    <section class="statical ">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-6">
+                    asdas
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    asdas
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    asdas
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    asdas
+                </div>
+            </div>
+        </div>
+    </section>
 </div>
 
-@await Component.InvokeAsync("Button", new ButtonComponent(){
-    Color = ButtonColor.Primary,
-    Content = "Test button",
-    Type = ButtonType.Button,
-    IsRounded = true
-})

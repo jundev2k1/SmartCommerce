@@ -1,6 +1,6 @@
 ﻿namespace Common.Constants
 {
-    public partial class Constants
+    public static partial class Constants
     {
         /// <summary>Application: Domain</summary>
         public const string APPLICATION_PROTOCOL_HTTP = "http://";
@@ -15,9 +15,9 @@
 
         /// <summary>Config: Global options</summary>
         public const bool CONFIG_GLOBAL_OPTIONS = true;
-        /// <summary>Global options</summary>
+        /// <summary>Default sidebar options</summary>
         public const bool CONFIG_DEFAULT_SIDEBAR_OPTIONS = true;
-        /// <summary>Global options</summary>
+        /// <summary>Default text options</summary>
         public const bool CONFIG_DEFAULT_TEXT_OPTIONS = true;
     }
 }

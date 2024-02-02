@@ -1,4 +1,4 @@
-namespace ErpManager.Web.Models
+namespace ErpManager.Web.ViewModels
 {
     public class ErrorViewModel
     {

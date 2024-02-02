@@ -176,8 +176,8 @@
                         <ul class="sub-menu">
                             @foreach (var subItem in item.Items)
                             {
-                                <li class="sub-menu-item">
-                                    <a href="#">
+                                <li class="sub-menu-item @((string.IsNullOrEmpty(currentPage) || currentPage != subItem.Name) ? string.Empty : "active")">
+                                    <a href="@subItem.Url">
                                         <i class="fa-solid fa-chevron-right fa-fw" style="opacity: 0"></i>
                                         <span class="title">
                                             @(Constants.CONFIG_DEFAULT_SIDEBAR_OPTIONS ? subItem.Label : _localizer[subItem.Localizer])
@@ -192,7 +192,7 @@
             else
             {
                 <div class="menu-item @((string.IsNullOrEmpty(currentPage) || currentPage != item.Name) ? string.Empty : "active")">
-                    <a href="#" class="collapsed" type="button">
+                    <a href="@item.Url" class="collapsed" type="button">
                         <i class="@item.Icon"></i>
                         <span class="title">
                             @(Constants.CONFIG_DEFAULT_SIDEBAR_OPTIONS ? item.Label : _localizer[item.Localizer])
@@ -204,7 +204,7 @@
     </div>
     <div class="logout">
         <div class="menu-line mb-3"></div>
-        <a href="#">
+        <a asp-route="Logout">
             <i class="fa-regular fa-right-from-bracket fa-fw"></i>
             <span>Logout</span>
         </a>

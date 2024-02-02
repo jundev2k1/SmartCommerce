@@ -5,9 +5,7 @@
     "localizer": "nav-dashboard",
     "name": "dashboard-page",
     "icon": "fa-light fa-gauge fa-fw",
-    "areas": "root",
-    "controller": "home",
-    "route": "dashboard"
+    "url": "#"
   },
   {
     "priority": "2",
@@ -15,20 +13,18 @@
     "localizer": "nav-user",
     "name": "user-page",
     "icon": "fa-light fa-user fa-fw",
-    "areas": "users",
-    "controller": "user",
     "items": [
       {
         "label": "User List",
         "localizer": "nav-user-list",
         "name": "user-list-page",
-        "route": ""
+        "url": "/user/user-list"
       },
       {
         "label": "User Category",
         "localizer": "nav-user-category",
         "name": "user-category-page",
-        "route": ""
+        "url": "#"
       }
     ]
   },
@@ -38,20 +34,18 @@
     "localizer": "nav-schedule",
     "name":  "schedule-page",
     "icon": "fa-light fa-calendar-days fa-fw",
-    "areas": "schedule",
-    "controller": "schedule",
     "items": [
       {
         "label": "Schedule List",
         "localizer": "nav-schedule-list",
         "name": "schedule-list-page",
-        "route": ""
+        "url": "#"
       },
       {
         "label": "Schedule Settings",
         "localizer": "nav-schedule-setting",
         "name": "schedule-setting-page",
-        "route": ""
+        "url": "#"
       }
     ]
   },
@@ -61,8 +55,6 @@
     "localizer": "nav-system",
     "name": "system-page",
     "icon": "fa-light fa-gear fa-fw",
-    "controller": "system",
-    "areas": "root",
-    "route": "system"
+    "url": "#"
   }
 ]

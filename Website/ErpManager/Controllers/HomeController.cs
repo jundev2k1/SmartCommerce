@@ -22,7 +22,6 @@ namespace ErpManager.Controllers
         [Route("/", Name = "Home")]
         public IActionResult Index()
         {
-            var b = _Context.Brands.FirstOrDefault();
             return View();
         }
     }

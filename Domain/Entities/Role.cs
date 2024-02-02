@@ -1,0 +1,38 @@
+﻿#nullable disable
+using Domain.Enum;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace Domain.Entities;
+
+[Table("Role")]
+public partial class Role
+{
+    [Key, Required]
+    [StringLength(20)]
+    public string BranchID { get; set; }
+
+    [Key, Required]
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+    public int RoleID { get; set; }
+
+    [Required]
+    [StringLength(60)]
+    public string Name { get; set; }
+
+    [StringLength(4000)]
+    public string Permission { get; set; }
+
+    public int Priority { get; set; } = 0;
+
+    [Column(TypeName = "datetime")]
+    public DateTime DateCreated { get; set; }
+
+    [Column(TypeName = "datetime")]
+    public DateTime DateChanged { get; set; }
+
+    [StringLength(30)]
+    public string CreatedBy { get; set; }
+
+    public RoleStatusEnum Status { get; set; }
+}

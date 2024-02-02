@@ -10,7 +10,10 @@ namespace ErpManager.Web.ViewModels.JSON
         [JsonProperty("localizer")]
         public string Localizer { get; set; } = string.Empty;
 
-        [JsonProperty("route")]
-        public string Route { get; set; } = string.Empty;
+        [JsonProperty("name")]
+        public string Name { get; set; } = string.Empty;
+
+        [JsonProperty("url")]
+        public string Url { get; set; } = string.Empty;
     }
 }

@@ -1,11 +1,11 @@
 ﻿namespace ErpManager.Web.ViewModels
 {
-    public class Login
+    public class LoginViewModel
     {
         public string LoginID { get; set; } = string.Empty;
 
         public string Password { get; set; } = string.Empty;
 
-        public bool Remember {  get; set; }
+        public bool RememberMe { get; set; } = false;
     }
 }
