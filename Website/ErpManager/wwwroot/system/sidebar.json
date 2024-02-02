@@ -5,10 +5,64 @@
     "localizer": "nav-dashboard",
     "name": "dashboard-page",
     "icon": "fa-light fa-gauge fa-fw",
-    "url": "#"
+    "url": "/"
   },
   {
     "priority": "2",
+    "label": "Product",
+    "localizer": "nav-product",
+    "name": "product-page",
+    "icon": "fa-light fa-cube fa-fw",
+    "items": [
+      {
+        "label": "Product List",
+        "localizer": "nav-product-list",
+        "name": "product-list-page",
+        "url": "/product/product-list"
+      },
+      {
+        "label": "Product Register",
+        "localizer": "nav-product-register",
+        "name": "product-register-page",
+        "url": "/product/product-register"
+      },
+      {
+        "label": "Product Modify",
+        "localizer": "nav-product-modify",
+        "name": "product-modify-page",
+        "url": "/product/product-modify"
+      },
+      {
+        "label": "Product Confirm",
+        "localizer": "nav-product-confirm",
+        "name": "product-confirm-page",
+        "url": "/product/product-confirm"
+      }
+    ]
+  },
+  {
+    "priority": "3",
+    "label": "Schedule",
+    "localizer": "nav-schedule",
+    "name": "schedule-page",
+    "icon": "fa-light fa-calendar-days fa-fw",
+    "items": [
+      {
+        "label": "Schedule List",
+        "localizer": "nav-schedule-list",
+        "name": "schedule-list-page",
+        "url": "#"
+      },
+      {
+        "label": "Schedule Settings",
+        "localizer": "nav-schedule-setting",
+        "name": "schedule-setting-page",
+        "url": "#"
+      }
+    ]
+  },
+  {
+    "priority": "4",
     "label": "User",
     "localizer": "nav-user",
     "name": "user-page",
@@ -29,28 +83,7 @@
     ]
   },
   {
-    "priority": "3",
-    "label": "Schedule",
-    "localizer": "nav-schedule",
-    "name":  "schedule-page",
-    "icon": "fa-light fa-calendar-days fa-fw",
-    "items": [
-      {
-        "label": "Schedule List",
-        "localizer": "nav-schedule-list",
-        "name": "schedule-list-page",
-        "url": "#"
-      },
-      {
-        "label": "Schedule Settings",
-        "localizer": "nav-schedule-setting",
-        "name": "schedule-setting-page",
-        "url": "#"
-      }
-    ]
-  },
-  {
-    "priority": "4",
+    "priority": "5",
     "label": "System",
     "localizer": "nav-system",
     "name": "system-page",

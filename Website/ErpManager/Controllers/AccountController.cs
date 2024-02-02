@@ -51,6 +51,7 @@ namespace ErpManager.Web.Controllers
                 return RedirectToRoute("Home");
             }
 
+            ViewData["as"] = "";
             return View(this.LoginCookieInput);
         }
 
@@ -130,6 +131,10 @@ namespace ErpManager.Web.Controllers
         {
             // Delete cookies
             HandleCookies(null, false);
+
+            // Clear session
+            HttpContext.Session.Clear();
+
             return RedirectToRoute("Login");
         }
 

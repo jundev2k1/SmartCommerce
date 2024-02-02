@@ -117,6 +117,13 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ErrorMessage_NoHasPermission" xml:space="preserve">
+    <value>Tài khoản của bạn không có quyền truy cập vào nội dung này. Vui lòng quay lại hoặc liên hệ người quản lý để được giúp đỡ.</value>
+  </data>
+  <data name="ErrorMessage_SystemError" xml:space="preserve">
+    <value>Đã xảy ra lỗi hệ thống, vui lòng liên hệ người quản lý để được giúp đỡ @@operator_phone_number@@</value>
+    <comment>Setting in config</comment>
+  </data>
   <data name="Login_Button_ForgetPassword" xml:space="preserve">
     <value>Quên mật khẩu?</value>
   </data>

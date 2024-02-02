@@ -1,46 +1,12 @@
-using Domain.Entities;
-using Domain.Services;
-using Microsoft.AspNetCore.Localization;
-using Microsoft.AspNetCore.Mvc.Razor;
-using Microsoft.EntityFrameworkCore;
+using ErpManager.Web;
+using ErpManager.Web.Middleware;
 using Microsoft.Extensions.Options;
-using System.Globalization;
 
 var builder = WebApplication.CreateBuilder(args);
-
-// Add session
-builder.Services.AddDistributedMemoryCache();
-builder.Services.AddSession(options =>
 {
-    options.IdleTimeout = TimeSpan.FromMinutes(30);
-});
-
-// Add multiple language
-builder.Services.AddLocalization(option => option.ResourcesPath = "Resources");    
-builder.Services.Configure<RequestLocalizationOptions>(options =>
-{
-    var supportedLanguage = new[]
-    {
-        new CultureInfo("vi-VN"),
-        new CultureInfo("en-US"),
-    };
-
-    options.DefaultRequestCulture = new RequestCulture("vi-VN");
-    options.SupportedCultures = supportedLanguage;
-    options.SupportedUICultures = supportedLanguage;
-});
-
-// Add services to the container.
-builder.Services.AddControllersWithViews()
-    .AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix)
-    .AddDataAnnotationsLocalization();
-
-// Dependency injection
-builder.Services.AddScoped<IUserService, UserService>();
-
-// Connection database
-var connection = builder.Configuration.GetConnectionString("ErpManager");
-builder.Services.AddDbContext<DBContext>(x => x.UseSqlServer(connection, b => b.MigrationsAssembly("ErpManager.Web")));
+    builder.Services.AddApplication(builder.Configuration);
+    builder.Services.AddPersistence();
+}
 
 var app = builder.Build();
 
@@ -51,6 +17,7 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
+// Use localization
 using (var scope = app.Services.CreateScope())
 {
     var localizationOptions = scope.ServiceProvider
@@ -58,9 +25,7 @@ using (var scope = app.Services.CreateScope())
         .Value;
     app.UseRequestLocalization(localizationOptions);
 }
-
 app.UseSession();
-
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
@@ -71,5 +36,9 @@ app.MapControllerRoute(
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+// Configuration for middleware
+app.UseMiddleware<SessionCheckMiddleware>();
+app.UseMiddleware<PermissionHandlerMiddleware>();
 
 app.Run();

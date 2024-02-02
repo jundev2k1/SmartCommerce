@@ -5,7 +5,6 @@ export const typeLoading = {
     text: 'loading-text',
 };
 export const showLoading = function (type, selector = 'global') {
-    debugger
     const isGlobal = (selector === 'global'|| document.querySelector(selector) === null) || false;
 
     if (Object.values(typeLoading).includes(type) === false)
@@ -43,7 +42,6 @@ export const showLoading = function (type, selector = 'global') {
     }
 };
 export const hideLoading = function (type = 'unknown', selector = 'global') {
-    debugger
     if (Object.values(typeLoading).includes(type) === false || type === 'unknown') {
         const types = Object.values(typeLoading);
         if (selector === 'global') {

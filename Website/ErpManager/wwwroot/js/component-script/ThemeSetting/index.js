@@ -59,7 +59,6 @@ const themeList = Object.freeze([
 ]);
 const ThemeSetting = (function () {
     // Element selector
-    debugger
     const root = document.querySelector("#page-load");
     const contentElement = document.querySelector(".theme-settings");
     const remoteElement = document.querySelector(".btn-theme-settings button");
@@ -108,7 +107,7 @@ const ThemeSetting = (function () {
         },
         getCookies() {
             const cookies = document.cookie?.split(';');
-            debugger
+
             if (cookies !== '') {
                 cookies.forEach((cookie) => {
                     const data = cookie.split('=');
@@ -134,7 +133,6 @@ const ThemeSetting = (function () {
             document.cookie = cookiePattern;
         },
         renderContent() {
-            debugger
             let modeContent = '';
             modeList.forEach((mode, index) => {
                 let content = ''

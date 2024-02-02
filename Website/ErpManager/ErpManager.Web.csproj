@@ -29,8 +29,8 @@
 
   <ItemGroup>
     <Folder Include="Areas\Users\ViewModels\" />
-    <Folder Include="Controllers\" />
     <Folder Include="Migrations\" />
+    <Folder Include="ViewModels\Component\" />
     <Folder Include="wwwroot\content\" />
     <Folder Include="wwwroot\css\" />
     <Folder Include="wwwroot\fileUpload\" />
