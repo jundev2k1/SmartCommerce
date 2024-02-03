@@ -49,13 +49,13 @@ namespace ErpManager.Web.Middleware
             }
 
             // Get message
-            var message = _localizer.GetString("ErrorMessage_NoHasPermission").ToStringOrEmpty();
+            var message = _localizer.GetString("ErrorMessage_NoHasPermission");
             var errorMessage = MessageUtilitiy.GetMessageReplacer(message);
 
             // Clear and set error message for error page
             context.Session.Clear();
             context.Session.SetString(Constants.SESSION_KEY_PAGE_ERROR_MESSAGE, errorMessage);
-            context.Response.Redirect("/error");
+            context.Response.Redirect("/error-page");
         }
 
         /// <summary>

@@ -1,8 +1,4 @@
-﻿@{
-    var background = Url.Content("~/images/background/theme-setting-background.jpg");
-    var componentScript = Url.Content("~/js/component-script/ThemeSetting/index.js");
-}
-<style>
+﻿<style>
     .btn-back-to-top {
         position: fixed;
         right: 12px;
@@ -39,7 +35,7 @@
 </div>
 
 <script type="text/javascript">
-    window.onscroll = (event) => {
+    const handleBackToTop = (event) => {
         const btnBackToTop = document.querySelector(".btn-back-to-top");
         if (window.scrollY > 200) {
             if (!btnBackToTop.classList.contains("active")) {
@@ -49,8 +45,11 @@
             if (btnBackToTop.classList.contains("active")) {
                 btnBackToTop.classList.remove("active");
             }
-        };
-    };
+        }
+    }
+    // Register function window scroll
+    StoreWindowScrollCallback.push(handleBackToTop);
+    
     const handleScrollTop = () => {
         window.scrollTo(0, 0);
     }

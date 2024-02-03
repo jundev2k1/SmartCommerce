@@ -1,9 +1,10 @@
 ﻿<!DOCTYPE html>
-<html lang="en">
+<html lang="@(ViewData["Language_Code"] ?? "en")">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - @Constants.APPLICATION_NAME</title>
+    <script src="~/js/store.js"></script>
     @* Css import render *@
     @await Component.InvokeAsync("StyleSheet")
 </head>
@@ -13,7 +14,9 @@
         @await Component.InvokeAsync("NavBar")
         <div class="render-content position-relative w-100">
             @await Component.InvokeAsync("Header")
-            @RenderBody()
+            <div class="main-content w-100 p-2">
+                @RenderBody()
+            </div>
             @await Component.InvokeAsync("Footer")
         </div>
         @await Component.InvokeAsync("ThemeSetting")

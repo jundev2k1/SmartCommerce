@@ -36,6 +36,8 @@
     <Folder Include="wwwroot\fileUpload\" />
     <Folder Include="wwwroot\js\component-js\dialog\" />
     <Folder Include="wwwroot\js\component-js\popup\" />
+    <Folder Include="wwwroot\js\component-script\SearchInput\" />
+    <Folder Include="wwwroot\js\component-script\ThemeSetting\" />
     <Folder Include="wwwroot\lib\bootstrap\" />
     <Folder Include="wwwroot\lib\bootstrap\dist\css\" />
     <Folder Include="wwwroot\lib\bootstrap\dist\js\" />

@@ -1,11 +1,16 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
-    ViewData["CurrentPage"] = "dashboard-page";
+    ViewData[Constants.GLOBAL_KEY_TITLE] = "Home Page";
+    ViewData[Constants.GLOBAL_KEY_CURRENT_PAGE] = "dashboard-page";
 }
 
 <div class=" dash-board">
     <section class="statical ">
         <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    @await Component.InvokeAsync("SearchInput")
+                </div>
+            </div>
             <div class="row">
                 <div class="col-lg-3 col-md-6">
                     asdas

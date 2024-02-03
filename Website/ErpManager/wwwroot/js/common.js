@@ -1,11 +1,11 @@
-// Loading function
+﻿// Loading function
 export const typeLoading = {
     spinner: 'loading-spinner',
     bar: 'loading-bar',
     text: 'loading-text',
 };
 export const showLoading = function (type, selector = 'global') {
-    const isGlobal = (selector === 'global'|| document.querySelector(selector) === null) || false;
+    const isGlobal = (selector === 'global' || document.querySelector(selector) === null) || false;
 
     if (Object.values(typeLoading).includes(type) === false)
         type = typeLoading.spinner;
@@ -64,3 +64,15 @@ export const hideLoading = function (type = 'unknown', selector = 'global') {
         }
     }
 };
+
+export const CallAjax = ({ url, data, method = "POST" }) => {
+    return $.ajax({
+        url: url,
+        type: method,
+        contentType: 'application/json',
+        data: JSON.stringify(data),
+        error: function (jqXHR, textStatus, errorThrown) {
+            console.error('AJAX request failed:', textStatus, errorThrown);
+        }
+    });
+}

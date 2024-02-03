@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ButtonTitle_Search" xml:space="preserve">
+    <value>Tìm Kiếm</value>
+  </data>
   <data name="ErrorMessage_NoHasPermission" xml:space="preserve">
     <value>Tài khoản của bạn không có quyền truy cập vào nội dung này. Vui lòng quay lại hoặc liên hệ người quản lý để được giúp đỡ.</value>
   </data>
@@ -145,6 +148,39 @@
   <data name="Login_Title_SubTitle" xml:space="preserve">
     <value>Đăng nhập vào tài khoản của bạn.</value>
     <comment>sign in to your account.</comment>
+  </data>
+  <data name="Nav_Dashboard" xml:space="preserve">
+    <value>Thống Kê</value>
+  </data>
+  <data name="Nav_Product" xml:space="preserve">
+    <value>Sản Phẩm</value>
+  </data>
+  <data name="Nav_Product_ProductList" xml:space="preserve">
+    <value>Danh Sách Sản Phẩm</value>
+  </data>
+  <data name="Nav_Product_ProductRegister" xml:space="preserve">
+    <value>Đăng Ký Sản Phẩm</value>
+  </data>
+  <data name="Nav_Schedule" xml:space="preserve">
+    <value>Lịch Trình</value>
+  </data>
+  <data name="Nav_Schedule_ScheduleList" xml:space="preserve">
+    <value>Danh Sách Lịch Trình</value>
+  </data>
+  <data name="Nav_Schedule_ScheduleSetting" xml:space="preserve">
+    <value>Cài Đặt Lịch Trình</value>
+  </data>
+  <data name="Nav_System" xml:space="preserve">
+    <value>Hệ Thống</value>
+  </data>
+  <data name="Nav_User" xml:space="preserve">
+    <value>Người Dùng</value>
+  </data>
+  <data name="Nav_User_UserList" xml:space="preserve">
+    <value>Danh Sách Người Dùng</value>
+  </data>
+  <data name="Nav_User_UserRole" xml:space="preserve">
+    <value>Phân Quyền</value>
   </data>
   <data name="ThemeSettings_Leave" xml:space="preserve">
     <value>Rời khỏi</value>

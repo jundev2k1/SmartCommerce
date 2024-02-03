@@ -2,6 +2,14 @@
 {
     public static partial class Constants
     {
+        /// <summary>Global key: Language code (for localization in page)</summary>
+        public const string GLOBAL_KEY_LANGUAGE_CODE = "Language_Code";
+        /// <summary>Global key: Title (for title every page)</summary>
+        public const string GLOBAL_KEY_TITLE = "Title";
+        /// <summary>Global key: Title (for title every page)</summary>
+        public const string GLOBAL_KEY_CURRENT_PAGE = "Current_Page";
+
+
         /// <summary>Session key: Operator id</summary>
         public const string SESSION_KEY_OPERATOR_ID = "Session_OperatorId";
         /// <summary>Session key: Operator permission</summary>

@@ -2,7 +2,7 @@
   {
     "priority": "1",
     "label": "Dashboard",
-    "localizer": "nav-dashboard",
+    "localizer": "Nav_Dashboard",
     "name": "dashboard-page",
     "icon": "fa-light fa-gauge fa-fw",
     "url": "/"
@@ -10,52 +10,40 @@
   {
     "priority": "2",
     "label": "Product",
-    "localizer": "nav-product",
+    "localizer": "Nav_Product",
     "name": "product-page",
     "icon": "fa-light fa-cube fa-fw",
     "items": [
       {
         "label": "Product List",
-        "localizer": "nav-product-list",
+        "localizer": "Nav_Product_ProductList",
         "name": "product-list-page",
         "url": "/product/product-list"
       },
       {
         "label": "Product Register",
-        "localizer": "nav-product-register",
+        "localizer": "Nav_Product_ProductRegister",
         "name": "product-register-page",
         "url": "/product/product-register"
-      },
-      {
-        "label": "Product Modify",
-        "localizer": "nav-product-modify",
-        "name": "product-modify-page",
-        "url": "/product/product-modify"
-      },
-      {
-        "label": "Product Confirm",
-        "localizer": "nav-product-confirm",
-        "name": "product-confirm-page",
-        "url": "/product/product-confirm"
       }
     ]
   },
   {
     "priority": "3",
     "label": "Schedule",
-    "localizer": "nav-schedule",
+    "localizer": "Nav_Schedule",
     "name": "schedule-page",
     "icon": "fa-light fa-calendar-days fa-fw",
     "items": [
       {
         "label": "Schedule List",
-        "localizer": "nav-schedule-list",
+        "localizer": "Nav_Schedule_ScheduleList",
         "name": "schedule-list-page",
         "url": "#"
       },
       {
         "label": "Schedule Settings",
-        "localizer": "nav-schedule-setting",
+        "localizer": "Nav_Schedule_ScheduleSetting",
         "name": "schedule-setting-page",
         "url": "#"
       }
@@ -64,20 +52,20 @@
   {
     "priority": "4",
     "label": "User",
-    "localizer": "nav-user",
+    "localizer": "Nav_User",
     "name": "user-page",
     "icon": "fa-light fa-user fa-fw",
     "items": [
       {
         "label": "User List",
-        "localizer": "nav-user-list",
+        "localizer": "Nav_User_UserList",
         "name": "user-list-page",
         "url": "/user/user-list"
       },
       {
-        "label": "User Category",
-        "localizer": "nav-user-category",
-        "name": "user-category-page",
+        "label": "User Role",
+        "localizer": "Nav_User_UserRole",
+        "name": "user-role-page",
         "url": "#"
       }
     ]
@@ -85,7 +73,7 @@
   {
     "priority": "5",
     "label": "System",
-    "localizer": "nav-system",
+    "localizer": "Nav_System",
     "name": "system-page",
     "icon": "fa-light fa-gear fa-fw",
     "url": "#"

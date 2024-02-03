@@ -16,8 +16,6 @@
         /// <summary>Config: Global options</summary>
         public const bool CONFIG_GLOBAL_OPTIONS = true;
         /// <summary>Default sidebar options</summary>
-        public const bool CONFIG_DEFAULT_SIDEBAR_OPTIONS = true;
-        /// <summary>Default text options</summary>
-        public const bool CONFIG_DEFAULT_TEXT_OPTIONS = true;
+        public const bool CONFIG_DEFAULT_SIDEBAR_OPTIONS = false;
     }
 }

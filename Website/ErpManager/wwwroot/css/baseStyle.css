@@ -52,7 +52,7 @@
 
 .light-mode {
     --site-mode-operating: var(--site-light-mode);
-    --site-background-operating: var(--site-white);
+    --site-background-operating: var(--site-gray-200);
     --site-popup-operating: var(--site-gray-100);
     background: var(--site-background-operating);
 }

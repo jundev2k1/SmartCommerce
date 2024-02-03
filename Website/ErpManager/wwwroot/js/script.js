@@ -1,4 +1,5 @@
 ﻿import * as Common from './common.js';
+import { navbarActive } from './component-script/Navbar';
 
 // Setting default toastr
 toastr.options = {
@@ -17,3 +18,19 @@ toastr.options = {
     "showMethod": "fadeIn",
     "hideMethod": "fadeOut"
 }
+
+// Handle common page load
+document.addEventListener('DOMContentLoaded', () => {
+    // Handle window scroll
+    window.onscroll = (event) => {
+        // Get window callback
+        StoreWindowScrollCallback.forEach((callback) => {
+            callback?.(event);
+        });
+    };
+
+    // Handle window load
+    StoreWindowLoadCallback.forEach((callback) => {
+        callback?.();
+    });
+});
