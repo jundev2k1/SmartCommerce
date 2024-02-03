@@ -26,18 +26,18 @@
     width: 100%;
     z-index: 97;
 }
+
+.global-loading {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: var(--site-background-operating);
+    z-index: 999;
+}
 /*#endregion */
 
 /*#region Component */
-
-/*#region Button */
-
-.component-button {
-    padding: 4px 8px;
-    margin: 0 2px;
-}
-
-/*#endregion */
-
 
 /*#endregion */

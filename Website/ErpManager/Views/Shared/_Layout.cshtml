@@ -4,11 +4,15 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - @Constants.APPLICATION_NAME</title>
-    <script src="~/js/store.js"></script>
     @* Css import render *@
     @await Component.InvokeAsync("StyleSheet")
 </head>
 <body>
+    <section>
+        <script src="~/js/store.js"></script>
+        <script src="~/js/common.js"></script>
+    </section>
+
     @* Main content *@
     <main id="page-load">
         @await Component.InvokeAsync("NavBar")

@@ -1,37 +1,42 @@
 ﻿// Loading function
-export const typeLoading = {
+const typeLoading = {
     spinner: 'loading-spinner',
     bar: 'loading-bar',
     text: 'loading-text',
 };
-export const showLoading = function (type, selector = 'global') {
+const showLoading = function (type, selector = 'global') {
     const isGlobal = (selector === 'global' || document.querySelector(selector) === null) || false;
-
     if (Object.values(typeLoading).includes(type) === false)
         type = typeLoading.spinner;
 
     if (isGlobal) {
-        const element = document.createElement('div');
-        element.style.position = 'fixed';
+        // Create loading element
+        const loadingElement = document.createElement('div');
         switch (type) {
             case typeLoading.spinner:
-                element.style.width = 'calc(100vw / 20)';
-                element.style.height = 'calc(100vw / 20)';
+                loadingElement.style.width = 'calc(100vw / 20)';
+                loadingElement.style.height = 'calc(100vw / 20)';
                 break;
 
             case typeLoading.bar:
-                element.style.width = '20vw';
-                element.style.height = 'calc(20vw / 10)';
+                loadingElement.style.width = '20vw';
+                loadingElement.style.height = 'calc(20vw / 10)';
                 break;
 
             case typeLoading.text:
-                element.style.width = '165px';
-                element.style.height = '40px';
+                loadingElement.style.width = '165px';
+                loadingElement.style.height = '40px';
                 break;
         }
+        loadingElement.classList.add(type);
 
-        element.className = type;
-        document.body.appendChild(element);
+        // Create overlay
+        const overlay = document.createElement("div");
+        overlay.classList.add("global-loading")
+        overlay.appendChild(loadingElement);
+
+        // Append DOM tree
+        document.body.appendChild(overlay);
     } else {
         const element = document.querySelector(selector);
         if (element) {
@@ -41,16 +46,12 @@ export const showLoading = function (type, selector = 'global') {
         }
     }
 };
-export const hideLoading = function (type = 'unknown', selector = 'global') {
+const hideLoading = function (type = 'unknown', selector = 'global') {
     if (Object.values(typeLoading).includes(type) === false || type === 'unknown') {
         const types = Object.values(typeLoading);
         if (selector === 'global') {
-            types.forEach((typeItem) => {
-                const typeClass = `.${typeItem}`;
-                const nodeSelector = document.querySelector(typeClass);
-
-                (nodeSelector) && (nodeSelector.remove());
-            });
+            const nodeSelector = document.querySelector('.global-loading');
+            (nodeSelector) && (nodeSelector.remove());
         }
     } else {
         const typeClass = `.${type}`;
@@ -65,7 +66,7 @@ export const hideLoading = function (type = 'unknown', selector = 'global') {
     }
 };
 
-export const CallAjax = ({ url, data, method = "POST" }) => {
+const CallAjax = ({ url, data, method = "POST" }) => {
     return $.ajax({
         url: url,
         type: method,
@@ -76,3 +77,6 @@ export const CallAjax = ({ url, data, method = "POST" }) => {
         }
     });
 }
+
+// Show loading
+showLoading(typeLoading.text);

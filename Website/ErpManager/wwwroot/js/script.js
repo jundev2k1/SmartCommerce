@@ -1,7 +1,4 @@
-﻿import * as Common from './common.js';
-import { navbarActive } from './component-script/Navbar';
-
-// Setting default toastr
+﻿// Setting default toastr
 toastr.options = {
     "closeButton": true,
     "newestOnTop": false,
@@ -33,4 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
     StoreWindowLoadCallback.forEach((callback) => {
         callback?.();
     });
+
+    // Hide loading after pageload
+    hideLoading();
 });
