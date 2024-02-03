@@ -1,58 +1,151 @@
-﻿using Common.Constants;
+﻿using AutoMapper;
+using Common.Constants;
 using Common.Utilities;
+using Domain.Entities;
+using Domain.Enum;
 using Domain.Models;
 using Domain.Services;
-using ErpManager.Web;
 using ErpManager.Web.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Localization;
-using Microsoft.IdentityModel.Tokens;
-using Microsoft.Net.Http.Headers;
-using System.Net;
+using NuGet.Protocol.Plugins;
+using System.Collections;
 
 namespace ErpManager.Web.Controllers
 {
     public class AccountController : Controller
     {
+        private readonly IMapper _mapper;
         private readonly IStringLocalizer<GlobalLocalizer> _localizer;
         private readonly IUserService _userService;
 
-        public AccountController(IStringLocalizer<GlobalLocalizer> localizer, IUserService userService)
+        public AccountController(IStringLocalizer<GlobalLocalizer> localizer, IMapper mapper, IUserService userService)
         {
             _localizer = localizer;
             _userService = userService;
+            _mapper = mapper;
         }
 
         [Route("/dang-nhap")]
-        [Route("/login", Name = "Login")]
+        [Route(Constants.MODULE_AUTH_LOGIN_PATH, Name = Constants.MODULE_AUTH_LOGIN_NAME)]
         [HttpGet]
         public IActionResult Index()
         {
-            if (this.LoginCookieInput.RememberMe)
-            {
-                var loginDefaultInput = HandleRememberMe();
-                if (loginDefaultInput == null) return RedirectToRoute("Home");
-
-                return View(loginDefaultInput);
-            }
+            if (!this.LoginCookieInput.RememberMe) return View(new LoginViewModel());
 
             return View(this.LoginCookieInput);
         }
 
         [Route("/dang-nhap")]
-        [Route("/login", Name = "Login")]
+        [Route(Constants.MODULE_AUTH_LOGIN_PATH, Name = Constants.MODULE_AUTH_LOGIN_NAME)]
         [HttpPost]
         public IActionResult Index(LoginViewModel login)
         {
-            var user = _userService.TryLogin(login.LoginID, login.Password);
-            if (user != null)
+            var isSuccess = HandleTryLogin(login);
+            if (isSuccess)
             {
-                HandleLoginSuccess(user, login.RememberMe);
-                return RedirectToRoute("Home");
+                return RedirectToRoute(Constants.MODULE_HOME_DASHBOARD_NAME);
             }
 
-            ViewData["as"] = "";
-            return View(this.LoginCookieInput);
+            return View(login);
+        }
+
+        /// <summary>
+        /// Get login count
+        /// </summary>
+        /// <param name="userId">User id</param>
+        /// <returns>Login count</returns>
+        private int GetLoginCount(string userId)
+        {
+            var key = string.Format(Constants.COOKIE_KEY_LOGIN_COUNT, userId);
+            var loginCount = Request.Cookies[key].ToStringOrEmpty();
+
+            // Parse fail, count = 0
+            int.TryParse(loginCount, out var count);
+
+            return count;
+        }
+
+        /// <summary>
+        /// Increase login count
+        /// </summary>
+        /// <param name="userId">User id</param>
+        private void IncreaseLoginCount(string userId)
+        {
+            // Get login count
+            var loginCount = GetLoginCount(userId) + 1;
+
+            // Add login cookies
+           var cookieOptions = new CookieOptions
+            {
+                Expires = DateTime.UtcNow.AddMinutes(Constants.AUTH_LOGIN_COUNT_EXPIRES),
+                HttpOnly = true,
+                Secure = true,
+            };
+            var key = string.Format(Constants.COOKIE_KEY_LOGIN_COUNT, userId);
+            // Delete and create new key cookies
+            Response.Cookies.Delete(key);
+            Response.Cookies.Append(key, loginCount.ToString(), cookieOptions);
+        }
+
+        /// <summary>
+        /// Reset login count
+        /// </summary>
+        /// <param name="userId">User id</param>
+        private void ResetLoginCount(string userId)
+        {
+            var key = string.Format(Constants.COOKIE_KEY_LOGIN_COUNT, userId);
+
+            // Delete cookie
+            Response.Cookies.Delete(key);
+        }
+
+        /// <summary>
+        /// Is blocked authentication
+        /// </summary>
+        /// <param name="userId">User Id</param>
+        /// <returns>Is blocked</returns>
+        private bool IsBlockedAuth(string userId)
+        {
+            return GetLoginCount(userId) > Constants.AUTH_LOGIN_COUNT_LIMIT;
+        }
+
+        /// <summary>
+        /// Handle try login
+        /// </summary>
+        /// <param name="input">Login input</param>
+        /// <returns>Is login success</returns>
+        private bool HandleTryLogin(LoginViewModel input)
+        {
+            var isBlock = false;
+            try
+            {
+                // Check login id is wrong
+                var user = _userService.GetUserByUsername(input.LoginID);
+                if (user == null) throw new Exception();
+
+                // Check block account
+                if (IsBlockedAuth(user.UserId))
+                {
+                    isBlock = true;
+                    throw new Exception();
+                }
+                // Increase login count every login after check block account
+                IncreaseLoginCount(user.UserId);
+
+                // Try login, throw error if login fail
+                var isSuccess = _userService.TryLogin(input.LoginID, input.Password);
+                if (isSuccess == false) throw new Exception();
+
+                // Handle login success
+                HandleLoginSuccess(user, input.RememberMe);
+                return true;
+            }
+            catch
+            {
+                HandleLoginFail(isBlock);
+                return false;
+            }
         }
 
         /// <summary>
@@ -62,36 +155,73 @@ namespace ErpManager.Web.Controllers
         /// <param name="isRememberMe">Is remember me</param>
         private void HandleLoginSuccess(UserModel user, bool isRememberMe)
         {
+            // Reset login count
+            ResetLoginCount(user.UserId);
+
+            // Set session login for operator
+            SetSessionForLogin(user);
+
+            // Handle with cookies
+            if (isRememberMe)
+            {
+                CreateCookies(user);
+            }
+            else
+            {
+                DeleteCookies();
+            }
+        }
+
+        /// <summary>
+        /// Handle login fail
+        /// </summary>
+        /// <param name="isBlock">Is block</param>
+        private void HandleLoginFail(bool isBlock = false)
+        {
+            var errorMessage = string.Empty;
+            if (isBlock)
+            {
+                var replacer = new Hashtable
+                {
+                    { "@@login_times@@", Constants.AUTH_LOGIN_COUNT_LIMIT },
+                    { "@@login_expires@@", Constants.AUTH_LOGIN_COUNT_EXPIRES }
+                };
+                var message = _localizer.GetString(Constants.ERRORMSG_KEY_LOGIN_TOO_MUCH);
+                errorMessage = MessageUtilitiy.GetMessageReplacer(message, replacer);
+
+            }
+            else
+            {
+                var message = _localizer.GetString(Constants.ERRORMSG_KEY_LOGIN_FAILED);
+                errorMessage = MessageUtilitiy.GetMessageReplacer(message);
+            }
+
+            ViewData[Constants.VIEWDATA_KEY_AUTH_ERROR_MESSAGE] = errorMessage;
+        }
+
+        /// <summary>
+        /// Set session for login
+        /// </summary>
+        /// <param name="user"></param>
+        private void SetSessionForLogin(UserModel user)
+        {
             // Set session login for operator
             var session = HttpContext.Session;
             session.SetString(Constants.SESSION_KEY_OPERATOR_ID, user.UserId);
             session.SetString(Constants.SESSION_KEY_OPERATOR_PERMISSION, "0");
-
-            // Handle cookie
-            HandleCookies(user, isRememberMe);
         }
 
         /// <summary>
-        /// Handle cookies
+        /// Create cookies
         /// </summary>
-        /// <param name="user">User</param>
-        /// <param name="isRememberMe">Is remember me</param>
-        private void HandleCookies(UserModel? user, bool isRememberMe)
+        /// <param name="user">User model</param>
+        private void CreateCookies(UserModel user)
         {
-            // Delete cookies
-            if ((isRememberMe == false) || (user == null))
-            {
-                Response.Cookies.Delete(Constants.COOKIE_KEY_LOGIN_REMEMBER_ME);
-                Response.Cookies.Delete(Constants.COOKIE_KEY_LOGIN_USERNAME);
-                Response.Cookies.Delete(Constants.COOKIE_KEY_LOGIN_PASSWORD);
-                return;
-            }
-
             // Add login cookies
             var cookieOptions = new CookieOptions
             {
                 Path = "/",
-                Expires = DateTime.Now.AddDays(30),
+                Expires = DateTime.Now.AddDays(Constants.AUTH_EXPIRES_COOKIE),
                 HttpOnly = true,
                 Secure = true,
                 SameSite = Microsoft.AspNetCore.Http.SameSiteMode.None
@@ -102,23 +232,13 @@ namespace ErpManager.Web.Controllers
         }
 
         /// <summary>
-        /// Handle remember me
+        /// Delete cookies
         /// </summary>
-        /// <returns>Login View Model or redirect page</returns>
-        private LoginViewModel? HandleRememberMe()
+        private void DeleteCookies()
         {
-            if ((string.IsNullOrEmpty(this.LoginCookieInput.LoginID) == false)
-                && (string.IsNullOrEmpty(this.LoginCookieInput.Password) == false))
-            {
-                var user = _userService.TryLogin(this.LoginCookieInput.LoginID, this.LoginCookieInput.Password);
-                if (user != null)
-                {
-                    HandleLoginSuccess(user, this.LoginCookieInput.RememberMe);
-                    return null;
-                }
-            }
-
-            return this.LoginCookieInput;
+            Response.Cookies.Delete(Constants.COOKIE_KEY_LOGIN_REMEMBER_ME);
+            Response.Cookies.Delete(Constants.COOKIE_KEY_LOGIN_USERNAME);
+            Response.Cookies.Delete(Constants.COOKIE_KEY_LOGIN_PASSWORD);
         }
 
         /// <summary>
@@ -126,12 +246,9 @@ namespace ErpManager.Web.Controllers
         /// </summary>
         /// <returns>Redirect to login page</returns>
         [HttpGet]
-        [Route("/logout", Name ="Logout")]
+        [Route(Constants.MODULE_AUTH_LOGOUT_PATH, Name = Constants.MODULE_AUTH_LOGOUT_NAME)]
         public IActionResult LogOut()
         {
-            // Delete cookies
-            HandleCookies(null, false);
-
             // Clear session
             HttpContext.Session.Clear();
 
@@ -144,7 +261,7 @@ namespace ErpManager.Web.Controllers
             get
             {
                 var cookies = Request.Cookies;
-                var rememberMeCookie = Request.Cookies[Constants.COOKIE_KEY_LOGIN_REMEMBER_ME].ToStringOrEmpty();
+                var rememberMeCookie = cookies[Constants.COOKIE_KEY_LOGIN_REMEMBER_ME].ToStringOrEmpty();
 
                 return new LoginViewModel
                 {

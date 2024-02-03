@@ -120,6 +120,12 @@
   <data name="ButtonTitle_Search" xml:space="preserve">
     <value>Tìm Kiếm</value>
   </data>
+  <data name="ErrorMessage_LoginFailed" xml:space="preserve">
+    <value>Thông tin đăng nhập không đúng</value>
+  </data>
+  <data name="ErrorMessage_LoginTooMuch" xml:space="preserve">
+    <value>Bạn đã nhập sai quá @@login_times@@ cho tài khoản này. Vui lòng thử lại sau @@login_expires@@ phút</value>
+  </data>
   <data name="ErrorMessage_NoHasPermission" xml:space="preserve">
     <value>Tài khoản của bạn không có quyền truy cập vào nội dung này. Vui lòng quay lại hoặc liên hệ người quản lý để được giúp đỡ.</value>
   </data>
@@ -151,6 +157,9 @@
   </data>
   <data name="Nav_Dashboard" xml:space="preserve">
     <value>Thống Kê</value>
+  </data>
+  <data name="Nav_Logout" xml:space="preserve">
+    <value>Đăng xuất</value>
   </data>
   <data name="Nav_Product" xml:space="preserve">
     <value>Sản Phẩm</value>

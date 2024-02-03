@@ -16,9 +16,6 @@ namespace ErpManager.Web.Middleware
         /// <summary>
         /// Constructor
         /// </summary>
-        /// <param name="next">Next</param>
-        /// <param name="localizer">Localizer</param>
-        /// <param name="configuration">Configuration</param>
         public PermissionHandlerMiddleware(RequestDelegate next, IStringLocalizer<GlobalLocalizer> localizer, AppConfiguration configuration)
         {
             _next = next;
@@ -26,6 +23,11 @@ namespace ErpManager.Web.Middleware
             _configuration = configuration;
         }
 
+        /// <summary>
+        /// Invoke
+        /// </summary>
+        /// <param name="context">Context</param>
+        /// <returns>Next step or redirect to error page</returns>
         public async Task Invoke(HttpContext context)
         {
             var permission = context.Session.GetString(Constants.SESSION_KEY_OPERATOR_PERMISSION).ToStringOrEmpty();
@@ -49,7 +51,7 @@ namespace ErpManager.Web.Middleware
             }
 
             // Get message
-            var message = _localizer.GetString("ErrorMessage_NoHasPermission");
+            var message = _localizer.GetString(Constants.ERRORMSG_KEY_NO_HAS_PERMISSION);
             var errorMessage = MessageUtilitiy.GetMessageReplacer(message);
 
             // Clear and set error message for error page

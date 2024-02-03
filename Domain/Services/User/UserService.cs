@@ -41,17 +41,28 @@ namespace Domain.Services
         }
 
         /// <summary>
+        /// Get user by username
+        /// </summary>
+        /// <param name="userName">User name</param>
+        /// <returns>User model</returns>
+        public UserModel? GetUserByUsername(string userName)
+        {
+            var user = _dbContext.Users.FirstOrDefault(x => x.UserName == userName);
+            return user.MapToUserModel();
+        }
+
+        /// <summary>
         /// Try login
         /// </summary>
         /// <param name="userName">User name</param>
         /// <param name="password">Password</param>
         /// <returns>User model</returns>
-        public UserModel? TryLogin(string userName, string password)
+        public bool TryLogin(string userName, string password)
         {
             var user = _dbContext.Users.FirstOrDefault(user =>
                 (user.UserName == userName) && (user.Password == password));
 
-            return user.MapToUserModel();
+            return user != null;
         }
     }
 }

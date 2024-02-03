@@ -1,10 +1,11 @@
-﻿<style>
+﻿<section id="backToTopButton">
+<style>
     .btn-back-to-top {
         position: fixed;
         right: 12px;
-        bottom: 12px;
+        bottom: 28px;
         opacity: .5;
-        background: var(--site-gray-200);
+        background: var(--site-gray-50);
         border-radius: var(--site-border-full);
         z-index: 98;
     }
@@ -46,11 +47,12 @@
                 btnBackToTop.classList.remove("active");
             }
         }
-    }
+    };
     // Register function window scroll
     StoreWindowScrollCallback.push(handleBackToTop);
     
     const handleScrollTop = () => {
         window.scrollTo(0, 0);
-    }
+    };
 </script>
+</section>

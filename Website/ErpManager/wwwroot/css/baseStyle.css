@@ -36,6 +36,7 @@
     --site-info: linear-gradient(to right, #457fca 0%, #5691c8 51%, #457fca 100%);
     --site-success: linear-gradient(to right, #76b852 0%, #8DC26F 51%, #76b852 100%);
     --site-warning: linear-gradient(to right, #F2994A 0%, #F2C94C 51%, #F2994A 100%);
+
     /* Border */
     --site-border-rounded: 12px;
     --site-border-full: 99999px;
@@ -276,12 +277,23 @@ ul, li {
     display: none !important;
 }
 
-.rounded {
-    border-radius: var(--site-border-rounded);
+.global-loading {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: var(--site-background-operating);
+    z-index: 999;
 }
 
-.border-full {
-    border-radius: var(--site-border-full);
+.sticky {
+    width: 100%;
+    position: sticky;
+    top: 0;
+    left: 0;
+    z-index: 998;
+    animation: FadeInDown .5s ease-in;
 }
 
 /*#endregion */

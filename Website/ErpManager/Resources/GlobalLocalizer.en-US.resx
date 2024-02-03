@@ -120,6 +120,19 @@
   <data name="ButtonTitle_Search" xml:space="preserve">
     <value>Search</value>
   </data>
+  <data name="ErrorMessage_LoginFailed" xml:space="preserve">
+    <value>Login information incorrect</value>
+  </data>
+  <data name="ErrorMessage_LoginTooMuch" xml:space="preserve">
+    <value>You entered the wrong @@login_times@@ for this account. Please try again after @@login_expires@@ minutes</value>
+  </data>
+  <data name="ErrorMessage_NoHasPermission" xml:space="preserve">
+    <value>Your account does not have permission to access this content. Please contact the manager for help.</value>
+  </data>
+  <data name="ErrorMessage_SystemError" xml:space="preserve">
+    <value>A system error has occurred, please contact the administrator for help @@operator_phone_number@@</value>
+    <comment>Setting in config</comment>
+  </data>
   <data name="Login_Button_ForgetPassword" xml:space="preserve">
     <value>Forget password?</value>
   </data>
@@ -136,7 +149,7 @@
     <value>Password</value>
   </data>
   <data name="Login_Label_RememberMe" xml:space="preserve">
-    <value>Nhớ tài khoản</value>
+    <value>Remember Me</value>
   </data>
   <data name="Login_Title_SubTitle" xml:space="preserve">
     <value>Sign In to your account.</value>
@@ -144,6 +157,9 @@
   </data>
   <data name="Nav_Dashboard" xml:space="preserve">
     <value>Dashboard</value>
+  </data>
+  <data name="Nav_Logout" xml:space="preserve">
+    <value>Logout</value>
   </data>
   <data name="Nav_Product" xml:space="preserve">
     <value>Product</value>

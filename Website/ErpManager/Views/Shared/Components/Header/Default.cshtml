@@ -1,43 +1,58 @@
-﻿<style>
-    .header {
-        width: 100%;
-        position: relative;
-    }
+﻿<section id="headerBar">
+    <style>
+        #headerBar .header {
+            width: 100%;
+            position: relative;
+        }
 
-        .header .wrapper {
+        #headerBar.sticky .header .wrapper {
+            margin: 0;
+            border-radius: 0;
+        }
+
+        #headerBar .header .wrapper {
             background: var(--site-theme-operating);
             border-radius: 4px;
-            padding: .5rem 1rem;
+            padding: .75rem 1rem;
             margin: .5rem;
         }
 
-            .header.sticky .wrapper {
-                width: 100%;
-                position: sticky;
-                top:0;
-                left: 0;
-            }
-
-            .header .wrapper .title h1 {
+            #headerBar .header .wrapper .title h1 {
                 font-size: 28px;
                 margin-bottom: 0;
             }
 
-            .header .wrapper .sub-navbar {
+            #headerBar .header .wrapper .sub-navbar {
                 display: flex;
                 justify-content: flex-end;
             }
-</style>
-<div class="header">
-    <div class="wrapper">
-        <div class="row align-items-center">
-            <div class="title col-md-4">
-                <h1>@ViewData["Title"]</h1>
-            </div>
-            <div class="sub-navbar col-md-8 gap-1">
-                <div class="user-info">asd</div>
-                <div class="user-notification">asd</div>
+    </style>
+    <div class="header">
+        <div class="wrapper">
+            <div class="row align-items-center">
+                <div class="title col-md-4">
+                    <h1>@ViewData["Title"]</h1>
+                </div>
+                <div class="sub-navbar col-md-8 gap-1">
+                    <div class="user-info">asd</div>
+                    <div class="user-notification">asd</div>
+                </div>
             </div>
         </div>
     </div>
-</div>
+    <script>
+        const headerOnScroll = (event) => {
+            const headerBar = document.querySelector("#headerBar");
+            if (window.scrollY > 100) {
+                if (!headerBar.classList.contains("sticky")) {
+                    headerBar.classList.add("sticky");
+                }
+            } else {
+                if (headerBar.classList.contains("sticky")) {
+                    headerBar.classList.remove("sticky");
+                }
+            }
+        };
+        StoreWindowScrollCallback.push(headerOnScroll);
+    </script>
+</section>

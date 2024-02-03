@@ -1,4 +1,5 @@
-﻿using Domain.Entities;
+﻿using Common.Constants;
+using Domain.Entities;
 using Domain.Services;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc.Razor;
@@ -31,6 +32,8 @@ namespace ErpManager.Web
                 .AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix)
                 .AddDataAnnotationsLocalization();
 
+            services.AddAutoMapper(typeof(AutoMapperProfile).Assembly);
+
             return services;
         }
 
@@ -59,7 +62,7 @@ namespace ErpManager.Web
             services.AddDistributedMemoryCache();
             services.AddSession(options =>
             {
-                options.IdleTimeout = TimeSpan.FromMinutes(30);
+                options.IdleTimeout = TimeSpan.FromMinutes(Constants.AUTH_EXPIRES_SESSION);
             });
 
             return services;

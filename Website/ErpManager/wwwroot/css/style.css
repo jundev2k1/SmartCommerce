@@ -5,7 +5,7 @@
 
 @media (min-width: 768px) {
     body {
-        font-size: 16px;
+        font-size: 14px;
     }
 }
 
@@ -27,15 +27,6 @@
     z-index: 97;
 }
 
-.global-loading {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background: var(--site-background-operating);
-    z-index: 999;
-}
 /*#endregion */
 
 /*#region Component */

@@ -18,11 +18,18 @@ namespace Domain.Services
         public UserModel? GetUser(string userId);
 
         /// <summary>
+        /// Get user
+        /// </summary>
+        /// <param name="userName">Username (login id)</param>
+        /// <returns>User model</returns>
+        public UserModel? GetUserByUsername(string userName);
+
+        /// <summary>
         /// Try login
         /// </summary>
         /// <param name="userName">User name</param>
         /// <param name="password">Password</param>
         /// <returns>User model</returns>
-        public UserModel? TryLogin(string userName, string password);
+        public bool TryLogin(string userName, string password);
     }
 }

@@ -1,4 +1,5 @@
-﻿using Domain.Entities;
+﻿using Common.Constants;
+using Domain.Entities;
 using Domain.Enum;
 using ErpManager.Web;
 using Microsoft.AspNetCore.Mvc;
@@ -7,14 +8,11 @@ namespace ErpManager.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly DBContext _Context;
-
         /// <summary>
         /// Constructor
         /// </summary>
-        public HomeController(DBContext context)
+        public HomeController()
         {
-            _Context = context;
         }
 
         /// <summary>
@@ -22,7 +20,8 @@ namespace ErpManager.Controllers
         /// </summary>
         /// <returns></returns>
         [PermissionAttribute(Permission.CanReadUser)]
-        [Route("/", Name = "Home")]
+        [Route("/", Name = Constants.MODULE_HOME_DASHBOARD_NAME)]
+        [Route(Constants.MODULE_HOME_DASHBOARD_PATH)]
         public IActionResult Index()
         {
             return View();
