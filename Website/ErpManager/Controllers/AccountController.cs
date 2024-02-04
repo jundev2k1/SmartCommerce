@@ -27,7 +27,7 @@ namespace ErpManager.Web.Controllers
         }
 
         [Route("/dang-nhap")]
-        [Route(Constants.MODULE_AUTH_LOGIN_PATH, Name = Constants.MODULE_AUTH_LOGIN_NAME)]
+        [Route(Constants.MODULE_AUTH_SIGNIN_PATH, Name = Constants.MODULE_AUTH_SIGNIN_NAME)]
         [HttpGet]
         public IActionResult Index()
         {
@@ -37,7 +37,7 @@ namespace ErpManager.Web.Controllers
         }
 
         [Route("/dang-nhap")]
-        [Route(Constants.MODULE_AUTH_LOGIN_PATH, Name = Constants.MODULE_AUTH_LOGIN_NAME)]
+        [Route(Constants.MODULE_AUTH_SIGNIN_PATH, Name = Constants.MODULE_AUTH_SIGNIN_NAME)]
         [HttpPost]
         public IActionResult Index(LoginViewModel login)
         {
@@ -107,7 +107,7 @@ namespace ErpManager.Web.Controllers
         /// <returns>Is blocked</returns>
         private bool IsBlockedAuth(string userId)
         {
-            return GetLoginCount(userId) > Constants.AUTH_LOGIN_COUNT_LIMIT;
+            return GetLoginCount(userId) >= Constants.AUTH_LOGIN_COUNT_LIMIT;
         }
 
         /// <summary>
@@ -246,7 +246,7 @@ namespace ErpManager.Web.Controllers
         /// </summary>
         /// <returns>Redirect to login page</returns>
         [HttpGet]
-        [Route(Constants.MODULE_AUTH_LOGOUT_PATH, Name = Constants.MODULE_AUTH_LOGOUT_NAME)]
+        [Route(Constants.MODULE_AUTH_SIGNOUT_PATH, Name = Constants.MODULE_AUTH_SIGNOUT_NAME)]
         public IActionResult LogOut()
         {
             // Clear session

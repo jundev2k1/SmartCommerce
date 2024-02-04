@@ -10,10 +10,8 @@ namespace Domain.Mapping
         /// </summary>
         /// <param name="userEntity">User entity</param>
         /// <returns>User model</returns>
-        public static UserModel? MapToUserModel(this User? userEntity)
+        public static UserModel MapToUserModel(this User userEntity)
         {
-            if (userEntity == null) return null;
-
             var user = new UserModel
             {
                 BranchID = userEntity.BranchID,

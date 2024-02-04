@@ -1,6 +1,8 @@
 ﻿using Common.Constants;
 using Domain.Entities;
+using Domain.Repositories.User;
 using Domain.Services;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.EntityFrameworkCore;
@@ -46,8 +48,11 @@ namespace ErpManager.Web
         {
             services.AddSingleton<AppConfiguration>();
             
-            // Dependency injection
+            // Dependency injection service
             services.AddScoped<IUserService, UserService>();
+
+            // Dependency injection repository
+            services.AddScoped<IUserRepository, UserRepository>();
 
             return services;
         }

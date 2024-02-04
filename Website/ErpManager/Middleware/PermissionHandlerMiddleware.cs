@@ -33,9 +33,9 @@ namespace ErpManager.Web.Middleware
             var permission = context.Session.GetString(Constants.SESSION_KEY_OPERATOR_PERMISSION).ToStringOrEmpty();
             if (string.IsNullOrEmpty(permission))
             {
-                if (context.Request.Path.Value != "/login")
+                if (context.Request.Path.Value != Constants.MODULE_AUTH_SIGNIN_PATH)
                 {
-                    context.Response.Redirect("/login");
+                    context.Response.Redirect(Constants.MODULE_AUTH_SIGNIN_PATH);
                 }
 
                 await _next(context);
@@ -57,7 +57,7 @@ namespace ErpManager.Web.Middleware
             // Clear and set error message for error page
             context.Session.Clear();
             context.Session.SetString(Constants.SESSION_KEY_PAGE_ERROR_MESSAGE, errorMessage);
-            context.Response.Redirect("/error-page");
+            context.Response.Redirect(Constants.MODULE_HOME_ERROR_PATH);
         }
 
         /// <summary>

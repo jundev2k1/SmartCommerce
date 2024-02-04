@@ -16,15 +16,15 @@
     "items": [
       {
         "label": "Product List",
-        "localizer": "Nav_Product_ProductList",
-        "name": "product-list-page",
-        "url": "/product/product-list"
+        "localizer": "Nav_Product_List",
+        "name": "product-page/productlist-page",
+        "url": "/product/list"
       },
       {
         "label": "Product Register",
-        "localizer": "Nav_Product_ProductRegister",
-        "name": "product-register-page",
-        "url": "/product/product-register"
+        "localizer": "Nav_Product_Register",
+        "name": "product-page/productregister-page",
+        "url": "/product/register"
       }
     ]
   },
@@ -58,15 +58,15 @@
     "items": [
       {
         "label": "User List",
-        "localizer": "Nav_User_UserList",
-        "name": "user-list-page",
-        "url": "/user/user-list"
+        "localizer": "Nav_User_List",
+        "name": "user-page/user-list-page",
+        "url": "/user/list"
       },
       {
         "label": "User Role",
-        "localizer": "Nav_User_UserRole",
-        "name": "user-role-page",
-        "url": "#"
+        "localizer": "Nav_User_Role",
+        "name": "user-page/user-role-page",
+        "url": "user/role"
       }
     ]
   },

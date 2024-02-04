@@ -77,6 +77,3 @@ const CallAjax = ({ url, data, method = "POST" }) => {
         }
     });
 }
-
-// Show loading
-showLoading(typeLoading.text);

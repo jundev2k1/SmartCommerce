@@ -1,10 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Common.Constants;
+using Microsoft.AspNetCore.Mvc;
 
 namespace ErpManager.Web.Controllers
 {
     public class ErrorController : Controller
     {
-        [Route("error-page", Name = "ErrorPage")]
+        [Route(Constants.MODULE_HOME_ERROR_PATH, Name = Constants.MODULE_HOME_ERROR_NAME)]
         public IActionResult Index()
         {
             return View();

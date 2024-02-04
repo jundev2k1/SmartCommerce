@@ -1,32 +1,30 @@
 ﻿using Domain.Entities;
 using Domain.Mapping;
 using Domain.Models;
+using Domain.Repositories.User;
 
 namespace Domain.Services
 {
     public class UserService : IUserService
     {
         /// <summary>Context singleton</summary>
-        private readonly DBContext _dbContext;
+        private readonly IUserRepository _userRepository;
 
         /// <summary>
         /// Constructor
         /// </summary>
-        /// <param name="dbContext">Context</param>
-        public UserService(DBContext dbContext)
+        public UserService(IUserRepository userRepository)
         {
-            _dbContext = dbContext;
+            _userRepository = userRepository;
         }
 
         /// <summary>
         /// Get all user
         /// </summary>
         /// <returns></returns>
-        public UserModel?[] GetAllUser()
+        public UserModel[] GetAllUser()
         {
-            return _dbContext.Users
-                .Select(user => user.MapToUserModel())
-                .ToArray();
+            return _userRepository.GetAll();
         }
 
         /// <summary>
@@ -36,8 +34,7 @@ namespace Domain.Services
         /// <returns>User model</returns>
         public UserModel? GetUser(string userId)
         {
-            var user = _dbContext.Users.FirstOrDefault(x => x.UserId == userId);
-            return user.MapToUserModel();
+            return _userRepository.Get(userId);
         }
 
         /// <summary>
@@ -47,8 +44,7 @@ namespace Domain.Services
         /// <returns>User model</returns>
         public UserModel? GetUserByUsername(string userName)
         {
-            var user = _dbContext.Users.FirstOrDefault(x => x.UserName == userName);
-            return user.MapToUserModel();
+            return _userRepository.GetByUserName(userName);
         }
 
         /// <summary>
@@ -59,10 +55,11 @@ namespace Domain.Services
         /// <returns>User model</returns>
         public bool TryLogin(string userName, string password)
         {
-            var user = _dbContext.Users.FirstOrDefault(user =>
-                (user.UserName == userName) && (user.Password == password));
+            var model = _userRepository.GetByUserName(userName);
+            if (model == null) return false;
 
-            return user != null;
+            var result = (model.UserName == userName) && (model.Password == password);
+            return result;
         }
     }
 }

@@ -155,28 +155,34 @@
     <value>Đăng nhập vào tài khoản của bạn.</value>
     <comment>sign in to your account.</comment>
   </data>
+  <data name="Nav_Auth_SignIn" xml:space="preserve">
+    <value>Đăng Nhập</value>
+  </data>
+  <data name="Nav_Auth_SignOut" xml:space="preserve">
+    <value>Đăng xuất</value>
+  </data>
+  <data name="Nav_Auth_SignUp" xml:space="preserve">
+    <value>Đăng Ký</value>
+  </data>
   <data name="Nav_Dashboard" xml:space="preserve">
     <value>Thống Kê</value>
-  </data>
-  <data name="Nav_Logout" xml:space="preserve">
-    <value>Đăng xuất</value>
   </data>
   <data name="Nav_Product" xml:space="preserve">
     <value>Sản Phẩm</value>
   </data>
-  <data name="Nav_Product_ProductList" xml:space="preserve">
+  <data name="Nav_Product_List" xml:space="preserve">
     <value>Danh Sách Sản Phẩm</value>
   </data>
-  <data name="Nav_Product_ProductRegister" xml:space="preserve">
+  <data name="Nav_Product_Register" xml:space="preserve">
     <value>Đăng Ký Sản Phẩm</value>
   </data>
   <data name="Nav_Schedule" xml:space="preserve">
     <value>Lịch Trình</value>
   </data>
-  <data name="Nav_Schedule_ScheduleList" xml:space="preserve">
+  <data name="Nav_Schedule_List" xml:space="preserve">
     <value>Danh Sách Lịch Trình</value>
   </data>
-  <data name="Nav_Schedule_ScheduleSetting" xml:space="preserve">
+  <data name="Nav_Schedule_Setting" xml:space="preserve">
     <value>Cài Đặt Lịch Trình</value>
   </data>
   <data name="Nav_System" xml:space="preserve">
@@ -185,10 +191,10 @@
   <data name="Nav_User" xml:space="preserve">
     <value>Người Dùng</value>
   </data>
-  <data name="Nav_User_UserList" xml:space="preserve">
+  <data name="Nav_User_List" xml:space="preserve">
     <value>Danh Sách Người Dùng</value>
   </data>
-  <data name="Nav_User_UserRole" xml:space="preserve">
+  <data name="Nav_User_Role" xml:space="preserve">
     <value>Phân Quyền</value>
   </data>
   <data name="ThemeSettings_Leave" xml:space="preserve">
