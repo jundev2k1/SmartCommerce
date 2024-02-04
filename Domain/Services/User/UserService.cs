@@ -1,6 +1,7 @@
 ﻿using Domain.Entities;
 using Domain.Mapping;
 using Domain.Models;
+using Domain.Repositories;
 using Domain.Repositories.User;
 
 namespace Domain.Services
@@ -9,6 +10,7 @@ namespace Domain.Services
     {
         /// <summary>Context singleton</summary>
         private readonly IUserRepository _userRepository;
+
 
         /// <summary>
         /// Constructor

@@ -1,12 +1,15 @@
 ﻿using Common.Constants;
 using Common.Utilities;
 using Domain.Enum;
+using ErpManager.Web.Enum;
+using Microsoft.AspNetCore.Mvc.Controllers;
 using Microsoft.Extensions.Localization;
 using System.Reflection;
+using System.Security;
 
 namespace ErpManager.Web.Middleware
 {
-    public class PermissionHandlerMiddleware
+    public class PermissionHandlerMiddleware : HandlerMiddlewareBase
     {
         /// <summary>DI</summary>
         private readonly RequestDelegate _next;
@@ -30,10 +33,10 @@ namespace ErpManager.Web.Middleware
         /// <returns>Next step or redirect to error page</returns>
         public async Task Invoke(HttpContext context)
         {
-            var permission = context.Session.GetString(Constants.SESSION_KEY_OPERATOR_PERMISSION).ToStringOrEmpty();
-            if (string.IsNullOrEmpty(permission))
+            var operatorPermission = context.Session.GetString(Constants.SESSION_KEY_OPERATOR_PERMISSION).ToStringOrEmpty();
+            if (string.IsNullOrEmpty(operatorPermission))
             {
-                if (context.Request.Path.Value != Constants.MODULE_AUTH_SIGNIN_PATH)
+                if (this.PublicRoute.Contains(context.Request.Path.Value) == false)
                 {
                     context.Response.Redirect(Constants.MODULE_AUTH_SIGNIN_PATH);
                 }
@@ -42,8 +45,9 @@ namespace ErpManager.Web.Middleware
                 return;
             }
 
-            // Next if allow permission
-            var result = HasAllPermission(permission) || HasPermission(context, permission);
+            // Next if allow operator permission
+            var permissionList = operatorPermission.Split(",");
+            var result = (HasAllPermission(operatorPermission) || HasPermission(context, permissionList));
             if (result)
             {
                 await _next(context);
@@ -55,9 +59,8 @@ namespace ErpManager.Web.Middleware
             var errorMessage = MessageUtilitiy.GetMessageReplacer(message);
 
             // Clear and set error message for error page
-            context.Session.Clear();
-            context.Session.SetString(Constants.SESSION_KEY_PAGE_ERROR_MESSAGE, errorMessage);
-            context.Response.Redirect(Constants.MODULE_HOME_ERROR_PATH);
+            SetErrorMessage(context, errorMessage);
+            context.Response.Redirect(Constants.MODULE_ERROR_ERROR_PATH);
         }
 
         /// <summary>
@@ -67,33 +70,53 @@ namespace ErpManager.Web.Middleware
         /// <returns>Has all permision</returns>
         private bool HasAllPermission(string permission)
         {
-            var result = int.TryParse(permission, out var allPermisson);
-            if (result)
-            {
-                return allPermisson == (int)Permission.HasAllPermission;
-            }
-
-            return false;
+            var result = EnumUtility.GetEnumValue<Permission>(permission);
+            return result == Permission.HasAllPermission;
         }
 
         /// <summary>
         /// Has permission
         /// </summary>
         /// <param name="context">Context</param>
-        /// <param name="permission">Permission</param>
+        /// <param name="operatorPermission">Operator permission</param>
         /// <returns>Has permission</returns>
-        private bool HasPermission(HttpContext context, string permission)
+        private bool HasPermission(HttpContext context, string[] operatorPermissions)
         {
-            var route = context.GetRouteValue("action").ToStringOrEmpty();
-            var actionMethod = context.GetType().GetMethod(route);
-            if (actionMethod == null) return false;
+            var pagePermission = GetPagePermission(context);
+            return operatorPermissions.Contains(pagePermission);
+        }
 
-            var permissionAttribute = actionMethod.GetCustomAttribute<PermissionAttribute>();
-            if (permissionAttribute == null) return false;
+        /// <summary>
+        /// Get page permission
+        /// </summary>
+        /// <returns>Page permission</returns>
+        private string GetPagePermission(HttpContext context)
+        {
+            // Get attributes
+            var attributes = context.GetEndpoint()
+                ?.Metadata.GetMetadata<ControllerActionDescriptor>()
+                ?.MethodInfo.GetCustomAttributes(inherit: true);
+            // Find permission attribute
+            var permission = attributes?
+                .Where(attr => attr is PermissionAttribute)
+                .Select(attr => (PermissionAttribute)attr)
+                .FirstOrDefault()
+                ?.Permission;
+            if (permission == null) return string.Empty;
 
-            var permissionValue = permissionAttribute.Permission;
+            return permission.GetStringValue<int>();
+        }
 
-            return true;
+        /// <summary>
+        /// Set error message
+        /// </summary>
+        /// <param name="context">Context</param>
+        /// <param name="message">Message</param>
+        private void SetErrorMessage(HttpContext context, string message)
+        {
+            context.Session.Clear();
+            context.Session.SetString(Constants.SESSION_KEY_PAGE_ERROR_CODE, ErrorCodeEnum.NotPermission.GetStringValue<int>());
+            context.Session.SetString(Constants.SESSION_KEY_PAGE_ERROR_MESSAGE, message);
         }
     }
 }

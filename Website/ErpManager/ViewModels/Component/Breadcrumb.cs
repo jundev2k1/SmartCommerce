@@ -1,4 +1,4 @@
-﻿namespace ErpManager.Web.ViewModels
+﻿namespace ErpManager.Web.ViewModels.Component
 {
     public class Breadcrumb
     {

@@ -120,6 +120,12 @@
   <data name="ButtonTitle_Search" xml:space="preserve">
     <value>Search</value>
   </data>
+  <data name="ErrorCode_NotPermission" xml:space="preserve">
+    <value>Not Permission</value>
+  </data>
+  <data name="ErrorCode_SystemError" xml:space="preserve">
+    <value>Oops</value>
+  </data>
   <data name="ErrorMessage_LoginFailed" xml:space="preserve">
     <value>Login information incorrect</value>
   </data>
@@ -166,6 +172,9 @@
   </data>
   <data name="Nav_Dashboard" xml:space="preserve">
     <value>Dashboard</value>
+  </data>
+  <data name="Nav_Error_ErrorPage" xml:space="preserve">
+    <value>Error Page</value>
   </data>
   <data name="Nav_Product" xml:space="preserve">
     <value>Product</value>

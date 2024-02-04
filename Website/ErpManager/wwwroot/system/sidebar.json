@@ -3,7 +3,8 @@
     "priority": "1",
     "label": "Dashboard",
     "localizer": "Nav_Dashboard",
-    "name": "dashboard-page",
+    "name": "Dashboard_Page",
+    "permission": "1",
     "icon": "fa-light fa-gauge fa-fw",
     "url": "/"
   },
@@ -11,19 +12,22 @@
     "priority": "2",
     "label": "Product",
     "localizer": "Nav_Product",
-    "name": "product-page",
+    "name": "Product_Page",
+    "permission": "100",
     "icon": "fa-light fa-cube fa-fw",
     "items": [
       {
         "label": "Product List",
         "localizer": "Nav_Product_List",
-        "name": "product-page/productlist-page",
+        "name": "ProductList_Page",
+        "permission": "101",
         "url": "/product/list"
       },
       {
         "label": "Product Register",
         "localizer": "Nav_Product_Register",
-        "name": "product-page/productregister-page",
+        "name": "ProductRegister_Page",
+        "permission": "103",
         "url": "/product/register"
       }
     ]
@@ -32,19 +36,22 @@
     "priority": "3",
     "label": "Schedule",
     "localizer": "Nav_Schedule",
-    "name": "schedule-page",
+    "name": "Schedule_Page",
+    "permission": "",
     "icon": "fa-light fa-calendar-days fa-fw",
     "items": [
       {
         "label": "Schedule List",
         "localizer": "Nav_Schedule_ScheduleList",
-        "name": "schedule-list-page",
+        "name": "ScheduleList_Page",
+        "permission": "",
         "url": "#"
       },
       {
         "label": "Schedule Settings",
         "localizer": "Nav_Schedule_ScheduleSetting",
         "name": "schedule-setting-page",
+        "permission": "",
         "url": "#"
       }
     ]
@@ -53,19 +60,22 @@
     "priority": "4",
     "label": "User",
     "localizer": "Nav_User",
-    "name": "user-page",
+    "name": "User_Page",
+    "permission": "50",
     "icon": "fa-light fa-user fa-fw",
     "items": [
       {
         "label": "User List",
         "localizer": "Nav_User_List",
-        "name": "user-page/user-list-page",
+        "name": "UserList_Page",
+        "permission": "51",
         "url": "/user/list"
       },
       {
         "label": "User Role",
         "localizer": "Nav_User_Role",
-        "name": "user-page/user-role-page",
+        "name": "UserRole_Page",
+        "permission": "",
         "url": "user/role"
       }
     ]
@@ -75,6 +85,7 @@
     "label": "System",
     "localizer": "Nav_System",
     "name": "system-page",
+    "permission": "",
     "icon": "fa-light fa-gear fa-fw",
     "url": "#"
   }

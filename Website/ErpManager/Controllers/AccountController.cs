@@ -1,14 +1,11 @@
 ﻿using AutoMapper;
 using Common.Constants;
 using Common.Utilities;
-using Domain.Entities;
-using Domain.Enum;
 using Domain.Models;
 using Domain.Services;
 using ErpManager.Web.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Localization;
-using NuGet.Protocol.Plugins;
 using System.Collections;
 
 namespace ErpManager.Web.Controllers
@@ -26,9 +23,9 @@ namespace ErpManager.Web.Controllers
             _mapper = mapper;
         }
 
+        [HttpGet]
         [Route("/dang-nhap")]
         [Route(Constants.MODULE_AUTH_SIGNIN_PATH, Name = Constants.MODULE_AUTH_SIGNIN_NAME)]
-        [HttpGet]
         public IActionResult Index()
         {
             if (!this.LoginCookieInput.RememberMe) return View(new LoginViewModel());
@@ -36,9 +33,9 @@ namespace ErpManager.Web.Controllers
             return View(this.LoginCookieInput);
         }
 
+        [HttpPost]
         [Route("/dang-nhap")]
         [Route(Constants.MODULE_AUTH_SIGNIN_PATH, Name = Constants.MODULE_AUTH_SIGNIN_NAME)]
-        [HttpPost]
         public IActionResult Index(LoginViewModel login)
         {
             var isSuccess = HandleTryLogin(login);
@@ -76,7 +73,7 @@ namespace ErpManager.Web.Controllers
             var loginCount = GetLoginCount(userId) + 1;
 
             // Add login cookies
-           var cookieOptions = new CookieOptions
+            var cookieOptions = new CookieOptions
             {
                 Expires = DateTime.UtcNow.AddMinutes(Constants.AUTH_LOGIN_COUNT_EXPIRES),
                 HttpOnly = true,
@@ -162,14 +159,13 @@ namespace ErpManager.Web.Controllers
             SetSessionForLogin(user);
 
             // Handle with cookies
-            if (isRememberMe)
-            {
-                CreateCookies(user);
-            }
-            else
+            if (isRememberMe == false)
             {
                 DeleteCookies();
+                return;
             }
+
+            CreateCookies(user);
         }
 
         /// <summary>
@@ -196,7 +192,7 @@ namespace ErpManager.Web.Controllers
                 errorMessage = MessageUtilitiy.GetMessageReplacer(message);
             }
 
-            ViewData[Constants.VIEWDATA_KEY_AUTH_ERROR_MESSAGE] = errorMessage;
+            SetErrorMessage(errorMessage);
         }
 
         /// <summary>
@@ -208,7 +204,7 @@ namespace ErpManager.Web.Controllers
             // Set session login for operator
             var session = HttpContext.Session;
             session.SetString(Constants.SESSION_KEY_OPERATOR_ID, user.UserId);
-            session.SetString(Constants.SESSION_KEY_OPERATOR_PERMISSION, "0");
+            session.SetString(Constants.SESSION_KEY_OPERATOR_PERMISSION, "9998");
         }
 
         /// <summary>
@@ -242,7 +238,16 @@ namespace ErpManager.Web.Controllers
         }
 
         /// <summary>
-        /// Log out
+        /// Set error message
+        /// </summary>
+        /// <param name="errorMessage">Error message</param>
+        private void SetErrorMessage(string errorMessage)
+        {
+            ViewData[Constants.VIEWDATA_KEY_AUTH_ERROR_MESSAGE] = errorMessage;
+        }
+
+        /// <summary>
+        /// Sign out
         /// </summary>
         /// <returns>Redirect to login page</returns>
         [HttpGet]
@@ -252,7 +257,7 @@ namespace ErpManager.Web.Controllers
             // Clear session
             HttpContext.Session.Clear();
 
-            return RedirectToRoute("Login");
+            return RedirectToRoute(Constants.MODULE_AUTH_SIGNIN_NAME);
         }
 
         /// <summary>Login cookie input</summary>

@@ -3,7 +3,8 @@
     public static partial class Constants
     {
         // Physical path
-        public const string PHYSICAL_PATH_APPLICATION = "";
+        public const string PHYSICAL_APPLICATION_ROOT_PATH = @"D:\Workplace\Project\ErpManager\Website\ErpManager";
+        public static string PHYSICAL_APPLICATION_CONTENT_PATH = Path.Combine(PHYSICAL_APPLICATION_ROOT_PATH, "wwwroot");
 
         // Auth module: sign in
         public const string MODULE_AUTH_SIGNIN_PATH = "/sign-in";
@@ -13,8 +14,8 @@
         public const string MODULE_AUTH_SIGNOUT_NAME = "SignOut";
 
         // Error module: error
-        public const string MODULE_HOME_ERROR_PATH = "/error-page";
-        public const string MODULE_HOME_ERROR_NAME = "Error";
+        public const string MODULE_ERROR_ERROR_PATH = "/error-page";
+        public const string MODULE_ERROR_ERROR_NAME = "Error";
 
         // Auth module: dashboard (home)
         public const string MODULE_HOME_DASHBOARD_PATH = "/dashboard";

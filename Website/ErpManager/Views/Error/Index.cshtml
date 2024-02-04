@@ -1,9 +1,7 @@
-﻿@{
-    var message = new
-    {
-        Code = "404",
-        Message = "System error: page not found"
-    };
+﻿@model ErrorPageViewModel
+@{
+    Layout = "_Layout_Error";
+    ViewData[Constants.GLOBAL_KEY_TITLE] = _localizer["Nav_Error_ErrorPage"];
 }
 <style>
     .error-page {
@@ -17,17 +15,37 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
+            text-align: center;
         }
+
+            .error-page .wrapper .content {
+                display: flex;
+                flex-direction: column;
+                gap: 8px;
+            }
+
+                .error-page .wrapper .content h2 {
+                    font-size: 60px;
+                    font-weight: bold;
+                    text-transform: uppercase;
+                    background: linear-gradient(to right, #30CFD0 0%, #330867 100%);
+                    -webkit-background-clip: text;
+                    -webkit-text-fill-color: transparent;
+                }
+
+                .error-page .wrapper .content p {
+                    font-size: 16px;
+                }
 </style>
 <section class="error-page">
     <div class="wrapper">
         <div class="content">
             <div class="error-content">
-                <h2>@message.Code</h2>
-                <p>@message.Message</p>
+                <h2>@Model.Title</h2>
+                <p>@Model.Message</p>
             </div>
             <div class="error-control">
-                <a asp-route="Home" class="btn btn-success">BACK HOME</a>
+                <a asp-route="@Constants.MODULE_HOME_DASHBOARD_NAME" class="btn btn-success">BACK HOME</a>
                 <a href="#" class="btn btn-outline-success">CONTACT US</a>
             </div>
         </div>

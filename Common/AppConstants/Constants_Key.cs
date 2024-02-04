@@ -6,13 +6,17 @@
         public const string GLOBAL_KEY_LANGUAGE_CODE = "Language_Code";
         /// <summary>Global key: Title (for title every page)</summary>
         public const string GLOBAL_KEY_TITLE = "Title";
-        /// <summary>Global key: Title (for title every page)</summary>
+        /// <summary>Global key: Current page (for active menu)</summary>
         public const string GLOBAL_KEY_CURRENT_PAGE = "Current_Page";
+        /// <summary>Global key: Operator permisson</summary>
+        public const string GLOBAL_KEY_OPERATOR_PERMISSON = "Operator_Permisson";
 
         /// <summary>Session key: Operator id</summary>
         public const string SESSION_KEY_OPERATOR_ID = "Session_OperatorId";
         /// <summary>Session key: Operator permission</summary>
         public const string SESSION_KEY_OPERATOR_PERMISSION = "Session_OperatorPermission";
+        /// <summary>Session key: Page error code</summary>
+        public const string SESSION_KEY_PAGE_ERROR_CODE = "Session_ErrorCode";
         /// <summary>Session key: Page error message</summary>
         public const string SESSION_KEY_PAGE_ERROR_MESSAGE = "Session_PageErrorMessage";
 

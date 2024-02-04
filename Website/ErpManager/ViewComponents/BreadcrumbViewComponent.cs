@@ -1,4 +1,4 @@
-﻿using ErpManager.Web.ViewModels;
+﻿using ErpManager.Web.ViewModels.Component;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ErpManager.Web.ViewComponents

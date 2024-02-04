@@ -2,11 +2,12 @@
 using Domain.Entities;
 using Domain.Enum;
 using ErpManager.Web;
+using ErpManager.Web.Controllers;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ErpManager.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
         /// <summary>
         /// Constructor
@@ -19,7 +20,7 @@ namespace ErpManager.Controllers
         /// Dashboard page
         /// </summary>
         /// <returns></returns>
-        [PermissionAttribute(Permission.CanReadUser)]
+        [PermissionAttribute(Permission.CanAccessDashBoard)]
         [Route("/", Name = Constants.MODULE_HOME_DASHBOARD_NAME)]
         [Route(Constants.MODULE_HOME_DASHBOARD_PATH)]
         public IActionResult Index()

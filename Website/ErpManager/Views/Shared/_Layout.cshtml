@@ -1,9 +1,9 @@
 ﻿<!DOCTYPE html>
-<html lang="@(ViewData["Language_Code"] ?? "en")">
+<html lang="@(ViewData[Constants.GLOBAL_KEY_LANGUAGE_CODE] ?? Constants.CONFIG_DEFAULT_LANGUAGE_OPTIONS)">
 <head>
-    <meta charset="utf-8" />
+    <meta charset="@Constants.CONFIG_CHARSET_OPTIONS" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - @Constants.APPLICATION_NAME</title>
+    <title>@ViewData[Constants.GLOBAL_KEY_TITLE] - @Constants.APPLICATION_NAME</title>
     @* Css import render *@
     @await Component.InvokeAsync("StyleSheet")
 </head>
