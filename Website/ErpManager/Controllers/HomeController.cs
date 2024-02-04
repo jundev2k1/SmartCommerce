@@ -1,5 +1,4 @@
 ﻿using Common.Constants;
-using Domain.Entities;
 using Domain.Enum;
 using ErpManager.Web;
 using ErpManager.Web.Controllers;

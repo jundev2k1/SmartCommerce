@@ -29,30 +29,41 @@ namespace Domain.Repositories.User
         /// <summary>
         /// Get all user
         /// </summary>
+        /// <param name="branchId">Branch id</param>
         /// <returns>A collection of user</returns>
-        public UserModel[] GetAll()
+        public UserModel[] GetAll(string branchId)
         {
             var result = _dbContext.Users
+                .Where(user => user.BranchID == branchId)
                 .Select(user => user.MapToUserModel())
                 .ToArray();
 
             return result;
         }
 
-        public UserModel? Get(string userId)
+        /// <summary>
+        /// Get
+        /// </summary>
+        /// <param name="branchId">Branch id</param>
+        /// <param name="userId">User id</param>
+        /// <returns>User model</returns>
+        public UserModel? Get(string branchId, string userId)
         {
-            var result = _dbContext.Users.FirstOrDefault(user => user.UserId == userId);
+            var result = _dbContext.Users
+                .FirstOrDefault(user => (user.BranchID == branchId) && (user.UserId == userId));
             return result?.MapToUserModel();
         }
 
         /// <summary>
         /// Get by user name
         /// </summary>
+        /// <param name="branchId">Branch id</param>
         /// <param name="username">User name</param>
         /// <returns>User model</returns>
-        public UserModel? GetByUserName(string username)
+        public UserModel? GetByUserName(string branchId, string username)
         {
-            var result = _dbContext.Users.FirstOrDefault(user => user.UserName == username);
+            var result = _dbContext.Users
+                .FirstOrDefault(user => (user.BranchID == branchId) && (user.UserName == username));
             return result?.MapToUserModel();
         }
 
@@ -63,8 +74,9 @@ namespace Domain.Repositories.User
         /// <returns>Status insert</returns>
         public bool Insert(UserModel model)
         {
-            var user = Get(model.UserId);
+            var user = Get(model.BranchID, model.UserId);
             if (user != null) return false;
+
             var transaction = _dbContext.Database.BeginTransaction();
             try
             {
@@ -88,7 +100,8 @@ namespace Domain.Repositories.User
         public bool Update(UserModel model)
         {
             var transaction = _dbContext.Database.BeginTransaction();
-            var userUpdate = _dbContext.Users.FirstOrDefault(user => user.UserId == model.UserId);
+            var userUpdate = _dbContext.Users
+                .FirstOrDefault(user => (user.UserId == model.BranchID) && (user.UserId == model.UserId));
             if (userUpdate == null) return false;
 
             userUpdate.UserName = model.UserName;
@@ -124,9 +137,15 @@ namespace Domain.Repositories.User
             }
         }
 
-        public bool Delete(string userId)
+        /// <summary>
+        /// Delete
+        /// </summary>
+        /// <param name="branchId">Branch id</param>
+        /// <param name="userId">User id</param>
+        /// <returns>Delete status</returns>
+        public bool Delete(string branchId, string userId)
         {
-            var user = Get(userId);
+            var user = Get(branchId, userId);
             if (user == null) return false;
 
             try

@@ -1,4 +1,5 @@
 ﻿using Common.Constants;
+using Common.Utilities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 
@@ -21,16 +22,35 @@ namespace ErpManager.Web.Controllers
         /// </summary>
         private void Initialize()
         {
-            SetOperatorInitialize();
+            SetDefaultPageData();
             SetDefaultViewValue();
         }
 
         /// <summary>
-        /// Set operator initialize
+        /// Reset operator session
         /// </summary>
-        private void SetOperatorInitialize()
+        public void ResetOperatorSession()
         {
+            this.OperatorBrandID = Session.GetString(Constants.SESSION_KEY_OPERATOR_BRANCH_ID).ToStringOrEmpty();
+            this.OperatorId = Session.GetString(Constants.SESSION_KEY_OPERATOR_ID).ToStringOrEmpty();
+            this.OperatorName = Session.GetString(Constants.SESSION_KEY_OPERATOR_NAME).ToStringOrEmpty();
+            this.OperatorPermission = Session.GetString(Constants.SESSION_KEY_OPERATOR_PERMISSION).ToStringOrEmpty();
+        }
 
+        /// <summary>
+        /// Clear session
+        /// </summary>
+        public void ClearSession()
+        {
+            Session.Clear();
+        }
+
+        /// <summary>
+        /// Set default page data
+        /// </summary>
+        private void SetDefaultPageData()
+        {
+            this.PageUrl = Request.Path;
         }
 
         /// <summary>
@@ -38,15 +58,27 @@ namespace ErpManager.Web.Controllers
         /// </summary>
         private void SetDefaultViewValue()
         {
-            var url = Request.Path;
-            ViewData[Constants.GLOBAL_KEY_TITLE] = "1234";
         }
 
+        /// <summary>Session</summary>
+        public ISession Session
+        {
+            get
+            {
+                return HttpContext.Session;
+            }
+        }
+        /// <summary>Operator brand id</summary>
+        public string OperatorBrandID { get; private set; } = Constants.CONFIG_DEFAULT_BRANCH_ID;
         /// <summary>Operator id</summary>
         public string OperatorId { get; private set; } = string.Empty;
         /// <summary>Operator id</summary>
         public string OperatorName { get; private set; } = string.Empty;
         /// <summary>Operator id</summary>
         public string OperatorPermission { get; private set; } = string.Empty;
+        /// <summary>Page url</summary>
+        public string PageUrl { get; private set; } = string.Empty;
+        /// <summary>Operator id</summary>
+        public string OperatorPermissions { get; private set; } = string.Empty;
     }
 }

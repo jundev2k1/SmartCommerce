@@ -1,7 +1,4 @@
-﻿using Domain.Entities;
-using Domain.Mapping;
-using Domain.Models;
-using Domain.Repositories;
+﻿using Domain.Models;
 using Domain.Repositories.User;
 
 namespace Domain.Services
@@ -23,41 +20,57 @@ namespace Domain.Services
         /// <summary>
         /// Get all user
         /// </summary>
+        /// <param name="branchId">Branch id</param>
         /// <returns></returns>
-        public UserModel[] GetAllUser()
+        public UserModel[] GetAllUser(string branchId)
         {
-            return _userRepository.GetAll();
+            return _userRepository.GetAll(branchId);
         }
 
         /// <summary>
         /// Get user
         /// </summary>
+        /// <param name="branchId">Branch id</param>
         /// <param name="userId">User id</param>
         /// <returns>User model</returns>
-        public UserModel? GetUser(string userId)
+        public UserModel? GetUser(string branchId, string userId)
         {
-            return _userRepository.Get(userId);
+            return _userRepository.Get(branchId, userId);
         }
 
         /// <summary>
         /// Get user by username
         /// </summary>
+        /// <param name="branchId">Branch id</param>
         /// <param name="userName">User name</param>
         /// <returns>User model</returns>
-        public UserModel? GetUserByUsername(string userName)
+        public UserModel? GetUserByUsername(string branchId, string userName)
         {
-            return _userRepository.GetByUserName(userName);
+            return _userRepository.GetByUserName(branchId, userName);
+        }
+
+        /// <summary>
+        /// Get operator user
+        /// </summary>
+        /// <param name="branchId">Branch id</param>
+        /// <param name="userId">User id</param>
+        /// <returns>User model</returns>
+        public UserModel? GetOperatorUser(string branchId, string userId)
+        {
+            var user = _userRepository.Get(branchId, userId);
+            return user;
         }
 
         /// <summary>
         /// Try login
         /// </summary>
+        /// <param name="branchId">Branch id</param>
         /// <param name="userName">User name</param>
         /// <param name="password">Password</param>
         /// <returns>User model</returns>
-        public bool TryLogin(string userName, string password)
+        public bool TryLogin(string branchId, string userName, string password)
         {
-            var model = _userRepository.GetByUserName(userName);
+            var model = _userRepository.GetByUserName(branchId, userName);
             if (model == null) return false;
 
             var result = (model.UserName == userName) && (model.Password == password);

@@ -10,7 +10,7 @@ using System.Collections;
 
 namespace ErpManager.Web.Controllers
 {
-    public class AccountController : Controller
+    public class AccountController : BaseController
     {
         private readonly IMapper _mapper;
         private readonly IStringLocalizer<GlobalLocalizer> _localizer;
@@ -118,7 +118,7 @@ namespace ErpManager.Web.Controllers
             try
             {
                 // Check login id is wrong
-                var user = _userService.GetUserByUsername(input.LoginID);
+                var user = _userService.GetUserByUsername(this.OperatorBrandID, input.LoginID);
                 if (user == null) throw new Exception();
 
                 // Check block account
@@ -131,7 +131,7 @@ namespace ErpManager.Web.Controllers
                 IncreaseLoginCount(user.UserId);
 
                 // Try login, throw error if login fail
-                var isSuccess = _userService.TryLogin(input.LoginID, input.Password);
+                var isSuccess = _userService.TryLogin(this.OperatorBrandID, input.LoginID, input.Password);
                 if (isSuccess == false) throw new Exception();
 
                 // Handle login success
@@ -157,6 +157,7 @@ namespace ErpManager.Web.Controllers
 
             // Set session login for operator
             SetSessionForLogin(user);
+            ResetOperatorSession();
 
             // Handle with cookies
             if (isRememberMe == false)
@@ -202,9 +203,8 @@ namespace ErpManager.Web.Controllers
         private void SetSessionForLogin(UserModel user)
         {
             // Set session login for operator
-            var session = HttpContext.Session;
-            session.SetString(Constants.SESSION_KEY_OPERATOR_ID, user.UserId);
-            session.SetString(Constants.SESSION_KEY_OPERATOR_PERMISSION, "9998");
+            Session.SetString(Constants.SESSION_KEY_OPERATOR_ID, user.UserId);
+            Session.SetString(Constants.SESSION_KEY_OPERATOR_PERMISSION, "9998");
         }
 
         /// <summary>
@@ -254,9 +254,7 @@ namespace ErpManager.Web.Controllers
         [Route(Constants.MODULE_AUTH_SIGNOUT_PATH, Name = Constants.MODULE_AUTH_SIGNOUT_NAME)]
         public IActionResult LogOut()
         {
-            // Clear session
-            HttpContext.Session.Clear();
-
+            ClearSession();
             return RedirectToRoute(Constants.MODULE_AUTH_SIGNIN_NAME);
         }
 

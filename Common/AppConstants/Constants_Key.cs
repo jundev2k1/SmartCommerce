@@ -11,8 +11,12 @@
         /// <summary>Global key: Operator permisson</summary>
         public const string GLOBAL_KEY_OPERATOR_PERMISSON = "Operator_Permisson";
 
+        /// <summary>Session key: Operator branch id</summary>
+        public const string SESSION_KEY_OPERATOR_BRANCH_ID = "Session_OperatorBranchId";
         /// <summary>Session key: Operator id</summary>
         public const string SESSION_KEY_OPERATOR_ID = "Session_OperatorId";
+        /// <summary>Session key: Operator name</summary>
+        public const string SESSION_KEY_OPERATOR_NAME = "Session_OperatorName";
         /// <summary>Session key: Operator permission</summary>
         public const string SESSION_KEY_OPERATOR_PERMISSION = "Session_OperatorPermission";
         /// <summary>Session key: Page error code</summary>

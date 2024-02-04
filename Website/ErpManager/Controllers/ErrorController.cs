@@ -1,6 +1,5 @@
 ﻿using Common.Constants;
 using Common.Utilities;
-using Domain.Enum;
 using ErpManager.Web.Enum;
 using ErpManager.Web.ViewModels;
 using Microsoft.AspNetCore.Mvc;
@@ -8,7 +7,7 @@ using Microsoft.Extensions.Localization;
 
 namespace ErpManager.Web.Controllers
 {
-    public class ErrorController : Controller
+    public class ErrorController : BaseController
     {
         private readonly IStringLocalizer<GlobalLocalizer> _localizer;
 

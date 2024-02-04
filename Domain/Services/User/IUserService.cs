@@ -7,29 +7,41 @@ namespace Domain.Services
         /// <summary>
         /// Get all user
         /// </summary>
+        /// <param name="branchId">Branch id</param>
         /// <returns>A collection of users</returns>
-        public UserModel?[] GetAllUser();
+        public UserModel?[] GetAllUser(string branchId);
 
         /// <summary>
         /// Get user
         /// </summary>
+        /// <param name="branchId">Branch id</param>
         /// <param name="userId">User id</param>
         /// <returns>User model</returns>
-        public UserModel? GetUser(string userId);
+        public UserModel? GetUser(string branchId, string userId);
 
         /// <summary>
         /// Get user
         /// </summary>
+        /// <param name="branchId">Branch id</param>
         /// <param name="userName">Username (login id)</param>
         /// <returns>User model</returns>
-        public UserModel? GetUserByUsername(string userName);
+        public UserModel? GetUserByUsername(string branchId, string userName);
+
+        /// <summary>
+        /// Get operator user
+        /// </summary>
+        /// <param name="branchId">Branch id</param>
+        /// <param name="userId">User id</param>
+        /// <returns>User model</returns>
+        public UserModel? GetOperatorUser(string branchId, string userId);
 
         /// <summary>
         /// Try login
         /// </summary>
+        /// <param name="branchId">Branch id</param>
         /// <param name="userName">User name</param>
         /// <param name="password">Password</param>
         /// <returns>User model</returns>
-        public bool TryLogin(string userName, string password);
+        public bool TryLogin(string branchId, string userName, string password);
     }
 }

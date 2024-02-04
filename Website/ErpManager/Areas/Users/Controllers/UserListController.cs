@@ -1,11 +1,12 @@
 ﻿using Common.Constants;
 using Domain.Enum;
+using ErpManager.Web.Controllers;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ErpManager.Web.Areas.Users.Controllers
 {
     [Area(Constants.MODULE_USER_AREA)]
-    public class UserListController : Controller
+    public class UserListController : BaseController
     {
         [HttpGet]
         [PermissionAttribute(Permission.CanReadListUser)]

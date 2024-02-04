@@ -23,6 +23,8 @@
         public static string CONFIG_LANGUAGE_OPTIONS = "en";
         /// <summary>Config: charset options</summary>
         public static string CONFIG_CHARSET_OPTIONS = "utf-8";
+        /// <summary>Config: default branch id</summary>
+        public static string CONFIG_DEFAULT_BRANCH_ID = "0";
 
         /// <summary>Authentication expires cookies (days)</summary>
         public const int AUTH_EXPIRES_COOKIE = 30;
