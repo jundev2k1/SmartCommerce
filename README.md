@@ -7,6 +7,7 @@
 
 ### Run migration create database
 
+- Change connectionString in AppSetting.json
 - Right click into ErpManager.Web -> Open in terminal
 - Run command:
   + Clear database: `dotnet ef database update 0`

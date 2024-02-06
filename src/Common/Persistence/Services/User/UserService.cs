@@ -1,13 +1,12 @@
 ﻿using Domain.Models;
-using Domain.Repositories.User;
+using Persistence.Repositories.User;
 
-namespace Domain.Services
+namespace Persistence.Services
 {
-    public class UserService : IUserService
+    public class UserService : ServiceBase, IUserService
     {
         /// <summary>Context singleton</summary>
         private readonly IUserRepository _userRepository;
-
 
         /// <summary>
         /// Constructor
@@ -21,7 +20,7 @@ namespace Domain.Services
         /// Get all user
         /// </summary>
         /// <param name="branchId">Branch id</param>
-        /// <returns></returns>
+        /// <returns>User list</returns>
         public UserModel[] GetAllUser(string branchId)
         {
             return _userRepository.GetAll(branchId);

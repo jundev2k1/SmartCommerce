@@ -1,8 +1,8 @@
 ﻿using Domain.Models;
 
-namespace Domain.Services
+namespace Persistence.Services
 {
-    public interface IUserService : IServiceBase
+    public interface IUserService
     {
         /// <summary>
         /// Get all user

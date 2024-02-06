@@ -1,6 +1,6 @@
 ﻿using Domain.Models;
 
-namespace Domain.Repositories.User
+namespace Persistence.Repositories.User
 {
     public interface IUserRepository
     {

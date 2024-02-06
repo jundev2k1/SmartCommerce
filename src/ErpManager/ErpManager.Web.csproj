@@ -33,7 +33,8 @@
     <Folder Include="Areas\Products\ViewModels\" />
     <Folder Include="Areas\Users\ViewModels\" />
     <Folder Include="Migrations\" />
-    <Folder Include="wwwroot\content\" />
+    <Folder Include="wwwroot\content\user-images\" />
+    <Folder Include="wwwroot\content\product-images\" />
     <Folder Include="wwwroot\css\" />
     <Folder Include="wwwroot\js\component-js\dialog\" />
     <Folder Include="wwwroot\js\component-js\popup\" />
@@ -50,8 +51,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Common\Common.csproj" />
-    <ProjectReference Include="..\..\Domain\Domain.csproj" />
+    <ProjectReference Include="..\Common\Common\Common.csproj" />
+    <ProjectReference Include="..\Common\Domain\Domain.csproj" />
+    <ProjectReference Include="..\Common\Persistence\Persistence.csproj" />
   </ItemGroup>
 
   <ItemGroup>

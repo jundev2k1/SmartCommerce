@@ -2,9 +2,9 @@
 using Domain.Mapping;
 using Domain.Models;
 
-namespace Domain.Repositories.User
+namespace Persistence.Repositories.User
 {
-    public class UserRepository : IUserRepository
+    public class UserRepository : RepositoryBase, IUserRepository
     {
         private DBContext _dbContext;
 

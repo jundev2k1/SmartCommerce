@@ -2,10 +2,10 @@
 using Common.Constants;
 using Common.Utilities;
 using Domain.Models;
-using Domain.Services;
 using ErpManager.Web.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Localization;
+using Persistence.Common;
 using System.Collections;
 
 namespace ErpManager.Web.Controllers
@@ -14,13 +14,13 @@ namespace ErpManager.Web.Controllers
     {
         private readonly IMapper _mapper;
         private readonly IStringLocalizer<GlobalLocalizer> _localizer;
-        private readonly IUserService _userService;
+        private readonly IServices _services;
 
-        public AccountController(IStringLocalizer<GlobalLocalizer> localizer, IMapper mapper, IUserService userService)
+        public AccountController(IStringLocalizer<GlobalLocalizer> localizer, IMapper mapper, IServices services)
         {
             _localizer = localizer;
-            _userService = userService;
             _mapper = mapper;
+            _services = services;
         }
 
         [HttpGet]
@@ -118,7 +118,7 @@ namespace ErpManager.Web.Controllers
             try
             {
                 // Check login id is wrong
-                var user = _userService.GetUserByUsername(this.OperatorBrandID, input.LoginID);
+                var user = _services.Users.GetUserByUsername(this.OperatorBrandID, input.LoginID);
                 if (user == null) throw new Exception();
 
                 // Check block account
@@ -131,7 +131,7 @@ namespace ErpManager.Web.Controllers
                 IncreaseLoginCount(user.UserId);
 
                 // Try login, throw error if login fail
-                var isSuccess = _userService.TryLogin(this.OperatorBrandID, input.LoginID, input.Password);
+                var isSuccess = _services.Users.TryLogin(this.OperatorBrandID, input.LoginID, input.Password);
                 if (isSuccess == false) throw new Exception();
 
                 // Handle login success

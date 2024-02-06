@@ -1,10 +1,6 @@
 ﻿using Common.Constants;
 using Domain.Entities;
-using Domain.Repositories.User;
-using Domain.Services;
-using Domain.Validator;
 using ErpManager.Web.Middleware;
-using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.EntityFrameworkCore;
