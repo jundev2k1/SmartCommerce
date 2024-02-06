@@ -77,6 +77,12 @@
                     background: var(--site-gray-200);
                 }
 
+            .login .input-group .remember-me {
+                display: flex;
+                align-items: center;
+                gap: 4px;
+            }
+
             .login .input-group input.error {
                 background: var(--site-red-theme);
                 filter: brightness(1.5);
@@ -150,9 +156,9 @@
                     <span class="login-message"></span>
                 </div>
                 <div class="input-group">
-                    <div class="remember">
+                    <div class="remember-me">
                         <input asp-for="@Model.RememberMe" type="checkbox" checked="@Model.RememberMe" />
-                        @_localizer["Login_Label_RememberMe"]
+                        <span>@_localizer["Login_Label_RememberMe"]</span>
                     </div>
                     <div class="forget-password">
                         <a href="#">@_localizer["Login_Button_ForgetPassword"]</a>

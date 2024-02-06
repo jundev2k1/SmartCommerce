@@ -2,7 +2,9 @@
 using Domain.Entities;
 using Domain.Repositories.User;
 using Domain.Services;
+using Domain.Validator;
 using ErpManager.Web.Middleware;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.EntityFrameworkCore;
@@ -20,13 +22,16 @@ namespace ErpManager.Web
         {
             // Connection database
             var connection = configuration.GetConnectionString("ErpManager");
+            services.AddDbContext<DBContext>(x => x.UseSqlServer(connection, b => b.MigrationsAssembly("ErpManager.Web")));
 
             // Add application service
             services
-                .AddDbContext<DBContext>(x => x.UseSqlServer(connection, b => b.MigrationsAssembly("ErpManager.Web")))
                 .AddSessionSetting()
                 .AddLocalizationSetting()
                 .AddAutoMapper(typeof(AutoMapperProfile).Assembly);
+
+            // Dependency injection
+            services.AddConfiguration();
 
             // Add services to the container.
             services.AddControllersWithViews()
@@ -37,44 +42,11 @@ namespace ErpManager.Web
         }
 
         /// <summary>
-        /// Add infrastructure
-        /// </summary>
-        public static IServiceCollection AddInfrastructure(this IServiceCollection services)
-        {
-            services
-                .AddConfiguration()
-                .AddServices()
-                .AddPersistence();
-
-            return services;
-        }
-
-        /// <summary>
         /// Add configuration
         /// </summary>
         private static IServiceCollection AddConfiguration(this IServiceCollection services)
         {
             services.AddSingleton<AppConfiguration>();
-            return services;
-        }
-
-        /// <summary>
-        /// Add services
-        /// </summary>
-        private static IServiceCollection AddServices(this IServiceCollection services)
-        {
-            // Dependency injection service
-            services.AddScoped<IUserService, UserService>();
-            return services;
-        }
-
-        /// <summary>
-        /// Add persistence
-        /// </summary>
-        private static IServiceCollection AddPersistence(this IServiceCollection services)
-        {
-            // Dependency injection repository
-            services.AddScoped<IUserRepository, UserRepository>();
             return services;
         }
 
@@ -147,7 +119,7 @@ namespace ErpManager.Web
         {
             if (!app.Environment.IsDevelopment())
             {
-                app.UseExceptionHandler("/Home/Error");
+                app.UseExceptionHandler(Constants.MODULE_ERROR_ERROR_PATH);
                 app.UseHsts();
             }
             return app;

@@ -1,6 +1,8 @@
 ﻿@{
     ViewData[Constants.GLOBAL_KEY_TITLE] = _localizer["Nav_Dashboard"];
     ViewData[Constants.GLOBAL_KEY_CURRENT_PAGE] = "Dashboard_Page";
+
+    var message = (string)ViewBag.LoginMessage;
 }
 <div class="dash-board">
     <section class="statical ">
@@ -26,5 +28,13 @@
             </div>
         </div>
     </section>
+    <script>
+        const message = '@message';
+        const InitPage = () => {
+            toastr.success(message);
+        };
+
+        if (message) StoreWindowLoadCallback.push(InitPage);
+    </script>
 </div>
 

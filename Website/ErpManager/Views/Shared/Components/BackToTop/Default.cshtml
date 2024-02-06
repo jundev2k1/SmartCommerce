@@ -1,58 +1,58 @@
 ﻿<section id="backToTopButton">
-<style>
-    .btn-back-to-top {
-        position: fixed;
-        right: 12px;
-        bottom: 28px;
-        opacity: .5;
-        background: var(--site-gray-50);
-        border-radius: var(--site-border-full);
-        z-index: 98;
-    }
-
-        .btn-back-to-top:hover {
-            opacity: 1;
-            transition: .4s ease-in-out;
+    <style>
+        .btn-back-to-top {
+            position: fixed;
+            right: 12px;
+            bottom: 28px;
+            opacity: .5;
+            background: var(--site-theme-operating);
+            border-radius: var(--site-border-full);
+            z-index: 98;
         }
 
-        .btn-back-to-top.active {
-            opacity: .8;
-            transition: .4s ease-in-out;
-        }
-
-        .btn-back-to-top button[type=button] {
-            padding: 12px;
-        }
-
-            .btn-back-to-top button[type=button] i {
-                width: 28px;
-                height: 28px;
-                font-size: 22px;
-                color: var(--site-theme-operating);
+            .btn-back-to-top:hover {
+                opacity: 1;
+                transition: .4s ease-in-out;
             }
-</style>
-<div class="btn-back-to-top">
-    <button type="button" onclick="handleScrollTop()"><i class="fa-regular fa-chevron-up fa-fw"></i></button>
-</div>
 
-<script type="text/javascript">
-    const handleBackToTop = (event) => {
-        const btnBackToTop = document.querySelector(".btn-back-to-top");
-        if (window.scrollY > 200) {
-            if (!btnBackToTop.classList.contains("active")) {
-                btnBackToTop.classList.add("active");
+            .btn-back-to-top.active {
+                opacity: .8;
+                transition: .4s ease-in-out;
             }
-        } else {
-            if (btnBackToTop.classList.contains("active")) {
-                btnBackToTop.classList.remove("active");
+
+            .btn-back-to-top button[type=button] {
+                padding: 12px;
             }
-        }
-    };
-    // Register function window scroll
-    StoreWindowScrollCallback.push(handleBackToTop);
-    
-    const handleScrollTop = () => {
-        window.scrollTo(0, 0);
-    };
-</script>
+
+                .btn-back-to-top button[type=button] i {
+                    width: 28px;
+                    height: 28px;
+                    font-size: 22px;
+                    color: var(--site-title-operating);
+                }
+    </style>
+    <div class="btn-back-to-top">
+        <button type="button" onclick="handleScrollTop()"><i class="fa-regular fa-chevron-up fa-fw"></i></button>
+    </div>
+
+    <script type="text/javascript">
+        const handleBackToTop = (event) => {
+            const btnBackToTop = document.querySelector(".btn-back-to-top");
+            if (window.scrollY > 200) {
+                if (!btnBackToTop.classList.contains("active")) {
+                    btnBackToTop.classList.add("active");
+                }
+            } else {
+                if (btnBackToTop.classList.contains("active")) {
+                    btnBackToTop.classList.remove("active");
+                }
+            }
+        };
+        // Register function window scroll
+        StoreWindowScrollCallback.push(handleBackToTop);
+
+        const handleScrollTop = () => {
+            window.scrollTo(0, 0);
+        };
+    </script>
 </section>

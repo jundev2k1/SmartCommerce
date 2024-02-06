@@ -35,7 +35,6 @@
     <Folder Include="Migrations\" />
     <Folder Include="wwwroot\content\" />
     <Folder Include="wwwroot\css\" />
-    <Folder Include="wwwroot\fileUpload\" />
     <Folder Include="wwwroot\js\component-js\dialog\" />
     <Folder Include="wwwroot\js\component-js\popup\" />
     <Folder Include="wwwroot\js\component-script\SearchInput\" />
@@ -56,6 +55,18 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Update="Resources\Views\Error\Index.en-US.resx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Views\Error\Index.vi-VN.resx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Views\Home\Index.en-US.resx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Views\Home\Index.vi-VN.resx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
     <EmbeddedResource Update="Resources\Views\Account\Index.en-US.resx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>

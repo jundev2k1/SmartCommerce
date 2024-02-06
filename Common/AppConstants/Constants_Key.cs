@@ -19,6 +19,8 @@
         public const string SESSION_KEY_OPERATOR_NAME = "Session_OperatorName";
         /// <summary>Session key: Operator permission</summary>
         public const string SESSION_KEY_OPERATOR_PERMISSION = "Session_OperatorPermission";
+        /// <summary>Session key: Login message</summary>
+        public const string SESSION_KEY_LOGIN_MESSAGE = "Session_LoginMessage";
         /// <summary>Session key: Page error code</summary>
         public const string SESSION_KEY_PAGE_ERROR_CODE = "Session_ErrorCode";
         /// <summary>Session key: Page error message</summary>
@@ -35,14 +37,5 @@
 
         /// <summary>View data key: Auth error message</summary>
         public const string VIEWDATA_KEY_AUTH_ERROR_MESSAGE = "Auth_Error_Message";
-
-        /// <summary>Error message key: system error</summary>
-        public const string ERRORMSG_KEY_SYSTEM_ERROR = "ErrorMessage_SystemError";
-        /// <summary>Error message key: no has permission</summary>
-        public const string ERRORMSG_KEY_NO_HAS_PERMISSION = "ErrorMessage_NoHasPermission";
-        /// <summary>Error message key: login failed</summary>
-        public const string ERRORMSG_KEY_LOGIN_FAILED = "ErrorMessage_LoginFailed";
-        /// <summary>Error message key: login too much</summary>
-        public const string ERRORMSG_KEY_LOGIN_TOO_MUCH = "ErrorMessage_LoginTooMuch";
     }
 }

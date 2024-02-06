@@ -16,6 +16,7 @@
     position: relative;
     display: flex;
     height: 100vh;
+    color: var(--site-text-operating);
 }
 
 .footer {

@@ -10,7 +10,7 @@ namespace ErpManager.Web.ViewComponents
     {
         public IViewComponentResult Invoke(string currentMenu)
         {
-            var sidebarJson = File.ReadAllText(Constants.FILE_PATH_SIDEBAR_SETTING);
+            var sidebarJson = File.ReadAllText($"{Environment.CurrentDirectory}{Constants.FILE_PATH_SIDEBAR_SETTING}");
             var menu = JsonConvert.DeserializeObject<List<MenuJsonModel>>(sidebarJson);
 
             ViewBag.OperatorPermisson = GetOperatorPermisson();

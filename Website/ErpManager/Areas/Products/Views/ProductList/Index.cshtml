@@ -2,3 +2,18 @@
     ViewData[Constants.GLOBAL_KEY_TITLE] = _localizer["Nav_Product_List"];
     ViewData[Constants.GLOBAL_KEY_CURRENT_PAGE] = "ProductList_Page";
 }
+
+<section id="searchBar" class="site-card">
+    <div class="row">
+        <div class="col-md-6 col-8">
+            @await Component.InvokeAsync("SearchInput")
+        </div>
+        <div class="col-md-2 col-4">
+            <input type="button" class="btn site-btn-outline-info site-rounded" value="Filter" />
+        </div>
+        <div class="col-md-4 d-flex justify-content-end gap-2">
+            <button type="button" class="btn site-btn-outline-theme site-rounded-full">Export</button>
+            <button type="button" class="btn site-btn-theme site-rounded-full">Create</button>
+        </div>
+    </div>
+</section>

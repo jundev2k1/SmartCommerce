@@ -204,7 +204,8 @@ namespace ErpManager.Web.Controllers
         {
             // Set session login for operator
             Session.SetString(Constants.SESSION_KEY_OPERATOR_ID, user.UserId);
-            Session.SetString(Constants.SESSION_KEY_OPERATOR_PERMISSION, "9998");
+            Session.SetString(Constants.SESSION_KEY_OPERATOR_PERMISSION, "9999");
+            Session.SetString(Constants.SESSION_KEY_LOGIN_MESSAGE, "Login success");
         }
 
         /// <summary>
