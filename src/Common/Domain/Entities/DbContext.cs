@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
+
+using Microsoft.EntityFrameworkCore;
 
 namespace Domain.Entities;
 

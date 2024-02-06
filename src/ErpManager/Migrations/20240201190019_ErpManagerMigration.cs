@@ -1,4 +1,6 @@
-﻿using System;
+﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
+
+using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable

@@ -1,4 +1,6 @@
-﻿namespace Common.Constants
+﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
+
+namespace Common.Constants
 {
     public static partial class Constants
     {

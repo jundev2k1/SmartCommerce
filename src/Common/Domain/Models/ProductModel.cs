@@ -1,4 +1,6 @@
-﻿using Domain.Enum;
+﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
+
+using Domain.Enum;
 
 namespace Domain.Models;
 

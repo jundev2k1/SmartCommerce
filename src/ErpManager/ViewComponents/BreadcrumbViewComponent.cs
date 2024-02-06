@@ -1,4 +1,6 @@
-﻿using ErpManager.Web.ViewModels.Component;
+﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
+
+using ErpManager.Web.ViewModels.Component;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ErpManager.Web.ViewComponents

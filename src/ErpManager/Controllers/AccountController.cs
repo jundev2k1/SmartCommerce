@@ -1,4 +1,6 @@
-﻿using AutoMapper;
+﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
+
+using AutoMapper;
 using Common.Constants;
 using Common.Utilities;
 using Domain.Models;

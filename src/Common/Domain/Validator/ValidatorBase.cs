@@ -1,4 +1,6 @@
-﻿using FluentValidation;
+﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
+
+using FluentValidation;
 
 namespace Domain.Validator
 {

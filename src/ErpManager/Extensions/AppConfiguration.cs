@@ -1,4 +1,6 @@
-﻿using Common.Utilities;
+﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
+
+using Common.Utilities;
 
 namespace ErpManager.Web
 {

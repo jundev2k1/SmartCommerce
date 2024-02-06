@@ -1,4 +1,6 @@
-﻿using System.Text;
+﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
+
+using System.Text;
 
 namespace Common.Utilities
 {

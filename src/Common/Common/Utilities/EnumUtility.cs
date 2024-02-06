@@ -1,4 +1,6 @@
-﻿using Newtonsoft.Json.Linq;
+﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
+
+using Newtonsoft.Json.Linq;
 using System.Runtime.Serialization;
 
 namespace Common.Utilities

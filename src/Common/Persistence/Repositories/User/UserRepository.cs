@@ -1,4 +1,6 @@
-﻿using Domain.Entities;
+﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
+
+using Domain.Entities;
 using Domain.Mapping;
 using Domain.Models;
 

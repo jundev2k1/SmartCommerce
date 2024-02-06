@@ -1,4 +1,6 @@
-﻿using Newtonsoft.Json;
+﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
+
+using Newtonsoft.Json;
 using System.Text.Json.Serialization;
 
 namespace ErpManager.Web.JsonModel

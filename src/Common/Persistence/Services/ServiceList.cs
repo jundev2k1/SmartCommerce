@@ -1,4 +1,6 @@
-﻿#nullable disable
+﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
+
+#nullable disable
 using Microsoft.Extensions.DependencyInjection;
 using Persistence.Common;
 

@@ -1,4 +1,6 @@
-﻿using ErpManager.Web.Enum;
+﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
+
+using ErpManager.Web.Enum;
 
 namespace ErpManager.Web.ViewModels
 {

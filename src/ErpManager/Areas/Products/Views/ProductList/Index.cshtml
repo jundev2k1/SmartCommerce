@@ -1,7 +1,16 @@
-﻿@{
+﻿@using ErpManager.Web.ViewModels.Component;
+@{
     ViewData[Constants.GLOBAL_KEY_TITLE] = _localizer["Nav_Product_List"];
     ViewData[Constants.GLOBAL_KEY_CURRENT_PAGE] = "ProductList_Page";
+
+    var breadcrumbs = new Breadcrumb[]
+    {
+        new Breadcrumb { Title = "Home", Href="/" },
+        new Breadcrumb { Title = "Product List", IsDisabled = true }
+    };
 }
+
+@await Component.InvokeAsync("Breadcrumb", breadcrumbs)
 
 <section id="searchBar" class="site-card">
     <div class="row">

@@ -1,4 +1,6 @@
-﻿using Common.Constants;
+﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
+
+using Common.Constants;
 using Domain.Enum;
 using Domain.Models;
 using Microsoft.AspNetCore.Mvc;

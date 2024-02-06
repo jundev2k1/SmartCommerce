@@ -1,4 +1,6 @@
-﻿using System.Collections;
+﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
+
+using System.Collections;
 
 namespace Common.Utilities
 {

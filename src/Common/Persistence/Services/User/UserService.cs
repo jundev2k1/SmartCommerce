@@ -1,4 +1,6 @@
-﻿using Domain.Models;
+﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
+
+using Domain.Models;
 using Persistence.Repositories.User;
 
 namespace Persistence.Services
