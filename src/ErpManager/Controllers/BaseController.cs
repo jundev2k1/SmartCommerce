@@ -1,11 +1,8 @@
 ﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
 
-using Common.Constants;
-using Common.Utilities;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 
-namespace ErpManager.Web.Controllers
+namespace ErpManager.ERP.Controllers
 {
     public class BaseController : Controller
     {

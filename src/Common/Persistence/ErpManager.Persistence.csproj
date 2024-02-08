@@ -1,0 +1,25 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Common\ErpManager.Common.csproj" />
+    <ProjectReference Include="..\Domain\ErpManager.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Using Include="ErpManager.Domain.Entities" />
+    <Using Include="ErpManager.Domain.Mapping" />
+    <Using Include="ErpManager.Domain.Models" />
+    <Using Include="Microsoft.EntityFrameworkCore" />
+    <Using Include="Microsoft.Extensions.DependencyInjection" />
+    <Using Include="Persistence.Common" />
+    <Using Include="Persistence.Interface" />
+    <Using Include="Persistence.Services" />
+  </ItemGroup>
+
+</Project>

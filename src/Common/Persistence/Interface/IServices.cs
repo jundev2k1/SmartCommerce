@@ -1,8 +1,6 @@
 ﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
 
-using Persistence.Services;
-
-namespace Persistence.Common
+namespace Persistence.Interface
 {
     public interface IServices
     {

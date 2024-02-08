@@ -1,8 +1,6 @@
 ﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
 
-using Domain.Entities;
-using Domain.Mapping;
-using Domain.Models;
+using ErpManager.Domain.Mapping;
 
 namespace Persistence.Repositories.User
 {
@@ -65,7 +63,10 @@ namespace Persistence.Repositories.User
         public UserModel? GetByUserName(string branchId, string username)
         {
             var result = _dbContext.Users
-                .FirstOrDefault(user => (user.BranchID == branchId) && (user.UserName == username));
+                .FirstOrDefault(user =>
+                    (user.BranchID == branchId)
+                    && (user.UserName == username)
+                    && (user.DelFlg == false));
             return result?.MapToUserModel();
         }
 

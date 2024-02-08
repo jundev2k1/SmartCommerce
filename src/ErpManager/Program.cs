@@ -1,14 +1,22 @@
 // Copyright (c) 2024 - Jun Dev. All rights reserved
 
-using ErpManager.Web;
+using ErpManager.ERP;
+using ErpManager.Infrastructure;
 using Persistence;
 
 var builder = WebApplication.CreateBuilder(args);
 {
-    builder.Services.AddApplication(builder.Configuration);
-    builder.Services.AddPersistence();
+    builder.Services
+        .AddApplication(builder.Configuration)
+        .AddPersistence()
+        .AddInfrastructure();
 }
 
 var app = builder.Build();
-app.Configure();
+{
+    app.Configure();
+    app.UserApplicationMiddleware();
+    app.UseInfrastructureMiddleware();
+}
+
 app.Run();

@@ -1,9 +1,9 @@
 ﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
 
-using Domain.Entities;
-using Domain.Models;
+using ErpManager.Domain.Entities;
+using ErpManager.Domain.Models;
 
-namespace Domain.Mapping
+namespace ErpManager.Domain.Mapping
 {
     public static class UserMapping
     {
@@ -30,6 +30,7 @@ namespace Domain.Mapping
                 Address3 = userEntity.Address3,
                 Address4 = userEntity.Address4,
                 Status = userEntity.Status,
+                DelFlg = userEntity.DelFlg,
                 Sex = userEntity.Sex,
                 Birthday = userEntity.Birthday,
                 DateCreated = userEntity.DateCreated,

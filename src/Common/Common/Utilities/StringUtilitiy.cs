@@ -2,29 +2,10 @@
 
 using System.Text;
 
-namespace Common.Utilities
+namespace ErpManager.Common
 {
     public static class StringUtilitiy
     {
-        /// <summary>Vietnamese text </summary>
-        private static readonly string[] _vietnameseText = new string[]
-        {
-            "aáàảãạăắằẳẵặâấầẩẫậ",
-            "AÁÀẢÃẠĂẮẰẲẴẶÂẤẦẨẪẬ",
-            "dđ",
-            "DĐ",
-            "eéèẻẽẹêếềểễệ",
-            "EÉÈẺẼẸÊẾỀỂỄỆ",
-            "iíìỉĩị",
-            "IÍÌỈĨỊ",
-            "oóòỏõọôốồổỗộơớờởỡợ",
-            "OÓÒỎÕỌÔỐỒỔỖỘƠỚỜỞỠỢ",
-            "uúùủũụưứừửữự",
-            "UÚÙỦŨỤƯỨỪỬỮỰ",
-            "yýỳỷỹỵ",
-            "YÝỲỶỸỴ",
-        };
-
         /// <summary>
         /// Convert object to string or string empty
         /// </summary>
@@ -47,7 +28,7 @@ namespace Common.Utilities
             var result = new StringBuilder();
             foreach (char charText in inputText)
             {
-                var textContain = _vietnameseText.FirstOrDefault(vt => vt.Contains(charText));
+                var textContain = Constants.CONST_DATA_VIETNAMESE_TEXT.FirstOrDefault(vt => vt.Contains(charText));
                 result.Append(textContain?[0] ?? charText);
             }
 

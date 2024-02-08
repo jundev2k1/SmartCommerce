@@ -1,6 +1,6 @@
 ﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
 
-namespace ErpManager.Web.ViewModels
+namespace ErpManager.ERP.ViewModels
 {
     public class LoginViewModel
     {

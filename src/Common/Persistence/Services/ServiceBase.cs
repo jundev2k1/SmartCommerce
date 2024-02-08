@@ -2,7 +2,7 @@
 
 namespace Persistence.Services
 {
-    public interface ServiceBase
+    public class ServiceBase
     {
     }
 }

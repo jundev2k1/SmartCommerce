@@ -1,11 +1,11 @@
 ﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
 
 #nullable disable
-using Domain.Enum;
+using ErpManager.Domain.Enum;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Domain.Entities;
+namespace ErpManager.Domain.Entities;
 
 [Table("Product")]
 public partial class Product
@@ -45,6 +45,8 @@ public partial class Product
     public DisplayPriceEnum DisplayPrice { get; set;}
 
     public ProductStatusEnum Status { get; set; }
+
+    public bool DelFlg { get; set; }
 
     public decimal Size1 { get; set; }
 

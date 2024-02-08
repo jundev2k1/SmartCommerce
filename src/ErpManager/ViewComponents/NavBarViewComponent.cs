@@ -1,19 +1,15 @@
 ﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
 
-using Common.Constants;
-using Common.Utilities;
-using ErpManager.Web.JsonModel;
-using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 
-namespace ErpManager.Web.ViewComponents
+namespace ErpManager.ERP.ViewComponents
 {
     public class NavBarViewComponent : ViewComponent
     {
         public IViewComponentResult Invoke(string currentMenu)
         {
             var sidebarJson = File.ReadAllText($"{Environment.CurrentDirectory}{Constants.FILE_PATH_SIDEBAR_SETTING}");
-            var menu = JsonConvert.DeserializeObject<List<MenuJsonModel>>(sidebarJson);
+            var menu = JsonConvert.DeserializeObject<List<MenuViewModel>>(sidebarJson);
 
             ViewBag.OperatorPermisson = GetOperatorPermisson();
             return View(menu);

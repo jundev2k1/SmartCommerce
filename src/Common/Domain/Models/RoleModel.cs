@@ -1,8 +1,8 @@
 ﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
 
-using Domain.Enum;
+using ErpManager.Domain.Enum;
 
-namespace Domain.Models;
+namespace ErpManager.Domain.Models;
 
 public class RoleModel
 {

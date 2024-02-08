@@ -1,11 +1,11 @@
 ﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
 
 #nullable disable
-using Domain.Enum;
+using ErpManager.Domain.Enum;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Domain.Entities;
+namespace ErpManager.Domain.Entities;
 
 [Table("Brand")]
 public partial class Brand

@@ -1,0 +1,51 @@
+﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
+
+using Newtonsoft.Json;
+
+namespace ErpManager.ERP.ViewModels
+{
+    public class MenuViewModel
+    {
+        [JsonProperty]
+        public int Priority { get; set; }
+
+        [JsonProperty("label")]
+        public string Label { get; set; } = string.Empty;
+
+        [JsonProperty("name")]
+        public string Name { get; set; } = string.Empty;
+
+        [JsonProperty("permission")]
+        public string Permission { get; set; } = string.Empty;
+
+        [JsonProperty("localizer")]
+        public string Localizer { get; set; } = string.Empty;
+
+        [JsonProperty("icon")]
+        public string Icon { get; set; } = string.Empty;
+
+        [JsonProperty("url")]
+        public string Url { get; set; } = string.Empty;
+
+        [JsonProperty("items")]
+        public List<SubMenuViewModel> Items { get; set; } = new List<SubMenuViewModel>();
+    }
+
+    public class SubMenuViewModel
+    {
+        [JsonProperty("label")]
+        public string Label { get; set; } = string.Empty;
+
+        [JsonProperty("localizer")]
+        public string Localizer { get; set; } = string.Empty;
+
+        [JsonProperty("name")]
+        public string Name { get; set; } = string.Empty;
+
+        [JsonProperty("permission")]
+        public string Permission { get; set; } = string.Empty;
+
+        [JsonProperty("url")]
+        public string Url { get; set; } = string.Empty;
+    }
+}

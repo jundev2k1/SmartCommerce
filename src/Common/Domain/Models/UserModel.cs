@@ -1,8 +1,8 @@
 ﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
 
-using Domain.Enum;
+using ErpManager.Domain.Enum;
 
-namespace Domain.Models;
+namespace ErpManager.Domain.Models;
 
 public class UserModel
 {
@@ -33,6 +33,8 @@ public class UserModel
     public string Address4 { get; set; } = string.Empty;
 
     public UserStatusEnum Status { get; set; }
+
+    public bool DelFlg { get; set; }
 
     public SexEnum Sex { get; set; }
 

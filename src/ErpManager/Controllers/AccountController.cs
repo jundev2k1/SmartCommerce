@@ -1,16 +1,6 @@
 ﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
 
-using AutoMapper;
-using Common.Constants;
-using Common.Utilities;
-using Domain.Models;
-using ErpManager.Web.ViewModels;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Localization;
-using Persistence.Common;
-using System.Collections;
-
-namespace ErpManager.Web.Controllers
+namespace ErpManager.ERP.Controllers
 {
     public class AccountController : BaseController
     {

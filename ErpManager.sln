@@ -3,15 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.33516.290
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ErpManager.Web", "src\ErpManager\ErpManager.Web.csproj", "{6575DB13-9679-4638-A127-8F91E738D75C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ErpManager.ERP", "src\ErpManager\ErpManager.ERP.csproj", "{6575DB13-9679-4638-A127-8F91E738D75C}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Database", "src\Common\Database\Database.csproj", "{595FC2CF-CC24-4B85-A22E-C5F97376AE72}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ErpManager.Persistence", "src\Common\Persistence\ErpManager.Persistence.csproj", "{1EF0AB07-920A-4B68-AB72-00A014574F44}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Persistence", "src\Common\Persistence\Persistence.csproj", "{1EF0AB07-920A-4B68-AB72-00A014574F44}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ErpManager.Domain", "src\Common\Domain\ErpManager.Domain.csproj", "{A24D1EA9-A20B-4B3A-BB7B-666FCEFC12BE}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain", "src\Common\Domain\Domain.csproj", "{A24D1EA9-A20B-4B3A-BB7B-666FCEFC12BE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ErpManager.Infrastructure", "src\Common\Infrastructure\ErpManager.Infrastructure.csproj", "{E813A4A0-2279-4A61-8306-E4EC01A43985}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common", "src\Common\Common\Common.csproj", "{BB9A4A7E-40EB-484F-8BDB-3433A5142A28}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ErpManager.Common", "src\Common\Common\ErpManager.Common.csproj", "{ACBAD902-1BCC-456F-9439-4DE6C1756BD2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,10 +23,6 @@ Global
 		{6575DB13-9679-4638-A127-8F91E738D75C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6575DB13-9679-4638-A127-8F91E738D75C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6575DB13-9679-4638-A127-8F91E738D75C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{595FC2CF-CC24-4B85-A22E-C5F97376AE72}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{595FC2CF-CC24-4B85-A22E-C5F97376AE72}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{595FC2CF-CC24-4B85-A22E-C5F97376AE72}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{595FC2CF-CC24-4B85-A22E-C5F97376AE72}.Release|Any CPU.Build.0 = Release|Any CPU
 		{1EF0AB07-920A-4B68-AB72-00A014574F44}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{1EF0AB07-920A-4B68-AB72-00A014574F44}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1EF0AB07-920A-4B68-AB72-00A014574F44}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -35,10 +31,14 @@ Global
 		{A24D1EA9-A20B-4B3A-BB7B-666FCEFC12BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A24D1EA9-A20B-4B3A-BB7B-666FCEFC12BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A24D1EA9-A20B-4B3A-BB7B-666FCEFC12BE}.Release|Any CPU.Build.0 = Release|Any CPU
-		{BB9A4A7E-40EB-484F-8BDB-3433A5142A28}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BB9A4A7E-40EB-484F-8BDB-3433A5142A28}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BB9A4A7E-40EB-484F-8BDB-3433A5142A28}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BB9A4A7E-40EB-484F-8BDB-3433A5142A28}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E813A4A0-2279-4A61-8306-E4EC01A43985}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E813A4A0-2279-4A61-8306-E4EC01A43985}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E813A4A0-2279-4A61-8306-E4EC01A43985}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E813A4A0-2279-4A61-8306-E4EC01A43985}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ACBAD902-1BCC-456F-9439-4DE6C1756BD2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ACBAD902-1BCC-456F-9439-4DE6C1756BD2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ACBAD902-1BCC-456F-9439-4DE6C1756BD2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ACBAD902-1BCC-456F-9439-4DE6C1756BD2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

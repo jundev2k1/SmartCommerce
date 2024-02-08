@@ -2,7 +2,7 @@
 
 using System.Collections;
 
-namespace Common.Utilities
+namespace ErpManager.Common
 {
     public static class MessageUtilitiy
     {

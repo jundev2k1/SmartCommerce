@@ -2,7 +2,7 @@
 
 using Microsoft.AspNetCore.Mvc;
 
-namespace ErpManager.Web.ViewComponents
+namespace ErpManager.ERP.ViewComponents
 {
     public class ScriptViewComponent : ViewComponent
     {

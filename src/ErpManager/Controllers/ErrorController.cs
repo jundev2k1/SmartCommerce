@@ -1,13 +1,6 @@
 ﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
 
-using Common.Constants;
-using Common.Utilities;
-using ErpManager.Web.Enum;
-using ErpManager.Web.ViewModels;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Localization;
-
-namespace ErpManager.Web.Controllers
+namespace ErpManager.ERP.Controllers
 {
     public class ErrorController : BaseController
     {

@@ -1,11 +1,11 @@
 ﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
 
 #nullable disable
-using Domain.Enum;
+using ErpManager.Domain.Enum;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Domain.Entities;
+namespace ErpManager.Domain.Entities;
 
 [Table("User")]
 public partial class User
@@ -53,6 +53,8 @@ public partial class User
     public string Address4 { get; set; } = string.Empty;
 
     public UserStatusEnum Status { get; set; }
+
+    public bool DelFlg { get; set; }
 
     public SexEnum Sex { get; set; }
 

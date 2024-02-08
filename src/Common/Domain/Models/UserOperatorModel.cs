@@ -1,12 +1,10 @@
 ﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
 
-using Common.Constants;
-
-namespace Domain.Models;
+namespace ErpManager.Domain.Models;
 
 public class UserOperatorModel
 {
-    public string BranchId { get; set; } = Constants.CONFIG_DEFAULT_BRANCH_ID;
+    public string BranchId { get; set; } = string.Empty;
 
     public UserModel? Profile { get; set; }
 

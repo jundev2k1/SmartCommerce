@@ -2,7 +2,6 @@
 
 #nullable disable
 using Microsoft.Extensions.DependencyInjection;
-using Persistence.Common;
 
 namespace Persistence.Services
 {

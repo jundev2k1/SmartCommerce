@@ -1,9 +1,6 @@
 ﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
 
-using Microsoft.Extensions.DependencyInjection;
-using Persistence.Common;
 using Persistence.Repositories.User;
-using Persistence.Services;
 
 namespace Persistence
 {

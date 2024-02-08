@@ -1,11 +1,6 @@
 ﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
 
-using Common.Constants;
-using Domain.Enum;
-using Domain.Models;
-using Microsoft.AspNetCore.Mvc;
-
-namespace ErpManager.Web.Areas.Product.Controllers
+namespace ErpManager.ERP.Areas.Product.Controllers
 {
     [Area(Constants.MODULE_PRODUCT_AREA)]
     public class ProductRegisterController : Controller
