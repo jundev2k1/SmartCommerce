@@ -2,7 +2,6 @@
 using ErpManager.ERP.Common.Middleware;
 using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.Extensions.Options;
-using Persistence.Common;
 using System.Globalization;
 
 namespace ErpManager.ERP
@@ -127,7 +126,6 @@ namespace ErpManager.ERP
             app.MapControllerRoute(
                 name: "Features",
                 pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
-
             app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");

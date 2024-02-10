@@ -7,10 +7,18 @@
 
     bool HasPermission(string permission)
     {
-        if (hasAllPermission) return true;
-        if (operatorPermissons == null) return false;
+        return operatorPermissons.Any() && operatorPermissons.Contains(permission);
+    }
 
-        return operatorPermissons.Contains(permission);
+    bool IsSubItemHasPermission(List<SubMenuViewModel> subMenus)
+    {
+        var result =
+            (operatorPermissons.Any() || subMenus.Any())
+            && subMenus
+                .Where(sub => operatorPermissons.Contains(sub.Permission))
+                .Any();
+
+        return result;
     }
 }
 
@@ -226,14 +234,16 @@
             <div class="menu">
                 @foreach (var item in Model)
                 {
-                    @if (HasPermission(item.Permission) == false) continue;
-                    @if (item.Items.Count > 0)
+                    @if (!hasAllPermission
+                        && (!HasPermission(item.Permission) && !IsSubItemHasPermission(item.Items)))
                     {
-                        <div class="menu-item @((string.IsNullOrEmpty(currentPage) || currentPage != item.Name) ? string.Empty : "active")">
-                            <button class="@((string.IsNullOrEmpty(currentPage) || currentPage != item.Name) ? "collapsed" : string.Empty)"
-                                    type="button"
-                                    data-bs-toggle="collapse"
-                                    data-bs-target="#@item.Name">
+                        continue;
+                    }
+
+                    @if (item.Items.Any())
+                    {
+                        <div class="menu-item @(currentPage == item.Name ? "active" : string.Empty)">
+                            <button type="button" data-bs-toggle="collapse" data-bs-target="#@item.Name">
                                 <i class="@item.Icon"></i>
                                 <span class="title">
                                     @(Constants.CONFIG_DEFAULT_SIDEBAR_OPTIONS ? item.Label : _localizer[item.Localizer])
@@ -243,9 +253,9 @@
                                 <ul class="sub-menu">
                                     @foreach (var subItem in item.Items)
                                     {
-                                        @if (HasPermission(subItem.Permission) == false) continue;
+                                        @if (!hasAllPermission && HasPermission(subItem.Permission) == false) continue;
 
-                                        <li class="sub-menu-item @((string.IsNullOrEmpty(currentPage) || currentPage != subItem.Name) ? string.Empty : "active")">
+                                        <li class="sub-menu-item @(currentPage == subItem.Name ? "active" : string.Empty)">
                                             <a href="@subItem.Url">
                                                 <i class="fa-solid fa-chevron-right fa-fw" style="opacity: 0"></i>
                                                 <span class="title">
@@ -260,7 +270,7 @@
                     }
                     else
                     {
-                        <div class="menu-item @((string.IsNullOrEmpty(currentPage) || currentPage != item.Name) ? string.Empty : "active")">
+                        <div class="menu-item @(currentPage == item.Name ? "active" : string.Empty)">
                             <a href="@item.Url" class="collapsed" type="button">
                                 <i class="@item.Icon"></i>
                                 <span class="title">

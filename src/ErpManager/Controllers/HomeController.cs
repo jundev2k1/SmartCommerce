@@ -2,7 +2,7 @@
 
 namespace ErpManager.Controllers
 {
-    public class HomeController : BaseController
+    public sealed class HomeController : BaseController
     {
         /// <summary>
         /// Constructor

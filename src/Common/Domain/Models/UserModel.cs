@@ -6,7 +6,7 @@ namespace ErpManager.Domain.Models;
 
 public class UserModel
 {
-    public string BranchID { get; set; } = string.Empty;
+    public string BranchId { get; set; } = string.Empty;
 
     public string UserId { get; set; } = string.Empty;
 
@@ -50,5 +50,5 @@ public class UserModel
 
     public string LastChanged { get; set; } = string.Empty;
 
-    public int? RoleID { get; set; }
+    public int? RoleId { get; set; }
 }

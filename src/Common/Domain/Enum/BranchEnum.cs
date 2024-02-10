@@ -2,7 +2,7 @@
 
 namespace ErpManager.Domain.Enum
 {
-    public enum BrandStatusEnum
+    public enum BranchStatusEnum
     {
         Inactive,
         Active,

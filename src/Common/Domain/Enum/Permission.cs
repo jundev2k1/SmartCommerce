@@ -7,41 +7,40 @@ namespace ErpManager.Domain.Enum
         // Administrator permission
         HasAllPermission = 9999,
 
+        // None permission
+        NonePermission = 0,
+
         // System permission
         CanAccessDashBoard = 1,
 
         // Role permission
-        CanAccessRole = 20,
-        CanReadListRole = 21,
-        CanReadDetailRole = 22,
-        CanEditRole = 24,
-        CanDeleteRole = 25,
+        CanReadListRole = 20,
+        CanReadDetailRole = 21,
+        CanEditRole = 23,
+        CanDeleteRole = 24,
 
         // User permission
-        CanAccessUser = 50,
-        CanReadListUser = 51,
-        CanReadDetailUser = 52,
-        CanCreateUser = 53,
-        CanEditUser = 54,
-        CanDeleteUser = 55,
-        CanImportUser = 56,
-        CanExportUser = 57,
-        CanReadPreviewUser = 58,
+        CanReadListUser = 50,
+        CanReadDetailUser = 51,
+        CanCreateUser = 52,
+        CanEditUser = 53,
+        CanDeleteUser = 54,
+        CanImportUser = 55,
+        CanExportUser = 56,
+        CanReadPreviewUser = 57,
 
         // User role permission
-        CanAccessUserRole = 70,
-        CanReadUserDetailRole = 71,
-        CanEditUserRole = 72,
+        CanReadUserDetailRole = 70,
+        CanEditUserRole = 71,
 
         // Product permission
-        CanAccessProduct = 100,
-        CanReadListProduct = 101,
-        CanReadDetailProduct = 102,
-        CanCreateProduct = 103,
-        CanEditProduct = 104,
-        CanDeleteProduct = 105,
-        CanImportProduct = 106,
-        CanExportProduct = 107,
-        CanReadPreviewProduct = 108,
+        CanReadListProduct = 100,
+        CanReadDetailProduct = 101,
+        CanCreateProduct = 102,
+        CanEditProduct = 103,
+        CanDeleteProduct = 104,
+        CanImportProduct = 105,
+        CanExportProduct = 106,
+        CanReadPreviewProduct = 107,
     }
 }

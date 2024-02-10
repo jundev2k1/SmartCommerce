@@ -6,9 +6,9 @@ namespace ErpManager.Domain.Models;
 
 public class RoleModel
 {
-    public string BranchID { get; set; } = string.Empty;
+    public string BranchId { get; set; } = string.Empty;
 
-    public int RoleID { get; set; }
+    public int RoleId { get; set; }
 
     public string Name { get; set; } = string.Empty;
 

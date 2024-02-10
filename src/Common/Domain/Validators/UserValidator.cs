@@ -1,15 +1,12 @@
 ﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
 
-using ErpManager.Domain.Entities;
-using FluentValidation;
-
 namespace ErpManager.Domain.Validator
 {
     public sealed class UserValidator : ValidatorBase<User>
     {
         public UserValidator()
         {
-            RuleFor(user => user.BranchID)
+            RuleFor(user => user.BranchId)
                 .NotNull().WithMessage("")
                 .NotEmpty().WithMessage("");
 

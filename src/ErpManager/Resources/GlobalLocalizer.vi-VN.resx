@@ -120,25 +120,6 @@
   <data name="ButtonTitle_Search" xml:space="preserve">
     <value>Tìm Kiếm</value>
   </data>
-  <data name="ErrorCode_NotPermission" xml:space="preserve">
-    <value>Không Có Quyền</value>
-  </data>
-  <data name="ErrorCode_SystemError" xml:space="preserve">
-    <value>Oops</value>
-  </data>
-  <data name="ErrorMessage_LoginFailed" xml:space="preserve">
-    <value>Thông tin đăng nhập không đúng</value>
-  </data>
-  <data name="ErrorMessage_LoginTooMuch" xml:space="preserve">
-    <value>Bạn đã nhập sai quá @@login_times@@ cho tài khoản này. Vui lòng thử lại sau @@login_expires@@ phút</value>
-  </data>
-  <data name="ErrorMessage_NoHasPermission" xml:space="preserve">
-    <value>Tài khoản của bạn không có quyền truy cập vào nội dung này. Vui lòng quay lại hoặc liên hệ người quản lý để được giúp đỡ.</value>
-  </data>
-  <data name="ErrorMessage_SystemError" xml:space="preserve">
-    <value>Đã xảy ra lỗi hệ thống, vui lòng liên hệ người quản lý để được giúp đỡ @@operator_phone_number@@</value>
-    <comment>Setting in config</comment>
-  </data>
   <data name="Login_Button_ForgetPassword" xml:space="preserve">
     <value>Quên mật khẩu?</value>
   </data>

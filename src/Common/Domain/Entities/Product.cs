@@ -1,7 +1,6 @@
 ﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
 
 #nullable disable
-using ErpManager.Domain.Enum;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -12,11 +11,11 @@ public partial class Product
 {
     [Key, Required]
     [StringLength(20)]
-    public string BranchID { get; set; }
+    public string BranchId { get; set; }
 
     [Key, Required]
     [StringLength(20)]
-    public string ProductID { get; set; }
+    public string ProductId { get; set; }
 
     [StringLength(60)]
     public string Name { get; set; }

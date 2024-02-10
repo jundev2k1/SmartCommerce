@@ -32,6 +32,7 @@
   <ItemGroup>
     <Folder Include="Areas\Products\ViewModels\" />
     <Folder Include="Areas\Users\ViewModels\" />
+    <Folder Include="Migrations\" />
     <Folder Include="wwwroot\content\user-images\" />
     <Folder Include="wwwroot\content\product-images\" />
     <Folder Include="wwwroot\css\" />
@@ -69,10 +70,10 @@
     <EmbeddedResource Update="Resources\Views\Home\Index.vi-VN.resx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Update="Resources\Views\Account\Index.en-US.resx">
+    <EmbeddedResource Update="Resources\Views\Authentication\Index.en-US.resx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Update="Resources\Views\Account\Index.vi-VN.resx">
+    <EmbeddedResource Update="Resources\Views\Authentication\Index.vi-VN.resx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
   </ItemGroup>
@@ -86,11 +87,11 @@
     <Using Include="ErpManager.ERP.Common.Enum" />
     <Using Include="ErpManager.ERP.Controllers" />
     <Using Include="ErpManager.ERP.ViewModels" />
+    <Using Include="ErpManager.Persistence.Common" />
     <Using Include="Microsoft.AspNetCore.Localization" />
     <Using Include="Microsoft.AspNetCore.Mvc" />
     <Using Include="Microsoft.EntityFrameworkCore" />
     <Using Include="Microsoft.Extensions.Localization" />
-    <Using Include="Persistence.Interface" />
     <Using Include="System.Collections" />
   </ItemGroup>
 

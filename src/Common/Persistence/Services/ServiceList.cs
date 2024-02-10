@@ -1,9 +1,7 @@
 ﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
 
 #nullable disable
-using Microsoft.Extensions.DependencyInjection;
-
-namespace Persistence.Services
+namespace ErpManager.Persistence.Services
 {
     public class ServiceList : IServices
     {
@@ -12,7 +10,11 @@ namespace Persistence.Services
         {
             _serviceProvider = serviceProvider;
         }
+        public IBranchService Branches => _serviceProvider.GetService<IBranchService>();
+
+        public IRoleService Roles => _serviceProvider.GetService<IRoleService>();
 
         public IUserService Users => _serviceProvider.GetService<IUserService>();
+
     }
 }

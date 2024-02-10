@@ -4,6 +4,11 @@ namespace ErpManager.Common
 {
     public static partial class Constants
     {
+        /// <summary>Error message key: system error code</summary>
+        public const string ERRORMSG_KEY_SYSTEM_ERROR_CODE = "ErrorCode_SystemError";
+        /// <summary>Error message key: no has permission code</summary>
+        public const string ERRORMSG_KEY_NO_HAS_PERMISSION_CODE = "ErrorCode_NotPermission";
+
         /// <summary>Error message key: system error</summary>
         public const string ERRORMSG_KEY_SYSTEM_ERROR = "ErrorMessage_SystemError";
         /// <summary>Error message key: no has permission</summary>

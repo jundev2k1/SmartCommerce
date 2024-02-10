@@ -9,15 +9,13 @@ namespace ErpManager.ERP.Common.Middleware
     {
         /// <summary>DI</summary>
         private readonly RequestDelegate _next;
-        private readonly IStringLocalizer<GlobalLocalizer> _localizer;
 
         /// <summary>
         /// Constructor
         /// </summary>
-        public PermissionHandlerMiddleware(RequestDelegate next, IStringLocalizer<GlobalLocalizer> localizer)
+        public PermissionHandlerMiddleware(RequestDelegate next)
         {
             _next = next;
-            _localizer = localizer;
         }
 
         /// <summary>
@@ -41,7 +39,7 @@ namespace ErpManager.ERP.Common.Middleware
 
             // Next if allow operator permission
             var permissionList = operatorPermission.Split(",");
-            var result = (HasAllPermission(operatorPermission) || HasPermission(context, permissionList));
+            var result = (HasAllPermission(permissionList.First()) || HasPermission(context, permissionList));
             if (result)
             {
                 await _next(context);
@@ -49,8 +47,8 @@ namespace ErpManager.ERP.Common.Middleware
             }
 
             // Get message
-            var message = _localizer.GetString(Constants.ERRORMSG_KEY_NO_HAS_PERMISSION);
-            var errorMessage = MessageUtilitiy.GetMessageReplacer(message);
+            var messageKey = Constants.ERRORMSG_KEY_NO_HAS_PERMISSION;
+            var errorMessage = MessageUtilitiy.GetMessageReplacer(messageKey);
 
             // Clear and set error message for error page
             SetErrorMessage(context, errorMessage);
@@ -77,7 +75,7 @@ namespace ErpManager.ERP.Common.Middleware
         private bool HasPermission(HttpContext context, string[] operatorPermissions)
         {
             var pagePermission = GetPagePermission(context);
-            return operatorPermissions.Contains(pagePermission);
+            return string.IsNullOrEmpty(pagePermission) || operatorPermissions.Contains(pagePermission);
         }
 
         /// <summary>

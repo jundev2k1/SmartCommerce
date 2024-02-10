@@ -1,9 +1,13 @@
 ﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
 
-namespace Persistence.Interface
+namespace ErpManager.Persistence.Common
 {
     public interface IServices
     {
+        IBranchService Branches { get; }
+
+        IRoleService Roles { get; }
+
         IUserService Users { get; }
     }
 }

@@ -76,7 +76,7 @@
         "localizer": "Nav_User_Role",
         "name": "UserRole_Page",
         "permission": "",
-        "url": "user/role"
+        "url": "/user/role"
       }
     ]
   },

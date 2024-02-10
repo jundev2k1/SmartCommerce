@@ -2,7 +2,7 @@
 
 using ErpManager.ERP;
 using ErpManager.Infrastructure;
-using Persistence;
+using ErpManager.Persistence;
 
 var builder = WebApplication.CreateBuilder(args);
 {

@@ -20,4 +20,11 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <Using Include="ErpManager.Domain.Entities" />
+    <Using Include="ErpManager.Domain.Enum" />
+    <Using Include="ErpManager.Domain.Models" />
+    <Using Include="FluentValidation" />
+  </ItemGroup>
+
 </Project>

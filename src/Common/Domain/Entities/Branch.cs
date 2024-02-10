@@ -1,24 +1,23 @@
 ﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
 
 #nullable disable
-using ErpManager.Domain.Enum;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ErpManager.Domain.Entities;
 
-[Table("Brand")]
-public partial class Brand
+[Table("Branch")]
+public partial class Branch
 {
     [Key, Required]
     [StringLength(20)]
-    public string BranchID { get; set; }
+    public string BranchId { get; set; }
 
     [Required]
     [StringLength(30)]
     public string Name { get; set; }
 
-    public BrandStatusEnum Status { get; set; }
+    public BranchStatusEnum Status { get; set; }
 
     [StringLength(255)]
     public string Avatar { get; set; }

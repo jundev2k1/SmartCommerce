@@ -1,6 +1,8 @@
 ﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
 
+using Microsoft.AspNetCore.Mvc.Controllers;
 using Microsoft.AspNetCore.Mvc.Filters;
+using System.Reflection;
 
 namespace ErpManager.ERP.Controllers
 {
@@ -28,9 +30,9 @@ namespace ErpManager.ERP.Controllers
         /// <summary>
         /// Reset operator session
         /// </summary>
-        public void ResetOperatorSession()
+        protected void ResetOperatorSession()
         {
-            this.OperatorBrandID = Session.GetString(Constants.SESSION_KEY_OPERATOR_BRANCH_ID).ToStringOrEmpty();
+            this.OperatorBrandId = Session.GetString(Constants.SESSION_KEY_OPERATOR_BRANCH_ID).ToStringOrEmpty();
             this.OperatorId = Session.GetString(Constants.SESSION_KEY_OPERATOR_ID).ToStringOrEmpty();
             this.OperatorName = Session.GetString(Constants.SESSION_KEY_OPERATOR_NAME).ToStringOrEmpty();
             this.OperatorPermission = Session.GetString(Constants.SESSION_KEY_OPERATOR_PERMISSION).ToStringOrEmpty();
@@ -39,9 +41,30 @@ namespace ErpManager.ERP.Controllers
         /// <summary>
         /// Clear session
         /// </summary>
-        public void ClearSession()
+        protected void ClearSession()
         {
             Session.Clear();
+        }
+
+        /// <summary>
+        /// Get page permission
+        /// </summary>
+        /// <returns>Page permission</returns>
+        protected List<RouteAttribute?> GetFeaturesPagePermission()
+        {
+            var assembly = Assembly.GetExecutingAssembly(); // hoặc sử dụng Assembly.Load("tên-assembly")
+            var controllerTypes = assembly.GetTypes().Where(type =>
+                typeof(Controller).IsAssignableFrom(type)
+                && type.FullName.ToStringOrEmpty().Contains("Areas"));
+            var featuresRoutes = controllerTypes
+                .SelectMany(type => type
+                    .GetMethods(BindingFlags.Instance | BindingFlags.Public)
+                    .Where(childType => childType.GetCustomAttribute<PermissionAttribute>() != null)
+                    .Select(childType => childType.GetCustomAttribute<RouteAttribute>()))
+                .Distinct()
+                .ToList();
+
+            return featuresRoutes;
         }
 
         /// <summary>
@@ -60,7 +83,7 @@ namespace ErpManager.ERP.Controllers
         }
 
         /// <summary>Session</summary>
-        public ISession Session
+        protected ISession Session
         {
             get
             {
@@ -68,16 +91,16 @@ namespace ErpManager.ERP.Controllers
             }
         }
         /// <summary>Operator brand id</summary>
-        public string OperatorBrandID { get; private set; } = Constants.CONFIG_DEFAULT_BRANCH_ID;
+        protected string OperatorBrandId { get; private set; } = Constants.CONFIG_DEFAULT_BRANCH_ID;
         /// <summary>Operator id</summary>
-        public string OperatorId { get; private set; } = string.Empty;
+        protected string OperatorId { get; private set; } = string.Empty;
         /// <summary>Operator id</summary>
-        public string OperatorName { get; private set; } = string.Empty;
+        protected string OperatorName { get; private set; } = string.Empty;
         /// <summary>Operator id</summary>
-        public string OperatorPermission { get; private set; } = string.Empty;
+        protected string OperatorPermission { get; private set; } = string.Empty;
         /// <summary>Page url</summary>
-        public string PageUrl { get; private set; } = string.Empty;
+        protected string PageUrl { get; private set; } = string.Empty;
         /// <summary>Operator id</summary>
-        public string OperatorPermissions { get; private set; } = string.Empty;
+        protected string OperatorPermissions { get; private set; } = string.Empty;
     }
 }

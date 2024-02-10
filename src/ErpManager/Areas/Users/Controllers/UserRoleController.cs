@@ -6,7 +6,7 @@ namespace ErpManager.ERP.Areas.Users.Controllers
     public class UserRoleController : BaseController
     {
         [HttpGet]
-        [PermissionAttribute(Permission.CanAccessUserRole)]
+        [PermissionAttribute(Permission.CanReadDetailRole)]
         [Route(Constants.MODULE_USER_USERROLE_PATH, Name = Constants.MODULE_USER_USERROLE_NAME)]
         public IActionResult Index()
         {

@@ -1,6 +1,6 @@
 ﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
 
-namespace Persistence.Repositories.User
+namespace ErpManager.Persistence.Repositories.User
 {
     public interface IUserRepository
     {
@@ -15,8 +15,9 @@ namespace Persistence.Repositories.User
         /// Get all
         /// </summary>
         /// <param name="branchId">Branch id</param>
+        /// <param name="isDeleted">Delete flag of user</param>
         /// <returns>User model list</returns>
-        public UserModel[] GetAll(string branchId);
+        public UserModel[] GetAll(string branchId, bool isDeleted);
 
         /// <summary>
         /// Get

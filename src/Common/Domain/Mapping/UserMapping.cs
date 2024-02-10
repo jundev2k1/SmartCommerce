@@ -1,8 +1,5 @@
 ﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
 
-using ErpManager.Domain.Entities;
-using ErpManager.Domain.Models;
-
 namespace ErpManager.Domain.Mapping
 {
     public static class UserMapping
@@ -14,9 +11,9 @@ namespace ErpManager.Domain.Mapping
         /// <returns>User model</returns>
         public static UserModel MapToUserModel(this User userEntity)
         {
-            var user = new UserModel
+            var model = new UserModel
             {
-                BranchID = userEntity.BranchID,
+                BranchId = userEntity.BranchId,
                 UserId = userEntity.UserId,
                 UserName = userEntity.UserName,
                 Password = userEntity.Password,
@@ -38,9 +35,47 @@ namespace ErpManager.Domain.Mapping
                 CreatedBy = userEntity.CreatedBy,
                 LastLogin = userEntity.LastLogin,
                 LastChanged = userEntity.LastChanged,
-                RoleID = userEntity.RoleID,
+                RoleId = userEntity.RoleId,
             };
-            return user;
+
+            return model;
+        }
+
+        /// <summary>
+        /// Map to user entity
+        /// </summary>
+        /// <param name="userModel">User model</param>
+        /// <returns>User entity</returns>
+        public static User MapToUserEntity(this UserModel userModel)
+        {
+            var entity = new User
+            {
+                BranchId = userModel.BranchId,
+                UserId = userModel.UserId,
+                UserName = userModel.UserName,
+                Password = userModel.Password,
+                Avatar = userModel.Avatar,
+                FirstName = userModel.FirstName,
+                LastName = userModel.LastName,
+                Email = userModel.Email,
+                PhoneNumber = userModel.PhoneNumber,
+                Address1 = userModel.Address1,
+                Address2 = userModel.Address2,
+                Address3 = userModel.Address3,
+                Address4 = userModel.Address4,
+                Status = userModel.Status,
+                DelFlg = userModel.DelFlg,
+                Sex = userModel.Sex,
+                Birthday = userModel.Birthday,
+                DateCreated = userModel.DateCreated,
+                DateChanged = userModel.DateChanged,
+                CreatedBy = userModel.CreatedBy,
+                LastLogin = userModel.LastLogin,
+                LastChanged = userModel.LastChanged,
+                RoleId = userModel.RoleId,
+            };
+
+            return entity;
         }
     }
 }

@@ -117,6 +117,12 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ErrorCode_NotPermission" xml:space="preserve">
+    <value>Không có quyền</value>
+  </data>
+  <data name="ErrorCode_SystemError" xml:space="preserve">
+    <value>Oops</value>
+  </data>
   <data name="ErrorMessage_LoginFailed" xml:space="preserve">
     <value>Thông tin đăng nhập không đúng</value>
   </data>

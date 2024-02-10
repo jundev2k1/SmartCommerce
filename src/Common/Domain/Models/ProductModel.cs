@@ -6,13 +6,13 @@ namespace ErpManager.Domain.Models;
 
 public class ProductModel
 {
-    public string BranchID { get; set; } = string.Empty;
+    public string BranchId { get; set; } = string.Empty;
 
-    public string ProductID { get; set; } = string.Empty;
+    public string ProductId { get; set; } = string.Empty;
 
     public string Name { get; set; } = string.Empty;
 
-    public string Image { get; set; } = string.Empty;
+    public string Images { get; set; } = string.Empty;
 
     public string Address1 { get; set; } = string.Empty;
 
@@ -32,6 +32,8 @@ public class ProductModel
 
     public ProductStatusEnum Status { get; set; }
 
+    public bool DelFlg { get; set; }
+
     public decimal Size1 { get; set; }
 
     public decimal Size2 { get; set; }
@@ -40,9 +42,9 @@ public class ProductModel
 
     public string TakeOverId { get; set; } = string.Empty;
 
-    public DateTime? DateCreated { get; set; }
+    public DateTime DateCreated { get; set; }
 
-    public DateTime? DateChanged { get; set; }
+    public DateTime DateChanged { get; set; }
 
     public string CreatedBy { get; set; } = string.Empty;
 

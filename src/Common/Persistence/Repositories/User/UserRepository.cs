@@ -1,19 +1,15 @@
 ﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
 
-using ErpManager.Domain.Mapping;
-
-namespace Persistence.Repositories.User
+namespace ErpManager.Persistence.Repositories.User
 {
     public class UserRepository : RepositoryBase, IUserRepository
     {
-        private DBContext _dbContext;
-
         /// <summary>
         /// Constructor
         /// </summary>
-        public UserRepository(DBContext dbContext)
+        /// <param name="dbContext">Context</param>
+        public UserRepository(DBContext dbContext) : base(dbContext)
         {
-            _dbContext = dbContext;
         }
 
         /// <summary>
@@ -30,11 +26,14 @@ namespace Persistence.Repositories.User
         /// Get all user
         /// </summary>
         /// <param name="branchId">Branch id</param>
+        /// <param name="isDeleted">Delete flag of user</param>
         /// <returns>A collection of user</returns>
-        public UserModel[] GetAll(string branchId)
+        public UserModel[] GetAll(string branchId, bool isDeleted)
         {
             var result = _dbContext.Users
-                .Where(user => user.BranchID == branchId)
+                .Where(user =>
+                    (user.BranchId == branchId)
+                    && (user.DelFlg == isDeleted))
                 .Select(user => user.MapToUserModel())
                 .ToArray();
 
@@ -50,7 +49,8 @@ namespace Persistence.Repositories.User
         public UserModel? Get(string branchId, string userId)
         {
             var result = _dbContext.Users
-                .FirstOrDefault(user => (user.BranchID == branchId) && (user.UserId == userId));
+                .FirstOrDefault(user => (user.BranchId == branchId) && (user.UserId == userId));
+
             return result?.MapToUserModel();
         }
 
@@ -64,9 +64,10 @@ namespace Persistence.Repositories.User
         {
             var result = _dbContext.Users
                 .FirstOrDefault(user =>
-                    (user.BranchID == branchId)
+                    (user.BranchId == branchId)
                     && (user.UserName == username)
                     && (user.DelFlg == false));
+
             return result?.MapToUserModel();
         }
 
@@ -77,22 +78,16 @@ namespace Persistence.Repositories.User
         /// <returns>Status insert</returns>
         public bool Insert(UserModel model)
         {
-            var user = Get(model.BranchID, model.UserId);
+            var user = Get(model.BranchId, model.UserId);
             if (user != null) return false;
 
-            var transaction = _dbContext.Database.BeginTransaction();
-            try
+            var result = BeginTransaction(() =>
             {
-                _dbContext.Add(model);
+                var insertModel = model.MapToUserEntity();
+                _dbContext.Add(insertModel);
                 _dbContext.SaveChanges();
-                transaction.Commit();
-                return true;
-            }
-            catch
-            {
-                transaction.Rollback();
-                return false;
-            }
+            });
+            return result;
         }
 
         /// <summary>
@@ -102,42 +97,19 @@ namespace Persistence.Repositories.User
         /// <returns>Status update</returns>
         public bool Update(UserModel model)
         {
-            var transaction = _dbContext.Database.BeginTransaction();
-            var userUpdate = _dbContext.Users
-                .FirstOrDefault(user => (user.UserId == model.BranchID) && (user.UserId == model.UserId));
-            if (userUpdate == null) return false;
+            var user = Get(model.BranchId, model.UserId);
+            if (user == null) return false;
 
-            userUpdate.UserName = model.UserName;
-            userUpdate.Password = model.Password;
-            userUpdate.PhoneNumber = model.PhoneNumber;
-            userUpdate.FirstName = model.FirstName;
-            userUpdate.LastName = model.LastName;
-            userUpdate.Avatar = model.Avatar;
-            userUpdate.Address1 = model.Address1;
-            userUpdate.Address2 = model.Address2;
-            userUpdate.Address3 = model.Address3;
-            userUpdate.Address4 = model.Address4;
-            userUpdate.Birthday = model.Birthday;
-            userUpdate.UserName = model.UserName;
-            userUpdate.Password = model.Password;
-            userUpdate.Status = model.Status;
-            userUpdate.DateChanged = DateTime.Now;
-            userUpdate.Email = model.Email;
-            userUpdate.LastChanged = model.LastChanged;
-            userUpdate.RoleID = model.RoleID;
-            userUpdate.Sex = model.Sex;
+            // Reset date created
+            model.DateCreated = user.DateCreated;
 
-            try
+            var result = BeginTransaction(() =>
             {
+                var updateModel = model.MapToUserEntity();
+                _dbContext.Update(updateModel);
                 _dbContext.SaveChanges();
-                transaction.Commit();
-                return true;
-            }
-            catch
-            {
-                transaction.Rollback();
-                return false;
-            }
+            });
+            return result;
         }
 
         /// <summary>
@@ -151,16 +123,12 @@ namespace Persistence.Repositories.User
             var user = Get(branchId, userId);
             if (user == null) return false;
 
-            try
+            var result = BeginTransaction(() =>
             {
                 _dbContext.Remove(user);
                 _dbContext.SaveChanges();
-                return true;
-            }
-            catch
-            {
-                return false;
-            }
+            });
+            return result;
         }
     }
 }

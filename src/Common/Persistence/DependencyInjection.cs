@@ -1,8 +1,9 @@
 ﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
 
-using Persistence.Repositories.User;
+using ErpManager.Persistence.Repositories.Role;
+using ErpManager.Persistence.Repositories.User;
 
-namespace Persistence
+namespace ErpManager.Persistence
 {
     public static class DependencyInjection
     {
@@ -30,6 +31,7 @@ namespace Persistence
         /// </summary>
         private static IServiceCollection RegisterRepository(this IServiceCollection services)
         {
+            services.AddScoped<IRoleRepository, RoleRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
             return services;
         }

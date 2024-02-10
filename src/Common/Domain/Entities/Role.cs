@@ -1,7 +1,6 @@
 ﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
 
 #nullable disable
-using ErpManager.Domain.Enum;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -12,11 +11,11 @@ public partial class Role
 {
     [Key, Required]
     [StringLength(20)]
-    public string BranchID { get; set; }
+    public string BranchId { get; set; }
 
     [Key, Required]
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-    public int RoleID { get; set; }
+    public int RoleId { get; set; }
 
     [Required]
     [StringLength(60)]

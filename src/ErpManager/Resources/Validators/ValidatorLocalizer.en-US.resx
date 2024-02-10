@@ -117,23 +117,4 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="ErrorCode_NotPermission" xml:space="preserve">
-    <value>Not Permission</value>
-  </data>
-  <data name="ErrorCode_SystemError" xml:space="preserve">
-    <value>Oops</value>
-  </data>
-  <data name="ErrorMessage_LoginFailed" xml:space="preserve">
-    <value>Login information incorrect</value>
-  </data>
-  <data name="ErrorMessage_LoginTooMuch" xml:space="preserve">
-    <value>You entered the wrong @@login_times@@ for this account. Please try again after @@login_expires@@ minutes</value>
-  </data>
-  <data name="ErrorMessage_NoHasPermission" xml:space="preserve">
-    <value>Your account does not have permission to access this content. Please contact the manager for help.</value>
-  </data>
-  <data name="ErrorMessage_SystemError" xml:space="preserve">
-    <value>A system error has occurred, please contact the administrator for help @@operator_phone_number@@</value>
-    <comment>Setting in config</comment>
-  </data>
 </root>

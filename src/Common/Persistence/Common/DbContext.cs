@@ -1,6 +1,6 @@
 ﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
 
-namespace Persistence.Common;
+namespace ErpManager.Persistence.Common;
 
 public partial class DBContext : DbContext
 {
@@ -13,9 +13,9 @@ public partial class DBContext : DbContext
     {
     }
 
-    public virtual DbSet<Brand> Brands { get; set; }
+    public virtual DbSet<Branch> Branches { get; set; }
 
-    public virtual DbSet<Role> UserCategories { get; set; }
+    public virtual DbSet<Role> Roles { get; set; }
 
     public virtual DbSet<User> Users { get; set; }
 
@@ -23,11 +23,11 @@ public partial class DBContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<Brand>(entity =>
+        modelBuilder.Entity<Branch>(entity =>
         {
-            entity.HasKey(e => e.BranchID).HasName("PK_Brand_1");
+            entity.HasKey(e => e.BranchId).HasName("PK_Branch_1");
 
-            entity.Property(e => e.BranchID).HasDefaultValueSql("(('0'))");
+            entity.Property(e => e.BranchId).HasDefaultValueSql("(('0'))");
             entity.Property(e => e.Name).HasDefaultValueSql("((''))");
             entity.Property(e => e.Status).HasConversion<int>().HasDefaultValueSql("((1))");
             entity.Property(e => e.Avatar).HasDefaultValueSql("((''))");
@@ -37,9 +37,9 @@ public partial class DBContext : DbContext
 
         modelBuilder.Entity<Role>(entity =>
         {
-            entity.HasKey(e => new { e.BranchID, e.RoleID }).HasName("PK_Role_1");
+            entity.HasKey(e => new { e.BranchId, e.RoleId }).HasName("PK_Role_1");
 
-            entity.Property(e => e.RoleID).UseIdentityColumn();
+            entity.Property(e => e.RoleId).UseIdentityColumn<int>(seed: 1, increment:1);
             entity.Property(e => e.Name).HasDefaultValueSql("('')");
             entity.Property(e => e.Permission).HasDefaultValueSql("('')");
             entity.Property(e => e.Priority).HasDefaultValueSql("(0)");
@@ -51,7 +51,7 @@ public partial class DBContext : DbContext
 
         modelBuilder.Entity<User>(entity =>
         {
-            entity.HasKey(e => new { e.BranchID, e.UserId }).HasName("PK_User_1");
+            entity.HasKey(e => new { e.BranchId, e.UserId }).HasName("PK_User_1");
 
             entity.Property(e => e.UserName).HasDefaultValueSql("('')");
             entity.Property(e => e.Password).HasDefaultValueSql("('')");
@@ -73,12 +73,12 @@ public partial class DBContext : DbContext
             entity.Property(e => e.CreatedBy).HasDefaultValueSql("('')");
             entity.Property(e => e.LastLogin).HasDefaultValueSql("(getdate())");
             entity.Property(e => e.LastChanged).HasDefaultValueSql("('')");
-            entity.Property(e => e.RoleID);
+            entity.Property(e => e.RoleId);
         });
 
         modelBuilder.Entity<Product>(entity =>
         {
-            entity.HasKey(e => new { e.BranchID, e.ProductID }).HasName("PK_Product_1");
+            entity.HasKey(e => new { e.BranchId, e.ProductId }).HasName("PK_Product_1");
 
             entity.Property(e => e.Name).HasDefaultValueSql("('')");
             entity.Property(e => e.Images).HasDefaultValueSql("('')");

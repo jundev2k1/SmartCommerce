@@ -1,15 +1,17 @@
 ﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
 
+using ErpManager.ERP.Message;
+
 namespace ErpManager.ERP.Controllers
 {
-    public class ErrorController : BaseController
+    public sealed class ErrorController : BaseController
     {
-        private readonly IStringLocalizer<GlobalLocalizer> _localizer;
+        private readonly IStringLocalizer<MessageLocalizer> _localizer;
 
         /// <summary>
         /// Constructor
         /// </summary>
-        public ErrorController(IStringLocalizer<GlobalLocalizer> localizer)
+        public ErrorController(IStringLocalizer<MessageLocalizer> localizer)
         {
             _localizer = localizer;
         }
@@ -65,18 +67,18 @@ namespace ErpManager.ERP.Controllers
             switch (code)
             {
                 case ErrorCodeEnum.SystemError:
-                    title = _localizer["ErrorCode_SystemError"];
+                    title = _localizer[Constants.ERRORMSG_KEY_SYSTEM_ERROR_CODE];
                     break;
 
                 case ErrorCodeEnum.NotPermission:
-                    title = _localizer["ErrorCode_NotPermission"];
+                    title = _localizer[Constants.ERRORMSG_KEY_NO_HAS_PERMISSION_CODE];
                     break;
             }
 
             return new ErrorPageViewModel
             {
                 Title = title,
-                Message = message
+                Message = _localizer[message]
             };
         }
     }

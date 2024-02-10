@@ -1,14 +1,16 @@
 ﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
 
+using ErpManager.ERP.Message;
+
 namespace ErpManager.ERP.Controllers
 {
-    public class AccountController : BaseController
+    public sealed class AuthenticationController : BaseController
     {
         private readonly IMapper _mapper;
-        private readonly IStringLocalizer<GlobalLocalizer> _localizer;
+        private readonly IStringLocalizer<MessageLocalizer> _localizer;
         private readonly IServices _services;
 
-        public AccountController(IStringLocalizer<GlobalLocalizer> localizer, IMapper mapper, IServices services)
+        public AuthenticationController(IStringLocalizer<MessageLocalizer> localizer, IMapper mapper, IServices services)
         {
             _localizer = localizer;
             _mapper = mapper;
@@ -33,7 +35,14 @@ namespace ErpManager.ERP.Controllers
             var isSuccess = HandleTryLogin(login);
             if (isSuccess)
             {
-                return RedirectToRoute(Constants.MODULE_HOME_DASHBOARD_NAME);
+                var featuresPage = GetFeaturesPagePermission();
+                if (featuresPage.Any(page => page?.Name.ToStringOrEmpty() == Constants.MODULE_HOME_DASHBOARD_NAME))
+                {
+                    return RedirectToRoute(Constants.MODULE_HOME_DASHBOARD_NAME);
+                }
+
+                var route = featuresPage.FirstOrDefault()?.Name;
+                if (route != null) return RedirectToRoute(route);
             }
 
             return View(login);
@@ -110,7 +119,7 @@ namespace ErpManager.ERP.Controllers
             try
             {
                 // Check login id is wrong
-                var user = _services.Users.GetUserByUsername(this.OperatorBrandID, input.LoginID);
+                var user = _services.Users.GetUserByUsername(this.OperatorBrandId, input.LoginID);
                 if (user == null) throw new Exception();
 
                 // Check block account
@@ -123,11 +132,11 @@ namespace ErpManager.ERP.Controllers
                 IncreaseLoginCount(user.UserId);
 
                 // Try login, throw error if login fail
-                var isSuccess = _services.Users.TryLogin(this.OperatorBrandID, input.LoginID, input.Password);
-                if (isSuccess == false) throw new Exception();
+                var @operator = _services.Users.TryLogin(this.OperatorBrandId, input.LoginID, input.Password);
+                if (@operator == null) throw new Exception();
 
                 // Handle login success
-                HandleLoginSuccess(user, input.RememberMe);
+                HandleLoginSuccess(@operator, input.RememberMe);
                 return true;
             }
             catch
@@ -140,15 +149,15 @@ namespace ErpManager.ERP.Controllers
         /// <summary>
         /// Handle login success
         /// </summary>
-        /// <param name="user">User model</param>
+        /// <param name="operator">Operator model</param>
         /// <param name="isRememberMe">Is remember me</param>
-        private void HandleLoginSuccess(UserModel user, bool isRememberMe)
+        private void HandleLoginSuccess(OperatorModel @operator, bool isRememberMe)
         {
             // Reset login count
-            ResetLoginCount(user.UserId);
+            ResetLoginCount(@operator.Profile.UserId);
 
             // Set session login for operator
-            SetSessionForLogin(user);
+            SetSessionForLogin(@operator);
             ResetOperatorSession();
 
             // Handle with cookies
@@ -158,7 +167,7 @@ namespace ErpManager.ERP.Controllers
                 return;
             }
 
-            CreateCookies(user);
+            CreateCookies(@operator);
         }
 
         /// <summary>
@@ -191,12 +200,13 @@ namespace ErpManager.ERP.Controllers
         /// <summary>
         /// Set session for login
         /// </summary>
-        /// <param name="user"></param>
-        private void SetSessionForLogin(UserModel user)
+        /// <param name="operator">Operator model</param>
+        private void SetSessionForLogin(OperatorModel @operator)
         {
             // Set session login for operator
-            Session.SetString(Constants.SESSION_KEY_OPERATOR_ID, user.UserId);
-            Session.SetString(Constants.SESSION_KEY_OPERATOR_PERMISSION, "9999");
+            Session.SetString(Constants.SESSION_KEY_OPERATOR_BRANCH_ID, @operator.BranchId);
+            Session.SetString(Constants.SESSION_KEY_OPERATOR_ID, @operator.Profile.UserId);
+            Session.SetString(Constants.SESSION_KEY_OPERATOR_PERMISSION, @operator.Permission);
             Session.SetString(Constants.SESSION_KEY_LOGIN_MESSAGE, "Login success");
         }
 
@@ -204,7 +214,7 @@ namespace ErpManager.ERP.Controllers
         /// Create cookies
         /// </summary>
         /// <param name="user">User model</param>
-        private void CreateCookies(UserModel user)
+        private void CreateCookies(OperatorModel @operator)
         {
             // Add login cookies
             var cookieOptions = new CookieOptions
@@ -216,8 +226,8 @@ namespace ErpManager.ERP.Controllers
                 SameSite = Microsoft.AspNetCore.Http.SameSiteMode.None
             };
             Response.Cookies.Append(Constants.COOKIE_KEY_LOGIN_REMEMBER_ME, "checked", cookieOptions);
-            Response.Cookies.Append(Constants.COOKIE_KEY_LOGIN_USERNAME, user.UserName, cookieOptions);
-            Response.Cookies.Append(Constants.COOKIE_KEY_LOGIN_PASSWORD, user.Password, cookieOptions);
+            Response.Cookies.Append(Constants.COOKIE_KEY_LOGIN_USERNAME, @operator.Profile.UserName, cookieOptions);
+            Response.Cookies.Append(Constants.COOKIE_KEY_LOGIN_PASSWORD, @operator.Profile.Password, cookieOptions);
         }
 
         /// <summary>

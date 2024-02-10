@@ -2,11 +2,11 @@
 
 namespace ErpManager.Domain.Models;
 
-public class UserOperatorModel
+public class OperatorModel
 {
     public string BranchId { get; set; } = string.Empty;
 
-    public UserModel? Profile { get; set; }
+    public UserModel Profile { get; set; } = new UserModel();
 
-    public RoleModel? Role { get; set; }
+    public string Permission { get; set; } = string.Empty;
 }
