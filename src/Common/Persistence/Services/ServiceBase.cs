@@ -4,5 +4,8 @@ namespace ErpManager.Persistence.Services
 {
     public class ServiceBase
     {
+        public ServiceBase()
+        {
+        }
     }
 }

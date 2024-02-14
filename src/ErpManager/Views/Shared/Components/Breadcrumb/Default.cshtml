@@ -5,7 +5,7 @@
         <ol class="breadcrumb">
             @foreach (var item in Model)
             {
-                if (item.IsDisabled)
+                if (!item.IsDisabled)
                 {
                     <li class="breadcrumb-item"><a href="@item.Href">@item.Title</a></li>
                 }

@@ -19,9 +19,9 @@
     @* Main content *@
     <main id="page-load">
         @await Component.InvokeAsync("NavBar")
-        <div class="render-content position-relative w-100">
+        <div class="render-content">
             @await Component.InvokeAsync("Header")
-            <div class="main-content w-100 p-2">
+            <div class="main-content">
                 @RenderBody()
             </div>
             @await Component.InvokeAsync("Footer")

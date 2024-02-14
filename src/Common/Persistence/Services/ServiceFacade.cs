@@ -3,18 +3,20 @@
 #nullable disable
 namespace ErpManager.Persistence.Services
 {
-    public class ServiceList : IServices
+    public sealed class ServiceFacade : IServiceFacade
     {
         private IServiceProvider _serviceProvider;
-        public ServiceList(IServiceProvider serviceProvider)
+        public ServiceFacade(IServiceProvider serviceProvider)
         {
             _serviceProvider = serviceProvider;
         }
+
         public IBranchService Branches => _serviceProvider.GetService<IBranchService>();
 
         public IRoleService Roles => _serviceProvider.GetService<IRoleService>();
 
         public IUserService Users => _serviceProvider.GetService<IUserService>();
 
+        public IProductService Products => _serviceProvider.GetService<IProductService>();
     }
 }

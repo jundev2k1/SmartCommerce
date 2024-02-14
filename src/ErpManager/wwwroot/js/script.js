@@ -18,13 +18,16 @@ toastr.options = {
 
 // Handle common page load
 document.addEventListener('DOMContentLoaded', () => {
-    // Handle window scroll
-    window.onscroll = (event) => {
-        // Get window callback
-        StoreWindowScrollCallback.forEach((callback) => {
-            callback?.(event);
-        });
-    };
+    const mainLayout = document.querySelector("#page-load .render-content");
+    if (mainLayout) {
+        // Handle main layout scroll
+        mainLayout.onscroll = (event) => {
+            // Execute main layout callback
+            StoreMainLayoutScrollCallback.forEach((callback) => {
+                callback?.(event);
+            });
+        };
+    }
 
     // Handle window load
     StoreWindowLoadCallback.forEach((callback) => {

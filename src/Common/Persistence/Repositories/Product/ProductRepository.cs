@@ -1,8 +1,8 @@
 ﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
 
-namespace ErpManager.Persistence.Repositories.Product
+namespace ErpManager.Persistence.Repositories
 {
-    public class ProductRepository : RepositoryBase, IProductRepository
+    public sealed class ProductRepository : RepositoryBase, IProductRepository
     {
         /// <summary>
         /// Constructor
@@ -15,11 +15,28 @@ namespace ErpManager.Persistence.Repositories.Product
         /// <summary>
         /// Search
         /// </summary>
-        /// <param name="searchParams">Search parameters</param>
-        /// <returns>A collection of product following search parameters</returns>
-        public ProductModel[] Search(Dictionary<string, string> searchParams)
+        /// <param name="expression">Expression</param>
+        /// <param name="pageIndex">Page index</param>
+        /// <param name="pageSize">Page size</param>
+        /// <returns>A tuple includes data, total page and total record</returns>
+        public (ProductModel[] Data, int TotalPage, int TotalRecord) Search(Expression<Func<Product, bool>> expression, int pageIndex, int pageSize)
         {
-            throw new NotImplementedException();
+            var query = _dbContext.Products
+                .AsQueryable()
+                .Where(expression);
+
+            var queryCount = query.Count();
+            var isSurplus = (queryCount % pageSize) > 0;
+            var totalPage = queryCount / pageSize + (isSurplus ? 1 : 0);
+
+            var pageSkip = (pageIndex - 1) * pageSize;
+            var data = query
+                .Skip(pageSkip)
+                .Take(pageSize)
+                .Select(product => product.MapToProductModel())
+                .ToArray();
+
+            return (data, totalPage, queryCount);
         }
 
         /// <summary>
@@ -52,7 +69,7 @@ namespace ErpManager.Persistence.Repositories.Product
                 .FirstOrDefault(product =>
                     (product.BranchId == branchId)
                     && (product.ProductId == productId)
-                    && product.DelFlg);
+                    && product.DelFlg == false);
 
             return result?.MapToProductModel();
         }

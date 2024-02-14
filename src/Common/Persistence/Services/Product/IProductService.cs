@@ -5,12 +5,21 @@ namespace ErpManager.Persistence.Services
     public interface IProductService
     {
         /// <summary>
+        /// Search
+        /// </summary>
+        /// <param name="searchParams">Search parameters</param>
+        /// <param name="pageIndex">Page index</param>
+        /// <param name="pageSize">Page size</param>
+        /// <returns>A tuple includes data, total page and total record</returns>
+        public (ProductModel[] Data, int TotalPage, int TotalRecord) Search(ProductSearchDto searchParams, int pageIndex, int pageSize);
+
+        /// <summary>
         /// Get all product
         /// </summary>
         /// <param name="branchId">Branch id</param>
         /// <param name="isDeleted">Delete flag of product</param>
         /// <returns>A collection of product</returns>
-        public ProductModel[] GetAllProduct(string branchId, bool isDeleted = true);
+        public ProductModel[] GetAllProduct(string branchId, bool isDeleted = false);
 
         /// <summary>
         /// Get product

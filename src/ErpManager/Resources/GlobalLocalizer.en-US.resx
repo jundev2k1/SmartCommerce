@@ -157,8 +157,14 @@
   <data name="Nav_Error_ErrorPage" xml:space="preserve">
     <value>Error Page</value>
   </data>
+  <data name="Nav_Home" xml:space="preserve">
+    <value>Home</value>
+  </data>
   <data name="Nav_Product" xml:space="preserve">
     <value>Product</value>
+  </data>
+  <data name="Nav_Product_Detail" xml:space="preserve">
+    <value>Product Detail</value>
   </data>
   <data name="Nav_Product_List" xml:space="preserve">
     <value>Product List</value>

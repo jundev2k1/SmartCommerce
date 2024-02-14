@@ -1,8 +1,8 @@
 ﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
 
-namespace ErpManager.Persistence.Repositories.Branch
+namespace ErpManager.Persistence.Repositories
 {
-    public class BranchRepository : RepositoryBase, IBranchRepository
+    public sealed class BranchRepository : RepositoryBase, IBranchRepository
     {
         /// <summary>
         /// Constructor

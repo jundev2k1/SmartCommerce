@@ -1,11 +1,10 @@
 ﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
 
-using ErpManager.Persistence.Repositories.Role;
-using ErpManager.Persistence.Repositories.User;
+using ErpManager.Persistence.Common.Utilities.Search;
 
 namespace ErpManager.Persistence.Services
 {
-    public class UserService : ServiceBase, IUserService
+    public sealed class UserService : ServiceBase, IUserService
     {
         #region Constructor
         /// <summary>Context singleton</summary>
@@ -22,13 +21,31 @@ namespace ErpManager.Persistence.Services
         }
         #endregion
 
+        #region Search
+        /// <summary>
+        /// Search
+        /// </summary>
+        /// <param name="searchParams">Search parameters</param>
+        /// <param name="pageIndex">Page index</param>
+        /// <param name="pageSize">Page size</param>
+        /// <returns>A tuple includes data, total page and total record</returns>
+        public (UserModel[] Data, int TotalPage, int TotalRecord) Search(UserSearchDto searchParams, int pageIndex, int pageSize)
+        {
+            if (string.IsNullOrEmpty(searchParams.BranchId)) return (Array.Empty<UserModel>(), 0, 0);
+
+            var condition = SearchConditionBuilder.UserSearch(searchParams);
+            var result = _userRepository.Search(condition, pageIndex, pageSize);
+            return result;
+        }
+        #endregion
+
         #region Queries
         /// <summary>
         /// Get all user
         /// </summary>
         /// <param name="branchId">Branch id</param>
         /// <returns>User list</returns>
-        public UserModel[] GetAllUser(string branchId, bool isDeleted = true)
+        public UserModel[] GetAllUser(string branchId, bool isDeleted = false)
         {
             return _userRepository.GetAll(branchId, isDeleted);
         }

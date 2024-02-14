@@ -15,7 +15,8 @@ namespace ErpManager.Common
         public const string MODULE_ERROR_ERROR_PATH = "/error-page";
         public const string MODULE_ERROR_ERROR_NAME = "Error";
 
-        // Auth module: dashboard (home)
+        // Home module: dashboard (home)
+        public const string MODULE_HOME_HOME_PATH = "/";
         public const string MODULE_HOME_DASHBOARD_PATH = "/dashboard";
         public const string MODULE_HOME_DASHBOARD_NAME = "Dashboard";
 
@@ -24,6 +25,9 @@ namespace ErpManager.Common
         // User module: user list
         public const string MODULE_USER_USERLIST_PATH = "/user/list";
         public const string MODULE_USER_USERLIST_NAME = "UserList";
+        // User module: user detail
+        public const string MODULE_USER_USERDETAIL_PATH = "/user/detail";
+        public const string MODULE_USER_USERDETAIL_NAME = "UserDetail";
         // User module: user role
         public const string MODULE_USER_USERROLE_PATH = "/user/role";
         public const string MODULE_USER_USERROLE_NAME = "UserRole";
@@ -33,6 +37,9 @@ namespace ErpManager.Common
         // Product module: product list
         public const string MODULE_PRODUCT_PRODUCTLIST_PATH = "/product/list";
         public const string MODULE_PRODUCT_PRODUCTLIST_NAME = "ProductList";
+        // Product module: product detail
+        public const string MODULE_PRODUCT_PRODUCTDETAIL_PATH = "/product/detail";
+        public const string MODULE_PRODUCT_PRODUCTDETAIL_NAME = "ProductDetail";
         // Product module: product register
         public const string MODULE_PRODUCT_PRODUCTREGISTER_PATH = "/product/register";
         public const string MODULE_PRODUCT_PRODUCTREGISTER_NAME = "ProductRegister";

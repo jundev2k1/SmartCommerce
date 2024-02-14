@@ -38,7 +38,7 @@ public class UserModel
 
     public SexEnum Sex { get; set; }
 
-    public DateTime? Birthday { get; set; }
+    public DateTime Birthday { get; set; }
 
     public DateTime DateCreated { get; set; }
 

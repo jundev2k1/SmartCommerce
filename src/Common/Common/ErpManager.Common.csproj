@@ -10,4 +10,10 @@
     <ProjectReference Include="..\Domain\ErpManager.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Using Include="ErpManager.Domain.Enum" />
+    <Using Include="ErpManager.Domain.Models" />
+    <Using Include="System.Collections" />
+  </ItemGroup>
+
 </Project>

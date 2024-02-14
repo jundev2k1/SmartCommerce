@@ -58,7 +58,7 @@ public partial class User
     public SexEnum Sex { get; set; }
 
     [Column(TypeName = "datetime")]
-    public DateTime? Birthday { get; set; }
+    public DateTime Birthday { get; set; }
 
     [Column(TypeName = "datetime")]
     public DateTime DateCreated { get; set; }

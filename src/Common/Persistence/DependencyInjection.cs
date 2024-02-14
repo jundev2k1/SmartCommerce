@@ -1,8 +1,5 @@
 ﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
 
-using ErpManager.Persistence.Repositories.Role;
-using ErpManager.Persistence.Repositories.User;
-
 namespace ErpManager.Persistence
 {
     public static class DependencyInjection
@@ -22,7 +19,7 @@ namespace ErpManager.Persistence
         /// </summary>
         private static IServiceCollection AddPersistenceFacade(this IServiceCollection services)
         {
-            services.AddScoped<IServices, ServiceList>();
+            services.AddScoped<IServiceFacade, ServiceFacade>();
             return services;
         }
 
@@ -31,8 +28,11 @@ namespace ErpManager.Persistence
         /// </summary>
         private static IServiceCollection RegisterRepository(this IServiceCollection services)
         {
+            services.AddScoped<IBranchRepository, BranchRepository>();
             services.AddScoped<IRoleRepository, RoleRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IProductRepository, ProductRepository>();
+
             return services;
         }
 
@@ -41,7 +41,11 @@ namespace ErpManager.Persistence
         /// </summary>
         private static IServiceCollection RegisterServices(this IServiceCollection services)
         {
+            services.AddScoped<IBranchService, BranchService>();
+            services.AddScoped<IRoleService, RoleService>();
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IProductService, ProductService>();
+
             return services;
         }
     }

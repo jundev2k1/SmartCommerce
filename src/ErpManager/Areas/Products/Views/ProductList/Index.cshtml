@@ -4,24 +4,122 @@
 
     var breadcrumbs = new Breadcrumb[]
     {
-        new Breadcrumb { Title = "Home", Href="/" },
-        new Breadcrumb { Title = "Product List", IsDisabled = true }
+        new Breadcrumb { Title = _localizer["Nav_Home"].Value, Href="/" },
+        new Breadcrumb { Title = _localizer["Nav_Product_List"].Value, IsDisabled = true }
     };
+
+    var pageIndex = int.Parse(ViewData[Constants.VIEWDATA_KEY_PAGE_INDEX].ToStringOrEmpty());
 }
+@model (ProductModel[] Data, int TotalPage, int TotalRecord)
 
 @await Component.InvokeAsync("Breadcrumb", breadcrumbs)
 
 <section id="searchBar" class="site-card">
     <div class="row">
-        <div class="col-md-6 col-8">
-            @await Component.InvokeAsync("SearchInput")
+        <div class="col-md-8 col-8 mb-2">
+            <div class="d-flex gap-1">
+                @await Component.InvokeAsync("SearchInput")
+                <input type="button" class="btn site-btn-outline-info site-rounded" value="Filter" data-bs-toggle="collapse" href="#filterAdvancedCollapse" />
+            </div>
         </div>
-        <div class="col-md-2 col-4">
-            <input type="button" class="btn site-btn-outline-info site-rounded" value="Filter" />
-        </div>
-        <div class="col-md-4 d-flex justify-content-end gap-2">
-            <button type="button" class="btn site-btn-outline-theme site-rounded-full">Export</button>
+        <div class="col-md-4 col-12 d-flex justify-content-end gap-2 mb-2">
+            <button type="button" class="btn site-btn-outline-theme site-rounded-full" data-bs-toggle="modal" data-bs-target="#exportModal">Export</button>
             <button type="button" class="btn site-btn-theme site-rounded-full">Create</button>
+        </div>
+        <div class="col-12">
+            <div class="collapse" id="filterAdvancedCollapse">
+                <div class="card card-body">
+                    Some placeholder content for the collapse component. This panel is hidden by default but revealed when the user activates the relevant trigger.
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section id="bodyPageLoad" class="site-card mt-2">
+    <div class="row">
+        <div class="col-12">
+            <table class="site-table site-table-hover site-border site-rounded-layout">
+                <thead>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Price</th>
+                        <th scope="col">Address</th>
+                        <th scope="col">Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Data)
+                    {
+                        <tr>
+                            <td>@item.ProductId</td>
+                            <td>
+                                <a asp-route="@Constants.MODULE_PRODUCT_PRODUCTDETAIL_NAME" asp-route-id="@item.ProductId">
+                                    @item.Name
+                                </a>
+                            </td>
+                            <td>@CommonUtility.GetProductDisplayPrice(item)</td>
+                            <td>@item.Address1</td>
+                            <td>@item.Status</td>
+                        </tr>
+                    }
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="5">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <p class="mb-0">
+                                    Total result: @(Constants.DEFAULT_PAGE_SIZE * (pageIndex - 1) + Model.Data.Length)/@(Model.TotalRecord)
+                                </p>
+                                <nav aria-label="Page navigation example">
+                                    <ul class="pagination">
+                                        <li class="page-item">
+                                            <a class="page-link @(pageIndex == 1 ? "disabled" : string.Empty)" asp-route="@Constants.MODULE_PRODUCT_PRODUCTLIST_NAME" asp-route-page="@CommonUtility.HandleLimitPage(pageIndex, Model.TotalPage)" aria-label="Previous">
+                                                <span aria-hidden="true">&laquo;</span>
+                                            </a>
+                                        </li>
+                                        @for (var index = 1; index <= Model.TotalPage; index++)
+                                        {
+                                            <li class="page-item">
+                                                <a class="page-link @(pageIndex == index ? "disabled" : string.Empty)" asp-route="@Constants.MODULE_PRODUCT_PRODUCTLIST_NAME" asp-route-page="@index">@index</a>
+                                            </li>
+                                        }
+                                        <li class="page-item">
+                                            <a class="page-link @(pageIndex == Model.TotalPage ? "disabled" : string.Empty)" asp-route="@Constants.MODULE_PRODUCT_PRODUCTLIST_NAME" asp-route-page="@CommonUtility.HandleLimitPage(pageIndex, Model.TotalPage, isPrevious: false)" asp- aria-label="Next">
+                                                <span aria-hidden="true">&raquo;</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</section>
+<section id="ModalContent">
+    <div class="modal fade" id="exportModal" tabindex="-1" aria-labelledby="exportModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exportModalLabel">Search Advanced</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>
+                        With less than a month to go before the European Union enacts new consumer privacy laws for its citizens, companies around the world are updating their terms of service agreements to comply.
+                    </p>
+                    <p>
+                        The European Union’s General Data Protection Regulation (G.D.P.R.) goes into effect on May 25 and is meant to ensure a common set of data rights in the European Union. It requires organizations to notify users as soon as possible of high-risk data breaches that could personally affect them.
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn site-btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn site-btn-primary">Search</button>
+                </div>
+            </div>
         </div>
     </div>
 </section>

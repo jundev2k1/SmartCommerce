@@ -1,15 +1,17 @@
 ﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
 
-namespace ErpManager.Persistence.Repositories.Product
+namespace ErpManager.Persistence.Repositories
 {
     public interface IProductRepository
     {
         /// <summary>
         /// Search
         /// </summary>
-        /// <param name="searchParams">Search parameters</param>
-        /// <returns>Product model list</returns>
-        public ProductModel[] Search(Dictionary<string, string> searchParams);
+        /// <param name="expression">Expression</param>
+        /// <param name="pageIndex">Page index</param>
+        /// <param name="pageSize">Page size</param>
+        /// <returns>A tuple includes data, total page and total record</returns>
+        public (ProductModel[] Data, int TotalPage, int TotalRecord) Search(Expression<Func<Product, bool>> expression, int pageIndex, int pageSize);
 
         /// <summary>
         /// Get all

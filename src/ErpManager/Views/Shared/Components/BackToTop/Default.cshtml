@@ -38,7 +38,7 @@
     <script type="text/javascript">
         const handleBackToTop = (event) => {
             const btnBackToTop = document.querySelector(".btn-back-to-top");
-            if (window.scrollY > 200) {
+            if (event.srcElement.scrollTop > 200) {
                 if (!btnBackToTop.classList.contains("active")) {
                     btnBackToTop.classList.add("active");
                 }
@@ -49,10 +49,11 @@
             }
         };
         // Register function window scroll
-        StoreWindowScrollCallback.push(handleBackToTop);
+        StoreMainLayoutScrollCallback.push(handleBackToTop);
 
         const handleScrollTop = () => {
-            window.scrollTo(0, 0);
+            const mainLayout = document.querySelector("#page-load .render-content");
+            mainLayout.scrollTo(0, 0);
         };
     </script>
 </section>

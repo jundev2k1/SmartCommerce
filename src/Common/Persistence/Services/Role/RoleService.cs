@@ -1,10 +1,8 @@
 ﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
 
-using ErpManager.Persistence.Repositories.Role;
-
 namespace ErpManager.Persistence.Services
 {
-    public class RoleService : ServiceBase, IRoleService
+    public sealed class RoleService : ServiceBase, IRoleService
     {
         #region Constructor
         /// <summary>Context singleton</summary>

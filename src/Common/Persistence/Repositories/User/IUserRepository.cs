@@ -1,15 +1,17 @@
 ﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
 
-namespace ErpManager.Persistence.Repositories.User
+namespace ErpManager.Persistence.Repositories
 {
     public interface IUserRepository
     {
         /// <summary>
         /// Search
         /// </summary>
-        /// <param name="searchParams">Search parameters</param>
-        /// <returns>User model list</returns>
-        public UserModel[] Search(Dictionary<string, string> searchParams);
+        /// <param name="expression">Expression</param>
+        /// <param name="pageIndex">Page index</param>
+        /// <param name="pageSize">Page size</param>
+        /// <returns>A tuple includes data, total page and total record</returns>
+        public (UserModel[] Data, int TotalPage, int TotalRecord) Search(Expression<Func<User, bool>> expression, int pageIndex, int pageSize);
 
         /// <summary>
         /// Get all

@@ -52,15 +52,19 @@ namespace ErpManager.ERP.Controllers
         /// <returns>Page permission</returns>
         protected List<RouteAttribute?> GetFeaturesPagePermission()
         {
-            var assembly = Assembly.GetExecutingAssembly(); // hoặc sử dụng Assembly.Load("tên-assembly")
+            var assembly = Assembly.GetExecutingAssembly();
             var controllerTypes = assembly.GetTypes().Where(type =>
                 typeof(Controller).IsAssignableFrom(type)
-                && type.FullName.ToStringOrEmpty().Contains("Areas"));
+                && (type.FullName.ToStringOrEmpty().Contains("Home")
+                    || type.FullName.ToStringOrEmpty().Contains("Areas")));
             var featuresRoutes = controllerTypes
                 .SelectMany(type => type
                     .GetMethods(BindingFlags.Instance | BindingFlags.Public)
-                    .Where(childType => childType.GetCustomAttribute<PermissionAttribute>() != null)
-                    .Select(childType => childType.GetCustomAttribute<RouteAttribute>()))
+                    .Where(childType => 
+                        (childType.GetCustomAttribute<PermissionAttribute>() != null))
+                    .Select(childType => childType
+                        .GetCustomAttributes<RouteAttribute>()
+                        .FirstOrDefault(route => route.Name != null)))
                 .Distinct()
                 .ToList();
 

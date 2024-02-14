@@ -1,6 +1,97 @@
 ﻿@{
     ViewData[Constants.GLOBAL_KEY_TITLE] = _localizer["Nav_User_List"];
     ViewData[Constants.GLOBAL_KEY_CURRENT_PAGE] = "UserList_Page";
-}
 
-<h1>User nghe</h1>
+    var breadcrumbs = new Breadcrumb[]
+    {
+        new Breadcrumb { Title = _localizer["Nav_Home"].Value, Href="/" },
+        new Breadcrumb { Title = _localizer["Nav_Product_List"].Value, IsDisabled = true }
+    };
+
+    var pageIndex = int.Parse(ViewData[Constants.VIEWDATA_KEY_PAGE_INDEX].ToStringOrEmpty());
+}
+@model (UserModel[] Data, int TotalPage, int TotalRecord)
+
+@await Component.InvokeAsync("Breadcrumb", breadcrumbs)
+
+<section id="searchBar" class="site-card">
+    <div class="row">
+        <div class="col-md-6 col-8">
+            @await Component.InvokeAsync("SearchInput")
+        </div>
+        <div class="col-md-2 col-4">
+            <input type="button" class="btn site-btn-outline-info site-rounded" value="Filter" />
+        </div>
+        <div class="col-md-4 d-flex justify-content-end gap-2">
+            <button type="button" class="btn site-btn-outline-theme site-rounded-full">Export</button>
+            <button type="button" class="btn site-btn-theme site-rounded-full">Create</button>
+        </div>
+    </div>
+</section>
+<section id="bodyPageLoad" class="site-card mt-2">
+    <div class="row">
+        <div class="col-12">
+            <table class="site-table site-table-hover site-border site-rounded-layout">
+                <thead>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Contact</th>
+                        <th scope="col">Sex</th>
+                        <th scope="col">Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Data)
+                    {
+                        <tr>
+                            <td>@item.UserId</td>
+                            <td>
+                                <a asp-route="@Constants.MODULE_PRODUCT_PRODUCTDETAIL_NAME" asp-route-id="@item.UserId">
+                                    @item.FirstName @item.LastName
+                                </a>
+                            </td>
+                            <td>
+                                <p>@item.Email</p>
+                                <p>@item.PhoneNumber</p>
+                            </td>
+                            <td>@item.Sex</td>
+                            <td>@item.Status</td>
+                        </tr>
+                    }
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="5">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <p class="mb-0">
+                                    Total result: @(Constants.DEFAULT_PAGE_SIZE * (pageIndex - 1) + Model.Data.Length)/@(Model.TotalRecord)
+                                </p>
+                                <nav aria-label="Page navigation example">
+                                    <ul class="pagination">
+                                        <li class="page-item">
+                                            <a class="page-link @(pageIndex == 1 ? "disabled" : string.Empty)" asp-route="@Constants.MODULE_PRODUCT_PRODUCTLIST_NAME" asp-route-page="@CommonUtility.HandleLimitPage(pageIndex, Model.TotalPage)" aria-label="Previous">
+                                                <span aria-hidden="true">&laquo;</span>
+                                            </a>
+                                        </li>
+                                        @for (var index = 1; index <= Model.TotalPage; index++)
+                                        {
+                                            <li class="page-item">
+                                                <a class="page-link @(pageIndex == index ? "disabled" : string.Empty)" asp-route="@Constants.MODULE_PRODUCT_PRODUCTLIST_NAME" asp-route-page="@index">@index</a>
+                                            </li>
+                                        }
+                                        <li class="page-item">
+                                            <a class="page-link @(pageIndex == Model.TotalPage ? "disabled" : string.Empty)" asp-route="@Constants.MODULE_PRODUCT_PRODUCTLIST_NAME" asp-route-page="@CommonUtility.HandleLimitPage(pageIndex, Model.TotalPage, isPrevious: false)" asp- aria-label="Next">
+                                                <span aria-hidden="true">&raquo;</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</section>

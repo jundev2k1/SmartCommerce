@@ -157,8 +157,14 @@
   <data name="Nav_Error_ErrorPage" xml:space="preserve">
     <value>Trang lỗi</value>
   </data>
+  <data name="Nav_Home" xml:space="preserve">
+    <value>Trang chủ</value>
+  </data>
   <data name="Nav_Product" xml:space="preserve">
     <value>Sản Phẩm</value>
+  </data>
+  <data name="Nav_Product_Detail" xml:space="preserve">
+    <value>Chi tiết sản phẩm</value>
   </data>
   <data name="Nav_Product_List" xml:space="preserve">
     <value>Danh Sách Sản Phẩm</value>

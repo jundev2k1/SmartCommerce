@@ -19,6 +19,8 @@ namespace ErpManager.Common
         public static bool CONFIG_GLOBAL_OPTIONS = true;
         /// <summary>Config: default sidebar options</summary>
         public static bool CONFIG_DEFAULT_SIDEBAR_OPTIONS = false;
+        /// <summary>Config: secret key</summary>
+        public static string CONFIG_SECRET_KEY = "240695";
         /// <summary>Config: default sidebar options</summary>
         public static string CONFIG_DEFAULT_LANGUAGE_OPTIONS = "en";
         /// <summary>Config: sidebar options</summary>
@@ -36,5 +38,8 @@ namespace ErpManager.Common
         public static int AUTH_LOGIN_COUNT_EXPIRES = 5;
         /// <summary>Authentication limit login count</summary>
         public static int AUTH_LOGIN_COUNT_LIMIT = 3;
+
+        /// <summary>Default page size</summary>
+        public const int DEFAULT_PAGE_SIZE = 20;
     }
 }

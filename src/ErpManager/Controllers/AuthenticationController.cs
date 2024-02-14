@@ -8,9 +8,9 @@ namespace ErpManager.ERP.Controllers
     {
         private readonly IMapper _mapper;
         private readonly IStringLocalizer<MessageLocalizer> _localizer;
-        private readonly IServices _services;
+        private readonly IServiceFacade _services;
 
-        public AuthenticationController(IStringLocalizer<MessageLocalizer> localizer, IMapper mapper, IServices services)
+        public AuthenticationController(IStringLocalizer<MessageLocalizer> localizer, IMapper mapper, IServiceFacade services)
         {
             _localizer = localizer;
             _mapper = mapper;

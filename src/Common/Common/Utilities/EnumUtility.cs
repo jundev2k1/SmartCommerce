@@ -1,6 +1,6 @@
 ﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
 
-namespace ErpManager.Common
+namespace ErpManager.Common.Utilities
 {
     public static class EnumUtility
     {

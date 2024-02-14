@@ -36,8 +36,6 @@
     <Folder Include="wwwroot\content\user-images\" />
     <Folder Include="wwwroot\content\product-images\" />
     <Folder Include="wwwroot\css\" />
-    <Folder Include="wwwroot\js\component-js\dialog\" />
-    <Folder Include="wwwroot\js\component-js\popup\" />
     <Folder Include="wwwroot\js\component-script\SearchInput\" />
     <Folder Include="wwwroot\js\component-script\ThemeSetting\" />
     <Folder Include="wwwroot\lib\bootstrap\" />
@@ -81,6 +79,8 @@
   <ItemGroup>
     <Using Include="AutoMapper" />
     <Using Include="ErpManager.Common" />
+    <Using Include="ErpManager.Common.Security" />
+    <Using Include="ErpManager.Common.Utilities" />
     <Using Include="ErpManager.Domain.Enum" />
     <Using Include="ErpManager.Domain.Models" />
     <Using Include="ErpManager.ERP.Common.Attributes" />

@@ -1,8 +1,6 @@
 ﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
 
-using System.Collections;
-
-namespace ErpManager.Common
+namespace ErpManager.Common.Utilities
 {
     public static class MessageUtilitiy
     {

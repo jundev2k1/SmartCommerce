@@ -15,5 +15,8 @@ namespace ErpManager.Common
         public const string FILE_PATH_JS_COMPONENT_NAV_BAR = "~/js/component-script/Navbar/index.js";
         /// <summary>File path: Js component search input</summary>
         public const string FILE_PATH_JS_COMPONENT_SEARCH_INPUT = "~/js/component-script/SearchInput/index.js";
+
+        /// <summary>File path: Public no image placeholder</summary>
+        public const string FILE_PATH_PUBLIC_NO_IMAGE = "/images/system/no-image-placeholder.jpg";
     }
 }

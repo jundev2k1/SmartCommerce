@@ -17,16 +17,36 @@
     display: flex;
     height: 100vh;
     color: var(--site-text-operating);
+    overflow: hidden;
 }
 
-.footer {
-    position: absolute;
-    display: flex;
-    justify-content: center;
-    bottom: 0;
-    width: 100%;
-    z-index: 97;
-}
+    #page-load .render-content {
+        position: relative;
+        overflow-x: hidden;
+        overflow-y: auto;
+        width: 100%;
+        min-height: 100%;
+        scroll-behavior: smooth;
+        display: flex;
+        flex-direction: column;
+    }
+
+        #page-load .render-content .main-content {
+            flex: 1;
+            width: 100%;
+            padding: .5rem;
+        }
+
+        #page-load .render-content .footer {
+            position: sticky;
+            display: flex;
+            justify-content: center;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            z-index: 97;
+            background: var(--site-gray-300);
+        }
 
 /*#endregion */
 

@@ -1,8 +1,8 @@
 ﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
 
-namespace ErpManager.Persistence.Repositories.User
+namespace ErpManager.Persistence.Repositories
 {
-    public class UserRepository : RepositoryBase, IUserRepository
+    public sealed class UserRepository : RepositoryBase, IUserRepository
     {
         /// <summary>
         /// Constructor
@@ -15,11 +15,28 @@ namespace ErpManager.Persistence.Repositories.User
         /// <summary>
         /// Search
         /// </summary>
-        /// <param name="searchParams">Search parameters</param>
-        /// <returns>A collection of user following search parameters</returns>
-        public UserModel[] Search(Dictionary<string, string> searchParams)
+        /// <param name="expression">Expression</param>
+        /// <param name="pageIndex">Page index</param>
+        /// <param name="pageSize">Page size</param>
+        /// <returns>A tuple includes data, total page and total record</returns>
+        public (UserModel[] Data, int TotalPage, int TotalRecord) Search(Expression<Func<User, bool>> expression, int pageIndex, int pageSize)
         {
-            throw new NotImplementedException();
+            var query = _dbContext.Users
+                .AsQueryable()
+                .Where(expression);
+
+            var queryCount = query.Count();
+            var isSurplus = (queryCount % pageSize) > 0;
+            var totalPage = queryCount / pageSize + (isSurplus ? 1 : 0);
+
+            var pageSkip = (pageIndex - 1) * pageSize;
+            var data = query
+                .Skip(pageSkip)
+                .Take(pageSize)
+                .Select(user => user.MapToUserModel())
+                .ToArray();
+
+            return (data, totalPage, queryCount);
         }
 
         /// <summary>

@@ -63,17 +63,12 @@ namespace ErpManager.ERP.Controllers
         /// <returns>Page content</returns>
         private ErrorPageViewModel GetPageContent(ErrorCodeEnum code, string message)
         {
-            var title = string.Empty;
-            switch (code)
+            var title = code switch
             {
-                case ErrorCodeEnum.SystemError:
-                    title = _localizer[Constants.ERRORMSG_KEY_SYSTEM_ERROR_CODE];
-                    break;
-
-                case ErrorCodeEnum.NotPermission:
-                    title = _localizer[Constants.ERRORMSG_KEY_NO_HAS_PERMISSION_CODE];
-                    break;
-            }
+                ErrorCodeEnum.SystemError => _localizer[Constants.ERRORMSG_KEY_SYSTEM_ERROR_CODE],
+                ErrorCodeEnum.NotPermission => _localizer[Constants.ERRORMSG_KEY_NO_HAS_PERMISSION_CODE],
+                _ => string.Empty
+            };
 
             return new ErrorPageViewModel
             {

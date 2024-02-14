@@ -1,10 +1,10 @@
 ﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
 
-using ErpManager.Persistence.Repositories.Product;
+using ErpManager.Persistence.Common.Utilities.Search;
 
 namespace ErpManager.Persistence.Services
 {
-    public class ProductService : ServiceBase, IProductService
+    public sealed class ProductService : ServiceBase, IProductService
     {
         #region Constructor
         /// <summary>Context singleton</summary>
@@ -19,6 +19,24 @@ namespace ErpManager.Persistence.Services
         }
         #endregion
 
+        #region Search
+        /// <summary>
+        /// Search
+        /// </summary>
+        /// <param name="searchParams">Search parameters</param>
+        /// <param name="pageIndex">Page index</param>
+        /// <param name="pageSize">Page size</param>
+        /// <returns>A tuple includes data, total page and total record</returns>
+        public (ProductModel[] Data, int TotalPage, int TotalRecord) Search(ProductSearchDto searchParams, int pageIndex, int pageSize)
+        {
+            if (string.IsNullOrEmpty(searchParams.BranchId)) return (Array.Empty<ProductModel>(), 0, 0);
+
+            var condition = SearchConditionBuilder.ProductSearch(searchParams);
+            var result = _productRepository.Search(condition, pageIndex, pageSize);
+            return result;
+        }
+        #endregion
+
         #region Queries
         /// <summary>
         /// Get all product
@@ -26,7 +44,7 @@ namespace ErpManager.Persistence.Services
         /// <param name="branchId">Branch id</param>
         /// <param name="isDeleted">Delete flag of product</param>
         /// <returns>Product list</returns>
-        public ProductModel[] GetAllProduct(string branchId, bool isDeleted = true)
+        public ProductModel[] GetAllProduct(string branchId, bool isDeleted = false)
         {
             return _productRepository.GetAll(branchId, isDeleted);
         }
@@ -89,6 +107,6 @@ namespace ErpManager.Persistence.Services
         {
             return _productRepository.Delete(branchId, productId);
         }
-        #endregion    
+        #endregion
     }
 }

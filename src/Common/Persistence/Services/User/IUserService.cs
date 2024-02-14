@@ -5,12 +5,21 @@ namespace ErpManager.Persistence.Services
     public interface IUserService
     {
         /// <summary>
+        /// Search
+        /// </summary>
+        /// <param name="searchParams">Search parameters</param>
+        /// <param name="pageIndex">Page index</param>
+        /// <param name="pageSize">Page size</param>
+        /// <returns>A tuple includes data, total page and total record</returns>
+        public (UserModel[] Data, int TotalPage, int TotalRecord) Search(UserSearchDto searchParams, int pageIndex, int pageSize);
+
+        /// <summary>
         /// Get all user
         /// </summary>
         /// <param name="branchId">Branch id</param>
         /// <param name="isDeleted">Delete flag of user</param>
         /// <returns>A collection of users</returns>
-        public UserModel[] GetAllUser(string branchId, bool isDeleted = true);
+        public UserModel[] GetAllUser(string branchId, bool isDeleted = false);
 
         /// <summary>
         /// Get user

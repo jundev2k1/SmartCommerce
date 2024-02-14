@@ -2,7 +2,7 @@
 
 using System.Text;
 
-namespace ErpManager.Common
+namespace ErpManager.Common.Utilities
 {
     public static class StringUtilitiy
     {

@@ -1,10 +1,8 @@
 ﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
 
-using ErpManager.Persistence.Repositories.Branch;
-
 namespace ErpManager.Persistence.Services
 {
-    public class BranchService : ServiceBase, IBranchService
+    public sealed class BranchService : ServiceBase, IBranchService
     {
         #region Constructor
         /// <summary>Context singleton</summary>

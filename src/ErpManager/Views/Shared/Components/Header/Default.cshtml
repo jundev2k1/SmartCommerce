@@ -26,6 +26,7 @@
             #headerBar .header .wrapper .sub-navbar {
                 display: flex;
                 justify-content: flex-end;
+                align-items: center;
             }
     </style>
     <div class="header">
@@ -35,6 +36,9 @@
                     <h1>@ViewData["Title"]</h1>
                 </div>
                 <div class="sub-navbar col-md-8 gap-1">
+                    <div class="language-change">
+                        @await Component.InvokeAsync("LanguageButton")
+                    </div>
                     <div class="user-info">asd</div>
                     <div class="user-notification">asd</div>
                 </div>
@@ -44,7 +48,7 @@
     <script>
         const headerOnScroll = (event) => {
             const headerBar = document.querySelector("#headerBar");
-            if (window.scrollY > 100) {
+            if (event.srcElement.scrollTop > 100) {
                 if (!headerBar.classList.contains("sticky")) {
                     headerBar.classList.add("sticky");
                 }
@@ -54,6 +58,6 @@
                 }
             }
         };
-        StoreWindowScrollCallback.push(headerOnScroll);
+        StoreMainLayoutScrollCallback.push(headerOnScroll);
     </script>
 </section>

@@ -24,7 +24,5 @@ namespace ErpManager.ERP.ViewComponents
             var result = HttpContext.Session.GetString(Constants.SESSION_KEY_OPERATOR_PERMISSION).ToStringOrEmpty();
             return result.Split(",");
         }
-
-        protected string GetA() => "";
     }
 }

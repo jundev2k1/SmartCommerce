@@ -7,19 +7,27 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="LinqKit" Version="1.2.5" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Common\ErpManager.Common.csproj" />
     <ProjectReference Include="..\Domain\ErpManager.Domain.csproj" />
   </ItemGroup>
 
   <ItemGroup>
+    <Using Include="ErpManager.Domain.Dtos.SearchDtos" />
     <Using Include="ErpManager.Domain.Entities" />
     <Using Include="ErpManager.Domain.Enum" />
     <Using Include="ErpManager.Domain.Mapping" />
     <Using Include="ErpManager.Domain.Models" />
     <Using Include="ErpManager.Persistence.Common" />
+    <Using Include="ErpManager.Persistence.Repositories" />
     <Using Include="ErpManager.Persistence.Services" />
+    <Using Include="LinqKit" />
     <Using Include="Microsoft.EntityFrameworkCore" />
     <Using Include="Microsoft.Extensions.DependencyInjection" />
+    <Using Include="System.Linq.Expressions" />
   </ItemGroup>
 
 </Project>

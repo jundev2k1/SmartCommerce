@@ -67,7 +67,7 @@ const ThemeSetting = (function () {
     const renderMode = contentElement.querySelector("#renderModeSetting");
 
     // Expires time (1 year)
-    const expiresTime = () => {
+    const getExpiresTime = () => {
         const time = new Date();
         time.setFullYear(time.getFullYear() + 1);
         return time;
@@ -129,14 +129,14 @@ const ThemeSetting = (function () {
         setCookie(name, value) {
             if (!name || !value) return;
 
-            const cookiePattern = `${name}=${value};expires=${expiresTime()};path=/`;
+            const cookiePattern = `${name}=${value};expires=${getExpiresTime()};path=/`;
             document.cookie = cookiePattern;
         },
         renderContent() {
             let modeContent = '';
             modeList.forEach((mode, index) => {
                 let content = ''
-                    + `<li class="setting-item ${(this.currentMode === mode.name) ? "choose" : ""}">`
+                    + `<li class="setting-item ${(this.currentMode === mode.name) ? 'choose' : ''}">`
                     + `<div class="setting-field" data-value="${mode.name}" `
                     + `style="background: var(${mode.color})">`
                     + `<a key="${index}" href="#" onclick="ThemeSetting.choose(event, '${type.Mode}')"><i class="fa-regular fa-check fa-fw"></i></a>`
