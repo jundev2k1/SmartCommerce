@@ -48,6 +48,15 @@
             background: var(--site-gray-300);
         }
 
+#utilitySideBar {
+    position: fixed;
+    bottom: 26px;
+    right: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
 /*#endregion */
 
 /*#region Component */

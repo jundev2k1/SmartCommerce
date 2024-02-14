@@ -16,20 +16,167 @@
 
 <section id="searchBar" class="site-card">
     <div class="row">
-        <div class="col-md-8 col-8 mb-2">
+        <div class="col-8">
             <div class="d-flex gap-1">
                 @await Component.InvokeAsync("SearchInput")
                 <input type="button" class="btn site-btn-outline-info site-rounded" value="Filter" data-bs-toggle="collapse" href="#filterAdvancedCollapse" />
             </div>
         </div>
-        <div class="col-md-4 col-12 d-flex justify-content-end gap-2 mb-2">
+        <div class="col-4 d-flex justify-content-end gap-2">
             <button type="button" class="btn site-btn-outline-theme site-rounded-full" data-bs-toggle="modal" data-bs-target="#exportModal">Export</button>
             <button type="button" class="btn site-btn-theme site-rounded-full">Create</button>
         </div>
         <div class="col-12">
-            <div class="collapse" id="filterAdvancedCollapse">
+            <div class="collapse mt-3" id="filterAdvancedCollapse">
                 <div class="card card-body">
-                    Some placeholder content for the collapse component. This panel is hidden by default but revealed when the user activates the relevant trigger.
+                    <h2 class="fs-4">Search Advanced</h2>
+                    <form asp-route="@Constants.MODULE_PRODUCT_PRODUCTLIST_NAME">
+                        <ul class="row">
+                            <li class="col-md-4 col-6">
+                                <div class="mb-3">
+                                    <label for="productIdForSearch" class="form-label">Product ID</label>
+                                    <input type="text" class="form-control" id="productIdForSearch" placeholder="Search with ID...">
+                                </div>
+                            </li>
+                            <li class="col-md-4 col-6">
+                                <div class="mb-3">
+                                    <label for="productIdForSearch" class="form-label">Status</label>
+                                    <input type="text" class="form-control" id="productIdForSearch" placeholder="Search with ID...">
+                                </div>
+                            </li>
+                            <li class="col-md-4 col-6">
+                                <div class="mb-3">
+                                    <label for="productIdForSearch" class="form-label">Delete status</label>
+                                    <input type="text" class="form-control" id="productIdForSearch" placeholder="Search with ID...">
+                                </div>
+                            </li>
+                            <li class="col-md-8 col-12">
+                                <div class="mb-3">
+                                    <label for="productNameForSearch" class="form-label">Product Name</label>
+                                    <input type="text" class="form-control" id="productNameForSearch" placeholder="Search with name...">
+                                </div>
+                            </li>
+                            <li class="col-md-4 col-12">
+                                <div class="mb-3">
+                                    <label for="productNameForSearch" class="form-label">Take Over By</label>
+                                    <input type="text" class="form-control" id="productNameForSearch" placeholder="Search with name...">
+                                </div>
+                            </li>
+                            <li class="col-12">
+                                <div class="row mb-3">
+                                    <div class="col-md-3 col-6">
+                                        <label for="productNameForSearch" class="form-label">Address</label>
+                                        <select class="form-select" aria-label="Province">
+                                            <option selected>Open this select menu</option>
+                                            <option value="1">One</option>
+                                            <option value="2">Two</option>
+                                            <option value="3">Three</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-3 col-6">
+                                        <label for="productNameForSearch" class="form-label">Address</label>
+                                        <select class="form-select" aria-label="District">
+                                            <option selected>Open this select menu</option>
+                                            <option value="1">One</option>
+                                            <option value="2">Two</option>
+                                            <option value="3">Three</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6 col-12">
+                                        <label for="productNameForSearch" class="form-label">Address</label>
+                                        <input type="text" class="form-control" id="address3ForSearch" placeholder="Search with address...">
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="col-md-4 col-12">
+                                <div class="mb-3">
+                                    <label class="form-label">Price 1</label>
+                                    <div class="d-flex gap-1 align-items-center">
+                                        <input type="text" class="form-control" id="price1FromForSearch" placeholder="Price from...">
+                                        ~
+                                        <input type="text" class="form-control" id="price1ToForSearch" placeholder="Price to...">
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="col-md-4 col-12">
+                                <div class="mb-3">
+                                    <label class="form-label">Price 2</label>
+                                    <div class="d-flex gap-1 align-items-center">
+                                        <input type="text" class="form-control" id="price2FromForSearch" placeholder="Price from...">
+                                        ~
+                                        <input type="text" class="form-control" id="price2ToForSearch" placeholder="Price to...">
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="col-md-4 col-12">
+                                <div class="mb-3">
+                                    <label class="form-label">Price 3</label>
+                                    <div class="d-flex gap-1 align-items-center">
+                                        <input type="text" class="form-control" id="price3FromForSearch" placeholder="Price from...">
+                                        ~
+                                        <input type="text" class="form-control" id="price3ToForSearch" placeholder="Price to...">
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="col-md-4 col-12">
+                                <div class="mb-3">
+                                    <label class="form-label">Length</label>
+                                    <div class="d-flex gap-1 align-items-center">
+                                        <input type="text" class="form-control" id="lengthFromForSearch" placeholder="Length from...">
+                                        ~
+                                        <input type="text" class="form-control" id="lengthToForSearch" placeholder="Length to...">
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="col-md-4 col-12">
+                                <div class="mb-3">
+                                    <label class="form-label">Width</label>
+                                    <div class="d-flex gap-1 align-items-center">
+                                        <input type="text" class="form-control" id="widthFromForSearch" placeholder="Width from...">
+                                        ~
+                                        <input type="text" class="form-control" id="widthToForSearch" placeholder="Width to...">
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="col-md-4 col-12">
+                                <div class="mb-3">
+                                    <label for="productNameForSearch" class="form-label">Land Area</label>
+                                    <div class="d-flex gap-1 align-items-center">
+                                        <input type="text" class="form-control" id="landAreaFromForSearch" placeholder="Land area from...">
+                                        ~
+                                        <input type="text" class="form-control" id="landAreaToForSearch" placeholder="Land area to...">
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="col-md-6 col-12">
+                                <div class="mb-3">
+                                    <label for="productNameForSearch" class="form-label">Date Created</label>
+                                    <div class="d-flex gap-1 align-items-center">
+                                        <input type="datetime" class="form-control" id="dateCreatedFromForSearch" placeholder="Date created from...">
+                                        ~
+                                        <input type="datetime" class="form-control" id="dateCreatedToForSearch" placeholder="Date created to...">
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="col-md-6 col-12">
+                                <div class="mb-3">
+                                    <label for="productNameForSearch" class="form-label">Date Changed</label>
+                                    <div class="d-flex gap-1 align-items-center">
+                                        <input type="text" class="form-control" id="dateChangedFromForSearch" placeholder="Date changed from...">
+                                        ~
+                                        <input type="text" class="form-control" id="dateChangedToForSearch" placeholder="Date changed to...">
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                        <div class="d-flex gap-3 justify-content-end align-items-center">
+                            <select class="form-select w-25" aria-label="DeleteFlg">
+                                <option selected value="0">Normal</option>
+                                <option value="1">Deleted</option>
+                            </select>
+                            <input type="submit" class="btn site-btn-theme" value="Search Advanced" />
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -123,3 +270,6 @@
         </div>
     </div>
 </section>
+<script>
+    $('#dateCreatedFromForSearch').datepicker();
+</script>

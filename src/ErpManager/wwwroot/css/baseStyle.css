@@ -626,13 +626,30 @@ ul, li {
     --bs-pagination-focus-box-shadow: none;
 }
 
-.dark-mode .search-form .search-input {
+.dark-mode .search-form .search-input,
+.dark-mode .form-control {
     background-color: var(--site-bg-content-operating) !important;
     border-color: var(--site-border-operating) !important;
     color: var(--site-text-operating) !important;
 }
 
-    .dark-mode .search-form .search-input:focus {
+    .dark-mode .search-form .search-input:focus,
+    .dark-mode .form-control:focus {
+        box-shadow: 0 0 0 0.1rem var(--site-gray-400) !important;
+    }
+
+    .dark-mode .search-form .search-input::placeholder,
+    .dark-mode .form-control::placeholder {
+        color: var(--site-gray-500) !important;
+    }
+
+.dark-mode .form-select {
+    background-color: var(--site-bg-content-operating) !important;
+    color: var(--site-text-operating) !important;
+    border-color: var(--site-border-operating) !important;
+}
+
+    .dark-mode .form-select:focus {
         box-shadow: 0 0 0 0.1rem var(--site-gray-400) !important;
     }
 
@@ -644,11 +661,14 @@ ul, li {
 }
 
     .dark-mode .modal .modal-title {
-        color: var(--site-popup-title-operating)!important;
+        color: var(--site-popup-title-operating) !important;
     }
 
     .dark-mode .modal .modal-body {
-        color: var(--site-popup-content-operating)!important;
+        color: var(--site-popup-content-operating) !important;
     }
 
+.dark-mode .card {
+    --bs-card-bg: var(--site-bg-content-operating);
+}
 /*#endregion */

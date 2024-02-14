@@ -8,13 +8,14 @@
     @await Component.InvokeAsync("StyleSheet")
 </head>
 <body>
-    <section>
+    <section id="startupJs">
         <script src="~/js/store.js"></script>
         <script src="~/js/common.js"></script>
         <script>
             showLoading(typeLoading.text);
         </script>
     </section>
+    @await Component.InvokeAsync("Script")
 
     @* Main content *@
     <main id="page-load">
@@ -26,12 +27,13 @@
             </div>
             @await Component.InvokeAsync("Footer")
         </div>
-        @await Component.InvokeAsync("ThemeSetting")
-        @await Component.InvokeAsync("BackToTop")
+        <aside id="utilitySideBar">
+            @await Component.InvokeAsync("ThemeSetting")
+            @await Component.InvokeAsync("BackToTop")
+        </aside>
     </main>
 
     @* Script import render *@
-    @await Component.InvokeAsync("Script")
     @RenderSection("Scripts", required: false)
 </body>
 </html>
