@@ -30,7 +30,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Areas\Products\ViewModels\" />
     <Folder Include="Areas\Users\ViewModels\" />
     <Folder Include="Migrations\" />
     <Folder Include="wwwroot\content\user-images\" />
@@ -81,6 +80,7 @@
     <Using Include="ErpManager.Common" />
     <Using Include="ErpManager.Common.Security" />
     <Using Include="ErpManager.Common.Utilities" />
+    <Using Include="ErpManager.Domain.Dtos.SearchDtos" />
     <Using Include="ErpManager.Domain.Enum" />
     <Using Include="ErpManager.Domain.Models" />
     <Using Include="ErpManager.ERP.Common.Attributes" />

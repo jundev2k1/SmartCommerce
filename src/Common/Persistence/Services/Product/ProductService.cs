@@ -1,5 +1,7 @@
 ﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
 
+using ErpManager.Common;
+using ErpManager.Domain.Models;
 using ErpManager.Persistence.Common.Utilities.Search;
 
 namespace ErpManager.Persistence.Services
@@ -26,10 +28,10 @@ namespace ErpManager.Persistence.Services
         /// <param name="searchParams">Search parameters</param>
         /// <param name="pageIndex">Page index</param>
         /// <param name="pageSize">Page size</param>
-        /// <returns>A tuple includes data, total page and total record</returns>
-        public (ProductModel[] Data, int TotalPage, int TotalRecord) Search(ProductSearchDto searchParams, int pageIndex, int pageSize)
+        /// <returns>Search result model</returns>
+        public SearchResultModel<ProductModel> Search(ProductSearchDto searchParams, int pageIndex, int pageSize = Constants.DEFAULT_PAGE_SIZE)
         {
-            if (string.IsNullOrEmpty(searchParams.BranchId)) return (Array.Empty<ProductModel>(), 0, 0);
+            if (string.IsNullOrEmpty(searchParams.BranchId)) return new SearchResultModel<ProductModel>();
 
             var condition = SearchConditionBuilder.ProductSearch(searchParams);
             var result = _productRepository.Search(condition, pageIndex, pageSize);

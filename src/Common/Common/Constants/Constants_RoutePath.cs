@@ -38,7 +38,7 @@ namespace ErpManager.Common
         public const string MODULE_PRODUCT_PRODUCTLIST_PATH = "/product/list";
         public const string MODULE_PRODUCT_PRODUCTLIST_NAME = "ProductList";
         // Product module: product detail
-        public const string MODULE_PRODUCT_PRODUCTDETAIL_PATH = "/product/detail";
+        public const string MODULE_PRODUCT_PRODUCTDETAIL_PATH = "/product/detail/{id}";
         public const string MODULE_PRODUCT_PRODUCTDETAIL_NAME = "ProductDetail";
         // Product module: product register
         public const string MODULE_PRODUCT_PRODUCTREGISTER_PATH = "/product/register";

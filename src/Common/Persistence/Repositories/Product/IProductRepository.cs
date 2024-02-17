@@ -1,5 +1,7 @@
 ﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
 
+using ErpManager.Domain.Models;
+
 namespace ErpManager.Persistence.Repositories
 {
     public interface IProductRepository
@@ -10,8 +12,8 @@ namespace ErpManager.Persistence.Repositories
         /// <param name="expression">Expression</param>
         /// <param name="pageIndex">Page index</param>
         /// <param name="pageSize">Page size</param>
-        /// <returns>A tuple includes data, total page and total record</returns>
-        public (ProductModel[] Data, int TotalPage, int TotalRecord) Search(Expression<Func<Product, bool>> expression, int pageIndex, int pageSize);
+        /// <returns>Search result model</returns>
+        public SearchResultModel<ProductModel> Search(Expression<Func<Product, bool>> expression, int pageIndex, int pageSize);
 
         /// <summary>
         /// Get all

@@ -6,7 +6,12 @@ namespace ErpManager.Persistence.Common.Utilities.Search
     {
         public static Expression<Func<Product, bool>> ProductSearch(ProductSearchDto searchDto)
         {
-            var predicate = PredicateBuilder.True<Product>();
+            var predicate = PredicateBuilder.New<Product>();
+
+            if (string.IsNullOrEmpty(searchDto.Keywords) == false)
+            {
+                predicate.And(p => p.ProductId.Contains(searchDto.Keywords) || p.Name.Contains(searchDto.Keywords));
+            }
 
             if (string.IsNullOrEmpty(searchDto.BranchId) == false)
             {
@@ -15,7 +20,7 @@ namespace ErpManager.Persistence.Common.Utilities.Search
 
             if (string.IsNullOrEmpty(searchDto.ProductId) == false)
             {
-                predicate.And(p => p.ProductId.Contains(searchDto.ProductId));
+                predicate.And(p => p.ProductId.StartsWith(searchDto.ProductId));
             }
 
             if (string.IsNullOrEmpty(searchDto.ProductName) == false)
@@ -52,6 +57,8 @@ namespace ErpManager.Persistence.Common.Utilities.Search
             {
                 predicate.And(p => p.CreatedBy.Equals(searchDto.CreatedBy));
             }
+
+            if (searchDto.DisplayPrice.HasValue) predicate.And(p => p.DisplayPrice.Equals(searchDto.DisplayPrice));
 
             if (searchDto.MinSize1.HasValue) predicate.And(p => p.Size1 >= searchDto.MinSize1);
             if (searchDto.MaxSize1.HasValue) predicate.And(p => p.Size1 <= searchDto.MaxSize1);

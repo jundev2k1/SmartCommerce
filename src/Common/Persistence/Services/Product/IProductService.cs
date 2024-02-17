@@ -1,5 +1,7 @@
 ﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
 
+using ErpManager.Common;
+
 namespace ErpManager.Persistence.Services
 {
     public interface IProductService
@@ -10,8 +12,8 @@ namespace ErpManager.Persistence.Services
         /// <param name="searchParams">Search parameters</param>
         /// <param name="pageIndex">Page index</param>
         /// <param name="pageSize">Page size</param>
-        /// <returns>A tuple includes data, total page and total record</returns>
-        public (ProductModel[] Data, int TotalPage, int TotalRecord) Search(ProductSearchDto searchParams, int pageIndex, int pageSize);
+        /// <returns>Search result model</returns>
+        public SearchResultModel<ProductModel> Search(ProductSearchDto searchParams, int pageIndex, int pageSize = Constants.DEFAULT_PAGE_SIZE);
 
         /// <summary>
         /// Get all product

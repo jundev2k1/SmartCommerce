@@ -1,6 +1,8 @@
-﻿namespace ErpManager.Domain.Dtos.SearchDtos
+﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
+
+namespace ErpManager.Domain.Dtos.SearchDtos
 {
-    public class UserSearchDto
+    public class UserSearchDto : SearchDtoBase<UserSearchDto>
     {
         public string BranchId { get; set; } = string.Empty;
 
@@ -43,7 +45,7 @@
         public DateTime? DateCreatedTo { get; set; }
 
         public DateTime? DateChangedFrom { get; set; }
-        
+
         public DateTime? DateChangedTo { get; set; }
 
         public string CreatedBy { get; set; } = string.Empty;

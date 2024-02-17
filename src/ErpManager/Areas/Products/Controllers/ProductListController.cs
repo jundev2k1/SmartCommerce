@@ -1,7 +1,6 @@
 ﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
 
-using ErpManager.Domain.Dtos.SearchDtos;
-using ErpManager.ERP.Message;
+using ErpManager.ERP.Areas.Products.ViewModels;
 
 namespace ErpManager.ERP.Areas.Product.Controllers
 {
@@ -19,31 +18,27 @@ namespace ErpManager.ERP.Areas.Product.Controllers
         [HttpGet]
         [PermissionAttribute(Permission.CanReadListProduct)]
         [Route(Constants.MODULE_PRODUCT_PRODUCTLIST_PATH, Name = Constants.MODULE_PRODUCT_PRODUCTLIST_NAME)]
-        public IActionResult Index(int page = 1)
+        public IActionResult Index()
         {
-            ViewData[Constants.VIEWDATA_KEY_PAGE_INDEX] = page;
+            ViewData[Constants.VIEWDATA_KEY_PAGE_INDEX] = 1;
+            var condition = new ProductSearchDto { BranchId = this.OperatorBrandId };
+            var data = _serviceFacade.Products.Search(condition, 1, Constants.DEFAULT_PAGE_SIZE);
 
-            var condition = new ProductSearchDto
-            {
-                BranchId = this.OperatorBrandId,
-            };
-            var data = _serviceFacade.Products.Search(condition, page, Constants.DEFAULT_PAGE_SIZE);
-
-            return View(data);
+            return View(new ProductListViewModel { PageData = data });
         }
 
         [HttpPost]
         [PermissionAttribute(Permission.CanReadListProduct)]
-        [Route(Constants.MODULE_PRODUCT_PRODUCTLIST_PATH, Name = Constants.MODULE_PRODUCT_PRODUCTLIST_NAME)]
-        public IActionResult Index(ProductModel model)
+        [Route(Constants.MODULE_PRODUCT_PRODUCTLIST_PATH)]
+        public IActionResult Index(ProductListViewModel viewModel)
         {
-            return View();
-        }
+            ViewData[Constants.VIEWDATA_KEY_PAGE_INDEX] = viewModel.PageIndex;
 
-        private int GetPageIndex()
-        {
-            var isSuccess = int.TryParse(Request.Query[Constants.PARAM_KEY_PAGE_INDEX].ToStringOrEmpty(), out var page);
-            return isSuccess ? page : 1;
+            var searchParams = viewModel.SearchFields;
+            searchParams.BranchId = this.OperatorBrandId;
+            var data = _serviceFacade.Products.Search(searchParams, viewModel.PageIndex, viewModel.PageSize);
+
+            return View(new ProductListViewModel { PageData = data });
         }
     }
 }

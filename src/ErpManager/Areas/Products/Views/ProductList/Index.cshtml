@@ -9,82 +9,99 @@
     };
 
     var pageIndex = int.Parse(ViewData[Constants.VIEWDATA_KEY_PAGE_INDEX].ToStringOrEmpty());
+    var hasResult = Model.PageData.Items.Any();
 }
-@model (ProductModel[] Data, int TotalPage, int TotalRecord)
+@model ProductListViewModel
 
 @await Component.InvokeAsync("Breadcrumb", breadcrumbs)
 
 <section id="searchBar" class="site-card">
-    <div class="row">
-        <div class="col-8">
-            <div class="d-flex gap-1">
-                @await Component.InvokeAsync("SearchInput")
-                <input type="button" class="btn site-btn-outline-info site-rounded" value="Filter" data-bs-toggle="collapse" href="#filterAdvancedCollapse" />
+    <form name="searchForm" asp-route="@Constants.MODULE_PRODUCT_PRODUCTLIST_NAME" method="post">
+        <div class="row">
+            <div class="col-8">
+                <div class="d-flex gap-1">
+                    @await Component.InvokeAsync("SearchInput", new { name = "SearchFields.Keywords" })
+                    <input type="button" class="btn site-btn-outline-info site-rounded" value="Filter" data-bs-toggle="collapse" href="#filterAdvancedCollapse" />
+                </div>
             </div>
-        </div>
-        <div class="col-4 d-flex justify-content-end gap-2">
-            <button type="button" class="btn site-btn-outline-theme site-rounded-full" data-bs-toggle="modal" data-bs-target="#exportModal">Export</button>
-            <button type="button" class="btn site-btn-theme site-rounded-full">Create</button>
-        </div>
-        <div class="col-12">
-            <div class="collapse mt-3" id="filterAdvancedCollapse">
-                <div class="card card-body">
-                    <h2 class="fs-4">Search Advanced</h2>
-                    <form asp-route="@Constants.MODULE_PRODUCT_PRODUCTLIST_NAME">
+            <div class="col-4 d-flex justify-content-end gap-2">
+                <button type="button" class="btn site-btn-outline-theme site-rounded-full" data-bs-toggle="modal" data-bs-target="#exportModal">Export</button>
+                <button type="button" class="btn site-btn-theme site-rounded-full">Create</button>
+            </div>
+            <div class="col-12">
+                <div class="collapse mt-3" id="filterAdvancedCollapse">
+                    <div class="card card-body">
+                        <h2 class="fs-4">Search Advanced</h2>
                         <ul class="row">
                             <li class="col-md-4 col-6">
                                 <div class="mb-3">
                                     <label for="productIdForSearch" class="form-label">Product ID</label>
-                                    <input type="text" class="form-control" id="productIdForSearch" placeholder="Search with ID...">
+                                    <input type="text" asp-for="SearchFields.ProductId" class="form-control" id="productIdForSearch" placeholder="Search with ID...">
                                 </div>
                             </li>
                             <li class="col-md-4 col-6">
                                 <div class="mb-3">
-                                    <label for="productIdForSearch" class="form-label">Status</label>
-                                    <input type="text" class="form-control" id="productIdForSearch" placeholder="Search with ID...">
+                                    <label for="statusForSearch" class="form-label">Status</label>
+                                    <input type="text" asp-for="SearchFields.Status" class="form-control" id="statusForSearch" placeholder="Search with ID...">
                                 </div>
                             </li>
-                            <li class="col-md-4 col-6">
+                            <li class="col-md-4 col-12">
                                 <div class="mb-3">
-                                    <label for="productIdForSearch" class="form-label">Delete status</label>
-                                    <input type="text" class="form-control" id="productIdForSearch" placeholder="Search with ID...">
+                                    <label for="takeOverByForSearch" class="form-label">Take Over By</label>
+                                    <input type="text" asp-for="SearchFields.TakeOverId" class="form-control" id="takeOverByForSearch" placeholder="Search with name...">
                                 </div>
                             </li>
                             <li class="col-md-8 col-12">
                                 <div class="mb-3">
                                     <label for="productNameForSearch" class="form-label">Product Name</label>
-                                    <input type="text" class="form-control" id="productNameForSearch" placeholder="Search with name...">
+                                    <input asp-for="SearchFields.ProductName" type="text" class="form-control" id="productNameForSearch" placeholder="Search with name...">
                                 </div>
                             </li>
                             <li class="col-md-4 col-12">
                                 <div class="mb-3">
-                                    <label for="productNameForSearch" class="form-label">Take Over By</label>
-                                    <input type="text" class="form-control" id="productNameForSearch" placeholder="Search with name...">
+                                    <label for="displayPriceForSearch" class="form-label">Display Price</label>
+                                    <select asp-for="SearchFields.DisplayPrice" class="form-select" id="displayPriceForSearch" aria-label="Display Price">
+                                        <option value="" selected>No value</option>
+                                        <option value="0">Price 1</option>
+                                        <option value="1">Price 2</option>
+                                        <option value="2">Price 3</option>
+                                    </select>
                                 </div>
                             </li>
                             <li class="col-12">
                                 <div class="row mb-3">
                                     <div class="col-md-3 col-6">
-                                        <label for="productNameForSearch" class="form-label">Address</label>
-                                        <select class="form-select" aria-label="Province">
-                                            <option selected>Open this select menu</option>
-                                            <option value="1">One</option>
-                                            <option value="2">Two</option>
-                                            <option value="3">Three</option>
+                                        <label for="Address1ForSearch" class="form-label">Province</label>
+                                        <select asp-for="SearchFields.Address1" class="form-select" id="Address1ForSearch" aria-label="Province">
+                                            <option value="" selected>No value</option>
+                                            <option value="Binh Duong">Binh Duong</option>
                                         </select>
                                     </div>
                                     <div class="col-md-3 col-6">
-                                        <label for="productNameForSearch" class="form-label">Address</label>
-                                        <select class="form-select" aria-label="District">
-                                            <option selected>Open this select menu</option>
+                                        <label for="Address2ForSearch" class="form-label">District</label>
+                                        <select asp-for="SearchFields.Address2" class="form-select" id="Address2ForSearch" aria-label="District">
+                                            <option value="" selected>No value</option>
+                                            <option value="Thu Dau Mot">Thu Dau Mot</option>
+                                            <option value="Thuan An">Thuan An</option>
+                                            <option value="Nam Tan Uyen">Nam Tan Uyen</option>
+                                            <option value="Bac Tan Uyen">Bac Tan Uyen</option>
+                                            <option value="Bau Bang">Bau Bang</option>
+                                            <option value="Phu Giao">Phu Giao</option>
+                                            <option value="Ben Cat">Ben Cat</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-3 col-12">
+                                        <label for="Address3ForSearch" class="form-label">Wards/Township</label>
+                                        <select asp-for="SearchFields.Address3" class="form-select" id="Address3ForSearch" aria-label="Wards-township">
+                                            <option value="" selected>No value</option>
                                             <option value="1">One</option>
                                             <option value="2">Two</option>
                                             <option value="3">Three</option>
                                         </select>
                                     </div>
-                                    <div class="col-md-6 col-12">
-                                        <label for="productNameForSearch" class="form-label">Address</label>
-                                        <input type="text" class="form-control" id="address3ForSearch" placeholder="Search with address...">
+                                    <div class="col-md-3 col-12">
+                                        <label for="Address3ForSearch" class="form-label">Street, Home number,...</label>
+                                        <input type="text" asp-for="SearchFields.Address4" class="form-control" id="address4ForSearch" placeholder="Search with address...">
                                     </div>
                                 </div>
                             </li>
@@ -92,9 +109,9 @@
                                 <div class="mb-3">
                                     <label class="form-label">Price 1</label>
                                     <div class="d-flex gap-1 align-items-center">
-                                        <input type="text" class="form-control" id="price1FromForSearch" placeholder="Price from...">
+                                        <input type="number" asp-for="SearchFields.MinPrice1" class="form-control" id="minPrice1ForSearch" placeholder="Min Price 1...">
                                         ~
-                                        <input type="text" class="form-control" id="price1ToForSearch" placeholder="Price to...">
+                                        <input type="number" asp-for="SearchFields.MaxPrice1" class="form-control" id="maxPrice1ForSearch" placeholder="Max Price 1...">
                                     </div>
                                 </div>
                             </li>
@@ -102,9 +119,9 @@
                                 <div class="mb-3">
                                     <label class="form-label">Price 2</label>
                                     <div class="d-flex gap-1 align-items-center">
-                                        <input type="text" class="form-control" id="price2FromForSearch" placeholder="Price from...">
+                                        <input type="number" asp-for="SearchFields.MinPrice2" class="form-control" id="minPrice1ForSearch" placeholder="Min Price 2...">
                                         ~
-                                        <input type="text" class="form-control" id="price2ToForSearch" placeholder="Price to...">
+                                        <input type="number" asp-for="SearchFields.MaxPrice2" class="form-control" id="maxPrice1ForSearch" placeholder="Max Price 2...">
                                     </div>
                                 </div>
                             </li>
@@ -112,9 +129,9 @@
                                 <div class="mb-3">
                                     <label class="form-label">Price 3</label>
                                     <div class="d-flex gap-1 align-items-center">
-                                        <input type="text" class="form-control" id="price3FromForSearch" placeholder="Price from...">
+                                        <input type="number" asp-for="SearchFields.MinPrice3" class="form-control" id="minPrice1ForSearch" placeholder="Min Price 3...">
                                         ~
-                                        <input type="text" class="form-control" id="price3ToForSearch" placeholder="Price to...">
+                                        <input type="number" asp-for="SearchFields.MaxPrice3" class="form-control" id="maxPrice1ForSearch" placeholder="Max Price 3...">
                                     </div>
                                 </div>
                             </li>
@@ -122,9 +139,9 @@
                                 <div class="mb-3">
                                     <label class="form-label">Length</label>
                                     <div class="d-flex gap-1 align-items-center">
-                                        <input type="text" class="form-control" id="lengthFromForSearch" placeholder="Length from...">
+                                        <input type="number" asp-for="SearchFields.MinSize1" class="form-control" id="lengthFromForSearch" placeholder="Length from...">
                                         ~
-                                        <input type="text" class="form-control" id="lengthToForSearch" placeholder="Length to...">
+                                        <input type="number" asp-for="SearchFields.MaxSize1" class="form-control" id="lengthToForSearch" placeholder="Length to...">
                                     </div>
                                 </div>
                             </li>
@@ -132,9 +149,9 @@
                                 <div class="mb-3">
                                     <label class="form-label">Width</label>
                                     <div class="d-flex gap-1 align-items-center">
-                                        <input type="text" class="form-control" id="widthFromForSearch" placeholder="Width from...">
+                                        <input type="number" asp-for="SearchFields.MinSize2" class="form-control" id="widthFromForSearch" placeholder="Width from...">
                                         ~
-                                        <input type="text" class="form-control" id="widthToForSearch" placeholder="Width to...">
+                                        <input type="number" asp-for="SearchFields.MaxSize2" class="form-control" id="widthToForSearch" placeholder="Width to...">
                                     </div>
                                 </div>
                             </li>
@@ -142,9 +159,9 @@
                                 <div class="mb-3">
                                     <label for="productNameForSearch" class="form-label">Land Area</label>
                                     <div class="d-flex gap-1 align-items-center">
-                                        <input type="text" class="form-control" id="landAreaFromForSearch" placeholder="Land area from...">
+                                        <input type="number" asp-for="SearchFields.MinSize3" class="form-control" id="landAreaFromForSearch" placeholder="Land area from...">
                                         ~
-                                        <input type="text" class="form-control" id="landAreaToForSearch" placeholder="Land area to...">
+                                        <input type="number" asp-for="SearchFields.MaxSize3" class="form-control" id="landAreaToForSearch" placeholder="Land area to...">
                                     </div>
                                 </div>
                             </li>
@@ -152,9 +169,9 @@
                                 <div class="mb-3">
                                     <label for="productNameForSearch" class="form-label">Date Created</label>
                                     <div class="d-flex gap-1 align-items-center">
-                                        <input type="datetime" class="form-control" id="dateCreatedFromForSearch" placeholder="Date created from...">
+                                        <input type="datetime" asp-for="SearchFields.DateCreatedFrom" class="form-control" id="dateCreatedFromForSearch" placeholder="Date created from...">
                                         ~
-                                        <input type="datetime" class="form-control" id="dateCreatedToForSearch" placeholder="Date created to...">
+                                        <input type="datetime" asp-for="SearchFields.DateCreatedTo" class="form-control" id="dateCreatedToForSearch" placeholder="Date created to...">
                                     </div>
                                 </div>
                             </li>
@@ -162,25 +179,29 @@
                                 <div class="mb-3">
                                     <label for="productNameForSearch" class="form-label">Date Changed</label>
                                     <div class="d-flex gap-1 align-items-center">
-                                        <input type="text" class="form-control" id="dateChangedFromForSearch" placeholder="Date changed from...">
+                                        <input type="datetime" asp-for="SearchFields.DateChangedFrom" class="form-control" id="dateChangedFromForSearch" placeholder="Date changed from...">
                                         ~
-                                        <input type="text" class="form-control" id="dateChangedToForSearch" placeholder="Date changed to...">
+                                        <input type="datetime" asp-for="SearchFields.DateChangedTo" class="form-control" id="dateChangedToForSearch" placeholder="Date changed to...">
                                     </div>
                                 </div>
                             </li>
                         </ul>
-                        <div class="d-flex gap-3 justify-content-end align-items-center">
-                            <select class="form-select w-25" aria-label="DeleteFlg">
-                                <option selected value="0">Normal</option>
-                                <option value="1">Deleted</option>
-                            </select>
-                            <input type="submit" class="btn site-btn-theme" value="Search Advanced" />
+                        <div>
+                            <input id="pageIndex" type="hidden" asp-for="PageIndex" value="@pageIndex" />
                         </div>
-                    </form>
+                        <div class="d-flex gap-3 justify-content-end align-items-center">
+                            <select asp-for="SearchFields.DelFlg" class="form-select w-25" aria-label="DeleteFlg">
+                                <option selected value="false">Normal</option>
+                                <option value="true">Deleted</option>
+                            </select>
+                            <input id="btnSubmitAdvanced" type="submit" class="btn site-btn-theme" value="Search Advanced" />
+                            <input id="btnResetForm" type="reset" class="btn site-btn-outline-theme" onclick="resetSearchForm()" value="Reset" />
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    </form>
 </section>
 <section id="bodyPageLoad" class="site-card mt-2">
     <div class="row">
@@ -196,52 +217,67 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var item in Model.Data)
+                    @if (hasResult)
+                    {
+                        @foreach (var item in Model.PageData.Items)
+                        {
+                            <tr>
+                                <td>@item.ProductId</td>
+                                <td>
+                                    <a asp-route="@Constants.MODULE_PRODUCT_PRODUCTDETAIL_NAME" asp-route-id="@item.ProductId">
+                                        @item.Name
+                                    </a>
+                                </td>
+                                <td>@CommonUtility.GetProductDisplayPrice(item)</td>
+                                <td>@item.Address1</td>
+                                <td>@item.Status</td>
+                            </tr>
+                        }
+                    }
+                    else
                     {
                         <tr>
-                            <td>@item.ProductId</td>
-                            <td>
-                                <a asp-route="@Constants.MODULE_PRODUCT_PRODUCTDETAIL_NAME" asp-route-id="@item.ProductId">
-                                    @item.Name
-                                </a>
+                            <td align="center" colspan="5">
+                                No results were found
                             </td>
-                            <td>@CommonUtility.GetProductDisplayPrice(item)</td>
-                            <td>@item.Address1</td>
-                            <td>@item.Status</td>
                         </tr>
                     }
                 </tbody>
-                <tfoot>
-                    <tr>
-                        <td colspan="5">
-                            <div class="d-flex justify-content-between align-items-center">
-                                <p class="mb-0">
-                                    Total result: @(Constants.DEFAULT_PAGE_SIZE * (pageIndex - 1) + Model.Data.Length)/@(Model.TotalRecord)
-                                </p>
-                                <nav aria-label="Page navigation example">
-                                    <ul class="pagination">
-                                        <li class="page-item">
-                                            <a class="page-link @(pageIndex == 1 ? "disabled" : string.Empty)" asp-route="@Constants.MODULE_PRODUCT_PRODUCTLIST_NAME" asp-route-page="@CommonUtility.HandleLimitPage(pageIndex, Model.TotalPage)" aria-label="Previous">
-                                                <span aria-hidden="true">&laquo;</span>
-                                            </a>
-                                        </li>
-                                        @for (var index = 1; index <= Model.TotalPage; index++)
-                                        {
+
+                @if (hasResult)
+                {
+                    <tfoot>
+                        <tr>
+                            <td colspan="5">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <p class="mb-0">
+                                        Total result: @(2 * (pageIndex - 1) + Model.PageData.Items.Length)/@(Model.PageData.TotalRecord)
+                                    </p>
+                                    <nav aria-label="Page navigation">
+                                        <ul class="pagination">
                                             <li class="page-item">
-                                                <a class="page-link @(pageIndex == index ? "disabled" : string.Empty)" asp-route="@Constants.MODULE_PRODUCT_PRODUCTLIST_NAME" asp-route-page="@index">@index</a>
+                                                <a class="page-link @(pageIndex == 1 ? "disabled" : string.Empty)" onclick="handlePaging(event, @CommonUtility.HandleLimitPage(pageIndex, Model.PageData.TotalPage))" aria-label="Previous">
+                                                    <span aria-hidden="true">&laquo;</span>
+                                                </a>
                                             </li>
-                                        }
-                                        <li class="page-item">
-                                            <a class="page-link @(pageIndex == Model.TotalPage ? "disabled" : string.Empty)" asp-route="@Constants.MODULE_PRODUCT_PRODUCTLIST_NAME" asp-route-page="@CommonUtility.HandleLimitPage(pageIndex, Model.TotalPage, isPrevious: false)" asp- aria-label="Next">
-                                                <span aria-hidden="true">&raquo;</span>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </nav>
-                            </div>
-                        </td>
-                    </tr>
-                </tfoot>
+                                            @for (var index = 1; index <= Model.PageData.TotalPage; index++)
+                                            {
+                                                <li class="page-item">
+                                                    <a class="page-link @(pageIndex == index ? "disabled" : string.Empty)" onclick="handlePaging(event, @index)">@index</a>
+                                                </li>
+                                            }
+                                            <li class="page-item">
+                                                <a class="page-link @(pageIndex == Model.PageData.TotalPage ? "disabled" : string.Empty)" onclick="handlePaging(event, @CommonUtility.HandleLimitPage(pageIndex, Model.PageData.TotalPage, isPrevious: false))" asp- aria-label="Next">
+                                                    <span aria-hidden="true">&raquo;</span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </nav>
+                                </div>
+                            </td>
+                        </tr>
+                    </tfoot>
+                }
             </table>
         </div>
     </div>
@@ -271,5 +307,15 @@
     </div>
 </section>
 <script>
-    $('#dateCreatedFromForSearch').datepicker();
+    // $('#dateCreatedFromForSearch').datepicker();
+
+    const handlePaging = (event, page = 1) => {
+        event.preventDefault();
+
+        const pageIndexInput = document.querySelector("#pageIndex");
+        pageIndexInput.value = page;
+
+        const searchForm = document.getElementsByName("searchForm")[0];
+        searchForm.submit();
+    }
 </script>

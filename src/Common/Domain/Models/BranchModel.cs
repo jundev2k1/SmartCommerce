@@ -1,18 +1,19 @@
 ﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
 
-namespace ErpManager.Domain.Models;
-
-public partial class BranchModel
+namespace ErpManager.Domain.Models
 {
-    public string BranchId { get; set; } = string.Empty;
+    public sealed class BranchModel : ModelBase<BranchModel>
+    {
+        public string BranchId { get; set; } = string.Empty;
 
-    public string Name { get; set; } = string.Empty;
+        public string Name { get; set; } = string.Empty;
 
-    public BranchStatusEnum Status { get; set; }
+        public BranchStatusEnum Status { get; set; }
 
-    public string Avatar { get; set; } = string.Empty;
+        public string Avatar { get; set; } = string.Empty;
 
-    public DateTime? CreatedDate { get; set; }
+        public DateTime? CreatedDate { get; set; }
 
-    public DateTime? LastChanged { get; set; }
+        public DateTime? LastChanged { get; set; }
+    }
 }

@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
 
 namespace ErpManager.Domain.Dtos.SearchDtos
 {
-    public class ProductSearchDto
+    public class ProductSearchDto : SearchDtoBase<ProductSearchDto>
     {
+        public string Keywords { get; set; } = string.Empty;
+
         public string BranchId { get; set; } = string.Empty;
 
         public string ProductId { get; set; } = string.Empty;
@@ -21,6 +19,8 @@ namespace ErpManager.Domain.Dtos.SearchDtos
         public string Address3 { get; set; } = string.Empty;
 
         public string Address4 { get; set; } = string.Empty;
+
+        public DisplayPriceEnum? DisplayPrice { get; set; }
 
         public decimal? MinPrice1 { get; set; }
 

@@ -17,7 +17,7 @@ namespace ErpManager.ERP.Areas.Product.Controllers
 
         [HttpGet]
         [PermissionAttribute(Permission.CanReadDetailProduct)]
-        [Route($"{Constants.MODULE_PRODUCT_PRODUCTDETAIL_PATH}/{{id}}", Name = Constants.MODULE_PRODUCT_PRODUCTDETAIL_NAME)]
+        [Route(Constants.MODULE_PRODUCT_PRODUCTDETAIL_PATH, Name = Constants.MODULE_PRODUCT_PRODUCTDETAIL_NAME)]
         public IActionResult Index(string id)
         {
             var data = _serviceFacade.Products.GetProduct(this.OperatorBrandId, id);
@@ -27,7 +27,7 @@ namespace ErpManager.ERP.Areas.Product.Controllers
 
         [HttpPost]
         [PermissionAttribute(Permission.CanReadDetailProduct)]
-        [Route(Constants.MODULE_PRODUCT_PRODUCTLIST_PATH, Name = Constants.MODULE_PRODUCT_PRODUCTLIST_NAME)]
+        [Route(Constants.MODULE_PRODUCT_PRODUCTDETAIL_PATH, Name = Constants.MODULE_PRODUCT_PRODUCTDETAIL_NAME)]
         public IActionResult Index(ProductModel model)
         {
             return View();

@@ -62,3 +62,15 @@
 /*#region Component */
 
 /*#endregion */
+
+/*#region Bootstrap */
+
+.pagination .page-item > a {
+    cursor: pointer;
+}
+
+.pagination .page-item > a.disabled {
+    cursor: default;
+}
+
+/*#endregion */
