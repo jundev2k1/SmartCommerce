@@ -7,9 +7,9 @@ using ErpManager.Persistence;
 var builder = WebApplication.CreateBuilder(args);
 {
     builder.Services
-        .AddApplication(builder.Configuration)
         .AddPersistence()
-        .AddInfrastructure();
+        .AddInfrastructure()
+        .AddApplication(builder.Configuration);
 }
 
 var app = builder.Build();

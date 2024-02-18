@@ -1,5 +1,6 @@
 ﻿using ErpManager.ERP.Common.Extensions;
 using ErpManager.ERP.Common.Middleware;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.Extensions.Options;
 using System.Globalization;
@@ -26,10 +27,15 @@ namespace ErpManager.ERP
             // Dependency injection
             services.AddConfiguration();
 
+#pragma warning disable CS0618
+
             // Add services to the container.
             services.AddControllersWithViews()
                 .AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix)
-                .AddDataAnnotationsLocalization();
+                .AddDataAnnotationsLocalization()
+                .AddFluentValidation();
+
+#pragma warning restore CS0618
 
             return services;
         }
@@ -78,7 +84,18 @@ namespace ErpManager.ERP
             return services;
         }
 
-        // Configure application
+        /// <summary>
+        /// Add validations
+        /// </summary>
+        private static IServiceCollection AddFluentValidations(this IServiceCollection services)
+        {
+
+            return services;
+        }
+
+        /// <summary>
+        /// Configure application
+        /// </summary>
         public static WebApplication Configure(this WebApplication application)
         {
             application

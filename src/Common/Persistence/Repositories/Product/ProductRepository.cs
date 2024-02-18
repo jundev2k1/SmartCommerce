@@ -25,7 +25,8 @@ namespace ErpManager.Persistence.Repositories
         {
             var query = _dbContext.Products
                 .AsQueryable()
-                .Where(expression);
+                .Where(expression)
+                .OrderByDescending(product => product.DateCreated);
 
             var queryCount = query.Count();
             var isSurplus = (queryCount % pageSize) > 0;
@@ -59,6 +60,7 @@ namespace ErpManager.Persistence.Repositories
                 .Where(product =>
                     product.BranchId == branchId
                     && product.DelFlg == isDeleted)
+                .OrderByDescending(product => product.DateCreated)
                 .Select(product => product.MapToProductModel())
                 .ToArray();
 

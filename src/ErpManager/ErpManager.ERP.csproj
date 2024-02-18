@@ -88,6 +88,7 @@
     <Using Include="ErpManager.ERP.Controllers" />
     <Using Include="ErpManager.ERP.ViewModels" />
     <Using Include="ErpManager.Persistence.Common" />
+    <Using Include="FluentValidation" />
     <Using Include="Microsoft.AspNetCore.Localization" />
     <Using Include="Microsoft.AspNetCore.Mvc" />
     <Using Include="Microsoft.EntityFrameworkCore" />

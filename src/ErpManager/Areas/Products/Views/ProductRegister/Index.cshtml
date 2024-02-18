@@ -1,8 +1,118 @@
-﻿
-@{
+﻿@{
     ViewData[Constants.GLOBAL_KEY_TITLE] = _localizer["Nav_Product_Register"];
     ViewData[Constants.GLOBAL_KEY_CURRENT_PAGE] = "ProductRegister_Page";
+
+    var breadcrumbs = new Breadcrumb[]
+    {
+        new Breadcrumb { Title = _localizer["Nav_Home"].Value, Href="/" },
+        new Breadcrumb { Title = _localizer["Nav_Product_Register"].Value, IsDisabled = true }
+    };
 }
+@model ProductModel
 
-<h1>Index</h1>
+@await Component.InvokeAsync("Breadcrumb", breadcrumbs)
 
+<section id="bodyPageLoad" class="site-card">
+    <form asp-area="@Constants.MODULE_PRODUCT_AREA" asp-route="@Constants.MODULE_PRODUCT_PRODUCTREGISTER_NAME" method="post">
+        <div class="row">
+            <div class="col-md-4 col-6">
+                <div class="form-group">
+                    <label asp-for="ProductId">Product ID</label>
+                    <input asp-for="ProductId" type="text" class="form-control" placeholder="Please enter Product ID..." />
+                    <span asp-validation-for="ProductId" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-md-8 col-6">
+                <div class="form-group">
+                    <label asp-for="Name">Product Name</label>
+                    <input asp-for="Name" type="text" class="form-control" placeholder="Please enter Product Name..." />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="row">
+                    <div class="form-group col-4">
+                        <label asp-for="Status">Status</label>
+                        <input asp-for="Status" type="text" class="form-control" placeholder="Please enter Status..." />
+                        <span asp-validation-for="Status" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-4">
+                        <label asp-for="DisplayPrice">Display Price</label>
+                        <input asp-for="DisplayPrice" type="text" class="form-control" placeholder="Please enter Display Price..." />
+                        <span asp-validation-for="DisplayPrice" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-4">
+                        <label asp-for="TakeOverId">Take over by</label>
+                        <input asp-for="TakeOverId" type="text" class="form-control" placeholder="Please enter User ID..." />
+                        <span asp-validation-for="TakeOverId" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="row">
+                    <div class="form-group col-4">
+                        <label asp-for="Price1">Price 1</label>
+                        <input asp-for="Price1" type="text" class="form-control" placeholder="Please enter Price 1..." />
+                        <span asp-validation-for="Price1" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-4">
+                        <label asp-for="Price2">Price 2</label>
+                        <input asp-for="Price2" type="text" class="form-control" placeholder="Please enter Price 2..." />
+                        <span asp-validation-for="Price2" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-4">
+                        <label asp-for="Price3">Price 3</label>
+                        <input asp-for="Price3" type="text" class="form-control" placeholder="Please enter Price 3..." />
+                        <span asp-validation-for="Price3" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="row">
+                    <div class="form-group col-4">
+                        <label asp-for="Size1">Size 1</label>
+                        <input asp-for="Size1" type="text" class="form-control" placeholder="Please enter Size 1..." />
+                        <span asp-validation-for="Size1" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-4">
+                        <label asp-for="Size2">Size 2</label>
+                        <input asp-for="Size2" type="text" class="form-control" placeholder="Please enter Size 2..." />
+                        <span asp-validation-for="Size2" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-4">
+                        <label asp-for="Size3">Size 3</label>
+                        <input asp-for="Size3" type="text" class="form-control" placeholder="Please enter Size 3..." />
+                        <span asp-validation-for="Size3" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="row">
+                    <div class="form-group col-md-3 col-6">
+                        <label asp-for="Address1">Province</label>
+                        <input asp-for="Address1" type="text" class="form-control" placeholder="Please enter Province..." />
+                        <span asp-validation-for="Address1" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-3 col-6">
+                        <label asp-for="Address2">District</label>
+                        <input asp-for="Address2" type="text" class="form-control" placeholder="Please enter District..." />
+                        <span asp-validation-for="Address2" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-3 col-6">
+                        <label asp-for="Address3">Wards</label>
+                        <input asp-for="Address3" type="text" class="form-control" placeholder="Please enter District..." />
+                        <span asp-validation-for="Address3" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-3 col-6">
+                        <label asp-for="Address4">Street/Home number</label>
+                        <input asp-for="Address4" type="text" class="form-control" placeholder="Please enter District..." />
+                        <span asp-validation-for="Address4" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="d-flex justify-content-end mt-2">
+            <input type="submit" class="btn site-btn-theme" value="Submit" />
+        </div>
+    </form>
+</section>

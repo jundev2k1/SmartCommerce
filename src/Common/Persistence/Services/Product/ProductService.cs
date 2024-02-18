@@ -71,6 +71,7 @@ namespace ErpManager.Persistence.Services
         /// <returns>Insert status</returns>
         public bool Insert(ProductModel model)
         {
+            model.DateCreated = DateTime.Now;
             return _productRepository.Insert(model);
         }
 

@@ -35,31 +35,31 @@
                         <ul class="row">
                             <li class="col-md-4 col-6">
                                 <div class="mb-3">
-                                    <label for="productIdForSearch" class="form-label">Product ID</label>
+                                    <label asp-for="SearchFields.ProductId" class="form-label">Product ID</label>
                                     <input type="text" asp-for="SearchFields.ProductId" class="form-control" id="productIdForSearch" placeholder="Search with ID...">
                                 </div>
                             </li>
                             <li class="col-md-4 col-6">
                                 <div class="mb-3">
-                                    <label for="statusForSearch" class="form-label">Status</label>
+                                    <label asp-for="SearchFields.Status" class="form-label">Status</label>
                                     <input type="text" asp-for="SearchFields.Status" class="form-control" id="statusForSearch" placeholder="Search with ID...">
                                 </div>
                             </li>
                             <li class="col-md-4 col-12">
                                 <div class="mb-3">
-                                    <label for="takeOverByForSearch" class="form-label">Take Over By</label>
+                                    <label asp-for="SearchFields.TakeOverId" class="form-label">Take Over By</label>
                                     <input type="text" asp-for="SearchFields.TakeOverId" class="form-control" id="takeOverByForSearch" placeholder="Search with name...">
                                 </div>
                             </li>
                             <li class="col-md-8 col-12">
                                 <div class="mb-3">
-                                    <label for="productNameForSearch" class="form-label">Product Name</label>
+                                    <label asp-for="SearchFields.ProductName" class="form-label">Product Name</label>
                                     <input asp-for="SearchFields.ProductName" type="text" class="form-control" id="productNameForSearch" placeholder="Search with name...">
                                 </div>
                             </li>
                             <li class="col-md-4 col-12">
                                 <div class="mb-3">
-                                    <label for="displayPriceForSearch" class="form-label">Display Price</label>
+                                    <label asp-for="SearchFields.DisplayPrice" class="form-label">Display Price</label>
                                     <select asp-for="SearchFields.DisplayPrice" class="form-select" id="displayPriceForSearch" aria-label="Display Price">
                                         <option value="" selected>No value</option>
                                         <option value="0">Price 1</option>
@@ -71,14 +71,14 @@
                             <li class="col-12">
                                 <div class="row mb-3">
                                     <div class="col-md-3 col-6">
-                                        <label for="Address1ForSearch" class="form-label">Province</label>
+                                        <label asp-for="SearchFields.Address1" class="form-label">Province</label>
                                         <select asp-for="SearchFields.Address1" class="form-select" id="Address1ForSearch" aria-label="Province">
                                             <option value="" selected>No value</option>
                                             <option value="Binh Duong">Binh Duong</option>
                                         </select>
                                     </div>
                                     <div class="col-md-3 col-6">
-                                        <label for="Address2ForSearch" class="form-label">District</label>
+                                        <label asp-for="SearchFields.Address2" class="form-label">District</label>
                                         <select asp-for="SearchFields.Address2" class="form-select" id="Address2ForSearch" aria-label="District">
                                             <option value="" selected>No value</option>
                                             <option value="Thu Dau Mot">Thu Dau Mot</option>
@@ -91,7 +91,7 @@
                                         </select>
                                     </div>
                                     <div class="col-md-3 col-12">
-                                        <label for="Address3ForSearch" class="form-label">Wards/Township</label>
+                                        <label asp-for="SearchFields.Address3" class="form-label">Wards/Township</label>
                                         <select asp-for="SearchFields.Address3" class="form-select" id="Address3ForSearch" aria-label="Wards-township">
                                             <option value="" selected>No value</option>
                                             <option value="1">One</option>
@@ -100,7 +100,7 @@
                                         </select>
                                     </div>
                                     <div class="col-md-3 col-12">
-                                        <label for="Address3ForSearch" class="form-label">Street, Home number,...</label>
+                                        <label asp-for="SearchFields.Address4" class="form-label">Street, Home number,...</label>
                                         <input type="text" asp-for="SearchFields.Address4" class="form-control" id="address4ForSearch" placeholder="Search with address...">
                                     </div>
                                 </div>
@@ -157,7 +157,7 @@
                             </li>
                             <li class="col-md-4 col-12">
                                 <div class="mb-3">
-                                    <label for="productNameForSearch" class="form-label">Land Area</label>
+                                    <label class="form-label">Land Area</label>
                                     <div class="d-flex gap-1 align-items-center">
                                         <input type="number" asp-for="SearchFields.MinSize3" class="form-control" id="landAreaFromForSearch" placeholder="Land area from...">
                                         ~
@@ -167,7 +167,7 @@
                             </li>
                             <li class="col-md-6 col-12">
                                 <div class="mb-3">
-                                    <label for="productNameForSearch" class="form-label">Date Created</label>
+                                    <label class="form-label">Date Created</label>
                                     <div class="d-flex gap-1 align-items-center">
                                         <input type="datetime" asp-for="SearchFields.DateCreatedFrom" class="form-control" id="dateCreatedFromForSearch" placeholder="Date created from...">
                                         ~
@@ -177,7 +177,7 @@
                             </li>
                             <li class="col-md-6 col-12">
                                 <div class="mb-3">
-                                    <label for="productNameForSearch" class="form-label">Date Changed</label>
+                                    <label class="form-label">Date Changed</label>
                                     <div class="d-flex gap-1 align-items-center">
                                         <input type="datetime" asp-for="SearchFields.DateChangedFrom" class="form-control" id="dateChangedFromForSearch" placeholder="Date changed from...">
                                         ~

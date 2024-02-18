@@ -75,7 +75,7 @@
     --site-text-operating: var(--site-gray-200);
     --site-border-operating: var(--site-gray-500);
     --site-border: 1px solid var(--site-border-operating);
-    background: var(--site-gray-600);
+    background: var(--site-gray-700);
 }
 
 .light-mode {

@@ -24,6 +24,9 @@
     <Using Include="ErpManager.Persistence.Common" />
     <Using Include="ErpManager.Persistence.Repositories" />
     <Using Include="ErpManager.Persistence.Services" />
+    <Using Include="ErpManager.Persistence.Validators" />
+    <Using Include="FluentValidation" />
+    <Using Include="FluentValidation.Results" />
     <Using Include="LinqKit" />
     <Using Include="Microsoft.EntityFrameworkCore" />
     <Using Include="Microsoft.Extensions.DependencyInjection" />

@@ -1,8 +1,8 @@
 ﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
 
-namespace ErpManager.Domain.Validator
+namespace ErpManager.Persistence.Validators
 {
-    public sealed class UserValidator : ValidatorBase<User>
+    public sealed class UserValidator : ValidatorBase<UserModel>
     {
         public UserValidator()
         {
