@@ -1,7 +1,7 @@
 ﻿@model LoginViewModel
 @{
     Layout = "_Layout_Login";
-    ViewData[Constants.GLOBAL_KEY_TITLE] = _localizer["Nav_Auth_SignIn"];
+    ViewData[Constants.GLOBAL_KEY_TITLE] = _globalsLocalizer["Nav_Auth_SignIn"];
 }
 
 <style>
@@ -142,35 +142,35 @@
                 <img src="~/images/system/logo.png" />
             </div>
             <div class="content">
-                <h2>@_localizer["Login_Title_SubTitle"]</h2>
+                <h2>@_globalsLocalizer["Login_Title_SubTitle"]</h2>
             </div>
         </div>
         <form name="sign-in" asp-route="@Constants.MODULE_AUTH_SIGNIN_NAME" method="post">
             <div class="login-form">
                 <div class="input-group">
-                    <input type="text" asp-for="@Model.LoginID" value="@Model.LoginID" placeholder="@_localizer["Login_Field_ID"]" />
+                    <input type="text" asp-for="@Model.LoginID" value="@Model.LoginID" placeholder="@_globalsLocalizer["Login_Field_ID"]" />
                     <span class="login-message"></span>
                 </div>
                 <div class="input-group">
-                    <input type="password" asp-for="@Model.Password" value="@Model.Password" placeholder="@_localizer["Login_Field_Password"]" />
+                    <input type="password" asp-for="@Model.Password" value="@Model.Password" placeholder="@_globalsLocalizer["Login_Field_Password"]" />
                     <span class="login-message"></span>
                 </div>
                 <div class="input-group">
                     <div class="remember-me">
                         <input asp-for="@Model.RememberMe" type="checkbox" checked="@Model.RememberMe" />
-                        <span>@_localizer["Login_Label_RememberMe"]</span>
+                        <span>@_globalsLocalizer["Login_Label_RememberMe"]</span>
                     </div>
                     <div class="forget-password">
-                        <a href="#">@_localizer["Login_Button_ForgetPassword"]</a>
+                        <a href="#">@_globalsLocalizer["Login_Button_ForgetPassword"]</a>
                     </div>
                 </div>
                 <div class="login-submit">
                     <span class="login-message"></span>
-                    <button type="submit">@_localizer["Login_Button_Login"]</button>
+                    <button type="submit">@_globalsLocalizer["Login_Button_Login"]</button>
                 </div>
                 <div class="login-register">
                     <a href="#">
-                        @_localizer["Login_Button_Register"]
+                        @_globalsLocalizer["Login_Button_Register"]
                     </a>
                 </div>
             </div>

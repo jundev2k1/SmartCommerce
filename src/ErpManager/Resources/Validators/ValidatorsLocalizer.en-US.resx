@@ -117,4 +117,28 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ErrorMsg_GreaterThanOrEqualTo" xml:space="preserve">
+    <value>{PropertyName} cannot be greater than or equal {MinValue}</value>
+  </data>
+  <data name="ErrorMsg_GreaterThanTo" xml:space="preserve">
+    <value>{PropertyName} cannot be greater than {MinValue}</value>
+  </data>
+  <data name="ErrorMsg_IsNotEnum" xml:space="preserve">
+    <value>{PropertyName} is not valid value ({PropertyValue})</value>
+  </data>
+  <data name="ErrorMsg_IsRequired" xml:space="preserve">
+    <value>{PropertyName} is required</value>
+  </data>
+  <data name="ErrorMsg_LessThanOrEqualTo" xml:space="preserve">
+    <value>{PropertyName} cannot be less than or equal {MaxValue}</value>
+  </data>
+  <data name="ErrorMsg_LessThanTo" xml:space="preserve">
+    <value>{PropertyName} cannot be less than {MaxValue}</value>
+  </data>
+  <data name="ErrorMsg_MaxLength" xml:space="preserve">
+    <value>{PropertyName} cannot be more than {MaxLength} characters</value>
+  </data>
+  <data name="ErrorMsg_MinLength" xml:space="preserve">
+    <value>{PropertyName} cannot be less than {MinLength} characters</value>
+  </data>
 </root>

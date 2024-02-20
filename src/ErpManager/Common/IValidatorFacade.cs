@@ -1,6 +1,8 @@
 ﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
 
-namespace ErpManager.Persistence.Common
+using FluentValidation.Results;
+
+namespace ErpManager.ERP.Common
 {
     public interface IValidatorFacade
     {

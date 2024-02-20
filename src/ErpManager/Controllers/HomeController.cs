@@ -14,7 +14,6 @@ namespace ErpManager.Controllers
         /// <summary>
         /// Dashboard page
         /// </summary>
-        /// <returns></returns>
         [PermissionAttribute(Permission.CanAccessDashBoard)]
         [Route("/", Name = Constants.MODULE_HOME_DASHBOARD_NAME)]
         [Route(Constants.MODULE_HOME_DASHBOARD_PATH)]
@@ -36,5 +35,26 @@ namespace ErpManager.Controllers
             ViewBag.LoginMessage = message;
             Session.Remove(Constants.SESSION_KEY_LOGIN_MESSAGE);
         }
+
+        [HttpGet]
+        [Route("/change-language", Name = "ChangeLanguage")]
+        public IActionResult LanguageSwitcher(string culture, string returnUrl)
+        {
+            // Set cookie option
+            var cookieOption = new CookieOptions
+            {
+                Expires = DateTimeOffset.UtcNow.AddYears(1)
+            };
+
+            // Set cookie with chosen language
+            Response.Cookies.Append(
+                CookieRequestCultureProvider.DefaultCookieName,
+                CookieRequestCultureProvider.MakeCookieValue(new RequestCulture(culture)),
+                cookieOption);
+
+            return Redirect(returnUrl);
+        }
+
+
     }
 }

@@ -117,4 +117,61 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Product_Address" xml:space="preserve">
+    <value>Địa điểm</value>
+  </data>
+  <data name="Product_Address1" xml:space="preserve">
+    <value>Tỉnh/Thành phố</value>
+  </data>
+  <data name="Product_Address2" xml:space="preserve">
+    <value>Quận/Huyện</value>
+  </data>
+  <data name="Product_Address3" xml:space="preserve">
+    <value>Xã/Phường</value>
+  </data>
+  <data name="Product_Address4" xml:space="preserve">
+    <value>Đường/Số nhà</value>
+  </data>
+  <data name="Product_DateChanged" xml:space="preserve">
+    <value>Ngày cập nhật</value>
+  </data>
+  <data name="Product_DateCreated" xml:space="preserve">
+    <value>Ngày tạo</value>
+  </data>
+  <data name="Product_DisplayPrice" xml:space="preserve">
+    <value>Giá hiển thị</value>
+  </data>
+  <data name="Product_Name" xml:space="preserve">
+    <value>Tên sản phẩm</value>
+  </data>
+  <data name="Product_Price" xml:space="preserve">
+    <value>Giá</value>
+  </data>
+  <data name="Product_Price1" xml:space="preserve">
+    <value>Giá 1</value>
+  </data>
+  <data name="Product_Price2" xml:space="preserve">
+    <value>Giá 2</value>
+  </data>
+  <data name="Product_Price3" xml:space="preserve">
+    <value>Giá 3</value>
+  </data>
+  <data name="Product_ProductId" xml:space="preserve">
+    <value>Mã sản phẩm</value>
+  </data>
+  <data name="Product_Size1" xml:space="preserve">
+    <value>Chiều dài</value>
+  </data>
+  <data name="Product_Size2" xml:space="preserve">
+    <value>Chiều rộng</value>
+  </data>
+  <data name="Product_Size3" xml:space="preserve">
+    <value>Diện tích</value>
+  </data>
+  <data name="Product_Status" xml:space="preserve">
+    <value>Trạng thái</value>
+  </data>
+  <data name="Product_TakeOverId" xml:space="preserve">
+    <value>Người tiếp nhận</value>
+  </data>
 </root>

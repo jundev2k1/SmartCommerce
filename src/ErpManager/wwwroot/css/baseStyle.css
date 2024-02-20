@@ -671,4 +671,12 @@ ul, li {
 .dark-mode .card {
     --bs-card-bg: var(--site-bg-content-operating);
 }
+
+.dark-mode .breadcrumb-item.active {
+    color: var(--site-gray-500)!important;
+}
+
+.dark-mode .breadcrumb-item::before {
+    color: var(--site-gray-600) !important;
+}
 /*#endregion */

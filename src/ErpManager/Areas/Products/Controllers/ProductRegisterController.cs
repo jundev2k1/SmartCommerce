@@ -1,5 +1,7 @@
 ﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
 
+using ErpManager.ERP.Common;
+
 namespace ErpManager.ERP.Areas.Product.Controllers
 {
     [Area(Constants.MODULE_PRODUCT_AREA)]
@@ -7,14 +9,16 @@ namespace ErpManager.ERP.Areas.Product.Controllers
     {
         private readonly IServiceFacade _serviceFacade;
         private readonly IValidatorFacade _validatorFacade;
+        private readonly ILocalizer _localizer;
 
         /// <summary>
         /// Constructor
         /// </summary>
-        public ProductRegisterController(IServiceFacade serviceFacade, IValidatorFacade validatorFacade)
+        public ProductRegisterController(IServiceFacade serviceFacade, IValidatorFacade validatorFacade, ILocalizer localizer)
         {
             _serviceFacade = serviceFacade;
             _validatorFacade = validatorFacade;
+            _localizer = localizer;
         }
 
         [HttpGet]
@@ -31,13 +35,17 @@ namespace ErpManager.ERP.Areas.Product.Controllers
         public IActionResult Index(ProductModel formInput)
         {
             // Set default value for form input
-            formInput.BranchId = this.OperatorBrandId;
+            formInput.BranchId = this.OperatorBranchId;
             formInput.CreatedBy = this.OperatorId;
             formInput.LastChanged = this.OperatorName;
 
             // Validate form input
             var validateResult = _validatorFacade.ProductValidate(formInput);
-            if (validateResult.IsValid == false) return View();
+            if (validateResult.IsValid == false)
+            {
+                AddErrorToModelState(validateResult);
+                return View();
+            }
 
             // Handle create new product
             var isSuccess = _serviceFacade.Products.Insert(formInput);

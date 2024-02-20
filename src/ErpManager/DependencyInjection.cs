@@ -1,5 +1,8 @@
-﻿using ErpManager.ERP.Common.Extensions;
+﻿using ErpManager.ERP.Common;
+using ErpManager.ERP.Common.Extensions;
+using ErpManager.ERP.Common.Localizer;
 using ErpManager.ERP.Common.Middleware;
+using ErpManager.ERP.Common.Validators;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.Extensions.Options;
@@ -25,7 +28,8 @@ namespace ErpManager.ERP
                 .AddAutoMapper(typeof(AutoMapperProfile).Assembly);
 
             // Dependency injection
-            services.AddConfiguration();
+            services.AddCommon();
+            services.RegisterValidations();
 
 #pragma warning disable CS0618
 
@@ -41,11 +45,13 @@ namespace ErpManager.ERP
         }
 
         /// <summary>
-        /// Add configuration
+        /// Add common
         /// </summary>
-        private static IServiceCollection AddConfiguration(this IServiceCollection services)
+        private static IServiceCollection AddCommon(this IServiceCollection services)
         {
             services.AddSingleton<AppConfiguration>();
+            services.AddScoped<ILocalizer, Localizer>();
+            services.AddTransient<IValidatorFacade, ValidatorFacade>();
             return services;
         }
 
@@ -85,10 +91,12 @@ namespace ErpManager.ERP
         }
 
         /// <summary>
-        /// Add validations
+        /// Register validations (dependency injection)
         /// </summary>
-        private static IServiceCollection AddFluentValidations(this IServiceCollection services)
+        private static IServiceCollection RegisterValidations(this IServiceCollection services)
         {
+            services.AddTransient<IValidator<UserModel>, UserValidator>();
+            services.AddTransient<IValidator<ProductModel>, ProductValidator>();
 
             return services;
         }

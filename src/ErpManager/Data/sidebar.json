@@ -42,14 +42,14 @@
     "items": [
       {
         "label": "Schedule List",
-        "localizer": "Nav_Schedule_ScheduleList",
+        "localizer": "Nav_Schedule_List",
         "name": "ScheduleList_Page",
         "permission": "",
         "url": "#"
       },
       {
         "label": "Schedule Settings",
-        "localizer": "Nav_Schedule_ScheduleSetting",
+        "localizer": "Nav_Schedule_Setting",
         "name": "schedule-setting-page",
         "permission": "",
         "url": "#"

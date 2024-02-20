@@ -22,7 +22,7 @@ namespace ErpManager.ERP.Areas.Users.Controllers
 
             var condition = new UserSearchDto
             {
-                BranchId = this.OperatorBrandId,
+                BranchId = this.OperatorBranchId,
             };
             var data = _serviceFacade.Users.Search(condition, page, Constants.DEFAULT_PAGE_SIZE);
 

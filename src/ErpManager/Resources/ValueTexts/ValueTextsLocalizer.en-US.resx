@@ -117,4 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ValTxt_DelFlg_Deleted" xml:space="preserve">
+    <value>Deleted</value>
+  </data>
+  <data name="ValTxt_DelFlg_Normal" xml:space="preserve">
+    <value>Active</value>
+  </data>
 </root>

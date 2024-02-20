@@ -171,12 +171,12 @@
                     <h2>
                         <i class="fa-regular fa-brush fa-fw"></i>
                         <br />
-                        <span>@_localizer["ThemeSettings_Title"]</span>
+                        <span>@_globalsLocalizer["ThemeSettings_Title"]</span>
                     </h2>
                 </div>
                 <div class="theme-settings-body">
                     <div class="mode-group">
-                        <h3>@_localizer["ThemeSettings_Mode"]</h3>
+                        <h3>@_globalsLocalizer["ThemeSettings_Mode"]</h3>
                         <ul class="setting-list" id="renderModeSetting">
                             <li class="setting-item">
                                 <div class="setting-field" style="background: var(--site-white-theme)"></div>
@@ -184,7 +184,7 @@
                         </ul>
                     </div>
                     <div class="theme-group">
-                        <h3>@_localizer["ThemeSettings_Theme"]</h3>
+                        <h3>@_globalsLocalizer["ThemeSettings_Theme"]</h3>
                         <ul class="setting-list" id="renderThemeSetting">
                             <li class="setting-item">
                                 <div class="setting-field" style="background: var(--site-white-theme)"></div>
@@ -202,7 +202,7 @@
                     </div>
                     <div class="btn-close-popup">
                         <button id="btnCloseSetting">
-                            @_localizer["ThemeSettings_Leave"]
+                            @_globalsLocalizer["ThemeSettings_Leave"]
                             <i class="fa-regular fa-right-from-bracket fa-fw"></i>
                         </button>
                     </div>
@@ -212,8 +212,8 @@
     </div>
     <script src="@componentScript"></script>
     <script>
-        const errorMessage = '@(_localizer["ThemeSettings_UpdateFailed"])';
-        const successMessage = '@(_localizer["ThemeSettings_UpdateSuccess"])';
+        const errorMessage = '@(_globalsLocalizer["ThemeSettings_UpdateFailed"])';
+        const successMessage = '@(_globalsLocalizer["ThemeSettings_UpdateSuccess"])';
         // Initial menu
         ThemeSetting.init();
     </script>

@@ -1,11 +1,11 @@
 ﻿@{
-    ViewData[Constants.GLOBAL_KEY_TITLE] = _localizer["Nav_User_List"];
+    ViewData[Constants.GLOBAL_KEY_TITLE] = _globalsLocalizer["Nav_User_List"];
     ViewData[Constants.GLOBAL_KEY_CURRENT_PAGE] = "UserList_Page";
 
     var breadcrumbs = new Breadcrumb[]
     {
-        new Breadcrumb { Title = _localizer["Nav_Home"].Value, Href="/" },
-        new Breadcrumb { Title = _localizer["Nav_Product_List"].Value, IsDisabled = true }
+        new Breadcrumb { Title = _globalsLocalizer["Nav_Home"].Value, Href="/" },
+        new Breadcrumb { Title = _globalsLocalizer["Nav_Product_List"].Value, IsDisabled = true }
     };
 
     var pageIndex = int.Parse(ViewData[Constants.VIEWDATA_KEY_PAGE_INDEX].ToStringOrEmpty());

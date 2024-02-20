@@ -246,7 +246,7 @@
                             <button type="button" data-bs-toggle="collapse" data-bs-target="#@item.Name">
                                 <i class="@item.Icon"></i>
                                 <span class="title">
-                                    @(Constants.CONFIG_DEFAULT_SIDEBAR_OPTIONS ? item.Label : _localizer[item.Localizer])
+                                    @(Constants.CONFIG_DEFAULT_SIDEBAR_OPTIONS ? item.Label : _globalsLocalizer[item.Localizer])
                                 </span>
                             </button>
                             <div id="@item.Name" class="collapse">
@@ -259,7 +259,7 @@
                                             <a href="@subItem.Url">
                                                 <i class="fa-solid fa-chevron-right fa-fw" style="opacity: 0"></i>
                                                 <span class="title">
-                                                    @(Constants.CONFIG_DEFAULT_SIDEBAR_OPTIONS ? subItem.Label : _localizer[subItem.Localizer])
+                                                    @(Constants.CONFIG_DEFAULT_SIDEBAR_OPTIONS ? subItem.Label : _globalsLocalizer[subItem.Localizer])
                                                 </span>
                                             </a>
                                         </li>
@@ -274,7 +274,7 @@
                             <a href="@item.Url" class="collapsed" type="button">
                                 <i class="@item.Icon"></i>
                                 <span class="title">
-                                    @(Constants.CONFIG_DEFAULT_SIDEBAR_OPTIONS ? item.Label : _localizer[item.Localizer])
+                                    @(Constants.CONFIG_DEFAULT_SIDEBAR_OPTIONS ? item.Label : _globalsLocalizer[item.Localizer])
                                 </span>
                             </a>
                         </div>
@@ -285,7 +285,7 @@
                 <div class="menu-line mb-2"></div>
                 <a asp-route="@Constants.MODULE_AUTH_SIGNOUT_NAME">
                     <i class="fa-regular fa-right-from-bracket fa-fw"></i>
-                    <span>@_localizer["Nav_Auth_SignOut"]</span>
+                    <span>@_globalsLocalizer["Nav_Auth_SignOut"]</span>
                 </a>
             </div>
         </div>

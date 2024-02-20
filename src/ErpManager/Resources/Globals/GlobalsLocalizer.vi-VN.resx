@@ -117,98 +117,172 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="ButtonTitle_Search" xml:space="preserve">
-    <value>Search</value>
+  <data name="Btn_Close" xml:space="preserve">
+    <value>Đóng</value>
+  </data>
+  <data name="Btn_Create" xml:space="preserve">
+    <value>Tạo mới</value>
+  </data>
+  <data name="Btn_Export" xml:space="preserve">
+    <value>Xuất file</value>
+  </data>
+  <data name="Btn_Filter" xml:space="preserve">
+    <value>Lọc dữ liệu</value>
+  </data>
+  <data name="Btn_ResetForm" xml:space="preserve">
+    <value>Làm mới</value>
+  </data>
+  <data name="Btn_Search" xml:space="preserve">
+    <value>Tìm Kiếm</value>
+  </data>
+  <data name="Btn_SearchAdvanced" xml:space="preserve">
+    <value>Tìm kiếm nâng cao</value>
   </data>
   <data name="Login_Button_ForgetPassword" xml:space="preserve">
-    <value>Forget password?</value>
+    <value>Quên mật khẩu?</value>
   </data>
   <data name="Login_Button_Login" xml:space="preserve">
-    <value>Sign In</value>
+    <value>Đăng nhập</value>
   </data>
   <data name="Login_Button_Register" xml:space="preserve">
-    <value>Don't have an account? Sign up</value>
+    <value>Không có tài khoản? Đăng ký</value>
   </data>
   <data name="Login_Field_ID" xml:space="preserve">
-    <value>Login ID</value>
+    <value>Tên đăng nhập</value>
   </data>
   <data name="Login_Field_Password" xml:space="preserve">
-    <value>Password</value>
+    <value>Mật khẩu</value>
   </data>
   <data name="Login_Label_RememberMe" xml:space="preserve">
-    <value>Remember Me</value>
+    <value>Nhớ tài khoản</value>
   </data>
   <data name="Login_Title_SubTitle" xml:space="preserve">
-    <value>Sign In to your account.</value>
+    <value>Đăng nhập vào tài khoản của bạn.</value>
     <comment>sign in to your account.</comment>
   </data>
   <data name="Nav_Auth_SignIn" xml:space="preserve">
-    <value>Sign In</value>
+    <value>Đăng Nhập</value>
   </data>
   <data name="Nav_Auth_SignOut" xml:space="preserve">
-    <value>Logout</value>
+    <value>Đăng xuất</value>
   </data>
   <data name="Nav_Auth_SignUp" xml:space="preserve">
-    <value>Sign Up</value>
+    <value>Đăng Ký</value>
   </data>
   <data name="Nav_Dashboard" xml:space="preserve">
-    <value>Dashboard</value>
+    <value>Thống Kê</value>
   </data>
   <data name="Nav_Error_ErrorPage" xml:space="preserve">
-    <value>Error Page</value>
+    <value>Trang lỗi</value>
   </data>
   <data name="Nav_Home" xml:space="preserve">
-    <value>Home</value>
+    <value>Trang chủ</value>
   </data>
   <data name="Nav_Product" xml:space="preserve">
-    <value>Product</value>
+    <value>Sản Phẩm</value>
   </data>
   <data name="Nav_Product_Detail" xml:space="preserve">
-    <value>Product Detail</value>
+    <value>Chi tiết sản phẩm</value>
   </data>
   <data name="Nav_Product_List" xml:space="preserve">
-    <value>Product List</value>
+    <value>Danh Sách Sản Phẩm</value>
   </data>
   <data name="Nav_Product_Register" xml:space="preserve">
-    <value>Product Register</value>
+    <value>Đăng Ký Sản Phẩm</value>
   </data>
   <data name="Nav_Schedule" xml:space="preserve">
-    <value>Schedule</value>
+    <value>Lịch Trình</value>
   </data>
   <data name="Nav_Schedule_List" xml:space="preserve">
-    <value>Schedule List</value>
+    <value>Danh Sách Lịch Trình</value>
   </data>
   <data name="Nav_Schedule_Setting" xml:space="preserve">
-    <value>Schedule Setting</value>
+    <value>Cài Đặt Lịch Trình</value>
   </data>
   <data name="Nav_System" xml:space="preserve">
-    <value>System</value>
+    <value>Hệ Thống</value>
   </data>
   <data name="Nav_User" xml:space="preserve">
-    <value>User</value>
+    <value>Người Dùng</value>
   </data>
   <data name="Nav_User_List" xml:space="preserve">
-    <value>User List</value>
+    <value>Danh Sách Người Dùng</value>
   </data>
   <data name="Nav_User_Role" xml:space="preserve">
-    <value>User Role</value>
+    <value>Phân Quyền</value>
+  </data>
+  <data name="PlaceHolder_Date" xml:space="preserve">
+    <value>Chọn 1 ngày</value>
+  </data>
+  <data name="PlaceHolder_FileImport" xml:space="preserve">
+    <value>Chọn file để nhập vào hệ thống</value>
+  </data>
+  <data name="PlaceHolder_FileUpload" xml:space="preserve">
+    <value>Chọn file để tải lên</value>
+  </data>
+  <data name="PlaceHolder_From" xml:space="preserve">
+    <value>Từ</value>
+  </data>
+  <data name="PlaceHolder_Mail" xml:space="preserve">
+    <value>Vui lòng nhập email của bạn</value>
+  </data>
+  <data name="PlaceHolder_Max" xml:space="preserve">
+    <value>Tối đa</value>
+  </data>
+  <data name="PlaceHolder_Message" xml:space="preserve">
+    <value>Để lại bình luận hoặc tin nhắn</value>
+  </data>
+  <data name="PlaceHolder_Min" xml:space="preserve">
+    <value>Tối thiểu</value>
+  </data>
+  <data name="PlaceHolder_Number" xml:space="preserve">
+    <value>Vui lòng nhập</value>
+  </data>
+  <data name="PlaceHolder_Phone" xml:space="preserve">
+    <value>Vui lòng nhập số điện thoại</value>
+  </data>
+  <data name="PlaceHolder_Quantity" xml:space="preserve">
+    <value>Chỉ định số lượng</value>
+  </data>
+  <data name="PlaceHolder_SearchWith" xml:space="preserve">
+    <value>Tìm kiếm với</value>
+  </data>
+  <data name="PlaceHolder_Select" xml:space="preserve">
+    <value>Vui lòng chọn</value>
+  </data>
+  <data name="PlaceHolder_TextBox" xml:space="preserve">
+    <value>Vui lòng nhập</value>
+  </data>
+  <data name="PlaceHolder_Time" xml:space="preserve">
+    <value>Chỉ định thời gian</value>
+  </data>
+  <data name="PlaceHolder_To" xml:space="preserve">
+    <value>Đến</value>
+  </data>
+  <data name="PlaceHolder_Url" xml:space="preserve">
+    <value>Cung cấp đường link chính xác</value>
   </data>
   <data name="ThemeSettings_Leave" xml:space="preserve">
-    <value>Leave</value>
+    <value>Rời khỏi</value>
   </data>
   <data name="ThemeSettings_Mode" xml:space="preserve">
-    <value>Mode color</value>
+    <value>Chế độ</value>
   </data>
   <data name="ThemeSettings_Theme" xml:space="preserve">
-    <value>Theme color</value>
+    <value>Chủ đề</value>
   </data>
   <data name="ThemeSettings_Title" xml:space="preserve">
-    <value>Theme settings</value>
+    <value>Cài đặt chủ đề</value>
   </data>
   <data name="ThemeSettings_UpdateFailed" xml:space="preserve">
-    <value>Update failed</value>
+    <value>Cập nhật thất bại</value>
+    <comment>Dùng cho theme settings</comment>
   </data>
   <data name="ThemeSettings_UpdateSuccess" xml:space="preserve">
-    <value>Update successful</value>
+    <value>Cập nhật thành công</value>
+    <comment>Dùng cho theme settings</comment>
+  </data>
+  <data name="Title_SearchAdvanced" xml:space="preserve">
+    <value>Tìm kiếm nâng cao</value>
   </data>
 </root>

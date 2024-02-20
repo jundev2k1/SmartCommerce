@@ -2,7 +2,7 @@
 
 using System.Text.RegularExpressions;
 
-namespace ErpManager.Persistence.Validators
+namespace ErpManager.ERP.Common.Validators
 {
     public class ValidatorBase<T> : AbstractValidator<T>
     {

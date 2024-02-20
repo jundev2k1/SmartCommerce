@@ -1,0 +1,66 @@
+﻿@model NotificationViewModel
+<section id="notificationButton">
+    <style>
+        #notificationButton .dropdown > a {
+            background: var(--site-title-operating)!important;
+            color: var(--site-theme-operating)!important;
+            font-weight: bold;
+        }
+
+        #notificationButton .dropdown-menu > li.read a {
+            background: var(--site-gray-200);
+        }
+
+        #notificationButton .dropdown-menu > li {
+            font-size: 12px;
+        }
+
+            #notificationButton .dropdown-menu > li h4 {
+                font-size: 14px;
+            }
+
+            #notificationButton .dropdown-menu > li:last-child {
+                font-size: 14px;
+                padding: 4px 8px;
+            }
+
+                #notificationButton .dropdown-menu > li:last-child:hover {
+                    color: var(--site-gray-500);
+                }
+    </style>
+    <div class="dropdown">
+        <a class="btn site-btn-info btn-sm dropdown-toggle px-3 site-rounded-full" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="fa-regular fa-bell"></i>
+            @(Model.NotificationUnReadCount > 0 ? @Model.NotificationUnReadCount : string.Empty)
+        </a>
+
+        <ul class="dropdown-menu min-h-25">
+            @foreach (var item in Model.Items)
+            {
+                <li class="@(!item.Status ? "read" : string.Empty)">
+                    <a class="dropdown-item" href="#">
+                        <div class="d-flex flex-column gap-1">
+                            <h4 class="m-0">@item.Title</h4>
+                            <p class="m-0">@item.Content</p>
+                            <span class="m-0">
+                                @if (item.Status)
+                                {
+                                    <i class="fa-regular fa-envelope"></i>
+                                    <em>UnRead</em>
+                                }
+                                else
+                                {
+                                    <i class="fa-regular fa-envelope-open"></i>
+                                    <em>Read</em>
+                                }
+                            </span>
+                        </div>
+                    </a>
+                </li>
+            }
+            <li class="m-0 text-end">
+                <a href="#">Mark all read</a>
+            </li>
+        </ul>
+    </div>
+</section>

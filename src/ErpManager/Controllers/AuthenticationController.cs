@@ -1,16 +1,16 @@
 ﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
 
-using ErpManager.ERP.Message;
+using ErpManager.ERP.Common;
 
 namespace ErpManager.ERP.Controllers
 {
     public sealed class AuthenticationController : BaseController
     {
         private readonly IMapper _mapper;
-        private readonly IStringLocalizer<MessageLocalizer> _localizer;
+        private readonly ILocalizer _localizer;
         private readonly IServiceFacade _services;
 
-        public AuthenticationController(IStringLocalizer<MessageLocalizer> localizer, IMapper mapper, IServiceFacade services)
+        public AuthenticationController(ILocalizer localizer, IMapper mapper, IServiceFacade services)
         {
             _localizer = localizer;
             _mapper = mapper;
@@ -119,7 +119,7 @@ namespace ErpManager.ERP.Controllers
             try
             {
                 // Check login id is wrong
-                var user = _services.Users.GetUserByUsername(this.OperatorBrandId, input.LoginID);
+                var user = _services.Users.GetUserByUsername(this.OperatorBranchId, input.LoginID);
                 if (user == null) throw new Exception();
 
                 // Check block account
@@ -132,7 +132,7 @@ namespace ErpManager.ERP.Controllers
                 IncreaseLoginCount(user.UserId);
 
                 // Try login, throw error if login fail
-                var @operator = _services.Users.TryLogin(this.OperatorBrandId, input.LoginID, input.Password);
+                var @operator = _services.Users.TryLogin(this.OperatorBranchId, input.LoginID, input.Password);
                 if (@operator == null) throw new Exception();
 
                 // Handle login success
@@ -184,13 +184,13 @@ namespace ErpManager.ERP.Controllers
                     { "@@login_times@@", Constants.AUTH_LOGIN_COUNT_LIMIT },
                     { "@@login_expires@@", Constants.AUTH_LOGIN_COUNT_EXPIRES }
                 };
-                var message = _localizer.GetString(Constants.ERRORMSG_KEY_LOGIN_TOO_MUCH);
+                var message = _localizer.Messages.GetString(Constants.ERRORMSG_KEY_LOGIN_TOO_MUCH);
                 errorMessage = MessageUtilitiy.GetMessageReplacer(message, replacer);
 
             }
             else
             {
-                var message = _localizer.GetString(Constants.ERRORMSG_KEY_LOGIN_FAILED);
+                var message = _localizer.Messages.GetString(Constants.ERRORMSG_KEY_LOGIN_FAILED);
                 errorMessage = MessageUtilitiy.GetMessageReplacer(message);
             }
 

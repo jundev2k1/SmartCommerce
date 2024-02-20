@@ -8,11 +8,9 @@ namespace ErpManager.ERP.Areas.Product.Controllers
     public class ProductDetailController : BaseController
     {
         private IServiceFacade _serviceFacade;
-        private readonly IStringLocalizer<GlobalLocalizer> _localizer;
-        public ProductDetailController(IServiceFacade serviceFacade, IStringLocalizer<GlobalLocalizer> localizer)
+        public ProductDetailController(IServiceFacade serviceFacade)
         {
             _serviceFacade = serviceFacade;
-            _localizer = localizer;
         }
 
         [HttpGet]
@@ -20,8 +18,7 @@ namespace ErpManager.ERP.Areas.Product.Controllers
         [Route(Constants.MODULE_PRODUCT_PRODUCTDETAIL_PATH, Name = Constants.MODULE_PRODUCT_PRODUCTDETAIL_NAME)]
         public IActionResult Index(string id)
         {
-            var data = _serviceFacade.Products.GetProduct(this.OperatorBrandId, id);
-
+            var data = _serviceFacade.Products.GetProduct(this.OperatorBranchId, id);
             return View(data);
         }
 

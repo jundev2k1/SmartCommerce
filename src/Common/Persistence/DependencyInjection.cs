@@ -9,7 +9,6 @@ namespace ErpManager.Persistence
             services
                 .RegisterServices()
                 .RegisterRepository()
-                .RegisterValidations()
                 .AddPersistenceFacade();
 
             return services;
@@ -21,7 +20,6 @@ namespace ErpManager.Persistence
         private static IServiceCollection AddPersistenceFacade(this IServiceCollection services)
         {
             services.AddScoped<IServiceFacade, ServiceFacade>();
-            services.AddTransient<IValidatorFacade, ValidatorFacade>();
             return services;
         }
 
@@ -47,17 +45,6 @@ namespace ErpManager.Persistence
             services.AddScoped<IRoleService, RoleService>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IProductService, ProductService>();
-
-            return services;
-        }
-
-        /// <summary>
-        /// Register validations (dependency injection)
-        /// </summary>
-        private static IServiceCollection RegisterValidations(this IServiceCollection services)
-        {
-            services.AddTransient<IValidator<UserModel>, UserValidator>();
-            services.AddTransient<IValidator<ProductModel>, ProductValidator>();
 
             return services;
         }

@@ -117,4 +117,170 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Btn_Close" xml:space="preserve">
+    <value>Close</value>
+  </data>
+  <data name="Btn_Create" xml:space="preserve">
+    <value>Create</value>
+  </data>
+  <data name="Btn_Export" xml:space="preserve">
+    <value>Export</value>
+  </data>
+  <data name="Btn_Filter" xml:space="preserve">
+    <value>Filter</value>
+  </data>
+  <data name="Btn_ResetForm" xml:space="preserve">
+    <value>Reset Form</value>
+  </data>
+  <data name="Btn_Search" xml:space="preserve">
+    <value>Search</value>
+  </data>
+  <data name="Btn_SearchAdvanced" xml:space="preserve">
+    <value>Search Advanced</value>
+  </data>
+  <data name="Login_Button_ForgetPassword" xml:space="preserve">
+    <value>Forget password?</value>
+  </data>
+  <data name="Login_Button_Login" xml:space="preserve">
+    <value>Sign In</value>
+  </data>
+  <data name="Login_Button_Register" xml:space="preserve">
+    <value>Don't have an account? Sign up</value>
+  </data>
+  <data name="Login_Field_ID" xml:space="preserve">
+    <value>Login ID</value>
+  </data>
+  <data name="Login_Field_Password" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="Login_Label_RememberMe" xml:space="preserve">
+    <value>Remember Me</value>
+  </data>
+  <data name="Login_Title_SubTitle" xml:space="preserve">
+    <value>Sign In to your account.</value>
+    <comment>sign in to your account.</comment>
+  </data>
+  <data name="Nav_Auth_SignIn" xml:space="preserve">
+    <value>Sign In</value>
+  </data>
+  <data name="Nav_Auth_SignOut" xml:space="preserve">
+    <value>Logout</value>
+  </data>
+  <data name="Nav_Auth_SignUp" xml:space="preserve">
+    <value>Sign Up</value>
+  </data>
+  <data name="Nav_Dashboard" xml:space="preserve">
+    <value>Dashboard</value>
+  </data>
+  <data name="Nav_Error_ErrorPage" xml:space="preserve">
+    <value>Error Page</value>
+  </data>
+  <data name="Nav_Home" xml:space="preserve">
+    <value>Home</value>
+  </data>
+  <data name="Nav_Product" xml:space="preserve">
+    <value>Product</value>
+  </data>
+  <data name="Nav_Product_Detail" xml:space="preserve">
+    <value>Product Detail</value>
+  </data>
+  <data name="Nav_Product_List" xml:space="preserve">
+    <value>Product List</value>
+  </data>
+  <data name="Nav_Product_Register" xml:space="preserve">
+    <value>Product Register</value>
+  </data>
+  <data name="Nav_Schedule" xml:space="preserve">
+    <value>Schedule</value>
+  </data>
+  <data name="Nav_Schedule_List" xml:space="preserve">
+    <value>Schedule List</value>
+  </data>
+  <data name="Nav_Schedule_Setting" xml:space="preserve">
+    <value>Schedule Setting</value>
+  </data>
+  <data name="Nav_System" xml:space="preserve">
+    <value>System</value>
+  </data>
+  <data name="Nav_User" xml:space="preserve">
+    <value>User</value>
+  </data>
+  <data name="Nav_User_List" xml:space="preserve">
+    <value>User List</value>
+  </data>
+  <data name="Nav_User_Role" xml:space="preserve">
+    <value>User Role</value>
+  </data>
+  <data name="PlaceHolder_Date" xml:space="preserve">
+    <value>Select a date</value>
+  </data>
+  <data name="PlaceHolder_FileImport" xml:space="preserve">
+    <value>Choose a file to import</value>
+  </data>
+  <data name="PlaceHolder_FileUpload" xml:space="preserve">
+    <value>Choose a file to upload</value>
+  </data>
+  <data name="PlaceHolder_From" xml:space="preserve">
+    <value>From</value>
+  </data>
+  <data name="PlaceHolder_Mail" xml:space="preserve">
+    <value>Please enter your email address</value>
+  </data>
+  <data name="PlaceHolder_Max" xml:space="preserve">
+    <value>Max</value>
+  </data>
+  <data name="PlaceHolder_Message" xml:space="preserve">
+    <value>Leave a comment or message</value>
+  </data>
+  <data name="PlaceHolder_Min" xml:space="preserve">
+    <value>Min</value>
+  </data>
+  <data name="PlaceHolder_Number" xml:space="preserve">
+    <value>Please enter</value>
+  </data>
+  <data name="PlaceHolder_Phone" xml:space="preserve">
+    <value>Please enter your number phone</value>
+  </data>
+  <data name="PlaceHolder_Quantity" xml:space="preserve">
+    <value>Specify the quantity</value>
+  </data>
+  <data name="PlaceHolder_SearchWith" xml:space="preserve">
+    <value>Search with</value>
+  </data>
+  <data name="PlaceHolder_Select" xml:space="preserve">
+    <value>Please choose</value>
+  </data>
+  <data name="PlaceHolder_TextBox" xml:space="preserve">
+    <value>Please enter</value>
+  </data>
+  <data name="PlaceHolder_Time" xml:space="preserve">
+    <value>Specify the time</value>
+  </data>
+  <data name="PlaceHolder_To" xml:space="preserve">
+    <value>To</value>
+  </data>
+  <data name="PlaceHolder_Url" xml:space="preserve">
+    <value>Provide a valid URL</value>
+  </data>
+  <data name="ThemeSettings_Leave" xml:space="preserve">
+    <value>Leave</value>
+  </data>
+  <data name="ThemeSettings_Mode" xml:space="preserve">
+    <value>Mode color</value>
+  </data>
+  <data name="ThemeSettings_Theme" xml:space="preserve">
+    <value>Theme color</value>
+  </data>
+  <data name="ThemeSettings_Title" xml:space="preserve">
+    <value>Theme settings</value>
+  </data>
+  <data name="ThemeSettings_UpdateFailed" xml:space="preserve">
+    <value>Update failed</value>
+  </data>
+  <data name="ThemeSettings_UpdateSuccess" xml:space="preserve">
+    <value>Update successful</value>
+  </data>
+  <data name="Title_SearchAdvanced" xml:space="preserve">
+    <value>Search Advanced</value>
+  </data>
 </root>

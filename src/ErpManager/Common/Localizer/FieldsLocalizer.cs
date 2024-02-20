@@ -1,8 +1,8 @@
 ﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
 
-namespace ErpManager.ERP.Message
+namespace ErpManager.ERP.Fields
 {
-    public class MessageLocalizer
+    public class FieldsLocalizer
     {
     }
 }

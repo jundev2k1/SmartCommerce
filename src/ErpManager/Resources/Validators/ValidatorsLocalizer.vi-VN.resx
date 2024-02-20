@@ -117,4 +117,28 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ErrorMsg_GreaterThanOrEqualTo" xml:space="preserve">
+    <value>{PropertyName} không thể nhỏ hơn hoặc bằng {MinValue}</value>
+  </data>
+  <data name="ErrorMsg_GreaterThanTo" xml:space="preserve">
+    <value>{PropertyName} phải lớn hơn {MinValue}</value>
+  </data>
+  <data name="ErrorMsg_IsNotEnum" xml:space="preserve">
+    <value>{PropertyName} không phải giá trị hợp lệ {PropertyValue}</value>
+  </data>
+  <data name="ErrorMsg_IsRequired" xml:space="preserve">
+    <value>{PropertyName} là trường bắt buộc</value>
+  </data>
+  <data name="ErrorMsg_LessThanOrEqualTo" xml:space="preserve">
+    <value>{PropertyName} không thể lớn hơn hoặc bằng {MaxValue}</value>
+  </data>
+  <data name="ErrorMsg_LessThanTo" xml:space="preserve">
+    <value>{PropertyName} phải nhỏ hơn {MaxValue}</value>
+  </data>
+  <data name="ErrorMsg_MaxLength" xml:space="preserve">
+    <value>{PropertyName} không thể vượt quá {MaxLength} kí tự</value>
+  </data>
+  <data name="ErrorMsg_MinLength" xml:space="preserve">
+    <value>{PropertyName} không thể ít hơn {MinLength} kí tự</value>
+  </data>
 </root>

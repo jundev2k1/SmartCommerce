@@ -3,10 +3,14 @@
 @using ErpManager.Common.Security;
 @using ErpManager.Domain.Enum
 @using ErpManager.Domain.Dtos.SearchDtos;
-@using ErpManager.ERP
+@using ErpManager.ERP.Fields;
+@using ErpManager.ERP.Globals;
+@using ErpManager.ERP.ValueTexts;
 @using ErpManager.ERP.ViewModels
 @using ErpManager.ERP.Areas.Products.ViewModels;
 @using Microsoft.AspNetCore.Mvc.Localization
 @inject IViewLocalizer _viewLocalizer
-@inject IHtmlLocalizer<GlobalLocalizer> _localizer
+@inject IHtmlLocalizer<GlobalsLocalizer> _globalsLocalizer
+@inject IHtmlLocalizer<FieldsLocalizer> _fieldsLocalizer
+@inject IHtmlLocalizer<ValueTextsLocalizer> _valueTextsLocalizer
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers

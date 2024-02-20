@@ -1,5 +1,6 @@
 ﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
 
+using FluentValidation.Results;
 using Microsoft.AspNetCore.Mvc.Controllers;
 using Microsoft.AspNetCore.Mvc.Filters;
 using System.Reflection;
@@ -32,7 +33,7 @@ namespace ErpManager.ERP.Controllers
         /// </summary>
         protected void ResetOperatorSession()
         {
-            this.OperatorBrandId = Session.GetString(Constants.SESSION_KEY_OPERATOR_BRANCH_ID).ToStringOrEmpty();
+            this.OperatorBranchId = Session.GetString(Constants.SESSION_KEY_OPERATOR_BRANCH_ID).ToStringOrEmpty();
             this.OperatorId = Session.GetString(Constants.SESSION_KEY_OPERATOR_ID).ToStringOrEmpty();
             this.OperatorName = Session.GetString(Constants.SESSION_KEY_OPERATOR_NAME).ToStringOrEmpty();
             this.OperatorPermission = Session.GetString(Constants.SESSION_KEY_OPERATOR_PERMISSION).ToStringOrEmpty();
@@ -86,6 +87,22 @@ namespace ErpManager.ERP.Controllers
         {
         }
 
+        /// <summary>
+        /// Add error to model state
+        /// </summary>
+        /// <param name="validationResult">Validation result</param>
+        protected void AddErrorToModelState(ValidationResult validationResult)
+        {
+            // Clear model state
+            ModelState.Clear();
+
+            // Add message fluent validate for model state
+            foreach(var error in validationResult.Errors)
+            {
+                ModelState.AddModelError(error.PropertyName, error.ErrorMessage);
+            }
+        }
+
         /// <summary>Session</summary>
         protected ISession Session
         {
@@ -94,8 +111,8 @@ namespace ErpManager.ERP.Controllers
                 return HttpContext.Session;
             }
         }
-        /// <summary>Operator brand id</summary>
-        protected string OperatorBrandId { get; private set; } = Constants.CONFIG_DEFAULT_BRANCH_ID;
+        /// <summary>Operator branch id</summary>
+        protected string OperatorBranchId { get; private set; } = Constants.CONFIG_DEFAULT_BRANCH_ID;
         /// <summary>Operator id</summary>
         protected string OperatorId { get; private set; } = string.Empty;
         /// <summary>Operator id</summary>

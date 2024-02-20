@@ -35,12 +35,14 @@
                 <div class="title col-md-4">
                     <h1>@ViewData["Title"]</h1>
                 </div>
-                <div class="sub-navbar col-md-8 gap-1">
+                <div class="sub-navbar col-md-8 gap-2">
                     <div class="language-change">
-                        @await Component.InvokeAsync("LanguageButton")
+                        @await Component.InvokeAsync("LanguageSwitcher")
+                    </div>
+                    <div class="user-notification">
+                        @await Component.InvokeAsync("UserNotification")
                     </div>
                     <div class="user-info">asd</div>
-                    <div class="user-notification">asd</div>
                 </div>
             </div>
         </div>

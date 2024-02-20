@@ -8,11 +8,9 @@ namespace ErpManager.ERP.Areas.Product.Controllers
     public class ProductListController : BaseController
     {
         private IServiceFacade _serviceFacade;
-        private readonly IStringLocalizer<GlobalLocalizer> _localizer;
-        public ProductListController(IServiceFacade serviceFacade, IStringLocalizer<GlobalLocalizer> localizer)
+        public ProductListController(IServiceFacade serviceFacade)
         {
             _serviceFacade = serviceFacade;
-            _localizer = localizer;
         }
 
         [HttpGet]
@@ -21,7 +19,7 @@ namespace ErpManager.ERP.Areas.Product.Controllers
         public IActionResult Index()
         {
             ViewData[Constants.VIEWDATA_KEY_PAGE_INDEX] = 1;
-            var condition = new ProductSearchDto { BranchId = this.OperatorBrandId };
+            var condition = new ProductSearchDto { BranchId = this.OperatorBranchId };
             var data = _serviceFacade.Products.Search(condition, 1, Constants.DEFAULT_PAGE_SIZE);
 
             return View(new ProductListViewModel { PageData = data });
@@ -35,7 +33,7 @@ namespace ErpManager.ERP.Areas.Product.Controllers
             ViewData[Constants.VIEWDATA_KEY_PAGE_INDEX] = viewModel.PageIndex;
 
             var searchParams = viewModel.SearchFields;
-            searchParams.BranchId = this.OperatorBrandId;
+            searchParams.BranchId = this.OperatorBranchId;
             var data = _serviceFacade.Products.Search(searchParams, viewModel.PageIndex, viewModel.PageSize);
 
             return View(new ProductListViewModel { PageData = data });

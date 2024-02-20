@@ -117,100 +117,61 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="ButtonTitle_Search" xml:space="preserve">
-    <value>Tìm Kiếm</value>
+  <data name="Product_Address" xml:space="preserve">
+    <value>Address</value>
   </data>
-  <data name="Login_Button_ForgetPassword" xml:space="preserve">
-    <value>Quên mật khẩu?</value>
+  <data name="Product_Address1" xml:space="preserve">
+    <value>Province/City</value>
   </data>
-  <data name="Login_Button_Login" xml:space="preserve">
-    <value>Đăng nhập</value>
+  <data name="Product_Address2" xml:space="preserve">
+    <value>District</value>
   </data>
-  <data name="Login_Button_Register" xml:space="preserve">
-    <value>Không có tài khoản? Đăng ký</value>
+  <data name="Product_Address3" xml:space="preserve">
+    <value>Commune/Ward</value>
   </data>
-  <data name="Login_Field_ID" xml:space="preserve">
-    <value>Tên đăng nhập</value>
+  <data name="Product_Address4" xml:space="preserve">
+    <value>Street/House Number</value>
   </data>
-  <data name="Login_Field_Password" xml:space="preserve">
-    <value>Mật khẩu</value>
+  <data name="Product_DateChanged" xml:space="preserve">
+    <value>Date Changed</value>
   </data>
-  <data name="Login_Label_RememberMe" xml:space="preserve">
-    <value>Nhớ tài khoản</value>
+  <data name="Product_DateCreated" xml:space="preserve">
+    <value>Date Created</value>
   </data>
-  <data name="Login_Title_SubTitle" xml:space="preserve">
-    <value>Đăng nhập vào tài khoản của bạn.</value>
-    <comment>sign in to your account.</comment>
+  <data name="Product_DisplayPrice" xml:space="preserve">
+    <value>Display Price</value>
   </data>
-  <data name="Nav_Auth_SignIn" xml:space="preserve">
-    <value>Đăng Nhập</value>
+  <data name="Product_Name" xml:space="preserve">
+    <value>Product Name</value>
   </data>
-  <data name="Nav_Auth_SignOut" xml:space="preserve">
-    <value>Đăng xuất</value>
+  <data name="Product_Price" xml:space="preserve">
+    <value>Price</value>
   </data>
-  <data name="Nav_Auth_SignUp" xml:space="preserve">
-    <value>Đăng Ký</value>
+  <data name="Product_Price1" xml:space="preserve">
+    <value>Price 1</value>
   </data>
-  <data name="Nav_Dashboard" xml:space="preserve">
-    <value>Thống Kê</value>
+  <data name="Product_Price2" xml:space="preserve">
+    <value>Price 2</value>
   </data>
-  <data name="Nav_Error_ErrorPage" xml:space="preserve">
-    <value>Trang lỗi</value>
+  <data name="Product_Price3" xml:space="preserve">
+    <value>Price 3</value>
   </data>
-  <data name="Nav_Home" xml:space="preserve">
-    <value>Trang chủ</value>
+  <data name="Product_ProductId" xml:space="preserve">
+    <value>Product ID</value>
   </data>
-  <data name="Nav_Product" xml:space="preserve">
-    <value>Sản Phẩm</value>
+  <data name="Product_Size1" xml:space="preserve">
+    <value>Length</value>
   </data>
-  <data name="Nav_Product_Detail" xml:space="preserve">
-    <value>Chi tiết sản phẩm</value>
+  <data name="Product_Size2" xml:space="preserve">
+    <value>Width</value>
   </data>
-  <data name="Nav_Product_List" xml:space="preserve">
-    <value>Danh Sách Sản Phẩm</value>
+  <data name="Product_Size3" xml:space="preserve">
+    <value>Area</value>
   </data>
-  <data name="Nav_Product_Register" xml:space="preserve">
-    <value>Đăng Ký Sản Phẩm</value>
+  <data name="Product_Status" xml:space="preserve">
+    <value>Status</value>
   </data>
-  <data name="Nav_Schedule" xml:space="preserve">
-    <value>Lịch Trình</value>
-  </data>
-  <data name="Nav_Schedule_List" xml:space="preserve">
-    <value>Danh Sách Lịch Trình</value>
-  </data>
-  <data name="Nav_Schedule_Setting" xml:space="preserve">
-    <value>Cài Đặt Lịch Trình</value>
-  </data>
-  <data name="Nav_System" xml:space="preserve">
-    <value>Hệ Thống</value>
-  </data>
-  <data name="Nav_User" xml:space="preserve">
-    <value>Người Dùng</value>
-  </data>
-  <data name="Nav_User_List" xml:space="preserve">
-    <value>Danh Sách Người Dùng</value>
-  </data>
-  <data name="Nav_User_Role" xml:space="preserve">
-    <value>Phân Quyền</value>
-  </data>
-  <data name="ThemeSettings_Leave" xml:space="preserve">
-    <value>Rời khỏi</value>
-  </data>
-  <data name="ThemeSettings_Mode" xml:space="preserve">
-    <value>Chế độ</value>
-  </data>
-  <data name="ThemeSettings_Theme" xml:space="preserve">
-    <value>Chủ đề</value>
-  </data>
-  <data name="ThemeSettings_Title" xml:space="preserve">
-    <value>Cài đặt chủ đề</value>
-  </data>
-  <data name="ThemeSettings_UpdateFailed" xml:space="preserve">
-    <value>Cập nhật thất bại</value>
-    <comment>Dùng cho theme settings</comment>
-  </data>
-  <data name="ThemeSettings_UpdateSuccess" xml:space="preserve">
-    <value>Cập nhật thành công</value>
-    <comment>Dùng cho theme settings</comment>
+  <data name="Product_TakeOverId" xml:space="preserve">
+    <value>Take Over ID</value>
   </data>
 </root>

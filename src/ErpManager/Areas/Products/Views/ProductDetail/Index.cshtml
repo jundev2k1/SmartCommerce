@@ -1,12 +1,12 @@
 ﻿@model ProductModel
 @{
-    ViewData[Constants.GLOBAL_KEY_TITLE] = _localizer["Nav_Product_Detail"];
+    ViewData[Constants.GLOBAL_KEY_TITLE] = _globalsLocalizer["Nav_Product_Detail"];
     ViewData[Constants.GLOBAL_KEY_CURRENT_PAGE] = "ProductList_Page";
 
     var breadcrumbs = new Breadcrumb[]
     {
-        new Breadcrumb { Title = _localizer["Nav_Home"].Value, Href = Constants.MODULE_HOME_HOME_PATH },
-        new Breadcrumb { Title = _localizer["Nav_Product_List"].Value, Href = Constants.MODULE_PRODUCT_PRODUCTLIST_PATH },
+        new Breadcrumb { Title = _globalsLocalizer["Nav_Home"].Value, Href = Constants.MODULE_HOME_HOME_PATH },
+        new Breadcrumb { Title = _globalsLocalizer["Nav_Product_List"].Value, Href = Constants.MODULE_PRODUCT_PRODUCTLIST_PATH },
         new Breadcrumb { Title = Model.ProductId, IsDisabled = true }
     };
 }
@@ -25,25 +25,25 @@
                 <div class="row">
                 <div class="col-md-6 col-12">
                     <div class="d-flex flex-column gap-1 mb-1">
-                        <label class="fw-semibold">Product Id:</label>
+                        <label class="fw-semibold">@_fieldsLocalizer["Product_ProductId"]:</label>
                         <p>@Model.ProductId</p>
                     </div>
                 </div>
                 <div class="col-md-6 col-12">
                     <div class="d-flex flex-column gap-1 mb-1">
-                        <label class="fw-semibold">Status:</label>
+                            <label class="fw-semibold">@_fieldsLocalizer["Product_Status"]:</label>
                         <p>@Model.Status</p>
                     </div>
                 </div>
                 <div class="col-12">
                     <div class="d-flex flex-column gap-1 mb-1">
-                        <label class="fw-semibold">Name:</label>
+                            <label class="fw-semibold">@_fieldsLocalizer["Product_Name"]:</label>
                         <p>@Model.Name</p>
                     </div>
                 </div>
                 <div class="col-12">
                     <div class="d-flex flex-column gap-1 mb-1">
-                        <label class="fw-semibold">Address:</label>
+                            <label class="fw-semibold">@_fieldsLocalizer["Product_Address"]:</label>
                         <p>@Model.Address1 @Model.Address2 @Model.Address3 @Model.Address4</p>
                     </div>
                 </div>

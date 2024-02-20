@@ -1,17 +1,17 @@
 ﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
 
-using ErpManager.ERP.Message;
+using ErpManager.ERP.Common;
 
 namespace ErpManager.ERP.Controllers
 {
     public sealed class ErrorController : BaseController
     {
-        private readonly IStringLocalizer<MessageLocalizer> _localizer;
+        private readonly ILocalizer _localizer;
 
         /// <summary>
         /// Constructor
         /// </summary>
-        public ErrorController(IStringLocalizer<MessageLocalizer> localizer)
+        public ErrorController(ILocalizer localizer)
         {
             _localizer = localizer;
         }
@@ -65,15 +65,15 @@ namespace ErpManager.ERP.Controllers
         {
             var title = code switch
             {
-                ErrorCodeEnum.SystemError => _localizer[Constants.ERRORMSG_KEY_SYSTEM_ERROR_CODE],
-                ErrorCodeEnum.NotPermission => _localizer[Constants.ERRORMSG_KEY_NO_HAS_PERMISSION_CODE],
+                ErrorCodeEnum.SystemError => _localizer.Messages.GetString(Constants.ERRORMSG_KEY_SYSTEM_ERROR_CODE),
+                ErrorCodeEnum.NotPermission => _localizer.Messages.GetString(Constants.ERRORMSG_KEY_NO_HAS_PERMISSION_CODE),
                 _ => string.Empty
             };
 
             return new ErrorPageViewModel
             {
                 Title = title,
-                Message = _localizer[message]
+                Message = _localizer.Messages.GetString(message)
             };
         }
     }
