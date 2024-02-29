@@ -123,4 +123,10 @@
   <data name="ValTxt_DelFlg_Normal" xml:space="preserve">
     <value>Active</value>
   </data>
+  <data name="ValTxt_NotificationStatus_Read" xml:space="preserve">
+    <value>Read</value>
+  </data>
+  <data name="ValTxt_NotificationStatus_Unread" xml:space="preserve">
+    <value>Unread</value>
+  </data>
 </root>

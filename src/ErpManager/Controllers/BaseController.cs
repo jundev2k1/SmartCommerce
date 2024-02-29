@@ -61,7 +61,7 @@ namespace ErpManager.ERP.Controllers
             var featuresRoutes = controllerTypes
                 .SelectMany(type => type
                     .GetMethods(BindingFlags.Instance | BindingFlags.Public)
-                    .Where(childType => 
+                    .Where(childType =>
                         (childType.GetCustomAttribute<PermissionAttribute>() != null))
                     .Select(childType => childType
                         .GetCustomAttributes<RouteAttribute>()
@@ -97,7 +97,7 @@ namespace ErpManager.ERP.Controllers
             ModelState.Clear();
 
             // Add message fluent validate for model state
-            foreach(var error in validationResult.Errors)
+            foreach (var error in validationResult.Errors)
             {
                 ModelState.AddModelError(error.PropertyName, error.ErrorMessage);
             }

@@ -50,6 +50,7 @@ namespace ErpManager.ERP
         private static IServiceCollection AddCommon(this IServiceCollection services)
         {
             services.AddSingleton<AppConfiguration>();
+            services.AddSingleton<AddressProvider>();
             services.AddScoped<ILocalizer, Localizer>();
             services.AddTransient<IValidatorFacade, ValidatorFacade>();
             return services;

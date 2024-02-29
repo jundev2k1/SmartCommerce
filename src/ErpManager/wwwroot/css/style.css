@@ -1,16 +1,6 @@
 @import 'baseStyle.css';
 @import 'animation.css';
 
-/*#region Responsive */
-
-@media (min-width: 768px) {
-    body {
-        font-size: 14px;
-    }
-}
-
-/*#endregion */
-
 /*#region Page style */
 #page-load {
     position: relative;
@@ -61,6 +51,165 @@
 
 /*#region Component */
 
+/*#region Theme component */
+.btn-theme-settings {
+    opacity: .5;
+}
+
+    .btn-theme-settings:hover {
+        opacity: 1;
+        transition: .25s ease-in-out;
+    }
+
+    .btn-theme-settings button[type=button] {
+        padding: 10px;
+        background: var(--site-theme-operating);
+        border-radius: var(--site-border-full);
+    }
+
+        .btn-theme-settings button[type=button] i {
+            width: 20px;
+            height: 20px;
+            font-size: 14px;
+            color: var(--site-title-operating);
+        }
+
+.theme-settings {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    display: none;
+    z-index: 99;
+}
+
+    .theme-settings .overlay {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        background: var(--site-color-shadow);
+        backdrop-filter: blur(2px);
+    }
+
+    .theme-settings .theme-settings-popup {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 640px;
+        height: 560px;
+        overflow: hidden;
+        background: var(--site-popup-operating);
+        border-radius: var(--site-border-rounded);
+    }
+
+        .theme-settings .theme-settings-popup .theme-settings-header {
+            background: url('../images/background/theme-setting-background.jpg');
+            background-size: cover;
+            background-position: center center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 30%;
+            border-radius: var(--site-border-rounded);
+            box-shadow: 0 0 6px var(--site-color-shadow);
+        }
+
+            .theme-settings .theme-settings-popup .theme-settings-header h2 {
+                text-align: center;
+                font-size: 28px;
+                font-weight: 700;
+            }
+
+                .theme-settings .theme-settings-popup .theme-settings-header h2 i {
+                    font-size: 48px;
+                }
+
+        .theme-settings .theme-settings-popup .theme-settings-body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 1rem;
+            width: 100%;
+            height: 70%;
+            padding: 0 1.5rem;
+        }
+
+            .theme-settings .theme-settings-popup .theme-settings-body h3 {
+                font-size: 22px;
+                font-weight: 500;
+            }
+
+            .theme-settings .theme-settings-popup .theme-settings-body .setting-list {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 12px;
+                align-items: flex-start;
+            }
+
+            .theme-settings .theme-settings-popup .theme-settings-body .setting-field {
+                position: relative;
+                text-align: center;
+                border-radius: var(--site-border-full);
+                overflow: hidden;
+                box-shadow: 0px 0px 2px var(--site-color-shadow);
+                filter: brightness(1);
+                cursor: pointer;
+            }
+
+                .theme-settings .theme-settings-popup .theme-settings-body .setting-field a {
+                    display: block;
+                    height: 40px;
+                    margin: 18px;
+                    font-size: 32px;
+                }
+
+                .theme-settings .theme-settings-popup .theme-settings-body .setting-field:hover {
+                    filter: brightness(.97);
+                    box-shadow: 1px 1px 4px var(--site-color-shadow);
+                    transition: .4s;
+                }
+
+            .theme-settings .theme-settings-popup .theme-settings-body .setting-item .setting-field > a > i {
+                visibility: hidden;
+            }
+
+            .theme-settings .theme-settings-popup .theme-settings-body .setting-item.choose .setting-field > a > i {
+                visibility: visible;
+                text-shadow: 0 0 4px var(--site-theme-operating);
+                color: #d6d6d6;
+            }
+
+            .theme-settings .theme-settings-popup .theme-settings-body .setting-item.choose .setting-field::after {
+                content: '';
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                top: 50%;
+                left: 50%;
+                border-radius: var(--site-border-full);
+                box-shadow: 0 0 6px #fff, 0 0 10px var(--site-theme-operating);
+                transform: translate(-50%, -50%);
+            }
+
+            .theme-settings .theme-settings-popup .theme-settings-body .btn-close-popup {
+                position: absolute;
+                bottom: 5%;
+                right: 5%;
+                background: var(--site-theme-operating);
+                padding: 8px 16px;
+                border-radius: var(--site-border-rounded);
+                box-shadow: 0 0 6px var(--site-color-shadow);
+                opacity: .5;
+                transition: .5s ease-in;
+            }
+
+                .theme-settings .theme-settings-popup .theme-settings-body .btn-close-popup:hover {
+                    opacity: 1;
+                }
+/*#endregion */
+
 /*#endregion */
 
 /*#region Bootstrap */
@@ -69,8 +218,150 @@
     cursor: pointer;
 }
 
-.pagination .page-item > a.disabled {
-    cursor: default;
+    .pagination .page-item > a.disabled {
+        cursor: default;
+    }
+
+.light-mode .pagination {
+    --bs-pagination-color: var(--site-text-operating);
+    --bs-pagination-hover-color: var(--site-text-operating);
+    --bs-pagination-border-color: var(--site-border-operating);
+    --bs-pagination-focus-box-shadow: none;
+}
+
+.dark-mode .pagination {
+    --bs-pagination-bg: var(--site-bg-content-operating);
+    --bs-pagination-color: var(--site-text-operating);
+    --bs-pagination-disabled-bg: var(--site-gray-500);
+    --bs-pagination-border-color: var(--site-border-operating);
+    --bs-pagination-disabled-border-color: var(--site-gray-400);
+    --bs-pagination-hover-bg: var(--site-gray-400);
+    --bs-pagination-hover-color: var(--site-text-operating);
+    --bs-pagination-focus-box-shadow: none;
+}
+
+.dark-mode .search-form .search-input,
+.dark-mode .form-control {
+    background-color: var(--site-bg-content-operating) !important;
+    border-color: var(--site-border-operating) !important;
+    color: var(--site-text-operating) !important;
+}
+
+    .dark-mode .search-form .search-input:focus,
+    .dark-mode .form-control:focus {
+        box-shadow: 0 0 0 0.1rem var(--site-gray-400) !important;
+    }
+
+    .dark-mode .search-form .search-input::placeholder,
+    .dark-mode .form-control::placeholder {
+        color: var(--site-gray-500) !important;
+    }
+
+.dark-mode .form-select {
+    background-color: var(--site-bg-content-operating) !important;
+    color: var(--site-text-operating) !important;
+    border-color: var(--site-border-operating) !important;
+}
+
+    .dark-mode .form-select:focus {
+        box-shadow: 0 0 0 0.1rem var(--site-gray-400) !important;
+    }
+
+.dark-mode .modal {
+    --bs-modal-bg: var(--site-popup-operating) !important;
+    --bs-modal-header-border-color: var(--site-gray-500) !important;
+    --bs-modal-footer-border-color: var(--site-gray-500) !important;
+    --bs-modal-border-color: none;
+}
+
+    .dark-mode .modal .modal-title {
+        color: var(--site-popup-title-operating) !important;
+    }
+
+    .dark-mode .modal .modal-body {
+        color: var(--site-popup-content-operating) !important;
+    }
+
+.dark-mode .card {
+    --bs-card-bg: var(--site-bg-content-operating);
+}
+
+.dark-mode .breadcrumb-item.active {
+    color: var(--site-gray-500) !important;
+}
+
+.dark-mode .breadcrumb-item::before {
+    color: var(--site-gray-600) !important;
+}
+/*#endregion */
+
+/*#region Library */
+/*#region Select2 */
+.select2-container--bootstrap-5 {
+    z-index: 0 !important;
+}
+
+.dark-mode .select2-container--bootstrap-5 .select2-selection {
+    background-color: var(--site-bg-content-operating) !important;
+    border-color: var(--site-border-operating) !important;
+}
+
+    .dark-mode .select2-container--bootstrap-5 .select2-selection .select2-selection__rendered {
+        color: var(--site-text-operating) !important;
+    }
+
+.dark-mode .select2-container--bootstrap-5.select2-container--focus .select2-selection, .select2-container--bootstrap-5.select2-container--open .select2-selection {
+    box-shadow: 0 0 0 0.1rem var(--site-gray-400) !important;
+}
+
+.dark-mode .select2-container--bootstrap-5 .select2-dropdown {
+    background-color: var(--site-bg-content-operating);
+    border-color: var(--site-gray-400);
+    box-shadow: 0 6px 6px 0.1rem var(--site-gray-700);
+    color: var(--site-gray-400);
+}
+
+    .dark-mode .select2-container--bootstrap-5 .select2-dropdown .select2-results__options .select2-results__option.select2-results__option--selected {
+        background: var(--site-gray-800);
+    }
+
+    .dark-mode .select2-container--bootstrap-5 .select2-dropdown .select2-results__options .select2-results__option.select2-results__option--highlighted {
+        background: var(--site-gray-700);
+        color: var(--site-text-operating);
+    }
+
+    .dark-mode .select2-container--bootstrap-5 .select2-dropdown .select2-search .select2-search__field {
+        background: var(--site-gray-500);
+    }
+
+        .dark-mode .select2-container--bootstrap-5 .select2-dropdown .select2-search .select2-search__field:focus {
+            border-color: var(--site-gray-500);
+            box-shadow: 0 0 2px 0.1rem var(--site-gray-700);
+        }
+/*#endregion */
+
+/*#region flatpickr */
+
+.dark-mode .flatpickr-calendar {
+    background: var(--site-gray-200);
+}
+
+.flatpickr-current-month {
+    font-size: 125%;
+}
+
+.flatpickr-day.selected {
+    background: var(--site-theme-operating);
+    border-color: var(--site-theme-operating);
+    color: var(--site-title-operating);
+}
+/*#endregion */
+/*#endregion */
+/*#region Responsive */
+@media (min-width: 768px) {
+    body {
+        font-size: 14px;
+    }
 }
 
 /*#endregion */

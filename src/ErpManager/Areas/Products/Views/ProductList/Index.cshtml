@@ -8,8 +8,8 @@
         new Breadcrumb { Title = _globalsLocalizer["Nav_Product_List"].Value, IsDisabled = true }
     };
 
-    var pageIndex = int.Parse(ViewData[Constants.VIEWDATA_KEY_PAGE_INDEX].ToStringOrEmpty());
     var hasResult = Model.PageData.Items.Any();
+    var hasData = Model.PageData.TotalPage > 0;
 }
 @model ProductListViewModel
 
@@ -20,7 +20,7 @@
         <div class="row">
             <div class="col-8">
                 <div class="d-flex gap-1">
-                    @await Component.InvokeAsync("SearchInput", new { name = "SearchFields.Keywords" })
+                    @await Component.InvokeAsync("SearchInput", new { name = "SearchFields.Keywords", value = Model.SearchFields.Keywords })
                     <input type="button" class="btn site-btn-outline-info site-rounded" value="@_globalsLocalizer["Btn_Filter"]" data-bs-toggle="collapse" href="#filterAdvancedCollapse" />
                 </div>
             </div>
@@ -72,31 +72,19 @@
                                 <div class="row mb-3">
                                     <div class="col-md-3 col-6">
                                         <label asp-for="SearchFields.Address1" class="form-label">@_fieldsLocalizer["Product_Address1"]</label>
-                                        <select asp-for="SearchFields.Address1" class="form-select" id="Address1ForSearch" aria-label="Province">
-                                            <option value="" selected>@_globalsLocalizer["PlaceHolder_Select"]</option>
-                                            <option value="Binh Duong">Binh Duong</option>
+                                        <select asp-for="SearchFields.Address1" class="form-select select-search-address-1" id="Address1ForSearch" aria-label="Province">
                                         </select>
                                     </div>
                                     <div class="col-md-3 col-6">
-                                        <label asp-for="SearchFields.Address2" class="form-label">@_fieldsLocalizer["Product_Address2"]</label>
-                                        <select asp-for="SearchFields.Address2" class="form-select" id="Address2ForSearch" aria-label="District">
-                                            <option value="" selected>@_globalsLocalizer["PlaceHolder_Select"]</option>
-                                            <option value="Thu Dau Mot">Thu Dau Mot</option>
-                                            <option value="Thuan An">Thuan An</option>
-                                            <option value="Nam Tan Uyen">Nam Tan Uyen</option>
-                                            <option value="Bac Tan Uyen">Bac Tan Uyen</option>
-                                            <option value="Bau Bang">Bau Bang</option>
-                                            <option value="Phu Giao">Phu Giao</option>
-                                            <option value="Ben Cat">Ben Cat</option>
-                                        </select>
+                                        <div>
+                                            <label asp-for="SearchFields.Address2" class="form-label">@_fieldsLocalizer["Product_Address2"]</label>
+                                            <select asp-for="SearchFields.Address2" class="form-select select-search-address-2" id="Address2ForSearch" aria-label="District" data-parent-id="Address1ForSearch">
+                                            </select>
+                                        </div>
                                     </div>
                                     <div class="col-md-3 col-12">
                                         <label asp-for="SearchFields.Address3" class="form-label">@_fieldsLocalizer["Product_Address3"]</label>
-                                        <select asp-for="SearchFields.Address3" class="form-select" id="Address3ForSearch" aria-label="Wards-township">
-                                            <option value="" selected>@_globalsLocalizer["PlaceHolder_Select"]</option>
-                                            <option value="1">One</option>
-                                            <option value="2">Two</option>
-                                            <option value="3">Three</option>
+                                        <select asp-for="SearchFields.Address3" class="form-select select-search-address-3" id="Address3ForSearch" aria-label="Wards-township" data-parent-id="Address2ForSearch">
                                         </select>
                                     </div>
                                     <div class="col-md-3 col-12">
@@ -169,9 +157,9 @@
                                 <div class="mb-3">
                                     <label class="form-label">@_fieldsLocalizer["Product_DateCreated"]</label>
                                     <div class="d-flex gap-1 align-items-center">
-                                        <input type="datetime" asp-for="SearchFields.DateCreatedFrom" class="form-control" id="dateCreatedFromForSearch" placeholder="@_globalsLocalizer["PlaceHolder_From"]...">
+                                        <input type="datetime" asp-for="SearchFields.DateCreatedFrom" class="form-control datetime-picker" id="dateCreatedFromForSearch" placeholder="@_globalsLocalizer["PlaceHolder_From"]...">
                                         ~
-                                        <input type="datetime" asp-for="SearchFields.DateCreatedTo" class="form-control" id="dateCreatedToForSearch" placeholder="@_globalsLocalizer["PlaceHolder_To"]...">
+                                        <input type="datetime" asp-for="SearchFields.DateCreatedTo" class="form-control datetime-picker" id="dateCreatedToForSearch" placeholder="@_globalsLocalizer["PlaceHolder_To"]...">
                                     </div>
                                 </div>
                             </li>
@@ -187,7 +175,7 @@
                             </li>
                         </ul>
                         <div>
-                            <input id="pageIndex" type="hidden" asp-for="PageIndex" value="@pageIndex" />
+                            <input id="pageIndex" type="hidden" asp-for="PageIndex" />
                         </div>
                         <div class="d-flex gap-3 justify-content-end align-items-center">
                             <select asp-for="SearchFields.DelFlg" class="form-select w-25" aria-label="DeleteFlg">
@@ -209,11 +197,11 @@
             <table class="site-table site-table-hover site-border site-rounded-layout">
                 <thead>
                     <tr>
-                        <th scope="col">@_fieldsLocalizer["Product_ProductId"]</th>
-                        <th scope="col">@_fieldsLocalizer["Product_Name"]</th>
-                        <th scope="col">@_fieldsLocalizer["Product_Price"]</th>
-                        <th scope="col">@_fieldsLocalizer["Product_Address"]</th>
-                        <th scope="col">@_fieldsLocalizer["Product_Status"]</th>
+                        <th scope="col" width="10%">@_fieldsLocalizer["Product_ProductId"]</th>
+                        <th scope="col" width="25%">@_fieldsLocalizer["Product_Name"]</th>
+                        <th class="text-center" scope="col" width="15%">@_fieldsLocalizer["Product_Price"]</th>
+                        <th class="text-center" scope="col" width="40%">@_fieldsLocalizer["Product_Address"]</th>
+                        <th class="text-center" scope="col" width="10%">@_fieldsLocalizer["Product_Status"]</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -228,9 +216,9 @@
                                         @item.Name
                                     </a>
                                 </td>
-                                <td>@CommonUtility.GetProductDisplayPrice(item)</td>
-                                <td>@item.Address1</td>
-                                <td>@item.Status</td>
+                                <td class="text-end">@CommonUtility.GetProductDisplayPrice(item, "VND")</td>
+                                <td class="text-end text-truncate">@item.Address1</td>
+                                <td class="text-center">@item.Status</td>
                             </tr>
                         }
                     }
@@ -238,36 +226,36 @@
                     {
                         <tr>
                             <td align="center" colspan="5">
-                                No results were found
+                                @(_globalsLocalizer["ListPage_NoResult"])
                             </td>
                         </tr>
                     }
                 </tbody>
 
-                @if (hasResult)
+                @if (hasData)
                 {
                     <tfoot>
                         <tr>
                             <td colspan="5">
                                 <div class="d-flex justify-content-between align-items-center">
                                     <p class="mb-0">
-                                        Total result: @(2 * (pageIndex - 1) + Model.PageData.Items.Length)/@(Model.PageData.TotalRecord)
+                                        @(_globalsLocalizer["ListPage_TotalResult"]): @(Constants.DEFAULT_PAGE_SIZE * (Model.PageIndex - 1) + Model.PageData.Items.Length)/@(Model.PageData.TotalRecord)
                                     </p>
                                     <nav aria-label="Page navigation">
                                         <ul class="pagination">
                                             <li class="page-item">
-                                                <a class="page-link @(pageIndex == 1 ? "disabled" : string.Empty)" onclick="handlePaging(event, @CommonUtility.HandleLimitPage(pageIndex, Model.PageData.TotalPage))" aria-label="Previous">
+                                                <a class="page-link @(Model.PageIndex == 1 ? "disabled" : string.Empty)" onclick="handlePaging(event, @CommonUtility.HandleLimitPage(Model.PageIndex, Model.PageData.TotalPage))" aria-label="Previous">
                                                     <span aria-hidden="true">&laquo;</span>
                                                 </a>
                                             </li>
                                             @for (var index = 1; index <= Model.PageData.TotalPage; index++)
                                             {
                                                 <li class="page-item">
-                                                    <a class="page-link @(pageIndex == index ? "disabled" : string.Empty)" onclick="handlePaging(event, @index)">@index</a>
+                                                    <a class="page-link @(Model.PageIndex == index ? "disabled" : string.Empty)" onclick="handlePaging(event, @index)">@index</a>
                                                 </li>
                                             }
                                             <li class="page-item">
-                                                <a class="page-link @(pageIndex == Model.PageData.TotalPage ? "disabled" : string.Empty)" onclick="handlePaging(event, @CommonUtility.HandleLimitPage(pageIndex, Model.PageData.TotalPage, isPrevious: false))" asp- aria-label="Next">
+                                                <a class="page-link @(Model.PageIndex == Model.PageData.TotalPage ? "disabled" : string.Empty)" onclick="handlePaging(event, @CommonUtility.HandleLimitPage(Model.PageIndex, Model.PageData.TotalPage, isPrevious: false))" asp- aria-label="Next">
                                                     <span aria-hidden="true">&raquo;</span>
                                                 </a>
                                             </li>
@@ -314,7 +302,6 @@
 
         const pageIndexInput = document.querySelector("#pageIndex");
         pageIndexInput.value = page;
-
         const searchForm = document.getElementsByName("searchForm")[0];
         searchForm.submit();
     }

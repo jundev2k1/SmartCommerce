@@ -70,7 +70,7 @@ namespace ErpManager.ERP.Common.Middleware
         /// Has permission
         /// </summary>
         /// <param name="context">Context</param>
-        /// <param name="operatorPermission">Operator permission</param>
+        /// <param name="operatorPermissions">Operator permission</param>
         /// <returns>Has permission</returns>
         private bool HasPermission(HttpContext context, string[] operatorPermissions)
         {

@@ -3,9 +3,10 @@
     var props = new
     {
         Name = ViewBag.Props.name,
+        Value = ViewBag.Props.value,
+        placeHolderText = ViewBag.Props.placeHolderText,
         Type = ViewBag.Props.type,
         ClassName = ViewBag.Props.className,
-        IsAsync = ViewBag.Props.isAsync
     };
 }
 
@@ -60,7 +61,7 @@
 </style>
 
 <div class="search-form @props.ClassName">
-    <input name="@props.Name" class="search-input" type="@props.Type" />
+    <input name="@props.Name" class="search-input" type="@props.Type" value="@props.Value" placeholder="@(string.IsNullOrEmpty(props.placeHolderText) ? _globalsLocalizer["PlaceHolder_SearchDefault"] : props.placeHolderText)" />
     <input type="submit" class="search-button btn btn-primary" value="@_globalsLocalizer["Btn_Search"]" />
 </div>
 

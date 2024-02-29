@@ -27,14 +27,15 @@ namespace ErpManager.Common.Utilities
         /// Get product display price
         /// </summary>
         /// <param name="product">Model</param>
+        /// <param name="prefix">Text prefix</param>
         /// <returns>Display price</returns>
-        public static string GetProductDisplayPrice(ProductModel product)
+        public static string GetProductDisplayPrice(ProductModel product, string prefix = "")
         {
             var result = product.DisplayPrice switch
             {
-                DisplayPriceEnum.Price1 => product.Price1.ToString("G29"),
-                DisplayPriceEnum.Price2 => product.Price1.ToString("G29"),
-                DisplayPriceEnum.Price3 => product.Price1.ToString("G29"),
+                DisplayPriceEnum.Price1 => $"{product.Price1.ToPrice()} {prefix}".Trim(),
+                DisplayPriceEnum.Price2 => $"{product.Price2.ToPrice()} {prefix}".Trim(),
+                DisplayPriceEnum.Price3 => $"{product.Price3.ToPrice()} {prefix}".Trim(),
                 _ => string.Empty
             };
             return result;
@@ -75,6 +76,11 @@ namespace ErpManager.Common.Utilities
                 Seconds: Now.Subtract(PastYearDate).Seconds);
         }
 
+        /// <summary>
+        /// Get user sex
+        /// </summary>
+        /// <param name="sex">Sex</param>
+        /// <returns>User sex</returns>
         public static string GetUserSex(SexEnum sex)
         {
             var result = sex switch
@@ -85,6 +91,16 @@ namespace ErpManager.Common.Utilities
                 _ => "This sex not exists"
             };
             return result;
+        }
+
+        /// <summary>
+        /// Get product address
+        /// </summary>
+        /// <param name="model">Product model</param>
+        /// <returns>Product address</returns>
+        public static string GetProductAddress(ProductModel model)
+        {
+            return string.Empty;
         }
     }
 }

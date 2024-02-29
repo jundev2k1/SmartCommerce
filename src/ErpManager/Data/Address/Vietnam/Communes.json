@@ -1,0 +1,531 @@
+﻿[
+  // Binh Duong Provices
+  {
+    "provinceId": "041",
+    "items": [
+      // Thuan An Districts
+      {
+        "districtId": "041001",
+        "items": [
+          {
+            "id": "041001001",
+            "name_vi": "Phường An Phú",
+            "name_en": "An Phu Ward"
+          },
+          {
+            "id": "041001002",
+            "name_vi": "Phường An Thạnh",
+            "name_en": "An Thanh Ward"
+          },
+          {
+            "id": "041001003",
+            "name_vi": "Phường Bình Chuẩn",
+            "name_en": "Binh Chuan Ward"
+          },
+          {
+            "id": "041001004",
+            "name_vi": "Phường Bình Hòa",
+            "name_en": "Binh Hoa Ward"
+          },
+          {
+            "id": "041001005",
+            "name_vi": "Phường Bình Nhâm",
+            "name_en": "Binh Nham Ward"
+          },
+          {
+            "id": "041001006",
+            "name_vi": "Phường Hưng Định",
+            "name_en": "Hung Dinh Ward"
+          },
+          {
+            "id": "041001007",
+            "name_vi": "Phường Lái Thiêu",
+            "name_en": "Lai Thieu Ward"
+          },
+          {
+            "id": "041001008",
+            "name_vi": "Phường Thuận Giao",
+            "name_en": "Thuan Giao Ward"
+          },
+          {
+            "id": "041001009",
+            "name_vi": "Phường Vĩnh Phú",
+            "name_en": "Vinh Phu Ward"
+          },
+          {
+            "id": "041001010",
+            "name_vi": "Xã An Sơn",
+            "name_en": "An Son Commune"
+          }
+        ]
+      },
+
+      // Tan Uyen Districts
+      {
+        "districtId": "041002",
+        "communes": [
+          {
+            "id": "041002002",
+            "name_vi": "Phường Hội Nghĩa",
+            "name_en": "Hoi Nghia Ward"
+          },
+          {
+            "id": "041002003",
+            "name_vi": "Phường Khánh Bình",
+            "name_en": "Khanh Binh Ward"
+          },
+          {
+            "id": "041002004",
+            "name_vi": "Phường Phú Chánh",
+            "name_en": "Phu Chanh Ward"
+          },
+          {
+            "id": "041002005",
+            "name_vi": "Phường Tân Hiệp",
+            "name_en": "Tan Hiep Ward"
+          },
+          {
+            "id": "041002006",
+            "name_vi": "Phường Tân Phước Khánh",
+            "name_en": "Tan Phuoc Khanh Ward"
+          },
+          {
+            "id": "041002007",
+            "name_vi": "Phường Tân Vĩnh Hiệp",
+            "name_en": "Tan Vinh Hiep Ward"
+          },
+          {
+            "id": "041002008",
+            "name_vi": "Phường Thái Hòa",
+            "name_en": "Thai Hoa Ward"
+          },
+          {
+            "id": "041002009",
+            "name_vi": "Phường Thạnh Phước",
+            "name_en": "Thanh Phuoc Ward"
+          },
+          {
+            "id": "041002010",
+            "name_vi": "Phường Uyên Hưng",
+            "name_en": "Uyen Hung Ward"
+          },
+          {
+            "id": "041002011",
+            "name_vi": "Phường Vĩnh Tân",
+            "name_en": "Vinh Tan Ward"
+          },
+          {
+            "id": "041002012",
+            "name_vi": "Xã Bạch Đằng",
+            "name_en": "Bach Dang Commune"
+          },
+          {
+            "id": "041002013",
+            "name_vi": "Xã Thạnh Hội",
+            "name_en": "Thanh Hoi Commune"
+          }
+        ]
+      },
+
+      // Di An Districts
+      {
+        "districtId": "041003",
+        "communes": [
+          {
+            "id": "041003001",
+            "name_vi": "Phường An Bình",
+            "name_en": "An Binh Ward"
+          },
+          {
+            "id": "041003002",
+            "name_vi": "Phường Bình An",
+            "name_en": "Binh An Ward"
+          },
+          {
+            "id": "041003003",
+            "name_vi": "Phường Bình Thắng",
+            "name_en": "Binh Thang Ward"
+          },
+          {
+            "id": "041003004",
+            "name_vi": "Phường Dĩ An",
+            "name_en": "Di An Ward"
+          },
+          {
+            "id": "041003005",
+            "name_vi": "Phường Đông Hòa",
+            "name_en": "Dong Hoa Ward"
+          },
+          {
+            "id": "041003006",
+            "name_vi": "Phường Tân Bình",
+            "name_en": "Tan Binh Ward"
+          },
+          {
+            "id": "041003007",
+            "name_vi": "Phường Tân Đông Hiệp",
+            "name_en": "Tan Dong Hiep Ward"
+          }
+        ]
+      },
+
+      // Ben Cat Districts
+      {
+        "districtId": "041004",
+        "communes": [
+          {
+            "id": "041004001",
+            "name_vi": "Phường Mỹ Phước",
+            "name_en": "My Phuoc Ward"
+          },
+          {
+            "id": "041004002",
+            "name_vi": "Phường Thới Hoà",
+            "name_en": "Thoi Hoa Ward"
+          },
+          {
+            "id": "041004003",
+            "name_vi": "Phường Hoà Lợi",
+            "name_en": "Hoa Loi Ward"
+          },
+          {
+            "id": "041004004",
+            "name_vi": "Phường Tân Định",
+            "name_en": "Tan Dinh Ward"
+          },
+          {
+            "id": "041004005",
+            "name_vi": "Phường Chánh Phú Hoà",
+            "name_en": "Chanh Phu Hoa Ward"
+          },
+          {
+            "id": "041004006",
+            "name_vi": "Xã An Tây",
+            "name_en": "An Tay Commune"
+          },
+          {
+            "id": "041004007",
+            "name_vi": "Xã An Điền",
+            "name_en": "An Dien Commune"
+          },
+          {
+            "id": "041004008",
+            "name_vi": "Xã Phú An",
+            "name_en": "Phu An Commune"
+          }
+        ]
+      },
+
+      //Thu Dau Mot Districts
+      {
+        "districtId": "041005",
+        "communes": [
+          {
+            "id": "041005001",
+            "name_vi": "Phường Chánh Mỹ",
+            "name_en": "Chanh My Ward"
+          },
+          {
+            "id": "041005002",
+            "name_vi": "Phường Chánh Nghĩa",
+            "name_en": "Chanh Nghia Ward"
+          },
+          {
+            "id": "041005003",
+            "name_vi": "Phường Định Hòa",
+            "name_en": "Dinh Hoa Ward"
+          },
+          {
+            "id": "041005004",
+            "name_vi": "Phường Hiệp An",
+            "name_en": "Hiep An Ward"
+          },
+          {
+            "id": "041005005",
+            "name_vi": "Phường Hiệp Thành",
+            "name_en": "Hiep Thanh Ward"
+          },
+          {
+            "id": "041005006",
+            "name_vi": "Phường Hòa Phú",
+            "name_en": "Hoa Phu Ward"
+          },
+          {
+            "id": "041005007",
+            "name_vi": "Phường Phú Cường",
+            "name_en": "Phu Cuong Ward"
+          },
+          {
+            "id": "041005008",
+            "name_vi": "Phường Phú Hòa",
+            "name_en": "Phu Hoa Ward"
+          },
+          {
+            "id": "041005009",
+            "name_vi": "Phường Phú Lợi",
+            "name_en": "Phu Loi Ward"
+          },
+          {
+            "id": "041005010",
+            "name_vi": "Phường Phú Mỹ",
+            "name_en": "Phu My Ward"
+          },
+          {
+            "id": "041005011",
+            "name_vi": "Phường Phú Tân",
+            "name_en": "Phu Tan Ward"
+          },
+          {
+            "id": "041005012",
+            "name_vi": "Phường Phú Thọ",
+            "name_en": "Phu Tho Ward"
+          },
+          {
+            "id": "041005013",
+            "name_vi": "Phường Tân An",
+            "name_en": "Tan An Ward"
+          },
+          {
+            "id": "041005014",
+            "name_vi": "Phường Tương Bình Hiệp",
+            "name_en": "Tuong Binh Hiep Ward"
+          }
+        ]
+      },
+
+
+      // Dau Tieng Districts
+      {
+        "districtId": "041006",
+        "communes": [
+          {
+            "id": "041006001",
+            "name_vi": "Thị trấn Dầu Tiếng",
+            "name_en": "Dau Tieng Town"
+          },
+          {
+            "id": "041006002",
+            "name_vi": "Xã An Lập",
+            "name_en": "An Lap Commune"
+          },
+          {
+            "id": "041006003",
+            "name_vi": "Xã Định An",
+            "name_en": "Dinh An Commune"
+          },
+          {
+            "id": "041006004",
+            "name_vi": "Xã Định Hiệp",
+            "name_en": "Dinh Hiep Commune"
+          },
+          {
+            "id": "041006005",
+            "name_vi": "Xã Định Thành",
+            "name_en": "Dinh Thanh Commune"
+          },
+          {
+            "id": "041006006",
+            "name_vi": "Xã Long Hòa",
+            "name_en": "Long Hoa Commune"
+          },
+          {
+            "id": "041006007",
+            "name_vi": "Xã Long Tân",
+            "name_en": "Long Tan Commune"
+          },
+          {
+            "id": "041006008",
+            "name_vi": "Xã Minh Hòa",
+            "name_en": "Minh Hoa Commune"
+          },
+          {
+            "id": "041006009",
+            "name_vi": "Xã Minh Tân",
+            "name_en": "Minh Tan Commune"
+          },
+          {
+            "id": "041006010",
+            "name_vi": "Xã Minh Thạnh",
+            "name_en": "Minh Thanh Commune"
+          },
+          {
+            "id": "041006011",
+            "name_vi": "Xã Thanh An",
+            "name_en": "Thanh An Commune"
+          },
+          {
+            "id": "041006012",
+            "name_vi": "Xã Thanh Tuyền",
+            "name_en": "Thanh Tuyen Commune"
+          }
+        ]
+      },
+
+      // Bau Bang Districts
+      {
+        "districtId": "041007",
+        "communes": [
+          {
+            "id": "041007001",
+            "name_vi": "Xã An Hòa",
+            "name_en": "An Hoa Commune"
+          },
+          {
+            "id": "041007002",
+            "name_vi": "Xã An Long",
+            "name_en": "An Long Commune"
+          },
+          {
+            "id": "041007003",
+            "name_vi": "Xã An Thái",
+            "name_en": "An Thai Commune"
+          },
+          {
+            "id": "041007004",
+            "name_vi": "Xã Long Cang",
+            "name_en": "Long Cang Commune"
+          },
+          {
+            "id": "041007005",
+            "name_vi": "Xã Phước Hòa",
+            "name_en": "Phuoc Hoa Commune"
+          },
+          {
+            "id": "041007006",
+            "name_vi": "Xã Phước Sang",
+            "name_en": "Phuoc Sang Commune"
+          },
+          {
+            "id": "041007007",
+            "name_vi": "Xã Phước Tân",
+            "name_en": "Phuoc Tan Commune"
+          },
+          {
+            "id": "041007008",
+            "name_vi": "Xã Tân Long",
+            "name_en": "Tan Long Commune"
+          }
+        ]
+      },
+
+      // Phu Giao Districts
+      {
+        "districtId": "041008",
+        "communes": [
+          {
+            "id": "041008001",
+            "name_vi": "Thị trấn Phước Vĩnh",
+            "name_en": "Phuoc Vinh Town"
+          },
+          {
+            "id": "041008002",
+            "name_vi": "Xã An Bình",
+            "name_en": "An Binh Commune"
+          },
+          {
+            "id": "041008003",
+            "name_vi": "Xã An Linh",
+            "name_en": "An Linh Commune"
+          },
+          {
+            "id": "041008004",
+            "name_vi": "Xã An Long",
+            "name_en": "An Long Commune"
+          },
+          {
+            "id": "041008005",
+            "name_vi": "Xã An Thái",
+            "name_en": "An Thai Commune"
+          },
+          {
+            "id": "041008006",
+            "name_vi": "Xã Phước Hòa",
+            "name_en": "Phuoc Hoa Commune"
+          },
+          {
+            "id": "041008007",
+            "name_vi": "Xã Phước Sang",
+            "name_en": "Phuoc Sang Commune"
+          },
+          {
+            "id": "041008008",
+            "name_vi": "Xã Tam Lập",
+            "name_en": "Tam Lap Commune"
+          },
+          {
+            "id": "04100809",
+            "name_vi": "Xã Tân Hiệp",
+            "name_en": "Tan Hiep Commune"
+          },
+          {
+            "id": "041008010",
+            "name_vi": "Xã Tân Long",
+            "name_en": "Tan Long Commune"
+          },
+          {
+            "id": "041008011",
+            "name_vi": "Xã Vĩnh Hòa",
+            "name_en": "Vinh Hoa Commune"
+          }
+        ]
+      },
+
+      // Bac Tan Uyen Districts
+      {
+        "districtId": "041009",
+        "communes": [
+          {
+            "id": "041009001",
+            "name_vi": "Thị trấn Tân Thành",
+            "name_en": "Tan Thanh Town"
+          },
+          {
+            "id": "041009002",
+            "name_vi": "Thị trấn Tân Bình",
+            "name_en": "Tan Binh Town"
+          },
+          {
+            "id": "041009003",
+            "name_vi": "Xã Bình Mỹ",
+            "name_en": "Binh My Commune"
+          },
+          {
+            "id": "041009004",
+            "name_vi": "Xã Đất Cuốc",
+            "name_en": "Dat Cuoc Commune"
+          },
+          {
+            "id": "041009005",
+            "name_vi": "Xã Hiếu Liêm",
+            "name_en": "Hieu Liem Commune"
+          },
+          {
+            "id": "041009006",
+            "name_vi": "Xã Lạc An",
+            "name_en": "Lac An Commune"
+          },
+          {
+            "id": "041009007",
+            "name_vi": "Xã Tân Định",
+            "name_en": "Tan Dinh Commune"
+          },
+          {
+            "id": "041009008",
+            "name_vi": "Xã Tân Lập",
+            "name_en": "Tan Lap Commune"
+          },
+          {
+            "id": "041009009",
+            "name_vi": "Xã Tân Mỹ",
+            "name_en": "Tan My Commune"
+          },
+          {
+            "id": "041009010",
+            "name_vi": "Xã Thường Tân",
+            "name_en": "Thuong Tan Commune"
+          }
+        ]
+      }
+    ]
+  }
+]

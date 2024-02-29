@@ -138,6 +138,12 @@
   <data name="Btn_SearchAdvanced" xml:space="preserve">
     <value>Tìm kiếm nâng cao</value>
   </data>
+  <data name="ListPage_NoResult" xml:space="preserve">
+    <value>Không tìm thấy kết quả</value>
+  </data>
+  <data name="ListPage_TotalResult" xml:space="preserve">
+    <value>Kết quả tìm kiếm</value>
+  </data>
   <data name="Login_Button_ForgetPassword" xml:space="preserve">
     <value>Quên mật khẩu?</value>
   </data>
@@ -171,6 +177,12 @@
   </data>
   <data name="Nav_Dashboard" xml:space="preserve">
     <value>Thống Kê</value>
+  </data>
+  <data name="Nav_Employee" xml:space="preserve">
+    <value>Nhân Viên</value>
+  </data>
+  <data name="Nav_Employee_List" xml:space="preserve">
+    <value>Danh Sách Nhân Viên</value>
   </data>
   <data name="Nav_Error_ErrorPage" xml:space="preserve">
     <value>Trang lỗi</value>
@@ -211,6 +223,9 @@
   <data name="Nav_User_Role" xml:space="preserve">
     <value>Phân Quyền</value>
   </data>
+  <data name="Notification_MarkAllRead" xml:space="preserve">
+    <value>Đánh dấu đọc tất cả</value>
+  </data>
   <data name="PlaceHolder_Date" xml:space="preserve">
     <value>Chọn 1 ngày</value>
   </data>
@@ -243,6 +258,9 @@
   </data>
   <data name="PlaceHolder_Quantity" xml:space="preserve">
     <value>Chỉ định số lượng</value>
+  </data>
+  <data name="PlaceHolder_SearchDefault" xml:space="preserve">
+    <value>Tìm kiếm với ID, tên,...</value>
   </data>
   <data name="PlaceHolder_SearchWith" xml:space="preserve">
     <value>Tìm kiếm với</value>

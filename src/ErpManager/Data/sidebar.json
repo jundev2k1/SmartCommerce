@@ -34,6 +34,23 @@
   },
   {
     "priority": "3",
+    "label": "Employee",
+    "localizer": "Nav_Employee",
+    "name": "Employee_Page",
+    "permission": "",
+    "icon": "fa-regular fa-users fa-fw",
+    "items": [
+      {
+        "label": "Employee List",
+        "localizer": "Nav_Employee_List",
+        "name": "EmployeeList_Page",
+        "permission": "",
+        "url": "#"
+      }
+    ]
+  },
+  {
+    "priority": "3",
     "label": "Schedule",
     "localizer": "Nav_Schedule",
     "name": "Schedule_Page",

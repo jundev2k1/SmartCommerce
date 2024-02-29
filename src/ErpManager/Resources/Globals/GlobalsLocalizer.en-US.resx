@@ -138,6 +138,12 @@
   <data name="Btn_SearchAdvanced" xml:space="preserve">
     <value>Search Advanced</value>
   </data>
+  <data name="ListPage_NoResult" xml:space="preserve">
+    <value>No results were found</value>
+  </data>
+  <data name="ListPage_TotalResult" xml:space="preserve">
+    <value>Total Result</value>
+  </data>
   <data name="Login_Button_ForgetPassword" xml:space="preserve">
     <value>Forget password?</value>
   </data>
@@ -171,6 +177,12 @@
   </data>
   <data name="Nav_Dashboard" xml:space="preserve">
     <value>Dashboard</value>
+  </data>
+  <data name="Nav_Employee" xml:space="preserve">
+    <value>Employee</value>
+  </data>
+  <data name="Nav_Employee_List" xml:space="preserve">
+    <value>Employee List</value>
   </data>
   <data name="Nav_Error_ErrorPage" xml:space="preserve">
     <value>Error Page</value>
@@ -211,6 +223,9 @@
   <data name="Nav_User_Role" xml:space="preserve">
     <value>User Role</value>
   </data>
+  <data name="Notification_MarkAllRead" xml:space="preserve">
+    <value>Make all read</value>
+  </data>
   <data name="PlaceHolder_Date" xml:space="preserve">
     <value>Select a date</value>
   </data>
@@ -243,6 +258,9 @@
   </data>
   <data name="PlaceHolder_Quantity" xml:space="preserve">
     <value>Specify the quantity</value>
+  </data>
+  <data name="PlaceHolder_SearchDefault" xml:space="preserve">
+    <value>Search with ID, name,...</value>
   </data>
   <data name="PlaceHolder_SearchWith" xml:space="preserve">
     <value>Search with</value>

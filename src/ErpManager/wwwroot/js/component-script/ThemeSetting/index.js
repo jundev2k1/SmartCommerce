@@ -59,7 +59,7 @@ const themeList = Object.freeze([
 ]);
 const ThemeSetting = (function () {
     // Element selector
-    const root = document.querySelector("#page-load");
+    const root = document.body;
     const contentElement = document.querySelector(".theme-settings");
     const remoteElement = document.querySelector(".btn-theme-settings button");
     const btnClose = contentElement.querySelector("#btnCloseSetting");

@@ -11,6 +11,13 @@ namespace ErpManager.Common
         /// <summary>File path: Sidebar setting</summary>
         public static string FILE_PATH_SIDEBAR_SETTING = "/Data/sidebar.json";
 
+        /// <summary>File path: Data address provinces</summary>
+        public static string FILE_PATH_DATA_ADDRESS_VN_PROVINCES = "/Data/Address/Vietnam/Provinces.json";
+        /// <summary>File path: Data address districts</summary>
+        public static string FILE_PATH_DATA_ADDRESS_VN_DISTRICTS = "/Data/Address/Vietnam/Districts.json";
+        /// <summary>File path: Data address communes</summary>
+        public static string FILE_PATH_DATA_ADDRESS_VN_COMMUNES = "/Data/Address/Vietnam/Communes.json";
+
         /// <summary>File path: Js component nav bar</summary>
         public const string FILE_PATH_JS_COMPONENT_NAV_BAR = "~/js/component-script/Navbar/index.js";
         /// <summary>File path: Js component search input</summary>

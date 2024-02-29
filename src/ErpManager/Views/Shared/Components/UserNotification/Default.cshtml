@@ -46,12 +46,12 @@
                                 @if (item.Status)
                                 {
                                     <i class="fa-regular fa-envelope"></i>
-                                    <em>UnRead</em>
+                                    <em>@_valueTextLocalizer["ValTxt_NotificationStatus_Unread"]</em>
                                 }
                                 else
                                 {
                                     <i class="fa-regular fa-envelope-open"></i>
-                                    <em>Read</em>
+                                    <em>@_valueTextLocalizer["ValTxt_NotificationStatus_Read"]</em>
                                 }
                             </span>
                         </div>
@@ -59,7 +59,7 @@
                 </li>
             }
             <li class="m-0 text-end">
-                <a href="#">Mark all read</a>
+                <a href="#">@_globalsLocalizer["Notification_MarkAllRead"]</a>
             </li>
         </ul>
     </div>
