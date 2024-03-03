@@ -62,6 +62,7 @@
     <Using Include="ErpManager.Domain.Dtos.SearchDtos" />
     <Using Include="ErpManager.Domain.Enum" />
     <Using Include="ErpManager.Domain.Models" />
+    <Using Include="ErpManager.ERP.Common" />
     <Using Include="ErpManager.ERP.Common.Attributes" />
     <Using Include="ErpManager.ERP.Common.Enum" />
     <Using Include="ErpManager.ERP.Controllers" />

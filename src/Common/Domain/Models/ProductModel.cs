@@ -26,9 +26,9 @@ namespace ErpManager.Domain.Models
 
         public decimal Price3 { get; set; }
 
-        public DisplayPriceEnum DisplayPrice { get; set; }
+        public DisplayPriceEnum DisplayPrice { get; set; } = DisplayPriceEnum.Price1;
 
-        public ProductStatusEnum Status { get; set; }
+        public ProductStatusEnum Status { get; set; } = ProductStatusEnum.Normal;
 
         public bool DelFlg { get; set; }
 
@@ -40,9 +40,11 @@ namespace ErpManager.Domain.Models
 
         public string TakeOverId { get; set; } = string.Empty;
 
-        public DateTime DateCreated { get; set; }
+        public string EmbeddedLink { get; set; } = string.Empty;
 
-        public DateTime DateChanged { get; set; }
+        public DateTime? DateCreated { get; set; }
+
+        public DateTime? DateChanged { get; set; }
 
         public string CreatedBy { get; set; } = string.Empty;
 

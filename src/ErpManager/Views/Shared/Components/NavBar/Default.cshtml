@@ -23,208 +23,9 @@
 }
 
 <section id="navBar">
-    <style>
-        .nav-bar {
-            height: 100%;
-        }
-
-            .nav-bar .wrapper {
-                position: fixed;
-                top: 0;
-                bottom: 0;
-                background: var(--site-mode-operating);
-                min-width: 15%;
-                max-width: 30%;
-                height: 100vh;
-                font-size: 16px;
-            }
-
-            .nav-bar .menu::-webkit-scrollbar-track {
-                -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.1);
-                border-radius: 10px;
-                background-color: var(--site-mode-operating);
-            }
-
-            .nav-bar .menu::-webkit-scrollbar {
-                width: 6px;
-                background-color: transparent;
-            }
-
-            .nav-bar .menu::-webkit-scrollbar-thumb {
-                border-radius: 10px;
-                -webkit-box-shadow: inset 0 0 4px rgba(0,0,0,.2);
-                background-color: var(--site-theme-operating);
-            }
-
-            .nav-bar .profile {
-                position: relative;
-            }
-
-                .nav-bar .profile .logo {
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    max-height: 120px;
-                    padding: 2rem;
-                }
-
-                    .nav-bar .profile .logo img {
-                        width: 120px;
-                    }
-
-            .nav-bar .menu-line {
-                position: relative;
-                width: 100%;
-                height: 1px;
-            }
-
-                .nav-bar .menu-line::after {
-                    content: '';
-                    position: absolute;
-                    top: 50%;
-                    left: 50%;
-                    width: 60%;
-                    height: 100%;
-                    border-radius: 12px;
-                    background: var(--site-mode-operating);
-                    filter: brightness(1.5);
-                    transform: translate(-50%, -50%);
-                }
-
-            .nav-bar .menu {
-                position: relative;
-                margin-right: 1rem;
-                height: calc(100% - 185px);
-                overflow-y: auto;
-            }
-
-            .nav-bar .profile::before {
-                content: "";
-                position: absolute;
-                bottom: -.5rem;
-                left: 0;
-                width: 100%;
-                height: 12px;
-                transform: translateY(100%);
-                background: linear-gradient(var(--site-mode-operating), transparent);
-                z-index: 99;
-            }
-
-            .nav-bar .logout::before {
-                content: "";
-                position: absolute;
-                transform: translateY(-100%);
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 12px;
-                background: linear-gradient(transparent, var(--site-mode-operating));
-                z-index: 99;
-            }
-
-            .nav-bar .menu-item > button,
-            .nav-bar .menu-item > a {
-                padding: 8px 4px 8px 16px;
-                width: 100%;
-                display: flex;
-                gap: 12px;
-                color: var(--site-theme-operating);
-            }
-
-            .nav-bar .menu-item .title {
-                font-weight: 600;
-            }
-
-            .nav-bar .menu-item > button > span,
-            .nav-bar .menu-item > a > span,
-            .nav-bar .menu-item .sub-menu .sub-menu-item > a > span,
-            .nav-bar .logout span {
-                position: relative;
-            }
-
-            .nav-bar .menu-item .sub-menu .sub-menu-item .title {
-                font-size: 14px;
-                font-weight: 400;
-            }
-
-            .nav-bar .logout span {
-                font-weight: 600;
-            }
-
-            .nav-bar .menu-item:not(.active) > button:hover > span::after,
-            .nav-bar .menu-item:not(.active) > a:hover > span::after,
-            .nav-bar .menu-item .sub-menu .sub-menu-item:not(.active):hover span::after,
-            .nav-bar .logout:hover span::after {
-                content: "";
-                position: absolute;
-                width: 100%;
-                height: 3px;
-                border-radius: 12px;
-                background: var(--site-theme-operating);
-                left: 0;
-                bottom: -4px;
-                filter: brightness(.8);
-                animation: IrisInX .3s ease-in, FadeIn .3s ease-in;
-            }
-
-            .nav-bar .active {
-                text-shadow: 0 0 4px var(--site-theme-operating);
-            }
-
-                .nav-bar .active span::after {
-                    content: "";
-                    position: absolute;
-                    width: 100%;
-                    height: 3px;
-                    border-radius: 12px;
-                    background: var(--site-theme-operating);
-                    left: 0;
-                    bottom: -4px;
-                    box-shadow: 0 0 6px #fff, 0 0 10px var(--site-theme-operating);
-                    animation: FadeIn .4s ease-in;
-                }
-
-            .nav-bar .menu-item .sub-menu {
-                display: flex;
-                flex-direction: column;
-            }
-
-                .nav-bar .menu-item .sub-menu .sub-menu-item {
-                    padding: 4px 4px 4px 16px;
-                    color: var(--site-theme-operating);
-                    filter: brightness(.75);
-                }
-
-                    .nav-bar .menu-item .sub-menu .sub-menu-item.active {
-                        filter: brightness(1);
-                    }
-
-                    .nav-bar .menu-item .sub-menu .sub-menu-item:first-child {
-                        padding-top: 0;
-                    }
-
-                    .nav-bar .menu-item .sub-menu .sub-menu-item > a {
-                        display: flex;
-                        gap: 12px;
-                    }
-
-            .nav-bar .logout {
-                position: absolute;
-                padding: 8px 4px 8px 16px;
-                width: 100%;
-                bottom: 1.5%;
-                left: 0;
-            }
-
-                .nav-bar .logout > a {
-                    display: flex;
-                    gap: 12px;
-                    color: var(--site-theme-operating);
-                }
-    </style>
-
     <div class="nav-bar">
         <div class="wrapper">
+            <button class="btn-close text-white-50 btn-navbar-switch is-mobile" style="width: 1.5em; height: 1.5em; z-index: 999999;" type="button"></button>
             <div class="profile">
                 <div class="logo">
                     <img src="~/images/system/logo.png" />
@@ -234,8 +35,7 @@
             <div class="menu">
                 @foreach (var item in Model)
                 {
-                    @if (!hasAllPermission
-                        && (!HasPermission(item.Permission) && !IsSubItemHasPermission(item.Items)))
+                    @if (!hasAllPermission && (!HasPermission(item.Permission) && !IsSubItemHasPermission(item.Items)))
                     {
                         continue;
                     }
@@ -246,7 +46,7 @@
                             <button type="button" data-bs-toggle="collapse" data-bs-target="#@item.Name">
                                 <i class="@item.Icon"></i>
                                 <span class="title">
-                                    @(Constants.CONFIG_DEFAULT_SIDEBAR_OPTIONS ? item.Label : _globalsLocalizer[item.Localizer])
+                                    @(Constants.CONFIG_DEFAULT_SIDEBAR_OPTIONS ? item.Label : _localizer.Globals[item.Localizer])
                                 </span>
                             </button>
                             <div id="@item.Name" class="collapse">
@@ -259,7 +59,7 @@
                                             <a href="@subItem.Url">
                                                 <i class="fa-solid fa-chevron-right fa-fw" style="opacity: 0"></i>
                                                 <span class="title">
-                                                    @(Constants.CONFIG_DEFAULT_SIDEBAR_OPTIONS ? subItem.Label : _globalsLocalizer[subItem.Localizer])
+                                                    @(Constants.CONFIG_DEFAULT_SIDEBAR_OPTIONS ? subItem.Label : _localizer.Globals[subItem.Localizer])
                                                 </span>
                                             </a>
                                         </li>
@@ -274,7 +74,7 @@
                             <a href="@item.Url" class="collapsed" type="button">
                                 <i class="@item.Icon"></i>
                                 <span class="title">
-                                    @(Constants.CONFIG_DEFAULT_SIDEBAR_OPTIONS ? item.Label : _globalsLocalizer[item.Localizer])
+                                    @(Constants.CONFIG_DEFAULT_SIDEBAR_OPTIONS ? item.Label : _localizer.Globals[item.Localizer])
                                 </span>
                             </a>
                         </div>
@@ -285,7 +85,7 @@
                 <div class="menu-line mb-2"></div>
                 <a asp-route="@Constants.MODULE_AUTH_SIGNOUT_NAME">
                     <i class="fa-regular fa-right-from-bracket fa-fw"></i>
-                    <span>@_globalsLocalizer["Nav_Auth_SignOut"]</span>
+                    <span>@_localizer.Globals["Nav_Auth_SignOut"]</span>
                 </a>
             </div>
         </div>
@@ -298,5 +98,6 @@
             navbarActive('@currentPage');
         };
         StoreWindowLoadCallback.push(navBarInitial);
+        StoreWindowResizeCallback.push(resetWidthSidebar);
     </script>
 </section>

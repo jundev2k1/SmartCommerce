@@ -31,7 +31,7 @@ public partial class DBContext : DbContext
             entity.Property(e => e.Name).HasDefaultValueSql("((''))");
             entity.Property(e => e.Status).HasConversion<int>().HasDefaultValueSql("((1))");
             entity.Property(e => e.Avatar).HasDefaultValueSql("((''))");
-            entity.Property(e => e.CreatedDate).HasDefaultValueSql("(getdate())");
+            entity.Property(e => e.DateCreated).HasDefaultValueSql("(getdate())");
             entity.Property(e => e.LastChanged).HasDefaultValueSql("((''))");
         });
 
@@ -44,7 +44,7 @@ public partial class DBContext : DbContext
             entity.Property(e => e.Permission).HasDefaultValueSql("('')");
             entity.Property(e => e.Priority).HasDefaultValueSql("(0)");
             entity.Property(e => e.DateCreated).HasDefaultValueSql("(getdate())");
-            entity.Property(e => e.DateChanged).HasDefaultValueSql("(getdate())");
+            entity.Property(e => e.DateChanged);
             entity.Property(e => e.CreatedBy).HasDefaultValueSql("('')");
             entity.Property(e => e.Status).HasConversion<int>().HasDefaultValueSql("(1)");
         });
@@ -69,7 +69,7 @@ public partial class DBContext : DbContext
             entity.Property(e => e.Sex).HasConversion<int>().HasDefaultValueSql("(2)");
             entity.Property(e => e.Birthday);
             entity.Property(e => e.DateCreated).HasDefaultValueSql("(getdate())");
-            entity.Property(e => e.DateChanged).HasDefaultValueSql("(getdate())");
+            entity.Property(e => e.DateChanged);
             entity.Property(e => e.CreatedBy).HasDefaultValueSql("('')");
             entity.Property(e => e.LastLogin).HasDefaultValueSql("(getdate())");
             entity.Property(e => e.LastChanged).HasDefaultValueSql("('')");
@@ -96,8 +96,9 @@ public partial class DBContext : DbContext
             entity.Property(e => e.Size2).HasColumnType("decimal(18,2)");
             entity.Property(e => e.Size3).HasColumnType("decimal(18,2)");
             entity.Property(e => e.TakeOverId).HasDefaultValueSql("('')");
+            entity.Property(e => e.EmbeddedLink).HasDefaultValueSql("('')");
             entity.Property(e => e.DateCreated).HasDefaultValueSql("(getdate())");
-            entity.Property(e => e.DateChanged).HasDefaultValueSql("(getdate())");
+            entity.Property(e => e.DateChanged);
             entity.Property(e => e.CreatedBy).HasDefaultValueSql("('')");
             entity.Property(e => e.LastChanged).HasDefaultValueSql("('')");
         });

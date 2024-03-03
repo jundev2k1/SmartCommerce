@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ErpManager.ERP.Migrations
 {
     [DbContext(typeof(DBContext))]
-    [Migration("20240208122602_InitialCreate")]
+    [Migration("20240303155143_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -39,7 +39,7 @@ namespace ErpManager.ERP.Migrations
                         .HasColumnType("nvarchar(255)")
                         .HasDefaultValueSql("((''))");
 
-                    b.Property<DateTime?>("CreatedDate")
+                    b.Property<DateTime?>("DateCreated")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime")
                         .HasDefaultValueSql("(getdate())");
@@ -107,12 +107,10 @@ namespace ErpManager.ERP.Migrations
                         .HasColumnType("nvarchar(30)")
                         .HasDefaultValueSql("('')");
 
-                    b.Property<DateTime>("DateChanged")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime")
-                        .HasDefaultValueSql("(getdate())");
+                    b.Property<DateTime?>("DateChanged")
+                        .HasColumnType("datetime");
 
-                    b.Property<DateTime>("DateCreated")
+                    b.Property<DateTime?>("DateCreated")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime")
                         .HasDefaultValueSql("(getdate())");
@@ -124,6 +122,12 @@ namespace ErpManager.ERP.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasDefaultValueSql("(0)");
+
+                    b.Property<string>("EmbeddedLink")
+                        .ValueGeneratedOnAdd()
+                        .HasMaxLength(4000)
+                        .HasColumnType("nvarchar(4000)")
+                        .HasDefaultValueSql("('')");
 
                     b.Property<string>("Images")
                         .ValueGeneratedOnAdd()
@@ -196,10 +200,8 @@ namespace ErpManager.ERP.Migrations
                         .HasColumnType("nvarchar(30)")
                         .HasDefaultValueSql("('')");
 
-                    b.Property<DateTime>("DateChanged")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime")
-                        .HasDefaultValueSql("(getdate())");
+                    b.Property<DateTime?>("DateChanged")
+                        .HasColumnType("datetime");
 
                     b.Property<DateTime>("DateCreated")
                         .ValueGeneratedOnAdd()
@@ -275,7 +277,7 @@ namespace ErpManager.ERP.Migrations
                         .HasColumnType("nvarchar(255)")
                         .HasDefaultValueSql("('')");
 
-                    b.Property<DateTime?>("Birthday")
+                    b.Property<DateTime>("Birthday")
                         .HasColumnType("datetime");
 
                     b.Property<string>("CreatedBy")
@@ -285,9 +287,7 @@ namespace ErpManager.ERP.Migrations
                         .HasDefaultValueSql("('')");
 
                     b.Property<DateTime>("DateChanged")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime")
-                        .HasDefaultValueSql("(getdate())");
+                        .HasColumnType("datetime");
 
                     b.Property<DateTime>("DateCreated")
                         .ValueGeneratedOnAdd()

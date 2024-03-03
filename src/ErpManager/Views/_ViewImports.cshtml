@@ -2,13 +2,14 @@
 @using ErpManager.Common.Utilities;
 @using ErpManager.Common.Security;
 @using ErpManager.Domain.Enum
+@using ErpManager.ERP.Common;
 @using ErpManager.ERP.Globals;
 @using ErpManager.ERP.Messages;
 @using ErpManager.ERP.ValueTexts;
-@using ErpManager.ERP.ViewModels
-@using Microsoft.AspNetCore.Mvc.Localization
+@using ErpManager.ERP.ViewModels;
+@using ErpManager.ERP.Common.Util;
+@using ErpManager.ERP.Common.Mapping;
+@using Microsoft.AspNetCore.Mvc.Localization;
 @inject IViewLocalizer _viewLocalizer
-@inject IHtmlLocalizer<GlobalsLocalizer> _globalsLocalizer
-@inject IHtmlLocalizer<MessagesLocalizer> _messagesLocalizer
-@inject IHtmlLocalizer<ValueTextsLocalizer> _valueTextLocalizer
+@inject ILocalizer _localizer
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers

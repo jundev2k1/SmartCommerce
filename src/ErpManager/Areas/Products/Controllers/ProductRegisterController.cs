@@ -1,6 +1,7 @@
 ﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
 
-using ErpManager.ERP.Common;
+using ErpManager.ERP.Common.Util;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace ErpManager.ERP.Areas.Product.Controllers
 {
@@ -26,7 +27,8 @@ namespace ErpManager.ERP.Areas.Product.Controllers
         [Route(Constants.MODULE_PRODUCT_PRODUCTREGISTER_PATH, Name = Constants.MODULE_PRODUCT_PRODUCTREGISTER_NAME)]
         public IActionResult Index()
         {
-            return View();
+            ViewBag.DropdownItems = GetInitDropdownListItems(new ProductModel());
+            return View(new ProductModel());
         }
 
         [HttpPost]
@@ -38,13 +40,17 @@ namespace ErpManager.ERP.Areas.Product.Controllers
             formInput.BranchId = this.OperatorBranchId;
             formInput.CreatedBy = this.OperatorId;
             formInput.LastChanged = this.OperatorName;
+            formInput.TrimStringInput();
+
+            // Set initial value for dropdown list
+            ViewBag.DropdownItems = GetInitDropdownListItems(formInput);
 
             // Validate form input
             var validateResult = _validatorFacade.ProductValidate(formInput);
             if (validateResult.IsValid == false)
             {
                 AddErrorToModelState(validateResult);
-                return View();
+                return View(formInput);
             }
 
             // Handle create new product
@@ -52,6 +58,58 @@ namespace ErpManager.ERP.Areas.Product.Controllers
             if (isSuccess == false) return View();
 
             return RedirectToRoute(Constants.MODULE_PRODUCT_PRODUCTLIST_NAME);
+        }
+
+        /// <summary>
+        /// Get init dropdown list items
+        /// </summary>
+        /// <param name="formInput">Form input</param>
+        /// <returns>dropdown list item collection</returns>
+        private Dictionary<string, List<SelectListItem>> GetInitDropdownListItems(ProductModel formInput)
+        {
+            var ddlCollection = new Dictionary<string, List<SelectListItem>>();
+
+            // Add init for take over id
+            if (string.IsNullOrEmpty(formInput.TakeOverId) == false)
+            {
+                var user = _serviceFacade.Users.GetUser(this.OperatorBranchId, formInput.TakeOverId);
+                if (user != null)
+                {
+                    var propName = formInput.Properties.GetName(prop => prop.TakeOverId);
+                    var ddlOptions = new List<SelectListItem>
+                    {
+                        new SelectListItem { Value = formInput.TakeOverId, Text = $"{user.UserId}. {user.FirstName} {user.LastName}", Selected = true }
+                    };
+                    ddlCollection.Add(propName, ddlOptions);
+                }
+            }
+
+            // Add init for product status
+            var ddlStatus = new List<SelectListItem>
+            {
+                new SelectListItem { Value = ProductStatusEnum.Sold.GetStringValue<int>(), Text = _localizer.ValueTexts["ValTxt_ProductStatus_Sold"] },
+                new SelectListItem { Value = ProductStatusEnum.Normal.GetStringValue<int>(), Text = _localizer.ValueTexts["ValTxt_ProductStatus_Normal"] },
+                new SelectListItem { Value = ProductStatusEnum.UrgentSale.GetStringValue<int>(), Text = _localizer.ValueTexts["ValTxt_ProductStatus_UrgentSale"] },
+                new SelectListItem { Value = ProductStatusEnum.GoodPrice.GetStringValue<int>(), Text = _localizer.ValueTexts["ValTxt_ProductStatus_GoodPrice"] },
+            };
+            var selectedStatus = ddlStatus.FirstOrDefault(status => status.Value.Equals(formInput.Status));
+            if (selectedStatus != null) selectedStatus.Selected = true;
+            var statusPropertyName = formInput.Properties.GetName(property => property.Status);
+            ddlCollection.Add(statusPropertyName, ddlStatus);
+
+            // Add init for display price
+            var ddlDisplayPrice = new List<SelectListItem>
+            {
+                new SelectListItem { Value = DisplayPriceEnum.Price1.GetStringValue<int>(), Text = _localizer.ValueTexts["ValTxt_ProductDisplayPrice1"] },
+                new SelectListItem { Value = DisplayPriceEnum.Price2.GetStringValue<int>(), Text = _localizer.ValueTexts["ValTxt_ProductDisplayPrice2"] },
+                new SelectListItem { Value = DisplayPriceEnum.Price3.GetStringValue<int>(), Text = _localizer.ValueTexts["ValTxt_ProductDisplayPrice3"] },
+            };
+            var selectedDisplayPrice = ddlDisplayPrice.FirstOrDefault(status => status.Value.Equals(formInput.DisplayPrice));
+            if (selectedDisplayPrice != null) selectedDisplayPrice.Selected = true;
+            var displayPricePropertyName = formInput.Properties.GetName(property => property.DisplayPrice);
+            ddlCollection.Add(displayPricePropertyName, ddlDisplayPrice);
+
+            return ddlCollection;
         }
     }
 }

@@ -117,28 +117,43 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ErrorMsg_Address_IsNotValid" xml:space="preserve">
+    <value>Địa chỉ này không phải là địa chỉ hợp lệ</value>
+  </data>
+  <data name="ErrorMsg_CannotNegative" xml:space="preserve">
+    <value>Giá trị này phải là số dương</value>
+  </data>
+  <data name="ErrorMsg_ExistSpecialCharacter" xml:space="preserve">
+    <value>Không chấp nhận ký tự đặc biệt</value>
+  </data>
   <data name="ErrorMsg_GreaterThanOrEqualTo" xml:space="preserve">
-    <value>{PropertyName} không thể nhỏ hơn hoặc bằng {MinValue}</value>
+    <value>Không thể nhập nhỏ hơn hoặc bằng {MinValue}</value>
   </data>
   <data name="ErrorMsg_GreaterThanTo" xml:space="preserve">
-    <value>{PropertyName} phải lớn hơn {MinValue}</value>
+    <value>Giá trị này phải lớn hơn {MinValue}</value>
   </data>
   <data name="ErrorMsg_IsNotEnum" xml:space="preserve">
-    <value>{PropertyName} không phải giá trị hợp lệ {PropertyValue}</value>
+    <value>{PropertyValue} không phải giá trị hợp lệ</value>
   </data>
   <data name="ErrorMsg_IsRequired" xml:space="preserve">
-    <value>{PropertyName} là trường bắt buộc</value>
+    <value>Trường này là trường bắt buộc</value>
   </data>
   <data name="ErrorMsg_LessThanOrEqualTo" xml:space="preserve">
-    <value>{PropertyName} không thể lớn hơn hoặc bằng {MaxValue}</value>
+    <value>Không thể nhập lớn hơn hoặc bằng {MaxValue}</value>
   </data>
   <data name="ErrorMsg_LessThanTo" xml:space="preserve">
-    <value>{PropertyName} phải nhỏ hơn {MaxValue}</value>
+    <value>Giá trị này phải nhỏ hơn {MaxValue}</value>
   </data>
   <data name="ErrorMsg_MaxLength" xml:space="preserve">
-    <value>{PropertyName} không thể vượt quá {MaxLength} kí tự</value>
+    <value>Không thể nhập vượt quá {MaxLength} kí tự</value>
   </data>
   <data name="ErrorMsg_MinLength" xml:space="preserve">
-    <value>{PropertyName} không thể ít hơn {MinLength} kí tự</value>
+    <value>không thể nhập ít hơn {MinLength} kí tự</value>
+  </data>
+  <data name="ErrorMsg_ProductIdExist" xml:space="preserve">
+    <value>Mã sản phẩm này đã tồn tại</value>
+  </data>
+  <data name="ErrorMsg_UserNotExist" xml:space="preserve">
+    <value>Người dùng này không tồn tại</value>
   </data>
 </root>

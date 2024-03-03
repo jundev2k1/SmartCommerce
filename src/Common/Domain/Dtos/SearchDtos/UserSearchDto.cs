@@ -4,6 +4,8 @@ namespace ErpManager.Domain.Dtos.SearchDtos
 {
     public class UserSearchDto : SearchDtoBase<UserSearchDto>
     {
+        public string Keywords { get; set; } = string.Empty;
+
         public string BranchId { get; set; } = string.Empty;
 
         public string UserId { get; set; } = string.Empty;

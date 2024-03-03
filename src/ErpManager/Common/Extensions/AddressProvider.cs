@@ -4,14 +4,33 @@ namespace ErpManager.ERP.Common.Extensions
 {
     public class AddressProvider
     {
+        private static AddressProvider? _instance;
+        private static readonly object lockObject = new object();
+
         private readonly List<AddressProvinceViewModel> _provinces;
         private readonly List<AddressDistrictGroupViewModel> _districts;
         private readonly List<AddressCommuneGroupListViewModel> _communes;
-        public AddressProvider()
+        private AddressProvider()
         {
             _provinces = GetProvinces();
             _districts = GetDistricts();
             _communes = GetCommunes();
+        }
+
+        /// <summary>Instance property</summary>
+        public static AddressProvider Instance
+        {
+            get
+            {
+                if (_instance == null)
+                {
+                    lock (lockObject)
+                    {
+                        if (_instance == null) _instance = new AddressProvider();
+                    }
+                }
+                return _instance;
+            }
         }
 
         /// <summary>

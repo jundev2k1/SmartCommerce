@@ -30,7 +30,7 @@ public partial class Role
     public DateTime DateCreated { get; set; }
 
     [Column(TypeName = "datetime")]
-    public DateTime DateChanged { get; set; }
+    public DateTime? DateChanged { get; set; }
 
     [StringLength(30)]
     public string CreatedBy { get; set; }

@@ -1,71 +1,13 @@
 ﻿@{
     var componentScript = Url.Content(Constants.FILE_PATH_JS_COMPONENT_SEARCH_INPUT);
-    var props = new
-    {
-        Name = ViewBag.Props.name,
-        Value = ViewBag.Props.value,
-        placeHolderText = ViewBag.Props.placeHolderText,
-        Type = ViewBag.Props.type,
-        ClassName = ViewBag.Props.className,
-    };
 }
+@model SearchInputViewModel
 
-<style>
-    .search-form {
-        position: relative;
-        width: 100%;
-    }
-
-        .search-form .search-input {
-            display: block;
-            width: 100%;
-            padding: 0.375rem 5.25rem 0.375rem 0.75rem;
-            font-size: 1rem;
-            font-weight: 400;
-            line-height: 1.5;
-            color: var(--bs-body-color);
-            appearance: none;
-            background-color: var(--bs-body-bg);
-            background-clip: padding-box;
-            border: var(--bs-border-width) solid var(--bs-border-color);
-            border-radius: 999px;
-            transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
-        }
-
-            .search-form .search-input:focus {
-                color: var(--bs-body-color);
-                background-color: var(--bs-body-bg);
-                border-color: #86b7fe;
-                outline: 0;
-                box-shadow: 0 0 0 0.1rem rgba(13,110,253,.25);
-            }
-
-        .search-form .search-button {
-            position: absolute;
-            top: 4px;
-            right: 4px;
-            height: calc(100% - 8px);
-            padding-top: 0 !important;
-            padding-bottom: 0 !important;
-            border-radius: 999px !important;
-            background-color: var(--site-theme-operating)!important;
-            color: var(--site-title-operating);
-            border: none;
-            transition: .25s ease-out;
-        }
-
-            .search-form .search-button:hover {
-                filter: brightness(.9);
-                transition: .25s ease-in;
-            }
-</style>
-
-<div class="search-form @props.ClassName">
-    <input name="@props.Name" class="search-input" type="@props.Type" value="@props.Value" placeholder="@(string.IsNullOrEmpty(props.placeHolderText) ? _globalsLocalizer["PlaceHolder_SearchDefault"] : props.placeHolderText)" />
-    <input type="submit" class="search-button btn btn-primary" value="@_globalsLocalizer["Btn_Search"]" />
+<div class="search-form @Model.ClassName">
+    <input name="@Model.Name" class="search-input" type="@Model.Type.ToString().ToLower()" value="@Model.Value" placeholder="@(string.IsNullOrEmpty(Model.PlaceHolderText) ? _localizer.Globals["PlaceHolder_SearchDefault"] : Model.PlaceHolderText)" />
+    <button type="submit" class="search-button btn btn-primary">
+        <i class="fa-light fa-magnifying-glass"></i>
+        @_localizer.Globals["Btn_Search"]
+    </button>
+    <script src="@componentScript"></script>
 </div>
-
-<script src="@componentScript"></script>
-<script type="text/javascript">
-
-</script>

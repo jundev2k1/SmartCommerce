@@ -1,12 +1,12 @@
 ﻿@model ProductModel
 @{
-    ViewData[Constants.GLOBAL_KEY_TITLE] = _globalsLocalizer["Nav_Product_Detail"];
+    ViewData[Constants.GLOBAL_KEY_TITLE] = _localizer.Globals["Nav_Product_Detail"];
     ViewData[Constants.GLOBAL_KEY_CURRENT_PAGE] = "ProductList_Page";
 
     var breadcrumbs = new Breadcrumb[]
     {
-        new Breadcrumb { Title = _globalsLocalizer["Nav_Home"].Value, Href = Constants.MODULE_HOME_HOME_PATH },
-        new Breadcrumb { Title = _globalsLocalizer["Nav_Product_List"].Value, Href = Constants.MODULE_PRODUCT_PRODUCTLIST_PATH },
+        new Breadcrumb { Title = _localizer.Globals["Nav_Home"].Value, Href = Constants.MODULE_HOME_HOME_PATH },
+        new Breadcrumb { Title = _localizer.Globals["Nav_Product_List"].Value, Href = Constants.MODULE_PRODUCT_PRODUCTLIST_PATH },
         new Breadcrumb { Title = Model.ProductId, IsDisabled = true }
     };
 }
@@ -14,40 +14,78 @@
 @await Component.InvokeAsync("Breadcrumb", breadcrumbs)
 
 <section id="bodyPageLoad">
-    <div class="row">
-        <div class="col-md-4 col-12">
+    <div class="row g-md-2 g-1">
+        <div class="col-md-6 col-12">
             <div class="site-card h-100">
                 @await Component.InvokeAsync("Carousel", new { images = Model.Images, idTarget = "ProductDetailImage" })
             </div>
         </div>
-        <div class="col-md-8 col-12">
+        <div class="col-md-6 col-12">
             <div class="site-card h-100">
-                <div class="row">
-                <div class="col-md-6 col-12">
-                    <div class="d-flex flex-column gap-1 mb-1">
-                        <label class="fw-semibold">@_fieldsLocalizer["Product_ProductId"]:</label>
-                        <p>@Model.ProductId</p>
+                <div class="d-flex gap-2 justify-content-end mb-2">
+                    <a href="#" class="btn site-btn-info">
+                        <i class="fa-regular fa-eye"></i>
+                        @_localizer.Globals["Btn_Preview"]
+                    </a>
+                    <a asp-route="@Constants.MODULE_PRODUCT_PRODUCTDELETE_NAME" asp-route-id="@Model.ProductId" class="btn site-btn-danger">
+                        <i class="fa-light fa-pencil"></i>
+                        @_localizer.Globals["Btn_Delete"]
+                    </a>
+                    <a asp-route="@Constants.MODULE_PRODUCT_PRODUCTEDIT_NAME" asp-route-id="@Model.ProductId" class="btn site-btn-primary">
+                        <i class="fa-light fa-pencil"></i>
+                        @_localizer.Globals["Btn_Edit"]
+                    </a>
+                </div>
+                <div class="row g-md-2 gx-1 gy-2">
+                    <div class="col-6">
+                        <div class="d-flex flex-column gap-1">
+                            <label class="fw-semibold">@_localizer.Fields["Product_ProductId"]:</label>
+                            <p>@Model.ProductId</p>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="d-flex flex-column gap-1">
+                            <label class="fw-semibold">@_localizer.Fields["Product_Status"]:</label>
+                            <p>@await Component.InvokeAsync("ProductStatusBadge", new { status = Model.Status })</p>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="d-flex flex-column gap-1">
+                            <label class="fw-semibold">@_localizer.Fields["Product_Name"]:</label>
+                            <p>@Model.Name</p>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="d-flex flex-column gap-1">
+                            <label class="fw-semibold">@_localizer.Fields["Product_Price1"]:</label>
+                            <p>@CommonUtility.GetProductPrice(Model.Price1, Constants.CONFIG_CURRENCY_IN_USE)</p>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="d-flex flex-column gap-1">
+                            <label class="fw-semibold">@_localizer.Fields["Product_Price2"]:</label>
+                            <p>@CommonUtility.GetProductPrice(Model.Price2, Constants.CONFIG_CURRENCY_IN_USE)</p>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="d-flex flex-column gap-1">
+                            <label class="fw-semibold">@_localizer.Fields["Product_Price3"]:</label>
+                            <p>@CommonUtility.GetProductPrice(Model.Price3, Constants.CONFIG_CURRENCY_IN_USE)</p>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="d-flex flex-column gap-1">
+                            <label class="fw-semibold">@_localizer.Fields["Product_DisplayPrice"]:</label>
+                            <p>@ProductUtilities.GetProductDislayPriceContent(_localizer.Dictionary, Model.DisplayPrice)</p>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="d-flex flex-column gap-1">
+                            <label class="fw-semibold">@_localizer.Fields["Product_Address"]:</label>
+                            <p>@AddressUtilities.GetFullAddress(Model.Address1, Model.Address2,Model.Address3,Model.Address4, Constants.CONFIG_LANGUAGE_OPTIONS)</p>
+                        </div>
                     </div>
                 </div>
-                <div class="col-md-6 col-12">
-                    <div class="d-flex flex-column gap-1 mb-1">
-                            <label class="fw-semibold">@_fieldsLocalizer["Product_Status"]:</label>
-                        <p>@Model.Status</p>
-                    </div>
-                </div>
-                <div class="col-12">
-                    <div class="d-flex flex-column gap-1 mb-1">
-                            <label class="fw-semibold">@_fieldsLocalizer["Product_Name"]:</label>
-                        <p>@Model.Name</p>
-                    </div>
-                </div>
-                <div class="col-12">
-                    <div class="d-flex flex-column gap-1 mb-1">
-                            <label class="fw-semibold">@_fieldsLocalizer["Product_Address"]:</label>
-                        <p>@Model.Address1 @Model.Address2 @Model.Address3 @Model.Address4</p>
-                    </div>
-                </div>
-            </div>
             </div>
         </div>
         <div class="col-md-12">

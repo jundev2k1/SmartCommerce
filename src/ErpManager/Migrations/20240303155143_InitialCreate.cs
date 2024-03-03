@@ -19,7 +19,7 @@ namespace ErpManager.ERP.Migrations
                     Name = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false, defaultValueSql: "((''))"),
                     Status = table.Column<int>(type: "int", nullable: false, defaultValueSql: "((1))"),
                     Avatar = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true, defaultValueSql: "((''))"),
-                    CreatedDate = table.Column<DateTime>(type: "datetime", nullable: true, defaultValueSql: "(getdate())"),
+                    DateCreated = table.Column<DateTime>(type: "datetime", nullable: true, defaultValueSql: "(getdate())"),
                     LastChanged = table.Column<DateTime>(type: "datetime", nullable: true, defaultValueSql: "((''))")
                 },
                 constraints: table =>
@@ -49,8 +49,9 @@ namespace ErpManager.ERP.Migrations
                     Size2 = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     Size3 = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     TakeOverId = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: true, defaultValueSql: "('')"),
-                    DateCreated = table.Column<DateTime>(type: "datetime", nullable: false, defaultValueSql: "(getdate())"),
-                    DateChanged = table.Column<DateTime>(type: "datetime", nullable: false, defaultValueSql: "(getdate())"),
+                    EmbeddedLink = table.Column<string>(type: "nvarchar(4000)", maxLength: 4000, nullable: true, defaultValueSql: "('')"),
+                    DateCreated = table.Column<DateTime>(type: "datetime", nullable: true, defaultValueSql: "(getdate())"),
+                    DateChanged = table.Column<DateTime>(type: "datetime", nullable: true),
                     CreatedBy = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: true, defaultValueSql: "('')"),
                     LastChanged = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: true, defaultValueSql: "('')")
                 },
@@ -70,7 +71,7 @@ namespace ErpManager.ERP.Migrations
                     Permission = table.Column<string>(type: "nvarchar(4000)", maxLength: 4000, nullable: true, defaultValueSql: "('')"),
                     Priority = table.Column<int>(type: "int", nullable: false, defaultValueSql: "(0)"),
                     DateCreated = table.Column<DateTime>(type: "datetime", nullable: false, defaultValueSql: "(getdate())"),
-                    DateChanged = table.Column<DateTime>(type: "datetime", nullable: false, defaultValueSql: "(getdate())"),
+                    DateChanged = table.Column<DateTime>(type: "datetime", nullable: true),
                     CreatedBy = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: true, defaultValueSql: "('')"),
                     Status = table.Column<int>(type: "int", nullable: false, defaultValueSql: "(1)")
                 },
@@ -99,9 +100,9 @@ namespace ErpManager.ERP.Migrations
                     Status = table.Column<int>(type: "int", nullable: false, defaultValueSql: "(1)"),
                     DelFlg = table.Column<bool>(type: "bit", nullable: false),
                     Sex = table.Column<int>(type: "int", nullable: false, defaultValueSql: "(2)"),
-                    Birthday = table.Column<DateTime>(type: "datetime", nullable: true),
+                    Birthday = table.Column<DateTime>(type: "datetime", nullable: false),
                     DateCreated = table.Column<DateTime>(type: "datetime", nullable: false, defaultValueSql: "(getdate())"),
-                    DateChanged = table.Column<DateTime>(type: "datetime", nullable: false, defaultValueSql: "(getdate())"),
+                    DateChanged = table.Column<DateTime>(type: "datetime", nullable: false),
                     CreatedBy = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: true, defaultValueSql: "('')"),
                     LastLogin = table.Column<DateTime>(type: "datetime", nullable: true, defaultValueSql: "(getdate())"),
                     LastChanged = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: true, defaultValueSql: "('')"),

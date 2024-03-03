@@ -12,7 +12,7 @@ namespace ErpManager.Domain.Models
 
         public string Avatar { get; set; } = string.Empty;
 
-        public DateTime? CreatedDate { get; set; }
+        public DateTime? DateCreated { get; set; }
 
         public DateTime? LastChanged { get; set; }
     }

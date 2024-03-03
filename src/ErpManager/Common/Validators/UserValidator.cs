@@ -4,7 +4,7 @@ namespace ErpManager.ERP.Common.Validators
 {
     public sealed class UserValidator : ValidatorBase<UserModel>
     {
-        public UserValidator()
+        public UserValidator(ILocalizer localizer, IServiceFacade serviceFacade) : base(serviceFacade)
         {
             RuleFor(user => user.BranchId)
                 .NotNull().WithMessage("")
@@ -43,7 +43,7 @@ namespace ErpManager.ERP.Common.Validators
                 .NotNull().WithMessage("")
                 .NotEmpty().WithMessage("Is required")
                 .MaximumLength(20).WithMessage("")
-                .Matches("^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\\s\\./0-9]*$").WithMessage("");
+                .Matches(Constants.REGEX_VALID_PHONE_NUMBER).WithMessage("");
         }
     }
 }

@@ -123,11 +123,20 @@
   <data name="Btn_Create" xml:space="preserve">
     <value>Create</value>
   </data>
+  <data name="Btn_Delete" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="Btn_Edit" xml:space="preserve">
+    <value>Edit</value>
+  </data>
   <data name="Btn_Export" xml:space="preserve">
     <value>Export</value>
   </data>
   <data name="Btn_Filter" xml:space="preserve">
     <value>Filter</value>
+  </data>
+  <data name="Btn_Preview" xml:space="preserve">
+    <value>Preview</value>
   </data>
   <data name="Btn_ResetForm" xml:space="preserve">
     <value>Reset Form</value>
@@ -195,6 +204,9 @@
   </data>
   <data name="Nav_Product_Detail" xml:space="preserve">
     <value>Product Detail</value>
+  </data>
+  <data name="Nav_Product_Edit" xml:space="preserve">
+    <value>Product Edit</value>
   </data>
   <data name="Nav_Product_List" xml:space="preserve">
     <value>Product List</value>

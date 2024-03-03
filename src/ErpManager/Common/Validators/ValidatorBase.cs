@@ -1,11 +1,19 @@
 ﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
 
+using Azure;
+using ErpManager.ERP.Common.Extensions;
 using System.Text.RegularExpressions;
 
 namespace ErpManager.ERP.Common.Validators
 {
     public class ValidatorBase<T> : AbstractValidator<T>
     {
+        private readonly IServiceFacade _serviceFacade;
+        public ValidatorBase(IServiceFacade serviceFacade)
+        {
+            _serviceFacade = serviceFacade;
+        }
+
         /// <summary>
         /// Must be valid images
         /// </summary>
@@ -13,6 +21,48 @@ namespace ErpManager.ERP.Common.Validators
         protected bool MustBeValidImages(string value)
         {
             return string.IsNullOrEmpty(value) || Regex.IsMatch(value, "^(image1|[^,]+)$");
+        }
+
+        /// <summary>
+        /// Be province
+        /// </summary>
+        /// <param name="value">Value</param>
+        /// <returns>Is province</returns>
+        protected bool BeProvince(string value)
+        {
+            return AddressProvider.Instance.Provinces.Any(address => address.ProvinceId.Equals(value));
+        }
+
+        /// <summary>
+        /// Be valid user (User must exist in database)
+        /// </summary>
+        /// <param name="userId">User id</param>
+        /// <returns>Be valid user</returns>
+        protected bool BeValidUser(string branchId, string userId)
+        {
+            return _serviceFacade.Users.GetUser(branchId, userId) != null;
+        }
+
+        /// <summary>
+        /// Be not exist product id (Product must not exist in database)
+        /// </summary>
+        /// <param name="branchId">Branch id</param>
+        /// <param name="productId">Product id</param>
+        /// <returns>Is not exist</returns>
+        protected bool BeNotExistProduct(string branchId, string productId)
+        {
+            var result = _serviceFacade.Products.GetProduct(branchId, productId) == null;
+            return result;
+        }
+
+        /// <summary>
+        /// Is update
+        /// </summary>
+        /// <param name="dateCreated">Date created</param>
+        /// <returns>Is update</returns>
+        protected bool IsUpdate(DateTime? dateCreated)
+        {
+            return dateCreated != null;
         }
     }
 }

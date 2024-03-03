@@ -17,7 +17,7 @@ namespace ErpManager.Domain.Mapping
                 Name = branchEntity.Name,
                 Avatar = branchEntity.Avatar,
                 Status = branchEntity.Status,
-                CreatedDate = branchEntity.CreatedDate,
+                DateCreated = branchEntity.DateCreated,
                 LastChanged = branchEntity.LastChanged,
             };
 
@@ -37,7 +37,7 @@ namespace ErpManager.Domain.Mapping
                 Name = branchModel.Name,
                 Avatar = branchModel.Avatar,
                 Status = branchModel.Status,
-                CreatedDate = branchModel.CreatedDate,
+                DateCreated = branchModel.DateCreated,
                 LastChanged = branchModel.LastChanged,
             };
 

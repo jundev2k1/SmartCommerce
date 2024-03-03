@@ -129,4 +129,25 @@
   <data name="ValTxt_NotificationStatus_Unread" xml:space="preserve">
     <value>Unread</value>
   </data>
+  <data name="ValTxt_ProductDisplayPrice1" xml:space="preserve">
+    <value>Display Price 1</value>
+  </data>
+  <data name="ValTxt_ProductDisplayPrice2" xml:space="preserve">
+    <value>Display Price 2</value>
+  </data>
+  <data name="ValTxt_ProductDisplayPrice3" xml:space="preserve">
+    <value>Display Price 3</value>
+  </data>
+  <data name="ValTxt_ProductStatus_GoodPrice" xml:space="preserve">
+    <value>Good Price</value>
+  </data>
+  <data name="ValTxt_ProductStatus_Normal" xml:space="preserve">
+    <value>Normal</value>
+  </data>
+  <data name="ValTxt_ProductStatus_Sold" xml:space="preserve">
+    <value>Sold</value>
+  </data>
+  <data name="ValTxt_ProductStatus_UrgentSale" xml:space="preserve">
+    <value>Urgent Sale</value>
+  </data>
 </root>

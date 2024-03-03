@@ -23,7 +23,7 @@ public partial class Branch
     public string Avatar { get; set; }
 
     [Column(TypeName = "datetime")]
-    public DateTime? CreatedDate { get; set; }
+    public DateTime? DateCreated { get; set; }
 
     [Column(TypeName = "datetime")]
     public DateTime? LastChanged { get; set; }

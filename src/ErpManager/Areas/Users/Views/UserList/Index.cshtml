@@ -1,11 +1,11 @@
 ﻿@{
-    ViewData[Constants.GLOBAL_KEY_TITLE] = _globalsLocalizer["Nav_User_List"];
+    ViewData[Constants.GLOBAL_KEY_TITLE] = _localizer.Globals["Nav_User_List"];
     ViewData[Constants.GLOBAL_KEY_CURRENT_PAGE] = "UserList_Page";
 
     var breadcrumbs = new Breadcrumb[]
     {
-        new Breadcrumb { Title = _globalsLocalizer["Nav_Home"].Value, Href="/" },
-        new Breadcrumb { Title = _globalsLocalizer["Nav_Product_List"].Value, IsDisabled = true }
+        new Breadcrumb { Title = _localizer.Globals["Nav_Home"].Value, Href = Constants.MODULE_HOME_HOME_PATH },
+        new Breadcrumb { Title = _localizer.Globals["Nav_Product_List"].Value, IsDisabled = true }
     };
 
     var pageIndex = int.Parse(ViewData[Constants.VIEWDATA_KEY_PAGE_INDEX].ToStringOrEmpty());
@@ -17,7 +17,7 @@
 <section id="searchBar" class="site-card">
     <div class="row">
         <div class="col-md-6 col-8">
-            @await Component.InvokeAsync("SearchInput")
+            @await Component.InvokeAsync("SearchInput", new SearchInputViewModel())
         </div>
         <div class="col-md-2 col-4">
             <input type="button" class="btn site-btn-outline-info site-rounded" value="Filter" />

@@ -148,12 +148,10 @@
 }
 
     .site-btn-primary:hover {
-        padding-left: 1rem;
-        padding-right: 1rem;
         background: var(--site-primary);
         filter: brightness(0.9);
-        transition: .25s ease-in;
         color: var(--site-white);
+        transition: .25s ease-in;
     }
 
 .site-btn-outline-primary {
@@ -165,8 +163,6 @@
 }
 
     .site-btn-outline-primary:hover {
-        padding-left: 1rem;
-        padding-right: 1rem;
         filter: brightness(0.75);
         border-color: var(--site-border-operating);
         color: var(--site-text-operating);
@@ -177,17 +173,15 @@
     padding-left: 1rem;
     padding-right: 1rem;
     background: var(--site-secondary);
-    color: var(--site-gray-100);
+    color: var(--site-text-operating);
     transition: .25s ease-out;
 }
 
     .site-btn-secondary:hover {
-        padding-left: 1rem;
-        padding-right: 1rem;
         background: var(--site-secondary);
         filter: brightness(0.9);
+        color: var(--site-text-operating);
         transition: .25s ease-in;
-        color: var(--site-white);
     }
 
 .site-btn-outline-secondary {
@@ -199,8 +193,6 @@
 }
 
     .site-btn-outline-secondary:hover {
-        padding-left: 1rem;
-        padding-right: 1rem;
         filter: brightness(0.75);
         border-color: var(--site-border-operating);
         color: var(--site-text-operating);
@@ -211,13 +203,12 @@
     padding-left: 1rem;
     padding-right: 1rem;
     background: var(--site-danger);
-    color: var(--site-gray-100);
+    color: var(--site-text-operating);
     transition: .25s ease-out;
 }
 
     .site-btn-danger:hover {
-        padding-left: 1rem;
-        padding-right: 1rem;
+        background: var(--site-danger);
         filter: brightness(0.9);
         color: var(--site-white);
         transition: .25s ease-in;
@@ -232,8 +223,6 @@
 }
 
     .site-btn-outline-danger:hover {
-        padding-left: 1rem;
-        padding-right: 1rem;
         filter: brightness(0.75);
         border-color: var(--site-border-operating);
         color: var(--site-text-operating);
@@ -244,13 +233,11 @@
     padding-left: 1rem;
     padding-right: 1rem;
     background: var(--site-info);
-    color: var(--site-gray-100);
+    color: var(--site-text-operating);
     transition: .25s ease-out;
 }
 
     .site-btn-info:hover {
-        padding-left: 1rem;
-        padding-right: 1rem;
         background: var(--site-info);
         filter: brightness(0.9);
         color: var(--site-white);
@@ -266,8 +253,6 @@
 }
 
     .site-btn-outline-info:hover {
-        padding-left: 1rem;
-        padding-right: 1rem;
         filter: brightness(0.75);
         border-color: var(--site-border-operating);
         color: var(--site-text-operating);
@@ -278,16 +263,14 @@
     padding-left: 1rem;
     padding-right: 1rem;
     background: var(--site-success);
-    color: var(--site-white);
+    color: var(--site-text-operating);
     transition: .25s ease-out;
 }
 
     .site-btn-success:hover {
-        padding-left: 1rem;
-        padding-right: 1rem;
         background: var(--site-success);
         filter: brightness(0.9);
-        color: var(--site-white);
+        color: var(--site-text-operating);
         transition: .25s ease-in;
     }
 
@@ -300,11 +283,8 @@
 }
 
     .site-btn-outline-success:hover {
-        padding-left: 1rem;
-        padding-right: 1rem;
         border-color: var(--site-success);
         filter: brightness(0.75);
-        border-color: var(--site-border-operating);
         color: var(--site-text-operating);
         transition: .25s ease-in;
     }
@@ -318,8 +298,6 @@
 }
 
     .site-btn-warning:hover {
-        padding-left: 1rem;
-        padding-right: 1rem;
         background: var(--site-warning);
         filter: brightness(0.9);
         color: var(--site-white);
@@ -369,11 +347,38 @@
 }
 
     .site-btn-outline-theme:hover {
-        padding-left: 1rem;
-        padding-right: 1rem;
         border-color: var(--site-border-operating);
-        filter: brightness(0.75);
+        filter: brightness(0.9);
+        transition: .25s ease-in;
+    }
+
+.site-btn-inner-theme {
+    padding-left: 1rem;
+    padding-right: 1rem;
+    background: var(--site-title-operating);
+    color: var(--site-theme-operating);
+    transition: .25s ease-out;
+}
+
+    .site-btn-inner-theme:hover {
+        background: var(--site-title-operating);
+        color: var(--site-theme-operating);
+        filter: brightness(0.9);
+        transition: .25s ease-in;
+    }
+
+.site-btn-outline-inner-theme {
+    padding-left: 1rem;
+    padding-right: 1rem;
+    border-color: var(--site-title-operating);
+    color: var(--site-text-operating);
+    transition: .25s ease-out;
+}
+
+    .site-btn-outline-inner-theme:hover {
+        filter: brightness(0.9);
         color: var(--site-text-operating);
+        border-color: var(--site-title-operating);
         transition: .25s ease-in;
     }
 /*#endregion */

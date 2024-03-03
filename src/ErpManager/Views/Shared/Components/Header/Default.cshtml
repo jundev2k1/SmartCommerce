@@ -1,48 +1,21 @@
 ﻿<section id="headerBar">
-    <style>
-        #headerBar .header {
-            width: 100%;
-            position: relative;
-        }
-
-        #headerBar.sticky .header .wrapper {
-            margin: 0;
-            border-radius: var(--site-border-none);
-        }
-
-        #headerBar .header .wrapper {
-            background: var(--site-theme-operating);
-            border-radius: var(--site-border-layout);
-            padding: .75rem 1rem;
-            margin: .5rem;
-        }
-
-            #headerBar .header .wrapper .title h1 {
-                font-size: 28px;
-                margin-bottom: 0;
-                color: var(--site-title-operating);
-            }
-
-            #headerBar .header .wrapper .sub-navbar {
-                display: flex;
-                justify-content: flex-end;
-                align-items: center;
-            }
-    </style>
     <div class="header">
         <div class="wrapper">
             <div class="row align-items-center">
-                <div class="title col-md-4">
+                <div class="title col-md-6 d-flex align-items-center gap-2">
+                    <button type="button" class="btn site-btn-outline-inner-theme btn-navbar-switch">
+                        <i class="fa-regular fa-bars" style="color: var(--site-title-operating)"></i>
+                    </button>
                     <h1>@ViewData["Title"]</h1>
                 </div>
-                <div class="sub-navbar col-md-8 gap-2">
+                <div class="sub-navbar col-md-6 gap-2">
                     <div class="language-change">
                         @await Component.InvokeAsync("LanguageSwitcher")
                     </div>
                     <div class="user-notification">
                         @await Component.InvokeAsync("UserNotification")
                     </div>
-                    <div class="user-info">asd</div>
+                    <div class="user-info"></div>
                 </div>
             </div>
         </div>

@@ -117,28 +117,43 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ErrorMsg_Address_IsNotValid" xml:space="preserve">
+    <value>This address is not a valid</value>
+  </data>
+  <data name="ErrorMsg_CannotNegative" xml:space="preserve">
+    <value>This field must be positive</value>
+  </data>
+  <data name="ErrorMsg_ExistSpecialCharacter" xml:space="preserve">
+    <value>Special characters are not accepted</value>
+  </data>
   <data name="ErrorMsg_GreaterThanOrEqualTo" xml:space="preserve">
-    <value>{PropertyName} cannot be greater than or equal {MinValue}</value>
+    <value>Cannot enter greater than or equal {MinValue}</value>
   </data>
   <data name="ErrorMsg_GreaterThanTo" xml:space="preserve">
-    <value>{PropertyName} cannot be greater than {MinValue}</value>
+    <value>Cannot enter greater than {MinValue}</value>
   </data>
   <data name="ErrorMsg_IsNotEnum" xml:space="preserve">
-    <value>{PropertyName} is not valid value ({PropertyValue})</value>
+    <value>{PropertyValue} is not valid value</value>
   </data>
   <data name="ErrorMsg_IsRequired" xml:space="preserve">
-    <value>{PropertyName} is required</value>
+    <value>This field is required</value>
   </data>
   <data name="ErrorMsg_LessThanOrEqualTo" xml:space="preserve">
-    <value>{PropertyName} cannot be less than or equal {MaxValue}</value>
+    <value>Cannot enter less than or equal {MaxValue}</value>
   </data>
   <data name="ErrorMsg_LessThanTo" xml:space="preserve">
-    <value>{PropertyName} cannot be less than {MaxValue}</value>
+    <value>Cannot enter less than {MaxValue}</value>
   </data>
   <data name="ErrorMsg_MaxLength" xml:space="preserve">
-    <value>{PropertyName} cannot be more than {MaxLength} characters</value>
+    <value>Cannot enter more than {MaxLength} characters</value>
   </data>
   <data name="ErrorMsg_MinLength" xml:space="preserve">
-    <value>{PropertyName} cannot be less than {MinLength} characters</value>
+    <value>Cannot enter less than {MinLength} characters</value>
+  </data>
+  <data name="ErrorMsg_ProductIdExist" xml:space="preserve">
+    <value>This product id is exist</value>
+  </data>
+  <data name="ErrorMsg_UserNotExist" xml:space="preserve">
+    <value>This user is not exist</value>
   </data>
 </root>

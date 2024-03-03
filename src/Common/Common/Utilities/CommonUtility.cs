@@ -1,5 +1,7 @@
 ﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
 
+using ErpManager.Domain.Entities;
+
 namespace ErpManager.Common.Utilities
 {
     public static class CommonUtility
@@ -33,12 +35,23 @@ namespace ErpManager.Common.Utilities
         {
             var result = product.DisplayPrice switch
             {
-                DisplayPriceEnum.Price1 => $"{product.Price1.ToPrice()} {prefix}".Trim(),
-                DisplayPriceEnum.Price2 => $"{product.Price2.ToPrice()} {prefix}".Trim(),
-                DisplayPriceEnum.Price3 => $"{product.Price3.ToPrice()} {prefix}".Trim(),
+                DisplayPriceEnum.Price1 => GetProductPrice(product.Price1, prefix),
+                DisplayPriceEnum.Price2 => GetProductPrice(product.Price2, prefix),
+                DisplayPriceEnum.Price3 => GetProductPrice(product.Price3, prefix),
                 _ => string.Empty
             };
             return result;
+        }
+
+        /// <summary>
+        /// Get product price
+        /// </summary>
+        /// <param name="price">Price</param>
+        /// <param name="prefix">Prefix</param>
+        /// <returns>Product price</returns>
+        public static string GetProductPrice(decimal price, string prefix = "")
+        {
+            return $"{price.ToPrice()} {prefix}".Trim();
         }
 
         /// <summary>

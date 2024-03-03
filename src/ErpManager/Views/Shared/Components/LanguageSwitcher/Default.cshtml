@@ -1,12 +1,5 @@
 ﻿@model LanguageSwitcherViewModel
 <section id="languageButton">
-    <style>
-        #languageButton select#languageDropdown {
-            background-color: var(--site-title-operating)!important;
-            color: var(--site-theme-operating)!important;
-            font-weight: bold;
-        }
-    </style>
     <form id="languageSwitcherForm" asp-controller="Home" asp-action="LanguageSwitcher" method="get">
         <select name="culture" class="form-select form-select-sm site-rounded-full ps-3 pr-4" id="languageDropdown" onchange="formSubmit()">
             @foreach (var culture in Model.AvailableCultures)

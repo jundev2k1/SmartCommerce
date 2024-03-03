@@ -18,6 +18,8 @@ namespace ErpManager.Domain.Models
 
         public string LastName { get; set; } = string.Empty;
 
+        public string FullName => $"{this.FirstName} {this.LastName}".Trim(); 
+
         public string Email { get; set; } = string.Empty;
 
         public string PhoneNumber { get; set; } = string.Empty;

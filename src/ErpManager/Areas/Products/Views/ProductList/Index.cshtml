@@ -1,11 +1,11 @@
 ﻿@{
-    ViewData[Constants.GLOBAL_KEY_TITLE] = _globalsLocalizer["Nav_Product_List"];
+    ViewData[Constants.GLOBAL_KEY_TITLE] = _localizer.Globals["Nav_Product_List"];
     ViewData[Constants.GLOBAL_KEY_CURRENT_PAGE] = "ProductList_Page";
 
     var breadcrumbs = new Breadcrumb[]
     {
-        new Breadcrumb { Title = _globalsLocalizer["Nav_Home"].Value, Href="/" },
-        new Breadcrumb { Title = _globalsLocalizer["Nav_Product_List"].Value, IsDisabled = true }
+        new Breadcrumb { Title = _localizer.Globals["Nav_Home"].Value, Href = Constants.MODULE_HOME_HOME_PATH },
+        new Breadcrumb { Title = _localizer.Globals["Nav_Product_List"].Value, IsDisabled = true }
     };
 
     var hasResult = Model.PageData.Items.Any();
@@ -16,174 +16,202 @@
 @await Component.InvokeAsync("Breadcrumb", breadcrumbs)
 
 <section id="searchBar" class="site-card">
-    <form name="searchForm" asp-route="@Constants.MODULE_PRODUCT_PRODUCTLIST_NAME" method="post">
-        <div class="row">
-            <div class="col-8">
-                <div class="d-flex gap-1">
-                    @await Component.InvokeAsync("SearchInput", new { name = "SearchFields.Keywords", value = Model.SearchFields.Keywords })
-                    <input type="button" class="btn site-btn-outline-info site-rounded" value="@_globalsLocalizer["Btn_Filter"]" data-bs-toggle="collapse" href="#filterAdvancedCollapse" />
+    <form id="advanceSearchForm" name="searchForm" asp-route="@Constants.MODULE_PRODUCT_PRODUCTLIST_NAME" method="post">
+        <div class="row g-md-2 gx-1 gy-2">
+            <div class="col-md-8 col-12">
+                <div class="d-flex gap-1 search-bar-group">
+                    <div class="flex-grow-1">
+                        @await Component.InvokeAsync("SearchInput", new SearchInputViewModel { Name = "SearchFields.Keywords", Value = Model.SearchFields.Keywords, ClassName= "search-bar-input" })
+                    </div>
+                    <button id="btnExport" type="button" class="btn site-btn-outline-info is-desktop" data-bs-toggle="collapse" href="#filterAdvancedCollapse">
+                        <i class="fa-light fa-filter-list"></i>
+                        @_localizer.Globals["Btn_Filter"]
+                    </button>
                 </div>
             </div>
-            <div class="col-4 d-flex justify-content-end gap-2">
-                <button type="button" class="btn site-btn-outline-theme site-rounded-full" data-bs-toggle="modal" data-bs-target="#exportModal">@_globalsLocalizer["Btn_Export"]</button>
-                <button type="button" class="btn site-btn-theme site-rounded-full">@_globalsLocalizer["Btn_Create"]</button>
+            <div class="col-md-4 col-12 d-flex justify-content-end gap-2">
+                <button id="btnExport" type="button" class="btn site-btn-outline-info is-mobile" data-bs-toggle="collapse" href="#filterAdvancedCollapse">
+                    <i class="fa-light fa-filter-list"></i>
+                    @_localizer.Globals["Btn_Filter"]
+                </button>
+                <button type="button" class="btn site-btn-outline-theme" data-bs-toggle="modal" data-bs-target="#exportModal">
+                    <i class="fa-light fa-file-export"></i>
+                    @_localizer.Globals["Btn_Export"]
+                </button>
+                <a asp-route="@Constants.MODULE_PRODUCT_PRODUCTREGISTER_NAME" class="btn site-btn-theme">
+                    <i class="fa-light fa-plus"></i>
+                    @_localizer.Globals["Btn_Create"]
+                </a>
             </div>
             <div class="col-12">
-                <div class="collapse mt-3" id="filterAdvancedCollapse">
+                <div class="collapse" id="filterAdvancedCollapse">
                     <div class="card card-body">
-                        <h2 class="fs-4">@_globalsLocalizer["Title_SearchAdvanced"]</h2>
-                        <ul class="row">
+                        <h2 class="fs-4">@_localizer.Globals["Title_SearchAdvanced"]</h2>
+                        <ul class="row g-md-2 gx-1 gy-2">
                             <li class="col-md-4 col-6">
-                                <div class="mb-3">
-                                    <label asp-for="SearchFields.ProductId" class="form-label">@_fieldsLocalizer["Product_ProductId"]</label>
-                                    <input type="text" asp-for="SearchFields.ProductId" class="form-control" id="productIdForSearch" placeholder="@_globalsLocalizer["PlaceHolder_SearchWith"] @_fieldsLocalizer["Product_ProductId"]...">
+                                <div class="form-group">
+                                    <label asp-for="SearchFields.ProductId" class="form-label">@_localizer.Fields["Product_ProductId"]</label>
+                                    <input type="text" asp-for="SearchFields.ProductId" class="form-control" id="productIdForSearch" placeholder="@_localizer.Globals["PlaceHolder_SearchWith"] @_localizer.Fields["Product_ProductId"]...">
                                 </div>
                             </li>
                             <li class="col-md-4 col-6">
-                                <div class="mb-3">
-                                    <label asp-for="SearchFields.Status" class="form-label">@_fieldsLocalizer["Product_Status"]</label>
-                                    <input type="text" asp-for="SearchFields.Status" class="form-control" id="statusForSearch" placeholder="@_globalsLocalizer["PlaceHolder_SearchWith"] @_fieldsLocalizer["Product_Status"]...">
+                                <div class="form-group">
+                                    <label asp-for="SearchFields.Status" class="form-label">@_localizer.Fields["Product_Status"]</label>
+                                    <input type="text" asp-for="SearchFields.Status" class="form-control" id="statusForSearch" placeholder="@_localizer.Globals["PlaceHolder_SearchWith"] @_localizer.Fields["Product_Status"]...">
                                 </div>
                             </li>
                             <li class="col-md-4 col-12">
-                                <div class="mb-3">
-                                    <label asp-for="SearchFields.TakeOverId" class="form-label">@_fieldsLocalizer["Product_TakeOverId"]</label>
-                                    <input type="text" asp-for="SearchFields.TakeOverId" class="form-control" id="takeOverByForSearch" placeholder="@_globalsLocalizer["PlaceHolder_SearchWith"] @_fieldsLocalizer["Product_TakeOverId"]...">
+                                <div class="form-group">
+                                    <label asp-for="SearchFields.TakeOverId" class="form-label">@_localizer.Fields["Product_TakeOverId"]</label>
+                                    <select asp-for="SearchFields.TakeOverId" class="form-select select-search-user" id="takeOverByForSearch">
+                                        <option value="@Model.SearchFields.TakeOverId" selected></option>
+                                    </select>
                                 </div>
                             </li>
                             <li class="col-md-8 col-12">
-                                <div class="mb-3">
-                                    <label asp-for="SearchFields.ProductName" class="form-label">@_fieldsLocalizer["Product_Name"]</label>
-                                    <input asp-for="SearchFields.ProductName" type="text" class="form-control" id="productNameForSearch" placeholder="@_globalsLocalizer["PlaceHolder_SearchWith"] @_fieldsLocalizer["Product_Name"]...">
+                                <div class="form-group">
+                                    <label asp-for="SearchFields.ProductName" class="form-label">@_localizer.Fields["Product_Name"]</label>
+                                    <input asp-for="SearchFields.ProductName" type="text" class="form-control" id="productNameForSearch" placeholder="@_localizer.Globals["PlaceHolder_SearchWith"] @_localizer.Fields["Product_Name"]...">
                                 </div>
                             </li>
                             <li class="col-md-4 col-12">
-                                <div class="mb-3">
-                                    <label asp-for="SearchFields.DisplayPrice" class="form-label">@_fieldsLocalizer["Product_DisplayPrice"]</label>
+                                <div class="form-group">
+                                    <label asp-for="SearchFields.DisplayPrice" class="form-label">@_localizer.Fields["Product_DisplayPrice"]</label>
                                     <select asp-for="SearchFields.DisplayPrice" class="form-select" id="displayPriceForSearch" aria-label="Display Price">
-                                        <option value="" selected>@_globalsLocalizer["PlaceHolder_Select"]</option>
-                                        <option value="0">@_fieldsLocalizer["Product_Price1"]</option>
-                                        <option value="1">@_fieldsLocalizer["Product_Price2"]</option>
-                                        <option value="2">@_fieldsLocalizer["Product_Price3"]</option>
+                                        <option value="" selected>@_localizer.Globals["PlaceHolder_Select"]</option>
+                                        <option value="0">@_localizer.Fields["Product_Price1"]</option>
+                                        <option value="1">@_localizer.Fields["Product_Price2"]</option>
+                                        <option value="2">@_localizer.Fields["Product_Price3"]</option>
                                     </select>
                                 </div>
                             </li>
                             <li class="col-12">
-                                <div class="row mb-3">
-                                    <div class="col-md-3 col-6">
-                                        <label asp-for="SearchFields.Address1" class="form-label">@_fieldsLocalizer["Product_Address1"]</label>
-                                        <select asp-for="SearchFields.Address1" class="form-select select-search-address-1" id="Address1ForSearch" aria-label="Province">
-                                        </select>
+                                <div class="row g-md-2 gx-1 gy-2">
+                                    <div class="col-md-3 col-12">
+                                        <label asp-for="SearchFields.Address1" class="form-label">@_localizer.Fields["Product_Address1"]</label>
+                                        <select asp-for="SearchFields.Address1" class="form-select select-search-address-1" id="address1ForSearch"></select>
                                     </div>
-                                    <div class="col-md-3 col-6">
+                                    <div class="col-md-3 col-12">
                                         <div>
-                                            <label asp-for="SearchFields.Address2" class="form-label">@_fieldsLocalizer["Product_Address2"]</label>
-                                            <select asp-for="SearchFields.Address2" class="form-select select-search-address-2" id="Address2ForSearch" aria-label="District" data-parent-id="Address1ForSearch">
-                                            </select>
+                                            <label asp-for="SearchFields.Address2" class="form-label">@_localizer.Fields["Product_Address2"]</label>
+                                            <select asp-for="SearchFields.Address2" class="form-select select-search-address-2" id="address2ForSearch" data-parent-id="address1ForSearch"></select>
                                         </div>
                                     </div>
                                     <div class="col-md-3 col-12">
-                                        <label asp-for="SearchFields.Address3" class="form-label">@_fieldsLocalizer["Product_Address3"]</label>
-                                        <select asp-for="SearchFields.Address3" class="form-select select-search-address-3" id="Address3ForSearch" aria-label="Wards-township" data-parent-id="Address2ForSearch">
-                                        </select>
+                                        <label asp-for="SearchFields.Address3" class="form-label">@_localizer.Fields["Product_Address3"]</label>
+                                        <select asp-for="SearchFields.Address3" class="form-select select-search-address-3" id="address3ForSearch" data-parent-id="address2ForSearch"></select>
                                     </div>
                                     <div class="col-md-3 col-12">
-                                        <label asp-for="SearchFields.Address4" class="form-label">@_fieldsLocalizer["Product_Address4"]</label>
-                                        <input type="text" asp-for="SearchFields.Address4" class="form-control" id="address4ForSearch" placeholder="@_globalsLocalizer["PlaceHolder_SearchWith"] @_fieldsLocalizer["Product_Address"]...">
+                                        <label asp-for="SearchFields.Address4" class="form-label">@_localizer.Fields["Product_Address4"]</label>
+                                        <input type="text" asp-for="SearchFields.Address4" class="form-control" id="address4ForSearch" placeholder="@_localizer.Globals["PlaceHolder_SearchWith"] @_localizer.Fields["Product_Address"]...">
                                     </div>
                                 </div>
                             </li>
                             <li class="col-md-4 col-12">
-                                <div class="mb-3">
-                                    <label class="form-label">@_fieldsLocalizer["Product_Price1"]</label>
+                                <div class="form-group">
+                                    <label class="form-label">@_localizer.Fields["Product_Price1"]</label>
                                     <div class="d-flex gap-1 align-items-center">
-                                        <input type="number" asp-for="SearchFields.MinPrice1" class="form-control" id="minPrice1ForSearch" placeholder="@_globalsLocalizer["PlaceHolder_Min"]...">
+                                        <input type="text" asp-for="SearchFields.MinPrice1" class="form-control" id="minPrice1ForSearch" placeholder="@_localizer.Globals["PlaceHolder_Min"]...">
                                         ~
-                                        <input type="number" asp-for="SearchFields.MaxPrice1" class="form-control" id="maxPrice1ForSearch" placeholder="@_globalsLocalizer["PlaceHolder_Max"]...">
+                                        <input type="text" asp-for="SearchFields.MaxPrice1" class="form-control" id="maxPrice1ForSearch" placeholder="@_localizer.Globals["PlaceHolder_Max"]...">
                                     </div>
                                 </div>
                             </li>
                             <li class="col-md-4 col-12">
-                                <div class="mb-3">
-                                    <label class="form-label">@_fieldsLocalizer["Product_Price2"]</label>
+                                <div class="form-group">
+                                    <label class="form-label">@_localizer.Fields["Product_Price2"]</label>
                                     <div class="d-flex gap-1 align-items-center">
-                                        <input type="number" asp-for="SearchFields.MinPrice2" class="form-control" id="minPrice2ForSearch" placeholder="@_globalsLocalizer["PlaceHolder_Min"]...">
+                                        <input type="text" asp-for="SearchFields.MinPrice2" class="form-control" id="minPrice2ForSearch" placeholder="@_localizer.Globals["PlaceHolder_Min"]...">
                                         ~
-                                        <input type="number" asp-for="SearchFields.MaxPrice2" class="form-control" id="maxPrice2ForSearch" placeholder="@_globalsLocalizer["PlaceHolder_Max"]...">
+                                        <input type="text" asp-for="SearchFields.MaxPrice2" class="form-control" id="maxPrice2ForSearch" placeholder="@_localizer.Globals["PlaceHolder_Max"]...">
                                     </div>
                                 </div>
                             </li>
                             <li class="col-md-4 col-12">
-                                <div class="mb-3">
-                                    <label class="form-label">@_fieldsLocalizer["Product_Price3"]</label>
+                                <div class="form-group">
+                                    <label class="form-label">@_localizer.Fields["Product_Price3"]</label>
                                     <div class="d-flex gap-1 align-items-center">
-                                        <input type="number" asp-for="SearchFields.MinPrice3" class="form-control" id="minPrice3ForSearch" placeholder="@_globalsLocalizer["PlaceHolder_Min"]...">
+                                        <input type="text" asp-for="SearchFields.MinPrice3" class="form-control" id="minPrice3ForSearch" placeholder="@_localizer.Globals["PlaceHolder_Min"]...">
                                         ~
-                                        <input type="number" asp-for="SearchFields.MaxPrice3" class="form-control" id="maxPrice3ForSearch" placeholder="@_globalsLocalizer["PlaceHolder_Max"]...">
+                                        <input type="text" asp-for="SearchFields.MaxPrice3" class="form-control" id="maxPrice3ForSearch" placeholder="@_localizer.Globals["PlaceHolder_Max"]...">
                                     </div>
                                 </div>
                             </li>
                             <li class="col-md-4 col-12">
-                                <div class="mb-3">
-                                    <label class="form-label">@_fieldsLocalizer["Product_Size1"]</label>
+                                <div class="form-group">
+                                    <label class="form-label">@_localizer.Fields["Product_Size1"]</label>
                                     <div class="d-flex gap-1 align-items-center">
-                                        <input type="number" asp-for="SearchFields.MinSize1" class="form-control" id="lengthFromForSearch" placeholder="@_globalsLocalizer["PlaceHolder_From"]...">
+                                        <input type="text" asp-for="SearchFields.MinSize1" class="form-control" id="lengthFromForSearch" placeholder="@_localizer.Globals["PlaceHolder_From"]...">
                                         ~
-                                        <input type="number" asp-for="SearchFields.MaxSize1" class="form-control" id="lengthToForSearch" placeholder="@_globalsLocalizer["PlaceHolder_To"]...">
+                                        <input type="text" asp-for="SearchFields.MaxSize1" class="form-control" id="lengthToForSearch" placeholder="@_localizer.Globals["PlaceHolder_To"]...">
                                     </div>
                                 </div>
                             </li>
                             <li class="col-md-4 col-12">
-                                <div class="mb-3">
-                                    <label class="form-label">@_fieldsLocalizer["Product_Size2"]</label>
+                                <div class="form-group">
+                                    <label class="form-label">@_localizer.Fields["Product_Size2"]</label>
                                     <div class="d-flex gap-1 align-items-center">
-                                        <input type="number" asp-for="SearchFields.MinSize2" class="form-control" id="widthFromForSearch" placeholder="@_globalsLocalizer["PlaceHolder_From"]...">
+                                        <input type="text" asp-for="SearchFields.MinSize2" class="form-control" id="widthFromForSearch" placeholder="@_localizer.Globals["PlaceHolder_From"]...">
                                         ~
-                                        <input type="number" asp-for="SearchFields.MaxSize2" class="form-control" id="widthToForSearch" placeholder="@_globalsLocalizer["PlaceHolder_To"]...">
+                                        <input type="text" asp-for="SearchFields.MaxSize2" class="form-control" id="widthToForSearch" placeholder="@_localizer.Globals["PlaceHolder_To"]...">
                                     </div>
                                 </div>
                             </li>
                             <li class="col-md-4 col-12">
-                                <div class="mb-3">
-                                    <label class="form-label">@_fieldsLocalizer["Product_Size3"]</label>
+                                <div class="form-group">
+                                    <label class="form-label">@_localizer.Fields["Product_Size3"]</label>
                                     <div class="d-flex gap-1 align-items-center">
-                                        <input type="number" asp-for="SearchFields.MinSize3" class="form-control" id="landAreaFromForSearch" placeholder="@_globalsLocalizer["PlaceHolder_From"]...">
+                                        <input type="text" asp-for="SearchFields.MinSize3" class="form-control" id="landAreaFromForSearch" placeholder="@_localizer.Globals["PlaceHolder_From"]...">
                                         ~
-                                        <input type="number" asp-for="SearchFields.MaxSize3" class="form-control" id="landAreaToForSearch" placeholder="@_globalsLocalizer["PlaceHolder_To"]...">
+                                        <input type="text" asp-for="SearchFields.MaxSize3" class="form-control" id="landAreaToForSearch" placeholder="@_localizer.Globals["PlaceHolder_To"]...">
                                     </div>
                                 </div>
                             </li>
                             <li class="col-md-6 col-12">
-                                <div class="mb-3">
-                                    <label class="form-label">@_fieldsLocalizer["Product_DateCreated"]</label>
+                                <div class="form-group">
+                                    <label class="form-label">@_localizer.Fields["Product_DateCreated"]</label>
                                     <div class="d-flex gap-1 align-items-center">
-                                        <input type="datetime" asp-for="SearchFields.DateCreatedFrom" class="form-control datetime-picker" id="dateCreatedFromForSearch" placeholder="@_globalsLocalizer["PlaceHolder_From"]...">
+                                        <input type="datetime" asp-for="SearchFields.DateCreatedFrom" class="form-control datetime-picker" id="dateCreatedFromForSearch" placeholder="@_localizer.Globals["PlaceHolder_From"]...">
                                         ~
-                                        <input type="datetime" asp-for="SearchFields.DateCreatedTo" class="form-control datetime-picker" id="dateCreatedToForSearch" placeholder="@_globalsLocalizer["PlaceHolder_To"]...">
+                                        <input type="datetime" asp-for="SearchFields.DateCreatedTo" class="form-control datetime-picker" id="dateCreatedToForSearch" placeholder="@_localizer.Globals["PlaceHolder_To"]...">
                                     </div>
                                 </div>
                             </li>
                             <li class="col-md-6 col-12">
-                                <div class="mb-3">
-                                    <label class="form-label">@_fieldsLocalizer["Product_DateChanged"]</label>
+                                <div class="form-group">
+                                    <label class="form-label">@_localizer.Fields["Product_DateChanged"]</label>
                                     <div class="d-flex gap-1 align-items-center">
-                                        <input type="datetime" asp-for="SearchFields.DateChangedFrom" class="form-control" id="dateChangedFromForSearch" placeholder="@_globalsLocalizer["PlaceHolder_From"]...">
+                                        <input type="datetime" asp-for="SearchFields.DateChangedFrom" class="form-control datetime-picker" id="dateChangedFromForSearch" placeholder="@_localizer.Globals["PlaceHolder_From"]...">
                                         ~
-                                        <input type="datetime" asp-for="SearchFields.DateChangedTo" class="form-control" id="dateChangedToForSearch" placeholder="@_globalsLocalizer["PlaceHolder_To"]...">
+                                        <input type="datetime" asp-for="SearchFields.DateChangedTo" class="form-control datetime-picker" id="dateChangedToForSearch" placeholder="@_localizer.Globals["PlaceHolder_To"]...">
                                     </div>
                                 </div>
                             </li>
                         </ul>
-                        <div>
+                        <div class="hidden-field-area d-none">
                             <input id="pageIndex" type="hidden" asp-for="PageIndex" />
                         </div>
-                        <div class="d-flex gap-3 justify-content-end align-items-center">
-                            <select asp-for="SearchFields.DelFlg" class="form-select w-25" aria-label="DeleteFlg">
-                                <option selected value="false">@_valueTextsLocalizer["ValTxt_DelFlg_Normal"]</option>
-                                <option value="true">@_valueTextsLocalizer["ValTxt_DelFlg_Deleted"]</option>
-                            </select>
-                            <input id="btnSubmitAdvanced" type="submit" class="btn site-btn-theme" value="@_globalsLocalizer["Btn_SearchAdvanced"]" />
-                            <input id="btnResetForm" type="reset" class="btn site-btn-outline-theme" onclick="resetSearchForm()" value="@_globalsLocalizer["Btn_ResetForm"]" />
+                        <div id="searchControl" class="d-flex justify-content-md-end mt-4">
+                            <div class="group-control w-auto row g-md-2 gx-1 gy-2">
+                                <div class="form-group col-md-auto col-12">
+                                    <select asp-for="SearchFields.DelFlg" id="delFlgSearchInput" class="form-select w-auto" aria-label="DeleteFlg">
+                                        <option selected value="false">@_localizer.ValueTexts["ValTxt_DelFlg_Normal"]</option>
+                                        <option value="true">@_localizer.ValueTexts["ValTxt_DelFlg_Deleted"]</option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-auto col-8">
+                                    <button id="btnSubmitAdvanced" type="submit" class="btn site-btn-theme">
+                                        <i class="fa-light fa-magnifying-glass"></i>
+                                        @_localizer.Globals["Btn_SearchAdvanced"]
+                                    </button>
+                                </div>
+                                <div class="form-group col-md-auto col-4">
+                                    <button id="btnResetForm" type="reset" class="btn site-btn-outline-theme" onclick="resetSearchForm('advanceSearchForm')">
+                                        <i class="fa-light fa-arrow-rotate-left"></i>
+                                        @_localizer.Globals["Btn_ResetForm"]
+                                    </button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -197,11 +225,11 @@
             <table class="site-table site-table-hover site-border site-rounded-layout">
                 <thead>
                     <tr>
-                        <th scope="col" width="10%">@_fieldsLocalizer["Product_ProductId"]</th>
-                        <th scope="col" width="25%">@_fieldsLocalizer["Product_Name"]</th>
-                        <th class="text-center" scope="col" width="15%">@_fieldsLocalizer["Product_Price"]</th>
-                        <th class="text-center" scope="col" width="40%">@_fieldsLocalizer["Product_Address"]</th>
-                        <th class="text-center" scope="col" width="10%">@_fieldsLocalizer["Product_Status"]</th>
+                        <th class="is-desktop" scope="col" width="10%">@_localizer.Fields["Product_ProductId"]</th>
+                        <th scope="col" width="25%">@_localizer.Fields["Product_Name"]</th>
+                        <th class="text-center" scope="col" width="15%">@_localizer.Fields["Product_Price"]</th>
+                        <th class="text-center" scope="col" width="10%">@_localizer.Fields["Product_Status"]</th>
+                        <th class="text-center is-desktop" scope="col" width="40%">@_localizer.Fields["Product_Address"]</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -210,15 +238,29 @@
                         @foreach (var item in Model.PageData.Items)
                         {
                             <tr>
-                                <td>@item.ProductId</td>
+                                <td class="is-desktop">
+                                    <p>
+                                        @item.ProductId
+                                    </p>
+                                </td>
                                 <td>
                                     <a asp-route="@Constants.MODULE_PRODUCT_PRODUCTDETAIL_NAME" asp-route-id="@item.ProductId">
-                                        @item.Name
+                                        <p>@item.Name</p>
                                     </a>
                                 </td>
-                                <td class="text-end">@CommonUtility.GetProductDisplayPrice(item, "VND")</td>
-                                <td class="text-end text-truncate">@item.Address1</td>
-                                <td class="text-center">@item.Status</td>
+                                <td class="text-end">
+                                    <p>
+                                        @CommonUtility.GetProductDisplayPrice(item, Constants.CONFIG_CURRENCY_IN_USE)
+                                    </p>
+                                </td>
+                                <td class="text-center">
+                                    @await Component.InvokeAsync("ProductStatusBadge", new { status = item.Status })
+                                </td>
+                                <td class="text-start is-desktop">
+                                    <p>
+                                        @AddressUtilities.GetFullAddress(item.Address1, item.Address2, item.Address3, item.Address4, Constants.CONFIG_LANGUAGE_OPTIONS)
+                                    </p>
+                                </td>
                             </tr>
                         }
                     }
@@ -226,7 +268,7 @@
                     {
                         <tr>
                             <td align="center" colspan="5">
-                                @(_globalsLocalizer["ListPage_NoResult"])
+                                @(_localizer.Globals["ListPage_NoResult"])
                             </td>
                         </tr>
                     }
@@ -239,7 +281,7 @@
                             <td colspan="5">
                                 <div class="d-flex justify-content-between align-items-center">
                                     <p class="mb-0">
-                                        @(_globalsLocalizer["ListPage_TotalResult"]): @(Constants.DEFAULT_PAGE_SIZE * (Model.PageIndex - 1) + Model.PageData.Items.Length)/@(Model.PageData.TotalRecord)
+                                        @(_localizer.Globals["ListPage_TotalResult"]): @(Constants.DEFAULT_PAGE_SIZE * (Model.PageIndex - 1) + Model.PageData.Items.Length)/@(Model.PageData.TotalRecord)
                                     </p>
                                     <nav aria-label="Page navigation">
                                         <ul class="pagination">
@@ -275,7 +317,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exportModalLabel">@_globalsLocalizer["Btn_Export"]</h1>
+                    <h1 class="modal-title fs-5" id="exportModalLabel">@_localizer.Globals["Btn_Export"]</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -287,16 +329,14 @@
                     </p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn site-btn-secondary" data-bs-dismiss="modal">@_globalsLocalizer["Btn_Close"]</button>
-                    <button type="button" class="btn site-btn-primary">@_globalsLocalizer["Btn_Export"]</button>
+                    <button type="button" class="btn site-btn-secondary" data-bs-dismiss="modal">@_localizer.Globals["Btn_Close"]</button>
+                    <button type="button" class="btn site-btn-primary">@_localizer.Globals["Btn_Export"]</button>
                 </div>
             </div>
         </div>
     </div>
 </section>
 <script>
-    // $('#dateCreatedFromForSearch').datepicker();
-
     const handlePaging = (event, page = 1) => {
         event.preventDefault();
 
@@ -305,4 +345,13 @@
         const searchForm = document.getElementsByName("searchForm")[0];
         searchForm.submit();
     }
+
+    const resetSearchForm = (formId) => {
+        if (!formId) return;
+
+        const formTarget = $(`#${formId}`);
+        if (!formTarget) return;
+
+        formTarget.find('select').val('').change();
+    };
 </script>

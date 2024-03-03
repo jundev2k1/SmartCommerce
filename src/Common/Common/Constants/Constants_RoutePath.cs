@@ -43,5 +43,11 @@ namespace ErpManager.Common
         // Product module: product register
         public const string MODULE_PRODUCT_PRODUCTREGISTER_PATH = "/product/register";
         public const string MODULE_PRODUCT_PRODUCTREGISTER_NAME = "ProductRegister";
+        // Product module: product edit
+        public const string MODULE_PRODUCT_PRODUCTEDIT_PATH = "/product/edit/{id}";
+        public const string MODULE_PRODUCT_PRODUCTEDIT_NAME = "ProductEdit";
+        // Product module: product edit
+        public const string MODULE_PRODUCT_PRODUCTDELETE_PATH = "/product/delete/{id}";
+        public const string MODULE_PRODUCT_PRODUCTDELETE_NAME = "ProductDelete";
     }
 }

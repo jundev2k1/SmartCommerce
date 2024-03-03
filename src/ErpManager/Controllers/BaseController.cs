@@ -1,7 +1,6 @@
 ﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
 
 using FluentValidation.Results;
-using Microsoft.AspNetCore.Mvc.Controllers;
 using Microsoft.AspNetCore.Mvc.Filters;
 using System.Reflection;
 

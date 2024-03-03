@@ -144,7 +144,7 @@
         "name_en": "Thuong Tin District"
       },
       {
-        "id": "001029",
+        "id": "001035",
         "name_vi": "Huyện Ứng Hòa",
         "name_en": "Ung Hoa District"
       },
@@ -158,60 +158,60 @@
 
   // Binh Dinh Provinces
   {
-    "parentId": "029",
-    "districts": [
+    "parentId": "035",
+    "items": [
       {
-        "id": "029001",
+        "id": "035001",
         "name_vi": "Thị xã Hoài Nhơn",
         "name_en": "Hoai Nhon Town"
       },
       {
-        "id": "029002",
+        "id": "035002",
         "name_vi": "Thành phố Quy Nhơn",
         "name_en": "Quy Nhon City"
       },
       {
-        "id": "029003",
+        "id": "035003",
         "name_vi": "Thị xã An Nhơn",
         "name_en": "An Nhon Town"
       },
       {
-        "id": "029004",
+        "id": "035004",
         "name_vi": "Huyện Tuy Phước",
         "name_en": "Tuy Phuoc District"
       },
       {
-        "id": "029005",
+        "id": "035005",
         "name_vi": "Huyện Phù Cát",
         "name_en": "Phu Cat District"
       },
       {
-        "id": "029006",
+        "id": "035006",
         "name_vi": "Huyện Phù Mỹ",
         "name_en": "Phu My District"
       },
       {
-        "id": "029007",
+        "id": "035007",
         "name_vi": "Huyện Tây Sơn",
         "name_en": "Tay Son District"
       },
       {
-        "id": "029008",
+        "id": "035008",
         "name_vi": "Huyện An Lão",
         "name_en": "An Lao District"
       },
       {
-        "id": "029009",
+        "id": "035009",
         "name_vi": "Huyện Hoài Ân",
         "name_en": "Hoai An District"
       },
       {
-        "id": "029010",
+        "id": "035010",
         "name_vi": "Huyện Vĩnh Thạnh",
         "name_en": "Vinh Thanh District"
       },
       {
-        "id": "029011",
+        "id": "035011",
         "name_vi": "Huyện Văn Canh",
         "name_en": "Van Canh District"
       }
@@ -220,60 +220,60 @@
 
   // Binh Phuoc Provinces
   {
-    "parentId": "039",
-    "districts": [
+    "parentId": "045",
+    "items": [
       {
-        "id": "039001",
+        "id": "045001",
         "name_vi": "Huyện Bù Gia Mập",
         "name_en": "Bu Gia Map District"
       },
       {
-        "id": "039002",
+        "id": "045002",
         "name_vi": "Huyện Bù Đăng",
         "name_en": "Bu Dang District"
       },
       {
-        "id": "039003",
+        "id": "045003",
         "name_vi": "Huyện Lộc Ninh",
         "name_en": "Loc Ninh District"
       },
       {
-        "id": "039004",
+        "id": "045004",
         "name_vi": "Thành phố Đồng Xoài",
         "name_en": "Dong Xoai City"
       },
       {
-        "id": "039005",
+        "id": "045005",
         "name_vi": "Thị xã Chơn Thành",
         "name_en": "Chon Thanh Town"
       },
       {
-        "id": "039006",
+        "id": "045006",
         "name_vi": "Thị xã Bình Long",
         "name_en": "Binh Long Town"
       },
       {
-        "id": "039007",
+        "id": "045007",
         "name_vi": "Huyện Hớn Quản",
         "name_en": "Hon Quan District"
       },
       {
-        "id": "039008",
+        "id": "045008",
         "name_vi": "Huyện Phú Riềng",
         "name_en": "Phu Rieng District"
       },
       {
-        "id": "039009",
+        "id": "045009",
         "name_vi": "Huyện Đồng Phú",
         "name_en": "Dong Phu District"
       },
       {
-        "id": "039010",
+        "id": "045010",
         "name_vi": "Thị xã Phước Long",
         "name_en": "Phuoc Long Town"
       },
       {
-        "id": "039011",
+        "id": "045011",
         "name_vi": "Huyện Bù Đốp",
         "name_en": "Bu Dop District"
       }
@@ -282,50 +282,50 @@
 
   // Binh Duong Provinces
   {
-    "parentId": "041",
-    "districts": [
+    "parentId": "047",
+    "items": [
       {
-        "id": "041001",
+        "id": "047001",
         "name_vi": "Thành phố Thuận An",
         "name_en": "Thuan An City"
       },
       {
-        "id": "041002",
+        "id": "047002",
         "name_vi": "Thành phố Tân Uyên",
         "name_en": "Tan Uyen City"
       },
       {
-        "id": "041003",
+        "id": "047003",
         "name_vi": "Thành phố Dĩ An",
         "name_en": "Di An City"
       },
       {
-        "id": "041004",
+        "id": "047004",
         "name_vi": "Thị xã Bến Cát",
         "name_en": "Ben Cat Town"
       },
       {
-        "id": "041005",
+        "id": "047005",
         "name_vi": "Thành phố Thủ Dầu Một",
         "name_en": "Thu Dau Mot City"
       },
       {
-        "id": "041006",
+        "id": "047006",
         "name_vi": "Huyện Dầu Tiếng",
         "name_en": "Dau Tieng District"
       },
       {
-        "id": "041007",
+        "id": "047007",
         "name_vi": "Huyện Bàu Bàng",
         "name_en": "Bau Bang District"
       },
       {
-        "id": "041008",
+        "id": "047008",
         "name_vi": "Huyện Phú Giáo",
         "name_en": "Phu Giao District"
       },
       {
-        "id": "041009",
+        "id": "047009",
         "name_vi": "Huyện Bắc Tân Uyên",
         "name_en": "Bac Tan Uyen District"
       }
@@ -334,60 +334,60 @@
 
   // Dong Nai Provinces
   {
-    "parentId": "042",
-    "districts": [
+    "parentId": "048",
+    "items": [
       {
-        "id": "042001",
+        "id": "048001",
         "name_vi": "Thành phố Biên Hòa",
         "name_en": "Bien Hoa City"
       },
       {
-        "id": "042002",
+        "id": "048002",
         "name_vi": "Thành phố Long Khánh",
         "name_en": "Long Khanh City"
       },
       {
-        "id": "042003",
+        "id": "048003",
         "name_vi": "Huyện Cẩm Mỹ",
         "name_en": "Cam My District"
       },
       {
-        "id": "042004",
+        "id": "048004",
         "name_vi": "Huyện Định Quán",
         "name_en": "Dinh Quan District"
       },
       {
-        "id": "042005",
+        "id": "048005",
         "name_vi": "Huyện Long Thành",
         "name_en": "Long Thanh District"
       },
       {
-        "id": "042006",
+        "id": "048006",
         "name_vi": "Huyện Nhơn Trạch",
         "name_en": "Nhon Trach District"
       },
       {
-        "id": "042007",
+        "id": "048007",
         "name_vi": "Huyện Tân Phú",
         "name_en": "Tan Phu District"
       },
       {
-        "id": "042008",
+        "id": "048008",
         "name_vi": "Huyện Thống Nhất",
         "name_en": "Thong Nhat District"
       },
       {
-        "id": "042009",
+        "id": "048009",
         "name_vi": "Huyện Trảng Bom",
         "name_en": "Trang Bom District"
       },
       {
-        "id": "042010",
+        "id": "048010",
         "name_vi": "Huyện Vĩnh Cửu",
         "name_en": "Vinh Cuu District"
       },
       {
-        "id": "042011",
+        "id": "048011",
         "name_vi": "Huyện Xuân Lộc",
         "name_en": "Xuan Loc District"
       }
@@ -396,45 +396,45 @@
 
   // Vung Tau Provinces
   {
-    "parentId": "043",
-    "districts": [
+    "parentId": "049",
+    "items": [
       {
-        "id": "043001",
+        "id": "049001",
         "name_vi": "Thành phố Vũng Tàu",
         "name_en": "Vung Tau City"
       },
       {
-        "id": "043002",
+        "id": "049002",
         "name_vi": "Thị xã Phú Mỹ",
         "name_en": "Phu My Town"
       },
       {
-        "id": "043003",
+        "id": "049003",
         "name_vi": "Thành phố Bà Rịa",
         "name_en": "Ba Ria City"
       },
       {
-        "id": "043004",
+        "id": "049004",
         "name_vi": "Huyện Xuyên Mộc",
         "name_en": "Xuyen Moc District"
       },
       {
-        "id": "043005",
+        "id": "049005",
         "name_vi": "Huyện Châu Đức",
         "name_en": "Chau Duc District"
       },
       {
-        "id": "043006",
+        "id": "049006",
         "name_vi": "Huyện Long Điền",
         "name_en": "Long Dien District"
       },
       {
-        "id": "043007",
+        "id": "049007",
         "name_vi": "Huyện Đất Đỏ",
         "name_en": "Dat Do District"
       },
       {
-        "id": "043008",
+        "id": "049008",
         "name_vi": "Huyện Côn Đảo",
         "name_en": "Con Dao District"
       }
@@ -444,115 +444,115 @@
 
   // TP Ho Chi Minh Provinces
   {
-    "parentId": "044",
-    "districts": [
+    "parentId": "050",
+    "items": [
       {
-        "id": "044001",
+        "id": "050001",
         "name_vi": "Quận 1",
         "name_en": "District 1"
       },
       {
-        "id": "044003",
+        "id": "050003",
         "name_vi": "Quận 3",
         "name_en": "District 3"
       },
       {
-        "id": "044004",
+        "id": "050004",
         "name_vi": "Quận 4",
         "name_en": "District 4"
       },
       {
-        "id": "044005",
+        "id": "050005",
         "name_vi": "Quận 5",
         "name_en": "District 5"
       },
       {
-        "id": "044006",
+        "id": "050006",
         "name_vi": "Quận 6",
         "name_en": "District 6"
       },
       {
-        "id": "044007",
+        "id": "050007",
         "name_vi": "Quận 7",
         "name_en": "District 7"
       },
       {
-        "id": "044008",
+        "id": "050008",
         "name_vi": "Quận 8",
         "name_en": "District 8"
       },
       {
-        "id": "044010",
+        "id": "050010",
         "name_vi": "Quận 10",
         "name_en": "District 10"
       },
       {
-        "id": "044011",
+        "id": "050011",
         "name_vi": "Quận 11",
         "name_en": "District 11"
       },
       {
-        "id": "044012",
+        "id": "050012",
         "name_vi": "Quận 12",
         "name_en": "District 12"
       },
       {
-        "id": "044001",
+        "id": "050001",
         "name_vi": "Quận Bình Thạnh",
         "name_en": "Binh Thanh District"
       },
       {
-        "id": "044002",
+        "id": "050002",
         "name_vi": "Quận Gò Vấp",
         "name_en": "Go Vap District"
       },
       {
-        "id": "044003",
+        "id": "050003",
         "name_vi": "Quận Phú Nhuận",
         "name_en": "Phu Nhuan District"
       },
       {
-        "id": "044004",
+        "id": "050004",
         "name_vi": "Quận Tân Bình",
         "name_en": "Tan Binh District"
       },
       {
-        "id": "044005",
+        "id": "050005",
         "name_vi": "Quận Tân Phú",
         "name_en": "Tan Phu District"
       },
       {
-        "id": "044006",
+        "id": "050006",
         "name_vi": "Quận Bình Tân",
         "name_en": "Binh Tan District"
       },
       {
-        "id": "044007",
+        "id": "050007",
         "name_vi": "Thành phố Thủ Đức",
         "name_en": "Thu Duc City"
       },
       {
-        "id": "044008",
+        "id": "050008",
         "name_vi": "Huyện Nhà Bè",
         "name_en": "Nha Be District"
       },
       {
-        "id": "044009",
+        "id": "050009",
         "name_vi": "Huyện Hóc Môn",
         "name_en": "Hoc Mon District"
       },
       {
-        "id": "044010",
+        "id": "050010",
         "name_vi": "Huyện Bình Chánh",
         "name_en": "Binh Chanh District"
       },
       {
-        "id": "044011",
+        "id": "050011",
         "name_vi": "Huyện Củ Chi",
         "name_en": "Cu Chi District"
       },
       {
-        "id": "044012",
+        "id": "050012",
         "name_vi": "Huyện Cần Giờ",
         "name_en": "Can Gio District"
       }
@@ -561,60 +561,60 @@
 
   // An Giang Provinces
   {
-    "parentId": "051",
-    "districts": [
+    "parentId": "057",
+    "items": [
       {
-        "id": "051001",
+        "id": "057001",
         "name_vi": "Thành phố Châu Đốc",
         "name_en": "Chau Doc City"
       },
       {
-        "id": "051002",
+        "id": "057002",
         "name_vi": "Thành phố Long Xuyên",
         "name_en": "Long Xuyen City"
       },
       {
-        "id": "051003",
+        "id": "057003",
         "name_vi": "Thị xã Tân Châu",
         "name_en": "Tan Chau Town"
       },
       {
-        "id": "051004",
+        "id": "057004",
         "name_vi": "Huyện An Phú",
         "name_en": "An Phu District"
       },
       {
-        "id": "051005",
+        "id": "057005",
         "name_vi": "Huyện Châu Phú",
         "name_en": "Chau Phu District"
       },
       {
-        "id": "051006",
+        "id": "057006",
         "name_vi": "Huyện Châu Thành",
         "name_en": "Chau Thanh District"
       },
       {
-        "id": "051007",
+        "id": "057007",
         "name_vi": "Huyện Chợ Mới",
         "name_en": "Cho Moi District"
       },
       {
-        "id": "051008",
+        "id": "057008",
         "name_vi": "Huyện Phú Tân",
         "name_en": "Phu Tan District"
       },
       {
-        "id": "051009",
+        "id": "057009",
         "name_vi": "Huyện Thoại Sơn",
         "name_en": "Thoai Son District"
       },
       {
-        "id": "051010",
+        "id": "057010",
         "name_vi": "Huyện Tịnh Biên",
         "name_en": "Tinh Bien District"
       },
       {
-        "id": "051011",
+        "id": "057011",
         "name_vi": "Huyện Tri Tôn",
         "name_en": "Tri Ton District"
       }

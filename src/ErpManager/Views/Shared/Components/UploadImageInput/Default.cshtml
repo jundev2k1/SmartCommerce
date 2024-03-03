@@ -1,0 +1,17 @@
+﻿@{
+    var componentScript = Url.Content(Constants.FILE_PATH_JS_COMPONENT_SEARCH_INPUT);
+    var props = new
+    {
+        Name = ViewBag.Props.name,
+        Value = ViewBag.Props.value,
+        placeHolderText = ViewBag.Props.placeHolderText,
+        Type = ViewBag.Props.type,
+        ClassName = ViewBag.Props.className,
+    };
+}
+
+<div class="search-form @props.ClassName">
+    <input name="@props.Name" class="search-input" type="@props.Type" value="@props.Value" placeholder="@(string.IsNullOrEmpty(props.placeHolderText) ? _localizer.Globals["PlaceHolder_SearchDefault"] : props.placeHolderText)" />
+    <input type="submit" class="search-button btn btn-primary" value="@_localizer.Globals["Btn_Search"]" />
+    <script src="@componentScript"></script>
+</div>

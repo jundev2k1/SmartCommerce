@@ -56,11 +56,14 @@ public partial class Product
     [StringLength(30)]
     public string TakeOverId { get; set; }
 
-    [Column(TypeName = "datetime")]
-    public DateTime DateCreated { get; set; }
+    [StringLength(4000)]
+    public string EmbeddedLink { get; set; }
 
     [Column(TypeName = "datetime")]
-    public DateTime DateChanged { get; set; }
+    public DateTime? DateCreated { get; set; }
+
+    [Column(TypeName = "datetime")]
+    public DateTime? DateChanged { get; set; }
 
     [StringLength(30)]
     public string CreatedBy { get; set; }

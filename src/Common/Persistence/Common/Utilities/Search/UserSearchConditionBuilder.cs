@@ -10,6 +10,16 @@ namespace ErpManager.Persistence.Common.Utilities.Search
         {
             var predicate = PredicateBuilder.True<User>();
 
+            if (string.IsNullOrEmpty(searchDto.Keywords) == false)
+            {
+                predicate.And(p =>
+                    p.UserId.Contains(searchDto.Keywords)
+                    || p.UserName.Contains(searchDto.Keywords)
+                    || p.FirstName.Contains(searchDto.Keywords)
+                    || p.LastName.Contains(searchDto.Keywords)
+                    || p.Email.Contains(searchDto.Keywords));
+            }
+
             if (string.IsNullOrEmpty(searchDto.BranchId) == false)
             {
                 predicate.And(u => u.BranchId.Contains(searchDto.BranchId));

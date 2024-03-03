@@ -8,6 +8,8 @@ namespace ErpManager.ERP.Common
 {
     public interface ILocalizer
     {
+        public Dictionary<string, string> Dictionary { get; }
+
         public IStringLocalizer<GlobalsLocalizer> Globals { get; }
 
         public IStringLocalizer<MessagesLocalizer> Messages { get; }

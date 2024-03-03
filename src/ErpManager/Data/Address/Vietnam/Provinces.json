@@ -1,295 +1,295 @@
 ﻿[
   {
     "id": "001",
-    "name_vi": "Hà Nội",
-    "name_en": "Hanoi",
+    "name_vi": "Thủ Đô Hà Nội",
+    "name_en": "Ha Noi capital",
     "plateCode": "29,33,40"
   },
   {
     "id": "002",
-    "name_vi": "Hà Giang",
+    "name_vi": "Tỉnh Hà Giang",
     "name_en": "Ha Giang",
     "plateCode": "23"
   },
   {
     "id": "003",
-    "name_vi": "Cao Bằng",
+    "name_vi": "Tỉnh Cao Bằng",
     "name_en": "Cao Bang",
     "plateCode": "11"
   },
   {
     "id": "004",
-    "name_vi": "Lào Cai",
+    "name_vi": "Tỉnh Lào Cai",
     "name_en": "Lao Cai",
     "plateCode": "24"
   },
   {
     "id": "005",
-    "name_vi": "Lai Châu",
+    "name_vi": "Tỉnh Lai Châu",
     "name_en": "Lai Chau",
     "plateCode": "25"
   },
   {
     "id": "006",
-    "name_vi": "Sơn La",
+    "name_vi": "Tỉnh Sơn La",
     "name_en": "Son La",
     "plateCode": "26"
   },
   {
     "id": "007",
-    "name_vi": "Điện Biên",
+    "name_vi": "Tỉnh Điện Biên",
     "name_en": "Dien Bien",
     "plateCode": "27"
   },
   {
     "id": "008",
-    "name_vi": "Tuyên Quang",
+    "name_vi": "Tỉnh Tuyên Quang",
     "name_en": "Tuyen Quang",
     "plateCode": "22"
   },
   {
     "id": "009",
-    "name_vi": "Yên Bái",
+    "name_vi": "Tỉnh Yên Bái",
     "name_en": "Yen Bai",
     "plateCode": "21"
   },
   {
     "id": "010",
-    "name_vi": "Lạng Sơn",
+    "name_vi": "Tỉnh Lạng Sơn",
     "name_en": "Lang Son",
     "plateCode": "12"
   },
   {
     "id": "011",
-    "name_vi": "Bắc Giang",
+    "name_vi": "Tỉnh Bắc Giang",
     "name_en": "Bac Giang",
     "plateCode": "98"
   },
   {
     "id": "012",
-    "name_vi": "Bắc Kạn",
+    "name_vi": "Tỉnh Bắc Kạn",
     "name_en": "Bac Kan",
     "plateCode": "97"
   },
   {
     "id": "013",
-    "name_vi": "Thái Nguyên",
+    "name_vi": "Tỉnh Thái Nguyên",
     "name_en": "Thai Nguyen",
     "plateCode": "20"
   },
   {
     "id": "014",
-    "name_vi": "Phú Thọ",
+    "name_vi": "Tỉnh Phú Thọ",
     "name_en": "Phu Tho",
     "plateCode": "19"
   },
   {
     "id": "015",
-    "name_vi": "Hòa Bình",
+    "name_vi": "Tỉnh Hòa Bình",
     "name_en": "Hoa Binh",
     "plateCode": "28"
   },
   {
     "id": "016",
-    "name_vi": "Vĩnh Phúc",
+    "name_vi": "Tỉnh Vĩnh Phúc",
     "name_en": "Vinh Phuc",
     "plateCode": "88"
   },
   {
     "id": "017",
-    "name_vi": "Bắc Ninh",
+    "name_vi": "Tỉnh Bắc Ninh",
     "name_en": "Bac Ninh",
     "plateCode": "99"
   },
   {
     "id": "018",
-    "name_vi": "Hải Dương",
+    "name_vi": "Tỉnh Hải Dương",
     "name_en": "Hai Duong",
     "plateCode": "34"
   },
   {
     "id": "019",
-    "name_vi": "Hải Phòng",
+    "name_vi": "Thành Phố Hải Phòng",
     "name_en": "Hai Phong",
     "plateCode": "15,16"
   },
   {
     "id": "020",
-    "name_vi": "Quảng Ninh",
+    "name_vi": "Tỉnh Quảng Ninh",
     "name_en": "Quang Ninh",
     "plateCode": "14"
   },
   {
     "id": "021",
-    "name_vi": "Hưng Yên",
+    "name_vi": "Tỉnh Hưng Yên",
     "name_en": "Hung Yen",
     "plateCode": "89"
   },
   {
     "id": "022",
-    "name_vi": "Thái Bình",
+    "name_vi": "Tỉnh Thái Bình",
     "name_en": "Thai Binh",
     "plateCode": "17"
   },
   {
     "id": "023",
-    "name_vi": "Hà Nam",
+    "name_vi": "Tỉnh Hà Nam",
     "name_en": "Ha Nam",
     "plateCode": "90"
   },
   {
     "id": "024",
-    "name_vi": "Nam Định",
+    "name_vi": "Tỉnh Nam Định",
     "name_en": "Nam Dinh",
     "plateCode": "18"
   },
   {
     "id": "025",
-    "name_vi": "Ninh Bình",
+    "name_vi": "Tỉnh Ninh Bình",
     "name_en": "Ninh Binh",
     "plateCode": "35"
   },
   {
     "id": "026",
-    "name_vi": "Thanh Hóa",
+    "name_vi": "Tỉnh Thanh Hóa",
     "name_en": "Thanh Hoa",
     "plateCode": "36"
   },
   {
     "id": "027",
-    "name_vi": "Nghệ An",
+    "name_vi": "Tỉnh Nghệ An",
     "name_en": "Nghe An",
     "plateCode": "37"
   },
   {
     "id": "028",
-    "name_vi": "Hà Tĩnh",
+    "name_vi": "Tỉnh Hà Tĩnh",
     "name_en": "Ha Tinh",
     "plateCode": "38"
   },
   {
     "id": "029",
-    "name_vi": "Quảng Bình",
+    "name_vi": "Tỉnh Quảng Bình",
     "name_en": "Quang Binh",
     "plateCode": "73"
   },
   {
     "id": "030",
-    "name_vi": "Quảng Trị",
+    "name_vi": "Tỉnh Quảng Trị",
     "name_en": "Quang Tri",
     "plateCode": "74"
   },
   {
     "id": "031",
-    "name_vi": "Thừa Thiên-Huế",
+    "name_vi": "Tỉnh Thừa Thiên-Huế",
     "name_en": "Thua Thien-Hue",
     "plateCode": "75"
   },
   {
     "id": "032",
-    "name_vi": "Đà Nẵng",
+    "name_vi": "Thành Phố Đà Nẵng",
     "name_en": "Da Nang",
     "plateCode": "43"
   },
   {
     "id": "033",
-    "name_vi": "Quảng Nam",
+    "name_vi": "Tỉnh Quảng Nam",
     "name_en": "Quang Nam",
     "plateCode": "92"
   },
   {
     "id": "034",
-    "name_vi": "Quảng Ngãi",
+    "name_vi": "Tỉnh Quảng Ngãi",
     "name_en": "Quang Ngai",
     "plateCode": "76"
   },
   {
     "id": "035",
-    "name_vi": "Bình Định",
+    "name_vi": "Tỉnh Bình Định",
     "name_en": "Binh Dinh",
     "plateCode": "77"
   },
   {
     "id": "036",
-    "name_vi": "Phú Yên",
+    "name_vi": "Tỉnh Phú Yên",
     "name_en": "Phu Yen",
     "plateCode": "78"
   },
   {
     "id": "037",
-    "name_vi": "Khánh Hòa",
+    "name_vi": "Tỉnh Khánh Hòa",
     "name_en": "Khanh Hoa",
     "plateCode": "79"
   },
   {
     "id": "038",
-    "name_vi": "Ninh Thuận",
+    "name_vi": "Tỉnh Ninh Thuận",
     "name_en": "Ninh Thuan",
     "plateCode": "85"
   },
   {
     "id": "039",
-    "name_vi": "Bình Thuận",
+    "name_vi": "Tỉnh Bình Thuận",
     "name_en": "Binh Thuan",
     "plateCode": "86"
   },
   {
     "id": "040",
-    "name_vi": "Kon Tum",
+    "name_vi": "Tỉnh Kon Tum",
     "name_en": "Kon Tum",
     "plateCode": "82"
   },
   {
     "id": "041",
-    "name_vi": "Gia Lai",
+    "name_vi": "Tỉnh Gia Lai",
     "name_en": "Gia Lai",
     "plateCode": "81"
   },
   {
     "id": "042",
-    "name_vi": "Đắk Lắk",
+    "name_vi": "Tỉnh Đắk Lắk",
     "name_en": "Dak Lak",
     "plateCode": "47"
   },
   {
     "id": "043",
-    "name_vi": "Đắk Nông",
+    "name_vi": "Tỉnh Đắk Nông",
     "name_en": "Dak Nong",
     "plateCode": "48"
   },
   {
     "id": "044",
-    "name_vi": "Lâm Đồng",
+    "name_vi": "Tỉnh Lâm Đồng",
     "name_en": "Lam Dong",
     "plateCode": "49"
   },
   {
     "id": "045",
-    "name_vi": "Bình Phước",
+    "name_vi": "Tỉnh Bình Phước",
     "name_en": "Binh Phuoc",
     "plateCode": "93"
   },
   {
     "id": "046",
-    "name_vi": "Tây Ninh",
+    "name_vi": "Tỉnh Tây Ninh",
     "name_en": "Tay Ninh",
     "plateCode": "70"
   },
   {
     "id": "047",
-    "name_vi": "Bình Dương",
+    "name_vi": "Tỉnh Bình Dương",
     "name_en": "Binh Duong",
     "plateCode": "61"
   },
   {
     "id": "048",
-    "name_vi": "Đồng Nai",
+    "name_vi": "Tỉnh Đồng Nai",
     "name_en": "Dong Nai",
     "plateCode": "39,60"
   },
   {
     "id": "049",
-    "name_vi": "Bà Rịa-Vũng Tàu",
+    "name_vi": "Tỉnh Bà Rịa-Vũng Tàu",
     "name_en": "Ba Ria-Vung Tau",
     "plateCode": "72"
   },
@@ -301,79 +301,79 @@
   },
   {
     "id": "051",
-    "name_vi": "Long An",
+    "name_vi": "Tỉnh Long An",
     "name_en": "Long An",
     "plateCode": "62"
   },
   {
     "id": "052",
-    "name_vi": "Tiền Giang",
+    "name_vi": "Tỉnh Tiền Giang",
     "name_en": "Tien Giang",
     "plateCode": "63"
   },
   {
     "id": "053",
-    "name_vi": "Bến Tre",
+    "name_vi": "Tỉnh Bến Tre",
     "name_en": "Ben Tre",
     "plateCode": "71"
   },
   {
     "id": "054",
-    "name_vi": "Trà Vinh",
+    "name_vi": "Tỉnh Trà Vinh",
     "name_en": "Tra Vinh",
     "plateCode": "84"
   },
   {
     "id": "055",
-    "name_vi": "Vĩnh Long",
+    "name_vi": "Tỉnh Vĩnh Long",
     "name_en": "Vinh Long",
     "plateCode": "64"
   },
   {
     "id": "056",
-    "name_vi": "Đồng Tháp",
+    "name_vi": "Tỉnh Đồng Tháp",
     "name_en": "Dong Thap",
     "plateCode": "66"
   },
   {
     "id": "057",
-    "name_vi": "An Giang",
+    "name_vi": "Tỉnh An Giang",
     "name_en": "An Giang",
     "plateCode": "67"
   },
   {
     "id": "058",
-    "name_vi": "Kiên Giang",
+    "name_vi": "Tỉnh Kiên Giang",
     "name_en": "Kien Giang",
     "plateCode": "68"
   },
   {
     "id": "059",
-    "name_vi": "Cần Thơ",
+    "name_vi": "Thành Phố Cần Thơ",
     "name_en": "Can Tho",
     "plateCode": "65"
   },
   {
     "id": "060",
-    "name_vi": "Hậu Giang",
+    "name_vi": "Tỉnh Hậu Giang",
     "name_en": "Hau Giang",
     "plateCode": "95"
   },
   {
     "id": "061",
-    "name_vi": "Sóc Trăng",
+    "name_vi": "Tỉnh Sóc Trăng",
     "name_en": "Soc Trang",
     "plateCode": "83"
   },
   {
     "id": "062",
-    "name_vi": "Bạc Liêu",
+    "name_vi": "Tỉnh Bạc Liêu",
     "name_en": "Bac Lieu",
     "plateCode": "94"
   },
   {
     "id": "063",
-    "name_vi": "Cà Mau",
+    "name_vi": "Tỉnh Cà Mau",
     "name_en": "Ca Mau",
     "plateCode": "69"
   }

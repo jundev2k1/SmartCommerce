@@ -1,22 +1,22 @@
-﻿using ErpManager.ERP.Common.Extensions;
-using Newtonsoft.Json;
+﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
+
+using ErpManager.ERP.Common.Extensions;
 
 namespace ErpManager.ERP.Controllers
 {
-    public class CommonController : BaseController
+    public sealed class CommonController : BaseController
     {
-        private readonly AddressProvider _addressProvider;
-
-        public CommonController(AddressProvider addressProvider)
+        private readonly IServiceFacade _serviceFacade;
+        public CommonController(IServiceFacade serviceFacade)
         {
-            _addressProvider = addressProvider;
+            _serviceFacade = serviceFacade;
         }
 
         [HttpGet]
         [Route("/common/get-provinces")]
         public IActionResult GetProvinces(string searchKey = "")
         {
-            var provinces = _addressProvider.Provinces;
+            var provinces = AddressProvider.Instance.Provinces;
 
             if (string.IsNullOrEmpty(searchKey.Trim()) == false)
             {
@@ -27,7 +27,7 @@ namespace ErpManager.ERP.Controllers
                         || model.VietnameseName.ToLower().Contains(searchKey)
                         || model.VietnameseName.ToLower().RemoveTextSign().Contains(searchKey)
                         || model.PlateCode.Contains(searchKey))
-                    .Take(8)
+                    .Take(6)
                     .ToList();
             }
 
@@ -39,10 +39,10 @@ namespace ErpManager.ERP.Controllers
         public IActionResult GetDistricts(string searchKey = "", string provinceId = "")
         {
             // Get list by province id
-            var districtGroups = _addressProvider.Districts;
+            var districtGroups = AddressProvider.Instance.Districts;
             var modelList = (string.IsNullOrEmpty(provinceId) == false)
                 ? districtGroups.FirstOrDefault(group => group.ProvinceId == provinceId)?.Items
-                : districtGroups.FirstOrDefault()?.Items;
+                : districtGroups.SelectMany(group => group.Items);
             if (modelList == null) return Json(Array.Empty<AddressDistrictViewModel>());
 
             // Check search key 
@@ -55,7 +55,7 @@ namespace ErpManager.ERP.Controllers
                     || model.EnglishName.ToLower().Contains(searchKey)
                     || model.VietnameseName.ToLower().Contains(searchKey)
                     || model.VietnameseName.ToLower().RemoveTextSign().Contains(searchKey))
-                .Take(8)
+                .Take(6)
                 .ToArray();
 
             return Json(modelList);
@@ -66,10 +66,10 @@ namespace ErpManager.ERP.Controllers
         public IActionResult GetCommunes(string searchKey = "", string districtId = "")
         {
             // Get list by district id
-            var modelGroupList = _addressProvider.Communes;
+            var modelGroupList = AddressProvider.Instance.Communes;
             var modelList = (string.IsNullOrEmpty(districtId) == false)
                 ? modelGroupList.SelectMany(groups => groups.Items).FirstOrDefault(group => group.DistrictId == districtId)?.Items
-                : modelGroupList.SelectMany(groups => groups.Items).FirstOrDefault()?.Items;
+                : modelGroupList.SelectMany(groups => groups.Items).SelectMany(group => group.Items);
             if (modelList == null) return Json(Array.Empty<AddressCommuneViewModel>());
 
             // Check search key 
@@ -82,10 +82,23 @@ namespace ErpManager.ERP.Controllers
                     || model.EnglishName.ToLower().Contains(searchKey)
                     || model.VietnameseName.ToLower().Contains(searchKey)
                     || model.VietnameseName.ToLower().RemoveTextSign().Contains(searchKey))
-                .Take(8)
+                .Take(6)
                 .ToArray();
 
             return Json(modelList);
+        }
+
+        [HttpGet]
+        [Route("/common/get-users")]
+        public IActionResult GetUsers(string searchKey = "")
+        {
+            var userSearch = new UserSearchDto
+            {
+                BranchId = this.OperatorBranchId,
+                Keywords = searchKey
+            };
+            var result = _serviceFacade.Users.Search(userSearch, pageIndex: 1, pageSize: 6).Data;
+            return Json(result);
         }
     }
 }
