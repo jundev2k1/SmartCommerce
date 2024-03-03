@@ -218,7 +218,6 @@
     .site-btn-danger:hover {
         padding-left: 1rem;
         padding-right: 1rem;
-        background: var(--site-danger);
         filter: brightness(0.9);
         color: var(--site-white);
         transition: .25s ease-in;
