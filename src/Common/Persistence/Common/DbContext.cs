@@ -21,6 +21,8 @@ public partial class DBContext : DbContext
 
     public virtual DbSet<Product> Products { get; set; }
 
+    public virtual DbSet<Employee> Employees { get; set; }
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Branch>(entity =>
@@ -90,13 +92,43 @@ public partial class DBContext : DbContext
             entity.Property(e => e.Price2).HasColumnType("decimal(18,2)");
             entity.Property(e => e.Price3).HasColumnType("decimal(18,2)");
             entity.Property(e => e.DisplayPrice).HasConversion<int>().HasDefaultValueSql("(0)");
-            entity.Property(e => e.Status).HasConversion<int>().HasDefaultValueSql("(0)");
+            entity.Property(e => e.Status).HasConversion<int>().HasDefaultValueSql("(1)");
             entity.Property(e => e.DelFlg);
             entity.Property(e => e.Size1).HasColumnType("decimal(18,2)");
             entity.Property(e => e.Size2).HasColumnType("decimal(18,2)");
             entity.Property(e => e.Size3).HasColumnType("decimal(18,2)");
             entity.Property(e => e.TakeOverId).HasDefaultValueSql("('')");
+            entity.Property(e => e.Description).HasDefaultValueSql("('')");
             entity.Property(e => e.EmbeddedLink).HasDefaultValueSql("('')");
+            entity.Property(e => e.DateCreated).HasDefaultValueSql("(getdate())");
+            entity.Property(e => e.DateChanged);
+            entity.Property(e => e.CreatedBy).HasDefaultValueSql("('')");
+            entity.Property(e => e.LastChanged).HasDefaultValueSql("('')");
+        });
+
+        modelBuilder.Entity<Employee>(entity =>
+        {
+            entity.HasKey(e => new { e.BranchId, e.EmployeeId }).HasName("PK_Employee_1");
+
+            entity.Property(e => e.FirstName).HasDefaultValueSql("('')");
+            entity.Property(e => e.LastName).HasDefaultValueSql("('')");
+            entity.Property(e => e.Avatar).HasDefaultValueSql("('')");
+            entity.Property(e => e.Email).HasDefaultValueSql("('')");
+            entity.Property(e => e.CardNumber).HasDefaultValueSql("('')"); ;
+            entity.Property(e => e.PhoneNumber).HasDefaultValueSql("('')");
+            entity.Property(e => e.BackupPhoneNumber).HasDefaultValueSql("('')");
+            entity.Property(e => e.Address1).HasDefaultValueSql("('')");
+            entity.Property(e => e.Address2).HasDefaultValueSql("('')");
+            entity.Property(e => e.Address3).HasDefaultValueSql("('')");
+            entity.Property(e => e.Address4).HasDefaultValueSql("('')");
+            entity.Property(e => e.SubAddress1).HasDefaultValueSql("('')");
+            entity.Property(e => e.SubAddress2).HasDefaultValueSql("('')");
+            entity.Property(e => e.SubAddress3).HasDefaultValueSql("('')");
+            entity.Property(e => e.SubAddress4).HasDefaultValueSql("('')");
+            entity.Property(e => e.BackupAddress).HasDefaultValueSql("('')");
+            entity.Property(e => e.Status).HasConversion<int>().HasDefaultValueSql("(1)");
+            entity.Property(e => e.DelFlg);
+            entity.Property(e => e.Sex).HasConversion<int>().HasDefaultValueSql("(0)");
             entity.Property(e => e.DateCreated).HasDefaultValueSql("(getdate())");
             entity.Property(e => e.DateChanged);
             entity.Property(e => e.CreatedBy).HasDefaultValueSql("('')");

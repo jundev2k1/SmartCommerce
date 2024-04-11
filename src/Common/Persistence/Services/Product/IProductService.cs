@@ -46,6 +46,13 @@ namespace ErpManager.Persistence.Services
         public bool Update(ProductModel model);
 
         /// <summary>
+        /// Update description
+        /// </summary>
+        /// <param name="model">Product model</param>
+        /// <returns>Is success</returns>
+        public bool UpdateDescription(ProductModel model);
+
+        /// <summary>
         /// Delete temporary
         /// </summary>
         /// <param name="branchId">Branch id</param>

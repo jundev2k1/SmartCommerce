@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
+    <PackageReference Include="dropzone" Version="4.3.0" />
     <PackageReference Include="FluentValidation.AspNetCore" Version="11.3.0" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.Cookies" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor" Version="2.2.0" />
@@ -35,6 +36,7 @@
     <Folder Include="wwwroot\content\user-images\" />
     <Folder Include="wwwroot\content\product-images\" />
     <Folder Include="wwwroot\css\" />
+    <Folder Include="wwwroot\js\component-script\UploadMultipleImage\" />
     <Folder Include="wwwroot\js\component-script\SearchInput\" />
     <Folder Include="wwwroot\js\component-script\ThemeSetting\" />
     <Folder Include="wwwroot\lib\bootstrap\" />

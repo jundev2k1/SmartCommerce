@@ -141,6 +141,9 @@
   <data name="Product_DisplayPrice" xml:space="preserve">
     <value>Giá hiển thị</value>
   </data>
+  <data name="Product_EmbeddedLink" xml:space="preserve">
+    <value>Link Nhúng</value>
+  </data>
   <data name="Product_Name" xml:space="preserve">
     <value>Tên sản phẩm</value>
   </data>

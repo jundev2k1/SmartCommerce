@@ -94,13 +94,13 @@ namespace ErpManager.Common.Utilities
         /// </summary>
         /// <param name="sex">Sex</param>
         /// <returns>User sex</returns>
-        public static string GetUserSex(SexEnum sex)
+        public static string GetUserSex(UserSexEnum sex)
         {
             var result = sex switch
             {
-                SexEnum.Male => "Male",
-                SexEnum.Female => "Female",
-                SexEnum.Other => "Other",
+                UserSexEnum.Male => "Male",
+                UserSexEnum.Female => "Female",
+                UserSexEnum.Other => "Other",
                 _ => "This sex not exists"
             };
             return result;

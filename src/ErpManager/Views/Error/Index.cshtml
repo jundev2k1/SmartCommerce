@@ -36,12 +36,17 @@
                 .error-page .wrapper .content p {
                     font-size: 16px;
                 }
+
+            .error-page .wrapper .content .error-control {
+                display: flex;
+                gap: 4px;
+            }
 </style>
 <section class="error-page">
     <div class="wrapper">
         <div class="content">
-            <div class="error-content">
-                <h2>@Model.Title</h2>
+            <div class="error-content mb-4">
+                <h2 class="mb-0">@Model.Title</h2>
                 <p>@Model.Message</p>
             </div>
             <div class="error-control">

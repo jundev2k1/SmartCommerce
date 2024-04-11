@@ -38,7 +38,7 @@
                     <i class="fa-light fa-file-export"></i>
                     @_localizer.Globals["Btn_Export"]
                 </button>
-                <a asp-route="@Constants.MODULE_PRODUCT_PRODUCTREGISTER_NAME" class="btn site-btn-theme">
+                <a asp-route="@Constants.MODULE_PRODUCT_PRODUCTREGISTER_NAME" class="btn site-btn-success">
                     <i class="fa-light fa-plus"></i>
                     @_localizer.Globals["Btn_Create"]
                 </a>
@@ -239,17 +239,17 @@
                         {
                             <tr>
                                 <td class="is-desktop">
-                                    <p>
+                                    <p class="mb-0">
                                         @item.ProductId
                                     </p>
                                 </td>
                                 <td>
                                     <a asp-route="@Constants.MODULE_PRODUCT_PRODUCTDETAIL_NAME" asp-route-id="@item.ProductId">
-                                        <p>@item.Name</p>
+                                        <p class="mb-0">@item.Name</p>
                                     </a>
                                 </td>
                                 <td class="text-end">
-                                    <p>
+                                    <p class="mb-0">
                                         @CommonUtility.GetProductDisplayPrice(item, Constants.CONFIG_CURRENCY_IN_USE)
                                     </p>
                                 </td>
@@ -257,7 +257,7 @@
                                     @await Component.InvokeAsync("ProductStatusBadge", new { status = item.Status })
                                 </td>
                                 <td class="text-start is-desktop">
-                                    <p>
+                                    <p class="mb-0">
                                         @AddressUtilities.GetFullAddress(item.Address1, item.Address2, item.Address3, item.Address4, Constants.CONFIG_LANGUAGE_OPTIONS)
                                     </p>
                                 </td>
@@ -322,10 +322,10 @@
                 </div>
                 <div class="modal-body">
                     <p>
-                        With less than a month to go before the European Union enacts new consumer privacy laws for its citizens, companies around the world are updating their terms of service agreements to comply.
+                        Chức năng này đang được thiết kế và lên ý tưởng
                     </p>
                     <p>
-                        The European Union’s General Data Protection Regulation (G.D.P.R.) goes into effect on May 25 and is meant to ensure a common set of data rights in the European Union. It requires organizations to notify users as soon as possible of high-risk data breaches that could personally affect them.
+                        This feature is being designed and conceptualized
                     </p>
                 </div>
                 <div class="modal-footer">

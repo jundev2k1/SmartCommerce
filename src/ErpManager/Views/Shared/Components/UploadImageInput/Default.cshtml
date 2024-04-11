@@ -1,17 +1,110 @@
-﻿@{
-    var componentScript = Url.Content(Constants.FILE_PATH_JS_COMPONENT_SEARCH_INPUT);
-    var props = new
-    {
-        Name = ViewBag.Props.name,
-        Value = ViewBag.Props.value,
-        placeHolderText = ViewBag.Props.placeHolderText,
-        Type = ViewBag.Props.type,
-        ClassName = ViewBag.Props.className,
-    };
-}
+﻿@using ErpManager.Infrastructure.Common.Enum;
+@using ErpManager.Infrastructure.Upload;
+@model UploadImageInputViewModel
 
-<div class="search-form @props.ClassName">
-    <input name="@props.Name" class="search-input" type="@props.Type" value="@props.Value" placeholder="@(string.IsNullOrEmpty(props.placeHolderText) ? _localizer.Globals["PlaceHolder_SearchDefault"] : props.placeHolderText)" />
-    <input type="submit" class="search-button btn btn-primary" value="@_localizer.Globals["Btn_Search"]" />
-    <script src="@componentScript"></script>
+<div class="image-upload @Model.ClassName" typeUpload="product" isMultiple>
+    <style>
+        .image-upload .previewImage {
+            width: 100%;
+            padding: 12px;
+            display: flex;
+            flex-direction: column;
+            gap: .5rem;
+        }
+
+        .image-upload .mainImage {
+            position: relative;
+            width: 100%;
+            min-height: 320px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+            .image-upload .mainImage .drop-area {
+                width: 100%;
+                height: 320px;
+                border: 1px solid #e4e4e4;
+                border-radius: 12px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                transition: .25s;
+                z-index: 2;
+            }
+
+                .image-upload .mainImage .drop-area.dragging {
+                    border: 2px dashed #e4e4e4;
+                }
+
+                    .image-upload .mainImage .drop-area.dragging div {
+                        display: block;
+                        z-index: 1;
+                    }
+
+                .image-upload .mainImage .drop-area div {
+                    display: none;
+                }
+
+                    .image-upload .mainImage .drop-area div i {
+                        font-size: 3rem;
+                    }
+
+                    .image-upload .mainImage .drop-area div p {
+                        font-size: .75rem;
+                    }
+
+        .image-upload .file-input {
+            width: 0px;
+            height: 0px;
+        }
+
+        .image-upload .subImage {
+            display: flex;
+            overflow-x: auto;
+            flex-wrap: nowrap;
+        }
+
+            .image-upload .subImage li {
+                min-width: 25%;
+                width: 25%;
+                padding: 4px;
+            }
+
+            .image-upload .subImage li img:hover {
+                cursor: pointer;
+                filter: brightness(.9);
+            }
+    </style>
+    <div class="previewImage">
+        <div class="mainImage">
+            <div class="text-center image-text-placeholder">
+                <i class="fa-regular fa-arrow-up-from-bracket"></i>
+                <p>Chỉ chấp nhận các định dạng jpg, png. Tối đa 10MB</p>
+            </div>
+            <img class="preview-image" src="" />
+        </div>
+        <div class="group-control">
+            <button type="button" class="import-image w-100 btn site-btn-success">Tải ảnh lên</button>
+            <input type="file" class="file-input" multiple />
+            <input type="hidden" name="@Model.Name" class="upload-value" value="@Model.Value" />
+        </div>
+        <ul class="load-image-area subImage">
+            <li>
+                <img class="w-100" src="/images/system/no-image-placeholder.jpg" />
+            </li>
+            <li>
+                <img class="w-100" src="/images/system/no-image-placeholder.jpg" />
+            </li>
+            <li>
+                <img class="w-100" src="/images/system/no-image-placeholder.jpg" />
+            </li>
+            <li>
+                <img class="w-100" src="/images/system/no-image-placeholder.jpg" />
+            </li>
+            <li>
+                <img class="w-100" src="/images/system/no-image-placeholder.jpg" />
+            </li>
+        </ul>
+    </div>
 </div>

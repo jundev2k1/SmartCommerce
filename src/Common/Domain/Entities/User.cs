@@ -55,7 +55,7 @@ public partial class User
 
     public bool DelFlg { get; set; }
 
-    public SexEnum Sex { get; set; }
+    public UserSexEnum Sex { get; set; }
 
     [Column(TypeName = "datetime")]
     public DateTime Birthday { get; set; }

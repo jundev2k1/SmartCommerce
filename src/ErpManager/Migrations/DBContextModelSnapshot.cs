@@ -64,6 +64,158 @@ namespace ErpManager.ERP.Migrations
                     b.ToTable("Branch");
                 });
 
+            modelBuilder.Entity("ErpManager.Domain.Entities.Employee", b =>
+                {
+                    b.Property<string>("BranchId")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<string>("EmployeeId")
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
+
+                    b.Property<string>("Address1")
+                        .ValueGeneratedOnAdd()
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)")
+                        .HasDefaultValueSql("('')");
+
+                    b.Property<string>("Address2")
+                        .ValueGeneratedOnAdd()
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)")
+                        .HasDefaultValueSql("('')");
+
+                    b.Property<string>("Address3")
+                        .ValueGeneratedOnAdd()
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)")
+                        .HasDefaultValueSql("('')");
+
+                    b.Property<string>("Address4")
+                        .ValueGeneratedOnAdd()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)")
+                        .HasDefaultValueSql("('')");
+
+                    b.Property<string>("Avatar")
+                        .ValueGeneratedOnAdd()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)")
+                        .HasDefaultValueSql("('')");
+
+                    b.Property<string>("BackupAddress")
+                        .ValueGeneratedOnAdd()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)")
+                        .HasDefaultValueSql("('')");
+
+                    b.Property<string>("BackupPhoneNumber")
+                        .ValueGeneratedOnAdd()
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)")
+                        .HasDefaultValueSql("('')");
+
+                    b.Property<DateTime>("Birthday")
+                        .HasColumnType("datetime");
+
+                    b.Property<string>("CardNumber")
+                        .ValueGeneratedOnAdd()
+                        .HasMaxLength(60)
+                        .HasColumnType("nvarchar(60)")
+                        .HasDefaultValueSql("('')");
+
+                    b.Property<string>("CreatedBy")
+                        .ValueGeneratedOnAdd()
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)")
+                        .HasDefaultValueSql("('')");
+
+                    b.Property<DateTime>("DateChanged")
+                        .HasColumnType("datetime");
+
+                    b.Property<DateTime>("DateCreated")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime")
+                        .HasDefaultValueSql("(getdate())");
+
+                    b.Property<bool>("DelFlg")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Email")
+                        .ValueGeneratedOnAdd()
+                        .HasMaxLength(60)
+                        .HasColumnType("nvarchar(60)")
+                        .HasDefaultValueSql("('')");
+
+                    b.Property<string>("FirstName")
+                        .ValueGeneratedOnAdd()
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)")
+                        .HasDefaultValueSql("('')");
+
+                    b.Property<string>("LastChanged")
+                        .ValueGeneratedOnAdd()
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)")
+                        .HasDefaultValueSql("('')");
+
+                    b.Property<string>("LastName")
+                        .ValueGeneratedOnAdd()
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)")
+                        .HasDefaultValueSql("('')");
+
+                    b.Property<string>("Note")
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<string>("PhoneNumber")
+                        .ValueGeneratedOnAdd()
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)")
+                        .HasDefaultValueSql("('')");
+
+                    b.Property<int>("Sex")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValueSql("(0)");
+
+                    b.Property<int>("Status")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValueSql("(1)");
+
+                    b.Property<string>("SubAddress1")
+                        .ValueGeneratedOnAdd()
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)")
+                        .HasDefaultValueSql("('')");
+
+                    b.Property<string>("SubAddress2")
+                        .ValueGeneratedOnAdd()
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)")
+                        .HasDefaultValueSql("('')");
+
+                    b.Property<string>("SubAddress3")
+                        .ValueGeneratedOnAdd()
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)")
+                        .HasDefaultValueSql("('')");
+
+                    b.Property<string>("SubAddress4")
+                        .ValueGeneratedOnAdd()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)")
+                        .HasDefaultValueSql("('')");
+
+                    b.HasKey("BranchId", "EmployeeId")
+                        .HasName("PK_Employee_1");
+
+                    b.ToTable("Employee");
+                });
+
             modelBuilder.Entity("ErpManager.Domain.Entities.Product", b =>
                 {
                     b.Property<string>("BranchId")
@@ -115,6 +267,12 @@ namespace ErpManager.ERP.Migrations
                     b.Property<bool>("DelFlg")
                         .HasColumnType("bit");
 
+                    b.Property<string>("Description")
+                        .ValueGeneratedOnAdd()
+                        .HasMaxLength(4000)
+                        .HasColumnType("nvarchar(4000)")
+                        .HasDefaultValueSql("('')");
+
                     b.Property<int>("DisplayPrice")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
@@ -122,14 +280,14 @@ namespace ErpManager.ERP.Migrations
 
                     b.Property<string>("EmbeddedLink")
                         .ValueGeneratedOnAdd()
-                        .HasMaxLength(4000)
-                        .HasColumnType("nvarchar(4000)")
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)")
                         .HasDefaultValueSql("('')");
 
                     b.Property<string>("Images")
                         .ValueGeneratedOnAdd()
-                        .HasMaxLength(4000)
-                        .HasColumnType("nvarchar(4000)")
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)")
                         .HasDefaultValueSql("('')");
 
                     b.Property<string>("LastChanged")
@@ -165,7 +323,7 @@ namespace ErpManager.ERP.Migrations
                     b.Property<int>("Status")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasDefaultValueSql("(0)");
+                        .HasDefaultValueSql("(1)");
 
                     b.Property<string>("TakeOverId")
                         .ValueGeneratedOnAdd()

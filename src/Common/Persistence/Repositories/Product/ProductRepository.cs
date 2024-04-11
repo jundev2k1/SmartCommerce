@@ -110,16 +110,35 @@ namespace ErpManager.Persistence.Repositories
         /// <returns>Status update</returns>
         public bool Update(ProductModel model)
         {
-            var product = Get(model.BranchId, model.ProductId);
-            if (product == null) return false;
-
-            // Reset date created
-            model.DateCreated = product.DateCreated;
-
             var result = BeginTransaction(() =>
             {
-                var updateModel = model.MapToProductEntity();
-                _dbContext.Update(updateModel);
+                var product = _dbContext.Products
+                    .FirstOrDefault(product => (product.BranchId == model.BranchId) && (product.ProductId == model.ProductId));
+                if (product == null) throw new Exception();
+
+                product.MapToUpdateProduct(model);
+                _dbContext.Update(product);
+                _dbContext.SaveChanges();
+            });
+            return result;
+        }
+
+        /// <summary>
+        /// Update description
+        /// </summary>
+        /// <param name="model">Product model</param>
+        /// <returns>Is success</returns>
+        public bool UpdateDescription(ProductModel model)
+        {
+            var result = BeginTransaction(() =>
+            {
+                var product = _dbContext.Products
+                    .FirstOrDefault(product => (product.BranchId == model.BranchId) && (product.ProductId == model.ProductId));
+                if (product == null) throw new Exception();
+
+                product.Description = model.Description;
+                product.DateChanged = DateTime.Now;
+                product.LastChanged = model.LastChanged;
                 _dbContext.SaveChanges();
             });
             return result;

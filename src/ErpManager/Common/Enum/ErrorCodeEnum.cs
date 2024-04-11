@@ -7,5 +7,6 @@ namespace ErpManager.ERP.Common.Enum
         NoError,
         SystemError,
         NotPermission,
+        DataNotFound,
     }
 }

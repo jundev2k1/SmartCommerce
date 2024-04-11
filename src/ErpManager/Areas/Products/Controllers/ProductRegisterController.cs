@@ -55,7 +55,7 @@ namespace ErpManager.ERP.Areas.Product.Controllers
 
             // Handle create new product
             var isSuccess = _serviceFacade.Products.Insert(formInput);
-            if (isSuccess == false) return View();
+            if (isSuccess == false) return View(formInput);
 
             return RedirectToRoute(Constants.MODULE_PRODUCT_PRODUCTLIST_NAME);
         }

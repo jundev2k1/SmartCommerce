@@ -141,6 +141,9 @@
   <data name="Product_DisplayPrice" xml:space="preserve">
     <value>Display Price</value>
   </data>
+  <data name="Product_EmbeddedLink" xml:space="preserve">
+    <value>Embedded Link</value>
+  </data>
   <data name="Product_Name" xml:space="preserve">
     <value>Product Name</value>
   </data>

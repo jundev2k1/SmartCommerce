@@ -206,6 +206,7 @@ namespace ErpManager.ERP.Controllers
             // Set session login for operator
             Session.SetString(Constants.SESSION_KEY_OPERATOR_BRANCH_ID, @operator.BranchId);
             Session.SetString(Constants.SESSION_KEY_OPERATOR_ID, @operator.Profile.UserId);
+            Session.SetString(Constants.SESSION_KEY_OPERATOR_NAME, @operator.Profile.FullName);
             Session.SetString(Constants.SESSION_KEY_OPERATOR_PERMISSION, @operator.Permission);
             Session.SetString(Constants.SESSION_KEY_LOGIN_MESSAGE, "Login success");
         }

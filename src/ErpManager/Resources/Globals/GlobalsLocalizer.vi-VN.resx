@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Btn_BackToDetail" xml:space="preserve">
+    <value>Trở lại trang chi tiết</value>
+  </data>
   <data name="Btn_Close" xml:space="preserve">
     <value>Đóng</value>
   </data>
@@ -140,6 +143,9 @@
   </data>
   <data name="Btn_ResetForm" xml:space="preserve">
     <value>Làm mới</value>
+  </data>
+  <data name="Btn_Save" xml:space="preserve">
+    <value>Lưu</value>
   </data>
   <data name="Btn_Search" xml:space="preserve">
     <value>Tìm Kiếm</value>
@@ -311,6 +317,15 @@
   <data name="ThemeSettings_UpdateSuccess" xml:space="preserve">
     <value>Cập nhật thành công</value>
     <comment>Dùng cho theme settings</comment>
+  </data>
+  <data name="Title_Product_Description" xml:space="preserve">
+    <value>Mô tả sản phẩm</value>
+  </data>
+  <data name="Title_Product_Images" xml:space="preserve">
+    <value>Hình ảnh sản phẩm</value>
+  </data>
+  <data name="Title_Product_Info" xml:space="preserve">
+    <value>Thông tin sản phẩm</value>
   </data>
   <data name="Title_SearchAdvanced" xml:space="preserve">
     <value>Tìm kiếm nâng cao</value>

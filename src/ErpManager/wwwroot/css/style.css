@@ -83,7 +83,7 @@
     width: 100vw;
     height: 100vh;
     display: none;
-    z-index: 99;
+    z-index: 99999;
 }
 
     .theme-settings .overlay {
@@ -590,8 +590,15 @@
     color: var(--site-gray-600) !important;
 }
 /*#endregion */
-/*#endregion */
+/*#region Carousel */
 
+.carousel-control-next-icon,
+.carousel-control-prev-icon,
+.carousel-indicators {
+    z-index: 0;
+}
+/*#endregion */
+/*#endregion */
 /*#region Library */
 /*#region Select2 */
 .select2-container--bootstrap-5 {
@@ -652,8 +659,33 @@
     color: var(--site-title-operating);
 }
 /*#endregion */
-/*#endregion */
+.ck.ck-editor__main > .ck-editor__editable {
+    min-height: 200px;
+}
 
+.dark-mode .ck.ck-editor__main > .ck-editor__editable {
+    background: var(--site-gray-700);
+}
+
+.dark-mode .ck.ck-toolbar {
+    background: var(--site-gray-500);
+}
+
+.dark-mode .ck.ck-button:not(.ck-disabled):hover, a.ck.ck-button:not(.ck-disabled):hover {
+    background: var(--site-gray-400);
+}
+
+.ck.ck-balloon-panel.ck-balloon-panel_visible {
+    display: none !important;
+}
+
+.ck ul,
+.ck li {
+    margin: inherit;
+    padding: inherit;
+    list-style: inherit;
+}
+/*#endregion */
 /*#region Responsive */
 @media (min-width: 769px) {
     .is-mobile {

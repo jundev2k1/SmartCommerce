@@ -20,7 +20,7 @@ public partial class Product
     [StringLength(60)]
     public string Name { get; set; }
 
-    [StringLength(4000)]
+    [StringLength(255)]
     public string Images { get; set; } = string.Empty;
 
     [StringLength(60)]
@@ -54,10 +54,13 @@ public partial class Product
     public decimal Size3 { get; set; }
 
     [StringLength(30)]
-    public string TakeOverId { get; set; }
+    public string TakeOverId { get; set; } = string.Empty;
 
     [StringLength(4000)]
-    public string EmbeddedLink { get; set; }
+    public string Description { get; set; } = string.Empty;
+
+    [StringLength(255)]
+    public string EmbeddedLink { get; set; } = string.Empty;
 
     [Column(TypeName = "datetime")]
     public DateTime? DateCreated { get; set; }
@@ -66,7 +69,7 @@ public partial class Product
     public DateTime? DateChanged { get; set; }
 
     [StringLength(30)]
-    public string CreatedBy { get; set; }
+    public string CreatedBy { get; set; } = string.Empty;
 
     [StringLength(30)]
     public string LastChanged { get; set; } = string.Empty;

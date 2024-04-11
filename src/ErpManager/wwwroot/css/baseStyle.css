@@ -149,7 +149,7 @@
 
     .site-btn-primary:hover {
         background: var(--site-primary);
-        filter: brightness(0.9);
+        filter: brightness(0.75);
         color: var(--site-white);
         transition: .25s ease-in;
     }
@@ -158,7 +158,7 @@
     padding-left: 1rem;
     padding-right: 1rem;
     border-color: var(--site-primary);
-    color: var(--site-text-operating);
+    color: var(--site-gray-100);
     transition: .25s ease-out;
 }
 
@@ -173,13 +173,13 @@
     padding-left: 1rem;
     padding-right: 1rem;
     background: var(--site-secondary);
-    color: var(--site-text-operating);
+    color: var(--site-gray-100);
     transition: .25s ease-out;
 }
 
     .site-btn-secondary:hover {
         background: var(--site-secondary);
-        filter: brightness(0.9);
+        filter: brightness(0.75);
         color: var(--site-text-operating);
         transition: .25s ease-in;
     }
@@ -188,7 +188,7 @@
     padding-left: 1rem;
     padding-right: 1rem;
     border-color: var(--site-secondary);
-    color: var(--site-text-operating);
+    color: var(--site-gray-100);
     transition: .25s ease-out;
 }
 
@@ -203,13 +203,13 @@
     padding-left: 1rem;
     padding-right: 1rem;
     background: var(--site-danger);
-    color: var(--site-text-operating);
+    color: var(--site-gray-100);
     transition: .25s ease-out;
 }
 
     .site-btn-danger:hover {
         background: var(--site-danger);
-        filter: brightness(0.9);
+        filter: brightness(0.75);
         color: var(--site-white);
         transition: .25s ease-in;
     }
@@ -218,14 +218,14 @@
     padding-left: 1rem;
     padding-right: 1rem;
     border-color: var(--site-danger);
-    color: var(--site-text-operating);
+    color: var(--site-danger);
     transition: .25s ease-out;
 }
 
     .site-btn-outline-danger:hover {
         filter: brightness(0.75);
-        border-color: var(--site-border-operating);
-        color: var(--site-text-operating);
+        border-color: var(--site-danger);
+        color: var(--site-danger);
         transition: .25s ease-in;
     }
 
@@ -233,13 +233,13 @@
     padding-left: 1rem;
     padding-right: 1rem;
     background: var(--site-info);
-    color: var(--site-text-operating);
+    color: var(--site-gray-100);
     transition: .25s ease-out;
 }
 
     .site-btn-info:hover {
         background: var(--site-info);
-        filter: brightness(0.9);
+        filter: brightness(0.75);
         color: var(--site-white);
         transition: .25s ease-in;
     }
@@ -248,14 +248,14 @@
     padding-left: 1rem;
     padding-right: 1rem;
     border-color: var(--site-info);
-    color: var(--site-text-operating);
+    color: var(--site-info);
     transition: .25s ease-out;
 }
 
     .site-btn-outline-info:hover {
         filter: brightness(0.75);
-        border-color: var(--site-border-operating);
-        color: var(--site-text-operating);
+        border-color: var(--site-info);
+        color: var(--site-info);
         transition: .25s ease-in;
     }
 
@@ -263,13 +263,13 @@
     padding-left: 1rem;
     padding-right: 1rem;
     background: var(--site-success);
-    color: var(--site-text-operating);
+    color: var(--site-gray-100);
     transition: .25s ease-out;
 }
 
     .site-btn-success:hover {
         background: var(--site-success);
-        filter: brightness(0.9);
+        filter: brightness(0.75);
         color: var(--site-text-operating);
         transition: .25s ease-in;
     }
@@ -278,14 +278,14 @@
     padding-left: 1rem;
     padding-right: 1rem;
     border-color: var(--site-success);
-    color: var(--site-text-operating);
+    color: var(--site-success);
     transition: .25s ease-out;
 }
 
     .site-btn-outline-success:hover {
         border-color: var(--site-success);
         filter: brightness(0.75);
-        color: var(--site-text-operating);
+        color: var(--site-success);
         transition: .25s ease-in;
     }
 
@@ -293,13 +293,13 @@
     padding-left: 1rem;
     padding-right: 1rem;
     background: var(--site-warning);
-    color: var(--site-white);
+    color: var(--site-gray-100);
     transition: .25s ease-out;
 }
 
     .site-btn-warning:hover {
         background: var(--site-warning);
-        filter: brightness(0.9);
+        filter: brightness(0.75);
         color: var(--site-white);
         transition: .25s ease-in;
     }
@@ -308,7 +308,7 @@
     padding-left: 1rem;
     padding-right: 1rem;
     border-color: var(--site-warning);
-    color: var(--site-text-operating);
+    color: var(--site-warning);
     transition: .25s ease-out;
 }
 
@@ -316,8 +316,8 @@
         padding-left: 1rem;
         padding-right: 1rem;
         filter: brightness(0.75);
-        border-color: var(--site-border-operating);
-        color: var(--site-text-operating);
+        border-color: var(--site-warning);
+        color: var(--site-warning);
         transition: .25s ease-in;
     }
 
@@ -333,7 +333,7 @@
         padding-left: 1rem;
         padding-right: 1rem;
         background: var(--site-theme-operating);
-        filter: brightness(0.9);
+        filter: brightness(0.75);
         color: var(--site-title-operating);
         transition: .25s ease-in;
     }
@@ -342,13 +342,13 @@
     padding-left: 1rem;
     padding-right: 1rem;
     border-color: var(--site-theme-operating);
-    color: var(--site-text-operating);
+    color: var(--site-theme-operating);
     transition: .25s ease-out;
 }
 
     .site-btn-outline-theme:hover {
-        border-color: var(--site-border-operating);
-        filter: brightness(0.9);
+        border-color: var(--site-theme-operating);
+        filter: brightness(0.75);
         transition: .25s ease-in;
     }
 
@@ -557,6 +557,20 @@ ul, li {
     border-radius: var(--site-border-layout);
     border: var(--site-border);
     padding: .75rem;
+}
+
+.site-note {
+    background: var(--site-gray-50);
+    border-radius: var(--site-border-layout);
+    border: var(--site-border);
+    padding: .5rem;
+}
+
+.dark-mode .site-note {
+    background: var(--site-gray-700);
+    border-radius: var(--site-border-layout);
+    border: var(--site-border);
+    padding: .5rem;
 }
 
 .site-rounded-layout {

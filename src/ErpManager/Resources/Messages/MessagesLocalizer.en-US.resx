@@ -123,6 +123,9 @@
   <data name="ErrorCode_SystemError" xml:space="preserve">
     <value>Oops</value>
   </data>
+  <data name="ErrorMessage_DataNotFound" xml:space="preserve">
+    <value>No data found</value>
+  </data>
   <data name="ErrorMessage_LoginFailed" xml:space="preserve">
     <value>Login information incorrect</value>
   </data>

@@ -688,6 +688,775 @@
             "name_en": "Long Hung Commune"
           }
         ]
+      },
+      // Long Khanh Districts
+      {
+        "districtId": "048002",
+        "items": [
+          {
+            "id": "048002001",
+            "name_vi": "Phường Bảo Vinh",
+            "name_en": "Bao Vinh Ward"
+          },
+          {
+            "id": "048002002",
+            "name_vi": "Phường Bàu Sen",
+            "name_en": "Bau Sen Ward"
+          },
+          {
+            "id": "048002003",
+            "name_vi": "Phường Phú Bình",
+            "name_en": "Phu Binh Ward"
+          },
+          {
+            "id": "048002004",
+            "name_vi": "Phường Suối Tre",
+            "name_en": "Suoi Tre Ward"
+          },
+          {
+            "id": "048002005",
+            "name_vi": "Phường Xuân An",
+            "name_en": "Xuan An Ward"
+          },
+          {
+            "id": "048002006",
+            "name_vi": "Phường Xuân Bình",
+            "name_en": "Xuan Binh Ward"
+          },
+          {
+            "id": "048002007",
+            "name_vi": "Phường Xuân Hoà",
+            "name_en": "Xuan Hoa Ward"
+          },
+          {
+            "id": "048002008",
+            "name_vi": "Phường Xuân Lập",
+            "name_en": "Xuan Lap Ward"
+          },
+          {
+            "id": "048002009",
+            "name_vi": "Phường Xuân Tân",
+            "name_en": "Xuan Tan Ward"
+          },
+          {
+            "id": "0480020010",
+            "name_vi": "Phường Xuân Thanh",
+            "name_en": "Xuan Thanh Ward"
+          },
+          {
+            "id": "048002011",
+            "name_vi": "Phường Xuân Trung",
+            "name_en": "Xuan Trung Ward"
+          },
+          {
+            "id": "048002012",
+            "name_vi": "Xã Bảo Quang",
+            "name_en": "Bảo Quang Commune"
+          },
+          {
+            "id": "048002013",
+            "name_vi": "Xã Bàu Trâm",
+            "name_en": "Bau Tram Commune"
+          },
+          {
+            "id": "048002014",
+            "name_vi": "Xã Bình Lộc",
+            "name_en": "Binh Loc Commune"
+          },
+          {
+            "id": "048002015",
+            "name_vi": "Xã Hàng Gòn",
+            "name_en": "Hang Gon Commune"
+          }
+        ]
+      },
+
+      // Cam My Districts
+      {
+        "districtId": "048003",
+        "items": [
+          {
+            "id": "048003001",
+            "name_vi": "Thị Trấn Long Giao",
+            "name_en": "Long Giao Town"
+          },
+          {
+            "id": "048003002",
+            "name_vi": "Xã Bảo Bình",
+            "name_en": "Bao Binh Commune"
+          },
+          {
+            "id": "048003003",
+            "name_vi": "Xã Lâm San",
+            "name_en": "Lam San Commune"
+          },
+          {
+            "id": "048003004",
+            "name_vi": "Xã Nhân Nghĩa",
+            "name_en": "Nhan Nghia Commune"
+          },
+          {
+            "id": "048003005",
+            "name_vi": "Xã Sông Nhạn",
+            "name_en": "Song Nhan Commune"
+          },
+          {
+            "id": "048003006",
+            "name_vi": "Xã Sông Ray",
+            "name_en": "Song Ray Commune"
+          },
+          {
+            "id": "048003007",
+            "name_vi": "Xã Thừa Đức",
+            "name_en": "Thua Duc Commune"
+          },
+          {
+            "id": "048003008",
+            "name_vi": "Xã Xuân Bảo",
+            "name_en": "Xuan Bao Commune"
+          },
+          {
+            "id": "048003009",
+            "name_vi": "Xã Xuân Đông",
+            "name_en": "Xuan Dong Commune"
+          },
+          {
+            "id": "048003010",
+            "name_vi": "Xã Xuân Đường",
+            "name_en": "Xuan Duong Commune"
+          },
+          {
+            "id": "048003011",
+            "name_vi": "Xã Xuân Mỹ",
+            "name_en": "Xuan My Commune"
+          },
+          {
+            "id": "048003012",
+            "name_vi": "Xã Xuân Quế",
+            "name_en": "Xuan Que Commune"
+          },
+          {
+            "id": "0480030013",
+            "name_vi": "Xã Xuân Tây",
+            "name_en": "Xuan Tay Commune"
+          }
+        ]
+      },
+
+      // Dinh Quan Districts
+      {
+        "districtId": "048004",
+        "items": [
+          {
+            "id": "048003001",
+            "name_vi": "Thị Trấn Định Quán",
+            "name_en": "Dinh Quan Town"
+          },
+          {
+            "id": "048004002",
+            "name_vi": "Xã Gia Canh",
+            "name_en": "Gia Canh Commune"
+          },
+          {
+            "id": "048004003",
+            "name_vi": "Xã La Ngà",
+            "name_en": "La Nga Commune"
+          },
+          {
+            "id": "048004004",
+            "name_vi": "Xã Ngọc Định",
+            "name_en": "Ngoc Dinh Commune"
+          },
+          {
+            "id": "048004005",
+            "name_vi": "Xã Phú Cường",
+            "name_en": "Phu Cuong Commune"
+          },
+          {
+            "id": "048004006",
+            "name_vi": "Xã Phú Hoà",
+            "name_en": "Phu Hoa Commune"
+          },
+          {
+            "id": "048004007",
+            "name_vi": "Xã Phú Lợi",
+            "name_en": "Phú Loi Commune"
+          },
+          {
+            "id": "048004008",
+            "name_vi": "Xã Phú Ngọc",
+            "name_en": "Phu Ngoc Commune"
+          },
+          {
+            "id": "048004009",
+            "name_vi": "Xã Phú Tân",
+            "name_en": "Phú Tan Commune"
+          },
+          {
+            "id": "048004010",
+            "name_vi": "Xã Phú Túc",
+            "name_en": "Phu Tuc Commune"
+          },
+          {
+            "id": "048004011",
+            "name_vi": "Xã Phú Vinh",
+            "name_en": "Phu Vinh Commune"
+          },
+          {
+            "id": "048004012",
+            "name_vi": "Xã Suối Nho",
+            "name_en": "Suoi Nho Commune"
+          },
+          {
+            "id": "048004013",
+            "name_vi": "Xã Thanh Sơn",
+            "name_en": "Thanh Son Commune"
+          },
+          {
+            "id": "048004014",
+            "name_vi": "Xã Túc Trưng",
+            "name_en": "Tuc Trung Commune"
+          }
+        ]
+      },
+
+      //Long Thanh Districts
+      {
+        "districtId": "048005",
+        "items": [
+          {
+            "id": "048005001",
+            "name_vi": "Thị trấn Long Thành",
+            "name_en": "Long Thanh Town"
+          },
+          {
+            "id": "048005002",
+            "name_vi": "Xã An Phước",
+            "name_en": "An Phuoc Commune"
+          },
+          {
+            "id": "048005003",
+            "name_vi": "Xã Bàu Cạn",
+            "name_en": "Bau Can Commune"
+          },
+          {
+            "id": "048005004",
+            "name_vi": "Xã Bình An",
+            "name_en": "Binh An Commune"
+          },
+          {
+            "id": "048005005",
+            "name_vi": "Xã Bình Sơn",
+            "name_en": "Binh Son Commune"
+          },
+          {
+            "id": "048005006",
+            "name_vi": "Xã Cẩm Đường",
+            "name_en": "Cam Duong Commune"
+          },
+          {
+            "id": "048005007",
+            "name_vi": "Xã Lộc An",
+            "name_en": "Loc An Commune"
+          },
+          {
+            "id": "048005008",
+            "name_vi": "Xã Long An",
+            "name_en": "Long An Commune"
+          },
+          {
+            "id": "048005009",
+            "name_vi": "Xã Long Đức",
+            "name_en": "An Long Duc Commune"
+          },
+          {
+            "id": "048005010",
+            "name_vi": "Xã Long Phước",
+            "name_en": "Long Phuoc Commune"
+          },
+          {
+            "id": "048005011",
+            "name_vi": "Xã Phước Bình",
+            "name_en": "Phuoc Binh Commune"
+          },
+          {
+            "id": "048005012",
+            "name_vi": "Xã Phước Thái",
+            "name_en": "Phuoc Thai Commune"
+          },
+          {
+            "id": "048005013",
+            "name_vi": "Xã Tam An",
+            "name_en": "Tam An Commune"
+          },
+          {
+            "id": "048005014",
+            "name_vi": "Xã Tân Hiệp",
+            "name_en": "Tan Hiep Commune"
+          }
+        ]
+      },
+
+      // Nhon Trach Districts
+      {
+        "districtId": "048006",
+        "items": [
+          {
+            "id": "048006001",
+            "name_vi": "Thị trấn Hiệp Phước",
+            "name_en": "Hiep Phuoc Town"
+          },
+          {
+            "id": "048006002",
+            "name_vi": "Xã Đại Phước",
+            "name_en": "Dai Phuoc Commune"
+          },
+          {
+            "id": "048006003",
+            "name_vi": "Xã Long Tân",
+            "name_en": "Long Tan Commune"
+          },
+          {
+            "id": "048006004",
+            "name_vi": "Xã Long Thọ",
+            "name_en": "Long Tho Commune"
+          },
+          {
+            "id": "048006005",
+            "name_vi": "Xã Phú Đông",
+            "name_en": "Phu Dong Commune"
+          },
+          {
+            "id": "048006006",
+            "name_vi": "Xã Phú Hội",
+            "name_en": "Phu Hoi Commune"
+          },
+          {
+            "id": "048006007",
+            "name_vi": "Xã Phú Thạnh",
+            "name_en": "Phu Thanh Commune"
+          },
+          {
+            "id": "048006008",
+            "name_vi": "Xã Phú Hữu",
+            "name_en": "Phu Huu Commune"
+          },
+          {
+            "id": "048006009",
+            "name_vi": "Xã Phước An",
+            "name_en": "Phuoc An Commune"
+          },
+          {
+            "id": "048006010",
+            "name_vi": "Xã Phước Khánh",
+            "name_en": "Phuoc Khanh Commune"
+          },
+          {
+            "id": "048006011",
+            "name_vi": "Xã Phước Thiền",
+            "name_en": "Phuoc Thien Commune"
+          },
+          {
+            "id": "048006012",
+            "name_vi": "Xã Vĩnh Thanh",
+            "name_en": "Vinh Thanh Commune"
+          }
+        ]
+      },
+
+      // Tan Phu Districts
+      {
+        "districtId": "048007",
+        "items": [
+          {
+            "id": "048007001",
+            "name_vi": "Thị Trấn Tân Phú",
+            "name_en": "Tan Phu Town"
+          },
+          {
+            "id": "048007002",
+            "name_vi": "Xã Đắc Lua",
+            "name_en": "Dac Lua Commune"
+          },
+          {
+            "id": "048007003",
+            "name_vi": "Xã Nam Cát Tiên",
+            "name_en": "Nam Cat Tien Commune"
+          },
+          {
+            "id": "048007004",
+            "name_vi": "Xã Núi Tượng",
+            "name_en": "Nui Tuong Commune"
+          },
+          {
+            "id": "048007005",
+            "name_vi": "Xã Phú An",
+            "name_en": "Phu An Commune"
+          },
+          {
+            "id": "048007006",
+            "name_vi": "Xã Phú Bình",
+            "name_en": "Phu Binh Commune"
+          },
+          {
+            "id": "048007007",
+            "name_vi": "Xã Phú Điền",
+            "name_en": "Phu Dien Commune"
+          },
+          {
+            "id": "048007008",
+            "name_vi": "Xã Phú Lâm",
+            "name_en": "Phu Lam Commune"
+          },
+          {
+            "id": "048007009",
+            "name_vi": "Xã Phú Lập",
+            "name_en": "Phu Lap Commune"
+          },
+          {
+            "id": "048007010",
+            "name_vi": "Xã Phú Lộc",
+            "name_en": "Phu Loc Commune"
+          },
+          {
+            "id": "048007011",
+            "name_vi": "Xã Phú Sơn",
+            "name_en": "Phu Son Commune"
+          },
+          {
+            "id": "048007012",
+            "name_vi": "Xã Phú Thanh",
+            "name_en": "Phu Thanh Commune"
+          },
+          {
+            "id": "048007013",
+            "name_vi": "Xã Phú Thịnh",
+            "name_en": "Phu Thinh Commune"
+          },
+          {
+            "id": "048007014",
+            "name_vi": "Xã Phú Trung",
+            "name_en": "Phu Trung Commune"
+          },
+          {
+            "id": "048007015",
+            "name_vi": "Xã Phú Xuân",
+            "name_en": "Phu Xuan Commune"
+          },
+          {
+            "id": "048007016",
+            "name_vi": "Xã Tà Lài",
+            "name_en": "Ta Lai Commune"
+          },
+          {
+            "id": "048007017",
+            "name_vi": "Xã Thanh Sơn",
+            "name_en": "Thanh Son Commune"
+          },
+          {
+            "id": "048007018",
+            "name_vi": "Xã Trà Cổ",
+            "name_en": "Tra Co Commune"
+          }
+        ]
+      },
+
+      // Thong Nhat Districts
+      {
+        "districtId": "048008",
+        "items": [
+          {
+            "id": "048008001",
+            "name_vi": "Thị Trấn Dầu Giây",
+            "name_en": "Dau Giay Town"
+          },
+          {
+            "id": "048008002",
+            "name_vi": "Xã Bàu Hàm 2",
+            "name_en": "Bau Ham 2 Commune"
+          },
+          {
+            "id": "048008003",
+            "name_vi": "Xã Gia Tân 1",
+            "name_en": "Gia Tan 1 Commune"
+          },
+          {
+            "id": "048008004",
+            "name_vi": "Xã Gia Tân 2",
+            "name_en": "Gia Tan 2 Commune"
+          },
+          {
+            "id": "048008005",
+            "name_vi": "Xã Gia Tân 3",
+            "name_en": "Gia Tan 3 Commune"
+          },
+          {
+            "id": "048008006",
+            "name_vi": "Xã Gia Kiệm",
+            "name_en": "Gia Kiem Commune"
+          },
+          {
+            "id": "048008007",
+            "name_vi": "Xã Hưng Lộc",
+            "name_en": "Hung Loc Commune"
+          },
+          {
+            "id": "048008008",
+            "name_vi": "Xã Lộ 25",
+            "name_en": "Lo 25 Commune"
+          },
+          {
+            "id": "048008009",
+            "name_vi": "Xã Quang Trung",
+            "name_en": "Quang Trung Commune"
+          },
+          {
+            "id": "048008010",
+            "name_vi": "Xã Xuân Thiện",
+            "name_en": "Xuan Thien Commune"
+          }
+        ]
+      },
+
+      // Trang Bom Districts
+      {
+        "districtId": "048009",
+        "items": [
+          {
+            "id": "048009001",
+            "name_vi": "Thị Trấn Trảng Bom",
+            "name_en": "Trang Bom Town"
+          },
+          {
+            "id": "048009002",
+            "name_vi": "Xã An Viễn",
+            "name_en": "An Vien Commune"
+          },
+          {
+            "id": "048009003",
+            "name_vi": "Xã Bắc Sơn",
+            "name_en": "Bac Son Commune"
+          },
+          {
+            "id": "048009004",
+            "name_vi": "Xã Bàu Hàm",
+            "name_en": "Bau Ham Commune"
+          },
+          {
+            "id": "048009005",
+            "name_vi": "Xã Bình Minh",
+            "name_en": "Binh Minh Commune"
+          },
+          {
+            "id": "048009006",
+            "name_vi": "Xã Cây Gáo",
+            "name_en": "Cay Gao Commune"
+          },
+          {
+            "id": "048009007",
+            "name_vi": "Xã Đông Hoà",
+            "name_en": "Dong Hoa Commune"
+          },
+          {
+            "id": "048009008",
+            "name_vi": "Xã Đồi 61",
+            "name_en": "Doi 61 Commune"
+          },
+          {
+            "id": "048009009",
+            "name_vi": "Xã Giang Điền",
+            "name_en": "Giang Dien Commune"
+          },
+          {
+            "id": "048009010",
+            "name_vi": "Xã Hố Nai 3",
+            "name_en": "Ho Nai 3 Commune"
+          },
+          {
+            "id": "048009011",
+            "name_vi": "Xã Hưng Thịnh",
+            "name_en": "Hung Thinh Commune"
+          },
+          {
+            "id": "048009012",
+            "name_vi": "Xã Quảng Tiến",
+            "name_en": "Quang Tien Commune"
+          },
+          {
+            "id": "048009013",
+            "name_vi": "Xã Sông Thao",
+            "name_en": "Song Thao Commune"
+          },
+          {
+            "id": "048009014",
+            "name_vi": "Xã Sông Trầu",
+            "name_en": "Song Trau Commune"
+          },
+          {
+            "id": "048009015",
+            "name_vi": "Xã Tây Hoà",
+            "name_en": "Tay Hoa Commune"
+          },
+          {
+            "id": "048009016",
+            "name_vi": "Xã Thanh Bình",
+            "name_en": "Thanh Binh Commune"
+          },
+          {
+            "id": "048009017",
+            "name_vi": "Xã Trung Hoà",
+            "name_en": "Trung Hoa Commune"
+          }
+        ]
+      },
+
+      // Vinh Cuu Districts
+      {
+        "districtId": "048010",
+        "items": [
+          {
+            "id": "048010001",
+            "name_vi": "Thị Trấn Vĩnh An",
+            "name_en": "Vinh An Town"
+          },
+          {
+            "id": "048010002",
+            "name_vi": "Xã Bình Hoà",
+            "name_en": "Binh Hoa Commune"
+          },
+          {
+            "id": "048010003",
+            "name_vi": "Xã Bình Lợi",
+            "name_en": "Binh Loi Commune"
+          },
+          {
+            "id": "048010004",
+            "name_vi": "Xã Hiếu Liêm",
+            "name_en": "Hieu Liem Commune"
+          },
+          {
+            "id": "048010005",
+            "name_vi": "Xã Mã Đà",
+            "name_en": "Ma Da Commune"
+          },
+          {
+            "id": "048010006",
+            "name_vi": "Xã Phú Lý",
+            "name_en": "Phu Ly Commune"
+          },
+          {
+            "id": "048010007",
+            "name_vi": "Xã Tân An",
+            "name_en": "Tan An Commune"
+          },
+          {
+            "id": "048010008",
+            "name_vi": "Xã Tân Bình",
+            "name_en": "Tan Binh Commune"
+          },
+          {
+            "id": "048010009",
+            "name_vi": "Xã Thạnh Phú",
+            "name_en": "Thanh Phu Commune"
+          },
+          {
+            "id": "048010010",
+            "name_vi": "Xã Thiện Tân",
+            "name_en": "Thien Tan Commune"
+          },
+          {
+            "id": "048010011",
+            "name_vi": "Xã Trị An",
+            "name_en": "Tri An Commune"
+          },
+          {
+            "id": "048010012",
+            "name_vi": "Xã Vĩnh Tân",
+            "name_en": "Vinh Tan Commune"
+          }
+        ]
+      },
+
+      // Xuan Loc Districts
+      {
+        "districtId": "048011",
+        "items": [
+          {
+            "id": "048011001",
+            "name_vi": "Thị Trấn Gia Ray",
+            "name_en": "Gia Ray Town"
+          },
+          {
+            "id": "048011002",
+            "name_vi": "Xã Bảo Hoà",
+            "name_en": "Bao Hoa Commune"
+          },
+          {
+            "id": "048011003",
+            "name_vi": "Xã Lang Minh",
+            "name_en": "Lang Minh Commune"
+          },
+          {
+            "id": "048011004",
+            "name_vi": "Xã Suối Cao",
+            "name_en": "Suoi Cao Commune"
+          },
+          {
+            "id": "048011005",
+            "name_vi": "Xã Suối Cát",
+            "name_en": "Suoi Cat Commune"
+          },
+          {
+            "id": "048011006",
+            "name_vi": "Xã Xuân Bắc",
+            "name_en": "Xuan Bac Commune"
+          },
+          {
+            "id": "048011007",
+            "name_vi": "Xã Xuân Định",
+            "name_en": "Xuan Dinh Commune"
+          },
+          {
+            "id": "048011008",
+            "name_vi": "Xã Xuân Hiệp",
+            "name_en": "Xuan Hiep Commune"
+          },
+          {
+            "id": "048011009",
+            "name_vi": "Xã Xuân Hoà",
+            "name_en": "Xuan Hoa Commune"
+          },
+          {
+            "id": "048011010",
+            "name_vi": "Xã Xuân Hưng",
+            "name_en": "Xuan Hung Commune"
+          },
+          {
+            "id": "048011011",
+            "name_vi": "Xã Xuân Phú",
+            "name_en": "Xuan Phu Commune"
+          },
+          {
+            "id": "048011012",
+            "name_vi": "Xã Xuân Tâm",
+            "name_en": "Xuan Tam Commune"
+          },
+          {
+            "id": "048011013",
+            "name_vi": "Xã Xuân Thành",
+            "name_en": "Xuan Thanh Commune"
+          },
+          {
+            "id": "048011014",
+            "name_vi": "Xã Xuân Thọ",
+            "name_en": "Xuan Tho Commune"
+          },
+          {
+            "id": "048011015",
+            "name_vi": "Xã Xuân Trường",
+            "name_en": "Xuan Truong Commune"
+          }
+        ]
       }
     ]
   }

@@ -37,12 +37,12 @@ namespace ErpManager.ERP.Areas.Product.Controllers
         [HttpPost]
         [PermissionAttribute(Permission.CanEditProduct)]
         [Route(Constants.MODULE_PRODUCT_PRODUCTEDIT_PATH, Name = Constants.MODULE_PRODUCT_PRODUCTEDIT_NAME)]
-        public IActionResult Index(ProductModel formInput)
+        public IActionResult Index([FromRoute] string id, ProductModel formInput)
         {
             // Set default value for form input
-            formInput.LastChanged = this.OperatorName;
-            formInput.DateChanged = DateTime.Now;
+            formInput.ProductId = id;
             formInput.TrimStringInput();
+            SetDataForUpdate(ref formInput);
 
             // Set initial value for dropdown list
             ViewBag.DropdownItems = GetInitDropdownListItems(formInput);
@@ -57,9 +57,25 @@ namespace ErpManager.ERP.Areas.Product.Controllers
 
             // Handle create new product
             var isSuccess = _serviceFacade.Products.Update(formInput);
-            if (isSuccess == false) return View();
+            if (isSuccess == false) return View(formInput);
 
             return RedirectToRoute(Constants.MODULE_PRODUCT_PRODUCTDETAIL_NAME, new { id = formInput.ProductId });
+        }
+
+        /// <summary>
+        /// Set data for update
+        /// </summary>
+        /// <param name="input">Input</param>
+        private void SetDataForUpdate(ref ProductModel input)
+        {
+            var product = _serviceFacade.Products.GetProduct(this.OperatorBranchId, input.ProductId);
+            if (product == null) return;
+
+            input.BranchId = this.OperatorBranchId;
+            input.LastChanged = this.OperatorName;
+            input.DateChanged = DateTime.Now;
+            input.DateCreated = product?.DateCreated;
+            input.CreatedBy = product?.CreatedBy ?? string.Empty;
         }
 
         /// <summary>
@@ -112,6 +128,18 @@ namespace ErpManager.ERP.Areas.Product.Controllers
             ddlCollection.Add(displayPricePropertyName, ddlDisplayPrice);
 
             return ddlCollection;
+        }
+
+        [HttpPost]
+        [PermissionAttribute(Permission.CanEditProduct)]
+        [Route(Constants.MODULE_PRODUCT_PRODUCTEDIT_DESCRIPTION_PATH, Name = Constants.MODULE_PRODUCT_PRODUCTEDIT_DESCRIPTION_NAME)]
+        public bool UpdateDescription([FromRoute] string id, [FromBody] string description)
+        {
+            var product = _serviceFacade.Products.GetProduct(this.OperatorBranchId, id);
+            if (product == null) return false;
+
+            product.Description = description;
+            return _serviceFacade.Products.UpdateDescription(product);
         }
     }
 }

@@ -34,6 +34,8 @@ namespace ErpManager.Domain.Mapping
                 Size2 = productEntity.Size2,
                 Size3 = productEntity.Size3,
                 TakeOverId = productEntity.TakeOverId,
+                Description = productEntity.Description,
+                EmbeddedLink = productEntity.EmbeddedLink,
                 DateCreated = productEntity.DateCreated,
                 DateChanged = productEntity.DateCreated,
                 CreatedBy = productEntity.CreatedBy,
@@ -70,11 +72,44 @@ namespace ErpManager.Domain.Mapping
                 Size2 = productModel.Size2,
                 Size3 = productModel.Size3,
                 TakeOverId = productModel.TakeOverId,
+                Description = productModel.Description,
+                EmbeddedLink = productModel.EmbeddedLink,
                 DateCreated = productModel.DateCreated,
                 DateChanged = productModel.DateCreated,
                 CreatedBy = productModel.CreatedBy,
                 LastChanged = productModel.LastChanged,
             };
+
+            return entity;
+        }
+
+        /// <summary>
+        /// Map to update product
+        /// </summary>
+        /// <param name="model">Product model</param>
+        /// <returns>Product entity</returns>
+        public static Product MapToUpdateProduct(this Product entity, ProductModel model)
+        {
+            entity.Name = model.Name;
+            entity.Images = model.Images;
+            entity.Address1 = model.Address1;
+            entity.Address2 = model.Address2;
+            entity.Address3 = model.Address3;
+            entity.Address4 = model.Address4;
+            entity.Price1 = model.Price1;
+            entity.Price2 = model.Price2;
+            entity.Price3 = model.Price3;
+            entity.DisplayPrice = model.DisplayPrice;
+            entity.Status = model.Status;
+            entity.Size1 = model.Size1;
+            entity.Size2 = model.Size2;
+            entity.Size3 = model.Size3;
+            entity.TakeOverId = model.TakeOverId;
+            entity.Description = model.Description;
+            entity.EmbeddedLink = model.EmbeddedLink;
+            entity.DateChanged = DateTime.Now;
+            entity.CreatedBy = model.CreatedBy;
+            entity.LastChanged = model.LastChanged;
 
             return entity;
         }

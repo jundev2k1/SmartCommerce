@@ -20,14 +20,14 @@ namespace ErpManager.ERP.Controllers
         [Route(Constants.MODULE_ERROR_ERROR_PATH, Name = Constants.MODULE_ERROR_ERROR_NAME)]
         public IActionResult Index()
         {
-            var (errorCode, errorMessage) = GetErrorSession();
+            var (errorCode, errorMessageKey) = GetErrorSession();
+            var content = GetPageContent(errorCode, errorMessageKey);
             if (errorCode is ErrorCodeEnum.NoError)
             {
                 return RedirectToRoute(Constants.MODULE_HOME_DASHBOARD_NAME);
             }
 
-            var content = GetPageContent(errorCode, errorMessage);
-
+            ClearErrorInfoSession();
             return View(content);
         }
 
@@ -37,44 +37,50 @@ namespace ErpManager.ERP.Controllers
         /// <returns>Error message</returns>
         private Tuple<ErrorCodeEnum, string> GetErrorSession()
         {
-            // Get error message
-            var errorMessage = HttpContext
-                .Session
-                .GetString(Constants.SESSION_KEY_PAGE_ERROR_MESSAGE)
-                .ToStringOrEmpty();
+            // Get error message key
+            var errorMessageKey = Session.GetString(Constants.SESSION_KEY_PAGE_ERROR_MESSAGE).ToStringOrEmpty();
 
             // Get error code
-            var errorCodeString = HttpContext
-                .Session
-                .GetString(Constants.SESSION_KEY_PAGE_ERROR_CODE)
-                .ToStringOrEmpty();
-            var errorCode = (string.IsNullOrEmpty(errorCodeString) == false)
+            var errorCodeString = Session.GetString(Constants.SESSION_KEY_PAGE_ERROR_CODE).ToStringOrEmpty();
+            var errorCode = string.IsNullOrEmpty(errorCodeString) == false
                 ? EnumUtility.GetEnumValue<ErrorCodeEnum>(errorCodeString)
                 : ErrorCodeEnum.NoError;
 
-            return Tuple.Create(errorCode, errorMessage);
+            return Tuple.Create(errorCode, errorMessageKey);
         }
 
         /// <summary>
         /// Get page content
         /// </summary>
         /// <param name="code">Error code</param>
-        /// <param name="message">Error message</param>
+        /// <param name="messageKey">Error message key</param>
         /// <returns>Page content</returns>
-        private ErrorPageViewModel GetPageContent(ErrorCodeEnum code, string message)
+        private ErrorPageViewModel GetPageContent(ErrorCodeEnum code, string messageKey)
         {
             var title = code switch
             {
                 ErrorCodeEnum.SystemError => _localizer.Messages.GetString(Constants.ERRORMSG_KEY_SYSTEM_ERROR_CODE),
                 ErrorCodeEnum.NotPermission => _localizer.Messages.GetString(Constants.ERRORMSG_KEY_NO_HAS_PERMISSION_CODE),
-                _ => string.Empty
+                _ => _localizer.Messages.GetString(Constants.ERRORMSG_KEY_SYSTEM_ERROR_CODE)
             };
 
             return new ErrorPageViewModel
             {
                 Title = title,
-                Message = _localizer.Messages.GetString(message)
+                Message = _localizer.Messages.GetString(messageKey)
             };
+        }
+
+        /// <summary>
+        /// Clear error info session
+        /// </summary>
+        private void ClearErrorInfoSession()
+        {
+            // Clear error message
+            Session.Remove(Constants.SESSION_KEY_PAGE_ERROR_MESSAGE);
+
+            // Clear error code
+            Session.Remove(Constants.SESSION_KEY_PAGE_ERROR_CODE);
         }
     }
 }

@@ -40,6 +40,8 @@ namespace ErpManager.Domain.Models
 
         public string TakeOverId { get; set; } = string.Empty;
 
+        public string Description { get; set; } = string.Empty;
+
         public string EmbeddedLink { get; set; } = string.Empty;
 
         public DateTime? DateCreated { get; set; }

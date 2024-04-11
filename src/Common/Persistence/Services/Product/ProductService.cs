@@ -83,7 +83,18 @@ namespace ErpManager.Persistence.Services
         /// <returns>Update status</returns>
         public bool Update(ProductModel model)
         {
+            model.DateChanged = DateTime.Now;
             return _productRepository.Update(model);
+        }
+
+        /// <summary>
+        /// Update description
+        /// </summary>
+        /// <param name="model">Product model</param>
+        /// <returns>Is success</returns>
+        public bool UpdateDescription(ProductModel model)
+        {
+            return _productRepository.UpdateDescription(model);
         }
 
         /// <summary>
@@ -94,11 +105,11 @@ namespace ErpManager.Persistence.Services
         /// <returns>Update status</returns>
         public bool TempDelete(string branchId, string productId)
         {
-            var user = _productRepository.Get(branchId, productId);
-            if (user == null) return false;
+            var product = _productRepository.Get(branchId, productId);
+            if (product == null) return false;
 
-            user.DelFlg = true;
-            return _productRepository.Update(user);
+            product.DelFlg = true;
+            return _productRepository.Update(product);
         }
 
         /// <summary>

@@ -123,6 +123,9 @@
   <data name="ErrorCode_SystemError" xml:space="preserve">
     <value>Oops</value>
   </data>
+  <data name="ErrorMessage_DataNotFound" xml:space="preserve">
+    <value>Không tìm thấy dữ liệu</value>
+  </data>
   <data name="ErrorMessage_LoginFailed" xml:space="preserve">
     <value>Thông tin đăng nhập không đúng</value>
   </data>

@@ -102,6 +102,17 @@ namespace ErpManager.ERP.Controllers
             }
         }
 
+        /// <summary>
+        /// Redirect to error page
+        /// </summary>
+        protected IActionResult RedirectToErrorPage(string errorMessageKey = Constants.ERRORMSG_KEY_SYSTEM_ERROR, ErrorCodeEnum errorCode = ErrorCodeEnum.SystemError)
+        {
+            Session.SetString(Constants.SESSION_KEY_PAGE_ERROR_CODE, errorCode.GetStringValue<int>());
+            Session.SetString(Constants.SESSION_KEY_PAGE_ERROR_MESSAGE, errorMessageKey);
+
+            return RedirectToRoute(Constants.MODULE_ERROR_ERROR_NAME);
+        }
+
         /// <summary>Session</summary>
         protected ISession Session
         {

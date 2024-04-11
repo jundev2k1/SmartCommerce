@@ -36,7 +36,7 @@ namespace ErpManager.Domain.Dtos.SearchDtos
 
         public bool DelFlg { get; set; } = false;
 
-        public SexEnum? Sex { get; set; }
+        public UserSexEnum? Sex { get; set; }
 
         public DateTime? BirthdayFrom { get; set; }
 

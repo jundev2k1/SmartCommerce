@@ -36,7 +36,7 @@ namespace ErpManager.Domain.Models
 
         public bool DelFlg { get; set; }
 
-        public SexEnum Sex { get; set; }
+        public UserSexEnum Sex { get; set; }
 
         public DateTime Birthday { get; set; }
 

@@ -17,5 +17,7 @@ namespace ErpManager.Common
         public const string ERRORMSG_KEY_LOGIN_FAILED = "ErrorMessage_LoginFailed";
         /// <summary>Error message key: login too much</summary>
         public const string ERRORMSG_KEY_LOGIN_TOO_MUCH = "ErrorMessage_LoginTooMuch";
+        /// <summary>Error message key: data not found</summary>
+        public const string ERRORMSG_KEY_DATA_NOT_FOUND = "ErrorMessage_DataNotFound";
     }
 }
