@@ -1,6 +1,5 @@
 ﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
 
-using ErpManager.Domain.Entities;
 using ErpManager.ERP.Areas.Products.ViewModels;
 
 namespace ErpManager.ERP.Areas.Product.Controllers
@@ -8,10 +7,13 @@ namespace ErpManager.ERP.Areas.Product.Controllers
     [Area(Constants.MODULE_PRODUCT_AREA)]
     public class ProductPreviewController : BaseController
     {
+        private SessionManager _sessionManager;
         private IServiceFacade _serviceFacade;
-        public ProductPreviewController(IServiceFacade serviceFacade)
+        public ProductPreviewController(IServiceFacade serviceFacade, SessionManager sessionManager)
+            : base(serviceFacade, sessionManager)
         {
             _serviceFacade = serviceFacade;
+            _sessionManager = sessionManager;
         }
 
         [HttpGet]
@@ -35,12 +37,16 @@ namespace ErpManager.ERP.Areas.Product.Controllers
         {
             var user = _serviceFacade.Users.GetUser(this.OperatorBranchId, product.TakeOverId);
             var relatedProduct = _serviceFacade.Products
-                .GetRelatedProducts(this.OperatorBranchId, product.ProductId, 5);
+                .GetRelatedProducts(this.OperatorBranchId, product.ProductId, 4);
+            var currentPath = Path.Combine(
+                this.Request.Host.Value,
+                this.Request.Path);
             var data = new ProductPreviewViewModel
             {
                 Product = product,
                 AgentDetail = user,
                 RelatedProducts = relatedProduct,
+                QRCode = QRCodeUtility.GetSrcImageQRCode(currentPath)
             };
 
             return data;

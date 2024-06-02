@@ -10,10 +10,13 @@ namespace ErpManager.ERP.Controllers
     {
         private readonly IServiceFacade _serviceFacade;
         private readonly IWebHostEnvironment _webHostEnvironment;
-        public CommonController(IServiceFacade serviceFacade, IWebHostEnvironment webHostEnvironment)
+        private readonly SessionManager _sessionManager;
+        public CommonController(IServiceFacade serviceFacade, IWebHostEnvironment webHostEnvironment, SessionManager sessionManager)
+            : base(serviceFacade, sessionManager)
         {
             _serviceFacade = serviceFacade;
             _webHostEnvironment = webHostEnvironment;
+            _sessionManager = sessionManager;
         }
 
         [HttpGet]

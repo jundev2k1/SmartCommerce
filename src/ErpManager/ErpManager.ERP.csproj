@@ -85,12 +85,14 @@
     <Using Include="ErpManager.ERP.Common" />
     <Using Include="ErpManager.ERP.Common.Attributes" />
     <Using Include="ErpManager.ERP.Common.Enum" />
+    <Using Include="ErpManager.ERP.Common.Session" />
     <Using Include="ErpManager.ERP.Controllers" />
     <Using Include="ErpManager.ERP.ViewModels" />
     <Using Include="ErpManager.Persistence.Common" />
     <Using Include="FluentValidation" />
     <Using Include="Microsoft.AspNetCore.Localization" />
     <Using Include="Microsoft.AspNetCore.Mvc" />
+    <Using Include="Microsoft.AspNetCore.Mvc.Rendering" />
     <Using Include="Microsoft.EntityFrameworkCore" />
     <Using Include="Microsoft.Extensions.Localization" />
     <Using Include="System.Collections" />

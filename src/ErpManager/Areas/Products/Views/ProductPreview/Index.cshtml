@@ -79,13 +79,13 @@
                 }
             </div>
             <div class="preview-layout calender mb-2">
-                <h3>Thông tin thêm</h3>
+                <h3>Chia sẽ liên kết</h3>
                 <div class="qr-code">
-                    <img class="img-fluid" src="@QRCodeUtility.GetSrcImageQRCode(Context.Request.Path)" />
+                    <a href="#" onclick="javascript:void(0); copyImageToClipboard(this.querySelector('img'));">
+                        <img class="img-fluid" src="@Model.QRCode" />
+                    </a>
+                    <p class="text-center">Click vào ảnh để copy</pc>
                 </div>
-                <a class="btn site-btn-outline-theme" href="#">
-                    <i class="fa-regular fa-calender"></i> Sao chép QR
-                </a>
             </div>
             @if (!string.IsNullOrEmpty(Model.Product.EmbeddedLink))
             {

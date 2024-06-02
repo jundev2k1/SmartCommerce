@@ -1,10 +1,7 @@
 ﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
 
-using ErpManager.ERP.Common.Util;
 using ErpManager.Infrastructure.Common.Enum;
 using ErpManager.Infrastructure.Upload;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using System.Diagnostics;
 
 namespace ErpManager.ERP.Areas.Product.Controllers
 {
@@ -14,15 +11,21 @@ namespace ErpManager.ERP.Areas.Product.Controllers
         private readonly IServiceFacade _serviceFacade;
         private readonly IValidatorFacade _validatorFacade;
         private readonly ILocalizer _localizer;
+        private readonly SessionManager _sessionManager;
 
         /// <summary>
         /// Constructor
         /// </summary>
-        public ProductRegisterController(IServiceFacade serviceFacade, IValidatorFacade validatorFacade, ILocalizer localizer)
+        public ProductRegisterController(
+            IServiceFacade serviceFacade,
+            IValidatorFacade validatorFacade,
+            ILocalizer localizer,
+            SessionManager sessionManager) : base(serviceFacade, sessionManager)
         {
             _serviceFacade = serviceFacade;
             _validatorFacade = validatorFacade;
             _localizer = localizer;
+            _sessionManager = sessionManager;
         }
 
         [HttpGet]
@@ -63,7 +66,6 @@ namespace ErpManager.ERP.Areas.Product.Controllers
                 @enum: UploadEnum.ProductImage,
                 sessionToken: this.SessionToken,
                 fileName: formInput.ProductId);
-            Debugger.Break();
             fileUpload.ChangeToActualImages();
             formInput.Images = string.Join(",", fileUpload.Result);
             System.IO.File.WriteAllText("C:\\Logs\\log.txt", formInput.Images);

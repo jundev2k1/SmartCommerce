@@ -1,8 +1,5 @@
 ﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
 
-using ErpManager.ERP.Common.Util;
-using Microsoft.AspNetCore.Mvc.Rendering;
-
 namespace ErpManager.ERP.Areas.Product.Controllers
 {
     [Area(Constants.MODULE_PRODUCT_AREA)]
@@ -11,15 +8,21 @@ namespace ErpManager.ERP.Areas.Product.Controllers
         private readonly IServiceFacade _serviceFacade;
         private readonly IValidatorFacade _validatorFacade;
         private readonly ILocalizer _localizer;
+        private readonly SessionManager _sessionManager;
 
         /// <summary>
         /// Constructor
         /// </summary>
-        public ProductEditController(IServiceFacade serviceFacade, IValidatorFacade validatorFacade, ILocalizer localizer)
+        public ProductEditController(
+            IServiceFacade serviceFacade,
+            IValidatorFacade validatorFacade,
+            ILocalizer localizer,
+            SessionManager sessionManager) : base(serviceFacade, sessionManager)
         {
             _serviceFacade = serviceFacade;
             _validatorFacade = validatorFacade;
             _localizer = localizer;
+            _sessionManager = sessionManager;
         }
 
         [HttpGet]

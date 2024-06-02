@@ -80,3 +80,37 @@ const callAjax = ({ url, data, contentType = 'application/json; charset=utf-8', 
         console.error('AJAX request failed:', textStatus, errorThrown);
     },
 });
+
+const copyImageToClipboard = async function (element) {
+    if (!element || element.tagName !== 'IMG') return;
+
+    // Ensure the image is loaded completely
+    const img = new Image();
+    img.crossOrigin = "anonymous";
+    img.src = element.src;
+
+    img.onload = async function () {
+        // Create a canvas to save the image
+        const canvas = document.createElement("canvas");
+        canvas.width = img.width;
+        canvas.height = img.height;
+        const ctx = canvas.getContext("2d");
+        ctx.drawImage(img, 0, 0);
+
+        // Create blob from canvas
+        canvas.toBlob(async function (blob) {
+            try {
+                // Create ClipboardItem object
+                const clipboardItem = new ClipboardItem({ "image/png": blob });
+                await navigator.clipboard.write([clipboardItem]);
+                toastr.success('Copy thành công QR Code');
+            } catch (error) {
+                toastr.error("Copy QR Code không thành công", error);
+            }
+        }, "image/png");
+    };
+
+    img.onerror = function () {
+        console.error("Failed to load image");
+    };
+}

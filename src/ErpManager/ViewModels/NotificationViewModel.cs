@@ -4,6 +4,8 @@ namespace ErpManager.ERP.ViewModels
 {
     public class NotificationViewModel
     {
+        public bool IsDisplay { get; set; }
+
         public int NotificationUnReadCount { get; set; }
 
         public NotificationContent[] Items { get; set; } = Array.Empty<NotificationContent>();

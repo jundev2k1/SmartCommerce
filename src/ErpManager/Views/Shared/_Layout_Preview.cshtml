@@ -18,10 +18,10 @@
     </section>
     @await Component.InvokeAsync(Constants.ERP_COMPONENT_NAME_SCRIPT)
     
-    @await Component.InvokeAsync(Constants.ERP_COMPONENT_NAME_HEADER, new HeaderViewModel())
     @* Main content *@
     <main id="page-load">
         <div class="render-content">
+            @await Component.InvokeAsync(Constants.ERP_COMPONENT_NAME_HEADER, new HeaderViewModel())
             <div class="main-content">
                 @RenderBody()
             </div>

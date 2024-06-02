@@ -1,19 +1,25 @@
 ﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
 
+using ErpManager.ERP.Common.Session;
+
 namespace ErpManager.ERP.ViewComponents
 {
     public class UserNotificationViewComponent : ViewComponent
     {
+        private readonly SessionManager _sessionManager;
         private readonly IServiceFacade _serviceFacade;
-        public UserNotificationViewComponent(IServiceFacade serviceFacade)
+        public UserNotificationViewComponent(IServiceFacade serviceFacade, SessionManager sessionManager)
         {
             _serviceFacade = serviceFacade;
+            _sessionManager = sessionManager;
         }
 
         public IViewComponentResult Invoke()
         {
+            var isLogin = _sessionManager.IsLogin;
             var data = new NotificationViewModel
             {
+                IsDisplay = isLogin,
                 NotificationUnReadCount = 2,
                 Items = new NotificationContent[]
                 {

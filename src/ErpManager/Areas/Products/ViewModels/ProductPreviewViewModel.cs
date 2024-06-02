@@ -10,5 +10,8 @@
 
         /// <summary>Related product list</summary>
         public ProductModel[] RelatedProducts { get; set; } = Array.Empty<ProductModel>();
+
+        /// <summary>QR Code</summary>
+        public string QRCode { get; set; } = string.Empty;
     }
 }

@@ -5,10 +5,13 @@ namespace ErpManager.ERP.Areas.Product.Controllers
     [Area(Constants.MODULE_PRODUCT_AREA)]
     public class ProductDetailController : BaseController
     {
-        private IServiceFacade _serviceFacade;
-        public ProductDetailController(IServiceFacade serviceFacade)
+        private readonly IServiceFacade _serviceFacade;
+        private readonly SessionManager _sessionManager;
+        public ProductDetailController(IServiceFacade serviceFacade, SessionManager sessionManager)
+            : base(serviceFacade, sessionManager)
         {
             _serviceFacade = serviceFacade;
+            _sessionManager = sessionManager;
         }
 
         [HttpGet]

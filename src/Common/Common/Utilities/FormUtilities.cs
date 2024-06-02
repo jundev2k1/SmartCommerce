@@ -1,8 +1,8 @@
-﻿using LinqKit;
+﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
 
-namespace ErpManager.ERP.Common.Util
+namespace ErpManager.Common.Utilities
 {
-    public static class InputUtilities
+    public static class FormUtilities
     {
         /// <summary>
         /// Trim string input
@@ -15,7 +15,7 @@ namespace ErpManager.ERP.Common.Util
         {
             if (input == null) throw new ArgumentNullException(nameof(input));
 
-            input.GetType().GetProperties()?.ForEach(property =>
+            input.GetType().GetProperties().ToList().ForEach(property =>
             {
                 if (property.PropertyType == typeof(string))
                 {

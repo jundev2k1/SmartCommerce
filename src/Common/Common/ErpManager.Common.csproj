@@ -20,4 +20,8 @@
     <Using Include="System.Collections" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Extensions\" />
+  </ItemGroup>
+
 </Project>

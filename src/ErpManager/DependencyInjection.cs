@@ -64,6 +64,7 @@ namespace ErpManager.ERP
             services.AddSingleton<AppConfiguration>();
             services.AddScoped<ILocalizer, Localizer>();
             services.AddTransient<IValidatorFacade, ValidatorFacade>();
+            services.AddScoped<SessionManager>();
             return services;
         }
 
@@ -103,6 +104,7 @@ namespace ErpManager.ERP
             {
                 options.IdleTimeout = TimeSpan.FromMinutes(Constants.AUTH_EXPIRES_SESSION);
             });
+            services.AddHttpContextAccessor();
 
             return services;
         }

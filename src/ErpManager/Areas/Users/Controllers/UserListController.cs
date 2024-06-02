@@ -1,16 +1,17 @@
 ﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
 
-using ErpManager.Domain.Dtos.SearchDtos;
-
 namespace ErpManager.ERP.Areas.Users.Controllers
 {
     [Area(Constants.MODULE_USER_AREA)]
     public class UserListController : BaseController
     {
-        private IServiceFacade _serviceFacade;
-        public UserListController(IServiceFacade serviceFacade)
+        private readonly IServiceFacade _serviceFacade;
+        private readonly SessionManager _sessionManager;
+        public UserListController(IServiceFacade serviceFacade, SessionManager sessionManager)
+            : base(serviceFacade, sessionManager)
         {
             _serviceFacade = serviceFacade;
+            _sessionManager = sessionManager;
         }
 
         [HttpGet]

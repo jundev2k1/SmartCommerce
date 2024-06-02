@@ -73,7 +73,7 @@ h3 {
     gap: .5rem;
 }
 
-    .preview-sidebar .location {
+    .preview-sidebar .location .wrapper {
         flex-grow: 1;
         overflow: hidden;
     }

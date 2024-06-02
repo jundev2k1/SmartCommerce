@@ -4,11 +4,19 @@ namespace ErpManager.Controllers
 {
     public sealed class HomeController : BaseController
     {
+        private readonly ILocalizer _localizer;
+        private readonly IServiceFacade _serviceFacade;
+        private readonly SessionManager _sessionManager;
+
         /// <summary>
         /// Constructor
         /// </summary>
-        public HomeController()
+        public HomeController(ILocalizer localizer, IServiceFacade serviceFacade, SessionManager sessionManager)
+            : base (serviceFacade, sessionManager)
         {
+            _localizer = localizer;
+            _serviceFacade = serviceFacade;
+            _sessionManager = sessionManager;
         }
 
         /// <summary>
@@ -29,11 +37,11 @@ namespace ErpManager.Controllers
         /// </summary>
         private void HandleForLoginSuccess()
         {
-            var message = Session.GetString(Constants.SESSION_KEY_LOGIN_MESSAGE);
+            var message = _sessionManager.Get(Constants.SESSION_KEY_LOGIN_MESSAGE);
             if (string.IsNullOrEmpty(message)) return;
 
             ViewBag.LoginMessage = message;
-            Session.Remove(Constants.SESSION_KEY_LOGIN_MESSAGE);
+            _sessionManager.Remove(Constants.SESSION_KEY_LOGIN_MESSAGE);
         }
 
         [HttpGet]

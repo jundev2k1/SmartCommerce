@@ -1,4 +1,6 @@
-﻿using Newtonsoft.Json;
+﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
+
+using Newtonsoft.Json;
 
 namespace ErpManager.ERP.Common.Extensions
 {

@@ -1,5 +1,6 @@
 ﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
 
+using ErpManager.ERP.Common.Session;
 using ErpManager.Infrastructure.Common.Enum;
 using FluentValidation.Results;
 using Microsoft.AspNetCore.Mvc.Filters;
@@ -9,14 +10,17 @@ namespace ErpManager.ERP.Controllers
 {
     public class BaseController : Controller
     {
+        private readonly IServiceFacade _serviceFacade;
+        private readonly SessionManager _sessionManager;
+
         /// <summary>
-        /// On action executing
+        /// Base Controller Constructor
         /// </summary>
-        /// <param name="context">Context</param>
-        public override void OnActionExecuting(ActionExecutingContext context)
+        public BaseController(IServiceFacade serviceFacade, SessionManager sessionManager)
         {
+            _serviceFacade = serviceFacade;
+            _sessionManager = sessionManager;
             Initialize();
-            base.OnActionExecuting(context);
         }
 
         /// <summary>
@@ -24,7 +28,6 @@ namespace ErpManager.ERP.Controllers
         /// </summary>
         private void Initialize()
         {
-            SetDefaultPageData();
             SetPropertiesValue();
             SetDefaultViewValue();
         }
@@ -34,10 +37,10 @@ namespace ErpManager.ERP.Controllers
         /// </summary>
         protected void ResetOperatorSession()
         {
-            this.OperatorBranchId = Session.GetString(Constants.SESSION_KEY_OPERATOR_BRANCH_ID).ToStringOrEmpty();
-            this.OperatorId = Session.GetString(Constants.SESSION_KEY_OPERATOR_ID).ToStringOrEmpty();
-            this.OperatorName = Session.GetString(Constants.SESSION_KEY_OPERATOR_NAME).ToStringOrEmpty();
-            this.OperatorPermission = Session.GetString(Constants.SESSION_KEY_OPERATOR_PERMISSION).ToStringOrEmpty();
+            this.OperatorBranchId = _sessionManager.OperatorBranchId;
+            this.OperatorId = _sessionManager.OperatorId;
+            this.OperatorName = _sessionManager.OperatorName;
+            this.OperatorPermission = _sessionManager.OperatorPermission;
         }
 
         /// <summary>
@@ -45,7 +48,7 @@ namespace ErpManager.ERP.Controllers
         /// </summary>
         protected void ClearSession()
         {
-            Session.Clear();
+            _sessionManager.ClearAll();
         }
 
         /// <summary>
@@ -90,14 +93,6 @@ namespace ErpManager.ERP.Controllers
         }
 
         /// <summary>
-        /// Set default page data
-        /// </summary>
-        private void SetDefaultPageData()
-        {
-            this.PageUrl = Request.Path;
-        }
-
-        /// <summary>
         /// Set properties value
         /// </summary>
         private void SetPropertiesValue()
@@ -118,11 +113,11 @@ namespace ErpManager.ERP.Controllers
         /// <returns>Session id</returns>
         private string GetOrResetSessionId()
         {
-            var result = this.Session.GetString(Constants.GLOBAL_KEY_SESSION_TOKEN);
+            var result = _sessionManager.Get(Constants.GLOBAL_KEY_SESSION_TOKEN);
             if (result != null) return result;
 
             var newId = Guid.NewGuid().ToString();
-            this.Session.SetString(Constants.GLOBAL_KEY_SESSION_TOKEN, newId);
+            _sessionManager.Set(Constants.GLOBAL_KEY_SESSION_TOKEN, newId);
             return newId;
         }
 
@@ -151,26 +146,20 @@ namespace ErpManager.ERP.Controllers
             string errorMessageKey = Constants.ERRORMSG_KEY_SYSTEM_ERROR,
             ErrorCodeEnum errorCode = ErrorCodeEnum.SystemError)
         {
-            Session.SetString(Constants.SESSION_KEY_PAGE_ERROR_CODE, errorCode.GetStringValue<int>());
-            Session.SetString(Constants.SESSION_KEY_PAGE_ERROR_MESSAGE, errorMessageKey);
+            _sessionManager.SystemPageErrorCode = errorCode.GetStringValue<int>();
+            _sessionManager.SystemPageErrorMessage = errorMessageKey;
 
             return RedirectToRoute(Constants.MODULE_ERROR_ERROR_NAME);
         }
 
-        /// <summary>Session</summary>
-        protected ISession Session => HttpContext.Session;
         /// <summary>Operator branch id</summary>
         protected string OperatorBranchId { get; private set; } = Constants.CONFIG_DEFAULT_BRANCH_ID;
         /// <summary>Operator id</summary>
         protected string OperatorId { get; private set; } = string.Empty;
-        /// <summary>Operator id</summary>
+        /// <summary>Operator name</summary>
         protected string OperatorName { get; private set; } = string.Empty;
-        /// <summary>Operator id</summary>
+        /// <summary>Operator Permission</summary>
         protected string OperatorPermission { get; private set; } = string.Empty;
-        /// <summary>Page url</summary>
-        protected string PageUrl { get; private set; } = string.Empty;
-        /// <summary>Operator id</summary>
-        protected string OperatorPermissions { get; private set; } = string.Empty;
         /// <summary>Session token</summary>
         protected string SessionToken => GetOrResetSessionId();
     }

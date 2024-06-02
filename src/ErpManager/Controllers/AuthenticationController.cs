@@ -1,6 +1,5 @@
 ﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
 
-using ErpManager.ERP.Common;
 using ErpManager.Infrastructure.Securiry;
 
 namespace ErpManager.ERP.Controllers
@@ -8,12 +7,18 @@ namespace ErpManager.ERP.Controllers
     public sealed class AuthenticationController : BaseController
     {
         private readonly ILocalizer _localizer;
-        private readonly IServiceFacade _services;
+        private readonly IServiceFacade _serviceFacade;
+        private readonly SessionManager _sessionManager;
 
-        public AuthenticationController(ILocalizer localizer, IServiceFacade services)
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        public AuthenticationController(ILocalizer localizer, IServiceFacade serviceFacade, SessionManager sessionManager)
+            : base (serviceFacade, sessionManager)
         {
             _localizer = localizer;
-            _services = services;
+            _serviceFacade = serviceFacade;
+            _sessionManager = sessionManager;
         }
 
         [HttpGet]
@@ -118,7 +123,7 @@ namespace ErpManager.ERP.Controllers
             try
             {
                 // Check login id is wrong
-                var user = _services.Users.GetUserByUsername(this.OperatorBranchId, input.LoginID);
+                var user = _serviceFacade.Users.GetUserByUsername(this.OperatorBranchId, input.LoginID);
                 if (user == null) throw new Exception();
 
                 // Check block account
@@ -132,7 +137,7 @@ namespace ErpManager.ERP.Controllers
 
                 // Try login, throw error if login fail
                 var passwordEncrypt = Authorization.Instance.PasswordEncrypt(input.Password);
-                var @operator = _services.Users.TryLogin(this.OperatorBranchId, input.LoginID, passwordEncrypt);
+                var @operator = _serviceFacade.Users.TryLogin(this.OperatorBranchId, input.LoginID, passwordEncrypt);
                 if (@operator == null) throw new Exception("Login information invalid");
 
                 // Handle login success
@@ -204,11 +209,11 @@ namespace ErpManager.ERP.Controllers
         private void SetSessionForLogin(OperatorModel @operator)
         {
             // Set session login for operator
-            Session.SetString(Constants.SESSION_KEY_OPERATOR_BRANCH_ID, @operator.BranchId);
-            Session.SetString(Constants.SESSION_KEY_OPERATOR_ID, @operator.Profile.UserId);
-            Session.SetString(Constants.SESSION_KEY_OPERATOR_NAME, @operator.Profile.FullName);
-            Session.SetString(Constants.SESSION_KEY_OPERATOR_PERMISSION, @operator.Permission);
-            Session.SetString(Constants.SESSION_KEY_LOGIN_MESSAGE, "Login success");
+            _sessionManager.OperatorBranchId = @operator.BranchId;
+            _sessionManager.OperatorId = @operator.Profile.UserId;
+            _sessionManager.OperatorName = @operator.Profile.FullName;
+            _sessionManager.OperatorPermission = @operator.Permission;
+            _sessionManager.Set(Constants.SESSION_KEY_LOGIN_MESSAGE, "Login success");
         }
 
         /// <summary>

@@ -1,19 +1,22 @@
 ﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
 
-using ErpManager.ERP.Common;
-
 namespace ErpManager.ERP.Controllers
 {
     public sealed class ErrorController : BaseController
     {
         private readonly ILocalizer _localizer;
+        private readonly IServiceFacade _serviceFacade;
+        private readonly SessionManager _sessionManager;
 
         /// <summary>
         /// Constructor
         /// </summary>
-        public ErrorController(ILocalizer localizer)
+        public ErrorController(ILocalizer localizer, IServiceFacade serviceFacade, SessionManager sessionManager)
+            : base(serviceFacade, sessionManager)
         {
             _localizer = localizer;
+            _serviceFacade = serviceFacade;
+            _sessionManager = sessionManager;
         }
 
         [HttpGet]
@@ -38,10 +41,10 @@ namespace ErpManager.ERP.Controllers
         private Tuple<ErrorCodeEnum, string> GetErrorSession()
         {
             // Get error message key
-            var errorMessageKey = Session.GetString(Constants.SESSION_KEY_PAGE_ERROR_MESSAGE).ToStringOrEmpty();
+            var errorMessageKey = _sessionManager.SystemPageErrorMessage;
 
             // Get error code
-            var errorCodeString = Session.GetString(Constants.SESSION_KEY_PAGE_ERROR_CODE).ToStringOrEmpty();
+            var errorCodeString = _sessionManager.SystemPageErrorCode;
             var errorCode = string.IsNullOrEmpty(errorCodeString) == false
                 ? EnumUtility.GetEnumValue<ErrorCodeEnum>(errorCodeString)
                 : ErrorCodeEnum.NoError;
@@ -77,10 +80,10 @@ namespace ErpManager.ERP.Controllers
         private void ClearErrorInfoSession()
         {
             // Clear error message
-            Session.Remove(Constants.SESSION_KEY_PAGE_ERROR_MESSAGE);
+            _sessionManager.Remove(Constants.SESSION_KEY_PAGE_ERROR_MESSAGE);
 
             // Clear error code
-            Session.Remove(Constants.SESSION_KEY_PAGE_ERROR_CODE);
+            _sessionManager.Remove(Constants.SESSION_KEY_PAGE_ERROR_CODE);
         }
     }
 }
