@@ -1,9 +1,9 @@
-﻿using ErpManager.ERP.Common;
-using ErpManager.ERP.Common.Extensions;
+﻿using ErpManager.ERP.Common.Extensions;
 using ErpManager.ERP.Common.Localizer;
 using ErpManager.ERP.Common.Middleware;
 using ErpManager.ERP.Common.Validators;
 using FluentValidation.AspNetCore;
+using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.Extensions.Options;
 using System.Globalization;
@@ -24,8 +24,17 @@ namespace ErpManager.ERP
             // Add application service
             services
                 .AddSessionSetting()
-                .AddLocalizationSetting()
-                .AddAutoMapper(typeof(AutoMapperProfile).Assembly);
+                .AddLocalizationSetting();
+
+            // Set file size limits
+            services.Configure<FormOptions>(option =>
+            {
+                option.MultipartBoundaryLengthLimit = 10000000; // 10MB
+            });
+            services.Configure<CookiePolicyOptions>(options =>
+            {
+                options.MinimumSameSitePolicy = SameSiteMode.Strict;
+            });
 
             // Dependency injection
             services.AddCommon();
@@ -41,6 +50,9 @@ namespace ErpManager.ERP
 
 #pragma warning restore CS0618
 
+            // Init handler
+            ConstantHandler.Initialize(configuration);
+
             return services;
         }
 
@@ -52,6 +64,32 @@ namespace ErpManager.ERP
             services.AddSingleton<AppConfiguration>();
             services.AddScoped<ILocalizer, Localizer>();
             services.AddTransient<IValidatorFacade, ValidatorFacade>();
+            return services;
+        }
+
+        /// <summary>
+        /// Add cors
+        /// </summary>
+        private static IServiceCollection AddCors(this IServiceCollection services)
+        {
+            services.AddCors(options =>
+            {
+                options.AddPolicy("AllowInternalOrigin",
+                    builder =>
+                    {
+                        builder
+                        .AllowAnyOrigin()
+                        .AllowAnyMethod()
+                        .AllowAnyHeader()
+                        .AllowCredentials();
+                    });
+            });
+
+            //.SetIsOriginAllowed(origin =>
+            // {
+            //     var uri = new Uri(origin);
+            //     return uri.Host == new Uri("https://" + uri.Host).Host; // Lấy tên miền từ request URL
+            // })
             return services;
         }
 
@@ -124,7 +162,8 @@ namespace ErpManager.ERP
                 .ConfigureLocalization()
                 .UseSession()
                 .UseHttpsRedirection()
-                .UseStaticFiles();
+                .UseStaticFiles()
+                .UseCors("AllowInternalOrigin");
 
             return application;
         }
@@ -177,7 +216,7 @@ namespace ErpManager.ERP
         /// <summary>
         /// Configure middleware
         /// </summary>
-        public static IApplicationBuilder UserApplicationMiddleware(this IApplicationBuilder app)
+        public static IApplicationBuilder UseApplicationMiddleware(this IApplicationBuilder app)
         {
             // Middleware
             app.UseMiddleware<PermissionHandlerMiddleware>();

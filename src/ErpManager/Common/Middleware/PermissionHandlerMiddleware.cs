@@ -25,10 +25,11 @@ namespace ErpManager.ERP.Common.Middleware
         /// <returns>Next step or redirect to error page</returns>
         public async Task Invoke(HttpContext context)
         {
+            // Check route permission
             var operatorPermission = context.Session.GetString(Constants.SESSION_KEY_OPERATOR_PERMISSION).ToStringOrEmpty();
             if (string.IsNullOrEmpty(operatorPermission))
             {
-                if (this.PublicRoute.Contains(context.Request.Path.Value) == false)
+                if (this.IsValidRoute(context.Request.Path.Value.ToStringOrEmpty()) == false)
                 {
                     context.Response.Redirect(Constants.MODULE_AUTH_SIGNIN_PATH);
                 }
@@ -94,7 +95,8 @@ namespace ErpManager.ERP.Common.Middleware
                 .Select(attr => (PermissionAttribute)attr)
                 .FirstOrDefault()
                 ?.Permission;
-            if (permission == null) return string.Empty;
+            if ((permission == null) || (permission.Value == Permission.NonePermission))
+                return string.Empty;
 
             return permission.GetStringValue<int>();
         }

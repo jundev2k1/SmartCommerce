@@ -20,7 +20,7 @@ public partial class Product
     [StringLength(60)]
     public string Name { get; set; }
 
-    [StringLength(255)]
+    [StringLength(4000)]
     public string Images { get; set; } = string.Empty;
 
     [StringLength(60)]
@@ -59,7 +59,7 @@ public partial class Product
     [StringLength(4000)]
     public string Description { get; set; } = string.Empty;
 
-    [StringLength(255)]
+    [StringLength(4000)]
     public string EmbeddedLink { get; set; } = string.Empty;
 
     [Column(TypeName = "datetime")]

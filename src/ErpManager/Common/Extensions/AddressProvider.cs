@@ -40,7 +40,7 @@ namespace ErpManager.ERP.Common.Extensions
         private List<AddressProvinceViewModel> GetProvinces()
         {
             var provinceRawData = System.IO.File.ReadAllText(
-                $"{Environment.CurrentDirectory}{Constants.FILE_PATH_DATA_ADDRESS_VN_PROVINCES}");
+                $"{Environment.CurrentDirectory}{Constants.ERP_FILE_PATH_DATA_ADDRESS_VN_PROVINCES}");
             var result = JsonConvert.DeserializeObject<List<AddressProvinceViewModel>>(provinceRawData);
             return result ?? new List<AddressProvinceViewModel>();
         }
@@ -52,7 +52,7 @@ namespace ErpManager.ERP.Common.Extensions
         private List<AddressDistrictGroupViewModel> GetDistricts()
         {
             var provinceRawData = System.IO.File.ReadAllText(
-                $"{Environment.CurrentDirectory}{Constants.FILE_PATH_DATA_ADDRESS_VN_DISTRICTS}");
+                $"{Environment.CurrentDirectory}{Constants.ERP_FILE_PATH_DATA_ADDRESS_VN_DISTRICTS}");
             var result = JsonConvert.DeserializeObject<List<AddressDistrictGroupViewModel>>(provinceRawData);
             return result ?? new List<AddressDistrictGroupViewModel>();
         }
@@ -64,7 +64,7 @@ namespace ErpManager.ERP.Common.Extensions
         private List<AddressCommuneGroupListViewModel> GetCommunes()
         {
             var provinceRawData = System.IO.File.ReadAllText(
-                $"{Environment.CurrentDirectory}{Constants.FILE_PATH_DATA_ADDRESS_VN_COMMUNES}");
+                $"{Environment.CurrentDirectory}{Constants.ERP_FILE_PATH_DATA_ADDRESS_VN_COMMUNES}");
             var result = JsonConvert.DeserializeObject<List<AddressCommuneGroupListViewModel>>(provinceRawData);
             return result ?? new List<AddressCommuneGroupListViewModel>();
         }

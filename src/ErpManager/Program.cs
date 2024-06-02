@@ -15,7 +15,7 @@ var builder = WebApplication.CreateBuilder(args);
 var app = builder.Build();
 {
     app.Configure();
-    app.UserApplicationMiddleware();
+    app.UseApplicationMiddleware();
     app.UseInfrastructureMiddleware();
 }
 

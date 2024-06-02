@@ -15,7 +15,6 @@ namespace ErpManager.Infrastructure
 
         private static IServiceCollection AddDependencyInjection(this IServiceCollection services)
         {
-            services.AddSingleton<IFileUpload, FileUpload>();
             return services;
         }
 

@@ -139,4 +139,7 @@
     <value>A system error has occurred, please contact the administrator for help @@operator_phone_number@@</value>
     <comment>Setting in config</comment>
   </data>
+  <data name="Message_NoExistProductDescription" xml:space="preserve">
+    <value>There is no product description</value>
+  </data>
 </root>

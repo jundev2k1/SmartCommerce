@@ -5,32 +5,39 @@ namespace ErpManager.Common
     public static partial class Constants
     {
         /// <summary>Physical path root</summary>
-        public static string PHYSICAL_ROOT_PATH = string.Empty;
-        public static string PHYSICAL_APPLICATION_CONTENT_PATH = Path.Combine(PHYSICAL_ROOT_PATH, "/wwwroot");
+        public static string PHYSICAL_APPLICATION_SITE_PATH = string.Empty;
+        public static string PHYSICAL_APPLICATION_ROOT_PATH = "wwwroot";
+        public static string PHYSICAL_APPLICATION_CONTENT_PATH = Path.Combine(PHYSICAL_APPLICATION_SITE_PATH, PHYSICAL_APPLICATION_ROOT_PATH);
 
-        /// <summary>File upload directory path</summary>
-        public static string FILE_UPLOAD_DIRPATH_PRODUCT_IMAGES = "wwroot/uploads/products";
-        public static string FILE_UPLOAD_DIRPATH_USER_AVATAR = "wwroot/uploads/users";
-        public static string FILE_UPLOAD_DIRPATH_EMPLOYEE_AVATAR = "wwroot/uploads/employees";
+        /// <summary>Directory path: Sidebar setting</summary>
+        public static string ERP_REFRESH_DIR_PATH = Path.Combine(PHYSICAL_APPLICATION_CONTENT_PATH, "refresh");
 
         /// <summary>File path: Sidebar setting</summary>
-        public static string FILE_PATH_SIDEBAR_SETTING = "/Data/sidebar.json";
+        public static string ERP_FILE_PATH_SIDEBAR_SETTING = "/Data/sidebar.json";
 
         /// <summary>File path: Data address provinces</summary>
-        public static string FILE_PATH_DATA_ADDRESS_VN_PROVINCES = "/Data/Address/Vietnam/Provinces.json";
+        public static string ERP_FILE_PATH_DATA_ADDRESS_VN_PROVINCES = "/Data/Address/Vietnam/Provinces.json";
         /// <summary>File path: Data address districts</summary>
-        public static string FILE_PATH_DATA_ADDRESS_VN_DISTRICTS = "/Data/Address/Vietnam/Districts.json";
+        public static string ERP_FILE_PATH_DATA_ADDRESS_VN_DISTRICTS = "/Data/Address/Vietnam/Districts.json";
         /// <summary>File path: Data address communes</summary>
-        public static string FILE_PATH_DATA_ADDRESS_VN_COMMUNES = "/Data/Address/Vietnam/Communes.json";
+        public static string ERP_FILE_PATH_DATA_ADDRESS_VN_COMMUNES = "/Data/Address/Vietnam/Communes.json";
+
+        /// <summary>Erp File upload directory path</summary>
+        public static string ERP_FILE_UPLOAD_DIRPATH_PRODUCT_IMAGES = @"wwwroot\content\uploads\product-images";
+        public static string ERP_FILE_UPLOAD_DIRPATH_TEMP_PRODUCT_IMAGES = @"wwwroot\content\uploads\temp\product-images";
+        public static string ERP_FILE_UPLOAD_DIRPATH_USER_AVATAR = "wwwroot/content/uploads/user-avatars";
+        public static string ERP_FILE_UPLOAD_DIRPATH_TEMP_USER_AVATAR = "wwwroot/content/uploads/temp/user-avatars";
+        public static string ERP_FILE_UPLOAD_DIRPATH_EMPLOYEE_AVATAR = "wwwroot/content/uploads/employee-avatars";
+        public static string ERP_FILE_UPLOAD_DIRPATH_TEMP_EMPLOYEE_AVATAR = "wwwroot/content/uploads/temp/employee-avatars";
 
         /// <summary>File path: Js component nav bar</summary>
-        public const string FILE_PATH_JS_COMPONENT_NAV_BAR = "~/js/component-script/Navbar/index.js";
+        public const string ERP_FILE_PATH_JS_COMPONENT_NAV_BAR = "~/js/component-script/Navbar/index.js";
         /// <summary>File path: Js component nav bar</summary>
-        public const string FILE_PATH_JS_COMPONENT_UPLOAD_MULTIPLE_IMAGE = "~/js/component-script/UploadMultipleImage/index.js";
+        public const string ERP_FILE_PATH_JS_COMPONENT_UPLOAD_MULTIPLE_IMAGE = "~/js/component-script/UploadMultipleImage/index.js";
         /// <summary>File path: Js component search input</summary>
-        public const string FILE_PATH_JS_COMPONENT_SEARCH_INPUT = "~/js/component-script/SearchInput/index.js";
+        public const string ERP_FILE_PATH_JS_COMPONENT_SEARCH_INPUT = "~/js/component-script/SearchInput/index.js";
 
         /// <summary>File path: Public no image placeholder</summary>
-        public const string FILE_PATH_PUBLIC_NO_IMAGE = "/images/system/no-image-placeholder.jpg";
+        public const string ERP_FILE_PATH_PUBLIC_NO_IMAGE = "/images/system/no-image-placeholder.jpg";
     }
 }

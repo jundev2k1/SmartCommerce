@@ -25,7 +25,7 @@ namespace ErpManager.ERP.ViewComponents
             className += isPill ? " rounded-pill" : "";
 
             ViewBag.ClassName = className.Trim();
-            ViewBag.Content = ProductUtilities.GetProductStatus(_localizer.Dictionary, status);
+            ViewBag.Content = ProductUtilities.GetStatus(_localizer.Dictionary, status);
             return View();
         }
     }

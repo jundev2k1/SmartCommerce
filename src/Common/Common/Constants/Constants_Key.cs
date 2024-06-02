@@ -12,6 +12,8 @@ namespace ErpManager.Common
         public const string GLOBAL_KEY_CURRENT_PAGE = "Current_Page";
         /// <summary>Global key: Operator permisson</summary>
         public const string GLOBAL_KEY_OPERATOR_PERMISSON = "Operator_Permisson";
+        /// <summary>Global key: Session token</summary>
+        public const string GLOBAL_KEY_SESSION_TOKEN = "Session_Token";
 
         /// <summary>Session key: Operator branch id</summary>
         public const string SESSION_KEY_OPERATOR_BRANCH_ID = "Session_OperatorBranchId";
@@ -42,6 +44,14 @@ namespace ErpManager.Common
         /// <summary>View data key: Page index</summary>
         public const string VIEWDATA_KEY_PAGE_INDEX = "pageIndex";
 
+        /// <summary>Param key: For page index</summary>
         public const string PARAM_KEY_PAGE_INDEX = "page";
+
+        /// <summary>Upload key: For actual product images</summary>
+        public const string UPLOAD_KEY_PRODUCT = "product";
+        /// <summary>Upload key: For actual user images</summary>
+        public const string UPLOAD_KEY_USER = "user";
+        /// <summary>Upload key: For actual employee avatar images</summary>
+        public const string UPLOAD_KEY_EMPLOYEE = "employee";
     }
 }

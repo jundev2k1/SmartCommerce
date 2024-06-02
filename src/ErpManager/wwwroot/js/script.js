@@ -335,24 +335,29 @@ const handleUploadImage = () => {
 };
 
 const uploadImage = (element) => {
+    let isFirstUpload = true;
     const isMultiple = element.attributes['isMultiple'] ? true : false;
     const typeUpload = element.attributes['typeUpload']?.value;
+    const formatFileName = element.attributes['fileName']?.value || '';
 
+    const validateConfig = Object.freeze({
+        maxSize: 10 * 1024 * 1024,    // 10MB
+        allowedType: ['image / jpeg', 'image / jpg', 'image / png'],    // File allowed
+    });
     const message = Object.freeze({
         vi: {
             confirmDelete: 'Bạn có chắc sẽ xóa ảnh này không?',
+            successDelete: 'Đã xóa thành công',
+            successImport: 'Đã thêm thành công',
+            errorHandle: 'Đã xảy ra lỗi xử lý, vui lòng thử lại lần nữa...',
+            sizeInvalid: `Không thể upload file quá ${validateConfig.maxSize}`,
+            typeInvalid: `Định dạng file không hợp lệ, (${validateConfig.allowedType.join(',')})`,
         },
         en: {
-            confirmDelete: '',
-        }
-    });
-
-    const typeEnum = Object.freeze({
-        product: {
-            endPoint: '/common',
-        },
-        user: {
-            endPoint: '/common',
+            confirmDelete: 'Bạn có chắc sẽ xóa ảnh này không?',
+            successDelete: 'Đã xóa thành công',
+            successImport: 'Đã thêm thành công',
+            errorHandle: 'Đã xảy ra lỗi xử lý, vui lòng thử lại lần nữa...',
         }
     });
 
@@ -364,29 +369,94 @@ const uploadImage = (element) => {
         loadImageArea: null,
         previewImage: null,
         textPlaceholder: null,
-        typeOption: null,
         isMultiple: isMultiple,
         srcImages: [],
         targetItemIndex: null,
+        messageMaster: null,
         validateOption() {
-            const result = (!this.masterElement || !this.valueControl || !this.inputControl || !this.typeOption) === false;
+            const result = (!this.masterElement || !this.valueControl || !this.inputControl) === false;
             return result;
         },
         validateFile(files) {
-            console.log(files);
-            return [];
-        },
-        importImage(element) {
+            const errorMessages = [];
+            [...files].forEach((file) => {
+                if (file.size > validateConfig.maxSize) {
+                    errorMessages.push(`${file.name} ${this.messageMaster.sizeInvalid}`);
+                }
 
+                if (validateConfig.allowedType.includes(file.type)) {
+                    errorMessages.push(`${file.name} ${this.messageMaster.typeInvalid}`);
+                }
+            });
+            return errorMessages;
+        },
+        importImage(files) {
+            const url = '/common/upload-images';
+            const formData = new FormData();
+            [...files].forEach((file) => {
+                formData.append('files', file);
+            });
+            formData.append('type', typeUpload);
+            formData.append('sessionToken', sessionToken);
+            formData.append('uploadFileName', formatFileName || '');
+            formData.append('isClearTempImages', isFirstUpload);
+
+            const xhr = new XMLHttpRequest();
+            xhr.open('POST', url, true);
+            xhr.onload = (event) => {
+                const { status, response } = event.target;
+                if (status === 200) {
+                    isFirstUpload = false;
+                    this.setSrcImages(response);
+                    toastr.success(this.messageMaster.successImport);
+                    if (this.isMultiple) {
+                        this.loadMultiple();
+                        this.resetEvent();
+                        return;
+                    }
+
+                    this.loadSingle();
+                    this.resetEvent();
+                }
+
+            };
+            xhr.send(formData);
         },
         deleteImage(element) {
-            if (!this.isMultiple) {
-                this.srcImages = [];
-                this.resetEvent();
+            const onSuccess = (response) => {
+                if (formatFileName) {
+                    const updateNewestImageUrl = '/common/update-newest-image';
+                    const requestData = { type: typeUpload, primaryKey: formatFileName };
+                    const updateNewestOnSuccess = (response) => {
+                        this.srcImages = response.split(',');
+                        toastr.success(this.messageMaster.successDelete);
+                        this.resetEvent();
+                    }
+                    callAjax({ url: updateNewestImageUrl, contentType: 'application/x-www-form-urlencoded; charset=UTF-8', dataType: 'text', data: requestData, onSuccess: updateNewestOnSuccess });
+                } else {
+                    this.srcImages.splice(element.itemIndex, 1);
+                    toastr.success(this.messageMaster.successDelete);
+                    this.resetEvent();
+                }
+            };
+
+            const targetItem = this.srcImages[element.itemIndex];
+            const url = '/common/delete-image';
+            callAjax({ url, data: { filePath: targetItem }, method: 'GET', onSuccess });
+
+
+        },
+        setSrcImages(strImages) {
+            const resultArr = strImages.split(",");
+            if (formatFileName) {
+                this.srcImages = resultArr;
+                this.valueControl.value = strImages.trim();
+                return;
             }
 
-            this.srcImages.splice(element.itemIndex, 1);
-            this.resetEvent();
+            const value = [...resultArr, ...this.srcImages].filter(image => image != '');
+            this.srcImages = value;
+            this.valueControl.value = value.join(',').trim();
         },
         loadSingle() {
         },
@@ -403,8 +473,9 @@ const uploadImage = (element) => {
                 if (this.previewImage.src == targetSrc) return;
 
                 this.targetItemIndex = element.itemIndex;
-                this.textPlaceholder.style.display = 'none';
+                $(this.textPlaceholder)?.hide();
                 this.previewImage.src = targetSrc;
+                $(this.previewImage)?.fadeIn();
             });
 
             element.addEventListener('mouseleave', () => {
@@ -412,9 +483,10 @@ const uploadImage = (element) => {
                 setTimeout(() => {
                     if (this.targetItemIndex === null) {
                         this.previewImage.src = '';
-                        this.textPlaceholder.style.display = 'block';
+                        $(this.previewImage)?.fadeOut();
+                        $(this.textPlaceholder)?.fadeIn();
                     }
-                }, 3000);
+                }, 1500);
             });
         },
         importEvent() {
@@ -422,11 +494,14 @@ const uploadImage = (element) => {
                 const files = event.target.files;
                 const errorMessages = this.validateFile(files);
                 if (errorMessages.length > 0) {
-                    console.log(errorMessages);
+                    toastr.error(errorMessages.join('\n'));
                     return;
                 }
 
                 this.importImage(files);
+
+                // Clear file list (use to re-upload this image in next time)
+                event.target.value = '';
             });
         },
         deleteEvent(element) {
@@ -451,6 +526,21 @@ const uploadImage = (element) => {
                 this.deleteEvent(item);
             });
         },
+        handleInitLoadImages() {
+            const initValues = this.valueControl?.value.split(',').filter(path => path != '') ?? [];
+            this.srcImages = this.isMultiple ? initValues : [...initValues[0]];
+            const url = '/common/get-exist-and-delete-not-use-temp-images';
+            const onSuccess = (response) => {
+                this.srcImages = response.split(',');
+                this.resetEvent();
+            }
+            callAjax({
+                url,
+                data: { type: typeUpload, sessionToken: sessionToken, filePath: this.srcImages.join(',') },
+                method: 'GET',
+                onSuccess
+            });
+        },
         init() {
             this.inputControl = this.masterElement.querySelector('.file-input');
             this.valueControl = this.masterElement.querySelector('.upload-value');
@@ -458,18 +548,16 @@ const uploadImage = (element) => {
             this.loadImageArea = this.masterElement.querySelector('.load-image-area');
             this.previewImage = this.masterElement.querySelector('.preview-image');
             this.textPlaceholder = this.masterElement.querySelector('.image-text-placeholder');
-            this.typeOption = typeEnum[typeUpload];
+            this.messageMaster = message[languageCode];
+
             if (this.validateOption() === false) return;
-            debugger
+
             // Add click to import
             this.importControl.addEventListener('click', () => {
                 this.inputControl?.click();
             });
             this.importEvent();
-            const initValues = this.valueControl.value?.split(',');
-            this.srcImages = this.isMultiple ? initValues : initValues[0];
-            // Binding and reset event
-            this.resetEvent();
+            this.handleInitLoadImages();
         },
     };
 };

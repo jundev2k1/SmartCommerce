@@ -18,7 +18,7 @@
     </main>
 
     @* Script import render *@
-    @await Component.InvokeAsync("Script")
+    @await Component.InvokeAsync(Constants.ERP_COMPONENT_NAME_SCRIPT)
     @RenderSection("Scripts", required: false)
 </body>
 </html>

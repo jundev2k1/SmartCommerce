@@ -20,7 +20,22 @@ namespace ErpManager.ERP.Common.Validators
         /// <returns>Is valid value</returns>
         protected bool MustBeValidImages(string value)
         {
-            return string.IsNullOrEmpty(value) || Regex.IsMatch(value, "^(image1|[^,]+)$");
+            if (string.IsNullOrEmpty(value)) return true;
+
+            bool ValidFileName(string fileName)
+            {
+                if (string.IsNullOrEmpty(fileName)) return false;
+
+                var fileNameParts = fileName.Split('.');
+                if (fileNameParts.Length != 2 
+                    || !Constants.CONST_DATA_VALID_IMAGE_EXTENSIONS.Contains(fileNameParts[1])
+                    || string.IsNullOrEmpty(fileNameParts[0])) return false;
+
+                return true;
+            }
+
+            var fileNames = value.Split(',');
+            return fileNames.All(file => ValidFileName(file));
         }
 
         /// <summary>

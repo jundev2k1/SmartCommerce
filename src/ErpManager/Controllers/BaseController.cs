@@ -1,5 +1,6 @@
 ﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
 
+using ErpManager.Infrastructure.Common.Enum;
 using FluentValidation.Results;
 using Microsoft.AspNetCore.Mvc.Filters;
 using System.Reflection;
@@ -24,6 +25,7 @@ namespace ErpManager.ERP.Controllers
         private void Initialize()
         {
             SetDefaultPageData();
+            SetPropertiesValue();
             SetDefaultViewValue();
         }
 
@@ -44,6 +46,22 @@ namespace ErpManager.ERP.Controllers
         protected void ClearSession()
         {
             Session.Clear();
+        }
+
+        /// <summary>
+        /// Get type upload by string
+        /// </summary>
+        /// <param name="typeUpload">Type upload</param>
+        /// <returns>Type upload by string</returns>
+        protected static UploadEnum GetTypeUploadByString(string typeUpload)
+        {
+            return typeUpload switch
+            {
+                Constants.UPLOAD_KEY_PRODUCT => UploadEnum.ProductImage,
+                Constants.UPLOAD_KEY_USER => UploadEnum.UserAvatar,
+                Constants.UPLOAD_KEY_EMPLOYEE => UploadEnum.EmployeeAvatar,
+                _ => UploadEnum.None
+            };
         }
 
         /// <summary>
@@ -80,10 +98,32 @@ namespace ErpManager.ERP.Controllers
         }
 
         /// <summary>
+        /// Set properties value
+        /// </summary>
+        private void SetPropertiesValue()
+        {
+        }
+
+        /// <summary>
         /// Set default view value
         /// </summary>
         private void SetDefaultViewValue()
         {
+            ViewData[Constants.GLOBAL_KEY_SESSION_TOKEN] = this.SessionToken;
+        }
+
+        /// <summary>
+        /// Get or reset session id
+        /// </summary>
+        /// <returns>Session id</returns>
+        private string GetOrResetSessionId()
+        {
+            var result = this.Session.GetString(Constants.GLOBAL_KEY_SESSION_TOKEN);
+            if (result != null) return result;
+
+            var newId = Guid.NewGuid().ToString();
+            this.Session.SetString(Constants.GLOBAL_KEY_SESSION_TOKEN, newId);
+            return newId;
         }
 
         /// <summary>
@@ -105,7 +145,11 @@ namespace ErpManager.ERP.Controllers
         /// <summary>
         /// Redirect to error page
         /// </summary>
-        protected IActionResult RedirectToErrorPage(string errorMessageKey = Constants.ERRORMSG_KEY_SYSTEM_ERROR, ErrorCodeEnum errorCode = ErrorCodeEnum.SystemError)
+        /// <param name="errorMessageKey">Error message key</param>
+        /// <param name="errorCode">Error code</param>
+        protected IActionResult RedirectToErrorPage(
+            string errorMessageKey = Constants.ERRORMSG_KEY_SYSTEM_ERROR,
+            ErrorCodeEnum errorCode = ErrorCodeEnum.SystemError)
         {
             Session.SetString(Constants.SESSION_KEY_PAGE_ERROR_CODE, errorCode.GetStringValue<int>());
             Session.SetString(Constants.SESSION_KEY_PAGE_ERROR_MESSAGE, errorMessageKey);
@@ -114,13 +158,7 @@ namespace ErpManager.ERP.Controllers
         }
 
         /// <summary>Session</summary>
-        protected ISession Session
-        {
-            get
-            {
-                return HttpContext.Session;
-            }
-        }
+        protected ISession Session => HttpContext.Session;
         /// <summary>Operator branch id</summary>
         protected string OperatorBranchId { get; private set; } = Constants.CONFIG_DEFAULT_BRANCH_ID;
         /// <summary>Operator id</summary>
@@ -133,5 +171,7 @@ namespace ErpManager.ERP.Controllers
         protected string PageUrl { get; private set; } = string.Empty;
         /// <summary>Operator id</summary>
         protected string OperatorPermissions { get; private set; } = string.Empty;
+        /// <summary>Session token</summary>
+        protected string SessionToken => GetOrResetSessionId();
     }
 }

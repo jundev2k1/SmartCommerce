@@ -68,6 +68,30 @@ namespace ErpManager.Persistence.Repositories
         }
 
         /// <summary>
+        /// Get related products
+        /// </summary>
+        /// <param name="branchId">Branch id</param>
+        /// <param name="productId">Product id</param>
+        /// <param name="maxQuantity">Max quantity</param>
+        /// <returns>A collection of related products</returns>
+        public ProductModel[] GetRelatedProducts(string branchId, string productId, int maxQuantity = 0)
+        {
+            var product = _dbContext.Products.FirstOrDefault(product =>
+                (product.BranchId == branchId)
+                && (product.ProductId == productId));
+            if (product == null) return Array.Empty<ProductModel>();
+
+            var relatedProducts = _dbContext.Products
+                .Where(product => (product.DelFlg == false) && (product.Status != ProductStatusEnum.Pending))
+                .OrderBy(product => product.Address1 == product.Address1)
+                .ThenBy(product => product.DateCreated)
+                .Take(maxQuantity)
+                .Select(product => product.MapToProductModel())
+                .ToArray();
+            return relatedProducts;
+        }
+
+        /// <summary>
         /// Get
         /// </summary>
         /// <param name="branchId">Branch id</param>
@@ -139,6 +163,28 @@ namespace ErpManager.Persistence.Repositories
                 product.Description = model.Description;
                 product.DateChanged = DateTime.Now;
                 product.LastChanged = model.LastChanged;
+                _dbContext.SaveChanges();
+            });
+            return result;
+        }
+
+        /// <summary>
+        /// Update product image
+        /// </summary>
+        /// <param name="branchId">Branch id</param>
+        /// <param name="productId">Product id</param>
+        /// <param name="images">Images</param>
+        /// <returns>Update status</returns>
+        public bool UpdateProductImage(string branchId, string productId, string images)
+        {
+            var result = BeginTransaction(() =>
+            {
+                var product = _dbContext.Products
+                    .FirstOrDefault(product => (product.BranchId == branchId) && (product.ProductId == productId));
+                if (product == null) throw new Exception();
+
+                product.Images = images;
+                product.DateChanged = DateTime.Now;
                 _dbContext.SaveChanges();
             });
             return result;

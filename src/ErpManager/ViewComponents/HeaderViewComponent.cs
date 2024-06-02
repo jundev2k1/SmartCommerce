@@ -6,9 +6,9 @@ namespace ErpManager.ERP.ViewComponents
 {
     public class HeaderViewComponent : ViewComponent
     {
-        public IViewComponentResult Invoke()
+        public IViewComponentResult Invoke(HeaderViewModel viewData)
         {
-            return View();
+            return View(viewData);
         }
     }
 }

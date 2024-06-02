@@ -11,7 +11,7 @@ namespace ErpManager.Common
         /// <summary>Application: Domain</summary>
         public const string APPLICATION_DOMAIN = "localhost";
         /// <summary>Application: Domain</summary>
-        public const string APPLICATION_PORT = "7189";
+        public const string APPLICATION_PORT = "44316";
         /// <summary>Application: Name</summary>
         public const string APPLICATION_NAME = "ERP Manager";
 
@@ -20,7 +20,7 @@ namespace ErpManager.Common
         /// <summary>Config: default sidebar options</summary>
         public const bool CONFIG_DEFAULT_SIDEBAR_OPTIONS = false;
         /// <summary>Config: secret key</summary>
-        public const string CONFIG_SECRET_KEY = "240695";
+        public const string CONFIG_SECRET_KEY = "ErpMeKey_240695";
         /// <summary>Config: charset options</summary>
         public const string CONFIG_CHARSET_OPTIONS = "utf-8";
         /// <summary>Config: default branch id</summary>

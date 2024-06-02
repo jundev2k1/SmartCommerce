@@ -13,5 +13,9 @@
         public bool IsMultiple { get; set; }
 
         public string ClassName { get; set; } = string.Empty;
+
+        public string UploadType = string.Empty;
+
+        public string UploadFileName = string.Empty;
     }
 }

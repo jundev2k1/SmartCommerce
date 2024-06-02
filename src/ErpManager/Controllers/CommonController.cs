@@ -1,15 +1,19 @@
 ﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
 
 using ErpManager.ERP.Common.Extensions;
+using ErpManager.Infrastructure.Common.Enum;
+using ErpManager.Infrastructure.Upload;
 
 namespace ErpManager.ERP.Controllers
 {
     public sealed class CommonController : BaseController
     {
         private readonly IServiceFacade _serviceFacade;
-        public CommonController(IServiceFacade serviceFacade)
+        private readonly IWebHostEnvironment _webHostEnvironment;
+        public CommonController(IServiceFacade serviceFacade, IWebHostEnvironment webHostEnvironment)
         {
             _serviceFacade = serviceFacade;
+            _webHostEnvironment = webHostEnvironment;
         }
 
         [HttpGet]
@@ -99,6 +103,102 @@ namespace ErpManager.ERP.Controllers
             };
             var result = _serviceFacade.Users.Search(userSearch, pageIndex: 1, pageSize: 6).Data;
             return Json(result);
+        }
+
+        [HttpPost]
+        [Route("/common/upload-images")]
+        public string UploadImages([FromForm] IFormFile[] files, string type, string sessionToken, string uploadFileName = "", bool isClearTempImages = false)
+        {
+            var typeUpload = GetTypeUploadByString(type);
+            if (typeUpload == UploadEnum.None) throw new Exception("type none");
+
+            var fileManager = new FileManager(files, typeUpload, uploadFileName, sessionToken);
+            if (isClearTempImages)
+            {
+                fileManager.DeleteTempImages();
+            }
+            fileManager.ExecuteUploadImages();
+            switch (typeUpload)
+            {
+                case UploadEnum.ProductImage:
+                    var product = _serviceFacade.Products.GetProduct(this.OperatorBranchId, uploadFileName);
+                    if (product == null) break;
+
+                    var productImage = _serviceFacade.Products.UpdateNewestProductImages(this.OperatorBranchId, uploadFileName);
+                    if (productImage != null) return productImage;
+                    break;
+            }
+
+            return string.Join(",", fileManager.Result);
+        }
+
+        [HttpGet]
+        [Route("/common/delete-image")]
+        public IActionResult DeleteImage(string filePath)
+        {
+            try
+            {
+                var targetPath = $"wwwroot{filePath}";
+                if (System.IO.File.Exists(targetPath))
+                {
+                    System.IO.File.Delete(targetPath);
+                    return Json(true);
+                }
+                throw new Exception();
+            }
+            catch
+            {
+                return Json(false);
+            }
+        }
+
+        [HttpGet]
+        [Route("/common/get-exist-and-delete-not-use-temp-images")]
+        public IActionResult GetExistAndDeleteNotUseTemporaryImages(string type, string sessionToken, string filePath = "")
+        {
+            if (string.IsNullOrEmpty(sessionToken)) throw new Exception("Session token cannot null");
+
+            var result = new List<string>();
+            var paths = filePath.Split(",");
+            foreach (var path in paths)
+            {
+                var targetPath = _webHostEnvironment.WebRootPath + path;
+                if (System.IO.File.Exists(targetPath))
+                    result.Add(path);
+            }
+            var typeUpload = GetTypeUploadByString(type);
+            if (typeUpload == UploadEnum.None)
+                throw new Exception("type none");
+
+            var fileManager = new FileManager(
+                files: Array.Empty<IFormFile>(),
+                @enum: typeUpload,
+                fileName: string.Empty,
+                sessionToken);
+            fileManager.DeleteNotUseImages(
+                expectImages: result.ToArray(),
+                isTempDir: true);
+
+            return Json(string.Join(",", result));
+        }
+
+        [HttpPost]
+        [Route("/common/update-newest-image")]
+        public IActionResult UpdateNewestImage(string type, string primaryKey)
+        {
+            var typeUpload = GetTypeUploadByString(type);
+            if (typeUpload == UploadEnum.None)
+                throw new Exception("type none");
+
+            switch (typeUpload)
+            {
+                case UploadEnum.ProductImage:
+                    var result = _serviceFacade.Products.UpdateNewestProductImages(this.OperatorBranchId, primaryKey);
+                    return Content(result ?? string.Empty);
+
+                default:
+                    return Content(string.Empty);
+            }
         }
     }
 }

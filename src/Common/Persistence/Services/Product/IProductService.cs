@@ -24,6 +24,15 @@ namespace ErpManager.Persistence.Services
         public ProductModel[] GetAllProduct(string branchId, bool isDeleted = false);
 
         /// <summary>
+        /// Get related products
+        /// </summary>
+        /// <param name="branchId">Branch id</param>
+        /// <param name="productId">Product id</param>
+        /// <param name="maxQuantity">Max quantity</param>
+        /// <returns>A collection of related product</returns>
+        public ProductModel[] GetRelatedProducts(string branchId, string productId, int maxQuantity);
+
+        /// <summary>
         /// Get product
         /// </summary>
         /// <param name="branchId">Branch id</param>
@@ -51,6 +60,14 @@ namespace ErpManager.Persistence.Services
         /// <param name="model">Product model</param>
         /// <returns>Is success</returns>
         public bool UpdateDescription(ProductModel model);
+
+        /// <summary>
+        /// Update newest product images
+        /// </summary>
+        /// <param name="branchId">Branch id</param>
+        /// <param name="productId">Product id</param>
+        /// <returns>Actual product image value</returns>
+        public string? UpdateNewestProductImages(string branchId, string productId);
 
         /// <summary>
         /// Delete temporary

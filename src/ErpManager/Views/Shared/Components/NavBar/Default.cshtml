@@ -1,7 +1,7 @@
 ﻿@model List<MenuViewModel>
 @{
     var currentPage = (ViewData[Constants.GLOBAL_KEY_CURRENT_PAGE]).ToStringOrEmpty();
-    var componentScript = Url.Content(Constants.FILE_PATH_JS_COMPONENT_NAV_BAR);
+    var componentScript = Url.Content(Constants.ERP_FILE_PATH_JS_COMPONENT_NAV_BAR);
     var operatorPermissons = (string[])(ViewBag.OperatorPermisson) ?? Array.Empty<string>();
     var hasAllPermission = EnumUtility.GetEnumValue<Permission>(operatorPermissons[0]) == Permission.HasAllPermission;
 

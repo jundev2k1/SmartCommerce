@@ -1,4 +1,6 @@
-﻿namespace ErpManager.ERP.Common.Util
+﻿using System;
+
+namespace ErpManager.ERP.Common.Util
 {
     public static class ProductUtilities
     {
@@ -9,7 +11,7 @@
         /// <param name="enum">Enum value</param>
         /// <returns>Product status</returns>
         /// <exception cref="NotImplementedException">Throw if not exist</exception>
-        public static string GetProductStatus(Dictionary<string, string> localizer, ProductStatusEnum @enum)
+        public static string GetStatus(Dictionary<string, string> localizer, ProductStatusEnum @enum)
         {
             return @enum switch
             {
@@ -28,7 +30,7 @@
         /// <param name="enum">Enum value</param>
         /// <returns>Product display price</returns>
         /// <exception cref="NotImplementedException">Throw if not exist</exception>
-        public static string GetProductDislayPriceContent(Dictionary<string, string> localizer, DisplayPriceEnum @enum)
+        public static string GetDislayPriceContent(Dictionary<string, string> localizer, DisplayPriceEnum @enum)
         {
             return @enum switch
             {
@@ -37,6 +39,40 @@
                 DisplayPriceEnum.Price3 => localizer["ValTxt_ProductDisplayPrice3"].ToStringOrEmpty(),
                 _ => throw new NotImplementedException()
             };
+        }
+
+        /// <summary>
+        /// Get display price
+        /// </summary>
+        /// <param name="model">Product model</param>
+        /// <returns>Display price</returns>
+        public static string GetDisplayPrice(ProductModel model)
+        {
+            return model.DisplayPrice switch
+            {
+                DisplayPriceEnum.Price1 => Convert.ToInt32(model.Price1).ToStringOrEmpty(),
+                DisplayPriceEnum.Price2 => Convert.ToInt32(model.Price2).ToStringOrEmpty(),
+                DisplayPriceEnum.Price3 => Convert.ToInt32(model.Price3).ToStringOrEmpty(),
+                _ => throw new NotImplementedException()
+            };
+        }
+
+        /// <summary>
+        /// Get main product image
+        /// </summary>
+        /// <param name="images">Images</param>
+        /// <returns>Main product image</returns>
+        public static string GetMainProductImage(string images)
+        {
+            if (string.IsNullOrEmpty(images)) return Constants.ERP_FILE_PATH_PUBLIC_NO_IMAGE;
+
+            foreach(var image in images.Split(','))
+            {
+                var imagePath = Constants.PHYSICAL_APPLICATION_ROOT_PATH + image;
+                if (File.Exists(imagePath)) return image;
+            }
+
+            return Constants.ERP_FILE_PATH_PUBLIC_NO_IMAGE;
         }
     }
 }

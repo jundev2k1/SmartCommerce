@@ -16,8 +16,9 @@ namespace ErpManager.Infrastructure.Common.Middleware
 
         public async Task Invoke(HttpContext context)
         {
-            if (!context.Session.TryGetValue(Constants.SESSION_KEY_OPERATOR_ID, out _)
-                && this.PublicRoute.Contains(context.Request.Path.Value) == false)
+            var isNeedLogin = (this.IsValidRoute(context.Request.Path.Value) == false)
+                && (context.Session.TryGetValue(Constants.SESSION_KEY_OPERATOR_ID, out _) == false);
+            if (isNeedLogin)
             {
                 context.Response.Redirect(Constants.MODULE_AUTH_SIGNIN_PATH);
                 return;

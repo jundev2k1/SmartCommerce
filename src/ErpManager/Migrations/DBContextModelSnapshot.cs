@@ -286,8 +286,8 @@ namespace ErpManager.ERP.Migrations
 
                     b.Property<string>("Images")
                         .ValueGeneratedOnAdd()
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)")
+                        .HasMaxLength(4000)
+                        .HasColumnType("nvarchar(4000)")
                         .HasDefaultValueSql("('')");
 
                     b.Property<string>("LastChanged")

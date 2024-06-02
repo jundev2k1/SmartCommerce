@@ -139,4 +139,7 @@
     <value>Đã xảy ra lỗi hệ thống, vui lòng liên hệ người quản lý để được giúp đỡ @@operator_phone_number@@</value>
     <comment>Setting in config</comment>
   </data>
+  <data name="Message_NoExistProductDescription" xml:space="preserve">
+    <value>Không có mô tả về sản phẩm</value>
+  </data>
 </root>

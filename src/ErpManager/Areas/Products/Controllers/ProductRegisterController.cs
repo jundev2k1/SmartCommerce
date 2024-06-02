@@ -1,7 +1,10 @@
 ﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
 
 using ErpManager.ERP.Common.Util;
+using ErpManager.Infrastructure.Common.Enum;
+using ErpManager.Infrastructure.Upload;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Diagnostics;
 
 namespace ErpManager.ERP.Areas.Product.Controllers
 {
@@ -46,12 +49,24 @@ namespace ErpManager.ERP.Areas.Product.Controllers
             ViewBag.DropdownItems = GetInitDropdownListItems(formInput);
 
             // Validate form input
+            ModelState.Clear();
             var validateResult = _validatorFacade.ProductValidate(formInput);
             if (validateResult.IsValid == false)
             {
                 AddErrorToModelState(validateResult);
                 return View(formInput);
             }
+
+            // Convert temp images to actual images
+            var fileUpload = new FileManager(
+                files: Array.Empty<IFormFile>(),
+                @enum: UploadEnum.ProductImage,
+                sessionToken: this.SessionToken,
+                fileName: formInput.ProductId);
+            Debugger.Break();
+            fileUpload.ChangeToActualImages();
+            formInput.Images = string.Join(",", fileUpload.Result);
+            System.IO.File.WriteAllText("C:\\Logs\\log.txt", formInput.Images);
 
             // Handle create new product
             var isSuccess = _serviceFacade.Products.Insert(formInput);

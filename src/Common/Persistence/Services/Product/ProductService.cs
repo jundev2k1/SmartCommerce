@@ -2,7 +2,10 @@
 
 using ErpManager.Common;
 using ErpManager.Domain.Models;
+using ErpManager.Infrastructure.Common.Enum;
+using ErpManager.Infrastructure.Upload;
 using ErpManager.Persistence.Common.Utilities.Search;
+using Microsoft.AspNetCore.Http;
 
 namespace ErpManager.Persistence.Services
 {
@@ -52,6 +55,18 @@ namespace ErpManager.Persistence.Services
         }
 
         /// <summary>
+        /// Get related products
+        /// </summary>
+        /// <param name="branchId">Branch id</param>
+        /// <param name="productId">Product id</param>
+        /// <param name="maxQuantity">Max quantity</param>
+        /// <returns>A collection of related products</returns>
+        public ProductModel[] GetRelatedProducts(string branchId, string productId, int maxQuantity)
+        {
+            return _productRepository.GetRelatedProducts(branchId, productId, maxQuantity);
+        }
+
+        /// <summary>
         /// Get product
         /// </summary>
         /// <param name="branchId">Branch id</param>
@@ -95,6 +110,28 @@ namespace ErpManager.Persistence.Services
         public bool UpdateDescription(ProductModel model)
         {
             return _productRepository.UpdateDescription(model);
+        }
+
+        /// <summary>
+        /// Update newest product images
+        /// </summary>
+        /// <param name="branchId">Branch id</param>
+        /// <param name="productId">Product id</param>
+        /// <returns>Actual product images</returns>
+        public string? UpdateNewestProductImages(string branchId, string productId)
+        {
+            var product = GetProduct(branchId, productId);
+            if (product == null) return null;
+
+            var fileManager = new FileManager(
+                files: Array.Empty<IFormFile>(),
+                @enum: UploadEnum.ProductImage,
+                fileName: productId);
+            var actualFileName = fileManager.GetAllActualFileName();
+            var productImages = string.Join(",", actualFileName);
+
+            var isSuccess = _productRepository.UpdateProductImage(branchId, productId, productImages);
+            return isSuccess ? productImages : product.Images;
         }
 
         /// <summary>

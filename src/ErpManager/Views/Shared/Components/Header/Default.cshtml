@@ -1,19 +1,24 @@
-﻿<section id="headerBar">
+﻿@model HeaderViewModel
+
+<section id="headerBar">
     <div class="header">
         <div class="wrapper">
             <div class="row align-items-center">
                 <div class="title col-md-6 d-flex align-items-center gap-2">
-                    <button type="button" class="btn site-btn-outline-inner-theme btn-navbar-switch">
-                        <i class="fa-regular fa-bars" style="color: var(--site-title-operating)"></i>
-                    </button>
+                    @if (Model.isShowNavbarSwitch)
+                    {
+                        <button type="button" class="btn site-btn-outline-inner-theme btn-navbar-switch">
+                            <i class="fa-regular fa-bars" style="color: var(--site-title-operating)"></i>
+                        </button>
+                    }
                     <h1>@ViewData["Title"]</h1>
                 </div>
                 <div class="sub-navbar col-md-6 gap-2">
                     <div class="language-change">
-                        @await Component.InvokeAsync("LanguageSwitcher")
+                        @await Component.InvokeAsync(Constants.ERP_COMPONENT_NAME_LANGUAGE_SWITCHER)
                     </div>
                     <div class="user-notification">
-                        @await Component.InvokeAsync("UserNotification")
+                        @await Component.InvokeAsync(Constants.ERP_COMPONENT_NAME_NOTIFICATION)
                     </div>
                     <div class="user-info"></div>
                 </div>

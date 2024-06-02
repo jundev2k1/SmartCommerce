@@ -1,19 +1,18 @@
 ﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
 
 using ErpManager.ERP.Common;
+using ErpManager.Infrastructure.Securiry;
 
 namespace ErpManager.ERP.Controllers
 {
     public sealed class AuthenticationController : BaseController
     {
-        private readonly IMapper _mapper;
         private readonly ILocalizer _localizer;
         private readonly IServiceFacade _services;
 
-        public AuthenticationController(ILocalizer localizer, IMapper mapper, IServiceFacade services)
+        public AuthenticationController(ILocalizer localizer, IServiceFacade services)
         {
             _localizer = localizer;
-            _mapper = mapper;
             _services = services;
         }
 
@@ -132,8 +131,9 @@ namespace ErpManager.ERP.Controllers
                 IncreaseLoginCount(user.UserId);
 
                 // Try login, throw error if login fail
-                var @operator = _services.Users.TryLogin(this.OperatorBranchId, input.LoginID, input.Password);
-                if (@operator == null) throw new Exception();
+                var passwordEncrypt = Authorization.Instance.PasswordEncrypt(input.Password);
+                var @operator = _services.Users.TryLogin(this.OperatorBranchId, input.LoginID, passwordEncrypt);
+                if (@operator == null) throw new Exception("Login information invalid");
 
                 // Handle login success
                 HandleLoginSuccess(@operator, input.RememberMe);
@@ -273,7 +273,8 @@ namespace ErpManager.ERP.Controllers
                 return new LoginViewModel
                 {
                     LoginID = cookies[Constants.COOKIE_KEY_LOGIN_USERNAME].ToStringOrEmpty(),
-                    Password = cookies[Constants.COOKIE_KEY_LOGIN_PASSWORD].ToStringOrEmpty(),
+                    Password = Authorization.Instance.PasswordDecrypt(
+                        cookies[Constants.COOKIE_KEY_LOGIN_PASSWORD].ToStringOrEmpty()),
                     RememberMe = (string.IsNullOrEmpty(rememberMeCookie) == false),
                 };
             }

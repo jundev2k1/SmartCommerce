@@ -2,57 +2,27 @@
 @using ErpManager.Infrastructure.Upload;
 @model UploadImageInputViewModel
 
-<div class="image-upload @Model.ClassName" typeUpload="product" isMultiple>
+<div class="image-upload @Model.ClassName" typeUpload="@Model.UploadType" fileName="@Model.UploadFileName" isMultiple>
     <style>
-        .image-upload .previewImage {
+        .image-upload .wrapper {
             width: 100%;
             padding: 12px;
-            display: flex;
-            flex-direction: column;
-            gap: .5rem;
         }
 
-        .image-upload .mainImage {
+        .image-upload .main-image {
             position: relative;
             width: 100%;
-            min-height: 320px;
+            height: 320px;
+            overflow: hidden;
             display: flex;
             justify-content: center;
             align-items: center;
         }
 
-            .image-upload .mainImage .drop-area {
-                width: 100%;
-                height: 320px;
-                border: 1px solid #e4e4e4;
-                border-radius: 12px;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                transition: .25s;
-                z-index: 2;
+            .image-upload .main-image .preview-image {
+                height: 100%;
+                object-fit: cover;
             }
-
-                .image-upload .mainImage .drop-area.dragging {
-                    border: 2px dashed #e4e4e4;
-                }
-
-                    .image-upload .mainImage .drop-area.dragging div {
-                        display: block;
-                        z-index: 1;
-                    }
-
-                .image-upload .mainImage .drop-area div {
-                    display: none;
-                }
-
-                    .image-upload .mainImage .drop-area div i {
-                        font-size: 3rem;
-                    }
-
-                    .image-upload .mainImage .drop-area div p {
-                        font-size: .75rem;
-                    }
 
         .image-upload .file-input {
             width: 0px;
@@ -69,15 +39,21 @@
                 min-width: 25%;
                 width: 25%;
                 padding: 4px;
+                overflow: hidden;
             }
 
-            .image-upload .subImage li img:hover {
-                cursor: pointer;
-                filter: brightness(.9);
-            }
+                .image-upload .subImage li img {
+                    height: 100%;
+                    object-fit: cover;
+                }
+
+                    .image-upload .subImage li img:hover {
+                        cursor: pointer;
+                        filter: brightness(.9);
+                    }
     </style>
-    <div class="previewImage">
-        <div class="mainImage">
+    <div class="wrapper">
+        <div class="main-image">
             <div class="text-center image-text-placeholder">
                 <i class="fa-regular fa-arrow-up-from-bracket"></i>
                 <p>Chỉ chấp nhận các định dạng jpg, png. Tối đa 10MB</p>
@@ -90,21 +66,6 @@
             <input type="hidden" name="@Model.Name" class="upload-value" value="@Model.Value" />
         </div>
         <ul class="load-image-area subImage">
-            <li>
-                <img class="w-100" src="/images/system/no-image-placeholder.jpg" />
-            </li>
-            <li>
-                <img class="w-100" src="/images/system/no-image-placeholder.jpg" />
-            </li>
-            <li>
-                <img class="w-100" src="/images/system/no-image-placeholder.jpg" />
-            </li>
-            <li>
-                <img class="w-100" src="/images/system/no-image-placeholder.jpg" />
-            </li>
-            <li>
-                <img class="w-100" src="/images/system/no-image-placeholder.jpg" />
-            </li>
         </ul>
     </div>
 </div>

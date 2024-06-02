@@ -2,7 +2,8 @@
 {
     public enum UploadEnum
     {
-        ProductImages,
+        None,
+        ProductImage,
         UserAvatar,
         EmployeeAvatar,
     }

@@ -8,7 +8,7 @@ namespace ErpManager.ERP.ViewComponents
         {
             if (string.IsNullOrEmpty(images))
             {
-                images = Constants.FILE_PATH_PUBLIC_NO_IMAGE;
+                images = Constants.ERP_FILE_PATH_PUBLIC_NO_IMAGE;
             }
 
             var imageList = images.Split(',');

@@ -1,0 +1,116 @@
+﻿@model ProductPreviewViewModel
+@{
+    Layout = "_Layout_Preview";
+    ViewData[Constants.GLOBAL_KEY_TITLE] = Model.Product.Name;
+}
+
+<section class="container">
+    <div class="row gx-3 gy-3">
+        <div class="preview-content col-md-8 col-sm-12">
+            <div class="preview-layout">
+                <div class="preview-image">
+                    <img src="/images/background/theme-setting-background.jpg" />
+                    <img src="/images/background/theme-setting-background.jpg" />
+                    <img src="/images/background/theme-setting-background.jpg" />
+                </div>
+                <div class="preview-content">
+                    <div class="preview-content-title row">
+                        <div class="preview-content-info col-md-9 col-12">
+                            <h1 class="title">@Model.Product.Name</h1>
+                            <h2 class="price">@ProductUtilities.GetDisplayPrice(Model.Product)</h2>
+                            <span class="address">
+                                <i class="fa-regular fa-location-dot"></i>
+                                @AddressUtilities.GetFullAddress(
+                                         provinceId: Model.Product.Address1,
+                                         districtId: Model.Product.Address2,
+                                         communeId: Model.Product.Address3,
+                                         addressContent: Model.Product.Address4,
+                                         culture: Constants.CONFIG_LANGUAGE_OPTIONS)
+                            </span>
+                        </div>
+                        <div class="preview-content-contact col-md-3 col-12">
+                            @if (@Model.AgentDetail != null)
+                            {
+                                <a class="btn site-btn-info" href="tel:@Model.AgentDetail?.PhoneNumber">
+                                    <i class="fa-solid fa-phone"></i>
+                                    Liên hệ ngay
+                                </a>
+                            }
+                            else
+                            {
+                                <a class="btn site-btn-info" href="tel:@Model.AgentDetail?.PhoneNumber">
+                                    <i class="fa-solid fa-phone"></i>
+                                    Gửi cho quản trị viên
+                                </a>
+                                <span>Chúng tôi sẽ liên hệ lại trong thời gian sớm nhất!</span>
+                            }
+                        </div>
+                    </div>
+                    <div class="site-divide-line"></div>
+                    <div class="preview-content-desc">
+                        <h2>Mô tả sản phẩm</h2>
+                        <div class="desc-content">
+                            @Html.Raw(Model.Product.Description)
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="preview-sidebar col-md-4 col-sm-12">
+            <div class="preview-layout agent-details mb-2">
+                <h3>Người phụ trách</h3>
+                @if (Model.AgentDetail != null)
+                {
+                    <p>@Model.AgentDetail.FullName</p>
+                    <span>
+                        @AddressUtilities.GetFullAddress(
+                                 provinceId: Model.AgentDetail.Address1,
+                                 districtId: Model.AgentDetail.Address2,
+                                 communeId: Model.AgentDetail.Address3,
+                                 addressContent: Model.AgentDetail.Address4)
+                    </span>
+                    <a class="btn site-btn-primary" href="tel:@Model.AgentDetail.PhoneNumber">
+                        <i class="fa-solid fa-phone"></i> Liên hệ tư vấn
+                    </a>
+                }
+                else
+                {
+                    <p>Chưa cập nhật người phụ trách</p>
+                }
+            </div>
+            <div class="preview-layout calender mb-2">
+                <h3>Thông tin thêm</h3>
+                <div class="qr-code">
+                    <img class="img-fluid" src="@QRCodeUtility.GetSrcImageQRCode(Context.Request.Path)" />
+                </div>
+                <a class="btn site-btn-outline-theme" href="#">
+                    <i class="fa-regular fa-calender"></i> Sao chép QR
+                </a>
+            </div>
+            @if (!string.IsNullOrEmpty(Model.Product.EmbeddedLink))
+            {
+                <div class="preview-layout location">
+                    <div class="wrapper">
+                        @Html.Raw(Model.Product.EmbeddedLink)
+                    </div>
+                </div>
+            }
+        </div>
+        <div class="preview-related-product">
+            <div class="preview-layout">
+                <ul class="row">
+                    @foreach (var relatedProduct in Model.RelatedProducts.Take(4))
+                    {
+                        <li class="col-md-3 col-4">
+                            <a asp-route="@Constants.MODULE_PRODUCT_PRODUCTDETAIL_NAME" asp-route-id="@relatedProduct.ProductId">
+                                <img class="img-fluid" src="@ProductUtilities.GetMainProductImage(relatedProduct.Images)" />
+                                <h3>@relatedProduct.Name</h3>
+                                <span>@ProductUtilities.GetDisplayPrice(relatedProduct)</span>
+                            </a>
+                        </li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>

@@ -12,12 +12,12 @@
 }
 @model (UserModel[] Data, int TotalPage, int TotalRecord)
 
-@await Component.InvokeAsync("Breadcrumb", breadcrumbs)
+@await Component.InvokeAsync(Constants.ERP_COMPONENT_NAME_BREADCRUMB, breadcrumbs)
 
 <section id="searchBar" class="site-card">
     <div class="row">
         <div class="col-md-6 col-8">
-            @await Component.InvokeAsync("SearchInput", new SearchInputViewModel())
+            @await Component.InvokeAsync(Constants.ERP_COMPONENT_NAME_SEARCH_INPUT, new SearchInputViewModel())
         </div>
         <div class="col-md-2 col-4">
             <input type="button" class="btn site-btn-outline-info site-rounded" value="Filter" />

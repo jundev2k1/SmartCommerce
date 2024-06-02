@@ -48,6 +48,7 @@ namespace ErpManager.ERP.Areas.Product.Controllers
             ViewBag.DropdownItems = GetInitDropdownListItems(formInput);
 
             // Validate form input
+            ModelState.Clear();
             var validateResult = _validatorFacade.ProductValidate(formInput);
             if (validateResult.IsValid == false)
             {
@@ -71,7 +72,12 @@ namespace ErpManager.ERP.Areas.Product.Controllers
             var product = _serviceFacade.Products.GetProduct(this.OperatorBranchId, input.ProductId);
             if (product == null) return;
 
+            var productImages = _serviceFacade.Products.UpdateNewestProductImages(product.BranchId, product.ProductId);
+            if (productImages == null) throw new Exception("Product id is not exist to update newest image");
+
             input.BranchId = this.OperatorBranchId;
+            input.Images = productImages;
+            input.Description = product.Description;
             input.LastChanged = this.OperatorName;
             input.DateChanged = DateTime.Now;
             input.DateCreated = product?.DateCreated;

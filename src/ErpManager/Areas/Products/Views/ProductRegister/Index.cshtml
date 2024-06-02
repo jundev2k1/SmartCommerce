@@ -13,7 +13,7 @@
 }
 @model ProductModel
 
-@await Component.InvokeAsync("Breadcrumb", breadcrumbs)
+@await Component.InvokeAsync(Constants.ERP_COMPONENT_NAME_BREADCRUMB, breadcrumbs)
 
 <section id="bodyPageLoad">
     <form id="productRegisterForm" asp-area="@Constants.MODULE_PRODUCT_AREA" asp-route="@Constants.MODULE_PRODUCT_PRODUCTREGISTER_NAME" method="post">
@@ -23,7 +23,7 @@
                     <div class="d-flex justify-content-start mb-2">
                         <h3>@_localizer.Globals["Title_Product_Images"]</h3>
                     </div>
-                    @await Component.InvokeAsync("UploadImageInput", new UploadImageInputViewModel { Name = "Images", Value = Model.Images, IsMultiple = true })
+                    @await Component.InvokeAsync(Constants.ERP_COMPONENT_NAME_UPLOAD_IMAGE_INPUT, new UploadImageInputViewModel { Name = "Images", Value = Model.Images, IsMultiple = true, UploadType = "product", UploadFileName = string.Empty })
                 </div>
             </div>
             <div class="col-md-7 col-12">

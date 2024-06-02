@@ -7,10 +7,8 @@ namespace ErpManager.ERP.ViewComponents
 {
     public sealed class UploadImageInputViewComponent : ViewComponent
     {
-        private readonly IFileUpload _fileUpload;
-        public UploadImageInputViewComponent(IFileUpload fileUpload)
+        public UploadImageInputViewComponent()
         {
-            _fileUpload = fileUpload;
         }
 
         /// <summary>
@@ -20,7 +18,6 @@ namespace ErpManager.ERP.ViewComponents
         /// <returns>Upload image input component</returns>
         public IViewComponentResult Invoke(UploadImageInputViewModel input)
         {
-            ViewBag.ProductUploadDirPath = _fileUpload.GetFilePath(UploadEnum.ProductImages);
             return View(input);
         }
     }

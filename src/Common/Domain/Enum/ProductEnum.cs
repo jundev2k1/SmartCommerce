@@ -15,5 +15,6 @@ namespace ErpManager.Domain.Enum
         Normal,
         UrgentSale,
         GoodPrice,
+        Pending,
     }
 }

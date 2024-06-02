@@ -66,15 +66,17 @@ const hideLoading = function (type = 'unknown', selector = 'global') {
     }
 };
 
-const callAjax = ({ url, data, method = "POST", onSuccess }) => $.ajax({
+const callAjax = ({ url, data, contentType = 'application/json; charset=utf-8', dataType = 'json', method = 'POST', onSuccess }) => $.ajax({
     url: url,
     type: method,
-    contentType: 'application/json',
+    contentType: contentType,
+    dataType: dataType,
     data,
     success: (result) => {
-        onSuccess?.(result)
+        onSuccess?.(result);
     },
     error: function (jqXHR, textStatus, errorThrown) {
+        debugger
         console.error('AJAX request failed:', textStatus, errorThrown);
     },
 });
