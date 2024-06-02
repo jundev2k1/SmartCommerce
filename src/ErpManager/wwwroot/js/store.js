@@ -6,3 +6,7 @@ const StoreWindowLoadCallback = [];
 
 // Store js: callback function list (for window resize)
 const StoreWindowResizeCallback = [];
+
+// Global variable
+let languageCode = 'en';
+let isMobile = window.innerWidth < 768;

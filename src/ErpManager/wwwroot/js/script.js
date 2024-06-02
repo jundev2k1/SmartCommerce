@@ -1,7 +1,4 @@
-﻿// Global variation
-let languageCode = 'en';
-
-// Handle common page load
+﻿// Handle common page load
 document.addEventListener('DOMContentLoaded', () => {
     const mainLayout = document.querySelector("#page-load .render-content");
     if (mainLayout) {
@@ -31,7 +28,13 @@ document.addEventListener('DOMContentLoaded', () => {
 // Handle reload page when resize to Mobile
 const handleResizeForMobileLayout = (event) => {
     const minitorWidth = event.target.innerWidth;
-    if (minitorWidth < 768) window.location.reload();
+    if (minitorWidth < 768) {
+        isMobile = true;
+        window.location.reload();
+        return;
+    }
+
+    isMobile = false;
 };
 StoreWindowResizeCallback.push(handleResizeForMobileLayout);
 

@@ -302,7 +302,7 @@ namespace ErpManager.Infrastructure.Upload
             {
                 UploadEnum.ProductImage => Path.Combine(Constants.ERP_FILE_UPLOAD_DIRPATH_TEMP_PRODUCT_IMAGES, _sessionToken),
                 UploadEnum.UserAvatar => Path.Combine(Constants.ERP_FILE_UPLOAD_DIRPATH_TEMP_USER_AVATAR, _sessionToken),
-                UploadEnum.EmployeeAvatar => Path.Combine(Constants.ERP_FILE_UPLOAD_DIRPATH_TEMP_EMPLOYEE_AVATAR, _sessionToken),
+                UploadEnum.EmployeeAvatar => Path.Combine(Constants.ERP_FILE_UPLOAD_DIRPATH_TEMP_MEMBER_AVATAR, _sessionToken),
                 _ => throw new NotImplementedException()
             };
         }
@@ -318,7 +318,7 @@ namespace ErpManager.Infrastructure.Upload
             {
                 UploadEnum.ProductImage => Constants.ERP_FILE_UPLOAD_DIRPATH_PRODUCT_IMAGES,
                 UploadEnum.UserAvatar => Constants.ERP_FILE_UPLOAD_DIRPATH_USER_AVATAR,
-                UploadEnum.EmployeeAvatar => Constants.ERP_FILE_UPLOAD_DIRPATH_EMPLOYEE_AVATAR,
+                UploadEnum.EmployeeAvatar => Constants.ERP_FILE_UPLOAD_DIRPATH_MEMBER_AVATAR,
                 _ => string.Empty
             };
         }

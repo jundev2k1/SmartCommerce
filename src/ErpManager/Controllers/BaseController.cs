@@ -1,9 +1,7 @@
 ﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
 
-using ErpManager.ERP.Common.Session;
 using ErpManager.Infrastructure.Common.Enum;
 using FluentValidation.Results;
-using Microsoft.AspNetCore.Mvc.Filters;
 using System.Reflection;
 
 namespace ErpManager.ERP.Controllers

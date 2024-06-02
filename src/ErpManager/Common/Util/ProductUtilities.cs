@@ -68,11 +68,22 @@ namespace ErpManager.ERP.Common.Util
 
             foreach(var image in images.Split(','))
             {
-                var imagePath = Constants.PHYSICAL_APPLICATION_ROOT_PATH + image;
+                var imagePath = string.Format("{0}{1}", Constants.PHYSICAL_APPLICATION_ROOT_PATH, image);
                 if (File.Exists(imagePath)) return image;
             }
 
             return Constants.ERP_FILE_PATH_PUBLIC_NO_IMAGE;
+        }
+
+        /// <summary>
+        /// Get product image
+        /// </summary>
+        /// <param name="path">Image path</param>
+        /// <returns>Product image</returns>
+        public static string GetProductImage(string path)
+        {
+            var imagePath = string.Format("{0}{1}", Constants.PHYSICAL_APPLICATION_ROOT_PATH, path);
+            return File.Exists(imagePath) ? path : Constants.ERP_FILE_PATH_PUBLIC_NO_IMAGE;
         }
     }
 }

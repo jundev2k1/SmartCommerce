@@ -44,14 +44,91 @@
     --site-gray-800: #1F2937;
     --site-gray-900: #111827;
     --site-gray-950: #030712;
+    --site-red-50: #FDF2F2;
+    --site-red-100: #FDE8E8;
+    --site-red-200: #FBD5D5;
+    --site-red-300: #F8B4B4;
+    --site-red-400: #F98080;
+    --site-red-500: #F05252;
+    --site-red-600: #E02424;
+    --site-red-700: #C81E1E;
+    --site-red-800: #9B1C1C;
+    --site-red-900: #771D1D;
+    --site-yellow-50: #FEFCE8;
+    --site-yellow-100: #FEF9C3;
+    --site-yellow-200: #FEF08A;
+    --site-yellow-300: #FDE047;
+    --site-yellow-400: #FACC15;
+    --site-yellow-500: #EAB308;
+    --site-yellow-600: #CA8A04;
+    --site-yellow-700: #A16207;
+    --site-yellow-800: #854D0E;
+    --site-yellow-900: #713F12;
+    --site-green-50: #F0FDF4;
+    --site-green-100: #DCFCE7;
+    --site-green-200: #BBF7D0;
+    --site-green-300: #86EFAC;
+    --site-green-400: #4ADE80;
+    --site-green-500: #22C55E;
+    --site-green-600: #16A34A;
+    --site-green-700: #15803D;
+    --site-green-800: #166534;
+    --site-green-900: #14532D;
+    --site-blue-50: #EFF6FF;
+    --site-blue-100: #DBEAFE;
+    --site-blue-200: #BFDBFE;
+    --site-blue-300: #93C5FD;
+    --site-blue-400: #60A5FA;
+    --site-blue-500: #3B82F6;
+    --site-blue-600: #2563EB;
+    --site-blue-700: #1D4ED8;
+    --site-blue-800: #1E40AF;
+    --site-blue-900: #1E3A8A;
+    --site-indigo-50: #EEF2FF;
+    --site-indigo-100: #E0E7FF;
+    --site-indigo-200: #C7D2FE;
+    --site-indigo-300: #A5B4FC;
+    --site-indigo-400: #818CF8;
+    --site-indigo-500: #6366F1;
+    --site-indigo-600: #4F46E5;
+    --site-indigo-700: #4338CA;
+    --site-indigo-800: #3730A3;
+    --site-indigo-900: #312E81;
+    --site-purple-50: #F5F3FF;
+    --site-purple-100: #EDE9FE;
+    --site-purple-200: #DDD6FE;
+    --site-purple-300: #C4B5FD;
+    --site-purple-400: #A78BFA;
+    --site-purple-500: #8B5CF6;
+    --site-purple-600: #7C3AED;
+    --site-purple-700: #6D28D9;
+    --site-purple-800: #5B21B6;
+    --site-purple-900: #4C1D95;
+    --site-pink-50: #FDF2F8;
+    --site-pink-100: #FCE7F3;
+    --site-pink-200: #FBCFE8;
+    --site-pink-300: #F9A8D4;
+    --site-pink-400: #F472B6;
+    --site-pink-500: #EC4899;
+    --site-pink-600: #DB2777;
+    --site-pink-700: #BE185D;
+    --site-pink-800: #9D174D;
+    --site-pink-900: #831843;
     --site-black: #000;
     --site-color-shadow: #00000076;
-    --site-primary: linear-gradient(to right, #673AB7 0%, #512DA8 51%, #673AB7 100%);
-    --site-secondary: linear-gradient(to right, #616161 0%, #889d9c 51%, #616161 100%);
-    --site-danger: linear-gradient(to right, #FF512F 0%, #DD2476 51%, #FF512F 100%);
-    --site-info: linear-gradient(to right, #457fca 0%, #5691c8 51%, #457fca 100%);
-    --site-success: linear-gradient(to right, #76b852 0%, #8DC26F 51%, #76b852 100%);
-    --site-warning: linear-gradient(to right, #F2994A 0%, #F2C94C 51%, #F2994A 100%);
+    --site-primary: ##512DA8;
+    --site-secondary: #889d9c;
+    --site-danger: #DD2476;
+    --site-info: #5691c8;
+    --site-success: #8DC26F;
+    --site-warning: #F2C94C;
+    /* Background linear color */
+    --site-bg-primary: linear-gradient(to right, #673AB7 0%, #512DA8 51%, #673AB7 100%);
+    --site-bg-secondary: linear-gradient(to right, #616161 0%, #889d9c 51%, #616161 100%);
+    --site-bg-danger: linear-gradient(to right, #FF512F 0%, #DD2476 51%, #FF512F 100%);
+    --site-bg-info: linear-gradient(to right, #457fca 0%, #5691c8 51%, #457fca 100%);
+    --site-bg-success: linear-gradient(to right, #76b852 0%, #8DC26F 51%, #76b852 100%);
+    --site-bg-warning: linear-gradient(to right, #F2994A 0%, #F2C94C 51%, #F2994A 100%);
     /* Border */
     --site-border: 1px solid var(--site-border-operating);
     --site-border-none: 0;
@@ -142,13 +219,13 @@
 .site-btn-primary {
     padding-left: 1rem;
     padding-right: 1rem;
-    background: var(--site-primary);
+    background: var(--site-bg-primary);
     color: var(--site-gray-100);
     transition: .25s ease-out;
 }
 
     .site-btn-primary:hover {
-        background: var(--site-primary);
+        background: var(--site-bg-primary);
         filter: brightness(0.75);
         color: var(--site-white);
         transition: .25s ease-in;
@@ -170,13 +247,13 @@
 .site-btn-secondary {
     padding-left: 1rem;
     padding-right: 1rem;
-    background: var(--site-secondary);
+    background: var(--site-bg-secondary);
     color: var(--site-gray-100);
     transition: .25s ease-out;
 }
 
     .site-btn-secondary:hover {
-        background: var(--site-secondary);
+        background: var(--site-bg-secondary);
         filter: brightness(0.75);
         color: var(--site-text-operating);
         transition: .25s ease-in;
@@ -198,13 +275,13 @@
 .site-btn-danger {
     padding-left: 1rem;
     padding-right: 1rem;
-    background: var(--site-danger);
+    background: var(--site-bg-danger);
     color: var(--site-gray-100);
     transition: .25s ease-out;
 }
 
     .site-btn-danger:hover {
-        background: var(--site-danger);
+        background: var(--site-bg-danger);
         filter: brightness(0.75);
         color: var(--site-white);
         transition: .25s ease-in;
@@ -226,13 +303,13 @@
 .site-btn-info {
     padding-left: 1rem;
     padding-right: 1rem;
-    background: var(--site-info);
+    background: var(--site-bg-info);
     color: var(--site-gray-100);
     transition: .25s ease-out;
 }
 
     .site-btn-info:hover {
-        background: var(--site-info);
+        background: var(--site-bg-info);
         filter: brightness(0.75);
         color: var(--site-white);
         transition: .25s ease-in;
@@ -254,13 +331,13 @@
 .site-btn-success {
     padding-left: 1rem;
     padding-right: 1rem;
-    background: var(--site-success);
+    background: var(--site-bg-success);
     color: var(--site-gray-100);
     transition: .25s ease-out;
 }
 
     .site-btn-success:hover {
-        background: var(--site-success);
+        background: var(--site-bg-success);
         filter: brightness(0.75);
         color: var(--site-text-operating);
         transition: .25s ease-in;
@@ -275,22 +352,20 @@
 }
 
     .site-btn-outline-success:hover {
-        border-color: var(--site-success);
         filter: brightness(0.75);
-        color: var(--site-success);
         transition: .25s ease-in;
     }
 
 .site-btn-warning {
     padding-left: 1rem;
     padding-right: 1rem;
-    background: var(--site-warning);
+    background: var(--site-bg-warning);
     color: var(--site-gray-100);
     transition: .25s ease-out;
 }
 
     .site-btn-warning:hover {
-        background: var(--site-warning);
+        background: var(--site-bg-warning);
         filter: brightness(0.75);
         color: var(--site-white);
         transition: .25s ease-in;
@@ -305,11 +380,7 @@
 }
 
     .site-btn-outline-warning:hover {
-        padding-left: 1rem;
-        padding-right: 1rem;
         filter: brightness(0.75);
-        border-color: var(--site-warning);
-        color: var(--site-warning);
         transition: .25s ease-in;
     }
 

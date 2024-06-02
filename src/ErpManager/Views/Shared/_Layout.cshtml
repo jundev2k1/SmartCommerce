@@ -22,7 +22,7 @@
     <main id="page-load">
         @await Component.InvokeAsync("NavBar")
         <div class="render-content">
-            @await Component.InvokeAsync(Constants.ERP_COMPONENT_NAME_HEADER, new HeaderViewModel { isShowNavbarSwitch = true })
+            @await Component.InvokeAsync(Constants.ERP_COMPONENT_NAME_HEADER, new HeaderViewModel { IsShowNavbarSwitch = true, IsFullScreen = true })
             <div class="main-content">
                 @RenderBody()
             </div>

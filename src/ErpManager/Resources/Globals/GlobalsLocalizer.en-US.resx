@@ -328,4 +328,40 @@
   <data name="Title_Product_Images" xml:space="preserve">
     <value>Product Images</value>
   </data>
+  <data name="Btn_ContactAdmin" xml:space="preserve">
+    <value>Contact Admin</value>
+  </data>
+  <data name="Btn_ContactConsulting" xml:space="preserve">
+    <value>Contact</value>
+  </data>
+  <data name="Btn_ContactNow" xml:space="preserve">
+    <value>Contact Now</value>
+  </data>
+  <data name="Title_Address" xml:space="preserve">
+    <value>Address</value>
+  </data>
+  <data name="Title_Price" xml:space="preserve">
+    <value>Price Only</value>
+  </data>
+  <data name="Title_Product_Image" xml:space="preserve">
+    <value>Product images</value>
+  </data>
+  <data name="Title_RelatedProduct" xml:space="preserve">
+    <value>Related Product</value>
+  </data>
+  <data name="Title_ShareLink" xml:space="preserve">
+    <value>Share The Link</value>
+  </data>
+  <data name="Title_TakeOverPerson" xml:space="preserve">
+    <value>Take Over Persion</value>
+  </data>
+  <data name="Title_Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="Title_ProductInformation" xml:space="preserve">
+    <value>Product Information</value>
+  </data>
+  <data name="Title_Tel" xml:space="preserve">
+    <value>Tel</value>
+  </data>
 </root>

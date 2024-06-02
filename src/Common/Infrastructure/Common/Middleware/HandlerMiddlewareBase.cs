@@ -47,6 +47,7 @@ namespace ErpManager.Infrastructure.Common.Middleware
                     Constants.MODULE_AUTH_SIGNIN_PATH,
                     Constants.MODULE_ERROR_ERROR_PATH,
                     Constants.MODULE_PRODUCT_PRODUCTPREVIEW_PATH,
+                    Constants.MODULE_COMMON_CHANGE_LANGUAGE_PATH,
                 };
             }
         }

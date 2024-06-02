@@ -139,7 +139,16 @@
     <value>A system error has occurred, please contact the administrator for help @@operator_phone_number@@</value>
     <comment>Setting in config</comment>
   </data>
+  <data name="Message_ClickCopy" xml:space="preserve">
+    <value>Click to copy</value>
+  </data>
   <data name="Message_NoExistProductDescription" xml:space="preserve">
     <value>There is no product description</value>
+  </data>
+  <data name="Message_NoHaveTakeOverPersion" xml:space="preserve">
+    <value>The person in charge has not been updated yet!</value>
+  </data>
+  <data name="Message_WeContactSoon" xml:space="preserve">
+    <value>We will contact you as soon as possible, thanks you!</value>
   </data>
 </root>

@@ -123,6 +123,15 @@
   <data name="Btn_Close" xml:space="preserve">
     <value>Đóng</value>
   </data>
+  <data name="Btn_ContactAdmin" xml:space="preserve">
+    <value>Liên hệ quản trị viên</value>
+  </data>
+  <data name="Btn_ContactConsulting" xml:space="preserve">
+    <value>Liên hệ tư vấn</value>
+  </data>
+  <data name="Btn_ContactNow" xml:space="preserve">
+    <value>Liên hệ ngay</value>
+  </data>
   <data name="Btn_Create" xml:space="preserve">
     <value>Tạo mới</value>
   </data>
@@ -318,8 +327,23 @@
     <value>Cập nhật thành công</value>
     <comment>Dùng cho theme settings</comment>
   </data>
+  <data name="Title_Address" xml:space="preserve">
+    <value>Địa chỉ</value>
+  </data>
+  <data name="Title_Name" xml:space="preserve">
+    <value>Tên</value>
+  </data>
+  <data name="Title_Price" xml:space="preserve">
+    <value>Giá chỉ</value>
+  </data>
+  <data name="Title_ProductInformation" xml:space="preserve">
+    <value>Thông tin sản phẩm</value>
+  </data>
   <data name="Title_Product_Description" xml:space="preserve">
     <value>Mô tả sản phẩm</value>
+  </data>
+  <data name="Title_Product_Image" xml:space="preserve">
+    <value>Hình ảnh về sản phẩm</value>
   </data>
   <data name="Title_Product_Images" xml:space="preserve">
     <value>Hình ảnh sản phẩm</value>
@@ -327,7 +351,19 @@
   <data name="Title_Product_Info" xml:space="preserve">
     <value>Thông tin sản phẩm</value>
   </data>
+  <data name="Title_RelatedProduct" xml:space="preserve">
+    <value>Sản phẩm liên quan</value>
+  </data>
   <data name="Title_SearchAdvanced" xml:space="preserve">
     <value>Tìm kiếm nâng cao</value>
+  </data>
+  <data name="Title_ShareLink" xml:space="preserve">
+    <value>Chia sẽ liên kết</value>
+  </data>
+  <data name="Title_TakeOverPerson" xml:space="preserve">
+    <value>Người tiếp quản</value>
+  </data>
+  <data name="Title_Tel" xml:space="preserve">
+    <value>Số Điện thoại</value>
   </data>
 </root>

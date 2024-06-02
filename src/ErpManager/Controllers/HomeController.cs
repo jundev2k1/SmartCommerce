@@ -23,8 +23,8 @@ namespace ErpManager.Controllers
         /// Dashboard page
         /// </summary>
         [PermissionAttribute(Permission.CanAccessDashBoard)]
-        [Route("/", Name = Constants.MODULE_HOME_DASHBOARD_NAME)]
-        [Route(Constants.MODULE_HOME_DASHBOARD_PATH)]
+        [Route("/")]
+        [Route(Constants.MODULE_HOME_DASHBOARD_PATH, Name = Constants.MODULE_HOME_DASHBOARD_NAME)]
         public IActionResult Index()
         {
             HandleForLoginSuccess();
@@ -45,7 +45,7 @@ namespace ErpManager.Controllers
         }
 
         [HttpGet]
-        [Route("/change-language", Name = "ChangeLanguage")]
+        [Route(Constants.MODULE_COMMON_CHANGE_LANGUAGE_PATH, Name = Constants.MODULE_COMMON_CHANGE_LANGUAGE_NAME)]
         public IActionResult LanguageSwitcher(string culture, string returnUrl)
         {
             // Set cookie option
@@ -62,7 +62,5 @@ namespace ErpManager.Controllers
 
             return Redirect(returnUrl);
         }
-
-
     }
 }

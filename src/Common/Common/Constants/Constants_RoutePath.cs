@@ -4,6 +4,10 @@ namespace ErpManager.Common
 {
     public static partial class Constants
     {
+        // Common module: Change language
+        public const string MODULE_COMMON_CHANGE_LANGUAGE_PATH = "/change-language";
+        public const string MODULE_COMMON_CHANGE_LANGUAGE_NAME = "ChangeLanguage";
+
         // Auth module: sign in
         public const string MODULE_AUTH_SIGNIN_PATH = "/sign-in";
         public const string MODULE_AUTH_SIGNIN_NAME = "SignIn";

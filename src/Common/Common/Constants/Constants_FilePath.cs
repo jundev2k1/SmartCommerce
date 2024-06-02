@@ -25,10 +25,10 @@ namespace ErpManager.Common
         /// <summary>Erp File upload directory path</summary>
         public static string ERP_FILE_UPLOAD_DIRPATH_PRODUCT_IMAGES = @"wwwroot\content\uploads\product-images";
         public static string ERP_FILE_UPLOAD_DIRPATH_TEMP_PRODUCT_IMAGES = @"wwwroot\content\uploads\temp\product-images";
-        public static string ERP_FILE_UPLOAD_DIRPATH_USER_AVATAR = "wwwroot/content/uploads/user-avatars";
-        public static string ERP_FILE_UPLOAD_DIRPATH_TEMP_USER_AVATAR = "wwwroot/content/uploads/temp/user-avatars";
-        public static string ERP_FILE_UPLOAD_DIRPATH_EMPLOYEE_AVATAR = "wwwroot/content/uploads/employee-avatars";
-        public static string ERP_FILE_UPLOAD_DIRPATH_TEMP_EMPLOYEE_AVATAR = "wwwroot/content/uploads/temp/employee-avatars";
+        public static string ERP_FILE_UPLOAD_DIRPATH_USER_AVATAR = @"wwwroot\content\uploads\user-avatars";
+        public static string ERP_FILE_UPLOAD_DIRPATH_TEMP_USER_AVATAR = @"wwwroot\content\uploads\temp\user-avatars";
+        public static string ERP_FILE_UPLOAD_DIRPATH_MEMBER_AVATAR = @"wwwroot\content\uploads\member-avatars";
+        public static string ERP_FILE_UPLOAD_DIRPATH_TEMP_MEMBER_AVATAR = @"wwwroot\content\uploads\temp\member-avatars";
 
         /// <summary>File path: Js component nav bar</summary>
         public const string ERP_FILE_PATH_JS_COMPONENT_NAV_BAR = "~/js/component-script/Navbar/index.js";
