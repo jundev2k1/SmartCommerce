@@ -97,9 +97,13 @@ h3 {
         font-weight: 500;
     }
 
-.preview-content .preview-content-desc {
-    margin-top: .875rem;
-}
+    .preview-content .preview-content-title .preview-content-contact p {
+        margin-bottom: 0;
+    }
+
+    .preview-content .preview-content-desc {
+        margin-top: .875rem;
+    }
 
     .preview-content .preview-content-desc .desc-content p {
         margin-bottom: .5rem;

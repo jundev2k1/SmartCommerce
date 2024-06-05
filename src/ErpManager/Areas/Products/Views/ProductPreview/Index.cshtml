@@ -9,7 +9,7 @@
         <div class="preview-content col-md-8 col-sm-12">
             <div class="preview-layout">
                 <div class="preview-image">
-                    @foreach (var imagePath in Model.Product.Images.Split(',', StringSplitOptions.RemoveEmptyEntries))
+                    @foreach (var imagePath in Model.Product.Images.Split(','))
                     {
                         <div class="preview-item">
                             <img src="@ProductUtilities.GetProductImage(imagePath)" data-bs-toggle="modal" data-bs-target="#previewModal" />
@@ -17,7 +17,7 @@
                     }
                 </div>
                 <div class="preview-content">
-                    <div class="preview-content-title row">
+                    <div class="preview-content-title row gy-3">
                         <div class="preview-content-info col-md-9 col-12">
                             <h1 class="title">@Model.Product.Name</h1>
                             <div class="price">
@@ -52,7 +52,7 @@
                                     <i class="fa-solid fa-phone"></i>
                                     @_localizer.Globals["Btn_ContactAdmin"]
                                 </a>
-                                <span>@_localizer.Messages["Message_WeContactSoon"]</span>
+                                <p>@_localizer.Messages["Message_WeContactSoon"]</p>
                             }
                         </div>
                     </div>
@@ -115,18 +115,19 @@
         <div class="preview-related-product">
             <div class="preview-layout">
                 <h2>@_localizer.Globals["Title_RelatedProduct"]</h2>
-                <ul class="row">
+                <ul class="row gy-3">
                     @foreach (var relatedProduct in Model.RelatedProducts)
                     {
                         var relatedAddress = AddressUtilities.GetDistrictName(relatedProduct.Address2, Constants.CONFIG_LANGUAGE_OPTIONS);
                         var relatedPrice = ProductUtilities.GetDisplayPrice(relatedProduct);
                         var relatedImage = ProductUtilities.GetMainProductImage(relatedProduct.Images);
 
-                        <li class="col-md-3 col-4">
-                            <a asp-route="@Constants.MODULE_PRODUCT_PRODUCTDETAIL_NAME" asp-route-id="@relatedProduct.ProductId">
+                        <li class="col-md-3 col-6">
+                            <a asp-route="@Constants.MODULE_PRODUCT_PRODUCTPREVIEW_NAME" asp-route-id="@relatedProduct.ProductId">
                                 <img class="img-fluid" src="@relatedImage" />
                                 <h3>@relatedProduct.Name</h3>
                                 <p><i class="fa-regular fa-circle-dollar"></i> @_localizer.Globals["Title_Price"]: @relatedPrice</p>
+                                <p>@await Component.InvokeAsync(Constants.ERP_COMPONENT_NAME_PRODUCT_STATUS_BADGE, new { status = relatedProduct.Status })</p>
                                 @if (!string.IsNullOrEmpty(relatedAddress))
                                 {
                                     <span><i class="fa-regular fa-map"></i> @relatedAddress</span>

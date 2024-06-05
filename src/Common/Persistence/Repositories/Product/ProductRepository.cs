@@ -84,7 +84,8 @@ namespace ErpManager.Persistence.Repositories
             var relatedProducts = _dbContext.Products
                 .Where(product => (product.DelFlg == false) && (product.Status != ProductStatusEnum.Pending))
                 .OrderBy(product => product.Address1 == product.Address1)
-                .ThenBy(product => product.DateCreated)
+                .ThenByDescending(product => product.DateCreated)
+                .ThenBy(product => product.Status)
                 .Take(maxQuantity)
                 .Select(product => product.MapToProductModel())
                 .ToArray();
