@@ -6,8 +6,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ErpManager.Domain.Entities;
 
-[Table("Employee")]
-public partial class Employee
+[Table("Member")]
+public partial class Member
 {
     [Key, Required]
     [StringLength(20)]
@@ -15,7 +15,7 @@ public partial class Employee
 
     [Key, Required]
     [StringLength(30)]
-    public string EmployeeId { get; set; }
+    public string MemberId { get; set; }
 
     [StringLength(30)]
     public string FirstName { get; set; } = string.Empty;
@@ -65,11 +65,11 @@ public partial class Employee
     [StringLength(255)]
     public string BackupAddress { get; set; } = string.Empty;
 
-    public EmployeeStatusEnum Status { get; set; }
+    public MemberStatusEnum Status { get; set; }
 
     public bool DelFlg { get; set; }
 
-    public EmployeeSexEnum Sex { get; set; }
+    public MemberSexEnum Sex { get; set; }
 
     [Column(TypeName = "datetime")]
     public DateTime Birthday { get; set; }

@@ -48,9 +48,9 @@
     <Folder Include="Areas\Users\ViewModels\" />
     <Folder Include="Migrations\" />
     <Folder Include="wwwroot\content\images\" />
-    <Folder Include="wwwroot\content\uploads\employees\" />
+    <Folder Include="wwwroot\content\uploads\members\" />
     <Folder Include="wwwroot\content\uploads\products\" />
-    <Folder Include="wwwroot\content\uploads\temp\employees\" />
+    <Folder Include="wwwroot\content\uploads\temp\members\" />
     <Folder Include="wwwroot\content\uploads\temp\products\" />
     <Folder Include="wwwroot\content\uploads\temp\users\" />
     <Folder Include="wwwroot\content\uploads\users\" />

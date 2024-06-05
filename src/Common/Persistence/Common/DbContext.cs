@@ -21,7 +21,9 @@ public partial class DBContext : DbContext
 
     public virtual DbSet<Product> Products { get; set; }
 
-    public virtual DbSet<Employee> Employees { get; set; }
+    public virtual DbSet<Member> Members { get; set; }
+
+    public virtual DbSet<Token> Tokens { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -106,9 +108,9 @@ public partial class DBContext : DbContext
             entity.Property(e => e.LastChanged).HasDefaultValueSql("('')");
         });
 
-        modelBuilder.Entity<Employee>(entity =>
+        modelBuilder.Entity<Member>(entity =>
         {
-            entity.HasKey(e => new { e.BranchId, e.EmployeeId }).HasName("PK_Employee_1");
+            entity.HasKey(e => new { e.BranchId, e.MemberId }).HasName("PK_Member_1");
 
             entity.Property(e => e.FirstName).HasDefaultValueSql("('')");
             entity.Property(e => e.LastName).HasDefaultValueSql("('')");
@@ -133,6 +135,17 @@ public partial class DBContext : DbContext
             entity.Property(e => e.DateChanged);
             entity.Property(e => e.CreatedBy).HasDefaultValueSql("('')");
             entity.Property(e => e.LastChanged).HasDefaultValueSql("('')");
+        });
+
+        modelBuilder.Entity<Token>(entity =>
+        {
+            entity.HasKey(e => new { e.BranchId, e.TokenId }).HasName("PK_Token_1");
+
+            entity.Property(e => e.ExpirationDate);
+            entity.Property(e => e.Type).HasConversion<int>();
+            entity.Property(e => e.DateCreated).HasDefaultValueSql("(getdate())");
+            entity.Property(e => e.DateChanged);
+            entity.Property(e => e.CreatedBy).HasDefaultValueSql("('')");
         });
 
         OnModelCreatingPartial(modelBuilder);

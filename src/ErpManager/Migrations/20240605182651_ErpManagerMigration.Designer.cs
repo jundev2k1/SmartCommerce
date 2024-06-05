@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ErpManager.ERP.Migrations
 {
     [DbContext(typeof(DBContext))]
-    [Migration("20240304165113_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20240605182651_ErpManagerMigration")]
+    partial class ErpManagerMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -67,13 +67,13 @@ namespace ErpManager.ERP.Migrations
                     b.ToTable("Branch");
                 });
 
-            modelBuilder.Entity("ErpManager.Domain.Entities.Employee", b =>
+            modelBuilder.Entity("ErpManager.Domain.Entities.Member", b =>
                 {
                     b.Property<string>("BranchId")
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
 
-                    b.Property<string>("EmployeeId")
+                    b.Property<string>("MemberId")
                         .HasMaxLength(30)
                         .HasColumnType("nvarchar(30)");
 
@@ -213,10 +213,10 @@ namespace ErpManager.ERP.Migrations
                         .HasColumnType("nvarchar(255)")
                         .HasDefaultValueSql("('')");
 
-                    b.HasKey("BranchId", "EmployeeId")
-                        .HasName("PK_Employee_1");
+                    b.HasKey("BranchId", "MemberId")
+                        .HasName("PK_Member_1");
 
-                    b.ToTable("Employee");
+                    b.ToTable("Member");
                 });
 
             modelBuilder.Entity("ErpManager.Domain.Entities.Product", b =>
@@ -283,14 +283,14 @@ namespace ErpManager.ERP.Migrations
 
                     b.Property<string>("EmbeddedLink")
                         .ValueGeneratedOnAdd()
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)")
+                        .HasMaxLength(4000)
+                        .HasColumnType("nvarchar(4000)")
                         .HasDefaultValueSql("('')");
 
                     b.Property<string>("Images")
                         .ValueGeneratedOnAdd()
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)")
+                        .HasMaxLength(4000)
+                        .HasColumnType("nvarchar(4000)")
                         .HasDefaultValueSql("('')");
 
                     b.Property<string>("LastChanged")
@@ -393,6 +393,42 @@ namespace ErpManager.ERP.Migrations
                         .HasName("PK_Role_1");
 
                     b.ToTable("Role");
+                });
+
+            modelBuilder.Entity("ErpManager.Domain.Entities.Token", b =>
+                {
+                    b.Property<string>("BranchId")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<string>("TokenId")
+                        .HasMaxLength(4000)
+                        .HasColumnType("nvarchar(4000)");
+
+                    b.Property<string>("CreatedBy")
+                        .ValueGeneratedOnAdd()
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)")
+                        .HasDefaultValueSql("('')");
+
+                    b.Property<DateTime?>("DateChanged")
+                        .HasColumnType("datetime");
+
+                    b.Property<DateTime>("DateCreated")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime")
+                        .HasDefaultValueSql("(getdate())");
+
+                    b.Property<DateTime>("ExpirationDate")
+                        .HasColumnType("datetime");
+
+                    b.Property<int>("Type")
+                        .HasColumnType("int");
+
+                    b.HasKey("BranchId", "TokenId")
+                        .HasName("PK_Token_1");
+
+                    b.ToTable("Token");
                 });
 
             modelBuilder.Entity("ErpManager.Domain.Entities.User", b =>

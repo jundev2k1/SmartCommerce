@@ -2,11 +2,11 @@
 
 namespace ErpManager.Domain.Models
 {
-    public sealed class EmployeeModel : ModelBase<UserModel>
+    public sealed class MemberModel : ModelBase<MemberModel>
     {
         public string BranchId { get; set; } = string.Empty;
 
-        public string EmployeeId { get; set; } = string.Empty;
+        public string MemberId { get; set; } = string.Empty;
 
         public string FirstName { get; set; } = string.Empty;
 
@@ -42,11 +42,11 @@ namespace ErpManager.Domain.Models
 
         public string BackupAddress { get; set; } = string.Empty;
 
-        public EmployeeStatusEnum Status { get; set; }
+        public MemberStatusEnum Status { get; set; }
 
         public bool DelFlg { get; set; }
 
-        public EmployeeSexEnum Sex { get; set; }
+        public MemberSexEnum Sex { get; set; }
 
         public DateTime Birthday { get; set; }
 

@@ -2,14 +2,14 @@
 
 namespace ErpManager.Domain.Enum
 {
-    public enum EmployeeSexEnum
+    public enum MemberSexEnum
     {
         Male,
         Female,
         Other,
     }
 
-    public enum EmployeeStatusEnum
+    public enum MemberStatusEnum
     {
         Inactive,
         Active,

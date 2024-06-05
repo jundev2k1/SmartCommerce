@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace ErpManager.ERP.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreate : Migration
+    public partial class ErpManagerMigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -28,11 +28,11 @@ namespace ErpManager.ERP.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Employee",
+                name: "Member",
                 columns: table => new
                 {
                     BranchId = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
-                    EmployeeId = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
+                    MemberId = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
                     FirstName = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: true, defaultValueSql: "('')"),
                     LastName = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: true, defaultValueSql: "('')"),
                     Avatar = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true, defaultValueSql: "('')"),
@@ -61,7 +61,7 @@ namespace ErpManager.ERP.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Employee_1", x => new { x.BranchId, x.EmployeeId });
+                    table.PrimaryKey("PK_Member_1", x => new { x.BranchId, x.MemberId });
                 });
 
             migrationBuilder.CreateTable(
@@ -71,7 +71,7 @@ namespace ErpManager.ERP.Migrations
                     BranchId = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
                     ProductId = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
                     Name = table.Column<string>(type: "nvarchar(60)", maxLength: 60, nullable: true, defaultValueSql: "('')"),
-                    Images = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true, defaultValueSql: "('')"),
+                    Images = table.Column<string>(type: "nvarchar(4000)", maxLength: 4000, nullable: true, defaultValueSql: "('')"),
                     Address1 = table.Column<string>(type: "nvarchar(60)", maxLength: 60, nullable: true, defaultValueSql: "('')"),
                     Address2 = table.Column<string>(type: "nvarchar(60)", maxLength: 60, nullable: true, defaultValueSql: "('')"),
                     Address3 = table.Column<string>(type: "nvarchar(60)", maxLength: 60, nullable: true, defaultValueSql: "('')"),
@@ -87,7 +87,7 @@ namespace ErpManager.ERP.Migrations
                     Size3 = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     TakeOverId = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: true, defaultValueSql: "('')"),
                     Description = table.Column<string>(type: "nvarchar(4000)", maxLength: 4000, nullable: true, defaultValueSql: "('')"),
-                    EmbeddedLink = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true, defaultValueSql: "('')"),
+                    EmbeddedLink = table.Column<string>(type: "nvarchar(4000)", maxLength: 4000, nullable: true, defaultValueSql: "('')"),
                     DateCreated = table.Column<DateTime>(type: "datetime", nullable: true, defaultValueSql: "(getdate())"),
                     DateChanged = table.Column<DateTime>(type: "datetime", nullable: true),
                     CreatedBy = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: true, defaultValueSql: "('')"),
@@ -116,6 +116,23 @@ namespace ErpManager.ERP.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Role_1", x => new { x.BranchId, x.RoleId });
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Token",
+                columns: table => new
+                {
+                    BranchId = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
+                    TokenId = table.Column<string>(type: "nvarchar(4000)", maxLength: 4000, nullable: false),
+                    Type = table.Column<int>(type: "int", nullable: false),
+                    ExpirationDate = table.Column<DateTime>(type: "datetime", nullable: false),
+                    DateCreated = table.Column<DateTime>(type: "datetime", nullable: false, defaultValueSql: "(getdate())"),
+                    DateChanged = table.Column<DateTime>(type: "datetime", nullable: true),
+                    CreatedBy = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: true, defaultValueSql: "('')")
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Token_1", x => new { x.BranchId, x.TokenId });
                 });
 
             migrationBuilder.CreateTable(
@@ -159,13 +176,16 @@ namespace ErpManager.ERP.Migrations
                 name: "Branch");
 
             migrationBuilder.DropTable(
-                name: "Employee");
+                name: "Member");
 
             migrationBuilder.DropTable(
                 name: "Product");
 
             migrationBuilder.DropTable(
                 name: "Role");
+
+            migrationBuilder.DropTable(
+                name: "Token");
 
             migrationBuilder.DropTable(
                 name: "User");
