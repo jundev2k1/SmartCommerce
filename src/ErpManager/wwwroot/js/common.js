@@ -1,4 +1,6 @@
-﻿/**
+﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
+
+/**
  * Takes the first `n` elements from the array.
  * @param {number} n - Number of elements to take.
  * @returns {Array} A new array containing the first `n` elements.

@@ -25,5 +25,12 @@ namespace ErpManager.Common
 
         /// <summary>Valid file extension name for image upload</summary>
         public static readonly string[] CONST_DATA_VALID_IMAGE_EXTENSIONS = new string[] { "jpg", "jpeg", "png" };
+
+        /// <summary>Supported culture</summary>
+        public static string[] SupportedCulture = new string[]
+        {
+            Constants.FLG_GLOBAL_CULTURE_VN,
+            Constants.FLG_GLOBAL_CULTURE_ENG
+        };
     }
 }

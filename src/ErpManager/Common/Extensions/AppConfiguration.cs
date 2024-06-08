@@ -8,22 +8,33 @@ namespace ErpManager.ERP.Common.Extensions
         public AppConfiguration(IConfiguration configuration)
         {
             _configuration = configuration;
+            Inititalize();
         }
 
-        /// <summary>Config: Owner name</summary>
-        public string OwnerName
+        /// <summary>
+        /// Inititalize
+        /// </summary>
+        private void Inititalize()
         {
-            get { return _configuration["OwnerName"].ToStringOrEmpty(); }
+            this.SecretKey = Constants.CONFIG_SECRET_KEY = _configuration["SecretKey"].ToStringOrEmpty();
+            this.OwnerName = Constants.CONFIG_OWNER_NAME = _configuration["OwnerName"].ToStringOrEmpty();
+            this.Tel = Constants.CONFIG_OWNER_TEL = _configuration["Tel"].ToStringOrEmpty();
+            this.Mail = Constants.CONFIG_OWNER_MAIL = _configuration["Mail"].ToStringOrEmpty();
+            this.MailCC = Constants.CONFIG_OWNER_MAIL_CC = _configuration["MailCC"].ToStringOrEmpty();
+            this.MailBCC = Constants.CONFIG_OWNER_MAIL_BCC = _configuration["MailBCC"].ToStringOrEmpty();
         }
-        /// <summary>Config: Owner phone number</summary>
-        public string PhoneNumber
-        {
-            get { return _configuration["PhoneNumber"].ToStringOrEmpty(); }
-        }
-        /// <summary>Config: secret key</summary>
-        public string SecretKey
-        {
-            get { return _configuration["SecretKey"].ToStringOrEmpty(); }
-        }
+
+        /// <summary>App Config: secret key</summary>
+        public string SecretKey { get; private set; } = string.Empty;
+        /// <summary>App Config: Owner name</summary>
+        public string OwnerName { get; private set; } = string.Empty;
+        /// <summary>App Config: Owner phone number</summary>
+        public string Tel { get; private set; } = string.Empty;
+        /// <summary>App Config: owner mail</summary>
+        public string Mail { get; private set; } = string.Empty;
+        /// <summary>App Config: mail CC</summary>
+        public string MailCC { get; private set; } = string.Empty;
+        /// <summary>App Config: mail BCC</summary>
+        public string MailBCC { get; private set; } = string.Empty;
     }
 }

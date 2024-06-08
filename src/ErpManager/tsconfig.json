@@ -5,8 +5,11 @@
     "noEmitOnError": true,
     "removeComments": false,
     "sourceMap": true,
+    "strict": true,
     "target": "es5",
-    "outDir": "wwwroot/js"
+    "rootDir": "./Scripts",
+    "outDir": "wwwroot/js",
+    "lib": [ "ES2022", "DOM" ]
   },
   "include": [
     "scripts/**/*"

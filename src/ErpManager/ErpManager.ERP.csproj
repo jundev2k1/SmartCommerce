@@ -7,16 +7,22 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Scripts\NewFolder\**" />
     <Compile Remove="wwwroot\content\product-images\**" />
     <Compile Remove="wwwroot\content\user-images\**" />
+    <Content Remove="Scripts\NewFolder\**" />
     <Content Remove="wwwroot\content\product-images\**" />
     <Content Remove="wwwroot\content\user-images\**" />
+    <EmbeddedResource Remove="Scripts\NewFolder\**" />
     <EmbeddedResource Remove="wwwroot\content\product-images\**" />
     <EmbeddedResource Remove="wwwroot\content\user-images\**" />
+    <EntityDeploy Remove="Scripts\NewFolder\**" />
     <EntityDeploy Remove="wwwroot\content\product-images\**" />
     <EntityDeploy Remove="wwwroot\content\user-images\**" />
+    <None Remove="Scripts\NewFolder\**" />
     <None Remove="wwwroot\content\product-images\**" />
     <None Remove="wwwroot\content\user-images\**" />
+    <TypeScriptCompile Remove="Scripts\NewFolder\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -51,6 +57,9 @@
   <ItemGroup>
     <Folder Include="Areas\Users\ViewModels\" />
     <Folder Include="Migrations\" />
+    <Folder Include="Scripts\Http\" />
+    <Folder Include="Scripts\Models\" />
+    <Folder Include="Scripts\Pages\" />
     <Folder Include="wwwroot\content\images\" />
     <Folder Include="wwwroot\content\uploads\members\" />
     <Folder Include="wwwroot\content\uploads\products\" />

@@ -4,8 +4,6 @@ namespace ErpManager.Common
 {
     public static partial class Constants
     {
-        /// <summary>Global key: Language code (for localization in page)</summary>
-        public const string GLOBAL_KEY_LANGUAGE_CODE = "Language_Code";
         /// <summary>Global key: Title (for title every page)</summary>
         public const string GLOBAL_KEY_TITLE = "Title";
         /// <summary>Global key: Current page (for active menu)</summary>

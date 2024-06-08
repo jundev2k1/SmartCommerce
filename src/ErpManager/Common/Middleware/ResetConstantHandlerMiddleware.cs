@@ -36,7 +36,7 @@ namespace ErpManager.ERP.Common.Middleware
         {
             var result = context.Features
                 .Get<IRequestCultureFeature>()
-                .RequestCulture.UICulture.TwoLetterISOLanguageName;
+                .RequestCulture.UICulture.Name;
             return result;
         }
     }

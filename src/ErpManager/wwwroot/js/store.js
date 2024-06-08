@@ -1,3 +1,5 @@
+// Copyright (c) 2024 - Jun Dev. All rights reserved
+
 // Store js: callback function list (for main layout scroll)
 const StoreMainLayoutScrollCallback = [];
 

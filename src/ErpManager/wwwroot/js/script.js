@@ -1,4 +1,6 @@
-﻿// Handle common page load
+﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
+
+// Handle common page load
 document.addEventListener('DOMContentLoaded', () => {
     const mainLayout = document.querySelector("#page-load .render-content");
     if (mainLayout) {

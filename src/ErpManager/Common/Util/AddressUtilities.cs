@@ -19,7 +19,7 @@ namespace ErpManager.ERP.Common.Util
         /// <returns>Province name</returns>
         public static string GetProvinceName(string provinceId, string culture = "")
         {
-            culture = SupportedCulture.Contains(culture) ? culture : Constants.CONFIG_LANGUAGE_OPTIONS;
+            culture = Constants.SupportedCulture.Contains(culture) ? culture : Constants.CONFIG_LANGUAGE_OPTIONS;
 
             var province = AddressProvider.Instance.Provinces.FirstOrDefault(address => address.ProvinceId == provinceId);
             if (province == null) return string.Empty;
@@ -40,7 +40,7 @@ namespace ErpManager.ERP.Common.Util
         /// <returns>District name</returns>
         public static string GetDistrictName(string districtId, string culture = "")
         {
-            culture = SupportedCulture.Contains(culture) ? culture : Constants.CONFIG_LANGUAGE_OPTIONS;
+            culture = Constants.SupportedCulture.Contains(culture) ? culture : Constants.CONFIG_LANGUAGE_OPTIONS;
 
             var district = AddressProvider.Instance.Districts
                 .SelectMany(address => address.Items)
@@ -63,7 +63,7 @@ namespace ErpManager.ERP.Common.Util
         /// <returns>Commune name</returns>
         public static string GetCommuneName(string communeId, string culture = "")
         {
-            culture = SupportedCulture.Contains(culture) ? culture : Constants.CONFIG_LANGUAGE_OPTIONS;
+            culture = Constants.SupportedCulture.Contains(culture) ? culture : Constants.CONFIG_LANGUAGE_OPTIONS;
 
             var commune = AddressProvider.Instance.Communes
                 .SelectMany(address => address.Items)
@@ -87,11 +87,11 @@ namespace ErpManager.ERP.Common.Util
         /// <returns>Address</returns>
         public static string GetAddressExtend(string address, string culture = "")
         {
-            culture = SupportedCulture.Contains(culture) ? culture : Constants.CONFIG_LANGUAGE_OPTIONS;
+            culture = Constants.SupportedCulture.Contains(culture) ? culture : Constants.CONFIG_LANGUAGE_OPTIONS;
             return culture switch
             {
-                Constants.FLG_GLOBAL_CULTURE_VN => culture,
-                _ => culture.RemoveTextSign(),
+                Constants.FLG_GLOBAL_CULTURE_VN => address,
+                _ => address.RemoveTextSign(),
             };
         }
 
@@ -101,10 +101,10 @@ namespace ErpManager.ERP.Common.Util
         /// <param name="provinceId">Province id</param>
         /// <param name="districtId">District id</param>
         /// <param name="communeId">Commune Id</param>
-        /// <param name="addressContent">Address content</param>
+        /// <param name="addressExtend">Address extend</param>
         /// <param name="culture">Culture code</param>
         /// <returns>Full address</returns>
-        public static string GetFullAddress(string provinceId, string districtId, string communeId, string addressContent, string culture = "")
+        public static string GetFullAddress(string provinceId, string districtId, string communeId, string addressExtend, string culture = "")
         {
             var addressParts = new List<string>();
 
@@ -117,7 +117,8 @@ namespace ErpManager.ERP.Common.Util
             var cummuneName = GetCommuneName(communeId, culture);
             if (string.IsNullOrEmpty(districtName) == false) addressParts.Add(cummuneName);
 
-            if (string.IsNullOrEmpty(addressContent) == false) addressParts.Add(addressContent.RemoveTextSign());
+            var addressEx = GetAddressExtend(addressExtend);
+            if (string.IsNullOrEmpty(addressExtend) == false) addressParts.Add(addressEx);
 
             return String.Join(", ", addressParts);
         }
