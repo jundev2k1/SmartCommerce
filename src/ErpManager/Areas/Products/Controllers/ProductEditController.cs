@@ -114,10 +114,10 @@ namespace ErpManager.ERP.Areas.Product.Controllers
             // Add init for product status
             var ddlStatus = new List<SelectListItem>
             {
-                new SelectListItem { Value = ProductStatusEnum.Sold.GetStringValue<int>(), Text = _localizer.ValueTexts["ValTxt_ProductStatus_Sold"] },
-                new SelectListItem { Value = ProductStatusEnum.Normal.GetStringValue<int>(), Text = _localizer.ValueTexts["ValTxt_ProductStatus_Normal"] },
-                new SelectListItem { Value = ProductStatusEnum.UrgentSale.GetStringValue<int>(), Text = _localizer.ValueTexts["ValTxt_ProductStatus_UrgentSale"] },
-                new SelectListItem { Value = ProductStatusEnum.GoodPrice.GetStringValue<int>(), Text = _localizer.ValueTexts["ValTxt_ProductStatus_GoodPrice"] },
+                new SelectListItem { Value = ProductStatusEnum.Sold.GetStringValue(), Text = _localizer.ValueTexts["ValTxt_ProductStatus_Sold"] },
+                new SelectListItem { Value = ProductStatusEnum.Normal.GetStringValue(), Text = _localizer.ValueTexts["ValTxt_ProductStatus_Normal"] },
+                new SelectListItem { Value = ProductStatusEnum.UrgentSale.GetStringValue(), Text = _localizer.ValueTexts["ValTxt_ProductStatus_UrgentSale"] },
+                new SelectListItem { Value = ProductStatusEnum.GoodPrice.GetStringValue(), Text = _localizer.ValueTexts["ValTxt_ProductStatus_GoodPrice"] },
             };
             var selectedStatus = ddlStatus.FirstOrDefault(status => status.Value.Equals(formInput.Status));
             if (selectedStatus != null) selectedStatus.Selected = true;
@@ -127,9 +127,9 @@ namespace ErpManager.ERP.Areas.Product.Controllers
             // Add init for display price
             var ddlDisplayPrice = new List<SelectListItem>
             {
-                new SelectListItem { Value = DisplayPriceEnum.Price1.GetStringValue<int>(), Text = _localizer.ValueTexts["ValTxt_ProductDisplayPrice1"] },
-                new SelectListItem { Value = DisplayPriceEnum.Price2.GetStringValue<int>(), Text = _localizer.ValueTexts["ValTxt_ProductDisplayPrice2"] },
-                new SelectListItem { Value = DisplayPriceEnum.Price3.GetStringValue<int>(), Text = _localizer.ValueTexts["ValTxt_ProductDisplayPrice3"] },
+                new SelectListItem { Value = DisplayPriceEnum.Price1.GetStringValue(), Text = _localizer.ValueTexts["ValTxt_ProductDisplayPrice1"] },
+                new SelectListItem { Value = DisplayPriceEnum.Price2.GetStringValue(), Text = _localizer.ValueTexts["ValTxt_ProductDisplayPrice2"] },
+                new SelectListItem { Value = DisplayPriceEnum.Price3.GetStringValue(), Text = _localizer.ValueTexts["ValTxt_ProductDisplayPrice3"] },
             };
             var selectedDisplayPrice = ddlDisplayPrice.FirstOrDefault(status => status.Value.Equals(formInput.DisplayPrice));
             if (selectedDisplayPrice != null) selectedDisplayPrice.Selected = true;

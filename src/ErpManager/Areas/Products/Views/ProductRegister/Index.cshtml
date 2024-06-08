@@ -199,14 +199,16 @@
             </div>
         </div>
     </form>
-    <script>
-        const resetSearchForm = (formId) => {
-            if (!formId) return;
+    @section Scripts {
+        <script>
+            const resetSearchForm = (formId) => {
+                if (!formId) return;
 
-            const formTarget = $(`#${formId}`);
-            if (!formTarget) return;
+                const formTarget = $(`#${formId}`);
+                if (!formTarget) return;
 
-            formTarget.find('select').val('').change();
-        };
-    </script>
+                formTarget.find('select').val('').change();
+            };
+        </script>
+    }
 </section>

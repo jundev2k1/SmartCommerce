@@ -1,6 +1,5 @@
 ﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
 
-using ErpManager.Infrastructure.Common.Enum;
 using FluentValidation.Results;
 using System.Reflection;
 
@@ -31,6 +30,48 @@ namespace ErpManager.ERP.Controllers
         }
 
         /// <summary>
+        /// Has All Permission
+        /// </summary>
+        /// <param name="permissions">Permission collection</param>
+        /// <returns>Has all permission?</returns>
+        protected bool HasAllPermission(params Permission[] permissions)
+        {
+            if (this.OperatorPermission.Any() == false) return false;
+
+            var result = this.OperatorPermission.Contains(Permission.HasAllPermission.GetStringValue())
+                || permissions.All(permission => this.OperatorPermission.Contains(permission.GetStringValue()));
+            return result;
+        }
+
+        /// <summary>
+        /// Has any permission
+        /// </summary>
+        /// <param name="permissions">Permission collection</param>
+        /// <returns>Has any permission?</returns>
+        protected bool HasAnyPermission(params Permission[] permissions)
+        {
+            if (this.OperatorPermission.Any() == false) return false;
+
+            var result = this.OperatorPermission.Contains(Permission.HasAllPermission.GetStringValue())
+                || permissions.Any(permission => this.OperatorPermission.Contains(permission.GetStringValue()));
+            return result;
+        }
+
+        /// <summary>
+        /// Has permission
+        /// </summary>
+        /// <param name="permission">Permission collection</param>
+        /// <returns>Has permission?</returns>
+        protected bool HasPermission(Permission permission)
+        {
+            if (this.OperatorPermission.Any() == false) return false;
+
+            var result = this.OperatorPermission.Contains(Permission.HasAllPermission.GetStringValue())
+                || this.OperatorPermission.Contains(permission.GetStringValue());
+            return result;
+        }
+
+        /// <summary>
         /// Reset operator session
         /// </summary>
         protected void ResetOperatorSession()
@@ -38,7 +79,9 @@ namespace ErpManager.ERP.Controllers
             this.OperatorBranchId = _sessionManager.OperatorBranchId;
             this.OperatorId = _sessionManager.OperatorId;
             this.OperatorName = _sessionManager.OperatorName;
-            this.OperatorPermission = _sessionManager.OperatorPermission;
+            this.OperatorPermission = _sessionManager.OperatorPermission
+                ?.Split(',', StringSplitOptions.RemoveEmptyEntries)
+                ?? Array.Empty<string>();
         }
 
         /// <summary>
@@ -60,7 +103,7 @@ namespace ErpManager.ERP.Controllers
             {
                 Constants.UPLOAD_KEY_PRODUCT => UploadEnum.ProductImage,
                 Constants.UPLOAD_KEY_USER => UploadEnum.UserAvatar,
-                Constants.UPLOAD_KEY_EMPLOYEE => UploadEnum.EmployeeAvatar,
+                Constants.UPLOAD_KEY_MEMBER => UploadEnum.MemberAvatar,
                 _ => UploadEnum.None
             };
         }
@@ -91,6 +134,20 @@ namespace ErpManager.ERP.Controllers
         }
 
         /// <summary>
+        /// Get or reset session id
+        /// </summary>
+        /// <returns>Session id</returns>
+        private string GetOrResetSessionId()
+        {
+            var result = _sessionManager.Get(Constants.GLOBAL_KEY_SESSION_TOKEN);
+            if (string.IsNullOrEmpty(result) == false) return result;
+
+            var newId = Guid.NewGuid().ToString();
+            _sessionManager.Set(Constants.GLOBAL_KEY_SESSION_TOKEN, newId);
+            return newId;
+        }
+
+        /// <summary>
         /// Set properties value
         /// </summary>
         private void SetPropertiesValue()
@@ -103,20 +160,6 @@ namespace ErpManager.ERP.Controllers
         private void SetDefaultViewValue()
         {
             ViewData[Constants.GLOBAL_KEY_SESSION_TOKEN] = this.SessionToken;
-        }
-
-        /// <summary>
-        /// Get or reset session id
-        /// </summary>
-        /// <returns>Session id</returns>
-        private string GetOrResetSessionId()
-        {
-            var result = _sessionManager.Get(Constants.GLOBAL_KEY_SESSION_TOKEN);
-            if (result != null) return result;
-
-            var newId = Guid.NewGuid().ToString();
-            _sessionManager.Set(Constants.GLOBAL_KEY_SESSION_TOKEN, newId);
-            return newId;
         }
 
         /// <summary>
@@ -144,7 +187,7 @@ namespace ErpManager.ERP.Controllers
             string errorMessageKey = Constants.ERRORMSG_KEY_SYSTEM_ERROR,
             ErrorCodeEnum errorCode = ErrorCodeEnum.SystemError)
         {
-            _sessionManager.SystemPageErrorCode = errorCode.GetStringValue<int>();
+            _sessionManager.SystemPageErrorCode = errorCode.GetStringValue();
             _sessionManager.SystemPageErrorMessage = errorMessageKey;
 
             return RedirectToRoute(Constants.MODULE_ERROR_ERROR_NAME);
@@ -157,7 +200,7 @@ namespace ErpManager.ERP.Controllers
         /// <summary>Operator name</summary>
         protected string OperatorName { get; private set; } = string.Empty;
         /// <summary>Operator Permission</summary>
-        protected string OperatorPermission { get; private set; } = string.Empty;
+        protected string[] OperatorPermission { get; private set; } = Array.Empty<string>();
         /// <summary>Session token</summary>
         protected string SessionToken => GetOrResetSessionId();
     }

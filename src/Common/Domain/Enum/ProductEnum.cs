@@ -13,8 +13,8 @@ namespace ErpManager.Domain.Enum
     {
         Sold,
         Normal,
-        UrgentSale,
         GoodPrice,
+        UrgentSale,
         Pending,
     }
 }

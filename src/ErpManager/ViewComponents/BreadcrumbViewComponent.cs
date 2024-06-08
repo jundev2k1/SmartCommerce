@@ -1,8 +1,5 @@
 ﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
 
-using ErpManager.ERP.ViewModels;
-using Microsoft.AspNetCore.Mvc;
-
 namespace ErpManager.ERP.ViewComponents
 {
     public class BreadcrumbViewComponent : ViewComponent

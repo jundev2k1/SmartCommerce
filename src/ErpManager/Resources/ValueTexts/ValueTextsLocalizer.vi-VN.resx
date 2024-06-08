@@ -123,31 +123,34 @@
   <data name="ValTxt_DelFlg_Normal" xml:space="preserve">
     <value>Kích hoạt</value>
   </data>
-  <data name="ValTxt_NotificationStatus_Read" xml:space="preserve">
+  <data name="ValTxt_Notification_Status_Read" xml:space="preserve">
     <value>Đã đọc</value>
   </data>
-  <data name="ValTxt_NotificationStatus_Unread" xml:space="preserve">
+  <data name="ValTxt_Notification_Status_Unread" xml:space="preserve">
     <value>Chưa đọc</value>
   </data>
-  <data name="ValTxt_ProductDisplayPrice1" xml:space="preserve">
+  <data name="ValTxt_Product_DisplayPrice1" xml:space="preserve">
     <value>Hiển thị giá 1</value>
   </data>
-  <data name="ValTxt_ProductDisplayPrice2" xml:space="preserve">
+  <data name="ValTxt_Product_DisplayPrice2" xml:space="preserve">
     <value>Hiển thị giá 2</value>
   </data>
-  <data name="ValTxt_ProductDisplayPrice3" xml:space="preserve">
+  <data name="ValTxt_Product_DisplayPrice3" xml:space="preserve">
     <value>Hiển thị giá 3</value>
   </data>
-  <data name="ValTxt_ProductStatus_GoodPrice" xml:space="preserve">
+  <data name="ValTxt_Product_Status_GoodPrice" xml:space="preserve">
     <value>Giá tốt</value>
   </data>
-  <data name="ValTxt_ProductStatus_Normal" xml:space="preserve">
+  <data name="ValTxt_Product_Status_Normal" xml:space="preserve">
     <value>Bình thường</value>
   </data>
-  <data name="ValTxt_ProductStatus_Sold" xml:space="preserve">
+  <data name="ValTxt_Product_Status_Pending" xml:space="preserve">
+    <value>Tạm Hoãn</value>
+  </data>
+  <data name="ValTxt_Product_Status_Sold" xml:space="preserve">
     <value>Đã bán</value>
   </data>
-  <data name="ValTxt_ProductStatus_UrgentSale" xml:space="preserve">
+  <data name="ValTxt_Product_Status_UrgentSale" xml:space="preserve">
     <value>Cần bán gấp</value>
   </data>
 </root>

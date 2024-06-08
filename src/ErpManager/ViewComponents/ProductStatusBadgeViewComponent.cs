@@ -1,7 +1,5 @@
 ﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
 
-using ErpManager.ERP.Common.Util;
-
 namespace ErpManager.ERP.ViewComponents
 {
     public sealed class ProductStatusBadgeViewComponent : ViewComponent

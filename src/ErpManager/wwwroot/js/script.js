@@ -400,7 +400,6 @@ const uploadImage = (element) => {
                 formData.append('files', file);
             });
             formData.append('type', typeUpload);
-            formData.append('sessionToken', sessionToken);
             formData.append('uploadFileName', formatFileName || '');
             formData.append('isClearTempImages', isFirstUpload);
 
@@ -539,7 +538,7 @@ const uploadImage = (element) => {
             }
             callAjax({
                 url,
-                data: { type: typeUpload, sessionToken: sessionToken, filePath: this.srcImages.join(',') },
+                data: { type: typeUpload, filePath: this.srcImages.join(',') },
                 method: 'GET',
                 onSuccess
             });

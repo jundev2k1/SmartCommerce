@@ -31,8 +31,12 @@
                         @_localizer.Globals["Btn_Preview"]
                     </a>
                     <a asp-route="@Constants.MODULE_PRODUCT_PRODUCTDELETE_NAME" asp-route-id="@Model.ProductId" class="btn site-btn-danger">
-                        <i class="fa-light fa-pencil"></i>
+                        <i class="fa-light fa-trash"></i>
                         @_localizer.Globals["Btn_Delete"]
+                    </a>
+                    <a asp-route="@Constants.MODULE_PRODUCT_PRODUCTREGISTER_NAME" asp-route-id="@Model.ProductId" class="btn site-btn-success">
+                        <i class="fa-light fa-copy"></i>
+                        @_localizer.Globals["Btn_CopyInsert"]
                     </a>
                     <a asp-route="@Constants.MODULE_PRODUCT_PRODUCTEDIT_NAME" asp-route-id="@Model.ProductId" class="btn site-btn-primary">
                         <i class="fa-light fa-pencil"></i>
@@ -88,7 +92,7 @@
                     <div class="col-12">
                         <div class="d-flex flex-column gap-1">
                             <label class="fw-semibold">@_localizer.Fields["Product_Address"]:</label>
-                            <p>@AddressUtilities.GetFullAddress(Model.Address1, Model.Address2,Model.Address3,Model.Address4, Constants.CONFIG_LANGUAGE_OPTIONS)</p>
+                            <p>@AddressUtilities.GetFullAddress(Model.Address1, Model.Address2,Model.Address3,Model.Address4)</p>
                         </div>
                     </div>
                 </div>
@@ -99,7 +103,7 @@
                 <div class="d-flex justify-content-between mb-2">
                     <h3>@_localizer.Globals["Title_Product_Description"]</h3>
                 </div>
-                <div class="p-2 site-note">
+                <div class="p-2 site-note site-editor-content">
                     @(!string.IsNullOrEmpty(Model.Description) ? Html.Raw(Model.Description) : _localizer.Messages["Message_NoExistProductDescription"])
                 </div>
             </div>

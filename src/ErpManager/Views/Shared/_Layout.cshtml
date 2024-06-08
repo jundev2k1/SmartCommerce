@@ -12,11 +12,9 @@
         <script src="~/js/store.js"></script>
         <script src="~/js/common.js"></script>
         <script>
-            const sessionToken = '@(ViewData[Constants.GLOBAL_KEY_SESSION_TOKEN])';
             showLoading(typeLoading.text);
         </script>
     </section>
-    @await Component.InvokeAsync(Constants.ERP_COMPONENT_NAME_SCRIPT)
 
     @* Main content *@
     <main id="page-load">
@@ -35,6 +33,9 @@
     </main>
 
     @* Script import render *@
-    @RenderSection("Scripts", required: false)
+    @await Component.InvokeAsync(Constants.ERP_COMPONENT_NAME_SCRIPT)
+    <section id="viewScript">
+        @RenderSectionAsync(Constants.ERP_SECTION_NAME_VIEWSCRIPT, required: false)
+    </section>
 </body>
 </html>

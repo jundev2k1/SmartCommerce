@@ -33,8 +33,7 @@
                                         provinceId: Model.Product.Address1,
                                         districtId: Model.Product.Address2,
                                         communeId: Model.Product.Address3,
-                                        addressContent: Model.Product.Address4,
-                                        culture: Constants.CONFIG_LANGUAGE_OPTIONS)
+                                        addressContent: Model.Product.Address4)
                                 </span>
                             </div>
                         </div>
@@ -75,8 +74,7 @@
                         provinceId: Model.AgentDetail.Address1,
                         districtId: Model.AgentDetail.Address2,
                         communeId: Model.AgentDetail.Address3,
-                        addressContent: Model.AgentDetail.Address4,
-                        culture: Constants.CONFIG_LANGUAGE_OPTIONS);
+                        addressContent: Model.AgentDetail.Address4);
 
                     <div class="avatar">
                         <img class="img-fluid" src="/images/system/no-user-placeholder.jpg" />
@@ -94,15 +92,18 @@
                     <p>@_localizer.Messages["Message_NoHaveTakeOverPersion"]</p>
                 }
             </div>
-            <div class="preview-layout calender mb-2">
-                <h3>@_localizer.Globals["Title_ShareLink"]</h3>
-                <div class="qr-code">
-                    <a href="#" onclick="javascript:void(0); copyImageToClipboard(this.querySelector('img'));" data-bs-toggle="tooltip" title="@_localizer.Messages["Message_ClickCopy"]">
-                        <img class="img-fluid" src="@Model.QRCode" />
-                    </a>
-                    <p class="text-center">@_localizer.Messages["Message_ClickCopy"]</pc>
+            @if (Model.CanShareQRCode)
+            {
+                <div class="preview-layout calender mb-2">
+                    <h3>@_localizer.Globals["Title_ShareLink"]</h3>
+                    <div class="qr-code">
+                        <a href="#" onclick="javascript:void(0); copyImageToClipboard(this.querySelector('img'));" data-bs-toggle="tooltip" title="@_localizer.Messages["Message_ClickCopy"]">
+                            <img class="img-fluid" src="@Model.QRCode" />
+                        </a>
+                        <p class="text-center">@_localizer.Messages["Message_ClickCopy"]</p>
+                    </div>
                 </div>
-            </div>
+            }
             @if (!string.IsNullOrEmpty(Model.Product.EmbeddedLink))
             {
                 <div class="preview-layout location">

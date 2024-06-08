@@ -1,9 +1,5 @@
 ﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
 
-using ErpManager.ERP.Common.Extensions;
-using ErpManager.Infrastructure.Common.Enum;
-using ErpManager.Infrastructure.Upload;
-
 namespace ErpManager.ERP.Controllers
 {
     public sealed class CommonController : BaseController
@@ -110,12 +106,12 @@ namespace ErpManager.ERP.Controllers
 
         [HttpPost]
         [Route("/common/upload-images")]
-        public string UploadImages([FromForm] IFormFile[] files, string type, string sessionToken, string uploadFileName = "", bool isClearTempImages = false)
+        public string UploadImages([FromForm] IFormFile[] files, string type, string uploadFileName = "", bool isClearTempImages = false)
         {
             var typeUpload = GetTypeUploadByString(type);
             if (typeUpload == UploadEnum.None) throw new Exception("type none");
 
-            var fileManager = new FileManager(files, typeUpload, uploadFileName, sessionToken);
+            var fileManager = new FileManager(files, typeUpload, uploadFileName, this.SessionToken);
             if (isClearTempImages)
             {
                 fileManager.DeleteTempImages();
@@ -157,10 +153,8 @@ namespace ErpManager.ERP.Controllers
 
         [HttpGet]
         [Route("/common/get-exist-and-delete-not-use-temp-images")]
-        public IActionResult GetExistAndDeleteNotUseTemporaryImages(string type, string sessionToken, string filePath = "")
+        public IActionResult GetExistAndDeleteNotUseTemporaryImages(string type, string filePath = "")
         {
-            if (string.IsNullOrEmpty(sessionToken)) throw new Exception("Session token cannot null");
-
             var result = new List<string>();
             var paths = filePath.Split(",");
             foreach (var path in paths)
@@ -177,7 +171,7 @@ namespace ErpManager.ERP.Controllers
                 files: Array.Empty<IFormFile>(),
                 @enum: typeUpload,
                 fileName: string.Empty,
-                sessionToken);
+                this.SessionToken);
             fileManager.DeleteNotUseImages(
                 expectImages: result.ToArray(),
                 isTempDir: true);

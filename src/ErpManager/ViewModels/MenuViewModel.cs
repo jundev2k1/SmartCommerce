@@ -1,7 +1,5 @@
 ﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
 
-using Newtonsoft.Json;
-
 namespace ErpManager.ERP.ViewModels
 {
     public class MenuViewModel

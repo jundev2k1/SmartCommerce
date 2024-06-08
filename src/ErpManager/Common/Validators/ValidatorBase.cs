@@ -1,9 +1,5 @@
 ﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
 
-using Azure;
-using ErpManager.ERP.Common.Extensions;
-using System.Text.RegularExpressions;
-
 namespace ErpManager.ERP.Common.Validators
 {
     public class ValidatorBase<T> : AbstractValidator<T>

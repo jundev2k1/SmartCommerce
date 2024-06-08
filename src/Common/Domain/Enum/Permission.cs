@@ -42,5 +42,6 @@ namespace ErpManager.Domain.Enum
         CanImportProduct = 105,
         CanExportProduct = 106,
         CanReadPreviewProduct = 107,
+        CanSharePreviewProduct = 108,
     }
 }

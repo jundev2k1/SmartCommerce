@@ -1,4 +1,4 @@
-﻿using System;
+﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
 
 namespace ErpManager.ERP.Common.Util
 {
@@ -15,10 +15,10 @@ namespace ErpManager.ERP.Common.Util
         {
             return @enum switch
             {
-                ProductStatusEnum.Sold => localizer["ValTxt_ProductStatus_Sold"].ToStringOrEmpty(),
-                ProductStatusEnum.Normal => localizer["ValTxt_ProductStatus_Normal"].ToStringOrEmpty(),
-                ProductStatusEnum.UrgentSale => localizer["ValTxt_ProductStatus_UrgentSale"].ToStringOrEmpty(),
-                ProductStatusEnum.GoodPrice => localizer["ValTxt_ProductStatus_GoodPrice"].ToStringOrEmpty(),
+                ProductStatusEnum.Sold => localizer["ValTxt_Product_Status_Sold"].ToStringOrEmpty(),
+                ProductStatusEnum.Normal => localizer["ValTxt_Product_Status_Normal"].ToStringOrEmpty(),
+                ProductStatusEnum.UrgentSale => localizer["ValTxt_Product_Status_UrgentSale"].ToStringOrEmpty(),
+                ProductStatusEnum.GoodPrice => localizer["ValTxt_Product_Status_GoodPrice"].ToStringOrEmpty(),
                 _ => throw new NotImplementedException()
             };
         }
@@ -34,9 +34,9 @@ namespace ErpManager.ERP.Common.Util
         {
             return @enum switch
             {
-                DisplayPriceEnum.Price1 => localizer["ValTxt_ProductDisplayPrice1"].ToStringOrEmpty(),
-                DisplayPriceEnum.Price2 => localizer["ValTxt_ProductDisplayPrice2"].ToStringOrEmpty(),
-                DisplayPriceEnum.Price3 => localizer["ValTxt_ProductDisplayPrice3"].ToStringOrEmpty(),
+                DisplayPriceEnum.Price1 => localizer["ValTxt_Product_DisplayPrice1"].ToStringOrEmpty(),
+                DisplayPriceEnum.Price2 => localizer["ValTxt_Product_DisplayPrice2"].ToStringOrEmpty(),
+                DisplayPriceEnum.Price3 => localizer["ValTxt_Product_DisplayPrice3"].ToStringOrEmpty(),
                 _ => throw new NotImplementedException()
             };
         }

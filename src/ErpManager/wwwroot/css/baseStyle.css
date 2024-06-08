@@ -240,6 +240,7 @@
 }
 
     .site-btn-outline-primary:hover {
+        border-color: var(--site-primary);
         filter: brightness(0.75);
         transition: .25s ease-in;
     }
@@ -268,6 +269,7 @@
 }
 
     .site-btn-outline-secondary:hover {
+        border-color: var(--site-secondary);
         filter: brightness(0.75);
         transition: .25s ease-in;
     }
@@ -296,6 +298,7 @@
 }
 
     .site-btn-outline-danger:hover {
+        border-color: var(--site-danger);
         filter: brightness(0.75);
         transition: .25s ease-in;
     }
@@ -324,6 +327,7 @@
 }
 
     .site-btn-outline-info:hover {
+        border-color: var(--site-info);
         filter: brightness(0.75);
         transition: .25s ease-in;
     }
@@ -352,6 +356,7 @@
 }
 
     .site-btn-outline-success:hover {
+        border-color: var(--site-success);
         filter: brightness(0.75);
         transition: .25s ease-in;
     }
@@ -380,6 +385,7 @@
 }
 
     .site-btn-outline-warning:hover {
+        border-color: var(--site-warning);
         filter: brightness(0.75);
         transition: .25s ease-in;
     }
@@ -691,6 +697,10 @@ ul, li {
     width: 100%;
     height: 1.5px;
     background: var(--site-gray-100);
+}
+
+.site-editor-content p {
+    margin: .5rem;
 }
 
 /*#endregion */

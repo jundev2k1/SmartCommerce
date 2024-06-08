@@ -9,15 +9,10 @@ namespace ErpManager.Common.Utilities
         /// </summary>
         /// <param name="enum">Enum value</param>
         /// <returns>String value</returns>
-        public static string GetStringValue<T>(this Enum @enum)
+        public static string GetStringValue(this Enum @enum)
         {
-            if (typeof(T) == typeof(int))
-            {
-                var result = Convert.ToInt32(@enum);
-                return result.ToString();
-            }
-
-            return @enum.ToStringOrEmpty();
+            var result = Convert.ToInt32(@enum);
+            return result.ToString();
         }
 
         /// <summary>

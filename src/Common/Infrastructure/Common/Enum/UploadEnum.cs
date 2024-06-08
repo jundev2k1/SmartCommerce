@@ -5,6 +5,6 @@
         None,
         ProductImage,
         UserAvatar,
-        EmployeeAvatar,
+        MemberAvatar,
     }
 }

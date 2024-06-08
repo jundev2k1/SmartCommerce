@@ -13,5 +13,8 @@
 
         /// <summary>QR Code</summary>
         public string QRCode { get; set; } = string.Empty;
+
+        /// <summary>Can share QR Code</summary>
+        public bool CanShareQRCode {  get; set; }
     }
 }

@@ -46,7 +46,8 @@ namespace ErpManager.ERP.Areas.Product.Controllers
                 Product = product,
                 AgentDetail = user,
                 RelatedProducts = relatedProduct,
-                QRCode = QRCodeUtility.GetSrcImageQRCode(currentPath)
+                QRCode = QRCodeUtility.GetSrcImageQRCode(currentPath),
+                CanShareQRCode = HasPermission(Permission.CanSharePreviewProduct)
             };
 
             return data;

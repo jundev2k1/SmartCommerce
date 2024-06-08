@@ -1,7 +1,5 @@
 ﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
 
-using ErpManager.Infrastructure.Securiry;
-
 namespace ErpManager.ERP.Controllers
 {
     public sealed class AuthenticationController : BaseController

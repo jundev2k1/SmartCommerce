@@ -14,6 +14,8 @@ namespace ErpManager.Common
 
         /// <summary>File path: Sidebar setting</summary>
         public static string ERP_FILE_PATH_SIDEBAR_SETTING = "/Data/sidebar.json";
+        /// <summary>File path: Value text setting</summary>
+        public static string ERP_FILE_PATH_VALUETEXT_SETTING = "/Data/ValueText.json";
 
         /// <summary>File path: Data address provinces</summary>
         public static string ERP_FILE_PATH_DATA_ADDRESS_VN_PROVINCES = "/Data/Address/Vietnam/Provinces.json";

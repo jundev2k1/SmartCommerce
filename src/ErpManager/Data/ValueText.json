@@ -1,0 +1,62 @@
+﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
+
+{
+  "product": {
+    "status": [
+      {
+        "text": "Sold",
+        "localizer": "ValTxt_Product_Status_Sold",
+        "value": "0"
+      },
+      {
+        "text": "Normal",
+        "localizer": "ValTxt_Product_Status_Normal",
+        "value": "1"
+      },
+      {
+        "text": "Good Price",
+        "localizer": "ValTxt_Product_Status_GoodPrice",
+        "value": "2"
+      },
+      {
+        "text": "Urgent Sale",
+        "localizer": "ValTxt_Product_Status_UrgentSale",
+        "value": "3"
+      },
+      {
+        "text": "Pending",
+        "localizer": "ValTxt_Product_Status_Pending",
+        "value": "4"
+      }
+    ],
+    "display_price": [
+      {
+        "text": "Price 1",
+        "localizer": "ValTxt_Product_DisplayPrice1",
+        "value": "0"
+      },
+      {
+        "text": "Price 2",
+        "localizer": "ValTxt_Product_DisplayPrice2",
+        "value": "1"
+      },
+      {
+        "text": "Price 3",
+        "localizer": "ValTxt_Product_DisplayPrice3",
+        "value": "2"
+      }
+    ],
+    "del_flg": [
+      {
+        "text": "-",
+        "localizer": "ValTxt_DelFlg_Deleted",
+        "value": "0"
+      },
+      {
+        "text": "O",
+        "localizer": "ValTxt_DelFlg_Normal",
+        "value": "1"
+      }
+    ]
+  }
+}

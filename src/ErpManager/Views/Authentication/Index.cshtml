@@ -178,13 +178,15 @@
     </div>
 </div>
 
-<script>
-    const initPage = () => {
-        const errorMessage = '@ViewData[Constants.VIEWDATA_KEY_AUTH_ERROR_MESSAGE]';
+@section ViewScript {
+    <script>
+        const initPage = () => {
+            const errorMessage = '@ViewData[Constants.VIEWDATA_KEY_AUTH_ERROR_MESSAGE]';
 
-        if (errorMessage != '') {
-            toastr.error(errorMessage);
+            if (errorMessage != '') {
+                toastr.error(errorMessage);
+            };
         };
-    };
-    StoreWindowLoadCallback.push(initPage);
-</script>
+        StoreWindowLoadCallback.push(initPage);
+    </script>
+}

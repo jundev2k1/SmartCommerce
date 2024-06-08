@@ -92,6 +92,7 @@ namespace ErpManager.Infrastructure.Upload
                     ? this.HandleFilePath
                     : this.TempFilePath;
                 var imagePath = Path.Combine(dirPath, fileName);
+                System.Diagnostics.Debugger.Launch();
                 if (File.Exists(imagePath))
                 {
                     // Check and increase index if duplicate file name
@@ -191,9 +192,16 @@ namespace ErpManager.Infrastructure.Upload
         private bool IsDuplicateFileName(string path, string fileName)
         {
             var targetFileName = Path.GetFileName(path);
-            var targetFileNameWithOutExtension = Path.GetFileNameWithoutExtension(path);
+            if (this.HasFileName)
+            {
+                var fileExtension = Path.GetExtension(path);
+                var fileNameFormat = @$"^{this.FileName}_\d+\{fileExtension}$";
+                return Regex.IsMatch(targetFileName, fileNameFormat);
+            }
+
 
             // Remove index pattern for check. Ex: pro1 (1), pro1 (2),...
+            var targetFileNameWithOutExtension = Path.GetFileNameWithoutExtension(path);
             var separateIndex = targetFileName.LastIndexOf(' ');
             var fileNameForRegex = (separateIndex > 0)
                 ? targetFileNameWithOutExtension.Substring(0, separateIndex)
@@ -213,6 +221,13 @@ namespace ErpManager.Infrastructure.Upload
         /// <returns>Duplicate file index</returns>
         private int GetDuplicateFileIndex(string fileName)
         {
+            if (this.HasFileName)
+            {
+                var fileNameWithOutExtension = Path.GetFileNameWithoutExtension(fileName);
+                int.TryParse(fileNameWithOutExtension.Replace($"{this.FileName}_", string.Empty), out var fileIndex);
+                return fileIndex;
+            }
+
             var indexPattern = fileName.Split(' ').Last();
             var regex = new Regex(Constants.REGEX_FOR_CHECK_FILENAME_DUPLICATE);
             var match = regex.Match(indexPattern);
@@ -302,7 +317,7 @@ namespace ErpManager.Infrastructure.Upload
             {
                 UploadEnum.ProductImage => Path.Combine(Constants.ERP_FILE_UPLOAD_DIRPATH_TEMP_PRODUCT_IMAGES, _sessionToken),
                 UploadEnum.UserAvatar => Path.Combine(Constants.ERP_FILE_UPLOAD_DIRPATH_TEMP_USER_AVATAR, _sessionToken),
-                UploadEnum.EmployeeAvatar => Path.Combine(Constants.ERP_FILE_UPLOAD_DIRPATH_TEMP_MEMBER_AVATAR, _sessionToken),
+                UploadEnum.MemberAvatar => Path.Combine(Constants.ERP_FILE_UPLOAD_DIRPATH_TEMP_MEMBER_AVATAR, _sessionToken),
                 _ => throw new NotImplementedException()
             };
         }
@@ -318,7 +333,7 @@ namespace ErpManager.Infrastructure.Upload
             {
                 UploadEnum.ProductImage => Constants.ERP_FILE_UPLOAD_DIRPATH_PRODUCT_IMAGES,
                 UploadEnum.UserAvatar => Constants.ERP_FILE_UPLOAD_DIRPATH_USER_AVATAR,
-                UploadEnum.EmployeeAvatar => Constants.ERP_FILE_UPLOAD_DIRPATH_MEMBER_AVATAR,
+                UploadEnum.MemberAvatar => Constants.ERP_FILE_UPLOAD_DIRPATH_MEMBER_AVATAR,
                 _ => string.Empty
             };
         }

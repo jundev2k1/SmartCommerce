@@ -4,7 +4,14 @@ namespace ErpManager.Common
 {
     public static partial class Constants
     {
+        #region Erp: Layout Section name
+        /// <summary>ERP section name: View script</summary>
+        public const string ERP_SECTION_NAME_VIEWSCRIPT = "ViewScript";
+        #endregion
+
         #region ERP: Layout Component Name
+        /// <summary>ERP component name: Seo information</summary>
+        public const string ERP_COMPONENT_NAME_SEO_INFO = "SeoInfo";
         /// <summary>ERP component name: Header</summary>
         public const string ERP_COMPONENT_NAME_HEADER = "Header";
         /// <summary>ERP component name: Footer</summary>

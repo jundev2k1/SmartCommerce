@@ -1,5 +1,4 @@
-﻿using ErpManager.ERP.Common.Extensions;
-using ErpManager.ERP.Common.Localizer;
+﻿using ErpManager.ERP.Common.Localizer;
 using ErpManager.ERP.Common.Middleware;
 using ErpManager.ERP.Common.Validators;
 using FluentValidation.AspNetCore;
@@ -62,9 +61,10 @@ namespace ErpManager.ERP
         private static IServiceCollection AddCommon(this IServiceCollection services)
         {
             services.AddSingleton<AppConfiguration>();
-            services.AddScoped<ILocalizer, Localizer>();
+            services.AddSingleton<ILocalizer, Localizer>();
             services.AddTransient<IValidatorFacade, ValidatorFacade>();
             services.AddScoped<SessionManager>();
+            services.AddSingleton<ValueTextManager>();
             return services;
         }
 
@@ -119,7 +119,7 @@ namespace ErpManager.ERP
             {
                 var supportedLanguage = new[]
                 {
-                    new CultureInfo("vi-VN"),
+                    new CultureInfo(Constants.FLG_GLOBAL_CULTURE_VN),
                     new CultureInfo("en-US"),
                 };
                 options.DefaultRequestCulture = new RequestCulture("en-US");
@@ -222,6 +222,7 @@ namespace ErpManager.ERP
         {
             // Middleware
             app.UseMiddleware<PermissionHandlerMiddleware>();
+            app.UseMiddleware<ResetConstantHandlerMiddleware>();
 
             return app;
         }

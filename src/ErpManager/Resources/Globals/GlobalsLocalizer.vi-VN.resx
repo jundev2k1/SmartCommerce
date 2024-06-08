@@ -132,6 +132,9 @@
   <data name="Btn_ContactNow" xml:space="preserve">
     <value>Liên hệ ngay</value>
   </data>
+  <data name="Btn_CopyInsert" xml:space="preserve">
+    <value>Nhân bản</value>
+  </data>
   <data name="Btn_Create" xml:space="preserve">
     <value>Tạo mới</value>
   </data>
@@ -202,17 +205,17 @@
   <data name="Nav_Dashboard" xml:space="preserve">
     <value>Thống Kê</value>
   </data>
-  <data name="Nav_Employee" xml:space="preserve">
-    <value>Nhân Viên</value>
-  </data>
-  <data name="Nav_Employee_List" xml:space="preserve">
-    <value>Danh Sách Nhân Viên</value>
-  </data>
   <data name="Nav_Error_ErrorPage" xml:space="preserve">
     <value>Trang lỗi</value>
   </data>
   <data name="Nav_Home" xml:space="preserve">
     <value>Trang chủ</value>
+  </data>
+  <data name="Nav_Member" xml:space="preserve">
+    <value>Thành Viên</value>
+  </data>
+  <data name="Nav_Member_List" xml:space="preserve">
+    <value>Danh Sách Thành Viên</value>
   </data>
   <data name="Nav_Product" xml:space="preserve">
     <value>Sản Phẩm</value>

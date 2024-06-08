@@ -19,6 +19,8 @@
 
     @* Script import render *@
     @await Component.InvokeAsync(Constants.ERP_COMPONENT_NAME_SCRIPT)
-    @RenderSection("Scripts", required: false)
+    <section id="viewScript">
+        @RenderSectionAsync(Constants.ERP_SECTION_NAME_VIEWSCRIPT, required: false)
+    </section>
 </body>
 </html>

@@ -1,8 +1,5 @@
 ﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
 
-using ErpManager.Infrastructure.Common.Enum;
-using ErpManager.Infrastructure.Upload;
-
 namespace ErpManager.ERP.ViewComponents
 {
     public sealed class UploadImageInputViewComponent : ViewComponent

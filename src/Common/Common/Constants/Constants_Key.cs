@@ -52,6 +52,6 @@ namespace ErpManager.Common
         /// <summary>Upload key: For actual user images</summary>
         public const string UPLOAD_KEY_USER = "user";
         /// <summary>Upload key: For actual employee avatar images</summary>
-        public const string UPLOAD_KEY_EMPLOYEE = "employee";
+        public const string UPLOAD_KEY_MEMBER = "employee";
     }
 }

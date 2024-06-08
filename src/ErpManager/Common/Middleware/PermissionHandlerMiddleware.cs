@@ -98,7 +98,7 @@ namespace ErpManager.ERP.Common.Middleware
             if ((permission == null) || (permission.Value == Permission.NonePermission))
                 return string.Empty;
 
-            return permission.GetStringValue<int>();
+            return permission.GetStringValue();
         }
 
         /// <summary>
@@ -109,7 +109,7 @@ namespace ErpManager.ERP.Common.Middleware
         private void SetErrorMessage(HttpContext context, string message)
         {
             context.Session.Clear();
-            context.Session.SetString(Constants.SESSION_KEY_PAGE_ERROR_CODE, ErrorCodeEnum.NotPermission.GetStringValue<int>());
+            context.Session.SetString(Constants.SESSION_KEY_PAGE_ERROR_CODE, ErrorCodeEnum.NotPermission.GetStringValue());
             context.Session.SetString(Constants.SESSION_KEY_PAGE_ERROR_MESSAGE, message);
         }
     }

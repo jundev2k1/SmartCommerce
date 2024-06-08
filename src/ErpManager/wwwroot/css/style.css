@@ -663,6 +663,10 @@
     min-height: 200px;
 }
 
+    .ck.ck-editor__main > .ck-editor__editable p {
+        margin-bottom: .5rem;
+    }
+
 .dark-mode .ck.ck-editor__main > .ck-editor__editable {
     background: var(--site-gray-700);
 }

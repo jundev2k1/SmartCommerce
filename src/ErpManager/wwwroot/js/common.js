@@ -36,6 +36,37 @@ Array.prototype.chunk = function (size) {
     return result;
 };
 
+const requestType = Object.freeze({
+    json: 'json',
+    formUrl: 'formUrl',
+    formData: 'formData',
+    textPlain: 'textPlain'
+});
+
+// Content type
+const requestContentType = Object.freeze({
+    json: 'application/json',
+    formUrlEncoded: 'application/x-www-form-urlencoded',
+    formData: 'multipart/form-data',
+    textPlain: 'text/plain'
+});
+
+const createRequestOption = ({ data,  }) => ({
+    json: {
+        contentType: requestContentType.json,
+        dataType: 'json',
+    },
+    formUrl: {
+        contentType: requestContentType.formUrlEncoded,
+    },
+    formData: {
+        contentType: requestContentType.formData
+    },
+    textPlain: {
+        contentType: requestContentType.textPlain,
+    }
+});
+
 // Loading function
 const typeLoading = {
     spinner: 'loading-spinner',
@@ -104,7 +135,7 @@ const hideLoading = function (type = 'unknown', selector = 'global') {
     }
 };
 
-const callAjax = ({ url, data, contentType = 'application/json; charset=utf-8', dataType = 'json', method = 'POST', onSuccess }) => $.ajax({
+const callAjax = ({ url, data, contentType = requestContentType.json, dataType = 'json', method = 'POST', onSuccess }) => $.ajax({
     url: url,
     type: method,
     contentType: contentType,
@@ -114,7 +145,6 @@ const callAjax = ({ url, data, contentType = 'application/json; charset=utf-8', 
         onSuccess?.(result);
     },
     error: function (jqXHR, textStatus, errorThrown) {
-        debugger
         console.error('AJAX request failed:', textStatus, errorThrown);
     },
 });

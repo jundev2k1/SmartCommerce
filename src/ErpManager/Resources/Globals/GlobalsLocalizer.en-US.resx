@@ -193,11 +193,11 @@
   <data name="Nav_Dashboard" xml:space="preserve">
     <value>Dashboard</value>
   </data>
-  <data name="Nav_Employee" xml:space="preserve">
-    <value>Employee</value>
+  <data name="Nav_Member" xml:space="preserve">
+    <value>Member</value>
   </data>
-  <data name="Nav_Employee_List" xml:space="preserve">
-    <value>Employee List</value>
+  <data name="Nav_Member_List" xml:space="preserve">
+    <value>Member List</value>
   </data>
   <data name="Nav_Error_ErrorPage" xml:space="preserve">
     <value>Error Page</value>
@@ -363,5 +363,8 @@
   </data>
   <data name="Title_Tel" xml:space="preserve">
     <value>Tel</value>
+  </data>
+  <data name="Btn_CopyInsert" xml:space="preserve">
+    <value>Duplicate</value>
   </data>
 </root>

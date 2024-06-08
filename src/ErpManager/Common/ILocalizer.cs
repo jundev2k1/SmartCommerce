@@ -1,4 +1,6 @@
-﻿using ErpManager.ERP.Fields;
+﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
+
+using ErpManager.ERP.Fields;
 using ErpManager.ERP.Globals;
 using ErpManager.ERP.Messages;
 using ErpManager.ERP.Validators;
