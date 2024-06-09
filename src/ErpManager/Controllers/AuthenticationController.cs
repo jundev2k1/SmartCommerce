@@ -211,13 +211,16 @@ namespace ErpManager.ERP.Controllers
             _sessionManager.OperatorId = @operator.Profile.UserId;
             _sessionManager.OperatorName = @operator.Profile.FullName;
             _sessionManager.OperatorPermission = @operator.Permission;
-            _sessionManager.Set(Constants.SESSION_KEY_LOGIN_MESSAGE, "Login success");
+            // Set login message
+            _sessionManager.Set(
+                Constants.SESSION_KEY_LOGIN_MESSAGE,
+                (_localizer.Messages["Message_LoginSuccess"]?.Value).ToStringOrEmpty());
         }
 
         /// <summary>
         /// Create cookies
         /// </summary>
-        /// <param name="user">User model</param>
+        /// <param name="operator">Operator model</param>
         private void CreateCookies(OperatorModel @operator)
         {
             // Add login cookies

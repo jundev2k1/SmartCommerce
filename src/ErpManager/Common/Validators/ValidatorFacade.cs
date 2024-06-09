@@ -4,7 +4,7 @@ using FluentValidation.Results;
 
 namespace ErpManager.ERP.Common.Validators
 {
-    public class ValidatorFacade : IValidatorFacade
+    public sealed class ValidatorFacade : IValidatorFacade
     {
         private IServiceProvider _serviceProvider;
         public ValidatorFacade(IServiceProvider serviceProvider)

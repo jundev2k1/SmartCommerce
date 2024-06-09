@@ -2,7 +2,7 @@
 
 namespace ErpManager.ERP.ViewModels
 {
-    public class NotificationViewModel
+    public sealed class NotificationViewModel
     {
         public bool IsDisplay { get; set; }
 
@@ -11,7 +11,7 @@ namespace ErpManager.ERP.ViewModels
         public NotificationContent[] Items { get; set; } = Array.Empty<NotificationContent>();
     }
 
-    public class NotificationContent
+    public sealed class NotificationContent
     {
         public string Title { get; set; } = string.Empty;
 

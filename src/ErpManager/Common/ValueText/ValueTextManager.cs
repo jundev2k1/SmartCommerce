@@ -2,7 +2,7 @@
 
 namespace ErpManager.ERP.Common.ValueText
 {
-    public class ValueTextManager
+    public sealed class ValueTextManager
     {
         // Dependency local variable
         private readonly ILocalizer _localizer;

@@ -2,7 +2,7 @@
 
 namespace ErpManager.ERP.ViewComponents
 {
-    public class NavBarViewComponent : ViewComponent
+    public sealed class NavBarViewComponent : ViewComponent
     {
         public IViewComponentResult Invoke(string currentMenu)
         {

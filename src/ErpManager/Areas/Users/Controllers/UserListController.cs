@@ -3,7 +3,7 @@
 namespace ErpManager.ERP.Areas.Users.Controllers
 {
     [Area(Constants.MODULE_USER_AREA)]
-    public class UserListController : BaseController
+    public sealed class UserListController : BaseController
     {
         private readonly IServiceFacade _serviceFacade;
         private readonly SessionManager _sessionManager;

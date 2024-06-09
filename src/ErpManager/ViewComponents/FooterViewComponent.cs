@@ -2,7 +2,7 @@
 
 namespace ErpManager.ERP.ViewComponents
 {
-    public class FooterViewComponent : ViewComponent
+    public sealed class FooterViewComponent : ViewComponent
     {
         public IViewComponentResult Invoke()
         {

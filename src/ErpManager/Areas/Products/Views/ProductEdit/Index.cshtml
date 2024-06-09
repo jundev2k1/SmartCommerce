@@ -205,35 +205,36 @@
         </div>
     </div>
 </section>
+@section ViewScript {
+    <script>
+        const resetSearchForm = (formId) => {
+            if (!formId) return;
 
-<script>
-    const resetSearchForm = (formId) => {
-        if (!formId) return;
+            const formTarget = $(`#${formId}`);
+            if (!formTarget) return;
 
-        const formTarget = $(`#${formId}`);
-        if (!formTarget) return;
+            formTarget.find('select').val('').change();
+        };
 
-        formTarget.find('select').val('').change();
-    };
+        const handleUpdateDescription = () => {
+            const hfElement = document.querySelector('.description-input');
+            if (!hfElement) return;
 
-    const handleUpdateDescription = () => {
-        const hfElement = document.querySelector('.description-input');
-        if (!hfElement) return;
+            const handleSuccess = (response) => {
+                if (response === false) {
+                    toastr.error('error');
+                    return;
+                }
 
-        const handleSuccess = (response) => {
-            if (response === false) {
-                toastr.error('error');
-                return;
+                toastr.success('success');
             }
-
-            toastr.success('success');
+            const productId = '@(Model.ProductId)'
+            const url = '@(Constants.MODULE_PRODUCT_PRODUCTEDIT_DESCRIPTION_PATH.Replace("{id}", Model.ProductId))';
+            callAjax({ url, data: JSON.stringify(hfElement.value), onSuccess: handleSuccess });
         }
-        const productId = '@(Model.ProductId)'
-        const url = '@(Constants.MODULE_PRODUCT_PRODUCTEDIT_DESCRIPTION_PATH.Replace("{id}", Model.ProductId))';
-        callAjax({ url, data: JSON.stringify(hfElement.value), onSuccess: handleSuccess });
-    }
 
-    $(document).ready(() => {
-        $('#btnSave').on('click', handleUpdateDescription);
-    });
-</script>
+        $(document).ready(() => {
+            $('#btnSave').on('click', handleUpdateDescription);
+        });
+    </script>
+}

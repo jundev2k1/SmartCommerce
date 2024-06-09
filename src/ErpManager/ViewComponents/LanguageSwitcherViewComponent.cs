@@ -2,7 +2,7 @@
 
 namespace ErpManager.ERP.ViewComponents
 {
-    public class LanguageSwitcherViewComponent : ViewComponent
+    public sealed class LanguageSwitcherViewComponent : ViewComponent
     {
         public IViewComponentResult Invoke()
         {

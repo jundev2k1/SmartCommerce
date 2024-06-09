@@ -122,5 +122,39 @@ namespace ErpManager.ERP.Common.Util
 
             return String.Join(", ", addressParts);
         }
+
+        /// <summary>
+        /// Get product address
+        /// </summary>
+        /// <param name="model">Product model</param>
+        /// <param name="culture">Culture</param>
+        /// <returns>Full address</returns>
+        public static string GetProductAddress(ProductModel model, string culture = "")
+        {
+            var result = GetFullAddress(
+                provinceId: model.Address1,
+                districtId: model.Address2,
+                communeId: model.Address3,
+                addressExtend: model.Address4,
+                culture);
+            return result;
+        }
+
+        /// <summary>
+        /// Get user address
+        /// </summary>
+        /// <param name="model">User model</param>
+        /// <param name="culture">Culture</param>
+        /// <returns>Full address</returns>
+        public static string GetUserAddress(UserModel model, string culture = "")
+        {
+            var result = GetFullAddress(
+                provinceId: model.Address1,
+                districtId: model.Address2,
+                communeId: model.Address3,
+                addressExtend: model.Address4,
+                culture);
+            return result;
+        }
     }
 }

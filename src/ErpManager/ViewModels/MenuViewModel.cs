@@ -2,7 +2,7 @@
 
 namespace ErpManager.ERP.ViewModels
 {
-    public class MenuViewModel
+    public sealed class MenuViewModel
     {
         [JsonProperty]
         public int Priority { get; set; }
@@ -29,7 +29,7 @@ namespace ErpManager.ERP.ViewModels
         public List<SubMenuViewModel> Items { get; set; } = new List<SubMenuViewModel>();
     }
 
-    public class SubMenuViewModel
+    public sealed class SubMenuViewModel
     {
         [JsonProperty("label")]
         public string Label { get; set; } = string.Empty;

@@ -1,11 +1,11 @@
 ﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
 
-using ErpManager.Infrastructure.Common.Middleware;
+using ErpManager.Infrastructure.Middleware;
 using Microsoft.AspNetCore.Mvc.Controllers;
 
 namespace ErpManager.ERP.Common.Middleware
 {
-    public class PermissionHandlerMiddleware : HandlerMiddlewareBase
+    public sealed class PermissionHandlerMiddleware : HandlerMiddlewareBase
     {
         /// <summary>DI</summary>
         private readonly RequestDelegate _next;

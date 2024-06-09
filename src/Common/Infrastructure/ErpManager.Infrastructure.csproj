@@ -29,7 +29,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Using Include="ErpManager.Infrastructure.Common.Enum" />
+    <Using Include="ErpManager.Infrastructure.Common.Models" />
+    <Using Include="ErpManager.Infrastructure.ExceptionExtension" />
     <Using Include="ErpManager.Infrastructure.Interface" />
+    <Using Include="ErpManager.Infrastructure.Middleware" />
+    <Using Include="Microsoft.Extensions.DependencyInjection" />
   </ItemGroup>
 
 </Project>

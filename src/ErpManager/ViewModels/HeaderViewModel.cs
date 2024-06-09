@@ -2,7 +2,7 @@
 
 namespace ErpManager.ERP.ViewModels
 {
-    public class HeaderViewModel
+    public sealed class HeaderViewModel
     {
         public bool IsShowNavbarSwitch { get; set; }
 

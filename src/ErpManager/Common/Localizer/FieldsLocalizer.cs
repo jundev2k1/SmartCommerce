@@ -2,7 +2,7 @@
 
 namespace ErpManager.ERP.Fields
 {
-    public class FieldsLocalizer
+    public sealed class FieldsLocalizer
     {
     }
 }

@@ -25,7 +25,6 @@ namespace ErpManager.ERP.Controllers
         /// </summary>
         private void Initialize()
         {
-            SetPropertiesValue();
             SetDefaultViewValue();
         }
 
@@ -148,18 +147,10 @@ namespace ErpManager.ERP.Controllers
         }
 
         /// <summary>
-        /// Set properties value
-        /// </summary>
-        private void SetPropertiesValue()
-        {
-        }
-
-        /// <summary>
         /// Set default view value
         /// </summary>
         private void SetDefaultViewValue()
         {
-            ViewData[Constants.GLOBAL_KEY_SESSION_TOKEN] = this.SessionToken;
         }
 
         /// <summary>

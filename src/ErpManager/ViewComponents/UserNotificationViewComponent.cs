@@ -2,7 +2,7 @@
 
 namespace ErpManager.ERP.ViewComponents
 {
-    public class UserNotificationViewComponent : ViewComponent
+    public sealed class UserNotificationViewComponent : ViewComponent
     {
         private readonly SessionManager _sessionManager;
         private readonly IServiceFacade _serviceFacade;
@@ -48,8 +48,8 @@ namespace ErpManager.ERP.ViewComponents
         }
 
         /// <summary>User operator branch id</summary>
-        protected string OperatorBranchId => HttpContext.Session.GetString(Constants.SESSION_KEY_OPERATOR_BRANCH_ID).ToStringOrEmpty();
+        private string OperatorBranchId => _sessionManager.Get(Constants.SESSION_KEY_OPERATOR_BRANCH_ID);
         /// <summary>User operator id</summary>
-        protected string OperatorId => HttpContext.Session.GetString(Constants.SESSION_KEY_OPERATOR_ID).ToStringOrEmpty();
+        private string OperatorId => _sessionManager.Get(Constants.SESSION_KEY_OPERATOR_ID);
     }
 }

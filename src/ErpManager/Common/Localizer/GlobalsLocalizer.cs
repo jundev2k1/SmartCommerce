@@ -2,7 +2,7 @@
 
 namespace ErpManager.ERP.Globals
 {
-    public class GlobalsLocalizer
+    public sealed class GlobalsLocalizer
     {
     }
 }

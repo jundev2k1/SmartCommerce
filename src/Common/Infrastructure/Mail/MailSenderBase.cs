@@ -2,6 +2,7 @@
 
 using ErpManager.Common;
 using ErpManager.Common.Utilities;
+using ErpManager.Infrastructure.Common.Models;
 using MailKit.Net.Smtp;
 using MailKit.Security;
 using MimeKit;
@@ -47,10 +48,11 @@ namespace ErpManager.Infrastructure.Mail
             var bodyBuilder = new BodyBuilder { HtmlBody = mailInfo.message.ChangeToBr() };
             mailMessage.Body = bodyBuilder.ToMessageBody();
 
+            SetMailPriority(mailMessage, mailInfo.priority);
             await ExecuteSendMail(mailMessage);
         }
 
-        protected async Task SendMailToOperatorAsync(string subject, string message)
+        protected async Task SendMailToOperatorAsync(string subject, string message, MailPriorityEnum priority)
         {
             var mailMessage = new MimeMessage();
             mailMessage.From.Add(new MailboxAddress(_nameOperator, _smtpUser));
@@ -60,6 +62,7 @@ namespace ErpManager.Infrastructure.Mail
             var bodyBuilder = new BodyBuilder { HtmlBody = message.ChangeToBr() };
             mailMessage.Body = bodyBuilder.ToMessageBody();
 
+            SetMailPriority(mailMessage, priority);
             await ExecuteSendMail(mailMessage);
         }
 
@@ -75,6 +78,31 @@ namespace ErpManager.Infrastructure.Mail
                 await client.AuthenticateAsync(_smtpUser, _smtpPass);
                 await client.SendAsync(mailMessage);
                 await client.DisconnectAsync(true);
+            }
+        }
+
+        /// <summary>
+        /// Set mail priority
+        /// </summary>
+        /// <param name="mailMessage">Mail message</param>
+        private void SetMailPriority(MimeMessage mailMessage, MailPriorityEnum priority)
+        {
+            switch (priority)
+            {
+                case MailPriorityEnum.Low:
+                    mailMessage.Priority = MessagePriority.Urgent;
+                    mailMessage.Headers.Add("X-Priority", "1");
+                    break;
+
+                case MailPriorityEnum.Normal:
+                    mailMessage.Priority = MessagePriority.Normal;
+                    mailMessage.Headers.Add("X-Priority", "3");
+                    break;
+
+                case MailPriorityEnum.High:
+                    mailMessage.Priority = MessagePriority.NonUrgent;
+                    mailMessage.Headers.Add("X-Priority", "5");
+                    break;
             }
         }
     }

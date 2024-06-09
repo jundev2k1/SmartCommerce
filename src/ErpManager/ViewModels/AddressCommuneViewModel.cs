@@ -2,7 +2,7 @@
 
 namespace ErpManager.ERP.ViewModels
 {
-    public class AddressCommuneGroupListViewModel
+    public sealed class AddressCommuneGroupListViewModel
     {
         [JsonProperty("provinceId")]
         public string ProvinceId { get; set; } = string.Empty;
@@ -10,7 +10,7 @@ namespace ErpManager.ERP.ViewModels
         public AddressCommuneGroupViewModel[] Items { get; set; } = Array.Empty<AddressCommuneGroupViewModel>();
     }
 
-    public class AddressCommuneGroupViewModel
+    public sealed class AddressCommuneGroupViewModel
     {
         [JsonProperty("districtId")]
         public string DistrictId { get; set; } = string.Empty;
@@ -18,7 +18,7 @@ namespace ErpManager.ERP.ViewModels
         public AddressCommuneViewModel[] Items { get; set; } = Array.Empty<AddressCommuneViewModel>();
     }
 
-    public class AddressCommuneViewModel
+    public sealed class AddressCommuneViewModel
     {
         [JsonProperty("id")]
         public string CommuneId { get; set; } = string.Empty;

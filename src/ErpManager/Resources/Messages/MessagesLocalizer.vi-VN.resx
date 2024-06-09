@@ -142,6 +142,9 @@
   <data name="Message_ClickCopy" xml:space="preserve">
     <value>Click vào để copy</value>
   </data>
+  <data name="Message_LoginSuccess" xml:space="preserve">
+    <value>Đăng nhập thành công</value>
+  </data>
   <data name="Message_NoExistProductDescription" xml:space="preserve">
     <value>Không có mô tả về sản phẩm</value>
   </data>

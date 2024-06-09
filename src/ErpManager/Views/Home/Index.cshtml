@@ -23,13 +23,15 @@
             </div>
         </div>
     </section>
-    <script>
-        const message = '@message';
-        const InitPage = () => {
-            toastr.success(message);
-        };
+    @section ViewScript {
+        <script>
+            const message = '@message';
+            const InitPage = () => {
+                toastr.success(message);
+            };
 
-        if (message) StoreWindowLoadCallback.push(InitPage);
-    </script>
+            if (message) StoreWindowLoadCallback.push(InitPage);
+        </script>
+    }
 </div>
 

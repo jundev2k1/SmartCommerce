@@ -1,10 +1,8 @@
 ﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
 
-using Newtonsoft.Json;
-
 namespace ErpManager.ERP.Common.Extensions
 {
-    public class AddressProvider
+    public sealed class AddressProvider
     {
         private static AddressProvider? _instance;
         private static readonly object lockObject = new object();

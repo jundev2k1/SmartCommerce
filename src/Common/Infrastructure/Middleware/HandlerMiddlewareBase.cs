@@ -3,7 +3,7 @@
 using ErpManager.Common;
 using System.Text.RegularExpressions;
 
-namespace ErpManager.Infrastructure.Common.Middleware
+namespace ErpManager.Infrastructure.Middleware
 {
     public class HandlerMiddlewareBase
     {
@@ -21,7 +21,7 @@ namespace ErpManager.Infrastructure.Common.Middleware
         /// <returns>Is valid route</returns>
         public bool IsValidRoute(string currentRoutePath)
         {
-            foreach (var route in this.PublicRoute)
+            foreach (var route in PublicRoute)
             {
                 var routePattern = $"^{route}$";
                 var routeItemMatch = Regex.Match(route, Constants.REGEX_FOR_GET_ROUTE_ITEM);

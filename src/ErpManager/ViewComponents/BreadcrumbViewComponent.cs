@@ -2,7 +2,7 @@
 
 namespace ErpManager.ERP.ViewComponents
 {
-    public class BreadcrumbViewComponent : ViewComponent
+    public sealed class BreadcrumbViewComponent : ViewComponent
     {
         /// <summary>
         /// Breadcrumb view component

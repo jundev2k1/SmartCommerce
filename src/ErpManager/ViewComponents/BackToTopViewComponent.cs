@@ -2,7 +2,7 @@
 
 namespace ErpManager.ERP.ViewComponents
 {
-    public class BackToTopViewComponent : ViewComponent
+    public sealed class BackToTopViewComponent : ViewComponent
     {
         public IViewComponentResult Invoke()
         {

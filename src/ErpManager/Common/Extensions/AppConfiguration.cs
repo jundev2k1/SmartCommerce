@@ -2,7 +2,7 @@
 
 namespace ErpManager.ERP.Common.Extensions
 {
-    public class AppConfiguration
+    public sealed class AppConfiguration
     {
         private readonly IConfiguration _configuration;
         public AppConfiguration(IConfiguration configuration)
@@ -26,11 +26,11 @@ namespace ErpManager.ERP.Common.Extensions
             Constants.CONFIG_APP_PORT = _configuration["ApplicationSetting:AppPort"].ToStringOrEmpty();
             Constants.CONFIG_APP_NAME = _configuration["ApplicationSetting:AppName"].ToStringOrEmpty();
             Constants.CONFIG_APP_LOG_PATH = _configuration["ApplicationSetting:LogPath"].ToStringOrEmpty();
-            Constants.CONFIG_APP_LOG_PATH_INFO = Path.Combine(Constants.CONFIG_APP_LOG_PATH, "log-info.txt");
-            Constants.CONFIG_APP_LOG_PATH_WARNING = Path.Combine(Constants.CONFIG_APP_LOG_PATH, "log-warning.txt");
-            Constants.CONFIG_APP_LOG_PATH_ERROR = Path.Combine(Constants.CONFIG_APP_LOG_PATH, "log-error.txt");
-            Constants.CONFIG_APP_LOG_PATH_DEBUG = Path.Combine(Constants.CONFIG_APP_LOG_PATH, "log-debug.txt");
-            Constants.CONFIG_APP_LOG_PATH_VERBOSE = Path.Combine(Constants.CONFIG_APP_LOG_PATH, "log-verbose.txt");
+            Constants.CONFIG_APP_LOG_PATH_INFO = Path.Combine(Constants.CONFIG_APP_LOG_PATH, "log-info-.txt");
+            Constants.CONFIG_APP_LOG_PATH_WARNING = Path.Combine(Constants.CONFIG_APP_LOG_PATH, "log-warning-.txt");
+            Constants.CONFIG_APP_LOG_PATH_ERROR = Path.Combine(Constants.CONFIG_APP_LOG_PATH, "log-error-.txt");
+            Constants.CONFIG_APP_LOG_PATH_DEBUG = Path.Combine(Constants.CONFIG_APP_LOG_PATH, "log-debug-.txt");
+            Constants.CONFIG_APP_LOG_PATH_VERBOSE = Path.Combine(Constants.CONFIG_APP_LOG_PATH, "log-verbose-.txt");
         }
 
         /// <summary>

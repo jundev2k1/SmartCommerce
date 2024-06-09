@@ -57,7 +57,7 @@
                                         }
                                         @foreach (var selectItem in statusDropdown)
                                         {
-                                            <option value="@selectItem?.Value">@selectItem.Text</option>
+                                            <option value="@(selectItem?.Value)">@selectItem.Text</option>
                                         }
                                     </select>
                                     <span asp-validation-for="Status" class="text-danger"></span>
@@ -71,7 +71,7 @@
                                         }
                                         @foreach (var selectItem in displayPriceDropdown)
                                         {
-                                            <option value="@selectItem?.Value">@selectItem.Text</option>
+                                            <option value="@(selectItem?.Value)">@selectItem.Text</option>
                                         }
                                     </select>
                                     <span asp-validation-for="DisplayPrice" class="text-danger"></span>
@@ -84,7 +84,7 @@
                                             ?? new List<SelectListItem>();
                                             var takeOverIdItem = takeOverIdDropdown?.FirstOrDefault();
                                         }
-                                        <option value="@takeOverIdItem?.Value">@takeOverIdItem?.Text</option>
+                                        <option value="@(takeOverIdItem?.Value)">@takeOverIdItem?.Text</option>
                                     </select>
                                     <span asp-validation-for="TakeOverId" class="text-danger"></span>
                                 </div>
@@ -135,7 +135,7 @@
                                     <select asp-for="Address1" class="form-select select-search-address-1" id="address1ForInsert">
                                         @if (string.IsNullOrEmpty(@Model.Address1) == false)
                                         {
-                                            <option value="@Model.Address1" selected></option>
+                                            <option value="@(Model.Address1)" selected></option>
                                         }
                                     </select>
                                     <span asp-validation-for="Address1" class="text-danger"></span>
@@ -145,7 +145,7 @@
                                     <select asp-for="Address2" class="form-select select-search-address-2" id="address2ForInsert" data-parent-id="address1ForInsert">
                                         @if (string.IsNullOrEmpty(@Model.Address2) == false)
                                         {
-                                            <option value="@Model.Address2" selected></option>
+                                            <option value="@(Model.Address2)" selected></option>
                                         }
                                     </select>
                                     <span asp-validation-for="Address2" class="text-danger"></span>
@@ -155,7 +155,7 @@
                                     <select asp-for="Address3" class="form-select select-search-address-3" id="address3ForInsert" data-parent-id="address2ForInsert">
                                         @if (string.IsNullOrEmpty(@Model.Address3) == false)
                                         {
-                                            <option value="@Model.Address3" selected></option>
+                                            <option value="@(Model.Address3)" selected></option>
                                         }
                                     </select>
                                     <span asp-validation-for="Address3" class="text-danger"></span>
@@ -199,7 +199,7 @@
             </div>
         </div>
     </form>
-    @section Scripts {
+    @section ViewScript {
         <script>
             const resetSearchForm = (formId) => {
                 if (!formId) return;

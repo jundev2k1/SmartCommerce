@@ -40,8 +40,8 @@ namespace ErpManager.Controllers
             var message = _sessionManager.Get(Constants.SESSION_KEY_LOGIN_MESSAGE);
             if (string.IsNullOrEmpty(message)) return;
 
-            ViewBag.LoginMessage = message;
             _sessionManager.Remove(Constants.SESSION_KEY_LOGIN_MESSAGE);
+            ViewBag.LoginMessage = message;
         }
 
         [HttpGet]

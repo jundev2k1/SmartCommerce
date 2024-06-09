@@ -3,12 +3,13 @@
 namespace ErpManager.ERP.Areas.Product.Controllers
 {
     [Area(Constants.MODULE_PRODUCT_AREA)]
-    public class ProductEditController : BaseController
+    public sealed class ProductEditController : BaseController
     {
         private readonly IServiceFacade _serviceFacade;
         private readonly IValidatorFacade _validatorFacade;
         private readonly ILocalizer _localizer;
         private readonly SessionManager _sessionManager;
+        private readonly ValueTextManager _valueTextManager;
 
         /// <summary>
         /// Constructor
@@ -17,12 +18,14 @@ namespace ErpManager.ERP.Areas.Product.Controllers
             IServiceFacade serviceFacade,
             IValidatorFacade validatorFacade,
             ILocalizer localizer,
-            SessionManager sessionManager) : base(serviceFacade, sessionManager)
+            SessionManager sessionManager,
+            ValueTextManager valueTextManager) : base(serviceFacade, sessionManager)
         {
             _serviceFacade = serviceFacade;
             _validatorFacade = validatorFacade;
             _localizer = localizer;
             _sessionManager = sessionManager;
+            _valueTextManager = valueTextManager;
         }
 
         [HttpGet]
@@ -112,27 +115,18 @@ namespace ErpManager.ERP.Areas.Product.Controllers
             }
 
             // Add init for product status
-            var ddlStatus = new List<SelectListItem>
-            {
-                new SelectListItem { Value = ProductStatusEnum.Sold.GetStringValue(), Text = _localizer.ValueTexts["ValTxt_ProductStatus_Sold"] },
-                new SelectListItem { Value = ProductStatusEnum.Normal.GetStringValue(), Text = _localizer.ValueTexts["ValTxt_ProductStatus_Normal"] },
-                new SelectListItem { Value = ProductStatusEnum.UrgentSale.GetStringValue(), Text = _localizer.ValueTexts["ValTxt_ProductStatus_UrgentSale"] },
-                new SelectListItem { Value = ProductStatusEnum.GoodPrice.GetStringValue(), Text = _localizer.ValueTexts["ValTxt_ProductStatus_GoodPrice"] },
-            };
-            var selectedStatus = ddlStatus.FirstOrDefault(status => status.Value.Equals(formInput.Status));
-            if (selectedStatus != null) selectedStatus.Selected = true;
+            var ddlStatus = _valueTextManager.GetSelectList(
+                group => group.Product,
+                Constants.VALUETEXT_FIELD_PRODUCT_STATUS,
+                formInput.Status.GetStringValue());
             var statusPropertyName = formInput.Properties.GetName(property => property.Status);
             ddlCollection.Add(statusPropertyName, ddlStatus);
 
             // Add init for display price
-            var ddlDisplayPrice = new List<SelectListItem>
-            {
-                new SelectListItem { Value = DisplayPriceEnum.Price1.GetStringValue(), Text = _localizer.ValueTexts["ValTxt_ProductDisplayPrice1"] },
-                new SelectListItem { Value = DisplayPriceEnum.Price2.GetStringValue(), Text = _localizer.ValueTexts["ValTxt_ProductDisplayPrice2"] },
-                new SelectListItem { Value = DisplayPriceEnum.Price3.GetStringValue(), Text = _localizer.ValueTexts["ValTxt_ProductDisplayPrice3"] },
-            };
-            var selectedDisplayPrice = ddlDisplayPrice.FirstOrDefault(status => status.Value.Equals(formInput.DisplayPrice));
-            if (selectedDisplayPrice != null) selectedDisplayPrice.Selected = true;
+            var ddlDisplayPrice = _valueTextManager.GetSelectList(
+                group => group.Product,
+                Constants.VALUETEXT_FIELD_PRODUCT_DISPLAY_PRICE,
+                formInput.DisplayPrice.GetStringValue());
             var displayPricePropertyName = formInput.Properties.GetName(property => property.DisplayPrice);
             ddlCollection.Add(displayPricePropertyName, ddlDisplayPrice);
 

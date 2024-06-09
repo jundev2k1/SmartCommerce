@@ -3,7 +3,7 @@
 namespace ErpManager.ERP.Areas.Product.Controllers
 {
     [Area(Constants.MODULE_PRODUCT_AREA)]
-    public class ProductDetailController : BaseController
+    public sealed class ProductDetailController : BaseController
     {
         private readonly IServiceFacade _serviceFacade;
         private readonly SessionManager _sessionManager;

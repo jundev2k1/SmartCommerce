@@ -58,5 +58,19 @@
         "value": "1"
       }
     ]
+  },
+  "common": {
+    "form_contact": [
+      {
+        "text": "Report",
+        "localizer": "ValTxt_FormContact_Report",
+        "value": "0"
+      },
+      {
+        "text": "Contact Admin",
+        "localizer": "ValTxt_FormContact_ContactAdmin",
+        "value": "1"
+      }
+    ]
   }
 }

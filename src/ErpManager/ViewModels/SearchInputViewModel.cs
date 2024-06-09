@@ -2,7 +2,7 @@
 
 namespace ErpManager.ERP.ViewModels
 {
-    public class SearchInputViewModel
+    public sealed class SearchInputViewModel
     {
         public string Name { get; set; } = string.Empty;
 

@@ -2,7 +2,7 @@
 
 namespace ErpManager.ERP.ViewModels
 {
-    public class UploadImageInputViewModel
+    public sealed class UploadImageInputViewModel
     {
         public string Name { get; set; } = string.Empty;
 

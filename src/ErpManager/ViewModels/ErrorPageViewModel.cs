@@ -2,7 +2,7 @@
 
 namespace ErpManager.ERP.ViewModels
 {
-    public class ErrorPageViewModel
+    public sealed class ErrorPageViewModel
     {
         public string Title { get; set; } =string.Empty;
 

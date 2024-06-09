@@ -2,7 +2,7 @@
 
 namespace ErpManager.ERP.ViewModels
 {
-    public class AddressDistrictGroupViewModel
+    public sealed class AddressDistrictGroupViewModel
     {
         [JsonProperty("parentId")]
         public string ProvinceId { get; set; } = string.Empty;
@@ -11,7 +11,7 @@ namespace ErpManager.ERP.ViewModels
         public AddressDistrictViewModel[] Items { get; set; } = Array.Empty<AddressDistrictViewModel>();
     }
 
-    public class AddressDistrictViewModel
+    public sealed class AddressDistrictViewModel
     {
         [JsonProperty("id")]
         public string DistrictId { get; set; } = string.Empty;

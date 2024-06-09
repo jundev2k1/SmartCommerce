@@ -2,7 +2,7 @@
 
 namespace ErpManager.ERP.ViewComponents
 {
-    public class HeaderViewComponent : ViewComponent
+    public sealed class HeaderViewComponent : ViewComponent
     {
         public IViewComponentResult Invoke(HeaderViewModel viewData)
         {

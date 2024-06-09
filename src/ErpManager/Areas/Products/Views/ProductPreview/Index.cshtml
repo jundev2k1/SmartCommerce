@@ -29,30 +29,27 @@
                                     <i class="fa-regular fa-location-dot"></i> <strong>@_localizer.Globals["Title_Address"]:</strong>
                                 </p>
                                 <span>
-                                    @AddressUtilities.GetFullAddress(
-                                        provinceId: Model.Product.Address1,
-                                        districtId: Model.Product.Address2,
-                                        communeId: Model.Product.Address3,
-                                        addressExtend: Model.Product.Address4)
+                                    @AddressUtilities.GetProductAddress(Model.Product)
                                 </span>
                             </div>
                         </div>
                         <div class="preview-content-contact col-md-3 col-12">
                             @if (@Model.AgentDetail != null)
                             {
-                                <a class="btn site-btn-primary" href="tel:@Model.AgentDetail?.PhoneNumber">
-                                    <i class="fa-solid fa-phone"></i>
-                                    @_localizer.Globals["Btn_ContactNow"]
-                                </a>
+                                <div class="mb-2 w-100">
+                                    <a class="btn site-btn-primary d-block" href="tel:@Model.AgentDetail?.PhoneNumber">
+                                        <i class="fa-solid fa-phone"></i>
+                                        @_localizer.Globals["Btn_ContactNow"]
+                                    </a>
+                                </div>
                             }
-                            else
-                            {
-                                <a class="btn site-btn-info" href="tel:@Model.AgentDetail?.PhoneNumber">
-                                    <i class="fa-solid fa-phone"></i>
+                            <div class="text-center">
+                                <button class="btn site-btn-info" data-bs-toggle="modal" data-bs-target="#btnContactUs">
+                                    <i class="fa-light fa-envelope"></i>
                                     @_localizer.Globals["Btn_ContactAdmin"]
-                                </a>
+                                </button>
                                 <p>@_localizer.Messages["Message_WeContactSoon"]</p>
-                            }
+                            </div>
                         </div>
                     </div>
                     <div class="site-divide-line"></div>
@@ -70,25 +67,24 @@
                 <h3>@_localizer.Globals["Title_TakeOverPerson"]</h3>
                 @if (Model.AgentDetail != null)
                 {
-                    var userAddress = @AddressUtilities.GetFullAddress(
-                        provinceId: Model.AgentDetail.Address1,
-                        districtId: Model.AgentDetail.Address2,
-                        communeId: Model.AgentDetail.Address3,
-                        addressExtend: Model.AgentDetail.Address4);
-
                     <div class="avatar">
                         <img class="img-fluid" src="/images/system/no-user-placeholder.jpg" />
                     </div>
                     <p>@(_localizer.Globals["Title_Name"]): @Model.AgentDetail.FullName</p>
                     <p>@(_localizer.Globals["Title_Tel"]): @Model.AgentDetail.PhoneNumber</p>
-                    <p>@(_localizer.Globals["Title_Address"]): @userAddress</p>
-                    
+                    <p>@(_localizer.Globals["Title_Address"]): @AddressUtilities.GetUserAddress(Model.AgentDetail)</p>
+
                     <a class="btn site-btn-primary" href="tel:@Model.AgentDetail.PhoneNumber">
-                        <i class="fa-solid fa-phone"></i> @_localizer.Globals["Btn_ContactConsulting"]
+                        <i class="fa-solid fa-phone"></i>
+                        @_localizer.Globals["Btn_ContactConsulting"]
                     </a>
                 }
                 else
                 {
+                    <a class="btn site-btn-primary" href="tel:@Model.AgentDetail.PhoneNumber">
+                        <i class="fa-light fa-envelope"></i>
+                        @_localizer.Globals["Btn_ContactAdmin"]
+                    </a>
                     <p>@_localizer.Messages["Message_NoHaveTakeOverPersion"]</p>
                 }
             </div>
@@ -156,7 +152,8 @@
         </div>
     </div>
 </section>
-<section>
+@await Component.InvokeAsync(Constants.ERP_COMPONENT_NAME_FORMCONTACT, new FormContactViewModel { TargetButtonId = "btnContactUs", IsShowType = false, TypeForm = FormContactTypeEnum.ContactAdmin });
+@section ViewScript {
     <script>
         (function () {
             const previewArea = document.querySelector('#previewModal');
@@ -190,4 +187,4 @@
             });
         })();
     </script>
-</section>
+}

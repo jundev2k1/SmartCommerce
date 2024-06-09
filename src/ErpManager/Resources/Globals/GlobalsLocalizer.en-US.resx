@@ -367,4 +367,10 @@
   <data name="Btn_CopyInsert" xml:space="preserve">
     <value>Duplicate</value>
   </data>
+  <data name="Btn_Back" xml:space="preserve">
+    <value>Back</value>
+  </data>
+  <data name="Btn_Send" xml:space="preserve">
+    <value>Send</value>
+  </data>
 </root>

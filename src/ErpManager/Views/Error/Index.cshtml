@@ -37,10 +37,11 @@
                     font-size: 16px;
                 }
 
-            .error-page .wrapper .content .error-control {
-                display: flex;
-                gap: 4px;
-            }
+                .error-page .wrapper .content .error-control {
+                    display: flex;
+                    justify-content: center;
+                    gap: 4px;
+                }
 </style>
 <section class="error-page">
     <div class="wrapper">
@@ -50,9 +51,11 @@
                 <p>@Model.Message</p>
             </div>
             <div class="error-control">
-                <a asp-route="@Constants.MODULE_HOME_DASHBOARD_NAME" class="btn site-btn-success">BACK HOME</a>
-                <a href="#" class="btn site-btn-outline-success">CONTACT US</a>
+                <button class="btn site-btn-success" onclick="history.back()">@_localizer.Globals["Btn_Back"]</button>
+                <button class="btn site-btn-outline-success">@_localizer.Globals["Btn_ContactAdmin"]</button>
             </div>
         </div>
     </div>
 </section>
+@section ViewScript {
+}

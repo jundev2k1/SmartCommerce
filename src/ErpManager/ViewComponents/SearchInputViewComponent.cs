@@ -2,7 +2,7 @@
 
 namespace ErpManager.ERP.ViewComponents
 {
-    public class SearchInputViewComponent : ViewComponent
+    public sealed class SearchInputViewComponent : ViewComponent
     {
         /// <summary>
         /// Search input view component

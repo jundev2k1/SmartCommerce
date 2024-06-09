@@ -2,7 +2,7 @@
 
 namespace ErpManager.ERP.ViewComponents
 {
-    public class StyleSheetViewComponent : ViewComponent
+    public sealed class StyleSheetViewComponent : ViewComponent
     {
         public IViewComponentResult Invoke()
         {

@@ -3,7 +3,7 @@
 namespace ErpManager.ERP.Common.Attributes
 {
     [AttributeUsage(AttributeTargets.Method, AllowMultiple = false, Inherited = true)]
-    public class PermissionAttribute : Attribute
+    public sealed class PermissionAttribute : Attribute
     {
         public Permission Permission { get; }
 

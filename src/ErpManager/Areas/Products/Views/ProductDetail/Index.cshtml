@@ -92,7 +92,7 @@
                     <div class="col-12">
                         <div class="d-flex flex-column gap-1">
                             <label class="fw-semibold">@_localizer.Fields["Product_Address"]:</label>
-                            <p>@AddressUtilities.GetFullAddress(Model.Address1, Model.Address2,Model.Address3,Model.Address4)</p>
+                            <p>@AddressUtilities.GetProductAddress(Model)</p>
                         </div>
                     </div>
                 </div>
@@ -110,3 +110,4 @@
         </div>
     </div>
 </section>
+@section ViewScript {}

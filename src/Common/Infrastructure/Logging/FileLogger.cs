@@ -6,7 +6,7 @@ namespace ErpManager.Infrastructure.Logging
 {
     public sealed class FileLogger : IFileLogger
     {
-        private readonly ILogger _logger;
+        private readonly ILogger<FileLogger> _logger;
 
         public FileLogger(ILogger<FileLogger> logger)
         {

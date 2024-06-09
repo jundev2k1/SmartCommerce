@@ -8,7 +8,7 @@ using System.Collections.Immutable;
 
 namespace ErpManager.ERP.Common.Localizer
 {
-    public class Localizer : ILocalizer
+    public sealed class Localizer : ILocalizer
     {
         private readonly IStringLocalizer<GlobalsLocalizer> _globalsLocalizer;
         private readonly IStringLocalizer<MessagesLocalizer> _messagesLocalizer;

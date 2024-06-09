@@ -3,7 +3,7 @@
 namespace ErpManager.ERP.Areas.Product.Controllers
 {
     [Area(Constants.MODULE_PRODUCT_AREA)]
-    public class ProductDeleteController : BaseController
+    public sealed class ProductDeleteController : BaseController
     {
         private readonly IServiceFacade _serviceFacade;
         private readonly IValidatorFacade _validatorFacade;

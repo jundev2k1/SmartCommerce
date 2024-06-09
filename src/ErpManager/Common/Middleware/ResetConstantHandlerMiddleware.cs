@@ -1,10 +1,10 @@
 ﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
 
-using ErpManager.Infrastructure.Common.Middleware;
+using ErpManager.Infrastructure.Middleware;
 
 namespace ErpManager.ERP.Common.Middleware
 {
-    public class ResetConstantHandlerMiddleware : HandlerMiddlewareBase
+    public sealed class ResetConstantHandlerMiddleware : HandlerMiddlewareBase
     {
         /// <summary>DI</summary>
         private readonly RequestDelegate _next;

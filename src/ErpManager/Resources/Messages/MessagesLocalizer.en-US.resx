@@ -142,6 +142,9 @@
   <data name="Message_ClickCopy" xml:space="preserve">
     <value>Click to copy</value>
   </data>
+  <data name="Message_LoginSuccess" xml:space="preserve">
+    <value>Login success</value>
+  </data>
   <data name="Message_NoExistProductDescription" xml:space="preserve">
     <value>There is no product description</value>
   </data>

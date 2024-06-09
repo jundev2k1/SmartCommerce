@@ -5,6 +5,7 @@ using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.Extensions.Options;
+using Serilog;
 using System.Globalization;
 
 namespace ErpManager.ERP
@@ -122,9 +123,9 @@ namespace ErpManager.ERP
                 var supportedLanguage = new[]
                 {
                     new CultureInfo(Constants.FLG_GLOBAL_CULTURE_VN),
-                    new CultureInfo("en-US"),
+                    new CultureInfo(Constants.FLG_GLOBAL_CULTURE_ENG),
                 };
-                options.DefaultRequestCulture = new RequestCulture("en-US");
+                options.DefaultRequestCulture = new RequestCulture(Constants.FLG_GLOBAL_CULTURE_VN);
                 options.SupportedCultures = supportedLanguage;
                 options.SupportedUICultures = supportedLanguage;
             });
@@ -167,7 +168,8 @@ namespace ErpManager.ERP
                 .UseSession()
                 .UseHttpsRedirection()
                 .UseStaticFiles()
-                .UseCors("AllowInternalOrigin");
+                .UseCors("AllowInternalOrigin")
+                .UseSerilogRequestLogging();
 
             return application;
         }
@@ -177,7 +179,12 @@ namespace ErpManager.ERP
         /// </summary>
         private static WebApplication ConfigureEnvironment(this WebApplication app)
         {
-            if (!app.Environment.IsDevelopment())
+            if (app.Environment.IsDevelopment())
+            {
+                app.UseExceptionHandler(Constants.MODULE_ERROR_ERROR_PATH);
+                // app.UseDeveloperExceptionPage();
+            }
+            else
             {
                 app.UseExceptionHandler(Constants.MODULE_ERROR_ERROR_PATH);
                 app.UseHsts();

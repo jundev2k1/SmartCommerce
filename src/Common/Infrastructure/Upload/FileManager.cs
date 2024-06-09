@@ -1,7 +1,6 @@
 ﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
 
 using ErpManager.Common;
-using ErpManager.Infrastructure.Common.Enum;
 using Microsoft.AspNetCore.Http;
 using System.Text.RegularExpressions;
 

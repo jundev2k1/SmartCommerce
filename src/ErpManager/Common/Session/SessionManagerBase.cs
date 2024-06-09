@@ -67,7 +67,9 @@ namespace ErpManager.ERP.Common.Session
         /// <param name="key">Session key</param>
         public void Remove(string key)
         {
-            _session.Remove(key);
+            var isExist = _session.Get(key);
+            if (isExist != null)
+                _session.Remove(key);
         }
 
         /// <summary>

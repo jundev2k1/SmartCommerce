@@ -2,7 +2,7 @@
 
 namespace ErpManager.ERP.ViewModels
 {
-    public class LoginViewModel
+    public sealed class LoginViewModel
     {
         public string LoginID { get; set; } = string.Empty;
 

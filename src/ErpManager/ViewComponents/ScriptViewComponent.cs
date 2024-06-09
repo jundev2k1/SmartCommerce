@@ -2,7 +2,7 @@
 
 namespace ErpManager.ERP.ViewComponents
 {
-    public class ScriptViewComponent : ViewComponent
+    public sealed class ScriptViewComponent : ViewComponent
     {
         public IViewComponentResult Invoke()
         {

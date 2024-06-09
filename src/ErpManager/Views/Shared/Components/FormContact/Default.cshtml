@@ -1,0 +1,32 @@
+﻿@model FormContactViewModel
+@{
+    var ddlFormType = ViewBag.FormType as List<SelectListItem> ?? new List<SelectListItem>();
+}
+
+<section id="formContact">
+    <div class="modal fade" id="@Model.TargetButtonId" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5">Modal title</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    @if (Model.IsShowType)
+                    {
+                        <select style="display: @(Model.IsShowType ? "block" : "none")">
+                            @foreach (var optionItem in ddlFormType)
+                            {
+                                <option value="@(optionItem?.Value)">@optionItem.Text</option>
+                            }
+                        </select>
+                    }
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn site-btn-secondary" data-bs-dismiss="modal">@_localizer.Globals["Btn_Close"]</button>
+                    <button type="button" class="btn site-btn-primary">@_localizer.Globals["Btn_Send"]</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

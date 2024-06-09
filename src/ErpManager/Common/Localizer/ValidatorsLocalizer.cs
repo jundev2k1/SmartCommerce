@@ -2,7 +2,7 @@
 
 namespace ErpManager.ERP.Validators
 {
-    public class ValidatorsLocalizer
+    public sealed class ValidatorsLocalizer
     {
     }
 }

@@ -3,7 +3,7 @@
 namespace ErpManager.ERP.Areas.Product.Controllers
 {
     [Area(Constants.MODULE_PRODUCT_AREA)]
-    public class ProductRegisterController : BaseController
+    public sealed class ProductRegisterController : BaseController
     {
         private readonly IServiceFacade _serviceFacade;
         private readonly IValidatorFacade _validatorFacade;

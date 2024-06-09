@@ -2,7 +2,7 @@
 
 namespace ErpManager.ERP.ViewComponents
 {
-    public class ThemeSettingViewComponent : ViewComponent
+    public sealed class ThemeSettingViewComponent : ViewComponent
     {
         public IViewComponentResult Invoke()
         {

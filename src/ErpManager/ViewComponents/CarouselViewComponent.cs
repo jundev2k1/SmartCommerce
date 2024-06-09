@@ -2,7 +2,7 @@
 
 namespace ErpManager.ERP.ViewComponents
 {
-    public class CarouselViewComponent : ViewComponent
+    public sealed class CarouselViewComponent : ViewComponent
     {
         public IViewComponentResult Invoke(string images, string idTarget)
         {

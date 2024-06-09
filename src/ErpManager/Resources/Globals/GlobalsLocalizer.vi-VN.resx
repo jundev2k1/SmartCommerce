@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Btn_Back" xml:space="preserve">
+    <value>Quay lại</value>
+  </data>
   <data name="Btn_BackToDetail" xml:space="preserve">
     <value>Trở lại trang chi tiết</value>
   </data>
@@ -164,6 +167,9 @@
   </data>
   <data name="Btn_SearchAdvanced" xml:space="preserve">
     <value>Tìm kiếm nâng cao</value>
+  </data>
+  <data name="Btn_Send" xml:space="preserve">
+    <value>Gửi đi</value>
   </data>
   <data name="ListPage_NoResult" xml:space="preserve">
     <value>Không tìm thấy kết quả</value>

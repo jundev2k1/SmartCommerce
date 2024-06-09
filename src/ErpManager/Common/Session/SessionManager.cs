@@ -2,7 +2,7 @@
 
 namespace ErpManager.ERP.Common.Session
 {
-    public class SessionManager : SessionManagerBase
+    public sealed class SessionManager : SessionManagerBase
     {
         public SessionManager(IHttpContextAccessor httpContextAccessor) : base(httpContextAccessor) { }
 

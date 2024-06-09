@@ -5,7 +5,7 @@ using ErpManager.ERP.Areas.Products.ViewModels;
 namespace ErpManager.ERP.Areas.Product.Controllers
 {
     [Area(Constants.MODULE_PRODUCT_AREA)]
-    public class ProductPreviewController : BaseController
+    public sealed class ProductPreviewController : BaseController
     {
         private SessionManager _sessionManager;
         private IServiceFacade _serviceFacade;

@@ -3,7 +3,7 @@
 namespace ErpManager.ERP.ViewModels
 {
     [Serializable]
-    public class AddressProvinceViewModel
+    public sealed class AddressProvinceViewModel
     {
         [JsonProperty("id")]
         public string ProvinceId { get; set; } = string.Empty;

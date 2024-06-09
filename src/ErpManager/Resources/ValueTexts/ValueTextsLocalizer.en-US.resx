@@ -123,6 +123,12 @@
   <data name="ValTxt_DelFlg_Normal" xml:space="preserve">
     <value>Active</value>
   </data>
+  <data name="ValTxt_FormContact_ContactAdmin" xml:space="preserve">
+    <value>Contact the administrator</value>
+  </data>
+  <data name="ValTxt_FormContact_Report" xml:space="preserve">
+    <value>Report</value>
+  </data>
   <data name="ValTxt_Notification_Status_Read" xml:space="preserve">
     <value>Read</value>
   </data>

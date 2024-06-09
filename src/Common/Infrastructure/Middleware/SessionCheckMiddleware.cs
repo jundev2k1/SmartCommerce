@@ -3,7 +3,7 @@
 using ErpManager.Common;
 using Microsoft.AspNetCore.Http;
 
-namespace ErpManager.Infrastructure.Common.Middleware
+namespace ErpManager.Infrastructure.Middleware
 {
     public class SessionCheckMiddleware : HandlerMiddlewareBase
     {
@@ -16,8 +16,8 @@ namespace ErpManager.Infrastructure.Common.Middleware
 
         public async Task Invoke(HttpContext context)
         {
-            var isNeedLogin = (this.IsValidRoute(context.Request.Path.Value) == false)
-                && (context.Session.TryGetValue(Constants.SESSION_KEY_OPERATOR_ID, out _) == false);
+            var isNeedLogin = IsValidRoute(context.Request.Path.Value) == false
+                && context.Session.TryGetValue(Constants.SESSION_KEY_OPERATOR_ID, out _) == false;
             if (isNeedLogin)
             {
                 context.Response.Redirect(Constants.MODULE_AUTH_SIGNIN_PATH);

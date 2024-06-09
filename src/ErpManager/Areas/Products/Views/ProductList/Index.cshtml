@@ -258,7 +258,7 @@
                                 </td>
                                 <td class="text-start is-desktop">
                                     <p class="mb-0">
-                                        @AddressUtilities.GetFullAddress(item.Address1, item.Address2, item.Address3, item.Address4)
+                                        @AddressUtilities.GetProductAddress(item)
                                     </p>
                                 </td>
                             </tr>
@@ -336,22 +336,24 @@
         </div>
     </div>
 </section>
-<script>
-    const handlePaging = (event, page = 1) => {
-        event.preventDefault();
+@section ViewScript {
+    <script>
+        const handlePaging = (event, page = 1) => {
+            event.preventDefault();
 
-        const pageIndexInput = document.querySelector("#pageIndex");
-        pageIndexInput.value = page;
-        const searchForm = document.getElementsByName("searchForm")[0];
-        searchForm.submit();
-    }
+            const pageIndexInput = document.querySelector("#pageIndex");
+            pageIndexInput.value = page;
+            const searchForm = document.getElementsByName("searchForm")[0];
+            searchForm.submit();
+        }
 
-    const resetSearchForm = (formId) => {
-        if (!formId) return;
+        const resetSearchForm = (formId) => {
+            if (!formId) return;
 
-        const formTarget = $(`#${formId}`);
-        if (!formTarget) return;
+            const formTarget = $(`#${formId}`);
+            if (!formTarget) return;
 
-        formTarget.find('select').val('').change();
-    };
-</script>
+            formTarget.find('select').val('').change();
+        };
+    </script>
+}

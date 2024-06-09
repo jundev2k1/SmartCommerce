@@ -123,6 +123,12 @@
   <data name="ValTxt_DelFlg_Normal" xml:space="preserve">
     <value>Kích hoạt</value>
   </data>
+  <data name="ValTxt_FormContact_ContactAdmin" xml:space="preserve">
+    <value>Liên hệ với quản trị viên</value>
+  </data>
+  <data name="ValTxt_FormContact_Report" xml:space="preserve">
+    <value>Báo cáo</value>
+  </data>
   <data name="ValTxt_Notification_Status_Read" xml:space="preserve">
     <value>Đã đọc</value>
   </data>

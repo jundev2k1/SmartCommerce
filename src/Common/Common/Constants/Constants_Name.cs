@@ -6,7 +6,7 @@ namespace ErpManager.Common
     {
         #region Erp: Layout Section name
         /// <summary>ERP section name: View script</summary>
-        public const string ERP_SECTION_NAME_VIEWSCRIPT = "ViewScript";
+        public const string ERP_SECTION_NAME_VIEW_SCRIPT = "ViewScript";
         #endregion
 
         #region ERP: Layout Component Name
@@ -32,6 +32,8 @@ namespace ErpManager.Common
         public const string ERP_COMPONENT_NAME_THEME_SETTING = "ThemeSetting";
         /// <summary>ERP component name: Notification</summary>
         public const string ERP_COMPONENT_NAME_NOTIFICATION = "UserNotification";
+        /// <summary>ERP component name: Form contact</summary>
+        public const string ERP_COMPONENT_NAME_FORMCONTACT = "FormContact";
         #endregion
 
         #region ERP: Form Control Component Name
