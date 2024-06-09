@@ -1,5 +1,6 @@
 ﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
 
+using ErpManager.Common;
 using ErpManager.Infrastructure.Common.Middleware;
 using ErpManager.Infrastructure.Interface;
 using ErpManager.Infrastructure.Logging;
@@ -33,15 +34,15 @@ namespace ErpManager.Infrastructure
                 .MinimumLevel.Debug()
                 .MinimumLevel.Override("Microsoft", LogEventLevel.Information)
                 .Enrich.FromLogContext()
-                .WriteTo.File("logs/information.log", rollingInterval: RollingInterval.Day,
+                .WriteTo.File(Constants.CONFIG_APP_LOG_PATH_INFO, rollingInterval: RollingInterval.Day,
                     outputTemplate: "{Timestamp:yyyy-MM-dd HH:mm:ss} [{Level:u3}] {Message:lj}{NewLine}{Exception}")
-                .WriteTo.File("logs/warning.log", restrictedToMinimumLevel: LogEventLevel.Warning, rollingInterval: RollingInterval.Day,
+                .WriteTo.File(Constants.CONFIG_APP_LOG_PATH_WARNING, restrictedToMinimumLevel: LogEventLevel.Warning, rollingInterval: RollingInterval.Day,
                     outputTemplate: "{Timestamp:yyyy-MM-dd HH:mm:ss} [{Level:u3}] {Message:lj}{NewLine}{Exception}")
-                .WriteTo.File("logs/error.log", restrictedToMinimumLevel: LogEventLevel.Error, rollingInterval: RollingInterval.Day,
+                .WriteTo.File(Constants.CONFIG_APP_LOG_PATH_ERROR, restrictedToMinimumLevel: LogEventLevel.Error, rollingInterval: RollingInterval.Day,
                     outputTemplate: "{Timestamp:yyyy-MM-dd HH:mm:ss} [{Level:u3}] {Message:lj}{NewLine}{Exception}")
-                .WriteTo.File("logs/verbose.log", restrictedToMinimumLevel: LogEventLevel.Verbose, rollingInterval: RollingInterval.Day,
+                .WriteTo.File(Constants.CONFIG_APP_LOG_PATH_VERBOSE, restrictedToMinimumLevel: LogEventLevel.Verbose, rollingInterval: RollingInterval.Day,
                     outputTemplate: "{Timestamp:yyyy-MM-dd HH:mm:ss} [{Level:u3}] {Message:lj}{NewLine}{Exception}")
-                .WriteTo.File("logs/debug.log", restrictedToMinimumLevel: LogEventLevel.Debug, rollingInterval: RollingInterval.Day,
+                .WriteTo.File(Constants.CONFIG_APP_LOG_PATH_DEBUG, restrictedToMinimumLevel: LogEventLevel.Debug, rollingInterval: RollingInterval.Day,
                     outputTemplate: "{Timestamp:yyyy-MM-dd HH:mm:ss} [{Level:u3}] {Message:lj}{NewLine}{Exception}")
                 .CreateLogger();
         }

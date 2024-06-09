@@ -1,5 +1,6 @@
 ﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
 
+using ErpManager.Common;
 using ErpManager.Common.Utilities;
 using MailKit.Net.Smtp;
 using MailKit.Security;
@@ -18,15 +19,15 @@ namespace ErpManager.Infrastructure.Mail
         protected readonly string _mailOperator;
         protected readonly string _nameOperator;
 
-        public MailSenderBase(MailSenderInitialize mailInfo)
+        public MailSenderBase()
         {
-            _smtpServer = mailInfo.smtpServer;
-            _smtpPort = mailInfo.smtpPort;
-            _smtpUser = mailInfo.smtpUser;
-            _smtpUserName = mailInfo.smtpUserName;
-            _smtpPass = mailInfo.smtpPass;
-            _mailOperator = mailInfo.mailOperator;
-            _nameOperator = mailInfo.nameOperator;
+            _smtpServer = Constants.CONFIG_SMTP_SERVER;
+            _smtpPort = Constants.CONFIG_SMTP_PORT;
+            _smtpUser = Constants.CONFIG_SMTP_USER;
+            _smtpUserName = Constants.CONFIG_SMTP_USERNAME;
+            _smtpPass = Constants.CONFIG_SMTP_PASSWORD;
+            _mailOperator = Constants.CONFIG_OWNER_MAIL;
+            _nameOperator = Constants.CONFIG_OWNER_NAME;
         }
 
         protected async Task SendMailAsync(MailSenderInfo mailInfo)

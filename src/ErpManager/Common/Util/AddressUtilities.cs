@@ -19,7 +19,7 @@ namespace ErpManager.ERP.Common.Util
         /// <returns>Province name</returns>
         public static string GetProvinceName(string provinceId, string culture = "")
         {
-            culture = Constants.SupportedCulture.Contains(culture) ? culture : Constants.CONFIG_LANGUAGE_OPTIONS;
+            culture = Constants.SupportedCulture.Contains(culture) ? culture : Constants.PAGE_LANGUAGE_OPTIONS;
 
             var province = AddressProvider.Instance.Provinces.FirstOrDefault(address => address.ProvinceId == provinceId);
             if (province == null) return string.Empty;
@@ -40,7 +40,7 @@ namespace ErpManager.ERP.Common.Util
         /// <returns>District name</returns>
         public static string GetDistrictName(string districtId, string culture = "")
         {
-            culture = Constants.SupportedCulture.Contains(culture) ? culture : Constants.CONFIG_LANGUAGE_OPTIONS;
+            culture = Constants.SupportedCulture.Contains(culture) ? culture : Constants.PAGE_LANGUAGE_OPTIONS;
 
             var district = AddressProvider.Instance.Districts
                 .SelectMany(address => address.Items)
@@ -63,7 +63,7 @@ namespace ErpManager.ERP.Common.Util
         /// <returns>Commune name</returns>
         public static string GetCommuneName(string communeId, string culture = "")
         {
-            culture = Constants.SupportedCulture.Contains(culture) ? culture : Constants.CONFIG_LANGUAGE_OPTIONS;
+            culture = Constants.SupportedCulture.Contains(culture) ? culture : Constants.PAGE_LANGUAGE_OPTIONS;
 
             var commune = AddressProvider.Instance.Communes
                 .SelectMany(address => address.Items)
@@ -87,7 +87,7 @@ namespace ErpManager.ERP.Common.Util
         /// <returns>Address</returns>
         public static string GetAddressExtend(string address, string culture = "")
         {
-            culture = Constants.SupportedCulture.Contains(culture) ? culture : Constants.CONFIG_LANGUAGE_OPTIONS;
+            culture = Constants.SupportedCulture.Contains(culture) ? culture : Constants.PAGE_LANGUAGE_OPTIONS;
             return culture switch
             {
                 Constants.FLG_GLOBAL_CULTURE_VN => address,

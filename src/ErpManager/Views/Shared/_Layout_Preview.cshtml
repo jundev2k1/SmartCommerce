@@ -1,9 +1,9 @@
 ﻿<!DOCTYPE html>
-<html lang="@Constants.CONFIG_LANGUAGE_OPTIONS">
+<html lang="@Constants.PAGE_LANGUAGE_OPTIONS">
 <head>
-    <meta charset="@Constants.CONFIG_CHARSET_OPTIONS" />
+    <meta charset="@Constants.PAGE_CHARSET_OPTIONS" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData[Constants.GLOBAL_KEY_TITLE] - @Constants.APPLICATION_NAME</title>
+    <title>@ViewData[Constants.GLOBAL_KEY_TITLE] - @Constants.CONFIG_APP_NAME</title>
     @* Css import render *@
     @await Component.InvokeAsync(Constants.ERP_COMPONENT_NAME_STYLE_SHEET)
 </head>

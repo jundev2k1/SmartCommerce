@@ -6,7 +6,7 @@ namespace ErpManager.Infrastructure.Mail
 {
     internal class MailSender : MailSenderBase, IMailSender
     {
-        public MailSender(MailSenderInitialize mailInfo) : base(mailInfo)
+        public MailSender() : base()
         {
         }
 

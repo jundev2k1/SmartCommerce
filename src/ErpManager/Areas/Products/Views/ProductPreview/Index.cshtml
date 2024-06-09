@@ -119,7 +119,7 @@
                 <ul class="row gy-3">
                     @foreach (var relatedProduct in Model.RelatedProducts)
                     {
-                        var relatedAddress = AddressUtilities.GetDistrictName(relatedProduct.Address2, Constants.CONFIG_LANGUAGE_OPTIONS);
+                        var relatedAddress = AddressUtilities.GetDistrictName(relatedProduct.Address2, Constants.PAGE_LANGUAGE_OPTIONS);
                         var relatedPrice = ProductUtilities.GetDisplayPrice(relatedProduct);
                         var relatedImage = ProductUtilities.GetMainProductImage(relatedProduct.Images);
 

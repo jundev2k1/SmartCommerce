@@ -35,6 +35,9 @@ namespace ErpManager.ERP
                 options.MinimumSameSitePolicy = SameSiteMode.Strict;
             });
 
+            // Init configuration
+            new AppConfiguration(configuration).Initialize();
+
             // Dependency injection
             services.AddCommon();
             services.RegisterValidations();
@@ -60,7 +63,6 @@ namespace ErpManager.ERP
         /// </summary>
         private static IServiceCollection AddCommon(this IServiceCollection services)
         {
-            services.AddSingleton<AppConfiguration>();
             services.AddSingleton<ILocalizer, Localizer>();
             services.AddTransient<IValidatorFacade, ValidatorFacade>();
             services.AddScoped<SessionManager>();

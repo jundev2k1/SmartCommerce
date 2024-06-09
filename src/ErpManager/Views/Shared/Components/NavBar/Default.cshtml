@@ -46,7 +46,7 @@
                             <button type="button" data-bs-toggle="collapse" data-bs-target="#@item.Name">
                                 <i class="@item.Icon"></i>
                                 <span class="title">
-                                    @(Constants.CONFIG_DEFAULT_SIDEBAR_OPTIONS ? item.Label : _localizer.Globals[item.Localizer])
+                                    @(Constants.CONFIG_DEFAULT_SIDEBAR_OPTION ? item.Label : _localizer.Globals[item.Localizer])
                                 </span>
                             </button>
                             <div id="@item.Name" class="collapse">
@@ -59,7 +59,7 @@
                                             <a href="@subItem.Url">
                                                 <i class="fa-solid fa-chevron-right fa-fw" style="opacity: 0"></i>
                                                 <span class="title">
-                                                    @(Constants.CONFIG_DEFAULT_SIDEBAR_OPTIONS ? subItem.Label : _localizer.Globals[subItem.Localizer])
+                                                    @(Constants.CONFIG_DEFAULT_SIDEBAR_OPTION ? subItem.Label : _localizer.Globals[subItem.Localizer])
                                                 </span>
                                             </a>
                                         </li>
@@ -74,7 +74,7 @@
                             <a href="@item.Url" class="collapsed" type="button">
                                 <i class="@item.Icon"></i>
                                 <span class="title">
-                                    @(Constants.CONFIG_DEFAULT_SIDEBAR_OPTIONS ? item.Label : _localizer.Globals[item.Localizer])
+                                    @(Constants.CONFIG_DEFAULT_SIDEBAR_OPTION ? item.Label : _localizer.Globals[item.Localizer])
                                 </span>
                             </a>
                         </div>

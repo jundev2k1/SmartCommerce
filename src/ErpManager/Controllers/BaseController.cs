@@ -194,7 +194,7 @@ namespace ErpManager.ERP.Controllers
         }
 
         /// <summary>Operator branch id</summary>
-        protected string OperatorBranchId { get; private set; } = Constants.CONFIG_DEFAULT_BRANCH_ID;
+        protected string OperatorBranchId { get; private set; } = Constants.CONFIG_MASTER_BRANCH_ID;
         /// <summary>Operator id</summary>
         protected string OperatorId { get; private set; } = string.Empty;
         /// <summary>Operator name</summary>

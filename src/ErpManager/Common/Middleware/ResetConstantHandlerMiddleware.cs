@@ -29,7 +29,7 @@ namespace ErpManager.ERP.Common.Middleware
 
         private void ResetConstants(HttpContext context)
         {
-            Constants.CONFIG_LANGUAGE_OPTIONS = GetCurrentCulture(context);
+            Constants.PAGE_LANGUAGE_OPTIONS = GetCurrentCulture(context);
         }
 
         private string GetCurrentCulture(HttpContext context)

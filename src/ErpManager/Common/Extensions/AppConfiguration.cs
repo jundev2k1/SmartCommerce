@@ -8,33 +8,57 @@ namespace ErpManager.ERP.Common.Extensions
         public AppConfiguration(IConfiguration configuration)
         {
             _configuration = configuration;
-            Inititalize();
+        }
+
+        public void Initialize()
+        {
+            AppSettingInititalize();
+            SystemInititalize();
+            OperatorInititalize();
+        } 
+
+        /// <summary>
+        /// System Inititalize
+        /// </summary>
+        private void AppSettingInititalize()
+        {
+            Constants.CONFIG_APP_DOMAIN = _configuration["ApplicationSetting:AppDomain"].ToStringOrEmpty();
+            Constants.CONFIG_APP_PORT = _configuration["ApplicationSetting:AppPort"].ToStringOrEmpty();
+            Constants.CONFIG_APP_NAME = _configuration["ApplicationSetting:AppName"].ToStringOrEmpty();
+            Constants.CONFIG_APP_LOG_PATH = _configuration["ApplicationSetting:LogPath"].ToStringOrEmpty();
+            Constants.CONFIG_APP_LOG_PATH_INFO = Path.Combine(Constants.CONFIG_APP_LOG_PATH, "log-info.txt");
+            Constants.CONFIG_APP_LOG_PATH_WARNING = Path.Combine(Constants.CONFIG_APP_LOG_PATH, "log-warning.txt");
+            Constants.CONFIG_APP_LOG_PATH_ERROR = Path.Combine(Constants.CONFIG_APP_LOG_PATH, "log-error.txt");
+            Constants.CONFIG_APP_LOG_PATH_DEBUG = Path.Combine(Constants.CONFIG_APP_LOG_PATH, "log-debug.txt");
+            Constants.CONFIG_APP_LOG_PATH_VERBOSE = Path.Combine(Constants.CONFIG_APP_LOG_PATH, "log-verbose.txt");
         }
 
         /// <summary>
-        /// Inititalize
+        /// System Inititalize
         /// </summary>
-        private void Inititalize()
+        private void SystemInititalize()
         {
-            this.SecretKey = Constants.CONFIG_SECRET_KEY = _configuration["SecretKey"].ToStringOrEmpty();
-            this.OwnerName = Constants.CONFIG_OWNER_NAME = _configuration["OwnerName"].ToStringOrEmpty();
-            this.Tel = Constants.CONFIG_OWNER_TEL = _configuration["Tel"].ToStringOrEmpty();
-            this.Mail = Constants.CONFIG_OWNER_MAIL = _configuration["Mail"].ToStringOrEmpty();
-            this.MailCC = Constants.CONFIG_OWNER_MAIL_CC = _configuration["MailCC"].ToStringOrEmpty();
-            this.MailBCC = Constants.CONFIG_OWNER_MAIL_BCC = _configuration["MailBCC"].ToStringOrEmpty();
+            bool.TryParse(_configuration["SystemSetting:GlobalOption"].ToStringOrEmpty(), out Constants.CONFIG_GLOBAL_OPTION);
+            bool.TryParse(_configuration["SystemSetting:DefaultSidebarOption"].ToStringOrEmpty(), out Constants.CONFIG_DEFAULT_SIDEBAR_OPTION);
+            Constants.CONFIG_MASTER_BRANCH_ID = _configuration["SystemSetting:MasterBranchId"].ToStringOrEmpty();
+            Constants.CONFIG_CURRENCY_IN_USE = _configuration["SystemSetting:CurencyInUse"].ToStringOrEmpty();
+            Constants.CONFIG_SMTP_SERVER = _configuration["SystemSetting:SmtpServer"].ToStringOrEmpty();
+            int.TryParse(_configuration["SystemSetting:SmtpPort"].ToStringOrEmpty(), out Constants.CONFIG_SMTP_PORT);
+            Constants.CONFIG_SMTP_USER = _configuration["SystemSetting:SmtpUser"].ToStringOrEmpty();
+            Constants.CONFIG_SMTP_USERNAME = _configuration["SystemSetting:SmtpUserName"].ToStringOrEmpty();
+            Constants.CONFIG_SMTP_PASSWORD = _configuration["SystemSetting:SmtpPassword"].ToStringOrEmpty();
         }
 
-        /// <summary>App Config: secret key</summary>
-        public string SecretKey { get; private set; } = string.Empty;
-        /// <summary>App Config: Owner name</summary>
-        public string OwnerName { get; private set; } = string.Empty;
-        /// <summary>App Config: Owner phone number</summary>
-        public string Tel { get; private set; } = string.Empty;
-        /// <summary>App Config: owner mail</summary>
-        public string Mail { get; private set; } = string.Empty;
-        /// <summary>App Config: mail CC</summary>
-        public string MailCC { get; private set; } = string.Empty;
-        /// <summary>App Config: mail BCC</summary>
-        public string MailBCC { get; private set; } = string.Empty;
+        /// <summary>
+        /// Operator Inititalize
+        /// </summary>
+        private void OperatorInititalize()
+        {
+            Constants.CONFIG_SECRET_KEY = _configuration["OperatorSetting:SecretKey"].ToStringOrEmpty();
+            Constants.CONFIG_OWNER_NAME = _configuration["OperatorSetting:OwnerName"].ToStringOrEmpty();
+            Constants.CONFIG_OWNER_TEL = _configuration["OperatorSetting:Tel"].ToStringOrEmpty();
+            Constants.CONFIG_OWNER_MAIL = _configuration["OperatorSetting:Mail"].ToStringOrEmpty();
+            Constants.CONFIG_OWNER_MAIL_CC = _configuration["OperatorSetting:MailCC"].ToStringOrEmpty();
+        }
     }
 }
