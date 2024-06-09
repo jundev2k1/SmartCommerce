@@ -59,5 +59,16 @@ namespace ErpManager.Common.Utilities
             var result = price.ToString("N0", CultureInfo.InvariantCulture) ?? string.Empty;
             return result;
         }
+
+        /// <summary>
+        /// Change break line to <br />
+        /// </summary>
+        /// <param name="input">Input value</param>
+        /// <returns>The results have been replaced</returns>
+        public static string ChangeToBr(this string input)
+        {
+            input = input.Replace(Environment.NewLine, "<br />");
+            return input;
+        }
     }
 }

@@ -146,9 +146,9 @@
     <value>There is no product description</value>
   </data>
   <data name="Message_NoHaveTakeOverPersion" xml:space="preserve">
-    <value>The person in charge has not been updated yet!</value>
+    <value>The person in charge has not been updated yet</value>
   </data>
   <data name="Message_WeContactSoon" xml:space="preserve">
-    <value>We will contact you as soon as possible, thanks you!</value>
+    <value>We will contact you as soon as possible, thanks you.</value>
   </data>
 </root>
