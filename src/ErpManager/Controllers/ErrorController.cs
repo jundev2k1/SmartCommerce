@@ -35,14 +35,10 @@ namespace ErpManager.ERP.Controllers
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Index()
         {
-            _mail.SendMailToOperator("Test mail", "<h1>Hello world</h1>\n<p>Hey you... I'm supper hacker. How do you feel</p>");
             var (errorCode, errorMessageKey) = GetErrorSession();
             var content = GetPageContent(errorCode, errorMessageKey);
-            
-            _logger.LogInformation("Test info message");
-            _logger.LogWarning("Test warning message");
-            _logger.LogError("Test error message");
-            _logger.LogTrace("Test trace message");
+
+            _logger.LogError(content.Message);
             ClearErrorInfoSession();
             return View(content);
         }

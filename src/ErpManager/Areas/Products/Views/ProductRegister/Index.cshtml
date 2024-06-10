@@ -9,7 +9,8 @@
         new Breadcrumb { Title = _localizer.Globals["Nav_Product_Register"].Value, IsDisabled = true }
     };
 
-    var dropdownItems = (Dictionary<string, List<SelectListItem>>)ViewBag.DropdownItems;
+    var dropdownItems = ViewBag.DropdownItems as Dictionary<string, List<SelectListItem>>;
+    var productTempModel = new ProductModel();
 }
 @model ProductModel
 
@@ -50,38 +51,25 @@
                             <div class="row g-md-3 gx-1 gy-2">
                                 <div class="form-group col-md-4 col-6">
                                     <label asp-for="Status">@_localizer.Fields["Product_Status"]</label>
-                                    <select asp-for="Status" class="form-select" id="productStatusForInsert">
-                                        @{
-                                            var statusDropdown = dropdownItems.FirstOrDefault(item => item.Key == new ProductModel().Properties.GetName(model => model.Status)).Value
-                                            ?? new List<SelectListItem>();
-                                        }
-                                        @foreach (var selectItem in statusDropdown)
-                                        {
-                                            <option value="@(selectItem?.Value)">@selectItem.Text</option>
-                                        }
-                                    </select>
+                                    @{
+                                        var statusDropdown = dropdownItems.FirstOrDefault(item => item.Key == productTempModel.Properties.GetName(model => model.Status)).Value;
+                                    }
+                                    @Html.DropDownListFor(model => model.Status, statusDropdown, new { Class = "form-select", Id = "productStatusForInsert" })
                                     <span asp-validation-for="Status" class="text-danger"></span>
                                 </div>
                                 <div class="form-group col-md-4 col-6">
                                     <label asp-for="DisplayPrice">@_localizer.Fields["Product_DisplayPrice"]</label>
-                                    <select asp-for="DisplayPrice" class="form-select" id="displayPriceForInsert">
-                                        @{
-                                            var displayPriceDropdown = dropdownItems.FirstOrDefault(item => item.Key == new ProductModel().Properties.GetName(model => model.DisplayPrice)).Value
-                                            ?? new List<SelectListItem>();
-                                        }
-                                        @foreach (var selectItem in displayPriceDropdown)
-                                        {
-                                            <option value="@(selectItem?.Value)">@selectItem.Text</option>
-                                        }
-                                    </select>
+                                    @{
+                                        var displayPriceDropdown = dropdownItems.FirstOrDefault(item => item.Key == productTempModel.Properties.GetName(model => model.DisplayPrice)).Value;
+                                    }
+                                    @Html.DropDownListFor(model => model.DisplayPrice, displayPriceDropdown, new { Class = "form-select", Id = "displayPriceForInsert" })
                                     <span asp-validation-for="DisplayPrice" class="text-danger"></span>
                                 </div>
                                 <div class="form-group col-md-4 col-12">
                                     <label asp-for="TakeOverId">@_localizer.Fields["Product_TakeOverId"]</label>
                                     <select asp-for="TakeOverId" class="form-select select-search-user">
                                         @{
-                                            var takeOverIdDropdown = dropdownItems.FirstOrDefault(item => item.Key == new ProductModel().Properties.GetName(model => model.TakeOverId)).Value
-                                            ?? new List<SelectListItem>();
+                                            var takeOverIdDropdown = dropdownItems.FirstOrDefault(item => item.Key == productTempModel.Properties.GetName(model => model.TakeOverId)).Value;
                                             var takeOverIdItem = takeOverIdDropdown?.FirstOrDefault();
                                         }
                                         <option value="@(takeOverIdItem?.Value)">@takeOverIdItem?.Text</option>
@@ -173,7 +161,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                 </div>
             </div>
             <div class="col-12">

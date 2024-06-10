@@ -373,4 +373,7 @@
   <data name="Btn_Send" xml:space="preserve">
     <value>Send</value>
   </data>
+  <data name="Title_FormContact" xml:space="preserve">
+    <value>Contact Form</value>
+  </data>
 </root>

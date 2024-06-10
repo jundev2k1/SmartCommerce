@@ -46,38 +46,22 @@ namespace ErpManager.ERP.Common.ValueText
         public List<SelectListItem> GetSelectList(
             Func<ValueTextModel, Dictionary<string, ValueTextItemModel[]>> getTargetValueText,
             string field,
-            string defaultValue = "",
-            bool includeEmptyFlg = false)
+            string defaultValue = "")
         {
-            var data = GetGroupValueText(getTargetValueText, field);
-            var result = new List<SelectListItem>();
-
-            // Add empty field if include empty flag is on 
-            if (includeEmptyFlg)
+            // Func map select item
+            var mapToSelectItem = (ValueTextItemModel item) =>
             {
-                result.Add(new SelectListItem
+                return new SelectListItem
                 {
-                    Text = string.Empty,
-                    Value = string.Empty,
-                    Selected = string.IsNullOrEmpty(defaultValue)
-                });
-            }
-
-            // Add items
-            foreach (var item in data)
-            {
-                var textContent = !string.IsNullOrEmpty(item.LocalizerKey)
-                    ? _localizer.ValueTexts[item.LocalizerKey]
-                    : item.Text;
-                var selectItem = new SelectListItem
-                {
-                    Text = textContent,
+                    Text = _localizer.ValueTexts[item.LocalizerKey].Value,
                     Value = item.Value,
                     Selected = item.Value == defaultValue
                 };
-                result.Add(selectItem);
-            }
+            };
 
+            // Get data for dropdownlist
+            var data = GetGroupValueText(getTargetValueText, field);
+            var result = data.Select(mapToSelectItem).ToList();
             return result;
         }
     }

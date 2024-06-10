@@ -121,7 +121,7 @@ namespace ErpManager.ERP.Controllers
             try
             {
                 // Check login id is wrong
-                var user = _serviceFacade.Users.GetUserByUsername(this.OperatorBranchId, input.LoginID);
+                var user = _serviceFacade.Users.GetUserByUsername(Constants.CONFIG_MASTER_BRANCH_ID, input.LoginID);
                 if (user == null) throw new Exception();
 
                 // Check block account
@@ -135,7 +135,7 @@ namespace ErpManager.ERP.Controllers
 
                 // Try login, throw error if login fail
                 var passwordEncrypt = Authorization.Instance.PasswordEncrypt(input.Password);
-                var @operator = _serviceFacade.Users.TryLogin(this.OperatorBranchId, input.LoginID, passwordEncrypt);
+                var @operator = _serviceFacade.Users.TryLogin(Constants.CONFIG_MASTER_BRANCH_ID, input.LoginID, passwordEncrypt);
                 if (@operator == null) throw new Exception("Login information invalid");
 
                 // Handle login success

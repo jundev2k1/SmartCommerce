@@ -7,7 +7,7 @@
 <section class="container">
     <div class="row gx-3 gy-3">
         <div class="preview-content col-md-8 col-sm-12">
-            <div class="preview-layout">
+            <div class="site-card">
                 <div class="preview-image">
                     @foreach (var imagePath in Model.Product.Images.Split(','))
                     {
@@ -43,8 +43,8 @@
                                     </a>
                                 </div>
                             }
-                            <div class="text-center">
-                                <button class="btn site-btn-info" data-bs-toggle="modal" data-bs-target="#btnContactUs">
+                            <div class="text-center w-100">
+                                <button class="btn site-btn-info d-block w-100" data-bs-toggle="modal" data-bs-target="#btnContactUs">
                                     <i class="fa-light fa-envelope"></i>
                                     @_localizer.Globals["Btn_ContactAdmin"]
                                 </button>
@@ -63,7 +63,7 @@
             </div>
         </div>
         <div class="preview-sidebar col-md-4 col-sm-12">
-            <div class="preview-layout agent-detail mb-2">
+            <div class="site-card agent-detail mb-2">
                 <h3>@_localizer.Globals["Title_TakeOverPerson"]</h3>
                 @if (Model.AgentDetail != null)
                 {
@@ -90,7 +90,7 @@
             </div>
             @if (Model.CanShareQRCode)
             {
-                <div class="preview-layout calender mb-2">
+                <div class="site-card calender mb-2">
                     <h3>@_localizer.Globals["Title_ShareLink"]</h3>
                     <div class="qr-code">
                         <a href="#" onclick="javascript:void(0); copyImageToClipboard(this.querySelector('img'));" data-bs-toggle="tooltip" title="@_localizer.Messages["Message_ClickCopy"]">
@@ -102,7 +102,7 @@
             }
             @if (!string.IsNullOrEmpty(Model.Product.EmbeddedLink))
             {
-                <div class="preview-layout location">
+                <div class="site-card location">
                     <div class="wrapper">
                         @Html.Raw(Model.Product.EmbeddedLink)
                     </div>
@@ -110,7 +110,7 @@
             }
         </div>
         <div class="preview-related-product">
-            <div class="preview-layout">
+            <div class="site-card">
                 <h2>@_localizer.Globals["Title_RelatedProduct"]</h2>
                 <ul class="row gy-3">
                     @foreach (var relatedProduct in Model.RelatedProducts)
@@ -121,7 +121,9 @@
 
                         <li class="col-md-3 col-6">
                             <a asp-route="@Constants.MODULE_PRODUCT_PRODUCTPREVIEW_NAME" asp-route-id="@relatedProduct.ProductId">
-                                <img class="img-fluid" src="@relatedImage" />
+                                <div class="product-thumbnail mb-2">
+                                    <img class="img-fluid" src="@relatedImage" />
+                                </div>
                                 <h3>@relatedProduct.Name</h3>
                                 <p><i class="fa-regular fa-circle-dollar"></i> @_localizer.Globals["Title_Price"]: @relatedPrice</p>
                                 <p>@await Component.InvokeAsync(Constants.ERP_COMPONENT_NAME_PRODUCT_STATUS_BADGE, new { status = relatedProduct.Status })</p>
@@ -152,7 +154,8 @@
         </div>
     </div>
 </section>
-@await Component.InvokeAsync(Constants.ERP_COMPONENT_NAME_FORMCONTACT, new FormContactViewModel { TargetButtonId = "btnContactUs", IsShowType = false, TypeForm = FormContactTypeEnum.ContactAdmin });
+@await Component.InvokeAsync(Constants.ERP_COMPONENT_NAME_FORMCONTACT, new FormContactViewModel { TargetButtonId = "btnContactUs", IsShowType = false, TypeForm = FormContactTypeEnum.ContactAdmin })
+
 @section ViewScript {
     <script>
         (function () {

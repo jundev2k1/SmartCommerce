@@ -1,30 +1,45 @@
 ﻿@model FormContactViewModel
 @{
     var ddlFormType = ViewBag.FormType as List<SelectListItem> ?? new List<SelectListItem>();
+    var displayStyle = Model.IsShowType ? "block" : "none";
 }
 
 <section id="formContact">
-    <div class="modal fade" id="@Model.TargetButtonId" tabindex="-1" aria-hidden="true">
+    <div class="modal modal-lg fade modal-dialog-scrollable" id="@Model.TargetButtonId" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5">Modal title</h1>
+                    <h1 class="modal-title fs-5">@_localizer.Fields["Title_FormContact"]</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    @if (Model.IsShowType)
-                    {
-                        <select style="display: @(Model.IsShowType ? "block" : "none")">
-                            @foreach (var optionItem in ddlFormType)
-                            {
-                                <option value="@(optionItem?.Value)">@optionItem.Text</option>
-                            }
-                        </select>
-                    }
+                    <div class="form-group" style="display: @displayStyle">
+                        @Html.DropDownList(expression: "formContact", selectList: ddlFormType, htmlAttributes: new { Class = "form-control" })
+                    </div>
+                    <div class="form-group mb-2">
+                        <label for="formName" class="form-label">@_localizer.Fields["FormContact_Name"]</label>
+                        <input id="formName" type="text" class="form-control" placeholder="@(_localizer.Globals["PlaceHolder_TextBox"]) (@_localizer.Fields["FormContact_Name"])..." />
+                        <span class="text-danger"></span>
+                    </div>
+                    <div class="form-group mb-2">
+                        <label for="formEmail" class="form-label">@_localizer.Fields["FormContact_Email"]</label>
+                        <input id="formEmail" type="text" class="form-control" placeholder="@(_localizer.Globals["PlaceHolder_TextBox"]) (@_localizer.Fields["FormContact_Email"])..." />
+                        <span class="text-danger"></span>
+                    </div>
+                    <div class="form-group mb-2">
+                        <label for="formTel" class="form-label">@_localizer.Fields["FormContact_Tel"]</label>
+                        <input id="formTel" type="text" class="form-control" placeholder="@(_localizer.Globals["PlaceHolder_TextBox"]) (@_localizer.Fields["FormContact_Tel"])..." />
+                        <span class="text-danger"></span>
+                    </div>
+                    <div class="form-group mb-2">
+                        <label for="formMessage" class="form-label">@_localizer.Fields["FormContact_Message"]</label>
+                        <textarea id="formMessage" type="text" class="form-control" placeholder="@(_localizer.Globals["PlaceHolder_TextBox"]) @(_localizer.Fields["FormContact_Message"])..."></textarea>
+                        <span class="text-danger"></span>
+                    </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn site-btn-secondary" data-bs-dismiss="modal">@_localizer.Globals["Btn_Close"]</button>
                     <button type="button" class="btn site-btn-primary">@_localizer.Globals["Btn_Send"]</button>
+                    <button type="button" class="btn site-btn-danger" data-bs-dismiss="modal">@_localizer.Globals["Btn_Close"]</button>
                 </div>
             </div>
         </div>

@@ -132,7 +132,7 @@
     /* Border */
     --site-border: 1px solid var(--site-border-operating);
     --site-border-none: 0;
-    --site-border-layout: 4px;
+    --site-border-layout: 8px;
     --site-border-rounded: 12px;
     --site-border-full: 99999px;
 }
@@ -625,7 +625,7 @@ ul, li {
     background: var(--site-background-operating);
     border-radius: var(--site-border-layout);
     border: var(--site-border);
-    padding: .75rem;
+    padding: .875rem;
 }
 
 .site-note {

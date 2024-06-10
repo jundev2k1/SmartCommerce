@@ -339,6 +339,9 @@
   <data name="Title_Address" xml:space="preserve">
     <value>Địa chỉ</value>
   </data>
+  <data name="Title_FormContact" xml:space="preserve">
+    <value>Liên Hệ Quản Trị Viên</value>
+  </data>
   <data name="Title_Name" xml:space="preserve">
     <value>Tên</value>
   </data>

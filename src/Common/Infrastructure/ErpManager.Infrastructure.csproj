@@ -29,6 +29,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Using Include="ErpManager.Common" />
     <Using Include="ErpManager.Infrastructure.Common.Enum" />
     <Using Include="ErpManager.Infrastructure.Common.Models" />
     <Using Include="ErpManager.Infrastructure.ExceptionExtension" />

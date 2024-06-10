@@ -7,8 +7,8 @@ namespace ErpManager.ERP.Controllers
 {
     public class BaseController : Controller
     {
-        private readonly IServiceFacade _serviceFacade;
-        private readonly SessionManager _sessionManager;
+        protected readonly IServiceFacade _serviceFacade;
+        protected readonly SessionManager _sessionManager;
 
         /// <summary>
         /// Base Controller Constructor
@@ -26,6 +26,7 @@ namespace ErpManager.ERP.Controllers
         private void Initialize()
         {
             SetDefaultViewValue();
+            ResetOperatorSession();
         }
 
         /// <summary>

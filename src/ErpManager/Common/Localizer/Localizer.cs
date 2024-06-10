@@ -15,7 +15,6 @@ namespace ErpManager.ERP.Common.Localizer
         private readonly IStringLocalizer<ValidatorsLocalizer> _validatorsLocalizer;
         private readonly IStringLocalizer<FieldsLocalizer> _fieldsLocalizer;
         private readonly IStringLocalizer<ValueTextsLocalizer> _valueTextsLocalizer;
-        private readonly Dictionary<string, string> _dictionary;
 
         public Localizer(
             IStringLocalizer<GlobalsLocalizer> globalsLocalizer,
@@ -29,7 +28,6 @@ namespace ErpManager.ERP.Common.Localizer
             _validatorsLocalizer = validatorsLocalizer;
             _fieldsLocalizer = fieldsLocalizer;
             _valueTextsLocalizer = valueTextsLocalizer;
-            _dictionary = GetDictionary();
         }
 
         public Dictionary<string, string> GetDictionary()
@@ -48,7 +46,7 @@ namespace ErpManager.ERP.Common.Localizer
                 .MapToDictionary();
         }
 
-        public Dictionary<string, string> Dictionary => _dictionary;
+        public Dictionary<string, string> Dictionary => GetDictionary();
 
         public IStringLocalizer<GlobalsLocalizer> Globals => _globalsLocalizer;
 
