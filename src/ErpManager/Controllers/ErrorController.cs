@@ -7,11 +7,8 @@ namespace ErpManager.ERP.Controllers
 {
     public sealed class ErrorController : BaseController
     {
-        private readonly ILocalizer _localizer;
-        private readonly IServiceFacade _serviceFacade;
-        private readonly SessionManager _sessionManager;
-        private readonly IFileLogger _logger;
-        private readonly IMailSender _mail;
+        // DI
+        private readonly IMailSender _mailSender;
 
         /// <summary>
         /// Constructor
@@ -21,13 +18,9 @@ namespace ErpManager.ERP.Controllers
             IServiceFacade serviceFacade,
             SessionManager sessionManager,
             IFileLogger logger,
-            IMailSender mail) : base(serviceFacade, sessionManager)
+            IMailSender mail) : base(serviceFacade, sessionManager, localizer, logger)
         {
-            _localizer = localizer;
-            _serviceFacade = serviceFacade;
-            _sessionManager = sessionManager;
-            _logger = logger;
-            _mail = mail;
+            _mailSender = mail;
         }
 
         [HttpGet]

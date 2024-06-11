@@ -67,4 +67,19 @@
             </ul>
         </div>
     </section>
+    <script type="text/javascript">
+        const initUserNotification = function () {
+            debugger
+            const connection = new signalR.HubConnectionBuilder()
+                .withUrl("@(Constants.HUB_PATH_NOTIFICATION)")
+                .build();
+
+            connection.on('@(Constants.HUB_METHOD_NAME_USER_NOTIFICATION)', (message) => {
+                console.log(message);
+            });
+
+            connection.start().catch(err => console.error(err.toString()));
+        }
+        StoreWindowLoadCallback.push(initUserNotification);
+    </script>
 }

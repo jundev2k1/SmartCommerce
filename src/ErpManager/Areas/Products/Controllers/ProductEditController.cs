@@ -8,7 +8,6 @@ namespace ErpManager.ERP.Areas.Product.Controllers
     public sealed class ProductEditController : ProductBaseController
     {
         private readonly IValidatorFacade _validatorFacade;
-        private readonly ILocalizer _localizer;
 
         /// <summary>
         /// Constructor
@@ -18,10 +17,10 @@ namespace ErpManager.ERP.Areas.Product.Controllers
             IValidatorFacade validatorFacade,
             ILocalizer localizer,
             SessionManager sessionManager,
-            ValueTextManager valueTextManager) : base(serviceFacade, sessionManager, valueTextManager)
+            ValueTextManager valueTextManager,
+            IFileLogger logger) : base(serviceFacade, sessionManager, localizer, logger, valueTextManager)
         {
             _validatorFacade = validatorFacade;
-            _localizer = localizer;
         }
 
         [HttpGet]

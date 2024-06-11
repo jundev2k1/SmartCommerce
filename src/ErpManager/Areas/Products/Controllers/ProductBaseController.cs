@@ -9,7 +9,9 @@ namespace ErpManager.ERP.Areas.Products.Controllers
         public ProductBaseController(
             IServiceFacade serviceFacade,
             SessionManager sessionManager,
-            ValueTextManager valueTextManager) : base(serviceFacade, sessionManager)
+            ILocalizer localizer,
+            IFileLogger logger,
+            ValueTextManager valueTextManager) : base(serviceFacade, sessionManager, localizer, logger)
         {
             _valueTextManager = valueTextManager;
         }

@@ -4,15 +4,15 @@ namespace ErpManager.ERP.Controllers
 {
     public sealed class CommonController : BaseController
     {
-        private readonly IServiceFacade _serviceFacade;
         private readonly IWebHostEnvironment _webHostEnvironment;
-        private readonly SessionManager _sessionManager;
-        public CommonController(IServiceFacade serviceFacade, IWebHostEnvironment webHostEnvironment, SessionManager sessionManager)
-            : base(serviceFacade, sessionManager)
+        public CommonController(
+            IServiceFacade serviceFacade,
+            IWebHostEnvironment webHostEnvironment,
+            SessionManager sessionManager,
+            ILocalizer localizer,
+            IFileLogger logger)
+            : base(serviceFacade, sessionManager, localizer, logger)
         {
-            _serviceFacade = serviceFacade;
-            _webHostEnvironment = webHostEnvironment;
-            _sessionManager = sessionManager;
         }
 
         [HttpGet]

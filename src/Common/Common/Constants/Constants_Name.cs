@@ -47,7 +47,15 @@ namespace ErpManager.Common
 
         #region ERP: Features Component Name
         /// <summary>ERP component name: Product status badge</summary>
-        public const string ERP_COMPONENT_NAME_PRODUCT_STATUS_BADGE = "ProductStatusBadge"; 
+        public const string ERP_COMPONENT_NAME_PRODUCT_STATUS_BADGE = "ProductStatusBadge";
+        #endregion
+
+        #region Hub Config
+        /// <summary>Hub path: Notification</summary>
+        public const string HUB_PATH_NOTIFICATION = "/Notification";
+
+        /// <summary>Hub method name: Notification</summary>
+        public const string HUB_METHOD_NAME_USER_NOTIFICATION = "UserNotification";
         #endregion
     }
 }

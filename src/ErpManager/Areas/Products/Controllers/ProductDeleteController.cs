@@ -1,15 +1,12 @@
 ﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
 
+using ErpManager.ERP.Areas.Products.Controllers;
+
 namespace ErpManager.ERP.Areas.Product.Controllers
 {
     [Area(Constants.MODULE_PRODUCT_AREA)]
-    public sealed class ProductDeleteController : BaseController
+    public sealed class ProductDeleteController : ProductBaseController
     {
-        private readonly IServiceFacade _serviceFacade;
-        private readonly IValidatorFacade _validatorFacade;
-        private readonly ILocalizer _localizer;
-        private readonly SessionManager _sessionManager;
-
         /// <summary>
         /// Constructor
         /// </summary>
@@ -17,12 +14,10 @@ namespace ErpManager.ERP.Areas.Product.Controllers
             IServiceFacade serviceFacade,
             IValidatorFacade validatorFacade,
             ILocalizer localizer,
-            SessionManager sessionManager) : base(serviceFacade, sessionManager)
+            SessionManager sessionManager,
+            ValueTextManager valueTextManager,
+            IFileLogger logger) : base(serviceFacade, sessionManager, localizer, logger, valueTextManager)
         {
-            _serviceFacade = serviceFacade;
-            _validatorFacade = validatorFacade;
-            _localizer = localizer;
-            _sessionManager = sessionManager;
         }
 
         [HttpGet]

@@ -4,19 +4,16 @@ namespace ErpManager.ERP.Controllers
 {
     public sealed class AuthenticationController : BaseController
     {
-        private readonly ILocalizer _localizer;
-        private readonly IServiceFacade _serviceFacade;
-        private readonly SessionManager _sessionManager;
-
         /// <summary>
         /// Constructor
         /// </summary>
-        public AuthenticationController(ILocalizer localizer, IServiceFacade serviceFacade, SessionManager sessionManager)
-            : base (serviceFacade, sessionManager)
+        public AuthenticationController(
+            ILocalizer localizer,
+            IServiceFacade serviceFacade,
+            SessionManager sessionManager,
+            IFileLogger logger)
+            : base (serviceFacade, sessionManager, localizer, logger)
         {
-            _localizer = localizer;
-            _serviceFacade = serviceFacade;
-            _sessionManager = sessionManager;
         }
 
         [HttpGet]

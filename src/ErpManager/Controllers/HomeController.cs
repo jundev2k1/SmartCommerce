@@ -4,19 +4,17 @@ namespace ErpManager.Controllers
 {
     public sealed class HomeController : BaseController
     {
-        private readonly ILocalizer _localizer;
-        private readonly IServiceFacade _serviceFacade;
-        private readonly SessionManager _sessionManager;
 
         /// <summary>
         /// Constructor
         /// </summary>
-        public HomeController(ILocalizer localizer, IServiceFacade serviceFacade, SessionManager sessionManager)
-            : base (serviceFacade, sessionManager)
+        public HomeController(
+            ILocalizer localizer,
+            IServiceFacade serviceFacade,
+            SessionManager sessionManager,
+            IFileLogger logger)
+            : base (serviceFacade, sessionManager, localizer, logger)
         {
-            _localizer = localizer;
-            _serviceFacade = serviceFacade;
-            _sessionManager = sessionManager;
         }
 
         /// <summary>

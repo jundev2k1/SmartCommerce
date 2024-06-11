@@ -1,5 +1,6 @@
 ﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
 
+using ErpManager.Infrastructure.BackgroundServices;
 using ErpManager.Infrastructure.Logging;
 using ErpManager.Infrastructure.Mail;
 using Microsoft.AspNetCore.Builder;
@@ -10,7 +11,9 @@ namespace ErpManager.Infrastructure
     {
         public static IServiceCollection AddInfrastructure(this IServiceCollection services)
         {
+            services.AddSignalR();
             services.AddDependencyInjection();
+            services.AddBackgroundService();
             return services;
         }
 
@@ -18,6 +21,12 @@ namespace ErpManager.Infrastructure
         {
             services.AddSingleton<IFileLogger, FileLogger>();
             services.AddSingleton<IMailSender, MailSender>();
+            return services;
+        }
+
+        private static IServiceCollection AddBackgroundService(this IServiceCollection services)
+        {
+            services.AddHostedService<NotificationBackgroundService>();
             return services;
         }
 

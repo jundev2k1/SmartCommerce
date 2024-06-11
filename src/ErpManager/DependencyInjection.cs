@@ -1,6 +1,9 @@
-﻿using ErpManager.ERP.Common.Localizer;
+﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
+
+using ErpManager.ERP.Common.Localizer;
 using ErpManager.ERP.Common.Middleware;
 using ErpManager.ERP.Common.Validators;
+using ErpManager.Infrastructure.Hubs;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.Mvc.Razor;
@@ -204,6 +207,7 @@ namespace ErpManager.ERP
             app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");
+            app.UseInfrastructureMapHub();
 
             return app;
         }
@@ -232,6 +236,13 @@ namespace ErpManager.ERP
             // Middleware
             app.UseMiddleware<PermissionHandlerMiddleware>();
             app.UseMiddleware<ResetConstantHandlerMiddleware>();
+
+            return app;
+        }
+
+        public static WebApplication UseInfrastructureMapHub(this WebApplication app)
+        {
+            app.MapHub<NotificationHub>(Constants.HUB_PATH_NOTIFICATION);
 
             return app;
         }

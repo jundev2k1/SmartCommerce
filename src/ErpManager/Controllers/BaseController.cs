@@ -9,14 +9,22 @@ namespace ErpManager.ERP.Controllers
     {
         protected readonly IServiceFacade _serviceFacade;
         protected readonly SessionManager _sessionManager;
+        protected readonly ILocalizer _localizer;
+        protected readonly IFileLogger _logger;
 
         /// <summary>
         /// Base Controller Constructor
         /// </summary>
-        public BaseController(IServiceFacade serviceFacade, SessionManager sessionManager)
+        public BaseController(
+            IServiceFacade serviceFacade,
+            SessionManager sessionManager,
+            ILocalizer localizer,
+            IFileLogger logger)
         {
             _serviceFacade = serviceFacade;
             _sessionManager = sessionManager;
+            _localizer = localizer;
+            _logger = logger;
             Initialize();
         }
 

@@ -15,6 +15,7 @@
   <ItemGroup>
     <PackageReference Include="MailKit" Version="4.6.0" />
     <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.SignalR" Version="1.1.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.0" />
     <PackageReference Include="Microsoft.Extensions.Localization.Abstractions" Version="7.0.11" />
     <PackageReference Include="MimeKit" Version="4.6.0" />
@@ -33,9 +34,12 @@
     <Using Include="ErpManager.Infrastructure.Common.Enum" />
     <Using Include="ErpManager.Infrastructure.Common.Models" />
     <Using Include="ErpManager.Infrastructure.ExceptionExtension" />
+    <Using Include="ErpManager.Infrastructure.Hubs" />
     <Using Include="ErpManager.Infrastructure.Interface" />
     <Using Include="ErpManager.Infrastructure.Middleware" />
+    <Using Include="Microsoft.AspNetCore.SignalR" />
     <Using Include="Microsoft.Extensions.DependencyInjection" />
+    <Using Include="Microsoft.Extensions.Hosting" />
   </ItemGroup>
 
 </Project>

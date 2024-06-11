@@ -3,13 +3,8 @@
 namespace ErpManager.ERP.Areas.Users.Controllers
 {
     [Area(Constants.MODULE_USER_AREA)]
-    public sealed class UserDetailController : BaseController
+    public sealed class UserDetailController : UserBaseController
     {
-        private readonly IServiceFacade _serviceFacade;
-        private readonly IValidatorFacade _validatorFacade;
-        private readonly ILocalizer _localizer;
-        private readonly SessionManager _sessionManager;
-
         /// <summary>
         /// Constructor
         /// </summary>
@@ -17,12 +12,10 @@ namespace ErpManager.ERP.Areas.Users.Controllers
             IServiceFacade serviceFacade,
             IValidatorFacade validatorFacade,
             ILocalizer localizer,
-            SessionManager sessionManager) : base(serviceFacade, sessionManager)
+            SessionManager sessionManager,
+            ValueTextManager valueTextManager,
+            IFileLogger logger) : base(serviceFacade, sessionManager, localizer, logger, valueTextManager)
         {
-            _serviceFacade = serviceFacade;
-            _validatorFacade = validatorFacade;
-            _localizer = localizer;
-            _sessionManager = sessionManager;
         }
 
         [HttpGet]

@@ -3,15 +3,16 @@
 namespace ErpManager.ERP.Areas.Users.Controllers
 {
     [Area(Constants.MODULE_USER_AREA)]
-    public sealed class UserListController : BaseController
+    public sealed class UserListController : UserBaseController
     {
-        private readonly IServiceFacade _serviceFacade;
-        private readonly SessionManager _sessionManager;
-        public UserListController(IServiceFacade serviceFacade, SessionManager sessionManager)
-            : base(serviceFacade, sessionManager)
+        public UserListController(
+            IServiceFacade serviceFacade,
+            IValidatorFacade validatorFacade,
+            ILocalizer localizer,
+            SessionManager sessionManager,
+            ValueTextManager valueTextManager,
+            IFileLogger logger) : base(serviceFacade, sessionManager, localizer, logger, valueTextManager)
         {
-            _serviceFacade = serviceFacade;
-            _sessionManager = sessionManager;
         }
 
         [HttpGet]

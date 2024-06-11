@@ -1,17 +1,20 @@
 ﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
 
+using ErpManager.ERP.Areas.Products.Controllers;
+
 namespace ErpManager.ERP.Areas.Product.Controllers
 {
     [Area(Constants.MODULE_PRODUCT_AREA)]
-    public sealed class ProductDetailController : BaseController
+    public sealed class ProductDetailController : ProductBaseController
     {
-        private readonly IServiceFacade _serviceFacade;
-        private readonly SessionManager _sessionManager;
-        public ProductDetailController(IServiceFacade serviceFacade, SessionManager sessionManager)
-            : base(serviceFacade, sessionManager)
+        public ProductDetailController(
+            IServiceFacade serviceFacade,
+            IValidatorFacade validatorFacade,
+            ILocalizer localizer,
+            SessionManager sessionManager,
+            ValueTextManager valueTextManager,
+            IFileLogger logger) : base(serviceFacade, sessionManager, localizer, logger, valueTextManager)
         {
-            _serviceFacade = serviceFacade;
-            _sessionManager = sessionManager;
         }
 
         [HttpGet]
