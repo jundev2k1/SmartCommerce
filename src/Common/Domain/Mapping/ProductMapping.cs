@@ -1,94 +1,92 @@
 ﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
 
-using ErpManager.Domain.Entities;
-using static System.Net.Mime.MediaTypeNames;
-
 namespace ErpManager.Domain.Mapping
 {
     public static class ProductMapping
     {
         /// <summary>
-        /// Map to product model
+        /// Map to model
         /// </summary>
-        /// <param name="productEntity">Product entity</param>
-        /// <returns>Product model</returns>
-        public static ProductModel MapToProductModel(this Product productEntity)
+        /// <param name="entity">Entity</param>
+        /// <returns>Model</returns>
+        public static ProductModel MapToModel(this Product entity)
         {
             var model = new ProductModel
             {
-                BranchId = productEntity.BranchId,
-                ProductId = productEntity.ProductId,
-                Name = productEntity.Name,
-                Images = productEntity.Images,
-                Address1 = productEntity.Address1,
-                Address2 = productEntity.Address2,
-                Address3 = productEntity.Address3,
-                Address4 = productEntity.Address4,
-                Price1 = productEntity.Price1,
-                Price2 = productEntity.Price2,
-                Price3 = productEntity.Price3,
-                DisplayPrice = productEntity.DisplayPrice,
-                Status = productEntity.Status,
-                DelFlg = productEntity.DelFlg,
-                Size1 = productEntity.Size1,
-                Size2 = productEntity.Size2,
-                Size3 = productEntity.Size3,
-                TakeOverId = productEntity.TakeOverId,
-                Description = productEntity.Description,
-                EmbeddedLink = productEntity.EmbeddedLink,
-                DateCreated = productEntity.DateCreated,
-                DateChanged = productEntity.DateCreated,
-                CreatedBy = productEntity.CreatedBy,
-                LastChanged = productEntity.LastChanged,
+                BranchId = entity.BranchId,
+                ProductId = entity.ProductId,
+                Name = entity.Name,
+                Images = entity.Images,
+                Address1 = entity.Address1,
+                Address2 = entity.Address2,
+                Address3 = entity.Address3,
+                Address4 = entity.Address4,
+                Price1 = entity.Price1,
+                Price2 = entity.Price2,
+                Price3 = entity.Price3,
+                DisplayPrice = entity.DisplayPrice,
+                Status = entity.Status,
+                DelFlg = entity.DelFlg,
+                Size1 = entity.Size1,
+                Size2 = entity.Size2,
+                Size3 = entity.Size3,
+                TakeOverId = entity.TakeOverId,
+                Description = entity.Description,
+                EmbeddedLink = entity.EmbeddedLink,
+                RelatedProductId = entity.RelatedProductId,
+                DateCreated = entity.DateCreated,
+                DateChanged = entity.DateCreated,
+                CreatedBy = entity.CreatedBy,
+                LastChanged = entity.LastChanged,
             };
 
             return model;
         }
 
         /// <summary>
-        /// Map to product entity
+        /// Map to entity
         /// </summary>
-        /// <param name="productModel">Product model</param>
-        /// <returns>Product entity</returns>
-        public static Product MapToProductEntity(this ProductModel productModel)
+        /// <param name="model">Model</param>
+        /// <returns>Entity</returns>
+        public static Product MapToEntity(this ProductModel model)
         {
             var entity = new Product
             {
-                BranchId = productModel.BranchId,
-                ProductId = productModel.ProductId,
-                Name = productModel.Name,
-                Images = productModel.Images,
-                Address1 = productModel.Address1,
-                Address2 = productModel.Address2,
-                Address3 = productModel.Address3,
-                Address4 = productModel.Address4,
-                Price1 = productModel.Price1,
-                Price2 = productModel.Price2,
-                Price3 = productModel.Price3,
-                DisplayPrice = productModel.DisplayPrice,
-                Status = productModel.Status,
-                DelFlg = productModel.DelFlg,
-                Size1 = productModel.Size1,
-                Size2 = productModel.Size2,
-                Size3 = productModel.Size3,
-                TakeOverId = productModel.TakeOverId,
-                Description = productModel.Description,
-                EmbeddedLink = productModel.EmbeddedLink,
-                DateCreated = productModel.DateCreated,
-                DateChanged = productModel.DateCreated,
-                CreatedBy = productModel.CreatedBy,
-                LastChanged = productModel.LastChanged,
+                BranchId = model.BranchId,
+                ProductId = model.ProductId,
+                Name = model.Name,
+                Images = model.Images,
+                Address1 = model.Address1,
+                Address2 = model.Address2,
+                Address3 = model.Address3,
+                Address4 = model.Address4,
+                Price1 = model.Price1,
+                Price2 = model.Price2,
+                Price3 = model.Price3,
+                DisplayPrice = model.DisplayPrice,
+                Status = model.Status,
+                DelFlg = model.DelFlg,
+                Size1 = model.Size1,
+                Size2 = model.Size2,
+                Size3 = model.Size3,
+                TakeOverId = model.TakeOverId,
+                Description = model.Description,
+                EmbeddedLink = model.EmbeddedLink,
+                DateCreated = model.DateCreated,
+                DateChanged = model.DateCreated,
+                CreatedBy = model.CreatedBy,
+                LastChanged = model.LastChanged,
             };
 
             return entity;
         }
-
         /// <summary>
-        /// Map to update product
+        /// Map to product
         /// </summary>
-        /// <param name="model">Product model</param>
-        /// <returns>Product entity</returns>
-        public static Product MapToUpdateProduct(this Product entity, ProductModel model)
+        /// <param name="entity">Entity</param>
+        /// <param name="model">Model</param>
+        /// <returns>Entity</returns>
+        public static Product MapToEntity(this Product entity, ProductModel model)
         {
             entity.Name = model.Name;
             entity.Images = model.Images;

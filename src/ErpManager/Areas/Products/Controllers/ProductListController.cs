@@ -26,7 +26,7 @@ namespace ErpManager.ERP.Areas.Product.Controllers
             var condition = new ProductSearchDto { BranchId = this.OperatorBranchId };
             var data = _serviceFacade.Products.Search(condition, page, Constants.DEFAULT_PAGE_SIZE);
 
-            return View(new ProductListViewModel { PageData = data });
+            return View(new ProductListViewModel { PageData = data, PageIndex = page });
         }
 
         [HttpPost]

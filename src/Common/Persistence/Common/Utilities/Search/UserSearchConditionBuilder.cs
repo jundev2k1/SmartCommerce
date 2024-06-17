@@ -1,4 +1,6 @@
-﻿#pragma warning disable CS0618
+﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
+
+#pragma warning disable CS0618
 
 using ErpManager.Common.Utilities;
 
@@ -47,7 +49,7 @@ namespace ErpManager.Persistence.Common.Utilities.Search
 
             if (string.IsNullOrEmpty(searchDto.Email) == false)
             {
-                predicate.And(u => u.Email.StartsWith(searchDto.Email));
+                predicate.And(u => u.Email.Contains(searchDto.Email));
             }
 
             if (string.IsNullOrEmpty(searchDto.PhoneNumber) == false)

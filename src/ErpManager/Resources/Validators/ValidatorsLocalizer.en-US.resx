@@ -153,6 +153,9 @@
   <data name="ErrorMsg_ProductIdExist" xml:space="preserve">
     <value>This product id is exist</value>
   </data>
+  <data name="ErrorMsg_ProductNotExist" xml:space="preserve">
+    <value>Product ID [{Value}] does not exist. Please enter product ids separated by ","</value>
+  </data>
   <data name="ErrorMsg_UserNotExist" xml:space="preserve">
     <value>This user is not exist</value>
   </data>

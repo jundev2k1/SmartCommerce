@@ -123,6 +123,9 @@
   <data name="ErrorCode_SystemError" xml:space="preserve">
     <value>Oops</value>
   </data>
+  <data name="ErrorMessage_BlockAccount" xml:space="preserve">
+    <value>You are blocked because you failed to log in more than 3 times. Please try again in 5 minutes</value>
+  </data>
   <data name="ErrorMessage_DataNotFound" xml:space="preserve">
     <value>No data found</value>
   </data>
@@ -138,6 +141,9 @@
   <data name="ErrorMessage_SystemError" xml:space="preserve">
     <value>A system error has occurred, please contact the administrator for help @@operator_phone_number@@</value>
     <comment>Setting in config</comment>
+  </data>
+  <data name="MailMessage_SendMailContactSuccess" xml:space="preserve">
+    <value>Contact sent successfully</value>
   </data>
   <data name="Message_ClickCopy" xml:space="preserve">
     <value>Click to copy</value>

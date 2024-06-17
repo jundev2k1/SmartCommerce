@@ -1,7 +1,5 @@
 ﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
 
-using ErpManager.Infrastructure.Hubs;
-
 namespace ErpManager.Infrastructure.BackgroundServices
 {
     internal class NotificationBackgroundService : BackgroundService

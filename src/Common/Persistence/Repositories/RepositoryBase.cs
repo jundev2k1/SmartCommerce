@@ -1,13 +1,17 @@
 ﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
 
+using System.Data.SqlClient;
+
 namespace ErpManager.Persistence.Repositories
 {
     public class RepositoryBase
     {
         protected DBContext _dbContext;
-        public RepositoryBase(DBContext dbContext)
+        protected IFileLogger _logger;
+        public RepositoryBase(DBContext dbContext, IFileLogger logger)
         {
             _dbContext = dbContext;
+            _logger = logger;
         }
 
         /// <summary>
@@ -24,11 +28,28 @@ namespace ErpManager.Persistence.Repositories
                 transaction.Commit();
                 return true;
             }
-            catch
+            catch (NotExistInDBException ex)
             {
-                transaction.Rollback();
-                return false;
+                _logger.LogWarning(ex.Message);
             }
+            catch (ExistInDBException ex)
+            {
+                _logger.LogWarning(ex.Message);
+            }
+            catch (SqlException ex)
+            {
+                var message = string.Format(
+                    "{0}{1}{0}",
+                    Environment.NewLine,
+                    ex.InnerException.Message);
+                _logger.LogError(message);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.InnerException.Message);
+            }
+            transaction.Rollback();
+            return false;
         }
     }
 }

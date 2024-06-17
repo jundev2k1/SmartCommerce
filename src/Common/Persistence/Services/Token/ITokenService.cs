@@ -10,21 +10,29 @@ namespace ErpManager.Persistence.Services
         /// <param name="branchId">Branch id</param>
         /// <param name="TokenId">Token id</param>
         /// <returns>Token model</returns>
-        public TokenModel? GetToken(string branchId, string TokenId);
+        TokenModel? Get(string branchId, string TokenId);
 
         /// <summary>
         /// Insert
         /// </summary>
         /// <param name="model">Token model</param>
         /// <returns>Insert status</returns>
-        public bool Insert(TokenModel model);
+        bool Insert(TokenModel model);
 
         /// <summary>
         /// Update
         /// </summary>
         /// <param name="model">Token model</param>
         /// <returns>Update status</returns>
-        public bool Update(TokenModel model);
+        bool Update(TokenModel model);
+        /// <summary>
+        /// Update
+        /// </summary>
+        /// <param name="branchId">Branch id</param>
+        /// <param name="memberId">Member id</param>
+        /// <param name="updateAction">Update action</param>
+        /// <returns>Update status</returns>
+        bool Update(string branchId, string memberId, Action<Token> updateAction);
 
         /// <summary>
         /// Delete
@@ -32,6 +40,6 @@ namespace ErpManager.Persistence.Services
         /// <param name="branchId">Branch id</param>
         /// <param name="tokenId">Token id</param>
         /// <returns>Delete status</returns>
-        public bool Delete(string branchId, string tokenId);
+        bool Delete(string branchId, string tokenId);
     }
 }

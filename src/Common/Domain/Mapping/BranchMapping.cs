@@ -5,41 +5,58 @@ namespace ErpManager.Domain.Mapping
     public static class BranchMapping
     {
         /// <summary>
-        /// Map to branch model
+        /// Map to model
         /// </summary>
-        /// <param name="branchEntity">Branch entity</param>
-        /// <returns>Branch model</returns>
-        public static BranchModel MapToBranchModel(this Branch branchEntity)
+        /// <param name="entity">Entity</param>
+        /// <returns>Model</returns>
+        public static BranchModel MapToModel(this Branch entity)
         {
             var model = new BranchModel
             {
-                BranchId = branchEntity.BranchId,
-                Name = branchEntity.Name,
-                Avatar = branchEntity.Avatar,
-                Status = branchEntity.Status,
-                DateCreated = branchEntity.DateCreated,
-                LastChanged = branchEntity.LastChanged,
+                BranchId = entity.BranchId,
+                Name = entity.Name,
+                Avatar = entity.Avatar,
+                Status = entity.Status,
+                DateCreated = entity.DateCreated,
+                LastChanged = entity.LastChanged,
             };
 
             return model;
         }
 
         /// <summary>
-        /// Map to branch entity
+        /// Map to entity
         /// </summary>
-        /// <param name="branchModel">Branch model</param>
-        /// <returns>Branch entity</returns>
-        public static Branch MapToRoleEntity(this BranchModel branchModel)
+        /// <param name="model">Model</param>
+        /// <returns>Entity</returns>
+        public static Branch MapToEntity(this BranchModel model)
         {
             var entity = new Branch
             {
-                BranchId = branchModel.BranchId,
-                Name = branchModel.Name,
-                Avatar = branchModel.Avatar,
-                Status = branchModel.Status,
-                DateCreated = branchModel.DateCreated,
-                LastChanged = branchModel.LastChanged,
+                BranchId = model.BranchId,
+                Name = model.Name,
+                Avatar = model.Avatar,
+                Status = model.Status,
+                DateCreated = model.DateCreated,
+                LastChanged = model.LastChanged,
             };
+
+            return entity;
+        }
+        /// <summary>
+        /// Map to entity
+        /// </summary>
+        /// <param name="entity">Entity</param>
+        /// <param name="model">Model</param>
+        /// <returns>Entity</returns>
+        public static Branch MapToEntity(this Branch entity, BranchModel model)
+        {
+            entity.BranchId = model.BranchId;
+            entity.Name = model.Name;
+            entity.Avatar = model.Avatar;
+            entity.Status = model.Status;
+            entity.DateCreated = model.DateCreated;
+            entity.LastChanged = model.LastChanged;
 
             return entity;
         }

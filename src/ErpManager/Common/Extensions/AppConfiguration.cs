@@ -15,6 +15,7 @@ namespace ErpManager.ERP.Common.Extensions
             AppSettingInititalize();
             SystemInititalize();
             OperatorInititalize();
+            PageInfoInititalize();
         } 
 
         /// <summary>
@@ -47,6 +48,11 @@ namespace ErpManager.ERP.Common.Extensions
             Constants.CONFIG_SMTP_USER = _configuration["SystemSetting:SmtpUser"].ToStringOrEmpty();
             Constants.CONFIG_SMTP_USERNAME = _configuration["SystemSetting:SmtpUserName"].ToStringOrEmpty();
             Constants.CONFIG_SMTP_PASSWORD = _configuration["SystemSetting:SmtpPassword"].ToStringOrEmpty();
+            Constants.CONFIG_IMAP_SERVER = _configuration["SystemSetting:ImapServer"].ToStringOrEmpty();
+            int.TryParse(_configuration["SystemSetting:ImapPort"].ToStringOrEmpty(), out Constants.CONFIG_IMAP_PORT);
+            Constants.CONFIG_IMAP_USER = _configuration["SystemSetting:ImapUser"].ToStringOrEmpty();
+            Constants.CONFIG_IMAP_PASSWORD = _configuration["SystemSetting:ImapPassword"].ToStringOrEmpty();
+            Constants.CONFIG_SYSTEM_MAIL_HEADER = _configuration["SystemSetting:SystemMailHeader"].ToStringOrEmpty();
         }
 
         /// <summary>
@@ -59,6 +65,23 @@ namespace ErpManager.ERP.Common.Extensions
             Constants.CONFIG_OWNER_TEL = _configuration["OperatorSetting:Tel"].ToStringOrEmpty();
             Constants.CONFIG_OWNER_MAIL = _configuration["OperatorSetting:Mail"].ToStringOrEmpty();
             Constants.CONFIG_OWNER_MAIL_CC = _configuration["OperatorSetting:MailCC"].ToStringOrEmpty();
+        }
+
+        private void PageInfoInititalize()
+        {
+            Constants.CONFIG_SITE_DESCRIPTION = _configuration["SiteInfo:SiteDescription"].ToStringOrEmpty();
+            Constants.CONFIG_SITE_KEYWORDS = _configuration["SiteInfo:SiteKeywords"].ToStringOrEmpty();
+            Constants.CONFIG_SITE_VIEWPORT = _configuration["SiteInfo:SiteViewport"].ToStringOrEmpty();
+            Constants.CONFIG_SITE_OPENGRAPH_TITLE = _configuration["SiteInfo:SiteOpenGraphTitle"].ToStringOrEmpty();
+            Constants.CONFIG_SITE_OPENGRAPH_DESCRIPTION = _configuration["SiteInfo:SiteOpenGraphDescription"].ToStringOrEmpty();
+            Constants.CONFIG_SITE_OPENGRAPH_IMAGE = _configuration["SiteInfo:SiteOpenGraphImage"].ToStringOrEmpty();
+            Constants.CONFIG_SITE_OPENGRAPH_URL = _configuration["SiteInfo:SiteOpenGraphUrl"].ToStringOrEmpty();
+            Constants.CONFIG_SITE_OPENGRAPH_TYPE = _configuration["SiteInfo:SiteOpenGraphType"].ToStringOrEmpty();
+            Constants.CONFIG_SITE_TWITTER_CARD = _configuration["SiteInfo:SiteTwitterCard"].ToStringOrEmpty();
+            Constants.CONFIG_SITE_TWITTER_TITLE = _configuration["SiteInfo:SiteTwitterTitle"].ToStringOrEmpty();
+            Constants.CONFIG_SITE_TWITTER_DESCRIPTION = _configuration["SiteInfo:SiteTwitterDescription"].ToStringOrEmpty();
+            Constants.CONFIG_SITE_TWITTER_IMAGE = _configuration["SiteInfo:SiteTwitterImage"].ToStringOrEmpty();
+            Constants.CONFIG_SITE_CANONICAL = _configuration["SiteInfo:SiteCanonical"].ToStringOrEmpty();
         }
     }
 }

@@ -11,5 +11,13 @@ namespace ErpManager.Persistence.Common
         IUserService Users { get; }
 
         IProductService Products { get; }
+
+        ITokenService Tokens { get; }
+
+        IMemberService Members { get; }
+
+        IMailTemplateService MailTemplates { get; }
+
+        INotificationService Notifications { get; }
     }
 }

@@ -27,6 +27,7 @@ namespace ErpManager.Infrastructure
         private static IServiceCollection AddBackgroundService(this IServiceCollection services)
         {
             services.AddHostedService<NotificationBackgroundService>();
+            services.AddHostedService<DeleteTempUploadDirBackgroundService>();
             return services;
         }
 

@@ -25,6 +25,8 @@
     <Using Include="ErpManager.Domain.Enum" />
     <Using Include="ErpManager.Domain.Models" />
     <Using Include="FluentValidation" />
+    <Using Include="System.ComponentModel.DataAnnotations" />
+    <Using Include="System.ComponentModel.DataAnnotations.Schema" />
   </ItemGroup>
 
 </Project>

@@ -13,6 +13,7 @@ namespace ErpManager.ERP.Controllers
             IFileLogger logger)
             : base(serviceFacade, sessionManager, localizer, logger)
         {
+            _webHostEnvironment = webHostEnvironment;
         }
 
         [HttpGet]
@@ -100,7 +101,7 @@ namespace ErpManager.ERP.Controllers
                 BranchId = this.OperatorBranchId,
                 Keywords = searchKey
             };
-            var result = _serviceFacade.Users.Search(userSearch, pageIndex: 1, pageSize: 6).Data;
+            var result = _serviceFacade.Users.Search(userSearch, pageIndex: 1, pageSize: 6).Items;
             return Json(result);
         }
 
@@ -109,7 +110,7 @@ namespace ErpManager.ERP.Controllers
         public string UploadImages([FromForm] IFormFile[] files, string type, string uploadFileName = "", bool isClearTempImages = false)
         {
             var typeUpload = GetTypeUploadByString(type);
-            if (typeUpload == UploadEnum.None) throw new Exception("type none");
+            if (typeUpload == UploadEnum.None) throw new NotExistInEnumException();
 
             var fileManager = new FileManager(files, typeUpload, uploadFileName, this.SessionToken);
             if (isClearTempImages)
@@ -120,7 +121,7 @@ namespace ErpManager.ERP.Controllers
             switch (typeUpload)
             {
                 case UploadEnum.ProductImage:
-                    var product = _serviceFacade.Products.GetProduct(this.OperatorBranchId, uploadFileName);
+                    var product = _serviceFacade.Products.Get(this.OperatorBranchId, uploadFileName);
                     if (product == null) break;
 
                     var productImage = _serviceFacade.Products.UpdateNewestProductImages(this.OperatorBranchId, uploadFileName);
@@ -137,7 +138,7 @@ namespace ErpManager.ERP.Controllers
         {
             try
             {
-                var targetPath = $"wwwroot{filePath}";
+                var targetPath = string.Format("{0}{1}", _webHostEnvironment.WebRootPath, filePath);
                 if (System.IO.File.Exists(targetPath))
                 {
                     System.IO.File.Delete(targetPath);
@@ -159,7 +160,7 @@ namespace ErpManager.ERP.Controllers
             var paths = filePath.Split(",");
             foreach (var path in paths)
             {
-                var targetPath = _webHostEnvironment.WebRootPath + path;
+                var targetPath = string.Format("{0}{1}", _webHostEnvironment.WebRootPath, path);
                 if (System.IO.File.Exists(targetPath))
                     result.Add(path);
             }

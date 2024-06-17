@@ -4,7 +4,7 @@ namespace ErpManager.Controllers
 {
     public sealed class HomeController : BaseController
     {
-
+        private readonly IMailSender _mailSender;
         /// <summary>
         /// Constructor
         /// </summary>
@@ -12,9 +12,11 @@ namespace ErpManager.Controllers
             ILocalizer localizer,
             IServiceFacade serviceFacade,
             SessionManager sessionManager,
-            IFileLogger logger)
+            IFileLogger logger,
+            IMailSender mailSender)
             : base (serviceFacade, sessionManager, localizer, logger)
         {
+            _mailSender = mailSender;
         }
 
         /// <summary>

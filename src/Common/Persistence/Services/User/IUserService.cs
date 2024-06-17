@@ -10,8 +10,8 @@ namespace ErpManager.Persistence.Services
         /// <param name="searchParams">Search parameters</param>
         /// <param name="pageIndex">Page index</param>
         /// <param name="pageSize">Page size</param>
-        /// <returns>A tuple includes data, total page and total record</returns>
-        public (UserModel[] Data, int TotalPage, int TotalRecord) Search(UserSearchDto searchParams, int pageIndex, int pageSize);
+        /// <returns>Search result model</returns>
+        SearchResultModel<UserModel> Search(UserSearchDto searchParams, int pageIndex, int pageSize = Constants.DEFAULT_PAGE_SIZE);
 
         /// <summary>
         /// Get all user
@@ -19,7 +19,15 @@ namespace ErpManager.Persistence.Services
         /// <param name="branchId">Branch id</param>
         /// <param name="isDeleted">Delete flag of user</param>
         /// <returns>A collection of users</returns>
-        public UserModel[] GetAllUser(string branchId, bool isDeleted = false);
+        UserModel[] GetAll(string branchId, bool isDeleted = false);
+
+        /// <summary>
+        /// Get user
+        /// </summary>
+        /// <param name="branchId">Branch id</param>
+        /// <param name="userIds">User id list</param>
+        /// <returns>User model list</returns>
+        UserModel[] Gets(string branchId, string[] userIds);
 
         /// <summary>
         /// Get user
@@ -27,7 +35,7 @@ namespace ErpManager.Persistence.Services
         /// <param name="branchId">Branch id</param>
         /// <param name="userId">User id</param>
         /// <returns>User model</returns>
-        public UserModel? GetUser(string branchId, string userId);
+        UserModel? Get(string branchId, string userId);
 
         /// <summary>
         /// Get user
@@ -35,7 +43,7 @@ namespace ErpManager.Persistence.Services
         /// <param name="branchId">Branch id</param>
         /// <param name="userName">Username (login id)</param>
         /// <returns>User model</returns>
-        public UserModel? GetUserByUsername(string branchId, string userName);
+        UserModel? GetUserByUsername(string branchId, string userName);
 
         /// <summary>
         /// Try login
@@ -44,21 +52,29 @@ namespace ErpManager.Persistence.Services
         /// <param name="userName">User name</param>
         /// <param name="password">Password</param>
         /// <returns>Operator model</returns>
-        public OperatorModel? TryLogin(string branchId, string userName, string password);
+        OperatorModel? TryLogin(string branchId, string userName, string password);
 
         /// <summary>
         /// Insert user
         /// </summary>
         /// <param name="model">User model</param>
         /// <returns>Insert status</returns>
-        public bool Insert(UserModel model);
+        bool Insert(UserModel model);
 
         /// <summary>
         /// Update
         /// </summary>
         /// <param name="model">User model</param>
         /// <returns>Update status</returns>
-        public bool Update(UserModel model);
+        bool Update(UserModel model);
+        /// <summary>
+        /// Update
+        /// </summary>
+        /// <param name="branchId">Branch id</param>
+        /// <param name="userId">User id</param>
+        /// <param name="UpdateAction">Update action</param>
+        /// <returns>Update status</returns>
+        bool Update(string branchId, string userId, Action<User> UpdateAction);
 
         /// <summary>
         /// Delete temporary
@@ -67,7 +83,7 @@ namespace ErpManager.Persistence.Services
         /// <param name="userId">User id</param>
         /// <remarks>Update delete flag to "true"</remarks>
         /// <returns>Delete status</returns>
-        public bool TempDelete(string branchId, string userId);
+        bool TempDelete(string branchId, string userId);
 
         /// <summary>
         /// Delete
@@ -75,6 +91,6 @@ namespace ErpManager.Persistence.Services
         /// <param name="branchId">Branch id</param>
         /// <param name="userId">User id</param>
         /// <returns>Delete status</returns>
-        public bool Delete(string branchId, string userId);
+        bool Delete(string branchId, string userId);
     }
 }

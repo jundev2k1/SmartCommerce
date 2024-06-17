@@ -31,15 +31,21 @@
 
   <ItemGroup>
     <Using Include="ErpManager.Common" />
+    <Using Include="ErpManager.Common.Utilities" />
     <Using Include="ErpManager.Infrastructure.Common.Enum" />
     <Using Include="ErpManager.Infrastructure.Common.Models" />
     <Using Include="ErpManager.Infrastructure.ExceptionExtension" />
     <Using Include="ErpManager.Infrastructure.Hubs" />
     <Using Include="ErpManager.Infrastructure.Interface" />
     <Using Include="ErpManager.Infrastructure.Middleware" />
+    <Using Include="MailKit.Net.Imap" />
+    <Using Include="MailKit.Net.Smtp" />
+    <Using Include="MailKit.Search" />
+    <Using Include="MailKit.Security" />
     <Using Include="Microsoft.AspNetCore.SignalR" />
     <Using Include="Microsoft.Extensions.DependencyInjection" />
     <Using Include="Microsoft.Extensions.Hosting" />
+    <Using Include="MimeKit" />
   </ItemGroup>
 
 </Project>

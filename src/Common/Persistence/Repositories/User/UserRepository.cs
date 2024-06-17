@@ -8,7 +8,7 @@ namespace ErpManager.Persistence.Repositories
         /// Constructor
         /// </summary>
         /// <param name="dbContext">Context</param>
-        public UserRepository(DBContext dbContext) : base(dbContext)
+        public UserRepository(DBContext dbContext, IFileLogger logger) : base(dbContext, logger)
         {
         }
 
@@ -18,8 +18,8 @@ namespace ErpManager.Persistence.Repositories
         /// <param name="expression">Expression</param>
         /// <param name="pageIndex">Page index</param>
         /// <param name="pageSize">Page size</param>
-        /// <returns>A tuple includes data, total page and total record</returns>
-        public (UserModel[] Data, int TotalPage, int TotalRecord) Search(Expression<Func<User, bool>> expression, int pageIndex, int pageSize)
+        /// <returns>Search result model</returns>
+        public SearchResultModel<UserModel> Search(Expression<Func<User, bool>> expression, int pageIndex, int pageSize)
         {
             var query = _dbContext.Users
                 .AsQueryable()
@@ -33,10 +33,16 @@ namespace ErpManager.Persistence.Repositories
             var data = query
                 .Skip(pageSkip)
                 .Take(pageSize)
-                .Select(user => user.MapToUserModel())
+                .Select(user => user.MapToModel())
                 .ToArray();
 
-            return (data, totalPage, queryCount);
+            var result = new SearchResultModel<UserModel>
+            {
+                Items = data,
+                TotalPage = totalPage,
+                TotalRecord = queryCount
+            };
+            return result;
         }
 
         /// <summary>
@@ -51,7 +57,23 @@ namespace ErpManager.Persistence.Repositories
                 .Where(user =>
                     (user.BranchId == branchId)
                     && (user.DelFlg == isDeleted))
-                .Select(user => user.MapToUserModel())
+                .Select(user => user.MapToModel())
+                .ToArray();
+
+            return result;
+        }
+
+        /// <summary>
+        /// Gets
+        /// </summary>
+        /// <param name="branchId">Branch id</param>
+        /// <param name="userIds">User id list</param>
+        /// <returns>User model list</returns>
+        public UserModel[] Gets(string branchId, string[] userIds)
+        {
+            var result = _dbContext.Users
+                .Where(user => (user.BranchId == branchId) && userIds.Contains(user.UserId))
+                .Select(user => user.MapToModel())
                 .ToArray();
 
             return result;
@@ -65,10 +87,11 @@ namespace ErpManager.Persistence.Repositories
         /// <returns>User model</returns>
         public UserModel? Get(string branchId, string userId)
         {
-            var result = _dbContext.Users
-                .FirstOrDefault(user => (user.BranchId == branchId) && (user.UserId == userId));
+            var result = _dbContext.Users.FirstOrDefault(user =>
+                (user.BranchId == branchId)
+                && (user.UserId == userId));
 
-            return result?.MapToUserModel();
+            return result?.MapToModel();
         }
 
         /// <summary>
@@ -79,13 +102,12 @@ namespace ErpManager.Persistence.Repositories
         /// <returns>User model</returns>
         public UserModel? GetByUserName(string branchId, string username)
         {
-            var result = _dbContext.Users
-                .FirstOrDefault(user =>
-                    (user.BranchId == branchId)
-                    && (user.UserName == username)
-                    && (user.DelFlg == false));
+            var result = _dbContext.Users.FirstOrDefault(user =>
+                (user.BranchId == branchId)
+                && (user.UserName == username)
+                && (user.DelFlg == false));
 
-            return result?.MapToUserModel();
+            return result?.MapToModel();
         }
 
         /// <summary>
@@ -95,12 +117,14 @@ namespace ErpManager.Persistence.Repositories
         /// <returns>Status insert</returns>
         public bool Insert(UserModel model)
         {
-            var user = Get(model.BranchId, model.UserId);
-            if (user != null) return false;
-
             var result = BeginTransaction(() =>
             {
-                var insertModel = model.MapToUserEntity();
+                var user = _dbContext.Users.FirstOrDefault(item =>
+                    (item.BranchId == model.BranchId)
+                    && (item.UserId == model.UserId));
+                if (user != null) throw new ExistInDBException();
+
+                var insertModel = model.MapToEntity();
                 _dbContext.Add(insertModel);
                 _dbContext.SaveChanges();
             });
@@ -114,16 +138,38 @@ namespace ErpManager.Persistence.Repositories
         /// <returns>Status update</returns>
         public bool Update(UserModel model)
         {
-            var user = Get(model.BranchId, model.UserId);
-            if (user == null) return false;
-
-            // Reset date created
-            model.DateCreated = user.DateCreated;
-
             var result = BeginTransaction(() =>
             {
-                var updateModel = model.MapToUserEntity();
+                var user = _dbContext.Users.FirstOrDefault(item =>
+                    (item.BranchId == model.BranchId)
+                    && (item.UserId == model.UserId));
+                if (user == null) throw new NotExistInDBException();
+
+                var updateModel = model.MapToEntity();
+                updateModel.DateChanged = DateTime.Now;
                 _dbContext.Update(updateModel);
+                _dbContext.SaveChanges();
+            });
+            return result;
+        }
+
+        /// <summary>
+        /// Update
+        /// </summary>
+        /// <param name="branchId">Branch id</param>
+        /// <param name="userId">User id</param>
+        /// <param name="UpdateAction">Update action</param>
+        /// <returns>Update status</returns>
+        public bool Update(string branchId, string userId, Action<User> UpdateAction)
+        {
+            var result = BeginTransaction(() =>
+            {
+                var user = _dbContext.Users.FirstOrDefault(item =>
+                    (item.BranchId == branchId)
+                    && (item.UserId == userId));
+                if (user == null) throw new NotExistInDBException();
+
+                UpdateAction(user);
                 _dbContext.SaveChanges();
             });
             return result;
@@ -137,11 +183,13 @@ namespace ErpManager.Persistence.Repositories
         /// <returns>Delete status</returns>
         public bool Delete(string branchId, string userId)
         {
-            var user = Get(branchId, userId);
-            if (user == null) return false;
-
             var result = BeginTransaction(() =>
             {
+                var user = _dbContext.Users.FirstOrDefault(item =>
+                    (item.BranchId == branchId)
+                    && (item.UserId == userId));
+                if (user == null) throw new NotExistInDBException();
+
                 _dbContext.Remove(user);
                 _dbContext.SaveChanges();
             });

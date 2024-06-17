@@ -28,10 +28,10 @@ namespace ErpManager.Persistence.Services
         /// <param name="searchParams">Search parameters</param>
         /// <param name="pageIndex">Page index</param>
         /// <param name="pageSize">Page size</param>
-        /// <returns>A tuple includes data, total page and total record</returns>
-        public (UserModel[] Data, int TotalPage, int TotalRecord) Search(UserSearchDto searchParams, int pageIndex, int pageSize)
+        /// <returns>Search result model</returns>
+        public SearchResultModel<UserModel> Search(UserSearchDto searchParams, int pageIndex, int pageSize = Constants.DEFAULT_PAGE_SIZE)
         {
-            if (string.IsNullOrEmpty(searchParams.BranchId)) return (Array.Empty<UserModel>(), 0, 0);
+            if (string.IsNullOrEmpty(searchParams.BranchId)) return new SearchResultModel<UserModel>();
 
             var condition = SearchConditionBuilder.UserSearch(searchParams);
             var result = _userRepository.Search(condition, pageIndex, pageSize);
@@ -45,18 +45,29 @@ namespace ErpManager.Persistence.Services
         /// </summary>
         /// <param name="branchId">Branch id</param>
         /// <returns>User list</returns>
-        public UserModel[] GetAllUser(string branchId, bool isDeleted = false)
+        public UserModel[] GetAll(string branchId, bool isDeleted = false)
         {
             return _userRepository.GetAll(branchId, isDeleted);
         }
 
         /// <summary>
-        /// Get user
+        /// Gets
+        /// </summary>
+        /// <param name="branchId">Branch id</param>
+        /// <param name="userIds">User id list</param>
+        /// <returns>User model list</returns>
+        public UserModel[] Gets(string branchId, string[] userIds)
+        {
+            return _userRepository.Gets(branchId, userIds);
+        }
+
+        /// <summary>
+        /// Get
         /// </summary>
         /// <param name="branchId">Branch id</param>
         /// <param name="userId">User id</param>
         /// <returns>User model</returns>
-        public UserModel? GetUser(string branchId, string userId)
+        public UserModel? Get(string branchId, string userId)
         {
             return _userRepository.Get(branchId, userId);
         }
@@ -115,6 +126,17 @@ namespace ErpManager.Persistence.Services
         public bool Update(UserModel model)
         {
             return _userRepository.Update(model);
+        }
+        /// <summary>
+        /// Update
+        /// </summary>
+        /// <param name="branchId">Branch id</param>
+        /// <param name="userId">User id</param>
+        /// <param name="updateAction">Update action</param>
+        /// <returns>Update status</returns>
+        public bool Update(string branchId, string userId, Action<User> updateAction)
+        {
+            return _userRepository.Update(branchId, userId, updateAction);
         }
 
         /// <summary>

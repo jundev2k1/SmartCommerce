@@ -22,7 +22,7 @@ namespace ErpManager.ERP.Areas.Product.Controllers
         [Route(Constants.MODULE_PRODUCT_PRODUCTPREVIEW_PATH, Name = Constants.MODULE_PRODUCT_PRODUCTPREVIEW_NAME)]
         public IActionResult Index([FromRoute]string id)
         {
-            var product = _serviceFacade.Products.GetProduct(this.OperatorBranchId, id);
+            var product = _serviceFacade.Products.Get(this.OperatorBranchId, id);
             if (product == null) return RedirectToErrorPage(Constants.ERRORMSG_KEY_DATA_NOT_FOUND, ErrorCodeEnum.DataNotFound);
 
             var data = GetProductViewData(product);
@@ -36,9 +36,9 @@ namespace ErpManager.ERP.Areas.Product.Controllers
         /// <returns>View model</returns>
         private ProductPreviewViewModel GetProductViewData(ProductModel product)
         {
-            var user = _serviceFacade.Users.GetUser(this.OperatorBranchId, product.TakeOverId);
+            var user = _serviceFacade.Users.Get(this.OperatorBranchId, product.TakeOverId);
             var relatedProduct = _serviceFacade.Products
-                .GetRelatedProducts(this.OperatorBranchId, product.ProductId, 4);
+                .GetRelatedProducts(this.OperatorBranchId, product.ProductId);
             var currentPath = Path.Combine(
                 this.Request.Host.Value,
                 this.Request.Path);

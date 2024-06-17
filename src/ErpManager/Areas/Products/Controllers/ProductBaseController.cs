@@ -28,7 +28,7 @@ namespace ErpManager.ERP.Areas.Products.Controllers
             // Add init for take over id
             if (string.IsNullOrEmpty(formInput.TakeOverId) == false)
             {
-                var user = _serviceFacade.Users.GetUser(this.OperatorBranchId, formInput.TakeOverId);
+                var user = _serviceFacade.Users.Get(this.OperatorBranchId, formInput.TakeOverId);
                 if (user != null)
                 {
                     var propName = formInput.Properties.GetName(prop => prop.TakeOverId);

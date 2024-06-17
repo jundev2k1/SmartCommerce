@@ -1,5 +1,7 @@
 ﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
 
+using Microsoft.EntityFrameworkCore;
+
 namespace ErpManager.Persistence.Common;
 
 public partial class DBContext : DbContext
@@ -24,6 +26,10 @@ public partial class DBContext : DbContext
     public virtual DbSet<Member> Members { get; set; }
 
     public virtual DbSet<Token> Tokens { get; set; }
+
+    public virtual DbSet<MailTemplate> MailTemplates { get; set; }
+
+    public virtual DbSet<Notification> Notifications { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -102,6 +108,7 @@ public partial class DBContext : DbContext
             entity.Property(e => e.TakeOverId).HasDefaultValueSql("('')");
             entity.Property(e => e.Description).HasDefaultValueSql("('')");
             entity.Property(e => e.EmbeddedLink).HasDefaultValueSql("('')");
+            entity.Property(e => e.RelatedProductId).HasDefaultValueSql("('')");
             entity.Property(e => e.DateCreated).HasDefaultValueSql("(getdate())");
             entity.Property(e => e.DateChanged);
             entity.Property(e => e.CreatedBy).HasDefaultValueSql("('')");
@@ -146,6 +153,36 @@ public partial class DBContext : DbContext
             entity.Property(e => e.DateCreated).HasDefaultValueSql("(getdate())");
             entity.Property(e => e.DateChanged);
             entity.Property(e => e.CreatedBy).HasDefaultValueSql("('')");
+        });
+
+        modelBuilder.Entity<MailTemplate>(entity =>
+        {
+            entity.HasKey(e => new { e.BranchId, e.MailId }).HasName("PK_MailTemplate_1");
+
+            entity.Property(e => e.Subject);
+            entity.Property(e => e.Body);
+            entity.Property(e => e.From);
+            entity.Property(e => e.To);
+            entity.Property(e => e.Cc);
+            entity.Property(e => e.Bcc);
+            entity.Property(e => e.Status).HasConversion<int>();
+            entity.Property(e => e.DateCreated).HasDefaultValueSql("(getdate())");
+            entity.Property(e => e.DateChanged);
+        });
+
+        modelBuilder.Entity<Notification>(entity =>
+        {
+            entity.HasKey(e => new { e.BranchId, e.Id, e.UserId }).HasName("PK_Notification_1");
+
+            entity.Property(e => e.Id).UseIdentityColumn<long>(seed: 1, increment: 1);
+            entity.Property(e => e.Title);
+            entity.Property(e => e.Content);
+            entity.Property(e => e.Path);
+            entity.Property(e => e.Type).HasConversion<int>();
+            entity.Property(e => e.Priority).HasConversion<int>();
+            entity.Property(e => e.Status).HasConversion<int>();
+            entity.Property(e => e.DateCreated).HasDefaultValueSql("(getdate())");
+            entity.Property(e => e.CreatedBy);
         });
 
         OnModelCreatingPartial(modelBuilder);

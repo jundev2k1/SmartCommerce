@@ -10,8 +10,8 @@ namespace ErpManager.Common
         #endregion
 
         #region ERP: Layout Component Name
-        /// <summary>ERP component name: Seo information</summary>
-        public const string ERP_COMPONENT_NAME_SEO_INFO = "SeoInfo";
+        /// <summary>ERP component name: Site meta information</summary>
+        public const string ERP_COMPONENT_NAME_SITE_META = "SiteMeta";
         /// <summary>ERP component name: Header</summary>
         public const string ERP_COMPONENT_NAME_HEADER = "Header";
         /// <summary>ERP component name: Footer</summary>

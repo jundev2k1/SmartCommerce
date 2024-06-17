@@ -10,8 +10,8 @@ namespace ErpManager.Persistence.Repositories
         /// <param name="expression">Expression</param>
         /// <param name="pageIndex">Page index</param>
         /// <param name="pageSize">Page size</param>
-        /// <returns>A tuple includes data, total page and total record</returns>
-        public (UserModel[] Data, int TotalPage, int TotalRecord) Search(Expression<Func<User, bool>> expression, int pageIndex, int pageSize);
+        /// <returns>Search result model</returns>
+        SearchResultModel<UserModel> Search(Expression<Func<User, bool>> expression, int pageIndex, int pageSize);
 
         /// <summary>
         /// Get all
@@ -19,7 +19,15 @@ namespace ErpManager.Persistence.Repositories
         /// <param name="branchId">Branch id</param>
         /// <param name="isDeleted">Delete flag of user</param>
         /// <returns>User model list</returns>
-        public UserModel[] GetAll(string branchId, bool isDeleted);
+        UserModel[] GetAll(string branchId, bool isDeleted);
+
+        /// <summary>
+        /// Gets
+        /// </summary>
+        /// <param name="branchId">Branch id</param>
+        /// <param name="userIds">User id list</param>
+        /// <returns>User model list</returns>
+        UserModel[] Gets(string branchId, string[] userIds);
 
         /// <summary>
         /// Get
@@ -27,7 +35,7 @@ namespace ErpManager.Persistence.Repositories
         /// <param name="branchId">Branch id</param>
         /// <param name="userId">User id</param>
         /// <returns>User model</returns>
-        public UserModel? Get(string branchId, string userId);
+        UserModel? Get(string branchId, string userId);
 
         /// <summary>
         /// Get by user name
@@ -35,21 +43,29 @@ namespace ErpManager.Persistence.Repositories
         /// <param name="branchId">Branch id</param>
         /// <param name="username">Username</param>
         /// <returns>User model</returns>
-        public UserModel? GetByUserName(string branchId, string username);
+        UserModel? GetByUserName(string branchId, string username);
 
         /// <summary>
         /// Insert
         /// </summary>
         /// <param name="model">User model</param>
         /// <returns>Insert status</returns>
-        public bool Insert(UserModel model);
+        bool Insert(UserModel model);
 
         /// <summary>
         /// Update
         /// </summary>
         /// <param name="model">User model</param>
         /// <returns>Update status</returns>
-        public bool Update(UserModel model);
+        bool Update(UserModel model);
+        /// <summary>
+        /// Update
+        /// </summary>
+        /// <param name="branchId">Branch id</param>
+        /// <param name="userId">User id</param>
+        /// <param name="updateAction">Update action</param>
+        /// <returns>Update status</returns>
+        bool Update(string branchId, string userId, Action<User> updateAction);
 
         /// <summary>
         /// Delete
@@ -57,6 +73,6 @@ namespace ErpManager.Persistence.Repositories
         /// <param name="branchId">Branch id</param>
         /// <param name="userId">User id</param>
         /// <returns>Delete status</returns>
-        public bool Delete(string branchId, string userId);
+        bool Delete(string branchId, string userId);
     }
 }

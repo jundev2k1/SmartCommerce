@@ -125,7 +125,7 @@ namespace ErpManager.ERP.Controllers
                 if (IsBlockedAuth(user.UserId))
                 {
                     isBlock = true;
-                    throw new Exception();
+                    throw new Exception(_localizer.Messages["ErrorMessage_BlockAccount"]);
                 }
                 // Increase login count every login after check block account
                 IncreaseLoginCount(user.UserId);
@@ -133,7 +133,7 @@ namespace ErpManager.ERP.Controllers
                 // Try login, throw error if login fail
                 var passwordEncrypt = Authorization.Instance.PasswordEncrypt(input.Password);
                 var @operator = _serviceFacade.Users.TryLogin(Constants.CONFIG_MASTER_BRANCH_ID, input.LoginID, passwordEncrypt);
-                if (@operator == null) throw new Exception("Login information invalid");
+                if (@operator == null) throw new Exception(_localizer.Messages["ErrorMessage_LoginFailed"]);
 
                 // Handle login success
                 HandleLoginSuccess(@operator, input.RememberMe);

@@ -153,6 +153,9 @@
   <data name="ErrorMsg_ProductIdExist" xml:space="preserve">
     <value>Mã sản phẩm này đã tồn tại</value>
   </data>
+  <data name="ErrorMsg_ProductNotExist" xml:space="preserve">
+    <value>ID sản phẩm [{Value}] không tồn tại. Hãy nhập đúng ID và cách nhau bằng dấu ","</value>
+  </data>
   <data name="ErrorMsg_UserNotExist" xml:space="preserve">
     <value>Người dùng này không tồn tại</value>
   </data>

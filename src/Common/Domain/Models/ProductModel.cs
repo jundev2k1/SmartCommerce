@@ -44,6 +44,8 @@ namespace ErpManager.Domain.Models
 
         public string EmbeddedLink { get; set; } = string.Empty;
 
+        public string RelatedProductId { get; set; } = string.Empty;
+
         public DateTime? DateCreated { get; set; }
 
         public DateTime? DateChanged { get; set; }

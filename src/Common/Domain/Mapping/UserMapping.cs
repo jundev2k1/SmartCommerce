@@ -5,75 +5,109 @@ namespace ErpManager.Domain.Mapping
     public static class UserMapping
     {
         /// <summary>
-        /// Map to user model
+        /// Map to model
         /// </summary>
-        /// <param name="userEntity">User entity</param>
-        /// <returns>User model</returns>
-        public static UserModel MapToUserModel(this User userEntity)
+        /// <param name="entity">Entity</param>
+        /// <returns>Model</returns>
+        public static UserModel MapToModel(this User entity)
         {
             var model = new UserModel
             {
-                BranchId = userEntity.BranchId,
-                UserId = userEntity.UserId,
-                UserName = userEntity.UserName,
-                Password = userEntity.Password,
-                Avatar = userEntity.Avatar,
-                FirstName = userEntity.FirstName,
-                LastName = userEntity.LastName,
-                Email = userEntity.Email,
-                PhoneNumber = userEntity.PhoneNumber,
-                Address1 = userEntity.Address1,
-                Address2 = userEntity.Address2,
-                Address3 = userEntity.Address3,
-                Address4 = userEntity.Address4,
-                Status = userEntity.Status,
-                DelFlg = userEntity.DelFlg,
-                Sex = userEntity.Sex,
-                Birthday = userEntity.Birthday,
-                DateCreated = userEntity.DateCreated,
-                DateChanged = userEntity.DateChanged,
-                CreatedBy = userEntity.CreatedBy,
-                LastLogin = userEntity.LastLogin,
-                LastChanged = userEntity.LastChanged,
-                RoleId = userEntity.RoleId,
+                BranchId = entity.BranchId,
+                UserId = entity.UserId,
+                UserName = entity.UserName,
+                Password = entity.Password,
+                Avatar = entity.Avatar,
+                FirstName = entity.FirstName,
+                LastName = entity.LastName,
+                Email = entity.Email,
+                PhoneNumber = entity.PhoneNumber,
+                Address1 = entity.Address1,
+                Address2 = entity.Address2,
+                Address3 = entity.Address3,
+                Address4 = entity.Address4,
+                Status = entity.Status,
+                DelFlg = entity.DelFlg,
+                Sex = entity.Sex,
+                Birthday = entity.Birthday,
+                DateCreated = entity.DateCreated,
+                DateChanged = entity.DateChanged,
+                CreatedBy = entity.CreatedBy,
+                LastLogin = entity.LastLogin,
+                LastChanged = entity.LastChanged,
+                RoleId = entity.RoleId,
             };
 
             return model;
         }
 
         /// <summary>
-        /// Map to user entity
+        /// Map to entity
         /// </summary>
-        /// <param name="userModel">User model</param>
-        /// <returns>User entity</returns>
-        public static User MapToUserEntity(this UserModel userModel)
+        /// <param name="model">Model</param>
+        /// <returns>Entity</returns>
+        public static User MapToEntity(this UserModel model)
         {
             var entity = new User
             {
-                BranchId = userModel.BranchId,
-                UserId = userModel.UserId,
-                UserName = userModel.UserName,
-                Password = userModel.Password,
-                Avatar = userModel.Avatar,
-                FirstName = userModel.FirstName,
-                LastName = userModel.LastName,
-                Email = userModel.Email,
-                PhoneNumber = userModel.PhoneNumber,
-                Address1 = userModel.Address1,
-                Address2 = userModel.Address2,
-                Address3 = userModel.Address3,
-                Address4 = userModel.Address4,
-                Status = userModel.Status,
-                DelFlg = userModel.DelFlg,
-                Sex = userModel.Sex,
-                Birthday = userModel.Birthday,
-                DateCreated = userModel.DateCreated,
-                DateChanged = userModel.DateChanged,
-                CreatedBy = userModel.CreatedBy,
-                LastLogin = userModel.LastLogin,
-                LastChanged = userModel.LastChanged,
-                RoleId = userModel.RoleId,
+                BranchId = model.BranchId,
+                UserId = model.UserId,
+                UserName = model.UserName,
+                Password = model.Password,
+                Avatar = model.Avatar,
+                FirstName = model.FirstName,
+                LastName = model.LastName,
+                Email = model.Email,
+                PhoneNumber = model.PhoneNumber,
+                Address1 = model.Address1,
+                Address2 = model.Address2,
+                Address3 = model.Address3,
+                Address4 = model.Address4,
+                Status = model.Status,
+                DelFlg = model.DelFlg,
+                Sex = model.Sex,
+                Birthday = model.Birthday,
+                DateCreated = model.DateCreated,
+                DateChanged = model.DateChanged,
+                CreatedBy = model.CreatedBy,
+                LastLogin = model.LastLogin,
+                LastChanged = model.LastChanged,
+                RoleId = model.RoleId,
             };
+
+            return entity;
+        }
+        /// <summary>
+        /// Map to entity
+        /// </summary>
+        /// <param name="entity">Entity</param>
+        /// <param name="model">Model</param>
+        /// <returns>Entity</returns>
+        public static User MapToEntity(this User entity, UserModel model)
+        {
+            entity.BranchId = model.BranchId;
+            entity.UserId = model.UserId;
+            entity.UserName = model.UserName;
+            entity.Password = model.Password;
+            entity.Avatar = model.Avatar;
+            entity.FirstName = model.FirstName;
+            entity.LastName = model.LastName;
+            entity.Email = model.Email;
+            entity.PhoneNumber = model.PhoneNumber;
+            entity.Address1 = model.Address1;
+            entity.Address2 = model.Address2;
+            entity.Address3 = model.Address3;
+            entity.Address4 = model.Address4;
+            entity.Status = model.Status;
+            entity.DelFlg = model.DelFlg;
+            entity.Sex = model.Sex;
+            entity.Birthday = model.Birthday;
+            entity.DateCreated = model.DateCreated;
+            entity.DateChanged = model.DateChanged;
+            entity.CreatedBy = model.CreatedBy;
+            entity.LastLogin = model.LastLogin;
+            entity.LastChanged = model.LastChanged;
+            entity.RoleId = model.RoleId;
 
             return entity;
         }

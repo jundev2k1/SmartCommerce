@@ -8,32 +8,56 @@ namespace ErpManager.Persistence.Repositories
         /// Constructor
         /// </summary>
         /// <param name="dbContext">Context</param>
-        public RoleRepository(DBContext dbContext) : base(dbContext)
+        public RoleRepository(DBContext dbContext, IFileLogger logger) : base(dbContext, logger)
         {
         }
 
         /// <summary>
         /// Search
         /// </summary>
-        /// <param name="searchParams">Search parameters</param>
-        /// <returns>A collection of user following search parameters</returns>
-        public RoleModel[] Search(Dictionary<string, string> searchParams)
+        /// <param name="expression">Expression</param>
+        /// <param name="pageIndex">Page index</param>
+        /// <param name="pageSize">Page size</param>
+        /// <returns>Search result model</returns>
+        public SearchResultModel<RoleModel> Search(Expression<Func<Role, bool>> expression, int pageIndex, int pageSize)
         {
-            throw new NotImplementedException();
+            var query = _dbContext.Roles
+                .AsQueryable()
+                .Where(expression)
+                .OrderByDescending(role => role.DateCreated);
+
+            var queryCount = query.Count();
+            var isSurplus = (queryCount % pageSize) > 0;
+            var totalPage = queryCount / pageSize + (isSurplus ? 1 : 0);
+
+            var pageSkip = (pageIndex - 1) * pageSize;
+            var data = query
+                .Skip(pageSkip)
+                .Take(pageSize)
+                .Select(role => role.MapToModel())
+                .ToArray();
+            var result = new SearchResultModel<RoleModel>
+            {
+                Items = data,
+                TotalPage = totalPage,
+                TotalRecord = queryCount
+            };
+
+            return result;
         }
 
         /// <summary>
         /// Get all role
         /// </summary>
         /// <param name="branchId">Branch id</param>
-        /// <returns>A collection of user</returns>
+        /// <returns>A collection of role</returns>
         public RoleModel[] GetAll(string branchId)
         {
             var result = _dbContext.Roles
                 .Where(role =>
                     (role.BranchId == branchId)
                     && (role.Status == RoleStatusEnum.Active))
-                .Select(role => role.MapToRoleModel())
+                .Select(role => role.MapToModel())
                 .ToArray();
 
             return result;
@@ -44,7 +68,7 @@ namespace ErpManager.Persistence.Repositories
         /// </summary>
         /// <param name="branchId">Branch id</param>
         /// <param name="roleId">Role id</param>
-        /// <returns>User model</returns>
+        /// <returns>Role model</returns>
         public RoleModel? Get(string branchId, int roleId)
         {
             var result = _dbContext.Roles
@@ -52,7 +76,7 @@ namespace ErpManager.Persistence.Repositories
                     (role.BranchId == branchId)
                     && (role.RoleId == roleId));
 
-            return result?.MapToRoleModel();
+            return result?.MapToModel();
         }
 
         /// <summary>
@@ -62,12 +86,14 @@ namespace ErpManager.Persistence.Repositories
         /// <returns>Status insert</returns>
         public bool Insert(RoleModel model)
         {
-            var user = Get(model.BranchId, model.RoleId);
-            if (user != null) return false;
-
             var result = BeginTransaction(() =>
             {
-                var insertModel = model.MapToRoleEntity();
+                var role = _dbContext.Roles.FirstOrDefault(item =>
+                    (item.BranchId == model.BranchId)
+                    && (item.RoleId == model.RoleId));
+                if (role != null) throw new ExistInDBException();
+
+                var insertModel = model.MapToEntity();
                 _dbContext.Add(insertModel);
                 _dbContext.SaveChanges();
             });
@@ -81,34 +107,57 @@ namespace ErpManager.Persistence.Repositories
         /// <returns>Status update</returns>
         public bool Update(RoleModel model)
         {
-            var role = Get(model.BranchId, model.RoleId);
-            if (role == null) return false;
-
-            model.DateCreated = role.DateCreated;
-
             var result = BeginTransaction(() =>
             {
-                var updateModel = model.MapToRoleEntity();
+                var role = _dbContext.Roles.FirstOrDefault(item =>
+                    (item.BranchId == model.BranchId)
+                    && (item.RoleId == model.RoleId));
+                if (role == null) throw new NotExistInDBException();
+
+                var updateModel = model.MapToEntity();
                 _dbContext.Update(updateModel);
                 _dbContext.SaveChanges();
             });
 
             return result;
         }
+        /// <summary>
+        /// Update
+        /// </summary>
+        /// <param name="branchId">Branch id</param>
+        /// <param name="roleId">Role id</param>
+        /// <param name="UpdateAction">Update action</param>
+        /// <returns>Update status</returns>
+        public bool Update(string branchId, int roleId, Action<Role> UpdateAction)
+        {
+            var result = BeginTransaction(() =>
+            {
+                var role = _dbContext.Roles.FirstOrDefault(item =>
+                    (item.BranchId == branchId)
+                    && (item.RoleId == roleId));
+                if (role == null) throw new NotExistInDBException();
+
+                UpdateAction(role);
+                _dbContext.SaveChanges();
+            });
+            return result;
+        }
 
         /// <summary>
         /// Delete
         /// </summary>
-        /// <param name="branchID">Branch id</param>
+        /// <param name="branchId">Branch id</param>
         /// <param name="roleId">Role id</param>
         /// <returns>Delete status</returns>
-        public bool Delete(string branchID, int roleId)
+        public bool Delete(string branchId, int roleId)
         {
-            var role = Get(branchID, roleId);
-            if (role == null) return false;
-
             var result = BeginTransaction(() =>
             {
+                var role = _dbContext.Roles.FirstOrDefault(item =>
+                    (item.BranchId == branchId)
+                    && (item.RoleId == roleId));
+                if (role == null) throw new NotExistInDBException();
+
                 _dbContext.Remove(role);
                 _dbContext.SaveChanges();
             });

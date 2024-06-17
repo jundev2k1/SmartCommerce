@@ -7,16 +7,18 @@ namespace ErpManager.Persistence.Repositories
         /// <summary>
         /// Search
         /// </summary>
-        /// <param name="searchParams">Search parameters</param>
-        /// <returns>Role model list</returns>
-        public RoleModel[] Search(Dictionary<string, string> searchParams);
+        /// <param name="expression">Expression</param>
+        /// <param name="pageIndex">Page index</param>
+        /// <param name="pageSize">Page size</param>
+        /// <returns>Search result model</returns>
+        SearchResultModel<RoleModel> Search(Expression<Func<Role, bool>> expression, int pageIndex, int pageSize);
 
         /// <summary>
         /// Get all
         /// </summary>
         /// <param name="branchId">Branch id</param>
         /// <returns>Role model list</returns>
-        public RoleModel[] GetAll(string branchId);
+        RoleModel[] GetAll(string branchId);
 
         /// <summary>
         /// Get
@@ -24,21 +26,29 @@ namespace ErpManager.Persistence.Repositories
         /// <param name="branchID">Branch id</param>
         /// <param name="roleId">Role id</param>
         /// <returns>Role model</returns>
-        public RoleModel? Get(string branchID, int roleId);
+        RoleModel? Get(string branchID, int roleId);
 
         /// <summary>
         /// Insert
         /// </summary>
         /// <param name="model">Role model</param>
         /// <returns>Insert status</returns>
-        public bool Insert(RoleModel model);
+        bool Insert(RoleModel model);
 
         /// <summary>
         /// Update
         /// </summary>
         /// <param name="model">Role model</param>
         /// <returns>Update status</returns>
-        public bool Update(RoleModel model);
+        bool Update(RoleModel model);
+        /// <summary>
+        /// Update
+        /// </summary>
+        /// <param name="branchId">Branch id</param>
+        /// <param name="roleId">Role id</param>
+        /// <param name="UpdateAction">Update action</param>
+        /// <returns>Update status</returns>
+        bool Update(string branchId, int roleId, Action<Role> UpdateAction);
 
         /// <summary>
         /// Delete
@@ -46,6 +56,6 @@ namespace ErpManager.Persistence.Repositories
         /// <param name="branchID">Branch id</param>
         /// <param name="roleID">Role id</param>
         /// <returns>Delete status</returns>
-        public bool Delete(string branchID, int roleID);
+        bool Delete(string branchID, int roleID);
     }
 }

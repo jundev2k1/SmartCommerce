@@ -2,7 +2,7 @@
 
 namespace ErpManager.ERP.ViewComponents
 {
-    public sealed class SeoInfoViewComponent : ViewComponent
+    public sealed class SiteMetaViewComponent : ViewComponent
     {
         public IViewComponentResult Invoke()
         {

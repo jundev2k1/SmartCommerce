@@ -1,12 +1,5 @@
 ﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
 
-using ErpManager.Common;
-using ErpManager.Common.Utilities;
-using ErpManager.Infrastructure.Common.Models;
-using MailKit.Net.Smtp;
-using MailKit.Security;
-using MimeKit;
-
 namespace ErpManager.Infrastructure.Mail
 {
     internal class MailSenderBase
@@ -17,6 +10,10 @@ namespace ErpManager.Infrastructure.Mail
         protected readonly string _smtpUser;
         protected readonly string _smtpUserName;
         protected readonly string _smtpPass;
+        protected readonly string _imapServer;
+        protected readonly int _imapPort;
+        protected readonly string _imapUser;
+        protected readonly string _imapPass;
         protected readonly string _mailOperator;
         protected readonly string _nameOperator;
 
@@ -27,6 +24,10 @@ namespace ErpManager.Infrastructure.Mail
             _smtpUser = Constants.CONFIG_SMTP_USER;
             _smtpUserName = Constants.CONFIG_SMTP_USERNAME;
             _smtpPass = Constants.CONFIG_SMTP_PASSWORD;
+            _imapServer = Constants.CONFIG_IMAP_SERVER;
+            _imapPort = Constants.CONFIG_IMAP_PORT;
+            _imapUser = Constants.CONFIG_IMAP_USER;
+            _imapPass = Constants.CONFIG_IMAP_PASSWORD;
             _mailOperator = Constants.CONFIG_OWNER_MAIL;
             _nameOperator = Constants.CONFIG_OWNER_NAME;
         }
@@ -72,12 +73,48 @@ namespace ErpManager.Infrastructure.Mail
         /// <param name="mailMessage">Mail message</param>
         private async Task ExecuteSendMail(MimeMessage mailMessage)
         {
+            // Set system mail header for mail system
+            mailMessage.Headers[Constants.CONFIG_SYSTEM_MAIL_HEADER] = "true";
+
+            // Execute send mail
             using (var client = new SmtpClient())
             {
                 await client.ConnectAsync(_smtpServer, _smtpPort, SecureSocketOptions.StartTls);
                 await client.AuthenticateAsync(_smtpUser, _smtpPass);
                 await client.SendAsync(mailMessage);
                 await client.DisconnectAsync(true);
+            }
+        }
+
+        public async Task<List<MimeMessage>> ReadEmailsAsync(SearchQuery? query = null, int maxCount = 10)
+        {
+            using (var client = new ImapClient())
+            {
+                await client.ConnectAsync(_imapServer, _imapPort, true);
+                await client.AuthenticateAsync(_imapUser, _imapPass);
+
+                var inbox = client.Inbox;
+                await inbox.OpenAsync(MailKit.FolderAccess.ReadOnly);
+
+                // Get query for search mail
+                query = query != null ? query : SearchQuery.NotSeen;
+                var uids = await inbox.SearchAsync(query);
+
+                var messages = new List<MimeMessage>();
+                foreach (var uid in uids)
+                {
+                    var message = await inbox.GetMessageAsync(uid);
+                    var isMailSystem = message.Headers.Contains("X-System-Email")
+                        && (message.Headers["X-System-Email"] == "true");
+                    if (!isMailSystem) continue;
+
+                    messages.Add(message);
+
+                    if (messages.Count >= maxCount) break;
+                }
+
+                await client.DisconnectAsync(true);
+                return messages;
             }
         }
 

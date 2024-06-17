@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
@@ -66,8 +66,8 @@
   <ItemGroup>
     <ProjectReference Include="..\Common\Common\ErpManager.Common.csproj" />
     <ProjectReference Include="..\Common\Domain\ErpManager.Domain.csproj" />
-    <ProjectReference Include="..\Common\Persistence\ErpManager.Persistence.csproj" />
     <ProjectReference Include="..\Common\Infrastructure\ErpManager.Infrastructure.csproj" />
+    <ProjectReference Include="..\Common\Persistence\ErpManager.Persistence.csproj" />
   </ItemGroup>
 
   <ItemGroup>

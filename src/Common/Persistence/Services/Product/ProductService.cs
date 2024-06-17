@@ -1,12 +1,5 @@
 ﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
 
-using ErpManager.Common;
-using ErpManager.Domain.Models;
-using ErpManager.Infrastructure.Common.Enum;
-using ErpManager.Infrastructure.Upload;
-using ErpManager.Persistence.Common.Utilities.Search;
-using Microsoft.AspNetCore.Http;
-
 namespace ErpManager.Persistence.Services
 {
     public sealed class ProductService : ServiceBase, IProductService
@@ -49,7 +42,7 @@ namespace ErpManager.Persistence.Services
         /// <param name="branchId">Branch id</param>
         /// <param name="isDeleted">Delete flag of product</param>
         /// <returns>Product list</returns>
-        public ProductModel[] GetAllProduct(string branchId, bool isDeleted = false)
+        public ProductModel[] GetAll(string branchId, bool isDeleted = false)
         {
             return _productRepository.GetAll(branchId, isDeleted);
         }
@@ -59,11 +52,10 @@ namespace ErpManager.Persistence.Services
         /// </summary>
         /// <param name="branchId">Branch id</param>
         /// <param name="productId">Product id</param>
-        /// <param name="maxQuantity">Max quantity</param>
         /// <returns>A collection of related products</returns>
-        public ProductModel[] GetRelatedProducts(string branchId, string productId, int maxQuantity)
+        public ProductModel[] GetRelatedProducts(string branchId, string productId)
         {
-            return _productRepository.GetRelatedProducts(branchId, productId, maxQuantity);
+            return _productRepository.GetRelatedProducts(branchId, productId);
         }
 
         /// <summary>
@@ -72,7 +64,7 @@ namespace ErpManager.Persistence.Services
         /// <param name="branchId">Branch id</param>
         /// <param name="productId">Product id</param>
         /// <returns>Product model</returns>
-        public ProductModel? GetProduct(string branchId, string productId)
+        public ProductModel? Get(string branchId, string productId)
         {
             return _productRepository.Get(branchId, productId);
         }
@@ -101,6 +93,17 @@ namespace ErpManager.Persistence.Services
             model.DateChanged = DateTime.Now;
             return _productRepository.Update(model);
         }
+        /// <summary>
+        /// Update
+        /// </summary>
+        /// <param name="branchId">Branch id</param>
+        /// <param name="productId">Product id</param>
+        /// <param name="updateAction">Update action</param>
+        /// <returns>Update status</returns>
+        public bool Update(string branchId, string productId, Action<Product> updateAction)
+        {
+            return _productRepository.Update(branchId, productId, updateAction);
+        }
 
         /// <summary>
         /// Update description
@@ -109,7 +112,12 @@ namespace ErpManager.Persistence.Services
         /// <returns>Is success</returns>
         public bool UpdateDescription(ProductModel model)
         {
-            return _productRepository.UpdateDescription(model);
+            var updateAction = (Product entity) =>
+            {
+                entity.Description = model.Description;
+                entity.DateChanged = DateTime.Now;
+            };
+            return _productRepository.Update(model.BranchId, model.ProductId, updateAction);
         }
 
         /// <summary>
@@ -120,7 +128,7 @@ namespace ErpManager.Persistence.Services
         /// <returns>Actual product images</returns>
         public string? UpdateNewestProductImages(string branchId, string productId)
         {
-            var product = GetProduct(branchId, productId);
+            var product = Get(branchId, productId);
             if (product == null) return null;
 
             var fileManager = new FileManager(
@@ -130,7 +138,12 @@ namespace ErpManager.Persistence.Services
             var actualFileName = fileManager.GetAllActualFileName();
             var productImages = string.Join(",", actualFileName);
 
-            var isSuccess = _productRepository.UpdateProductImage(branchId, productId, productImages);
+            var updateAction = (Product item) =>
+            {
+                item.Images = productImages;
+                item.DateChanged = DateTime.Now;
+            };
+            var isSuccess = _productRepository.Update(branchId, productId, updateAction);
             return isSuccess ? productImages : product.Images;
         }
 
@@ -158,6 +171,19 @@ namespace ErpManager.Persistence.Services
         public bool Delete(string branchId, string productId)
         {
             return _productRepository.Delete(branchId, productId);
+        }
+        #endregion
+
+        #region Extension
+        /// <summary>
+        /// Check is exist
+        /// </summary>
+        /// <param name="branchId">Branch id</param>
+        /// <param name="productId">Product id</param>
+        /// <returns>Is exist?</returns>
+        public bool IsExist(string branchId, string productId)
+        {
+            return _productRepository.IsExist(branchId, productId);
         }
         #endregion
     }

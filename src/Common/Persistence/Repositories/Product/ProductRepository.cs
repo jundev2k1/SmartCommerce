@@ -1,6 +1,6 @@
 ﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
 
-using ErpManager.Domain.Models;
+using System.Buffers;
 
 namespace ErpManager.Persistence.Repositories
 {
@@ -10,7 +10,7 @@ namespace ErpManager.Persistence.Repositories
         /// Constructor
         /// </summary>
         /// <param name="dbContext">Context</param>
-        public ProductRepository(DBContext dbContext) : base(dbContext)
+        public ProductRepository(DBContext dbContext, IFileLogger logger) : base(dbContext, logger)
         {
         }
 
@@ -36,7 +36,7 @@ namespace ErpManager.Persistence.Repositories
             var data = query
                 .Skip(pageSkip)
                 .Take(pageSize)
-                .Select(product => product.MapToProductModel())
+                .Select(product => product.MapToModel())
                 .ToArray();
             var result = new SearchResultModel<ProductModel>
             {
@@ -61,7 +61,7 @@ namespace ErpManager.Persistence.Repositories
                     product.BranchId == branchId
                     && product.DelFlg == isDeleted)
                 .OrderByDescending(product => product.DateCreated)
-                .Select(product => product.MapToProductModel())
+                .Select(product => product.MapToModel())
                 .ToArray();
 
             return result;
@@ -72,24 +72,38 @@ namespace ErpManager.Persistence.Repositories
         /// </summary>
         /// <param name="branchId">Branch id</param>
         /// <param name="productId">Product id</param>
-        /// <param name="maxQuantity">Max quantity</param>
         /// <returns>A collection of related products</returns>
-        public ProductModel[] GetRelatedProducts(string branchId, string productId, int maxQuantity = 0)
+        public ProductModel[] GetRelatedProducts(string branchId, string productId)
         {
             var product = _dbContext.Products.FirstOrDefault(product =>
                 (product.BranchId == branchId)
                 && (product.ProductId == productId));
-            if (product == null) return Array.Empty<ProductModel>();
+            var relatedIds = product?.RelatedProductId.Split(',', StringSplitOptions.RemoveEmptyEntries);
+            if ((relatedIds == null) || (relatedIds.Any() == false)) return Array.Empty<ProductModel>();
 
             var relatedProducts = _dbContext.Products
-                .Where(product => (product.DelFlg == false) && (product.Status != ProductStatusEnum.Pending))
-                .OrderBy(product => product.Address1 == product.Address1)
-                .ThenByDescending(product => product.DateCreated)
-                .ThenBy(product => product.Status)
-                .Take(maxQuantity)
-                .Select(product => product.MapToProductModel())
+                .Where(item => item.DelFlg == false
+                    && item.Status != ProductStatusEnum.Pending
+                    && relatedIds.Contains(item.ProductId))
+                .Select(product => product.MapToModel())
                 .ToArray();
             return relatedProducts;
+        }
+
+        /// <summary>
+        /// Gets
+        /// </summary>
+        /// <param name="branchId">Branch id</param>
+        /// <param name="productIds">Product id list</param>
+        /// <returns>Product model list</returns>
+        public ProductModel[] Gets(string branchId, string[] productIds)
+        {
+            var result = _dbContext.Products
+                .Where(product => (product.BranchId == branchId) && productIds.Contains(product.ProductId))
+                .Select(product => product.MapToModel())
+                .ToArray();
+
+            return result;
         }
 
         /// <summary>
@@ -106,7 +120,7 @@ namespace ErpManager.Persistence.Repositories
                     && (product.ProductId == productId)
                     && product.DelFlg == false);
 
-            return result?.MapToProductModel();
+            return result?.MapToModel();
         }
 
         /// <summary>
@@ -121,7 +135,7 @@ namespace ErpManager.Persistence.Repositories
 
             var result = BeginTransaction(() =>
             {
-                var insertModel = model.MapToProductEntity();
+                var insertModel = model.MapToEntity();
                 _dbContext.Add(insertModel);
                 _dbContext.SaveChanges();
             });
@@ -139,53 +153,31 @@ namespace ErpManager.Persistence.Repositories
             {
                 var product = _dbContext.Products
                     .FirstOrDefault(product => (product.BranchId == model.BranchId) && (product.ProductId == model.ProductId));
-                if (product == null) throw new Exception();
+                if (product == null) throw new NotExistInDBException();
 
-                product.MapToUpdateProduct(model);
+                product.MapToEntity(model);
                 _dbContext.Update(product);
                 _dbContext.SaveChanges();
             });
             return result;
         }
-
         /// <summary>
-        /// Update description
-        /// </summary>
-        /// <param name="model">Product model</param>
-        /// <returns>Is success</returns>
-        public bool UpdateDescription(ProductModel model)
-        {
-            var result = BeginTransaction(() =>
-            {
-                var product = _dbContext.Products
-                    .FirstOrDefault(product => (product.BranchId == model.BranchId) && (product.ProductId == model.ProductId));
-                if (product == null) throw new Exception();
-
-                product.Description = model.Description;
-                product.DateChanged = DateTime.Now;
-                product.LastChanged = model.LastChanged;
-                _dbContext.SaveChanges();
-            });
-            return result;
-        }
-
-        /// <summary>
-        /// Update product image
+        /// Update
         /// </summary>
         /// <param name="branchId">Branch id</param>
         /// <param name="productId">Product id</param>
-        /// <param name="images">Images</param>
+        /// <param name="UpdateAction">Update action</param>
         /// <returns>Update status</returns>
-        public bool UpdateProductImage(string branchId, string productId, string images)
+        public bool Update(string branchId, string productId, Action<Product> UpdateAction)
         {
             var result = BeginTransaction(() =>
             {
-                var product = _dbContext.Products
-                    .FirstOrDefault(product => (product.BranchId == branchId) && (product.ProductId == productId));
-                if (product == null) throw new Exception();
+                var product = _dbContext.Products.FirstOrDefault(product =>
+                    (product.BranchId == branchId)
+                    && (product.ProductId == productId));
+                if (product == null) throw new NotExistInDBException();
 
-                product.Images = images;
-                product.DateChanged = DateTime.Now;
+                UpdateAction(product);
                 _dbContext.SaveChanges();
             });
             return result;
@@ -199,15 +191,29 @@ namespace ErpManager.Persistence.Repositories
         /// <returns>Delete status</returns>
         public bool Delete(string branchId, string productId)
         {
-            var user = Get(branchId, productId);
-            if (user == null) return false;
-
             var result = BeginTransaction(() =>
             {
-                _dbContext.Remove(user);
+                var product = _dbContext.Products
+                    .FirstOrDefault(item => (item.BranchId == branchId) && (item.ProductId == productId));
+                if (product == null) throw new NotExistInDBException();
+
+                _dbContext.Remove(product);
                 _dbContext.SaveChanges();
             });
             return result;
+        }
+
+        /// <summary>
+        /// Check is exist
+        /// </summary>
+        /// <param name="branchId">Branch id</param>
+        /// <param name="productId">Product id</param>
+        /// <returns>Is exist?</returns>
+        public bool IsExist(string branchId, string productId)
+        {
+            return _dbContext.Products.Any(item =>
+                (item.BranchId == branchId)
+                && (item.ProductId == productId));
         }
     }
 }

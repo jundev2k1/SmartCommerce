@@ -1,5 +1,7 @@
 ﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
 
+using ErpManager.ERP.Areas.Products.ViewModels;
+
 namespace ErpManager.ERP.Areas.Users.Controllers
 {
     [Area(Constants.MODULE_USER_AREA)]
@@ -28,7 +30,7 @@ namespace ErpManager.ERP.Areas.Users.Controllers
             };
             var data = _serviceFacade.Users.Search(condition, page, Constants.DEFAULT_PAGE_SIZE);
 
-            return View(data);
+            return View(new UserListViewModel { PageData = data, PageIndex = page });
         }
     }
 }

@@ -29,6 +29,11 @@ namespace ErpManager.Common
         public static string CONFIG_SMTP_USER = string.Empty;
         public static string CONFIG_SMTP_USERNAME = string.Empty;
         public static string CONFIG_SMTP_PASSWORD = string.Empty;
+        public static string CONFIG_IMAP_SERVER = string.Empty;
+        public static int CONFIG_IMAP_PORT = 0;
+        public static string CONFIG_IMAP_USER = string.Empty;
+        public static string CONFIG_IMAP_PASSWORD = string.Empty;
+        public static string CONFIG_SYSTEM_MAIL_HEADER = string.Empty;
 
         // AppConfig: Operator setting
         public static string CONFIG_SECRET_KEY = string.Empty;
@@ -37,6 +42,21 @@ namespace ErpManager.Common
         public static string CONFIG_OWNER_MAIL = string.Empty;
         public static string CONFIG_OWNER_MAIL_CC = string.Empty;
         public static string CONFIG_OWNER_MAIL_BCC = string.Empty;
+
+        // AppConfig: Site information setting
+        public static string CONFIG_SITE_DESCRIPTION = string.Empty;
+        public static string CONFIG_SITE_KEYWORDS = string.Empty;
+        public static string CONFIG_SITE_VIEWPORT = string.Empty;
+        public static string CONFIG_SITE_OPENGRAPH_TITLE = string.Empty;
+        public static string CONFIG_SITE_OPENGRAPH_DESCRIPTION = string.Empty;
+        public static string CONFIG_SITE_OPENGRAPH_IMAGE = string.Empty;
+        public static string CONFIG_SITE_OPENGRAPH_URL = string.Empty;
+        public static string CONFIG_SITE_OPENGRAPH_TYPE = string.Empty;
+        public static string CONFIG_SITE_TWITTER_CARD = string.Empty;
+        public static string CONFIG_SITE_TWITTER_TITLE = string.Empty;
+        public static string CONFIG_SITE_TWITTER_DESCRIPTION = string.Empty;
+        public static string CONFIG_SITE_TWITTER_IMAGE = string.Empty;
+        public static string CONFIG_SITE_CANONICAL = string.Empty;
 
         /// <summary>Config: Charset options</summary>
         public static string PAGE_CHARSET_OPTIONS = "utf-8";

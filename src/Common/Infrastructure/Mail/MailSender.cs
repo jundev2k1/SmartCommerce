@@ -17,5 +17,16 @@ namespace ErpManager.Infrastructure.Mail
         {
             Task.Run(() => this.SendMailToOperatorAsync(subject, message, priority));
         }
+
+        public void SendMailContact(string subject, string message)
+        {
+            SendMailToOperator(subject, message, MailPriorityEnum.High);
+        }
+
+        public List<MimeMessage> readMailNotSend(int maxCount = 99)
+        {
+            var query = SearchQuery.NotSeen;
+            return Task.Run(() => this.ReadEmailsAsync(query, maxCount)).Result;
+        }
     }
 }

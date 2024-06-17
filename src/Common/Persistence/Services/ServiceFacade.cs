@@ -18,5 +18,13 @@ namespace ErpManager.Persistence.Services
         public IUserService Users => _serviceProvider.GetService<IUserService>();
 
         public IProductService Products => _serviceProvider.GetService<IProductService>();
+
+        public ITokenService Tokens => _serviceProvider.GetService<ITokenService>();
+
+        public IMemberService Members => _serviceProvider.GetService<IMemberService>();
+
+        public IMailTemplateService MailTemplates => _serviceProvider.GetService<IMailTemplateService>();
+
+        public INotificationService Notifications => _serviceProvider.GetService<INotificationService>();
     }
 }

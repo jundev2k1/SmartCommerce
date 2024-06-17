@@ -13,7 +13,7 @@ namespace ErpManager.Persistence.Services
         /// <param name="pageIndex">Page index</param>
         /// <param name="pageSize">Page size</param>
         /// <returns>Search result model</returns>
-        public SearchResultModel<ProductModel> Search(ProductSearchDto searchParams, int pageIndex, int pageSize = Constants.DEFAULT_PAGE_SIZE);
+        SearchResultModel<ProductModel> Search(ProductSearchDto searchParams, int pageIndex, int pageSize = Constants.DEFAULT_PAGE_SIZE);
 
         /// <summary>
         /// Get all product
@@ -21,16 +21,15 @@ namespace ErpManager.Persistence.Services
         /// <param name="branchId">Branch id</param>
         /// <param name="isDeleted">Delete flag of product</param>
         /// <returns>A collection of product</returns>
-        public ProductModel[] GetAllProduct(string branchId, bool isDeleted = false);
+        ProductModel[] GetAll(string branchId, bool isDeleted = false);
 
         /// <summary>
         /// Get related products
         /// </summary>
         /// <param name="branchId">Branch id</param>
         /// <param name="productId">Product id</param>
-        /// <param name="maxQuantity">Max quantity</param>
         /// <returns>A collection of related product</returns>
-        public ProductModel[] GetRelatedProducts(string branchId, string productId, int maxQuantity);
+        ProductModel[] GetRelatedProducts(string branchId, string productId);
 
         /// <summary>
         /// Get product
@@ -38,28 +37,36 @@ namespace ErpManager.Persistence.Services
         /// <param name="branchId">Branch id</param>
         /// <param name="productId">Product id</param>
         /// <returns>product model</returns>
-        public ProductModel? GetProduct(string branchId, string productId);
+        ProductModel? Get(string branchId, string productId);
 
         /// <summary>
         /// Insert product
         /// </summary>
         /// <param name="model">Product model</param>
         /// <returns>Insert status</returns>
-        public bool Insert(ProductModel model);
+        bool Insert(ProductModel model);
 
         /// <summary>
         /// Update
         /// </summary>
         /// <param name="model">Product model</param>
         /// <returns>Update status</returns>
-        public bool Update(ProductModel model);
+        bool Update(ProductModel model);
+        /// <summary>
+        /// Update
+        /// </summary>
+        /// <param name="branchId">Branch id</param>
+        /// <param name="productId">Product id</param>
+        /// <param name="updateAction">Update action</param>
+        /// <returns>Update status</returns>
+        bool Update(string branchId, string productId, Action<Product> updateAction);
 
         /// <summary>
         /// Update description
         /// </summary>
         /// <param name="model">Product model</param>
         /// <returns>Is success</returns>
-        public bool UpdateDescription(ProductModel model);
+        bool UpdateDescription(ProductModel model);
 
         /// <summary>
         /// Update newest product images
@@ -67,7 +74,7 @@ namespace ErpManager.Persistence.Services
         /// <param name="branchId">Branch id</param>
         /// <param name="productId">Product id</param>
         /// <returns>Actual product image value</returns>
-        public string? UpdateNewestProductImages(string branchId, string productId);
+        string? UpdateNewestProductImages(string branchId, string productId);
 
         /// <summary>
         /// Delete temporary
@@ -76,14 +83,22 @@ namespace ErpManager.Persistence.Services
         /// <param name="productId">product id</param>
         /// <remarks>Update delete flag to "true"</remarks>
         /// <returns>Delete status</returns>
-        public bool TempDelete(string branchId, string productId);
+        bool TempDelete(string branchId, string productId);
 
         /// <summary>
         /// Delete
         /// </summary>
         /// <param name="branchId">Branch id</param>
-        /// <param name="productId">ProductId id</param>
+        /// <param name="productId">Product id</param>
         /// <returns>Delete status</returns>
-        public bool Delete(string branchId, string productId);
+        bool Delete(string branchId, string productId);
+
+        /// <summary>
+        /// Check is exist
+        /// </summary>
+        /// <param name="branchId">Branch id</param>
+        /// <param name="productId">Product id</param>
+        /// <returns>Is exist?</returns>
+        bool IsExist(string branchId, string productId);
     }
 }

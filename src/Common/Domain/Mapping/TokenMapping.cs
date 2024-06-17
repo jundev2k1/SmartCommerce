@@ -5,62 +5,63 @@ namespace ErpManager.Domain.Mapping
     public static class TokenMapping
     {
         /// <summary>
-        /// Map to token model
+        /// Map to model
         /// </summary>
-        /// <param name="tokenEntity">Token entity</param>
-        /// <returns>Token model</returns>
-        public static TokenModel MapToTokenModel(this Token tokenEntity)
+        /// <param name="entity">Entity</param>
+        /// <returns>Model</returns>
+        public static TokenModel MapToModel(this Token entity)
         {
             var model = new TokenModel
             {
-                BranchId = tokenEntity.BranchId,
-                TokenId = tokenEntity.TokenId,
-                ExpirationDate = tokenEntity.ExpirationDate,
-                Type = tokenEntity.Type,
-                DateCreated = tokenEntity.DateCreated,
-                DateChanged = tokenEntity.DateChanged,
-                CreatedBy = tokenEntity.CreatedBy,
+                BranchId = entity.BranchId,
+                TokenId = entity.TokenId,
+                ExpirationDate = entity.ExpirationDate,
+                Type = entity.Type,
+                DateCreated = entity.DateCreated,
+                DateChanged = entity.DateChanged,
+                CreatedBy = entity.CreatedBy,
             };
 
             return model;
         }
 
         /// <summary>
-        /// Map to token entity
+        /// Map to entity
         /// </summary>
-        /// <param name="tokenModel">Token model</param>
-        /// <returns>Token entity</returns>
-        public static Token MapToTokenEntity(this TokenModel tokenModel)
+        /// <param name="model">Model</param>
+        /// <returns>Entity</returns>
+        public static Token MapToEntity(this TokenModel model)
         {
             var entity = new Token
             {
-                BranchId = tokenModel.BranchId,
-                TokenId = tokenModel.TokenId,
-                ExpirationDate = tokenModel.ExpirationDate,
-                Type = tokenModel.Type,
-                DateCreated = tokenModel.DateCreated,
-                DateChanged = tokenModel.DateChanged,
-                CreatedBy = tokenModel.CreatedBy,
+                BranchId = model.BranchId,
+                TokenId = model.TokenId,
+                ExpirationDate = model.ExpirationDate,
+                Type = model.Type,
+                DateCreated = model.DateCreated,
+                DateChanged = model.DateChanged,
+                CreatedBy = model.CreatedBy,
             };
 
             return entity;
         }
-
         /// <summary>
-        /// Map to token entity
+        /// Map to entity
         /// </summary>
-        /// <param name="tokenModel">Token model</param>
-        /// <returns>Token entity</returns>
-        public static Token MapToTokenEntity(this Token tokenEntity, TokenModel tokenModel)
+        /// <param name="entity">Entity</param>
+        /// <param name="model">Model</param>
+        /// <returns>Entity</returns>
+        public static Token MapToEntity(this Token entity, TokenModel model)
         {
-            tokenEntity.BranchId = tokenModel.BranchId;
-            tokenEntity.TokenId = tokenModel.TokenId;
-            tokenEntity.ExpirationDate = tokenModel.ExpirationDate;
-            tokenEntity.Type = tokenModel.Type;
-            tokenEntity.DateCreated = tokenModel.DateCreated;
-            tokenEntity.DateChanged = tokenModel.DateChanged;
-            tokenEntity.CreatedBy = tokenModel.CreatedBy;
-            return tokenEntity;
+            entity.BranchId = model.BranchId;
+            entity.TokenId = model.TokenId;
+            entity.ExpirationDate = model.ExpirationDate;
+            entity.Type = model.Type;
+            entity.DateCreated = model.DateCreated;
+            entity.DateChanged = model.DateChanged;
+            entity.CreatedBy = model.CreatedBy;
+
+            return entity;
         }
     }
 }

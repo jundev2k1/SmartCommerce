@@ -22,7 +22,7 @@ namespace ErpManager.ERP.Areas.Product.Controllers
         [Route(Constants.MODULE_PRODUCT_PRODUCTDETAIL_PATH, Name = Constants.MODULE_PRODUCT_PRODUCTDETAIL_NAME)]
         public IActionResult Index([FromRoute]string id)
         {
-            var data = _serviceFacade.Products.GetProduct(this.OperatorBranchId, id);
+            var data = _serviceFacade.Products.Get(this.OperatorBranchId, id);
             if (data == null) return RedirectToErrorPage(Constants.ERRORMSG_KEY_DATA_NOT_FOUND, ErrorCodeEnum.DataNotFound);
 
             return View(data);

@@ -8,13 +8,13 @@ namespace ErpManager.Persistence.Services
         /// Get all branch
         /// </summary>
         /// <returns>A collection of branch</returns>
-        public BranchModel?[] GetAllBranch();
+        BranchModel?[] GetAll();
 
         /// <summary>
         /// Get user
         /// </summary>
         /// <param name="branchId">Branch id</param>
         /// <returns>Branch model</returns>
-        public BranchModel? GetBranch(string branchId);
+        BranchModel? Get(string branchId);
     }
 }

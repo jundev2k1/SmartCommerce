@@ -4,7 +4,7 @@ namespace ErpManager.ERP.Common.Validators
 {
     public class ValidatorBase<T> : AbstractValidator<T>
     {
-        private readonly IServiceFacade _serviceFacade;
+        protected readonly IServiceFacade _serviceFacade;
         public ValidatorBase(IServiceFacade serviceFacade)
         {
             _serviceFacade = serviceFacade;
@@ -51,7 +51,7 @@ namespace ErpManager.ERP.Common.Validators
         /// <returns>Be valid user</returns>
         protected bool BeValidUser(string branchId, string userId)
         {
-            return _serviceFacade.Users.GetUser(branchId, userId) != null;
+            return _serviceFacade.Users.Get(branchId, userId) != null;
         }
 
         /// <summary>
@@ -62,7 +62,7 @@ namespace ErpManager.ERP.Common.Validators
         /// <returns>Is not exist</returns>
         protected bool BeNotExistProduct(string branchId, string productId)
         {
-            var result = _serviceFacade.Products.GetProduct(branchId, productId) == null;
+            var result = _serviceFacade.Products.Get(branchId, productId) == null;
             return result;
         }
 

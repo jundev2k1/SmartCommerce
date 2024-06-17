@@ -52,7 +52,7 @@ namespace ErpManager.Domain.Models
 
         public string Note { get; set; } = string.Empty;
 
-        public DateTime? DateCreated { get; set; }
+        public DateTime DateCreated { get; set; }
 
         public DateTime? DateChanged { get; set; }
 

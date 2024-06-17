@@ -22,7 +22,7 @@ namespace ErpManager.Persistence.Services
         /// Get all branch
         /// </summary>
         /// <returns>A collection of branch</returns>
-        public BranchModel[] GetAllBranch()
+        public BranchModel[] GetAll()
         {
             return _branchRepository.GetAll();
         }
@@ -32,7 +32,7 @@ namespace ErpManager.Persistence.Services
         /// </summary>
         /// <param name="branchId">Branch id</param>
         /// <returns>Branch model</returns>
-        public BranchModel? GetBranch(string branchId)
+        public BranchModel? Get(string branchId)
         {
             return _branchRepository.Get(branchId);
         }

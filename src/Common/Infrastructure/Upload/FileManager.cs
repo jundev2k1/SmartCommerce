@@ -1,6 +1,5 @@
 ﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
 
-using ErpManager.Common;
 using Microsoft.AspNetCore.Http;
 using System.Text.RegularExpressions;
 
@@ -91,7 +90,6 @@ namespace ErpManager.Infrastructure.Upload
                     ? this.HandleFilePath
                     : this.TempFilePath;
                 var imagePath = Path.Combine(dirPath, fileName);
-                System.Diagnostics.Debugger.Launch();
                 if (File.Exists(imagePath))
                 {
                     // Check and increase index if duplicate file name

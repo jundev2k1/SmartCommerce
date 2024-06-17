@@ -8,7 +8,7 @@ namespace ErpManager.Persistence.Repositories
         /// Constructor
         /// </summary>
         /// <param name="dbContext">Context</param>
-        public TokenRepository(DBContext dbContext) : base(dbContext)
+        public TokenRepository(DBContext dbContext, IFileLogger logger) : base(dbContext, logger)
         {
         }
 
@@ -24,7 +24,7 @@ namespace ErpManager.Persistence.Repositories
                 token.BranchId == branchId
                 && token.TokenId == tokenId);
 
-            return result?.MapToTokenModel();
+            return result?.MapToModel();
         }
 
         /// <summary>
@@ -34,12 +34,14 @@ namespace ErpManager.Persistence.Repositories
         /// <returns>Status insert</returns>
         public bool Insert(TokenModel model)
         {
-            var token = Get(model.BranchId, model.TokenId);
-            if (token != null) return false;
-
             var result = BeginTransaction(() =>
             {
-                var insertModel = model.MapToTokenEntity();
+                var token = _dbContext.Tokens.FirstOrDefault(item =>
+                    (item.BranchId == model.BranchId)
+                    && (item.TokenId == model.TokenId));
+                if (token != null) throw new NotExistInDBException();
+
+                var insertModel = model.MapToEntity();
                 _dbContext.Add(insertModel);
                 _dbContext.SaveChanges();
             });
@@ -60,28 +62,51 @@ namespace ErpManager.Persistence.Repositories
                     && item.TokenId == model.TokenId);
                 if (token == null) throw new Exception();
 
-                var updateModel = token.MapToTokenEntity(model);
+                var updateModel = token.MapToEntity(model);
                 _dbContext.Update(updateModel);
                 _dbContext.SaveChanges();
             });
 
             return result;
         }
+        /// <summary>
+        /// Update
+        /// </summary>
+        /// <param name="branchId">Branch id</param>
+        /// <param name="tokenId">Token id</param>
+        /// <param name="UpdateAction">Update action</param>
+        /// <returns>Update status</returns>
+        public bool Update(string branchId, string tokenId, Action<Token> UpdateAction)
+        {
+            var result = BeginTransaction(() =>
+            {
+                var token = _dbContext.Tokens.FirstOrDefault(item =>
+                    (item.BranchId == branchId)
+                    && (item.TokenId == tokenId));
+                if (token == null) throw new NotExistInDBException();
+
+                UpdateAction(token);
+                _dbContext.SaveChanges();
+            });
+            return result;
+        }
 
         /// <summary>
         /// Delete
         /// </summary>
-        /// <param name="branchID">Branch id</param>
-        /// <param name="tokenId">Role id</param>
+        /// <param name="branchId">Branch id</param>
+        /// <param name="tokenId">Token id</param>
         /// <returns>Delete status</returns>
-        public bool Delete(string branchID, string tokenId)
+        public bool Delete(string branchId, string tokenId)
         {
-            var role = Get(branchID, tokenId);
-            if (role == null) return false;
-
             var result = BeginTransaction(() =>
             {
-                _dbContext.Remove(role);
+                var token = _dbContext.Tokens.FirstOrDefault(item =>
+                    item.BranchId == branchId
+                    && item.TokenId == tokenId);
+                if (token == null) throw new NotExistInDBException();
+
+                _dbContext.Remove(token);
                 _dbContext.SaveChanges();
             });
 

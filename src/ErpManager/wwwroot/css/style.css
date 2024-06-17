@@ -122,6 +122,7 @@
                 text-align: center;
                 font-size: 28px;
                 font-weight: 700;
+                color: var(--site-black);
             }
 
                 .theme-settings .theme-settings-popup .theme-settings-header h2 i {

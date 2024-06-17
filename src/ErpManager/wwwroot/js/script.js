@@ -1,5 +1,8 @@
 ﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
 
+import '../lib/select2/js/i18n/vi.js';
+import '../lib/select2/js/i18n/en.js';
+
 // Handle common page load
 document.addEventListener('DOMContentLoaded', () => {
     const mainLayout = document.querySelector("#page-load .render-content");
@@ -15,6 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Handle window load
     StoreWindowLoadCallback.forEach((callback) => {
+        debugger
         callback?.();
     });
 
@@ -69,8 +73,6 @@ toastr.options = {
 };
 
 // Handle load select2
-import '../lib/select2/js/i18n/vi.js';
-import '../lib/select2/js/i18n/en.js';
 $(document).ready(function () {
     const defaultOptions = {
         theme: 'bootstrap-5',
@@ -397,34 +399,26 @@ const uploadImage = (element) => {
         },
         importImage(files) {
             const url = '/common/upload-images';
-            const formData = new FormData();
-            [...files].forEach((file) => {
-                formData.append('files', file);
-            });
-            formData.append('type', typeUpload);
-            formData.append('uploadFileName', formatFileName || '');
-            formData.append('isClearTempImages', isFirstUpload);
-
-            const xhr = new XMLHttpRequest();
-            xhr.open('POST', url, true);
-            xhr.onload = (event) => {
-                const { status, response } = event.target;
-                if (status === 200) {
-                    isFirstUpload = false;
-                    this.setSrcImages(response);
-                    toastr.success(this.messageMaster.successImport);
-                    if (this.isMultiple) {
-                        this.loadMultiple();
-                        this.resetEvent();
-                        return;
-                    }
-
-                    this.loadSingle();
+            const data = {
+                files: Array.from(files),
+                type: typeUpload,
+                uploadFileName: formatFileName,
+                isClearTempImages: isFirstUpload
+            };
+            const onSuccess = (response) => {
+                isFirstUpload = false;
+                this.setSrcImages(response);
+                toastr.success(this.messageMaster.successImport);
+                if (this.isMultiple) {
+                    this.loadMultiple();
                     this.resetEvent();
+                    return;
                 }
 
+                this.loadSingle();
+                this.resetEvent();
             };
-            xhr.send(formData);
+            callAjax({ url, data, type: requestType.formData, onSuccess });
         },
         deleteImage(element) {
             const onSuccess = (response) => {
@@ -435,13 +429,13 @@ const uploadImage = (element) => {
                         this.srcImages = response.split(',');
                         toastr.success(this.messageMaster.successDelete);
                         this.resetEvent();
-                    }
-                    callAjax({ url: updateNewestImageUrl, contentType: 'application/x-www-form-urlencoded; charset=UTF-8', dataType: 'text', data: requestData, onSuccess: updateNewestOnSuccess });
+                    };
+                    callAjax({ url: updateNewestImageUrl, data: requestData, onSuccess: updateNewestOnSuccess });
                 } else {
                     this.srcImages.splice(element.itemIndex, 1);
                     toastr.success(this.messageMaster.successDelete);
                     this.resetEvent();
-                }
+                };
             };
 
             const targetItem = this.srcImages[element.itemIndex];
@@ -541,6 +535,7 @@ const uploadImage = (element) => {
             callAjax({
                 url,
                 data: { type: typeUpload, filePath: this.srcImages.join(',') },
+                type: requestType.formUrl,
                 method: 'GET',
                 onSuccess
             });

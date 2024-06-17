@@ -1,11 +1,18 @@
 ﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
 
+using MailKit.Search;
+using MimeKit;
+
 namespace ErpManager.Infrastructure.Interface
 {
     public interface IMailSender
     {
-        public void SendMail(MailSenderInfo mailInfo);
+        void SendMail(MailSenderInfo mailInfo);
 
-        public void SendMailToOperator(string subject, string message, MailPriorityEnum priority = MailPriorityEnum.Normal);
+        void SendMailToOperator(string subject, string message, MailPriorityEnum priority = MailPriorityEnum.Normal);
+
+        void SendMailContact(string subject, string message);
+
+        List<MimeMessage> readMailNotSend(int maxCount = 10);
     }
 }

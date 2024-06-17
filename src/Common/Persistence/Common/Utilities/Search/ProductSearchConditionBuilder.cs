@@ -1,4 +1,6 @@
-﻿#pragma warning disable CS0618
+﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
+
+#pragma warning disable CS0618
 
 namespace ErpManager.Persistence.Common.Utilities.Search
 {

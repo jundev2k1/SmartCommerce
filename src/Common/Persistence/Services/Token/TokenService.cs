@@ -24,7 +24,7 @@ namespace ErpManager.Persistence.Services
         /// <param name="branchId">Branch Id</param>
         /// <param name="tokenId">Token id</param>
         /// <returns>Token model</returns>
-        public TokenModel? GetToken(string branchId, string tokenId)
+        public TokenModel? Get(string branchId, string tokenId)
         {
             return _tokenRepository.Get(branchId, tokenId);
         }
@@ -49,6 +49,17 @@ namespace ErpManager.Persistence.Services
         public bool Update(TokenModel model)
         {
             return _tokenRepository.Update(model);
+        }
+        /// <summary>
+        /// Update
+        /// </summary>
+        /// <param name="branchId">Branch id</param>
+        /// <param name="tokenId">Token id</param>
+        /// <param name="updateAction">Update action</param>
+        /// <returns>Update status</returns>
+        public bool Update(string branchId, string tokenId, Action<Token> updateAction)
+        {
+            return _tokenRepository.Update(branchId, tokenId, updateAction);
         }
 
         /// <summary>

@@ -28,7 +28,7 @@ namespace ErpManager.ERP.Areas.Product.Controllers
         [Route(Constants.MODULE_PRODUCT_PRODUCTEDIT_PATH, Name = Constants.MODULE_PRODUCT_PRODUCTEDIT_NAME)]
         public IActionResult Index(string id)
         {
-            var product = _serviceFacade.Products.GetProduct(this.OperatorBranchId, id);
+            var product = _serviceFacade.Products.Get(this.OperatorBranchId, id);
             if (product == null) return RedirectToRoute(Constants.MODULE_PRODUCT_PRODUCTLIST_NAME);
 
             ViewBag.DropdownItems = GetInitDropdownListItems(new ProductModel());
@@ -70,7 +70,7 @@ namespace ErpManager.ERP.Areas.Product.Controllers
         /// <param name="input">Input</param>
         private void SetDataForUpdate(ref ProductModel input)
         {
-            var product = _serviceFacade.Products.GetProduct(this.OperatorBranchId, input.ProductId);
+            var product = _serviceFacade.Products.Get(this.OperatorBranchId, input.ProductId);
             if (product == null) return;
 
             var productImages = _serviceFacade.Products.UpdateNewestProductImages(product.BranchId, product.ProductId);
@@ -90,7 +90,7 @@ namespace ErpManager.ERP.Areas.Product.Controllers
         [Route(Constants.MODULE_PRODUCT_PRODUCTEDIT_DESCRIPTION_PATH, Name = Constants.MODULE_PRODUCT_PRODUCTEDIT_DESCRIPTION_NAME)]
         public bool UpdateDescription([FromRoute] string id, [FromBody] string description)
         {
-            var product = _serviceFacade.Products.GetProduct(this.OperatorBranchId, id);
+            var product = _serviceFacade.Products.Get(this.OperatorBranchId, id);
             if (product == null) return false;
 
             product.Description = description;

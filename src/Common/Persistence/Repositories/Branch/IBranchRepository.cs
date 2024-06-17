@@ -8,13 +8,13 @@ namespace ErpManager.Persistence.Repositories
         /// Get all
         /// </summary>
         /// <returns>Branch model list</returns>
-        public BranchModel[] GetAll();
+        BranchModel[] GetAll();
 
         /// <summary>
         /// Get
         /// </summary>
         /// <param name="branchId">Branch id</param>
         /// <returns>Branch model</returns>
-        public BranchModel? Get(string branchId);
+        BranchModel? Get(string branchId);
     }
 }

@@ -8,19 +8,19 @@ namespace ErpManager.Persistence.Repositories
         /// Constructor
         /// </summary>
         /// <param name="dbContext">Context</param>
-        public BranchRepository(DBContext dbContext) : base(dbContext)
+        public BranchRepository(DBContext dbContext, IFileLogger logger) : base(dbContext, logger)
         {
         }
 
         /// <summary>
-        /// Get all branch
+        /// Get all
         /// </summary>
         /// <returns>A collection of branch</returns>
         public BranchModel[] GetAll()
         {
             var result = _dbContext.Branches
                 .Where(branch => branch.Status == BranchStatusEnum.Active)
-                .Select(branch => branch.MapToBranchModel())
+                .Select(branch => branch.MapToModel())
                 .ToArray();
 
             return result;
@@ -36,7 +36,7 @@ namespace ErpManager.Persistence.Repositories
             var result = _dbContext.Branches
                 .FirstOrDefault(branch => (branch.BranchId == branchId));
 
-            return result?.MapToBranchModel();
+            return result?.MapToModel();
         }
     }
 }

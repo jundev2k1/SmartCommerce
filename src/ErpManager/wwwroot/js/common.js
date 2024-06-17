@@ -38,6 +38,28 @@ Array.prototype.chunk = function (size) {
     return result;
 };
 
+const convertToFormData = (data) => {
+    const formData = new FormData();
+    // Check params
+    if (typeof data !== 'object') return formData;
+
+    // Add data to form data
+    Object.entries(data).forEach(([key, value]) => {
+        if (!value) return;
+
+        if (Array.isArray(value)) {
+            Array.from(value).forEach(item => {
+                formData.append(key, item);
+            });
+            return;
+        }
+
+        formData.append(key, value);
+    });
+
+    return formData;
+};
+
 const requestType = Object.freeze({
     json: 'json',
     formUrl: 'formUrl',
@@ -49,25 +71,33 @@ const requestType = Object.freeze({
 const requestContentType = Object.freeze({
     json: 'application/json',
     formUrlEncoded: 'application/x-www-form-urlencoded',
-    formData: 'multipart/form-data',
+    formData: false,
     textPlain: 'text/plain'
 });
 
-const createRequestOption = ({ data,  }) => ({
-    json: {
-        contentType: requestContentType.json,
-        dataType: 'json',
-    },
-    formUrl: {
-        contentType: requestContentType.formUrlEncoded,
-    },
-    formData: {
-        contentType: requestContentType.formData
-    },
-    textPlain: {
-        contentType: requestContentType.textPlain,
-    }
-});
+const createRequestOption = ({ data, type = requestType.json }) => {
+    const options = {
+        json: {
+            data: JSON.stringify(data),
+            contentType: requestContentType.json,
+            dataType: 'json',
+        },
+        formUrl: {
+            data: new URLSearchParams(data).toString(),
+            contentType: requestContentType.formUrlEncoded,
+        },
+        formData: {
+            data: convertToFormData(data),
+            contentType: requestContentType.formData,
+            processData: false,
+        },
+        textPlain: {
+            data: data,
+            contentType: requestContentType.textPlain,
+        }
+    };
+    return options[type];
+};
 
 // Loading function
 const typeLoading = {
@@ -137,12 +167,10 @@ const hideLoading = function (type = 'unknown', selector = 'global') {
     }
 };
 
-const callAjax = ({ url, data, contentType = requestContentType.json, dataType = 'json', method = 'POST', onSuccess }) => $.ajax({
+const callAjax = ({ url, data, type = requestType.json, method = 'POST', onSuccess }) => $.ajax({
     url: url,
     type: method,
-    contentType: contentType,
-    dataType: dataType,
-    data,
+    ...createRequestOption({ data, type }),
     success: (result) => {
         onSuccess?.(result);
     },

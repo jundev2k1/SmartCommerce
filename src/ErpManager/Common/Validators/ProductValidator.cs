@@ -86,6 +86,11 @@ namespace ErpManager.ERP.Common.Validators
                 .MaximumLength(30).WithMessage(localizer.Validates["ErrorMsg_MaxLength"])
                 .Must((model, value) => string.IsNullOrEmpty(value) || BeValidUser(model.BranchId, value))
                     .WithMessage(localizer.Validates["ErrorMsg_UserNotExist"]);
+
+            RuleFor(product => product.RelatedProductId)
+                .MaximumLength(4000).WithMessage(localizer.Validates["ErrorMsg_MaxLength"])
+                .Must((model, value) => string.IsNullOrEmpty(value) || BeProductRelatedFormat(model.BranchId, value))
+                    .WithMessage(localizer.Validates["ErrorMsg_ProductNotExist"]);
         }
 
         /// <summary>
@@ -127,6 +132,19 @@ namespace ErpManager.ERP.Common.Validators
             }
 
             var result = communeGroups.SelectMany(address => address.Items).Any(address => address.CommuneId.Equals(value));
+            return result;
+        }
+
+        /// <summary>
+        /// Be product related format
+        /// </summary>
+        /// <param name="branchId">Branch id</param>
+        /// <param name="value">Related product id (string)</param>
+        /// <returns>Is valid</returns>
+        public bool BeProductRelatedFormat(string branchId, string value)
+        {
+            var productIds = value.Split(',', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
+            var result = productIds.All(id => _serviceFacade.Products.IsExist(branchId, id));
             return result;
         }
     }

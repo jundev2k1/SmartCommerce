@@ -1,7 +1,5 @@
 ﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
 
-using ErpManager.Domain.Models;
-
 namespace ErpManager.Persistence.Repositories
 {
     public interface IProductRepository
@@ -13,7 +11,7 @@ namespace ErpManager.Persistence.Repositories
         /// <param name="pageIndex">Page index</param>
         /// <param name="pageSize">Page size</param>
         /// <returns>Search result model</returns>
-        public SearchResultModel<ProductModel> Search(Expression<Func<Product, bool>> expression, int pageIndex, int pageSize);
+        SearchResultModel<ProductModel> Search(Expression<Func<Product, bool>> expression, int pageIndex, int pageSize);
 
         /// <summary>
         /// Get all
@@ -21,54 +19,52 @@ namespace ErpManager.Persistence.Repositories
         /// <param name="branchId">Branch id</param>
         /// <param name="isDeleted">Delete flag of product</param>
         /// <returns>Product model list</returns>
-        public ProductModel[] GetAll(string branchId, bool isDeleted);
+        ProductModel[] GetAll(string branchId, bool isDeleted);
 
         /// <summary>
         /// Get related products
         /// </summary>
         /// <param name="branchId">Branch id</param>
         /// <param name="productId">Product id</param>
-        /// <param name="maxQuantity">Max quantity</param>
         /// <returns>Related products</returns>
-        public ProductModel[] GetRelatedProducts(string branchId, string productId, int maxQuantity);
+        ProductModel[] GetRelatedProducts(string branchId, string productId);
 
+        /// <summary>
+        /// Gets
+        /// </summary>
+        /// <param name="branchId">Branch id</param>
+        /// <param name="productIds">Product id list</param>
+        /// <returns>Product model list</returns>
+        ProductModel[] Gets(string branchId, string[] productIds);
         /// <summary>
         /// Get
         /// </summary>
         /// <param name="branchId">Branch id</param>
         /// <param name="productId">Product id</param>
         /// <returns>Product model</returns>
-        public ProductModel? Get(string branchId, string productId);
+        ProductModel? Get(string branchId, string productId);
 
         /// <summary>
         /// Insert
         /// </summary>
         /// <param name="model">Product model</param>
         /// <returns>Insert status</returns>
-        public bool Insert(ProductModel model);
+        bool Insert(ProductModel model);
 
         /// <summary>
         /// Update
         /// </summary>
         /// <param name="model">Product model</param>
         /// <returns>Update status</returns>
-        public bool Update(ProductModel model);
-
+        bool Update(ProductModel model);
         /// <summary>
-        /// Update description
-        /// </summary>
-        /// <param name="product">Product model</param>
-        /// <returns>Is success</returns>
-        public bool UpdateDescription(ProductModel product);
-
-        /// <summary>
-        /// Update product image
+        /// Update
         /// </summary>
         /// <param name="branchId">Branch id</param>
         /// <param name="productId">Product id</param>
-        /// <param name="images">Images</param>
+        /// <param name="UpdateAction">Update action</param>
         /// <returns>Update status</returns>
-        public bool UpdateProductImage(string branchId, string productId, string images);
+        bool Update(string branchId, string productId, Action<Product> UpdateAction);
 
         /// <summary>
         /// Delete
@@ -76,6 +72,14 @@ namespace ErpManager.Persistence.Repositories
         /// <param name="branchId">Branch id</param>
         /// <param name="productId">Product id</param>
         /// <returns>Delete status</returns>
-        public bool Delete(string branchId, string productId);
+        bool Delete(string branchId, string productId);
+
+        /// <summary>
+        /// Check is exist
+        /// </summary>
+        /// <param name="branchId">Branch id</param>
+        /// <param name="productId">Product id</param>
+        /// <returns>Is exist?</returns>
+        bool IsExist(string branchId, string productId);
     }
 }

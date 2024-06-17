@@ -25,7 +25,7 @@ namespace ErpManager.ERP.Areas.Product.Controllers
         [Route(Constants.MODULE_PRODUCT_PRODUCTDELETE_PATH, Name = Constants.MODULE_PRODUCT_PRODUCTDELETE_NAME)]
         public IActionResult Index(string id)
         {
-            var product = _serviceFacade.Products.GetProduct(this.OperatorBranchId, id);
+            var product = _serviceFacade.Products.Get(this.OperatorBranchId, id);
             if (product == null) return RedirectToRoute(Constants.MODULE_ERROR_ERROR_NAME);
 
             var isSuccess = _serviceFacade.Products.Delete(this.OperatorBranchId, product.ProductId);

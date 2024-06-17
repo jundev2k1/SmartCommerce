@@ -32,6 +32,9 @@ namespace ErpManager.Persistence
             services.AddScoped<IRoleRepository, RoleRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IProductRepository, ProductRepository>();
+            services.AddScoped<ITokenRepository, TokenRepository>();
+            services.AddScoped<IMemberRepository, MemberRepository>();
+            services.AddScoped<IMailTemplateRepository, MailTemplateRepository>();
 
             return services;
         }
@@ -45,6 +48,9 @@ namespace ErpManager.Persistence
             services.AddScoped<IRoleService, RoleService>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IProductService, ProductService>();
+            services.AddScoped<ITokenService, TokenService>();
+            services.AddScoped<IMemberService, MemberService>();
+            services.AddScoped<IMailTemplateService, MailTemplateService>();
 
             return services;
         }

@@ -4,7 +4,7 @@ namespace ErpManager.Infrastructure.ExceptionExtension
 {
     public sealed class NotExistInDBException : Exception
     {
-        const string CONST_DEFAULT_ERROR_MESSAGE = "This value is not exist in database";
+        const string CONST_DEFAULT_ERROR_MESSAGE = "This item does not exist";
 
         public NotExistInDBException() : base(CONST_DEFAULT_ERROR_MESSAGE)
         {

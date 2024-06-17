@@ -31,7 +31,7 @@ namespace ErpManager.ERP.Areas.Product.Controllers
             var product = new ProductModel();
             if (string.IsNullOrEmpty(id) == false)
             {
-                product = _serviceFacade.Products.GetProduct(this.OperatorBranchId, id) ?? new ProductModel();
+                product = _serviceFacade.Products.Get(this.OperatorBranchId, id) ?? new ProductModel();
                 product.Images = string.Empty;
             }
 

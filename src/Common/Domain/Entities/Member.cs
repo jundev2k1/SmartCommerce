@@ -1,9 +1,6 @@
 ﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
 
 #nullable disable
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-
 namespace ErpManager.Domain.Entities;
 
 [Table("Member")]
@@ -81,7 +78,7 @@ public partial class Member
     public DateTime DateCreated { get; set; }
 
     [Column(TypeName = "datetime")]
-    public DateTime DateChanged { get; set; }
+    public DateTime? DateChanged { get; set; }
 
     [StringLength(30)]
     public string CreatedBy { get; set; }
