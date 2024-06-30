@@ -2,14 +2,14 @@
 
 namespace ErpManager.Infrastructure.Interface
 {
-    public interface IFileLogger
-    {
-        public void LogInformation(string message);
+	public interface IFileLogger
+	{
+		public void LogInformation(string message);
 
-        public void LogWarning(string message);
+		public void LogWarning(string message);
 
-        public void LogError(string message);
+		public void LogError(string message);
 
-        public void LogTrace(string message);
-    }
+		public void LogTrace(string message);
+	}
 }

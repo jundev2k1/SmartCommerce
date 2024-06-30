@@ -3,28 +3,28 @@
 #nullable disable
 namespace ErpManager.Persistence.Services
 {
-    public sealed class ServiceFacade : IServiceFacade
-    {
-        private IServiceProvider _serviceProvider;
-        public ServiceFacade(IServiceProvider serviceProvider)
-        {
-            _serviceProvider = serviceProvider;
-        }
+	public sealed class ServiceFacade : IServiceFacade
+	{
+		private IServiceProvider _serviceProvider;
+		public ServiceFacade(IServiceProvider serviceProvider)
+		{
+			_serviceProvider = serviceProvider;
+		}
 
-        public IBranchService Branches => _serviceProvider.GetService<IBranchService>();
+		public IBranchService Branches => _serviceProvider.GetService<IBranchService>();
 
-        public IRoleService Roles => _serviceProvider.GetService<IRoleService>();
+		public IRoleService Roles => _serviceProvider.GetService<IRoleService>();
 
-        public IUserService Users => _serviceProvider.GetService<IUserService>();
+		public IUserService Users => _serviceProvider.GetService<IUserService>();
 
-        public IProductService Products => _serviceProvider.GetService<IProductService>();
+		public IProductService Products => _serviceProvider.GetService<IProductService>();
 
-        public ITokenService Tokens => _serviceProvider.GetService<ITokenService>();
+		public ITokenService Tokens => _serviceProvider.GetService<ITokenService>();
 
-        public IMemberService Members => _serviceProvider.GetService<IMemberService>();
+		public IMemberService Members => _serviceProvider.GetService<IMemberService>();
 
-        public IMailTemplateService MailTemplates => _serviceProvider.GetService<IMailTemplateService>();
+		public IMailTemplateService MailTemplates => _serviceProvider.GetService<IMailTemplateService>();
 
-        public INotificationService Notifications => _serviceProvider.GetService<INotificationService>();
-    }
+		public INotificationService Notifications => _serviceProvider.GetService<INotificationService>();
+	}
 }

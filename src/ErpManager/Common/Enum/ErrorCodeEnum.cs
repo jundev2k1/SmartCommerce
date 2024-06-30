@@ -2,10 +2,11 @@
 
 namespace ErpManager.ERP.Common.Enum
 {
-    public enum ErrorCodeEnum
-    {
-        SystemError,
-        NotPermission,
-        DataNotFound,
-    }
+	public enum ErrorCodeEnum
+	{
+		SystemError,
+		NotPermission,
+		DataNotFound,
+		TokenInvalid
+	}
 }

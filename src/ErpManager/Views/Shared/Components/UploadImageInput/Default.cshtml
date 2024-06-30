@@ -1,71 +1,71 @@
-﻿@using ErpManager.Infrastructure.Common.Enum;
-@using ErpManager.Infrastructure.Upload;
+﻿@* // Copyright (c) 2024 - Jun Dev. All rights reserved *@
+
 @model UploadImageInputViewModel
 
 <div class="image-upload @Model.ClassName" typeUpload="@Model.UploadType" fileName="@Model.UploadFileName" isMultiple>
-    <style>
-        .image-upload .wrapper {
-            width: 100%;
-            padding: 12px;
-        }
+	<style>
+		.image-upload .wrapper {
+			width: 100%;
+			padding: 12px;
+		}
 
-        .image-upload .main-image {
-            position: relative;
-            width: 100%;
-            height: 320px;
-            overflow: hidden;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
+		.image-upload .main-image {
+			position: relative;
+			width: 100%;
+			height: 320px;
+			overflow: hidden;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
 
-            .image-upload .main-image .preview-image {
-                height: 100%;
-                object-fit: cover;
-            }
+			.image-upload .main-image .preview-image {
+				height: 100%;
+				object-fit: cover;
+			}
 
-        .image-upload .file-input {
-            width: 0px;
-            height: 0px;
-        }
+		.image-upload .file-input {
+			width: 0px;
+			height: 0px;
+		}
 
-        .image-upload .subImage {
-            display: flex;
-            overflow-x: auto;
-            flex-wrap: nowrap;
-        }
+		.image-upload .subImage {
+			display: flex;
+			overflow-x: auto;
+			flex-wrap: nowrap;
+		}
 
-            .image-upload .subImage li {
-                min-width: 25%;
-                width: 25%;
-                padding: 4px;
-                overflow: hidden;
-            }
+			.image-upload .subImage li {
+				min-width: 25%;
+				width: 25%;
+				padding: 4px;
+				overflow: hidden;
+			}
 
-                .image-upload .subImage li img {
-                    height: 100%;
-                    object-fit: cover;
-                }
+				.image-upload .subImage li img {
+					height: 100%;
+					object-fit: cover;
+				}
 
-                    .image-upload .subImage li img:hover {
-                        cursor: pointer;
-                        filter: brightness(.9);
-                    }
-    </style>
-    <div class="wrapper">
-        <div class="main-image">
-            <div class="text-center image-text-placeholder">
-                <i class="fa-regular fa-arrow-up-from-bracket"></i>
-                <p>Chỉ chấp nhận các định dạng jpg, png. Tối đa 10MB</p>
-            </div>
-            <img class="preview-image" src="" />
-        </div>
-        <div class="group-control">
-            <button type="button" class="import-image w-100 btn site-btn-success">Tải ảnh lên</button>
-            <input type="file" class="file-input" multiple />
-            <input type="hidden" name="@Model.Name" class="upload-value" value="@Model.Value" />
-        </div>
-        <ul class="load-image-area subImage">
-        </ul>
-    </div>
+					.image-upload .subImage li img:hover {
+						cursor: pointer;
+						filter: brightness(.9);
+					}
+	</style>
+	<div class="wrapper">
+		<div class="main-image">
+			<div class="text-center image-text-placeholder">
+				<i class="fa-regular fa-arrow-up-from-bracket"></i>
+				<p>Chỉ chấp nhận các định dạng jpg, png. Tối đa 10MB</p>
+			</div>
+			<img class="preview-image" src="" />
+		</div>
+		<div class="group-control">
+			<button type="button" class="import-image w-100 btn site-btn-success">Tải ảnh lên</button>
+			<input type="file" class="file-input" multiple />
+			<input type="hidden" name="@Model.Name" class="upload-value" value="@Model.Value" />
+		</div>
+		<ul class="load-image-area subImage">
+		</ul>
+	</div>
 </div>

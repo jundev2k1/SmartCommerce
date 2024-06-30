@@ -1,22 +1,25 @@
-﻿@model LanguageSwitcherViewModel
-<section id="languageButton">
-    <form id="languageSwitcherForm" asp-controller="Home" asp-action="LanguageSwitcher" method="get">
-        <select name="culture" class="form-select form-select-sm site-rounded-full ps-3 pr-4" id="languageDropdown" onchange="formSubmit()">
-            @foreach (var culture in Model.AvailableCultures)
-            {
-                var isCurrentCulture = Model.CurrentCulture == culture.Culture;
+﻿@* // Copyright (c) 2024 - Jun Dev. All rights reserved *@
 
-                <option value="@culture.Culture" disabled="@isCurrentCulture" selected="@isCurrentCulture">
-                    @culture.DisplayName
-                </option>
-            }
-        </select>
-        <input type="hidden" name="returnUrl" value="@Context.Request.Path" />
-    </form>
-    <script>
-        const formSubmit = (culture) => {
-            const languageForm = document.getElementById("languageSwitcherForm");
-            languageForm.submit();
-        }
-    </script>
+@model LanguageSwitcherViewModel
+
+<section id="languageButton">
+	<form id="languageSwitcherForm" asp-controller="Home" asp-action="LanguageSwitcher" method="get">
+		<select name="culture" class="form-select form-select-sm site-rounded-full ps-3 pr-4" id="languageDropdown" onchange="formSubmit()">
+			@foreach (var culture in Model.AvailableCultures)
+			{
+				var isCurrentCulture = Model.CurrentCulture == culture.Culture;
+
+				<option value="@culture.Culture" disabled="@isCurrentCulture" selected="@isCurrentCulture">
+					@culture.DisplayName
+				</option>
+			}
+		</select>
+		<input type="hidden" name="returnUrl" value="@Context.Request.Path" />
+	</form>
+	<script>
+		const formSubmit = (culture) => {
+			const languageForm = document.getElementById("languageSwitcherForm");
+			languageForm.submit();
+		}
+	</script>
 </section>

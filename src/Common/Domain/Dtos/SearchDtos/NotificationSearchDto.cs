@@ -2,10 +2,10 @@
 
 namespace ErpManager.Domain.Dtos.SearchDtos
 {
-    public class NotificationSearchDto : SearchDtoBase<NotificationSearchDto>
-    {
-        public string Keywords { get; set; } = string.Empty;
+	public sealed class NotificationSearchDto : SearchDtoBase<NotificationSearchDto>
+	{
+		public string Keywords { get; set; } = string.Empty;
 
-        public string BranchId { get; set; } = string.Empty;
-    }
+		public string BranchId { get; set; } = string.Empty;
+	}
 }

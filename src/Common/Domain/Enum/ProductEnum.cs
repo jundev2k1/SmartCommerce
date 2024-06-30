@@ -2,19 +2,19 @@
 
 namespace ErpManager.Domain.Enum
 {
-    public enum DisplayPriceEnum
-    {
-        Price1,
-        Price2,
-        Price3,
-    }
+	public enum DisplayPriceEnum
+	{
+		Price1,
+		Price2,
+		Price3,
+	}
 
-    public enum ProductStatusEnum
-    {
-        Sold,
-        Normal,
-        GoodPrice,
-        UrgentSale,
-        Pending,
-    }
+	public enum ProductStatusEnum
+	{
+		Sold,
+		Normal,
+		GoodPrice,
+		UrgentSale,
+		Pending,
+	}
 }

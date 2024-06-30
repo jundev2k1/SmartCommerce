@@ -2,7 +2,7 @@
 
 namespace ErpManager.ERP.Messages
 {
-    public sealed class MessagesLocalizer
-    {
-    }
+	public sealed class MessagesLocalizer
+	{
+	}
 }

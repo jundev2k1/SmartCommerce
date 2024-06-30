@@ -2,10 +2,10 @@
 
 namespace ErpManager.ERP.ViewModels
 {
-    public sealed class Breadcrumb
-    {
-        public string Title { get; set; } = string.Empty;
-        public string Href { get; set; } = string.Empty;
-        public bool IsDisabled { get; set; }
-    }
+	public sealed class Breadcrumb
+	{
+		public string Title { get; set; } = string.Empty;
+		public string Href { get; set; } = string.Empty;
+		public bool IsDisabled { get; set; }
+	}
 }

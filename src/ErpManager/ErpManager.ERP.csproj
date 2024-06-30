@@ -33,6 +33,7 @@
 
   <ItemGroup>
     <PackageReference Include="FluentValidation.AspNetCore" Version="11.3.0" />
+    <PackageReference Include="HtmlAgilityPack" Version="1.11.61" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.Cookies" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Cors" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor" Version="2.2.0" />
@@ -77,14 +78,15 @@
     <Using Include="ErpManager.Domain.Enum" />
     <Using Include="ErpManager.Domain.Models" />
     <Using Include="ErpManager.ERP.Common" />
-    <Using Include="ErpManager.ERP.Common.Attributes" />
     <Using Include="ErpManager.ERP.Common.Enum" />
     <Using Include="ErpManager.ERP.Common.Extensions" />
+    <Using Include="ErpManager.ERP.Common.Filters" />
     <Using Include="ErpManager.ERP.Common.Session" />
     <Using Include="ErpManager.ERP.Common.Util" />
     <Using Include="ErpManager.ERP.Common.ValueText" />
     <Using Include="ErpManager.ERP.Controllers" />
     <Using Include="ErpManager.ERP.ViewModels" />
+    <Using Include="ErpManager.Infrastructure.Common.Attributes" />
     <Using Include="ErpManager.Infrastructure.Common.Enum" />
     <Using Include="ErpManager.Infrastructure.Common.Models" />
     <Using Include="ErpManager.Infrastructure.ExceptionExtension" />
@@ -95,11 +97,16 @@
     <Using Include="FluentValidation" />
     <Using Include="Microsoft.AspNetCore.Localization" />
     <Using Include="Microsoft.AspNetCore.Mvc" />
+    <Using Include="Microsoft.AspNetCore.Mvc.Filters" />
     <Using Include="Microsoft.AspNetCore.Mvc.Rendering" />
     <Using Include="Microsoft.EntityFrameworkCore" />
     <Using Include="Microsoft.Extensions.Localization" />
     <Using Include="Newtonsoft.Json" />
     <Using Include="System.Collections" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\css\component\" />
   </ItemGroup>
 
 </Project>

@@ -1,103 +1,105 @@
-﻿@model List<MenuViewModel>
+﻿@* // Copyright (c) 2024 - Jun Dev. All rights reserved *@
+
+@model List<MenuViewModel>
 @{
-    var currentPage = (ViewData[Constants.GLOBAL_KEY_CURRENT_PAGE]).ToStringOrEmpty();
-    var componentScript = Url.Content(Constants.ERP_FILE_PATH_JS_COMPONENT_NAV_BAR);
-    var operatorPermissons = (string[])(ViewBag.OperatorPermisson) ?? Array.Empty<string>();
-    var hasAllPermission = EnumUtility.GetEnumValue<Permission>(operatorPermissons[0]) == Permission.HasAllPermission;
+	var currentPage = (ViewData[Constants.GLOBAL_KEY_CURRENT_PAGE]).ToStringOrEmpty();
+	var componentScript = Url.Content(Constants.ERP_FILE_PATH_JS_COMPONENT_NAV_BAR);
+	var operatorPermissons = (string[])(ViewBag.OperatorPermisson) ?? Array.Empty<string>();
+	var hasAllPermission = EnumUtility.GetEnumValue<Permission>(operatorPermissons[0]) == Permission.HasAllPermission;
 
-    bool HasPermission(string permission)
-    {
-        return operatorPermissons.Any() && operatorPermissons.Contains(permission);
-    }
+	bool HasPermission(string permission)
+	{
+		return operatorPermissons.Any() && operatorPermissons.Contains(permission);
+	}
 
-    bool IsSubItemHasPermission(List<SubMenuViewModel> subMenus)
-    {
-        var result =
-            (operatorPermissons.Any() || subMenus.Any())
-            && subMenus
-                .Where(sub => operatorPermissons.Contains(sub.Permission))
-                .Any();
+	bool IsSubItemHasPermission(List<SubMenuViewModel> subMenus)
+	{
+		var result =
+			(operatorPermissons.Any() || subMenus.Any())
+			&& subMenus
+				.Where(sub => operatorPermissons.Contains(sub.Permission))
+				.Any();
 
-        return result;
-    }
+		return result;
+	}
 }
 
 <section id="navBar">
-    <div class="nav-bar">
-        <div class="wrapper">
-            <button class="btn-close text-white-50 btn-navbar-switch is-mobile" style="width: 1.5em; height: 1.5em; z-index: 999999;" type="button"></button>
-            <div class="profile">
-                <div class="logo">
-                    <img src="~/images/system/logo.png" />
-                </div>
-                <div class="menu-line mb-2"></div>
-            </div>
-            <div class="menu">
-                @foreach (var item in Model)
-                {
-                    @if (!hasAllPermission && (!HasPermission(item.Permission) && !IsSubItemHasPermission(item.Items)))
-                    {
-                        continue;
-                    }
+	<div class="nav-bar">
+		<div class="wrapper">
+			<button class="btn-close text-white-50 btn-navbar-switch is-mobile" style="width: 1.5em; height: 1.5em; z-index: 999999;" type="button"></button>
+			<div class="profile">
+				<div class="logo">
+					<img src="~/images/system/logo.png" />
+				</div>
+				<div class="menu-line mb-2"></div>
+			</div>
+			<div class="menu">
+				@foreach (var item in Model)
+				{
+					@if (!hasAllPermission && (!HasPermission(item.Permission) && !IsSubItemHasPermission(item.Items)))
+					{
+						continue;
+					}
 
-                    @if (item.Items.Any())
-                    {
-                        <div class="menu-item @(currentPage == item.Name ? "active" : string.Empty)">
-                            <button type="button" data-bs-toggle="collapse" data-bs-target="#@item.Name">
-                                <i class="@item.Icon"></i>
-                                <span class="title">
-                                    @(Constants.CONFIG_DEFAULT_SIDEBAR_OPTION ? item.Label : _localizer.Globals[item.Localizer])
-                                </span>
-                            </button>
-                            <div id="@item.Name" class="collapse">
-                                <ul class="sub-menu">
-                                    @foreach (var subItem in item.Items)
-                                    {
-                                        @if (!hasAllPermission && HasPermission(subItem.Permission) == false) continue;
+					@if (item.Items.Any())
+					{
+						<div class="menu-item @(currentPage == item.Name ? "active" : string.Empty)">
+							<button type="button" data-bs-toggle="collapse" data-bs-target="#@item.Name">
+								<i class="@item.Icon"></i>
+								<span class="title">
+									@(Constants.CONFIG_DEFAULT_SIDEBAR_OPTION ? item.Label : _localizer.Globals[item.Localizer])
+								</span>
+							</button>
+							<div id="@item.Name" class="collapse">
+								<ul class="sub-menu">
+									@foreach (var subItem in item.Items)
+									{
+										@if (!hasAllPermission && HasPermission(subItem.Permission) == false) continue;
 
-                                        <li class="sub-menu-item @(currentPage == subItem.Name ? "active" : string.Empty)">
-                                            <a href="@subItem.Url">
-                                                <i class="fa-solid fa-chevron-right fa-fw" style="opacity: 0"></i>
-                                                <span class="title">
-                                                    @(Constants.CONFIG_DEFAULT_SIDEBAR_OPTION ? subItem.Label : _localizer.Globals[subItem.Localizer])
-                                                </span>
-                                            </a>
-                                        </li>
-                                    }
-                                </ul>
-                            </div>
-                        </div>
-                    }
-                    else
-                    {
-                        <div class="menu-item @(currentPage == item.Name ? "active" : string.Empty)">
-                            <a href="@item.Url" class="collapsed" type="button">
-                                <i class="@item.Icon"></i>
-                                <span class="title">
-                                    @(Constants.CONFIG_DEFAULT_SIDEBAR_OPTION ? item.Label : _localizer.Globals[item.Localizer])
-                                </span>
-                            </a>
-                        </div>
-                    }
-                }
-            </div>
-            <div class="logout">
-                <div class="menu-line mb-2"></div>
-                <a asp-route="@Constants.MODULE_AUTH_SIGNOUT_NAME">
-                    <i class="fa-regular fa-right-from-bracket fa-fw"></i>
-                    <span>@_localizer.Globals["Nav_Auth_SignOut"]</span>
-                </a>
-            </div>
-        </div>
-    </div>
+										<li class="sub-menu-item @(currentPage == subItem.Name ? "active" : string.Empty)">
+											<a href="@subItem.Url">
+												<i class="fa-solid fa-chevron-right fa-fw" style="opacity: 0"></i>
+												<span class="title">
+													@(Constants.CONFIG_DEFAULT_SIDEBAR_OPTION ? subItem.Label : _localizer.Globals[subItem.Localizer])
+												</span>
+											</a>
+										</li>
+									}
+								</ul>
+							</div>
+						</div>
+					}
+					else
+					{
+						<div class="menu-item @(currentPage == item.Name ? "active" : string.Empty)">
+							<a href="@item.Url" class="collapsed" type="button">
+								<i class="@item.Icon"></i>
+								<span class="title">
+									@(Constants.CONFIG_DEFAULT_SIDEBAR_OPTION ? item.Label : _localizer.Globals[item.Localizer])
+								</span>
+							</a>
+						</div>
+					}
+				}
+			</div>
+			<div class="logout">
+				<div class="menu-line mb-2"></div>
+				<a asp-route="@Constants.MODULE_AUTH_SIGNOUT_NAME">
+					<i class="fa-regular fa-right-from-bracket fa-fw"></i>
+					<span>@_localizer.Globals["Nav_Auth_SignOut"]</span>
+				</a>
+			</div>
+		</div>
+	</div>
 
-    <script src="@componentScript"></script>
-    <script>
-        const navBarInitial = () => {
-            resetWidthSidebar();
-            navbarActive('@currentPage');
-        };
-        StoreWindowLoadCallback.push(navBarInitial);
-        StoreWindowResizeCallback.push(resetWidthSidebar);
-    </script>
+	<script src="@componentScript"></script>
+	<script>
+		const navBarInitial = () => {
+			resetWidthSidebar();
+			navbarActive('@currentPage');
+		};
+		StoreWindowLoadCallback.push(navBarInitial);
+		StoreWindowResizeCallback.push(resetWidthSidebar);
+	</script>
 </section>

@@ -2,18 +2,18 @@
 
 namespace ErpManager.Domain.Models
 {
-    public sealed class BranchModel : ModelBase<BranchModel>
-    {
-        public string BranchId { get; set; } = string.Empty;
+	public sealed class BranchModel : ModelBase<BranchModel>
+	{
+		public string BranchId { get; set; } = string.Empty;
 
-        public string Name { get; set; } = string.Empty;
+		public string Name { get; set; } = string.Empty;
 
-        public BranchStatusEnum Status { get; set; }
+		public BranchStatusEnum Status { get; set; }
 
-        public string Avatar { get; set; } = string.Empty;
+		public string Avatar { get; set; } = string.Empty;
 
-        public DateTime? DateCreated { get; set; }
+		public DateTime? DateCreated { get; set; }
 
-        public DateTime? LastChanged { get; set; }
-    }
+		public DateTime? LastChanged { get; set; }
+	}
 }

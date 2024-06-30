@@ -4,8 +4,8 @@ using ErpManager.Domain.Extensions;
 
 namespace ErpManager.Domain.Dtos.SearchDtos
 {
-    public class SearchDtoBase<TModel>
-    {
-        public PropertyExtensions<TModel> Properties { get; } = new PropertyExtensions<TModel>();
-    }
+	public class SearchDtoBase<TModel>
+	{
+		public PropertyExtensions<TModel> Properties { get; } = new PropertyExtensions<TModel>();
+	}
 }

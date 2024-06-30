@@ -4,24 +4,24 @@
 
 namespace ErpManager.Persistence.Common.Utilities.Search
 {
-    public partial class SearchConditionBuilder
-    {
-        public static Expression<Func<Notification, bool>> NotificationSearch(NotificationSearchDto searchDto)
-        {
-            var predicate = PredicateBuilder.True<Notification>();
+	public partial class SearchConditionBuilder
+	{
+		public static Expression<Func<Notification, bool>> NotificationSearch(NotificationSearchDto searchDto)
+		{
+			var predicate = PredicateBuilder.True<Notification>();
 
-            if (string.IsNullOrEmpty(searchDto.Keywords) == false)
-            {
-                predicate.And(p => p.Id.ToString().Contains(searchDto.Keywords)
-                    || p.Title.Contains(searchDto.Keywords));
-            }
+			if (string.IsNullOrEmpty(searchDto.Keywords) == false)
+			{
+				predicate.And(p => p.Id.ToString().Contains(searchDto.Keywords)
+					|| p.Title.Contains(searchDto.Keywords));
+			}
 
-            if (string.IsNullOrEmpty(searchDto.BranchId) == false)
-            {
-                predicate.And(u => u.BranchId.Contains(searchDto.BranchId));
-            }
+			if (string.IsNullOrEmpty(searchDto.BranchId) == false)
+			{
+				predicate.And(u => u.BranchId.Contains(searchDto.BranchId));
+			}
 
-            return predicate;
-        }
-    }
+			return predicate;
+		}
+	}
 }

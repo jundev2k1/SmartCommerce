@@ -7,19 +7,19 @@ using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 {
-    builder.Services
-        .AddPersistence()
-        .AddInfrastructure()
-        .AddApplication(builder.Configuration);
-    builder.Host.UseSerilog((context, configuration) =>
-        configuration.ReadFrom.Configuration(context.Configuration));
+	builder.Services
+		.AddPersistence()
+		.AddInfrastructure()
+		.AddApplication(builder.Configuration);
+	builder.Host.UseSerilog((context, configuration) =>
+		configuration.ReadFrom.Configuration(context.Configuration));
 }
 
 var app = builder.Build();
 {
-    app.Configure();
-    app.UseApplicationMiddleware();
-    app.UseInfrastructureMiddleware();
+	app.Configure();
+	app.UseInfrastructure();
+	app.UsePersistence();
 }
 
 app.Run();

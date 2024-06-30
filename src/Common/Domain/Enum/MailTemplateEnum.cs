@@ -2,9 +2,9 @@
 
 namespace ErpManager.Domain.Enum
 {
-    public enum MailTemplateStatusEnum
-    {
-        Inactive,
-        Active,
-    }
+	public enum MailTemplateStatusEnum
+	{
+		Inactive,
+		Active,
+	}
 }

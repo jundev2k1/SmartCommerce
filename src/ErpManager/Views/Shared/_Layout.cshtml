@@ -1,38 +1,40 @@
-﻿<!DOCTYPE html>
+﻿@* // Copyright (c) 2024 - Jun Dev. All rights reserved *@
+
+<!DOCTYPE html>
 <html lang="@Constants.PAGE_LANGUAGE_OPTIONS">
 <head>
-    <meta charset="@Constants.PAGE_CHARSET_OPTIONS" />
-    <title>@ViewData[Constants.GLOBAL_KEY_TITLE] - @Constants.CONFIG_APP_NAME</title>
-    @* Render meta *@
-    @await Component.InvokeAsync(Constants.ERP_COMPONENT_NAME_SITE_META)
-    @* Css import render *@
-    @await Component.InvokeAsync(Constants.ERP_COMPONENT_NAME_STYLE_SHEET)
-    @* Add common js *@
-    <script src="~/js/store.js" asp-append-version="true"></script>
-    <script src="~/js/common.js" asp-append-version="true"></script>
+	<meta charset="@Constants.PAGE_CHARSET_OPTIONS" />
+	<title>@ViewData[Constants.GLOBAL_KEY_TITLE] - @Constants.CONFIG_APP_NAME</title>
+	@* Render meta *@
+	@await Component.InvokeAsync(Constants.ERP_COMPONENT_NAME_SITE_META)
+	@* Css import render *@
+	@await Component.InvokeAsync(Constants.ERP_COMPONENT_NAME_STYLE_SHEET)
+	@* Add common js *@
+	<script src="~/js/store.js" asp-append-version="true"></script>
+	<script src="~/js/common.js" asp-append-version="true"></script>
 </head>
 <body>
-    <script src="~/js/init-script.js" asp-append-version="true"></script>
-    @* Main content *@
-    <main id="page-load">
-        @await Component.InvokeAsync("NavBar")
-        <div class="render-content">
-            @await Component.InvokeAsync(Constants.ERP_COMPONENT_NAME_HEADER, new HeaderViewModel { IsShowNavbarSwitch = true, IsFullScreen = true })
-            <div class="main-content">
-                @RenderBody()
-            </div>
-            @await Component.InvokeAsync(Constants.ERP_COMPONENT_NAME_FOOTER)
-        </div>
-        <aside id="utilitySideBar">
-            @await Component.InvokeAsync(Constants.ERP_COMPONENT_NAME_THEME_SETTING)
-            @await Component.InvokeAsync(Constants.ERP_COMPONENT_NAME_BACK_TOP)
-        </aside>
-    </main>
+	<script src="~/js/init-script.js" asp-append-version="true"></script>
+	@* Main content *@
+	<main id="page-load">
+		@await Component.InvokeAsync("NavBar")
+		<div class="render-content">
+			@await Component.InvokeAsync(Constants.ERP_COMPONENT_NAME_HEADER, new HeaderViewModel { IsShowNavbarSwitch = true, IsFullScreen = true })
+			<div class="main-content">
+				@RenderBody()
+			</div>
+			@await Component.InvokeAsync(Constants.ERP_COMPONENT_NAME_FOOTER)
+		</div>
+		<aside id="utilitySideBar">
+			@await Component.InvokeAsync(Constants.ERP_COMPONENT_NAME_THEME_SETTING)
+			@await Component.InvokeAsync(Constants.ERP_COMPONENT_NAME_BACK_TOP)
+		</aside>
+	</main>
 
-    @* Script import render *@
-    @await Component.InvokeAsync(Constants.ERP_COMPONENT_NAME_SCRIPT)
-    <section id="viewScript">
-        @RenderSection(Constants.ERP_SECTION_NAME_VIEW_SCRIPT, required: false)
-    </section>
+	@* Script import render *@
+	@await Component.InvokeAsync(Constants.ERP_COMPONENT_NAME_SCRIPT)
+	<section id="viewScript">
+		@RenderSection(Constants.ERP_SECTION_NAME_VIEW_SCRIPT, required: false)
+	</section>
 </body>
 </html>

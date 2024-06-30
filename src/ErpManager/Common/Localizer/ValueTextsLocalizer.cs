@@ -2,7 +2,7 @@
 
 namespace ErpManager.ERP.ValueTexts
 {
-    public sealed class ValueTextsLocalizer
-    {
-    }
+	public sealed class ValueTextsLocalizer
+	{
+	}
 }

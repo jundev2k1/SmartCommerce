@@ -1,236 +1,238 @@
-﻿@{
-    ViewData[Constants.GLOBAL_KEY_TITLE] = _localizer.Globals["Nav_User_List"];
-    ViewData[Constants.GLOBAL_KEY_CURRENT_PAGE] = "UserList_Page";
+﻿@* // Copyright (c) 2024 - Jun Dev. All rights reserved *@
 
-    var breadcrumbs = new Breadcrumb[]
-    {
-        new Breadcrumb { Title = _localizer.Globals["Nav_Home"].Value, Href = Constants.MODULE_HOME_HOME_PATH },
-        new Breadcrumb { Title = _localizer.Globals["Nav_Product_List"].Value, IsDisabled = true }
-    };
+@{
+	ViewData[Constants.GLOBAL_KEY_TITLE] = _localizer.Globals["Nav_User_List"];
+	ViewData[Constants.GLOBAL_KEY_CURRENT_PAGE] = "UserList_Page";
 
-    var hasResult = Model.PageData.Items.Any();
-    var hasData = Model.PageData.TotalPage > 0;
+	var breadcrumbs = new Breadcrumb[]
+	{
+		new Breadcrumb { Title = _localizer.Globals["Nav_Home"].Value, Href = Constants.MODULE_HOME_HOME_PATH },
+		new Breadcrumb { Title = _localizer.Globals["Nav_Product_List"].Value, IsDisabled = true }
+	};
+
+	var hasResult = Model.PageData.Items.Any();
+	var hasData = Model.PageData.TotalPage > 0;
 }
 @model UserListViewModel
 
 @await Component.InvokeAsync(Constants.ERP_COMPONENT_NAME_BREADCRUMB, breadcrumbs)
 
 <section id="searchBar" class="site-card">
-    <div class="row g-md-2 gx-1 gy-2">
-        <div class="col-md-8 col-12">
-            <div class="d-flex gap-1 search-bar-group">
-                <div class="flex-grow-1">
-                    @await Component.InvokeAsync(Constants.ERP_COMPONENT_NAME_SEARCH_INPUT, new SearchInputViewModel { Name = "SearchFields.Keywords", Value = Model.SearchFields.Keywords, ClassName = "search-bar-input" })
-                </div>
-                <button id="btnExport" type="button" class="btn site-btn-outline-info is-desktop" data-bs-toggle="collapse" href="#filterAdvancedCollapse">
-                    <i class="fa-light fa-filter-list"></i>
-                    @_localizer.Globals["Btn_Filter"]
-                </button>
-            </div>
-        </div>
-        <div class="col-md-4 col-12 d-flex justify-content-end gap-2">
-            <button id="btnExport" type="button" class="btn site-btn-outline-info is-mobile" data-bs-toggle="collapse" href="#filterAdvancedCollapse">
-                <i class="fa-light fa-filter-list"></i>
-                @_localizer.Globals["Btn_Filter"]
-            </button>
-            <button type="button" class="btn site-btn-outline-theme" data-bs-toggle="modal" data-bs-target="#exportModal">
-                <i class="fa-light fa-file-export"></i>
-                @_localizer.Globals["Btn_Export"]
-            </button>
-            <a asp-route="@Constants.MODULE_PRODUCT_PRODUCTREGISTER_NAME" class="btn site-btn-success">
-                <i class="fa-light fa-plus"></i>
-                @_localizer.Globals["Btn_Create"]
-            </a>
-        </div>
-        <div class="col-12">
-            <div class="collapse" id="filterAdvancedCollapse">
-                <div class="card card-body">
-                    <h2 class="fs-4">@_localizer.Globals["Title_SearchAdvanced"]</h2>
-                    <ul class="row g-md-2 gx-1 gy-2">
-                        <li class="col-md-4 col-6">
-                            <div class="form-group">
-                                <label asp-for="SearchFields.UserId" class="form-label">@_localizer.Fields["Product_ProductId"]</label>
-                                <input type="text" asp-for="SearchFields.UserId" class="form-control" id="userIdForSearch" placeholder="@_localizer.Globals["PlaceHolder_SearchWith"] @_localizer.Fields["Product_ProductId"]...">
-                            </div>
-                        </li>
-                        <li class="col-md-4 col-6">
-                            <div class="form-group">
-                                <label asp-for="SearchFields.Status" class="form-label">@_localizer.Fields["Product_Status"]</label>
-                                <input type="text" asp-for="SearchFields.Status" class="form-control" id="statusForSearch" placeholder="@_localizer.Globals["PlaceHolder_SearchWith"] @_localizer.Fields["Product_Status"]...">
-                            </div>
-                        </li>
-                        <li class="col-md-4 col-12">
-                            <div class="form-group">
-                                <label asp-for="SearchFields.Email" class="form-label">@_localizer.Fields["Product_TakeOverId"]</label>
-                                <select asp-for="SearchFields.Email" class="form-select select-search-user" id="emailForSearch">
-                                    <option value="@Model.SearchFields.Email" selected></option>
-                                </select>
-                            </div>
-                        </li>
-                        <li class="col-md-8 col-12">
-                            <div class="form-group">
-                                <label asp-for="SearchFields.PhoneNumber" class="form-label">@_localizer.Fields["Product_Name"]</label>
-                                <input asp-for="SearchFields.PhoneNumber" type="text" class="form-control" id="productNameForSearch" placeholder="@_localizer.Globals["PlaceHolder_SearchWith"] @_localizer.Fields["Product_Name"]...">
-                            </div>
-                        </li>
-                        <li class="col-12">
-                            <div class="row g-md-2 gx-1 gy-2">
-                                <div class="col-md-3 col-12">
-                                    <label asp-for="SearchFields.Address1" class="form-label">@_localizer.Fields["Product_Address1"]</label>
-                                    <select asp-for="SearchFields.Address1" class="form-select select-search-address-1" id="address1ForSearch"></select>
-                                </div>
-                                <div class="col-md-3 col-12">
-                                    <div>
-                                        <label asp-for="SearchFields.Address2" class="form-label">@_localizer.Fields["Product_Address2"]</label>
-                                        <select asp-for="SearchFields.Address2" class="form-select select-search-address-2" id="address2ForSearch" data-parent-id="address1ForSearch"></select>
-                                    </div>
-                                </div>
-                                <div class="col-md-3 col-12">
-                                    <label asp-for="SearchFields.Address3" class="form-label">@_localizer.Fields["Product_Address3"]</label>
-                                    <select asp-for="SearchFields.Address3" class="form-select select-search-address-3" id="address3ForSearch" data-parent-id="address2ForSearch"></select>
-                                </div>
-                                <div class="col-md-3 col-12">
-                                    <label asp-for="SearchFields.Address4" class="form-label">@_localizer.Fields["Product_Address4"]</label>
-                                    <input type="text" asp-for="SearchFields.Address4" class="form-control" id="address4ForSearch" placeholder="@_localizer.Globals["PlaceHolder_SearchWith"] @_localizer.Fields["Product_Address"]...">
-                                </div>
-                            </div>
-                        </li>
-                        <li class="col-md-6 col-12">
-                            <div class="form-group">
-                                <label class="form-label">@_localizer.Fields["Product_DateCreated"]</label>
-                                <div class="d-flex gap-1 align-items-center">
-                                    <input type="datetime" asp-for="SearchFields.DateCreatedFrom" class="form-control datetime-picker" id="dateCreatedFromForSearch" placeholder="@_localizer.Globals["PlaceHolder_From"]...">
-                                    ~
-                                    <input type="datetime" asp-for="SearchFields.DateCreatedTo" class="form-control datetime-picker" id="dateCreatedToForSearch" placeholder="@_localizer.Globals["PlaceHolder_To"]...">
-                                </div>
-                            </div>
-                        </li>
-                        <li class="col-md-6 col-12">
-                            <div class="form-group">
-                                <label class="form-label">@_localizer.Fields["Product_DateChanged"]</label>
-                                <div class="d-flex gap-1 align-items-center">
-                                    <input type="datetime" asp-for="SearchFields.DateChangedFrom" class="form-control datetime-picker" id="dateChangedFromForSearch" placeholder="@_localizer.Globals["PlaceHolder_From"]...">
-                                    ~
-                                    <input type="datetime" asp-for="SearchFields.DateChangedTo" class="form-control datetime-picker" id="dateChangedToForSearch" placeholder="@_localizer.Globals["PlaceHolder_To"]...">
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
-                    <div class="hidden-field-area d-none">
-                        <input id="pageIndex" type="hidden" asp-for="PageIndex" />
-                    </div>
-                    <div id="searchControl" class="d-flex justify-content-md-end mt-4">
-                        <div class="group-control w-auto row g-md-2 gx-1 gy-2">
-                            <div class="form-group col-md-auto col-12">
-                                <select asp-for="SearchFields.DelFlg" id="delFlgSearchInput" class="form-select w-auto" aria-label="DeleteFlg">
-                                    <option selected value="false">@_localizer.ValueTexts["ValTxt_DelFlg_Normal"]</option>
-                                    <option value="true">@_localizer.ValueTexts["ValTxt_DelFlg_Deleted"]</option>
-                                </select>
-                            </div>
-                            <div class="form-group col-md-auto col-8">
-                                <button id="btnSubmitAdvanced" type="submit" class="btn site-btn-theme">
-                                    <i class="fa-light fa-magnifying-glass"></i>
-                                    @_localizer.Globals["Btn_SearchAdvanced"]
-                                </button>
-                            </div>
-                            <div class="form-group col-md-auto col-4">
-                                <button id="btnResetForm" type="reset" class="btn site-btn-outline-theme" onclick="resetSearchForm('advanceSearchForm')">
-                                    <i class="fa-light fa-arrow-rotate-left"></i>
-                                    @_localizer.Globals["Btn_ResetForm"]
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+	<div class="row g-md-2 gx-1 gy-2">
+		<div class="col-md-8 col-12">
+			<div class="d-flex gap-1 search-bar-group">
+				<div class="flex-grow-1">
+					@await Component.InvokeAsync(Constants.ERP_COMPONENT_NAME_SEARCH_INPUT, new SearchInputViewModel { Name = "SearchFields.Keywords", Value = Model.SearchFields.Keywords, ClassName = "search-bar-input" })
+				</div>
+				<button id="btnExport" type="button" class="btn site-btn-outline-info is-desktop" data-bs-toggle="collapse" href="#filterAdvancedCollapse">
+					<i class="fa-light fa-filter-list"></i>
+					@_localizer.Globals["Btn_Filter"]
+				</button>
+			</div>
+		</div>
+		<div class="col-md-4 col-12 d-flex justify-content-end gap-2">
+			<button id="btnExport" type="button" class="btn site-btn-outline-info is-mobile" data-bs-toggle="collapse" href="#filterAdvancedCollapse">
+				<i class="fa-light fa-filter-list"></i>
+				@_localizer.Globals["Btn_Filter"]
+			</button>
+			<button type="button" class="btn site-btn-outline-theme" data-bs-toggle="modal" data-bs-target="#exportModal">
+				<i class="fa-light fa-file-export"></i>
+				@_localizer.Globals["Btn_Export"]
+			</button>
+			<a asp-route="@Constants.MODULE_PRODUCT_PRODUCTREGISTER_NAME" class="btn site-btn-success">
+				<i class="fa-light fa-plus"></i>
+				@_localizer.Globals["Btn_Create"]
+			</a>
+		</div>
+		<div class="col-12">
+			<div class="collapse" id="filterAdvancedCollapse">
+				<div class="card card-body">
+					<h2 class="fs-4">@_localizer.Globals["Title_SearchAdvanced"]</h2>
+					<ul class="row g-md-2 gx-1 gy-2">
+						<li class="col-md-4 col-6">
+							<div class="form-group">
+								<label asp-for="SearchFields.UserId" class="form-label">@_localizer.Fields["Product_ProductId"]</label>
+								<input type="text" asp-for="SearchFields.UserId" class="form-control" id="userIdForSearch" placeholder="@_localizer.Globals["PlaceHolder_SearchWith"] @_localizer.Fields["Product_ProductId"]...">
+							</div>
+						</li>
+						<li class="col-md-4 col-6">
+							<div class="form-group">
+								<label asp-for="SearchFields.Status" class="form-label">@_localizer.Fields["Product_Status"]</label>
+								<input type="text" asp-for="SearchFields.Status" class="form-control" id="statusForSearch" placeholder="@_localizer.Globals["PlaceHolder_SearchWith"] @_localizer.Fields["Product_Status"]...">
+							</div>
+						</li>
+						<li class="col-md-4 col-12">
+							<div class="form-group">
+								<label asp-for="SearchFields.Email" class="form-label">@_localizer.Fields["Product_TakeOverId"]</label>
+								<select asp-for="SearchFields.Email" class="form-select select-search-user" id="emailForSearch">
+									<option value="@Model.SearchFields.Email" selected></option>
+								</select>
+							</div>
+						</li>
+						<li class="col-md-8 col-12">
+							<div class="form-group">
+								<label asp-for="SearchFields.PhoneNumber" class="form-label">@_localizer.Fields["Product_Name"]</label>
+								<input asp-for="SearchFields.PhoneNumber" type="text" class="form-control" id="productNameForSearch" placeholder="@_localizer.Globals["PlaceHolder_SearchWith"] @_localizer.Fields["Product_Name"]...">
+							</div>
+						</li>
+						<li class="col-12">
+							<div class="row g-md-2 gx-1 gy-2">
+								<div class="col-md-3 col-12">
+									<label asp-for="SearchFields.Address1" class="form-label">@_localizer.Fields["Product_Address1"]</label>
+									<select asp-for="SearchFields.Address1" class="form-select select-search-address-1" id="address1ForSearch"></select>
+								</div>
+								<div class="col-md-3 col-12">
+									<div>
+										<label asp-for="SearchFields.Address2" class="form-label">@_localizer.Fields["Product_Address2"]</label>
+										<select asp-for="SearchFields.Address2" class="form-select select-search-address-2" id="address2ForSearch" data-parent-id="address1ForSearch"></select>
+									</div>
+								</div>
+								<div class="col-md-3 col-12">
+									<label asp-for="SearchFields.Address3" class="form-label">@_localizer.Fields["Product_Address3"]</label>
+									<select asp-for="SearchFields.Address3" class="form-select select-search-address-3" id="address3ForSearch" data-parent-id="address2ForSearch"></select>
+								</div>
+								<div class="col-md-3 col-12">
+									<label asp-for="SearchFields.Address4" class="form-label">@_localizer.Fields["Product_Address4"]</label>
+									<input type="text" asp-for="SearchFields.Address4" class="form-control" id="address4ForSearch" placeholder="@_localizer.Globals["PlaceHolder_SearchWith"] @_localizer.Fields["Product_Address"]...">
+								</div>
+							</div>
+						</li>
+						<li class="col-md-6 col-12">
+							<div class="form-group">
+								<label class="form-label">@_localizer.Fields["Product_DateCreated"]</label>
+								<div class="d-flex gap-1 align-items-center">
+									<input type="datetime" asp-for="SearchFields.DateCreatedFrom" class="form-control datetime-picker" id="dateCreatedFromForSearch" placeholder="@_localizer.Globals["PlaceHolder_From"]...">
+									~
+									<input type="datetime" asp-for="SearchFields.DateCreatedTo" class="form-control datetime-picker" id="dateCreatedToForSearch" placeholder="@_localizer.Globals["PlaceHolder_To"]...">
+								</div>
+							</div>
+						</li>
+						<li class="col-md-6 col-12">
+							<div class="form-group">
+								<label class="form-label">@_localizer.Fields["Product_DateChanged"]</label>
+								<div class="d-flex gap-1 align-items-center">
+									<input type="datetime" asp-for="SearchFields.DateChangedFrom" class="form-control datetime-picker" id="dateChangedFromForSearch" placeholder="@_localizer.Globals["PlaceHolder_From"]...">
+									~
+									<input type="datetime" asp-for="SearchFields.DateChangedTo" class="form-control datetime-picker" id="dateChangedToForSearch" placeholder="@_localizer.Globals["PlaceHolder_To"]...">
+								</div>
+							</div>
+						</li>
+					</ul>
+					<div class="hidden-field-area d-none">
+						<input id="pageIndex" type="hidden" asp-for="PageIndex" />
+					</div>
+					<div id="searchControl" class="d-flex justify-content-md-end mt-4">
+						<div class="group-control w-auto row g-md-2 gx-1 gy-2">
+							<div class="form-group col-md-auto col-12">
+								<select asp-for="SearchFields.DelFlg" id="delFlgSearchInput" class="form-select w-auto" aria-label="DeleteFlg">
+									<option selected value="false">@_localizer.ValueTexts["ValTxt_DelFlg_Normal"]</option>
+									<option value="true">@_localizer.ValueTexts["ValTxt_DelFlg_Deleted"]</option>
+								</select>
+							</div>
+							<div class="form-group col-md-auto col-8">
+								<button id="btnSubmitAdvanced" type="submit" class="btn site-btn-theme">
+									<i class="fa-light fa-magnifying-glass"></i>
+									@_localizer.Globals["Btn_SearchAdvanced"]
+								</button>
+							</div>
+							<div class="form-group col-md-auto col-4">
+								<button id="btnResetForm" type="reset" class="btn site-btn-outline-theme" onclick="resetSearchForm('advanceSearchForm')">
+									<i class="fa-light fa-arrow-rotate-left"></i>
+									@_localizer.Globals["Btn_ResetForm"]
+								</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </section>
 <section id="bodyPageLoad" class="site-card mt-2">
-    <div class="row">
-        <div class="col-12">
-            <table class="site-table site-table-hover site-border site-rounded-layout">
-                <thead>
-                    <tr>
-                        <th scope="col">ID</th>
-                        <th scope="col">Name</th>
-                        <th scope="col">Contact</th>
-                        <th scope="col">Sex</th>
-                        <th scope="col">Status</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var item in Model.PageData.Items)
-                    {
-                        <tr>
-                            <td>@item.UserId</td>
-                            <td>
-                                <a asp-route="@Constants.MODULE_PRODUCT_PRODUCTDETAIL_NAME" asp-route-id="@item.UserId">
-                                    @item.FullName
-                                </a>
-                            </td>
-                            <td>
-                                <p>@item.Email</p>
-                                <p>@item.PhoneNumber</p>
-                            </td>
-                            <td>@item.Sex</td>
-                            <td>@item.Status</td>
-                        </tr>
-                    }
-                </tbody>
-                <tfoot>
-                    <tr>
-                        <td colspan="5">
-                            <div class="d-flex justify-content-between align-items-center">
-                                <p class="mb-0">
-                                    @(_localizer.Globals["ListPage_TotalResult"]): @(Constants.DEFAULT_PAGE_SIZE * (Model.PageIndex - 1) + Model.PageData.Items.Length)/@(Model.PageData.TotalRecord)
-                                </p>
-                                <nav aria-label="Page navigation">
-                                    <ul class="pagination">
-                                        <li class="page-item">
-                                            <a class="page-link @(Model.PageIndex == 1 ? "disabled" : string.Empty)" asp-route="@Constants.MODULE_USER_USERLIST_NAME" asp-route-page="@CommonUtility.HandleLimitPage(Model.PageIndex, Model.PageData.TotalPage)" aria-label="Previous">
-                                                <span aria-hidden="true">&laquo;</span>
-                                            </a>
-                                        </li>
-                                        @for (var index = 1; index <= Model.PageData.TotalPage; index++)
-                                        {
-                                            <li class="page-item">
-                                                <a class="page-link @(Model.PageIndex == index ? "disabled" : string.Empty)" asp-route="@Constants.MODULE_USER_USERLIST_NAME" asp-route-page="@index">@index</a>
-                                            </li>
-                                        }
-                                        <li class="page-item">
-                                            <a class="page-link @(Model.PageIndex == Model.PageData.TotalPage ? "disabled" : string.Empty)" asp-route="@Constants.MODULE_USER_USERLIST_NAME" asp-route-page="@CommonUtility.HandleLimitPage(Model.PageIndex, Model.PageData.TotalPage, isPrevious: false)" asp- aria-label="Next">
-                                                <span aria-hidden="true">&raquo;</span>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </nav>
-                            </div>
-                        </td>
-                    </tr>
-                </tfoot>
-            </table>
-        </div>
-    </div>
+	<div class="row">
+		<div class="col-12">
+			<table class="site-table site-table-hover site-border site-rounded-layout">
+				<thead>
+					<tr>
+						<th scope="col">ID</th>
+						<th scope="col">Name</th>
+						<th scope="col">Contact</th>
+						<th scope="col">Sex</th>
+						<th scope="col">Status</th>
+					</tr>
+				</thead>
+				<tbody>
+					@foreach (var item in Model.PageData.Items)
+					{
+						<tr>
+							<td>@item.UserId</td>
+							<td>
+								<a asp-route="@Constants.MODULE_PRODUCT_PRODUCTDETAIL_NAME" asp-route-id="@item.UserId">
+									@item.FullName
+								</a>
+							</td>
+							<td>
+								<p>@item.Email</p>
+								<p>@item.PhoneNumber</p>
+							</td>
+							<td>@item.Sex</td>
+							<td>@item.Status</td>
+						</tr>
+					}
+				</tbody>
+				<tfoot>
+					<tr>
+						<td colspan="5">
+							<div class="d-flex justify-content-between align-items-center">
+								<p class="mb-0">
+									@(_localizer.Globals["ListPage_TotalResult"]): @(Constants.DEFAULT_PAGE_SIZE * (Model.PageIndex - 1) + Model.PageData.Items.Length)/@(Model.PageData.TotalRecord)
+								</p>
+								<nav aria-label="Page navigation">
+									<ul class="pagination">
+										<li class="page-item">
+											<a class="page-link @(Model.PageIndex == 1 ? "disabled" : string.Empty)" asp-route="@Constants.MODULE_USER_USERLIST_NAME" asp-route-page="@CommonUtility.HandleLimitPage(Model.PageIndex, Model.PageData.TotalPage)" aria-label="Previous">
+												<span aria-hidden="true">&laquo;</span>
+											</a>
+										</li>
+										@for (var index = 1; index <= Model.PageData.TotalPage; index++)
+										{
+											<li class="page-item">
+												<a class="page-link @(Model.PageIndex == index ? "disabled" : string.Empty)" asp-route="@Constants.MODULE_USER_USERLIST_NAME" asp-route-page="@index">@index</a>
+											</li>
+										}
+										<li class="page-item">
+											<a class="page-link @(Model.PageIndex == Model.PageData.TotalPage ? "disabled" : string.Empty)" asp-route="@Constants.MODULE_USER_USERLIST_NAME" asp-route-page="@CommonUtility.HandleLimitPage(Model.PageIndex, Model.PageData.TotalPage, isPrevious: false)" asp- aria-label="Next">
+												<span aria-hidden="true">&raquo;</span>
+											</a>
+										</li>
+									</ul>
+								</nav>
+							</div>
+						</td>
+					</tr>
+				</tfoot>
+			</table>
+		</div>
+	</div>
 </section>
 @section ViewScript {
-    <script>
-        const handlePaging = (event, page = 1) => {
-            event.preventDefault();
+	<script>
+		const handlePaging = (event, page = 1) => {
+			event.preventDefault();
 
-            const pageIndexInput = document.querySelector("#pageIndex");
-            pageIndexInput.value = page;
-            const searchForm = document.getElementsByName("searchForm")[0];
-            searchForm.submit();
-        }
+			const pageIndexInput = document.querySelector("#pageIndex");
+			pageIndexInput.value = page;
+			const searchForm = document.getElementsByName("searchForm")[0];
+			searchForm.submit();
+		}
 
-        const resetSearchForm = (formId) => {
-            if (!formId) return;
+		const resetSearchForm = (formId) => {
+			if (!formId) return;
 
-            const formTarget = $(`#${formId}`);
-            if (!formTarget) return;
+			const formTarget = $(`#${formId}`);
+			if (!formTarget) return;
 
-            formTarget.find('select').val('').change();
-        };
-    </script>
+			formTarget.find('select').val('').change();
+		};
+	</script>
 }

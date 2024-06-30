@@ -2,11 +2,11 @@
 
 namespace ErpManager.ERP.ViewComponents
 {
-    public sealed class SiteMetaViewComponent : ViewComponent
-    {
-        public IViewComponentResult Invoke()
-        {
-            return View();
-        }
-    }
+	public sealed class SiteMetaViewComponent : ViewComponent
+	{
+		public IViewComponentResult Invoke()
+		{
+			return View();
+		}
+	}
 }

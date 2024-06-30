@@ -2,10 +2,10 @@
 
 namespace ErpManager.Persistence.Services
 {
-    public class ServiceBase
-    {
-        public ServiceBase()
-        {
-        }
-    }
+	public class ServiceBase
+	{
+		public ServiceBase()
+		{
+		}
+	}
 }

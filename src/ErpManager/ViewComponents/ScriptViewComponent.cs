@@ -2,11 +2,11 @@
 
 namespace ErpManager.ERP.ViewComponents
 {
-    public sealed class ScriptViewComponent : ViewComponent
-    {
-        public IViewComponentResult Invoke()
-        {
-            return View();
-        }
-    }
+	public sealed class ScriptViewComponent : ViewComponent
+	{
+		public IViewComponentResult Invoke()
+		{
+			return View();
+		}
+	}
 }

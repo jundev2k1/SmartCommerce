@@ -1,193 +1,195 @@
-﻿@model ProductPreviewViewModel
+﻿@* // Copyright (c) 2024 - Jun Dev. All rights reserved *@
+
+@model ProductPreviewViewModel
 @{
-    Layout = "_Layout_Preview";
-    ViewData[Constants.GLOBAL_KEY_TITLE] = _localizer.Globals["Title_ProductInformation"];
+	Layout = "_Layout_Preview";
+	ViewData[Constants.GLOBAL_KEY_TITLE] = _localizer.Globals["Title_ProductInformation"];
 }
 
 <section class="container">
-    <div class="row gx-3 gy-3">
-        <div class="preview-content col-md-8 col-sm-12">
-            <div class="site-card">
-                <div class="preview-image">
-                    @foreach (var imagePath in Model.Product.Images.Split(','))
-                    {
-                        <div class="preview-item">
-                            <img src="@ProductUtilities.GetProductImage(imagePath)" data-bs-toggle="modal" data-bs-target="#previewModal" />
-                        </div>
-                    }
-                </div>
-                <div class="preview-content">
-                    <div class="preview-content-title row gy-3">
-                        <div class="preview-content-info col-md-9 col-12">
-                            <h1 class="title">@Model.Product.Name</h1>
-                            <div class="price">
-                                <h3>@_localizer.Globals["Title_Price"]: @ProductUtilities.GetDisplayPrice(Model.Product) VNĐ</h3>
-                                <span>@await Component.InvokeAsync(Constants.ERP_COMPONENT_NAME_PRODUCT_STATUS_BADGE, new { status = Model.Product.Status })</span>
-                            </div>
-                            <div class="address">
-                                <p>
-                                    <i class="fa-regular fa-location-dot"></i> <strong>@_localizer.Globals["Title_Address"]:</strong>
-                                </p>
-                                <span>
-                                    @AddressUtilities.GetProductAddress(Model.Product)
-                                </span>
-                            </div>
-                        </div>
-                        <div class="preview-content-contact col-md-3 col-12">
-                            @if (@Model.AgentDetail != null)
-                            {
-                                <div class="mb-2 w-100">
-                                    <a class="btn site-btn-primary d-block" href="tel:@Model.AgentDetail?.PhoneNumber">
-                                        <i class="fa-solid fa-phone"></i>
-                                        @_localizer.Globals["Btn_ContactNow"]
-                                    </a>
-                                </div>
-                            }
-                            <div class="text-center w-100">
-                                <button class="btn site-btn-info d-block w-100" data-bs-toggle="modal" data-bs-target="#btnContactUs">
-                                    <i class="fa-light fa-envelope"></i>
-                                    @_localizer.Globals["Btn_ContactAdmin"]
-                                </button>
-                                <p>@_localizer.Messages["Message_WeContactSoon"]</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="site-divide-line"></div>
-                    <div class="preview-content-desc">
-                        <h2>@_localizer.Globals["Title_Product_Description"]</h2>
-                        <div class="desc-content">
-                            @Html.Raw(Model.Product.Description)
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="preview-sidebar col-md-4 col-sm-12">
-            <div class="site-card agent-detail mb-2">
-                <h3>@_localizer.Globals["Title_TakeOverPerson"]</h3>
-                @if (Model.AgentDetail != null)
-                {
-                    <div class="avatar">
-                        <img class="img-fluid" src="/images/system/no-user-placeholder.jpg" />
-                    </div>
-                    <p>@(_localizer.Globals["Title_Name"]): @Model.AgentDetail?.FullName</p>
-                    <p>@(_localizer.Globals["Title_Tel"]): @Model.AgentDetail?.PhoneNumber</p>
-                    <p>@(_localizer.Globals["Title_Address"]): @(Model.AgentDetail != null ? AddressUtilities.GetUserAddress(Model.AgentDetail) : string.Empty)</p>
+	<div class="row gx-3 gy-3">
+		<div class="preview-content col-md-8 col-sm-12">
+			<div class="site-card">
+				<div class="preview-image">
+					@foreach (var imagePath in Model.Product.Images.Split(','))
+					{
+						<div class="preview-item">
+							<img src="@ProductUtilities.GetProductImage(imagePath)" data-bs-toggle="modal" data-bs-target="#previewModal" />
+						</div>
+					}
+				</div>
+				<div class="preview-content">
+					<div class="preview-content-title row gy-3">
+						<div class="preview-content-info col-md-9 col-12">
+							<h1 class="title">@Model.Product.Name</h1>
+							<div class="price">
+								<h3>@_localizer.Globals["Title_Price"]: @ProductUtilities.GetDisplayPrice(Model.Product) VNĐ</h3>
+								<span>@await Component.InvokeAsync(Constants.ERP_COMPONENT_NAME_PRODUCT_STATUS_BADGE, new { status = Model.Product.Status })</span>
+							</div>
+							<div class="address">
+								<p>
+									<i class="fa-regular fa-location-dot"></i> <strong>@_localizer.Globals["Title_Address"]:</strong>
+								</p>
+								<span>
+									@AddressUtilities.GetProductAddress(Model.Product)
+								</span>
+							</div>
+						</div>
+						<div class="preview-content-contact col-md-3 col-12">
+							@if (@Model.AgentDetail != null)
+							{
+								<div class="mb-2 w-100">
+									<a class="btn site-btn-primary d-block" href="tel:@Model.AgentDetail?.PhoneNumber">
+										<i class="fa-solid fa-phone"></i>
+										@_localizer.Globals["Btn_ContactNow"]
+									</a>
+								</div>
+							}
+							<div class="text-center w-100">
+								<button class="btn site-btn-info d-block w-100" data-bs-toggle="modal" data-bs-target="#btnContactUs">
+									<i class="fa-light fa-envelope"></i>
+									@_localizer.Globals["Btn_ContactAdmin"]
+								</button>
+								<p>@_localizer.Messages["Message_WeContactSoon"]</p>
+							</div>
+						</div>
+					</div>
+					<div class="site-divide-line"></div>
+					<div class="preview-content-desc">
+						<h2>@_localizer.Globals["Title_Product_Description"]</h2>
+						<div class="desc-content">
+							@Html.Raw(Model.Product.Description)
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="preview-sidebar col-md-4 col-sm-12">
+			<div class="site-card agent-detail mb-2">
+				<h3>@_localizer.Globals["Title_TakeOverPerson"]</h3>
+				@if (Model.AgentDetail != null)
+				{
+					<div class="avatar">
+						<img class="img-fluid" src="/images/system/no-user-placeholder.jpg" />
+					</div>
+					<p>@(_localizer.Globals["Title_Name"]): @Model.AgentDetail?.FullName</p>
+					<p>@(_localizer.Globals["Title_Tel"]): @Model.AgentDetail?.PhoneNumber</p>
+					<p>@(_localizer.Globals["Title_Address"]): @(Model.AgentDetail != null ? AddressUtilities.GetUserAddress(Model.AgentDetail) : string.Empty)</p>
 
-                    <a class="btn site-btn-primary" href="tel:@Model.AgentDetail?.PhoneNumber">
-                        <i class="fa-solid fa-phone"></i>
-                        @_localizer.Globals["Btn_ContactConsulting"]
-                    </a>
-                }
-                else
-                {
-                    <a class="btn site-btn-primary" href="tel:@Model.AgentDetail?.PhoneNumber">
-                        <i class="fa-light fa-envelope"></i>
-                        @_localizer.Globals["Btn_ContactAdmin"]
-                    </a>
-                    <p>@_localizer.Messages["Message_NoHaveTakeOverPersion"]</p>
-                }
-            </div>
-            @if (Model.CanShareQRCode)
-            {
-                <div class="site-card calender mb-2">
-                    <h3>@_localizer.Globals["Title_ShareLink"]</h3>
-                    <div class="qr-code">
-                        <a href="#" onclick="javascript:void(0); copyImageToClipboard(this.querySelector('img'));" data-bs-toggle="tooltip" title="@_localizer.Messages["Message_ClickCopy"]">
-                            <img class="img-fluid" src="@Model.QRCode" />
-                        </a>
-                        <p class="text-center">@_localizer.Messages["Message_ClickCopy"]</p>
-                    </div>
-                </div>
-            }
-            @if (!string.IsNullOrEmpty(Model.Product.EmbeddedLink))
-            {
-                <div class="site-card location">
-                    <div class="wrapper">
-                        @Html.Raw(Model.Product.EmbeddedLink)
-                    </div>
-                </div>
-            }
-        </div>
-        <div class="preview-related-product">
-            <div class="site-card">
-                <h2>@_localizer.Globals["Title_RelatedProduct"]</h2>
-                <ul class="row gy-3">
-                    @foreach (var relatedProduct in Model.RelatedProducts)
-                    {
-                        var relatedAddress = AddressUtilities.GetDistrictName(relatedProduct.Address2, Constants.PAGE_LANGUAGE_OPTIONS);
-                        var relatedPrice = ProductUtilities.GetDisplayPrice(relatedProduct);
-                        var relatedImage = ProductUtilities.GetMainProductImage(relatedProduct.Images);
+					<a class="btn site-btn-primary" href="tel:@Model.AgentDetail?.PhoneNumber">
+						<i class="fa-solid fa-phone"></i>
+						@_localizer.Globals["Btn_ContactConsulting"]
+					</a>
+				}
+				else
+				{
+					<a class="btn site-btn-primary" href="tel:@Model.AgentDetail?.PhoneNumber">
+						<i class="fa-light fa-envelope"></i>
+						@_localizer.Globals["Btn_ContactAdmin"]
+					</a>
+					<p>@_localizer.Messages["Message_NoHaveTakeOverPersion"]</p>
+				}
+			</div>
+			@if (Model.CanShareQRCode)
+			{
+				<div class="site-card calender mb-2">
+					<h3>@_localizer.Globals["Title_ShareLink"]</h3>
+					<div class="qr-code">
+						<a href="#" onclick="javascript:void(0); copyImageToClipboard(this.querySelector('img'));" data-bs-toggle="tooltip" title="@_localizer.Messages["Message_ClickCopy"]">
+							<img class="img-fluid" src="@Model.QRCode" />
+						</a>
+						<p class="text-center">@_localizer.Messages["Message_ClickCopy"]</p>
+					</div>
+				</div>
+			}
+			@if (!string.IsNullOrEmpty(Model.Product.EmbeddedLink))
+			{
+				<div class="site-card location">
+					<div class="wrapper">
+						@Html.Raw(Model.Product.EmbeddedLink)
+					</div>
+				</div>
+			}
+		</div>
+		<div class="preview-related-product">
+			<div class="site-card">
+				<h2>@_localizer.Globals["Title_RelatedProduct"]</h2>
+				<ul class="row gy-3">
+					@foreach (var relatedProduct in Model.RelatedProducts)
+					{
+						var relatedAddress = AddressUtilities.GetDistrictName(relatedProduct.Address2, Constants.PAGE_LANGUAGE_OPTIONS);
+						var relatedPrice = ProductUtilities.GetDisplayPrice(relatedProduct);
+						var relatedImage = ProductUtilities.GetMainProductImage(relatedProduct.Images);
 
-                        <li class="col-md-3 col-6">
-                            <a asp-route="@Constants.MODULE_PRODUCT_PRODUCTPREVIEW_NAME" asp-route-id="@relatedProduct.ProductId">
-                                <div class="product-thumbnail mb-2">
-                                    <img class="img-fluid" src="@relatedImage" />
-                                </div>
-                                <h3>@relatedProduct.Name</h3>
-                                <p><i class="fa-regular fa-circle-dollar"></i> @_localizer.Globals["Title_Price"]: @relatedPrice</p>
-                                <p>@await Component.InvokeAsync(Constants.ERP_COMPONENT_NAME_PRODUCT_STATUS_BADGE, new { status = relatedProduct.Status })</p>
-                                @if (!string.IsNullOrEmpty(relatedAddress))
-                                {
-                                    <span><i class="fa-regular fa-map"></i> @relatedAddress</span>
-                                }
-                            </a>
-                        </li>
-                    }
-                </ul>
-            </div>
-        </div>
-    </div>
+						<li class="col-md-3 col-6">
+							<a asp-route="@Constants.MODULE_PRODUCT_PRODUCTPREVIEW_NAME" asp-route-branchId="@relatedProduct.BranchId" asp-route-id="@relatedProduct.ProductId">
+								<div class="product-thumbnail mb-2">
+									<img class="img-fluid" src="@relatedImage" />
+								</div>
+								<h3>@relatedProduct.Name</h3>
+								<p><i class="fa-regular fa-circle-dollar"></i> @_localizer.Globals["Title_Price"]: @relatedPrice</p>
+								<p>@await Component.InvokeAsync(Constants.ERP_COMPONENT_NAME_PRODUCT_STATUS_BADGE, new { status = relatedProduct.Status })</p>
+								@if (!string.IsNullOrEmpty(relatedAddress))
+								{
+									<span><i class="fa-regular fa-map"></i> @relatedAddress</span>
+								}
+							</a>
+						</li>
+					}
+				</ul>
+			</div>
+		</div>
+	</div>
 </section>
 <section id="previewImageModal">
-    <div class="modal fade modal-dialog-scrollable" id="previewModal" tabindex="-1" aria-labelledby="previewModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="previewModalLabel">@_localizer.Globals["Title_Product_Image"]</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    @await Component.InvokeAsync(Constants.ERP_COMPONENT_NAME_CAROUSEL, new { Images = Model.Product.Images, idTarget = "productPreviewImage" })
-                </div>
-            </div>
-        </div>
-    </div>
+	<div class="modal fade modal-dialog-scrollable" id="previewModal" tabindex="-1" aria-labelledby="previewModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h1 class="modal-title fs-5" id="previewModalLabel">@_localizer.Globals["Title_Product_Image"]</h1>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					@await Component.InvokeAsync(Constants.ERP_COMPONENT_NAME_CAROUSEL, new { Images = Model.Product.Images, idTarget = "productPreviewImage" })
+				</div>
+			</div>
+		</div>
+	</div>
 </section>
 @await Component.InvokeAsync(Constants.ERP_COMPONENT_NAME_FORMCONTACT, new FormContactViewModel { TargetButtonId = "btnContactUs", IsShowType = false, TypeForm = FormContactTypeEnum.ContactAdmin })
 
 @section ViewScript {
-    <script>
-        (function () {
-            const previewArea = document.querySelector('#previewModal');
-            const modalSize = isMobile ? 'modal-fullscreen' : 'modal-xl';
-            previewArea.classList.add(modalSize);
+	<script>
+		(function () {
+			const previewArea = document.querySelector('#previewModal');
+			const modalSize = isMobile ? 'modal-fullscreen' : 'modal-xl';
+			previewArea.classList.add(modalSize);
 
-            const onChooseImage = (imageIndex) => {
-                const modalImages = document.querySelectorAll('#productPreviewImage .carousel-item');
-                modalImages.forEach((item, index) => {
-                    item.classList.remove('active');
+			const onChooseImage = (imageIndex) => {
+				const modalImages = document.querySelectorAll('#productPreviewImage .carousel-item');
+				modalImages.forEach((item, index) => {
+					item.classList.remove('active');
 
-                    if (imageIndex === index)
-                        item.classList.add('active');
-                })
-            };
+					if (imageIndex === index)
+						item.classList.add('active');
+				})
+			};
 
-            const takeCount = isMobile ? 4 : 3;
-            const imageElements = document.querySelectorAll('.preview-content .preview-image .preview-item');
-            imageElements.forEach((image, index) => {
-                image.addEventListener('click', () => onChooseImage(index));
-                const imageCount = index + 1;
-                const hiddenCount = imageElements.length - takeCount;
-                if ((imageCount === takeCount) && (hiddenCount > 0)) {
-                    image.classList.add('last-item');
-                    image.style.setProperty('--pseudo-content', `"+${hiddenCount}"`);
-                }
+			const takeCount = isMobile ? 4 : 3;
+			const imageElements = document.querySelectorAll('.preview-content .preview-image .preview-item');
+			imageElements.forEach((image, index) => {
+				image.addEventListener('click', () => onChooseImage(index));
+				const imageCount = index + 1;
+				const hiddenCount = imageElements.length - takeCount;
+				if ((imageCount === takeCount) && (hiddenCount > 0)) {
+					image.classList.add('last-item');
+					image.style.setProperty('--pseudo-content', `"+${hiddenCount}"`);
+				}
 
-                if (imageCount > takeCount) {
-                    image.style.display = 'none';
-                }
-            });
-        })();
-    </script>
+				if (imageCount > takeCount) {
+					image.style.display = 'none';
+				}
+			});
+		})();
+	</script>
 }

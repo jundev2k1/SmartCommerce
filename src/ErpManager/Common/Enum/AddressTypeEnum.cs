@@ -1,9 +1,11 @@
-﻿namespace ErpManager.ERP.Common.Enum
+﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
+
+namespace ErpManager.ERP.Common.Enum
 {
-    public enum AddressTypeEnum
-    {
-        Province,
-        District,
-        Communes,
-    }
+	public enum AddressTypeEnum
+	{
+		Province,
+		District,
+		Communes,
+	}
 }

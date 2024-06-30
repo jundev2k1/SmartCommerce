@@ -2,19 +2,19 @@
 
 namespace ErpManager.Persistence.Services
 {
-    public interface IBranchService
-    {
-        /// <summary>
-        /// Get all branch
-        /// </summary>
-        /// <returns>A collection of branch</returns>
-        BranchModel?[] GetAll();
+	public interface IBranchService
+	{
+		/// <summary>
+		/// Get all branch
+		/// </summary>
+		/// <returns>A collection of branch</returns>
+		BranchModel?[] GetAll();
 
-        /// <summary>
-        /// Get user
-        /// </summary>
-        /// <param name="branchId">Branch id</param>
-        /// <returns>Branch model</returns>
-        BranchModel? Get(string branchId);
-    }
+		/// <summary>
+		/// Get user
+		/// </summary>
+		/// <param name="branchId">Branch id</param>
+		/// <returns>Branch model</returns>
+		BranchModel? Get(string branchId);
+	}
 }

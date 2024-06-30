@@ -4,10 +4,10 @@ using FluentValidation.Results;
 
 namespace ErpManager.ERP.Common
 {
-    public interface IValidatorFacade
-    {
-        public ValidationResult UserValidate(UserModel model);
+	public interface IValidatorFacade
+	{
+		public ValidationResult UserValidate(UserModel model);
 
-        public ValidationResult ProductValidate(ProductModel model);
-    }
+		public ValidationResult ProductValidate(ProductModel model);
+	}
 }

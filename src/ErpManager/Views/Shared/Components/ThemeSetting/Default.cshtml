@@ -1,61 +1,63 @@
-﻿@{
-    var componentScript = Url.Content("~/js/component-script/ThemeSetting/index.js");
+﻿@* // Copyright (c) 2024 - Jun Dev. All rights reserved *@
+
+@{
+	var componentScript = Url.Content("~/js/component-script/ThemeSetting/index.js");
 }
 <section id="themeSettingButton">
-    <div class="btn-theme-settings">
-        <button type="button"><i class="fa-regular fa-brush fa-fw"></i></button>
-    </div>
-    <div class="theme-settings">
-        <div class="overlay">
-            <div class="theme-settings-popup">
-                <div class="theme-settings-header">
-                    <h2>
-                        <i class="fa-regular fa-brush fa-fw"></i>
-                        <br />
-                        <span>@_localizer.Globals["ThemeSettings_Title"]</span>
-                    </h2>
-                </div>
-                <div class="theme-settings-body">
-                    <div class="mode-group">
-                        <h3>@_localizer.Globals["ThemeSettings_Mode"]</h3>
-                        <ul class="setting-list" id="renderModeSetting">
-                            <li class="setting-item">
-                                <div class="setting-field" style="background: var(--site-white-theme)"></div>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="theme-group">
-                        <h3>@_localizer.Globals["ThemeSettings_Theme"]</h3>
-                        <ul class="setting-list" id="renderThemeSetting">
-                            <li class="setting-item">
-                                <div class="setting-field" style="background: var(--site-white-theme)"></div>
-                                <input name="theme-options" type="radio" value="white" />
-                            </li>
-                            <li class="setting-item">
-                                <div class="setting-field"></div>
-                                <input name="theme-options" type="radio" value="milky" />
-                            </li>
-                            <li class="setting-item">
-                                <div class="setting-field"></div>
-                                <input name="theme-options" type="radio" value="pastel" />
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="btn-close-popup">
-                        <button id="btnCloseSetting">
-                            @_localizer.Globals["ThemeSettings_Leave"]
-                            <i class="fa-regular fa-right-from-bracket fa-fw"></i>
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <script src="@componentScript"></script>
-    <script>
-        const errorMessage = '@(_localizer.Globals["ThemeSettings_UpdateFailed"])';
-        const successMessage = '@(_localizer.Globals["ThemeSettings_UpdateSuccess"])';
-        // Initial menu
-        ThemeSetting.init();
-    </script>
+	<div class="btn-theme-settings">
+		<button type="button"><i class="fa-regular fa-brush fa-fw"></i></button>
+	</div>
+	<div class="theme-settings">
+		<div class="overlay">
+			<div class="theme-settings-popup">
+				<div class="theme-settings-header">
+					<h2>
+						<i class="fa-regular fa-brush fa-fw"></i>
+						<br />
+						<span>@_localizer.Globals["ThemeSettings_Title"]</span>
+					</h2>
+				</div>
+				<div class="theme-settings-body">
+					<div class="mode-group">
+						<h3>@_localizer.Globals["ThemeSettings_Mode"]</h3>
+						<ul class="setting-list" id="renderModeSetting">
+							<li class="setting-item">
+								<div class="setting-field" style="background: var(--site-white-theme)"></div>
+							</li>
+						</ul>
+					</div>
+					<div class="theme-group">
+						<h3>@_localizer.Globals["ThemeSettings_Theme"]</h3>
+						<ul class="setting-list" id="renderThemeSetting">
+							<li class="setting-item">
+								<div class="setting-field" style="background: var(--site-white-theme)"></div>
+								<input name="theme-options" type="radio" value="white" />
+							</li>
+							<li class="setting-item">
+								<div class="setting-field"></div>
+								<input name="theme-options" type="radio" value="milky" />
+							</li>
+							<li class="setting-item">
+								<div class="setting-field"></div>
+								<input name="theme-options" type="radio" value="pastel" />
+							</li>
+						</ul>
+					</div>
+					<div class="btn-close-popup">
+						<button id="btnCloseSetting">
+							@_localizer.Globals["ThemeSettings_Leave"]
+							<i class="fa-regular fa-right-from-bracket fa-fw"></i>
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script src="@componentScript"></script>
+	<script>
+		const errorMessage = '@(_localizer.Globals["ThemeSettings_UpdateFailed"])';
+		const successMessage = '@(_localizer.Globals["ThemeSettings_UpdateSuccess"])';
+		// Initial menu
+		ThemeSetting.init();
+	</script>
 </section>

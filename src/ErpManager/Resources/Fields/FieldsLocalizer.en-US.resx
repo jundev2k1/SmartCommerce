@@ -129,6 +129,9 @@
   <data name="FormContact_Tel" xml:space="preserve">
     <value>Phone Number</value>
   </data>
+  <data name="FormContact_Type" xml:space="preserve">
+    <value>Type Report</value>
+  </data>
   <data name="Product_Address" xml:space="preserve">
     <value>Address</value>
   </data>

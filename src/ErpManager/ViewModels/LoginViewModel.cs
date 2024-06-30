@@ -2,12 +2,12 @@
 
 namespace ErpManager.ERP.ViewModels
 {
-    public sealed class LoginViewModel
-    {
-        public string LoginID { get; set; } = string.Empty;
+	public sealed class LoginViewModel
+	{
+		public string LoginID { get; set; } = string.Empty;
 
-        public string Password { get; set; } = string.Empty;
+		public string Password { get; set; } = string.Empty;
 
-        public bool RememberMe { get; set; } = false;
-    }
+		public bool RememberMe { get; set; } = false;
+	}
 }

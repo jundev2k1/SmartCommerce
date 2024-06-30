@@ -1,13 +1,15 @@
-﻿@{
-    var componentScript = Url.Content(Constants.ERP_FILE_PATH_JS_COMPONENT_SEARCH_INPUT);
+﻿@* // Copyright (c) 2024 - Jun Dev. All rights reserved *@
+
+@{
+	var componentScript = Url.Content(Constants.ERP_FILE_PATH_JS_COMPONENT_SEARCH_INPUT);
 }
 @model SearchInputViewModel
 
 <div class="search-form @Model.ClassName">
-    <input name="@Model.Name" class="search-input" type="@Model.Type.ToString().ToLower()" value="@Model.Value" placeholder="@(string.IsNullOrEmpty(Model.PlaceHolderText) ? _localizer.Globals["PlaceHolder_SearchDefault"] : Model.PlaceHolderText)" />
-    <button type="submit" class="search-button btn btn-primary">
-        <i class="fa-light fa-magnifying-glass"></i>
-        @_localizer.Globals["Btn_Search"]
-    </button>
-    <script src="@componentScript"></script>
+	<input name="@Model.Name" class="search-input" type="@Model.Type.ToString().ToLower()" value="@Model.Value" placeholder="@(string.IsNullOrEmpty(Model.PlaceHolderText) ? _localizer.Globals["PlaceHolder_SearchDefault"] : Model.PlaceHolderText)" />
+	<button type="submit" class="search-button btn btn-primary">
+		<i class="fa-light fa-magnifying-glass"></i>
+		@_localizer.Globals["Btn_Search"]
+	</button>
+	<script src="@componentScript"></script>
 </div>

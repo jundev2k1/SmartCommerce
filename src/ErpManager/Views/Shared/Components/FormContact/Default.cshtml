@@ -1,98 +1,119 @@
-﻿@model FormContactViewModel
+﻿@* // Copyright (c) 2024 - Jun Dev. All rights reserved *@
+
+@model FormContactViewModel
 @{
-    var ddlFormType = ViewBag.FormType as List<SelectListItem> ?? new List<SelectListItem>();
-    var displayStyle = Model.IsShowType ? "block" : "none";
+	var ddlFormType = ViewBag.FormType as List<SelectListItem> ?? new List<SelectListItem>();
+	var displayStyle = Model.IsShowType ? "block" : "none";
 }
 
-<section id="form-contact">
-    <div class="modal modal-lg fade modal-dialog-scrollable" id="@Model.TargetButtonId" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5">@_localizer.Globals["Title_FormContact"]</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="form-group" style="display: @displayStyle">
-                        @Html.DropDownList(expression: "formContact", selectList: ddlFormType, htmlAttributes: new { Id = "formContactType", Class = "form-control" })
-                    </div>
-                    <div class="form-group mb-2">
-                        <label for="formContactName" class="form-label">@_localizer.Fields["FormContact_Name"]</label>
-                        <input id="formContactName" type="text" class="form-control" placeholder="@(_localizer.Globals["PlaceHolder_TextBox"]) (@_localizer.Fields["FormContact_Name"])..." required />
-                        <span class="text-danger"></span>
-                    </div>
-                    <div class="form-group mb-2">
-                        <label for="formContactEmail" class="form-label">@_localizer.Fields["FormContact_Email"]</label>
-                        <input id="formContactEmail" type="text" class="form-control" placeholder="@(_localizer.Globals["PlaceHolder_TextBox"]) (@_localizer.Fields["FormContact_Email"])..." required />
-                        <span class="text-danger"></span>
-                    </div>
-                    <div class="form-group mb-2">
-                        <label for="formContactTel" class="form-label">@_localizer.Fields["FormContact_Tel"]</label>
-                        <input id="formContactTel" type="text" class="form-control" placeholder="@(_localizer.Globals["PlaceHolder_TextBox"]) (@_localizer.Fields["FormContact_Tel"])..." required />
-                        <span class="text-danger"></span>
-                    </div>
-                    <div class="form-group mb-2">
-                        <label for="formMessage" class="form-label">@_localizer.Fields["FormContact_Message"]</label>
-                        <textarea id="formMessage" type="text" class="form-control" rows="4" placeholder="@(_localizer.Globals["PlaceHolder_TextBox"]) @(_localizer.Fields["FormContact_Message"])..."></textarea>
-                        <span class="text-danger"></span>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button id="btnSendContact" type="button" class="btn site-btn-primary">@_localizer.Globals["Btn_Send"]</button>
-                    <button type="button" class="btn site-btn-danger" data-bs-dismiss="modal">@_localizer.Globals["Btn_Close"]</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <script>
-        const handleFormContact = () => {
-            const formSection = document.querySelector('#form-contact');
-            const btnSend = formSection.querySelector('#btnSendContact');
-            const formType = formSection.querySelector('#formContactType');
-            const formName = formSection.querySelector('#formName');
-            const formEmail = formSection.querySelector('#formEmail');
-            const formTel = formSection.querySelector('#formTel');
-            const formMessage = formSection.querySelector('#formMessage');
+<section id="formContact">
+	<div class="modal modal-lg fade modal-dialog-scrollable" id="@Model.TargetButtonId" tabindex="-1" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h1 class="modal-title fs-5">@_localizer.Globals["Title_FormContact"]</h1>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<div class="form-group mb-2" style="display: @(displayStyle);">
+						<label for="formContactType" class="form-label">@_localizer.Fields["FormContact_Type"]</label>
+						@Html.DropDownList(expression: "formContact", selectList: ddlFormType, htmlAttributes: new { Id = "formContactType", Class = "form-select" })
+					</div>
+					<div class="form-group mb-2">
+						<label for="formContactName" class="form-label">@_localizer.Fields["FormContact_Name"]</label>
+						<input id="formContactName" type="text" class="form-control" placeholder="@(_localizer.Globals["PlaceHolder_TextBox"]) (@_localizer.Fields["FormContact_Name"])..." required />
+						<span class="text-danger"></span>
+					</div>
+					<div class="form-group mb-2">
+						<label for="formContactEmail" class="form-label">@_localizer.Fields["FormContact_Email"]</label>
+						<input id="formContactEmail" type="text" class="form-control" placeholder="@(_localizer.Globals["PlaceHolder_TextBox"]) (@_localizer.Fields["FormContact_Email"])..." />
+						<span class="text-danger"></span>
+					</div>
+					<div class="form-group mb-2">
+						<label for="formContactTel" class="form-label">@_localizer.Fields["FormContact_Tel"]</label>
+						<input id="formContactTel" type="text" class="form-control" placeholder="@(_localizer.Globals["PlaceHolder_TextBox"]) (@_localizer.Fields["FormContact_Tel"])..." />
+						<span class="text-danger"></span>
+					</div>
+					<div class="form-group mb-2">
+						<label for="formMessage" class="form-label">@_localizer.Fields["FormContact_Message"]</label>
+						<textarea id="formMessage" type="text" class="form-control" rows="4" placeholder="@(_localizer.Globals["PlaceHolder_TextBox"]) @(_localizer.Fields["FormContact_Message"])..."></textarea>
+						<span class="text-danger"></span>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button id="btnSendContact" type="button" class="btn site-btn-primary">@_localizer.Globals["Btn_Send"]</button>
+					<button id="btnCloseContact" type="button" class="btn site-btn-danger" data-bs-dismiss="modal">@_localizer.Globals["Btn_Close"]</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script>
+		const handleFormContact = () => {
+			const formSection = document.querySelector('#formContact');
+			const btnSend = formSection.querySelector('#btnSendContact');
+			const btnClose = formSection.querySelector('#btnCloseContact');
+			const formType = formSection.querySelector('#formContactType');
+			const formName = formSection.querySelector('#formContactName');
+			const formEmail = formSection.querySelector('#formContactEmail');
+			const formTel = formSection.querySelector('#formContactTel');
+			const formMessage = formSection.querySelector('#formMessage');
 
-            const getData = () => {
-                const data = {
-                    formType: formType?.value,
-                    formName: formName.value,
-                    formEmail: formEmail.value,
-                    formTel: formTel.value,
-                    formMessage: formMessage.value,
-                };
-                return data;
-            };
+			// Validate setting
+			const telRegexExp = /^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$/
+			const validateSchema = yup.object().shape({
+				type: yup.number()
+					.required('@(_localizer.Messages[""].Value)'),
+				name: yup.string()
+					.required('@(_localizer.Messages[""].Value)'),
+				email: yup.string()
+					.required('@(_localizer.Messages[""].Value)'),
+				tel: yup.string()
+					.required('@(_localizer.Messages[""].Value)')
+					.matches(telRegexExp, '@(_localizer.Messages[""].Value)'),
+				message: yup.string()
+					.required('@(_localizer.Messages[""].Value)'),
+			});
 
-            const validate = () => {
-                return true;
-            }
+			const getData = () => ({
+				type: Number(formType?.value || 0),
+				name: formName.value,
+				email: formEmail.value,
+				tel: formTel.value,
+				message: formMessage.value,
+			});
 
-            const resetMessage = () => {
-                formSection.querySelectorAll('.form-group span').forEach(element => {
-                    element.innerHTML = ''
-                });
-            };
+			const validate = () => {
 
-            const setMessage = (element, message = '') => {
-                const messageElement = element.closest('.form-group').querySelector('span');
-                if (messageElement) messageElement.innerHTML = message;
-            };
+				return true;
+			}
 
-            const onSend = (event) => {
-                resetMessage();
-                const url = '/mail/send-mail-to-operator';
-                const data = getData();
-                const onSuccess = () => {
-                    toastr.success('Đã gửi thành công');
-                };
-                callAjax({ url, data, type: requestType.formData, onSuccess });
-            };
+			const resetMessage = () => {
+				formSection.querySelectorAll('.form-group span').forEach(element => {
+					element.innerHTML = '';
+				});
+			};
 
-            // Execute when send form
-            btnSend.addEventListener('click', onSend);
-        };
-        StoreWindowLoadCallback.push(handleFormContact);
-    </script>
+			const setMessage = (element, message = '') => {
+				const messageElement = element.closest('.form-group').querySelector('span');
+				if (messageElement) messageElement.innerHTML = message;
+			};
+
+			const onSend = (event) => {
+				resetMessage();
+				if (!validate()) return;
+
+				const url = '/mail/send-mail-to-operator';
+				const data = getData();
+				const onSuccess = (response) => {
+					toastr.success(response);
+					btnClose?.click();
+				};
+				callAjax({ url, data, onSuccess });
+			};
+
+			// Execute when send form
+			btnSend.addEventListener('click', onSend);
+		};
+		StoreWindowLoadCallback.push(handleFormContact);
+	</script>
 </section>

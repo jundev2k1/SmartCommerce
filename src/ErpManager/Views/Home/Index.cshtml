@@ -1,37 +1,39 @@
-﻿@{
-    ViewData[Constants.GLOBAL_KEY_TITLE] = _localizer.Globals["Nav_Dashboard"];
-    ViewData[Constants.GLOBAL_KEY_CURRENT_PAGE] = "Dashboard_Page";
+﻿@* // Copyright (c) 2024 - Jun Dev. All rights reserved *@
 
-    var message = (string)ViewBag.LoginMessage;
+@{
+	ViewData[Constants.GLOBAL_KEY_TITLE] = _localizer.Globals["Nav_Dashboard"];
+	ViewData[Constants.GLOBAL_KEY_CURRENT_PAGE] = "Dashboard_Page";
+
+	var message = (string)ViewBag.LoginMessage;
 }
 <div class="dash-board">
-    <section class="statical ">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-3 col-md-6">
-                </div>
-                <div class="col-lg-3 col-md-6">
-                </div>
-                <div class="col-lg-3 col-md-6">
-                </div>
-                <div class="col-lg-3 col-md-6">
-                </div>
-            </div>
-        </div>
-    </section>
-    @section ViewScript {
-        <script>
-            const message = '@message';
-            const InitPage = () => {
-                toastr.success(message);
-            };
+	<section class="statical ">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-lg-3 col-md-6">
+				</div>
+				<div class="col-lg-3 col-md-6">
+				</div>
+				<div class="col-lg-3 col-md-6">
+				</div>
+				<div class="col-lg-3 col-md-6">
+				</div>
+			</div>
+		</div>
+	</section>
+	@section ViewScript {
+		<script>
+			const message = '@message';
+			const InitPage = () => {
+				toastr.success(message);
+			};
 
-            if (message) StoreWindowLoadCallback.push(InitPage);
-        </script>
-    }
+			if (message) StoreWindowLoadCallback.push(InitPage);
+		</script>
+	}
 </div>
 

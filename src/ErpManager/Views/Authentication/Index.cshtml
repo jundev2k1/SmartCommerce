@@ -1,192 +1,194 @@
-﻿@model LoginViewModel
+﻿@* // Copyright (c) 2024 - Jun Dev. All rights reserved *@
+
+@model LoginViewModel
 @{
-    Layout = "_Layout_Login";
-    ViewData[Constants.GLOBAL_KEY_TITLE] = _localizer.Globals["Nav_Auth_SignIn"];
+	Layout = "_Layout_Login";
+	ViewData[Constants.GLOBAL_KEY_TITLE] = _localizer.Globals["Nav_Auth_SignIn"];
 }
 
 <style>
-    .background {
-        width: 100%;
-        height: 100%;
-        background-color: #4158D0;
-        background-image: linear-gradient(43deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%);
-    }
+	.background {
+		width: 100%;
+		height: 100%;
+		background-color: #4158D0;
+		background-image: linear-gradient(43deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%);
+	}
 
-    .login {
-        position: fixed;
-        background: var(--site-popup-operating);
-        padding: 4rem 2rem;
-        width: 360px;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        border-radius: var(--site-border-rounded);
-    }
+	.login {
+		position: fixed;
+		background: var(--site-popup-operating);
+		padding: 4rem 2rem;
+		width: 360px;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		border-radius: var(--site-border-rounded);
+	}
 
-        .login .title {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            gap: 6px;
-            margin-bottom: 1.5rem;
-        }
+		.login .title {
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+			gap: 6px;
+			margin-bottom: 1.5rem;
+		}
 
-            .login .title .logo {
-                width: 50%;
-            }
+			.login .title .logo {
+				width: 50%;
+			}
 
-                .login .title .logo img {
-                    margin: auto;
-                    width: 100%;
-                }
+				.login .title .logo img {
+					margin: auto;
+					width: 100%;
+				}
 
-            .login .title .content h2 {
-                font-size: 16px;
-            }
+			.login .title .content h2 {
+				font-size: 16px;
+			}
 
-        .login .login-form {
-            display: flex;
-            flex-direction: column;
-        }
+		.login .login-form {
+			display: flex;
+			flex-direction: column;
+		}
 
-            .login .login-form a:hover {
-                color: var(--site-gray-400);
-                transition: .25s;
-            }
+			.login .login-form a:hover {
+				color: var(--site-gray-400);
+				transition: .25s;
+			}
 
-        .login .input-group {
-            display: flex;
-            justify-content: space-between;
-            margin: 8px 0;
-        }
+		.login .input-group {
+			display: flex;
+			justify-content: space-between;
+			margin: 8px 0;
+		}
 
-            .login .input-group input[type=text],
-            .login .input-group input[type=password] {
-                width: 100%;
-                padding: 8px;
-                border: none;
-                border-radius: 4px;
-                background: var(--site-gray-100);
-                transition: .25s;
-            }
+			.login .input-group input[type=text],
+			.login .input-group input[type=password] {
+				width: 100%;
+				padding: 8px;
+				border: none;
+				border-radius: 4px;
+				background: var(--site-gray-100);
+				transition: .25s;
+			}
 
-                .login .input-group input[type=text]:focus,
-                .login .input-group input[type=password]:focus {
-                    outline: none;
-                    background: var(--site-gray-200);
-                }
+				.login .input-group input[type=text]:focus,
+				.login .input-group input[type=password]:focus {
+					outline: none;
+					background: var(--site-gray-200);
+				}
 
-            .login .input-group .remember-me {
-                display: flex;
-                align-items: center;
-                gap: 4px;
-            }
+			.login .input-group .remember-me {
+				display: flex;
+				align-items: center;
+				gap: 4px;
+			}
 
-            .login .input-group input.error {
-                background: var(--site-red-theme);
-                filter: brightness(1.5);
-                opacity: .75;
-            }
+			.login .input-group input.error {
+				background: var(--site-red-theme);
+				filter: brightness(1.5);
+				opacity: .75;
+			}
 
-                .login .input-group input.error:focus {
-                    background: var(--site-gray-100);
-                    filter: brightness(1);
-                    opacity: 1;
-                }
+				.login .input-group input.error:focus {
+					background: var(--site-gray-100);
+					filter: brightness(1);
+					opacity: 1;
+				}
 
-            .login .input-group .login-message {
-                display: block;
-                font-size: 14px;
-                color: var(--site-red-theme);
-            }
+			.login .input-group .login-message {
+				display: block;
+				font-size: 14px;
+				color: var(--site-red-theme);
+			}
 
-        .login .login-submit {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin-top: 1rem;
-            margin-bottom: .5rem;
-        }
+		.login .login-submit {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			margin-top: 1rem;
+			margin-bottom: .5rem;
+		}
 
-            .login .login-submit button[type=submit] {
-                padding: .5rem 1rem;
-                width: 100%;
-                border-radius: var(--site-border-full);
-                background-image: var(--site-bg-primary);
-                color: #fff;
-            }
+			.login .login-submit button[type=submit] {
+				padding: .5rem 1rem;
+				width: 100%;
+				border-radius: var(--site-border-full);
+				background-image: var(--site-bg-primary);
+				color: #fff;
+			}
 
-                .login .login-submit button[type=submit]:hover {
-                    filter: brightness(.95);
-                    transition: .25s;
-                }
+				.login .login-submit button[type=submit]:hover {
+					filter: brightness(.95);
+					transition: .25s;
+				}
 
 
-            .login .login-submit .login-message {
-                display: block;
-                font-size: 14px;
-                color: var(--site-red-theme);
-            }
+			.login .login-submit .login-message {
+				display: block;
+				font-size: 14px;
+				color: var(--site-red-theme);
+			}
 
-        .login .login-register {
-            display: block;
-            text-align: center;
-        }
+		.login .login-register {
+			display: block;
+			text-align: center;
+		}
 </style>
 
 <div class="background">
-    <div class="login">
-        <div class="title">
-            <div class="logo">
-                <img src="~/images/system/logo.png" />
-            </div>
-            <div class="content">
-                <h2>@_localizer.Globals["Login_Title_SubTitle"]</h2>
-            </div>
-        </div>
-        <form name="sign-in" asp-route="@Constants.MODULE_AUTH_SIGNIN_NAME" method="post">
-            <div class="login-form">
-                <div class="input-group">
-                    <input type="text" asp-for="@Model.LoginID" value="@Model.LoginID" placeholder="@_localizer.Globals["Login_Field_ID"]" />
-                    <span class="login-message"></span>
-                </div>
-                <div class="input-group">
-                    <input type="password" asp-for="@Model.Password" value="@Model.Password" placeholder="@_localizer.Globals["Login_Field_Password"]" />
-                    <span class="login-message"></span>
-                </div>
-                <div class="input-group">
-                    <div class="remember-me">
-                        <input asp-for="@Model.RememberMe" type="checkbox" checked="@Model.RememberMe" />
-                        <span>@_localizer.Globals["Login_Label_RememberMe"]</span>
-                    </div>
-                    <div class="forget-password">
-                        <a href="#">@_localizer.Globals["Login_Button_ForgetPassword"]</a>
-                    </div>
-                </div>
-                <div class="login-submit">
-                    <span class="login-message"></span>
-                    <button type="submit">@_localizer.Globals["Login_Button_Login"]</button>
-                </div>
-                <div class="login-register">
-                    <a href="#">
-                        @_localizer.Globals["Login_Button_Register"]
-                    </a>
-                </div>
-            </div>
-        </form>
-    </div>
+	<div class="login">
+		<div class="title">
+			<div class="logo">
+				<img src="~/images/system/logo.png" />
+			</div>
+			<div class="content">
+				<h2>@_localizer.Globals["Login_Title_SubTitle"]</h2>
+			</div>
+		</div>
+		<form name="sign-in" asp-route="@Constants.MODULE_AUTH_SIGNIN_NAME" method="post">
+			<div class="login-form">
+				<div class="input-group">
+					<input type="text" asp-for="@Model.LoginID" value="@Model.LoginID" placeholder="@_localizer.Globals["Login_Field_ID"]" />
+					<span class="login-message"></span>
+				</div>
+				<div class="input-group">
+					<input type="password" asp-for="@Model.Password" value="@Model.Password" placeholder="@_localizer.Globals["Login_Field_Password"]" />
+					<span class="login-message"></span>
+				</div>
+				<div class="input-group">
+					<div class="remember-me">
+						<input asp-for="@Model.RememberMe" type="checkbox" checked="@Model.RememberMe" />
+						<span>@_localizer.Globals["Login_Label_RememberMe"]</span>
+					</div>
+					<div class="forget-password">
+						<a href="#">@_localizer.Globals["Login_Button_ForgetPassword"]</a>
+					</div>
+				</div>
+				<div class="login-submit">
+					<span class="login-message"></span>
+					<button type="submit">@_localizer.Globals["Login_Button_Login"]</button>
+				</div>
+				<div class="login-register">
+					<a href="#">
+						@_localizer.Globals["Login_Button_Register"]
+					</a>
+				</div>
+			</div>
+		</form>
+	</div>
 </div>
 
 @section ViewScript {
-    <script>
-        const initPage = () => {
-            const errorMessage = '@ViewData[Constants.VIEWDATA_KEY_AUTH_ERROR_MESSAGE]';
+	<script>
+		const initPage = () => {
+			const errorMessage = '@ViewData[Constants.VIEWDATA_KEY_AUTH_ERROR_MESSAGE]';
 
-            if (errorMessage != '') {
-                toastr.error(errorMessage);
-            };
-        };
-        StoreWindowLoadCallback.push(initPage);
-    </script>
+			if (errorMessage != '') {
+				toastr.error(errorMessage);
+			};
+		};
+		StoreWindowLoadCallback.push(initPage);
+	</script>
 }

@@ -1,19 +1,21 @@
-﻿@model Breadcrumb[]
+﻿@* // Copyright (c) 2024 - Jun Dev. All rights reserved *@
+
+@model Breadcrumb[]
 
 <section id="breadcrumbs">
-    <nav aria-label="breadcrumb">
-        <ol class="breadcrumb">
-            @foreach (var item in Model)
-            {
-                if (!item.IsDisabled)
-                {
-                    <li class="breadcrumb-item"><a href="@item.Href">@item.Title</a></li>
-                }
-                else
-                {
-                    <li class="breadcrumb-item active" aria-current="page">@item.Title</li>
-                }
-            }
-        </ol>
-    </nav>
+	<nav aria-label="breadcrumb">
+		<ol class="breadcrumb">
+			@foreach (var item in Model)
+			{
+				if (!item.IsDisabled)
+				{
+					<li class="breadcrumb-item"><a href="@item.Href">@item.Title</a></li>
+				}
+				else
+				{
+					<li class="breadcrumb-item active" aria-current="page">@item.Title</li>
+				}
+			}
+		</ol>
+	</nav>
 </section>

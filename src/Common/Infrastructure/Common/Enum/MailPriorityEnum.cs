@@ -2,10 +2,10 @@
 
 namespace ErpManager.Infrastructure.Common.Enum
 {
-    public enum MailPriorityEnum
-    {
-        Low,
-        Normal,
-        High
-    }
+	public enum MailPriorityEnum
+	{
+		Low,
+		Normal,
+		High
+	}
 }

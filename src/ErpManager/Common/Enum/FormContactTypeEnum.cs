@@ -2,9 +2,9 @@
 
 namespace ErpManager.ERP.Common.Enum
 {
-    public enum FormContactTypeEnum
-    {
-        Report,
-        ContactAdmin,
-    }
+	public enum FormContactTypeEnum
+	{
+		Report,
+		ContactAdmin,
+	}
 }

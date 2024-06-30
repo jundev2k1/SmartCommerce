@@ -2,12 +2,12 @@
 
 namespace ErpManager.Domain.Models
 {
-    public sealed class OperatorModel : ModelBase<OperatorModel>
-    {
-        public string BranchId { get; set; } = string.Empty;
+	public sealed class OperatorModel : ModelBase<OperatorModel>
+	{
+		public string BranchId { get; set; } = string.Empty;
 
-        public UserModel Profile { get; set; } = new UserModel();
+		public UserModel Profile { get; set; } = new UserModel();
 
-        public string Permission { get; set; } = string.Empty;
-    }
+		public string Permission { get; set; } = string.Empty;
+	}
 }

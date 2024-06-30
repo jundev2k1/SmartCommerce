@@ -2,10 +2,10 @@
 
 namespace ErpManager.ERP.ViewModels
 {
-    public sealed class HeaderViewModel
-    {
-        public bool IsShowNavbarSwitch { get; set; }
+	public sealed class HeaderViewModel
+	{
+		public bool IsShowNavbarSwitch { get; set; }
 
-        public bool IsFullScreen { get; set; }
-    }
+		public bool IsFullScreen { get; set; }
+	}
 }

@@ -2,8 +2,8 @@
 
 namespace ErpManager.Domain.Enum
 {
-    public enum TokenTypeEnum
-    {
-        ProductPreviewToken,
-    }
+	public enum TokenTypeEnum
+	{
+		ProductPreviewToken,
+	}
 }

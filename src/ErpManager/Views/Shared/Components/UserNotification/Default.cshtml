@@ -1,84 +1,85 @@
-﻿@model NotificationViewModel
+﻿@* // Copyright (c) 2024 - Jun Dev. All rights reserved *@
+
+@model NotificationViewModel
 
 @if (Model.IsDisplay)
 {
-    <section id="notificationButton">
-        <style>
-            #notificationButton .dropdown > a {
-                background: var(--site-title-operating)!important;
-                color: var(--site-theme-operating)!important;
-                font-weight: bold;
-            }
+	<section id="notificationButton">
+		<style>
+			#notificationButton .dropdown > a {
+				background: var(--site-title-operating) !important;
+				color: var(--site-theme-operating) !important;
+				font-weight: bold;
+			}
 
-            #notificationButton .dropdown-menu > li.read a {
-                background: var(--site-gray-200);
-            }
+			#notificationButton .dropdown-menu > li.read a {
+				background: var(--site-gray-200);
+			}
 
-            #notificationButton .dropdown-menu > li {
-                font-size: 12px;
-            }
+			#notificationButton .dropdown-menu > li {
+				font-size: 12px;
+			}
 
-                #notificationButton .dropdown-menu > li h4 {
-                    font-size: 14px;
-                }
+				#notificationButton .dropdown-menu > li h4 {
+					font-size: 14px;
+				}
 
-                #notificationButton .dropdown-menu > li:last-child {
-                    font-size: 14px;
-                    padding: 4px 8px;
-                }
+				#notificationButton .dropdown-menu > li:last-child {
+					font-size: 14px;
+					padding: 4px 8px;
+				}
 
-                    #notificationButton .dropdown-menu > li:last-child:hover {
-                        color: var(--site-gray-500);
-                    }
-        </style>
-        <div class="dropdown">
-            <a class="btn site-btn-info btn-sm dropdown-toggle px-3 site-rounded-full" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                <i class="fa-regular fa-bell"></i>
-                @(Model.NotificationUnReadCount > 0 ? @Model.NotificationUnReadCount : string.Empty)
-            </a>
+					#notificationButton .dropdown-menu > li:last-child:hover {
+						color: var(--site-gray-500);
+					}
+		</style>
+		<div class="dropdown">
+			<a class="btn site-btn-info btn-sm dropdown-toggle px-3 site-rounded-full" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+				<i class="fa-regular fa-bell"></i>
+				@(Model.NotificationUnReadCount > 0 ? @Model.NotificationUnReadCount : string.Empty)
+			</a>
 
-            <ul class="dropdown-menu min-h-25">
-                @foreach (var item in Model.Items)
-                {
-                    <li class="@(!item.Status ? "read" : string.Empty)">
-                        <a class="dropdown-item" href="#">
-                            <div class="d-flex flex-column gap-1">
-                                <h4 class="m-0">@item.Title</h4>
-                                <p class="m-0">@item.Content</p>
-                                <span class="m-0">
-                                    @if (item.Status)
-                                    {
-                                        <i class="fa-regular fa-envelope"></i>
-                                        <em>@_localizer.ValueTexts["ValTxt_NotificationStatus_Unread"]</em>
-                                    }
-                                    else
-                                    {
-                                        <i class="fa-regular fa-envelope-open"></i>
-                                        <em>@_localizer.ValueTexts["ValTxt_NotificationStatus_Read"]</em>
-                                    }
-                                </span>
-                            </div>
-                        </a>
-                    </li>
-                }
-                <li class="m-0 text-end">
-                    <a href="#">@_localizer.Globals["Notification_MarkAllRead"]</a>
-                </li>
-            </ul>
-        </div>
-        <script type="text/javascript">
-            const initUserNotification = function () {
-                const connection = new signalR.HubConnectionBuilder()
-                    .withUrl("@(Constants.HUB_PATH_NOTIFICATION)")
-                    .build();
+			<ul class="dropdown-menu min-h-25">
+				@foreach (var item in Model.Items)
+				{
+					<li class="@(!item.Status ? "read" : string.Empty)">
+						<a class="dropdown-item" href="#">
+							<div class="d-flex flex-column gap-1">
+								<h4 class="m-0">@item.Title</h4>
+								<p class="m-0">@item.Content</p>
+								<span class="m-0">
+									@if (item.Status)
+									{
+										<i class="fa-regular fa-envelope"></i>
+										<em>@_localizer.ValueTexts["ValTxt_NotificationStatus_Unread"]</em>
+									}
+									else
+									{
+										<i class="fa-regular fa-envelope-open"></i>
+										<em>@_localizer.ValueTexts["ValTxt_NotificationStatus_Read"]</em>
+									}
+								</span>
+							</div>
+						</a>
+					</li>
+				}
+				<li class="m-0 text-end">
+					<a href="#">@_localizer.Globals["Notification_MarkAllRead"]</a>
+				</li>
+			</ul>
+		</div>
+		<script type="text/javascript">
+			const initUserNotification = function () {
+				const connection = new signalR.HubConnectionBuilder()
+					.withUrl("@(Constants.HUB_PATH_NOTIFICATION)")
+					.build();
 
-                connection.on('@(Constants.HUB_METHOD_NAME_USER_NOTIFICATION)', (message) => {
-                    console.log(message);
-                });
+				connection.on('@(Constants.HUB_METHOD_NAME_USER_NOTIFICATION)', (message) => {
+				});
 
-                connection.start().catch(err => console.error(err.toString()));
-            }
-            StoreWindowLoadCallback.push(initUserNotification);
-        </script>
-    </section>
+				connection.start().catch(err => console.error(err.toString()));
+			}
+			StoreWindowLoadCallback.push(initUserNotification);
+		</script>
+	</section>
 }
