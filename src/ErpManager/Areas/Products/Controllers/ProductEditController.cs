@@ -24,7 +24,7 @@ namespace ErpManager.ERP.Areas.Product.Controllers
 		}
 
 		[HttpGet]
-		[PermissionAttribute(Permission.CanEditProduct)]
+		[Authorization(Permission.CanEditProduct)]
 		[Route(Constants.MODULE_PRODUCT_PRODUCTEDIT_PATH, Name = Constants.MODULE_PRODUCT_PRODUCTEDIT_NAME)]
 		public IActionResult Index(string id)
 		{
@@ -36,7 +36,7 @@ namespace ErpManager.ERP.Areas.Product.Controllers
 		}
 
 		[HttpPost]
-		[PermissionAttribute(Permission.CanEditProduct)]
+		[Authorization(Permission.CanEditProduct)]
 		[Route(Constants.MODULE_PRODUCT_PRODUCTEDIT_PATH, Name = Constants.MODULE_PRODUCT_PRODUCTEDIT_NAME)]
 		public IActionResult Index([FromRoute] string id, ProductModel formInput)
 		{
@@ -79,14 +79,14 @@ namespace ErpManager.ERP.Areas.Product.Controllers
 			input.BranchId = this.OperatorBranchId;
 			input.Images = productImages;
 			input.Description = product.Description;
-			input.LastChanged = this.OperatorName;
+			input.LastChanged = this.OperatorId;
 			input.DateChanged = DateTime.Now;
 			input.DateCreated = product?.DateCreated;
-			input.CreatedBy = product?.CreatedBy ?? string.Empty;
+			input.CreatedBy = product?.CreatedBy ?? this.OperatorId;
 		}
 
 		[HttpPost]
-		[PermissionAttribute(Permission.CanEditProduct)]
+		[Authorization(Permission.CanEditProduct)]
 		[Route(Constants.MODULE_PRODUCT_PRODUCTEDIT_DESCRIPTION_PATH, Name = Constants.MODULE_PRODUCT_PRODUCTEDIT_DESCRIPTION_NAME)]
 		public bool UpdateDescription([FromRoute] string id, [FromBody] string description)
 		{

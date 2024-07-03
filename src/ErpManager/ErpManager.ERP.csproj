@@ -103,10 +103,15 @@
     <Using Include="Microsoft.Extensions.Localization" />
     <Using Include="Newtonsoft.Json" />
     <Using Include="System.Collections" />
+    <Using Include="System.Web" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="wwwroot\css\component\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\lib\alert-box\alert-box.js" />
   </ItemGroup>
 
 </Project>

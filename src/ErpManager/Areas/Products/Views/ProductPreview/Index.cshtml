@@ -92,12 +92,18 @@
 			</div>
 			@if (Model.CanShareQRCode)
 			{
-				<div class="site-card calender mb-2">
+				<div class="site-card mb-2">
 					<h3>@_localizer.Globals["Title_ShareLink"]</h3>
 					<div class="qr-code">
-						<a href="#" onclick="javascript:void(0); copyImageToClipboard(this.querySelector('img'));" data-bs-toggle="tooltip" title="@_localizer.Messages["Message_ClickCopy"]">
-							<img class="img-fluid" src="@Model.QRCode" />
-						</a>
+						<img class="img-fluid" src="@Model.QRCode" />
+						<button id="btnRefreshQRCode" class="d-block w-100 btn site-btn-primary mt-1">
+							<i class="fa-light fa-rotate-right"></i>
+							Làm mới QR code
+						</button>
+						<button id="btnShareQRCode" class="d-block w-100 btn site-btn-secondary mt-1" data-bs-toggle="tooltip" title="@_localizer.Messages["Message_ClickCopy"]">
+							<i class="fa-light fa-copy"></i>
+							Copy QR code
+						</button>
 						<p class="text-center">@_localizer.Messages["Message_ClickCopy"]</p>
 					</div>
 				</div>
@@ -111,34 +117,37 @@
 				</div>
 			}
 		</div>
-		<div class="preview-related-product">
-			<div class="site-card">
-				<h2>@_localizer.Globals["Title_RelatedProduct"]</h2>
-				<ul class="row gy-3">
-					@foreach (var relatedProduct in Model.RelatedProducts)
-					{
-						var relatedAddress = AddressUtilities.GetDistrictName(relatedProduct.Address2, Constants.PAGE_LANGUAGE_OPTIONS);
-						var relatedPrice = ProductUtilities.GetDisplayPrice(relatedProduct);
-						var relatedImage = ProductUtilities.GetMainProductImage(relatedProduct.Images);
+		@if (Model.RelatedProducts.Any())
+		{
+			<div class="preview-related-product">
+				<div class="site-card">
+					<h2>@_localizer.Globals["Title_RelatedProduct"]</h2>
+					<ul class="row gy-3">
+						@foreach (var relatedProduct in Model.RelatedProducts)
+						{
+							var relatedAddress = AddressUtilities.GetDistrictName(relatedProduct.Address2, Constants.PAGE_LANGUAGE_OPTIONS);
+							var relatedPrice = ProductUtilities.GetDisplayPrice(relatedProduct);
+							var relatedImage = ProductUtilities.GetMainProductImage(relatedProduct.Images);
 
-						<li class="col-md-3 col-6">
-							<a asp-route="@Constants.MODULE_PRODUCT_PRODUCTPREVIEW_NAME" asp-route-branchId="@relatedProduct.BranchId" asp-route-id="@relatedProduct.ProductId">
-								<div class="product-thumbnail mb-2">
-									<img class="img-fluid" src="@relatedImage" />
-								</div>
-								<h3>@relatedProduct.Name</h3>
-								<p><i class="fa-regular fa-circle-dollar"></i> @_localizer.Globals["Title_Price"]: @relatedPrice</p>
-								<p>@await Component.InvokeAsync(Constants.ERP_COMPONENT_NAME_PRODUCT_STATUS_BADGE, new { status = relatedProduct.Status })</p>
-								@if (!string.IsNullOrEmpty(relatedAddress))
-								{
-									<span><i class="fa-regular fa-map"></i> @relatedAddress</span>
-								}
-							</a>
-						</li>
-					}
-				</ul>
+							<li class="col-md-3 col-6">
+								<a asp-route="@Constants.MODULE_PRODUCT_PRODUCTPREVIEW_NAME" asp-route-branchId="@relatedProduct.BranchId" asp-route-id="@relatedProduct.ProductId">
+									<div class="product-thumbnail mb-2">
+										<img class="img-fluid" src="@relatedImage" />
+									</div>
+									<h3>@relatedProduct.Name</h3>
+									<p><i class="fa-regular fa-circle-dollar"></i> @_localizer.Globals["Title_Price"]: @relatedPrice</p>
+									<p>@await Component.InvokeAsync(Constants.ERP_COMPONENT_NAME_PRODUCT_STATUS_BADGE, new { status = relatedProduct.Status })</p>
+									@if (!string.IsNullOrEmpty(relatedAddress))
+									{
+										<span><i class="fa-regular fa-map"></i> @relatedAddress</span>
+									}
+								</a>
+							</li>
+						}
+					</ul>
+				</div>
 			</div>
-		</div>
+		}
 	</div>
 </section>
 <section id="previewImageModal">
@@ -160,7 +169,7 @@
 
 @section ViewScript {
 	<script>
-		(function () {
+		const handlePreviewImageModal = function () {
 			const previewArea = document.querySelector('#previewModal');
 			const modalSize = isMobile ? 'modal-fullscreen' : 'modal-xl';
 			previewArea.classList.add(modalSize);
@@ -190,6 +199,38 @@
 					image.style.display = 'none';
 				}
 			});
-		})();
+		};
+		StoreWindowLoadCallback.push(handlePreviewImageModal);
+
+		const handleCopyQrCode = function () {
+			const btnRefreshQR = document.querySelector('.qr-code #btnRefreshQRCode');
+			btnRefreshQR?.addEventListener('click', () => {
+				const onSuccess = (response) => {
+					if (!response) return;
+
+					const qrCodeImg = document.querySelector('.qr-code img');
+					if (!qrCodeImg) return;
+
+					toastr.success('Lam moi thanh cong');
+					qrCodeImg.src = response;
+				};
+				callAjax({
+					url: '@(Constants.ENDPOINT_COMMON_GENERATE_QR_CODE)',
+					data: { url: window.location.href },
+					type: requestType.formUrl,
+					method: 'GET',
+					onSuccess,
+				});
+			});
+
+			const btnShareQR = document.querySelector('.qr-code #btnShareQRCode');
+			btnShareQR?.addEventListener('click', () => {
+				const qrCodeImg = document.querySelector('.qr-code img');
+				if (!qrCodeImg) return;
+
+				copyImageToClipboard(qrCodeImg);
+			});
+		};
+		StoreWindowLoadCallback.push(handleCopyQrCode);
 	</script>
 }

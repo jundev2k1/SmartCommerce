@@ -81,5 +81,12 @@ namespace ErpManager.Common
 		public const string DEFAULT_FLG_OFF = "0";
 		/// <summary>Default flag is ON</summary>
 		public const string DEFAULT_FLG_ON = "1";
+
+		/// <summary>Created by default flag: User</summary>
+		public const string DEFAULT_FLG_CREATED_BY_USER = "User";
+		/// <summary>Created by default flag: System</summary>
+		public const string DEFAULT_FLG_CREATED_BY_SYSTEM = "System";
+		/// <summary>Created by default flag: Manager</summary>
+		public const string DEFAULT_FLG_CREATED_BY_MANAGER = "Manager";
 	}
 }

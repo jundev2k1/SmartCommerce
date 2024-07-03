@@ -21,22 +21,22 @@
 					</div>
 					<div class="form-group mb-2">
 						<label for="formContactName" class="form-label">@_localizer.Fields["FormContact_Name"]</label>
-						<input id="formContactName" type="text" class="form-control" placeholder="@(_localizer.Globals["PlaceHolder_TextBox"]) (@_localizer.Fields["FormContact_Name"])..." required />
+						<input id="formContactName" data-id="name" type="text" class="form-control" placeholder="@(_localizer.Globals["PlaceHolder_TextBox"]) (@_localizer.Fields["FormContact_Name"])..." />
 						<span class="text-danger"></span>
 					</div>
 					<div class="form-group mb-2">
 						<label for="formContactEmail" class="form-label">@_localizer.Fields["FormContact_Email"]</label>
-						<input id="formContactEmail" type="text" class="form-control" placeholder="@(_localizer.Globals["PlaceHolder_TextBox"]) (@_localizer.Fields["FormContact_Email"])..." />
+						<input id="formContactEmail" data-id="email" type="text" class="form-control" placeholder="@(_localizer.Globals["PlaceHolder_TextBox"]) (@_localizer.Fields["FormContact_Email"])..." />
 						<span class="text-danger"></span>
 					</div>
 					<div class="form-group mb-2">
 						<label for="formContactTel" class="form-label">@_localizer.Fields["FormContact_Tel"]</label>
-						<input id="formContactTel" type="text" class="form-control" placeholder="@(_localizer.Globals["PlaceHolder_TextBox"]) (@_localizer.Fields["FormContact_Tel"])..." />
+						<input id="formContactTel" data-id="tel" type="text" class="form-control" placeholder="@(_localizer.Globals["PlaceHolder_TextBox"]) (@_localizer.Fields["FormContact_Tel"])..." />
 						<span class="text-danger"></span>
 					</div>
 					<div class="form-group mb-2">
 						<label for="formMessage" class="form-label">@_localizer.Fields["FormContact_Message"]</label>
-						<textarea id="formMessage" type="text" class="form-control" rows="4" placeholder="@(_localizer.Globals["PlaceHolder_TextBox"]) @(_localizer.Fields["FormContact_Message"])..."></textarea>
+						<textarea id="formMessage" data-id="message" type="text" class="form-control" rows="4" placeholder="@(_localizer.Globals["PlaceHolder_TextBox"]) @(_localizer.Fields["FormContact_Message"])..."></textarea>
 						<span class="text-danger"></span>
 					</div>
 				</div>
@@ -58,21 +58,34 @@
 			const formTel = formSection.querySelector('#formContactTel');
 			const formMessage = formSection.querySelector('#formMessage');
 
-			// Validate setting
 			const telRegexExp = /^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$/
-			const validateSchema = yup.object().shape({
-				type: yup.number()
-					.required('@(_localizer.Messages[""].Value)'),
-				name: yup.string()
-					.required('@(_localizer.Messages[""].Value)'),
-				email: yup.string()
-					.required('@(_localizer.Messages[""].Value)'),
-				tel: yup.string()
-					.required('@(_localizer.Messages[""].Value)')
-					.matches(telRegexExp, '@(_localizer.Messages[""].Value)'),
-				message: yup.string()
-					.required('@(_localizer.Messages[""].Value)'),
-			});
+			var constraints = {
+				name: {
+					presence: {
+						allowEmpty: false,
+						message: '^@Html.Raw(_localizer.Validates["ErrorMsg_IsRequired"].Value)'
+					}
+				},
+				email: {
+					presence: {
+						allowEmpty: false,
+						message: '^@Html.Raw(_localizer.Validates["ErrorMsg_IsRequired"].Value)'
+					},
+					email: {
+						message: '^@Html.Raw(_localizer.Validates["ErrorMsg_EmailInvalid"].Value)'
+					}
+				},
+				tel: {
+					presence: {
+						allowEmpty: false,
+						message: '^@Html.Raw(_localizer.Validates["ErrorMsg_IsRequired"].Value)'
+					},
+					format: {
+						pattern: telRegexExp,
+						message: '^@Html.Raw(_localizer.Validates["ErrorMsg_TelNotCorrect"].Value)'
+					}
+				}
+			};
 
 			const getData = () => ({
 				type: Number(formType?.value || 0),
@@ -82,12 +95,14 @@
 				message: formMessage.value,
 			});
 
-			const validate = () => {
+			const validateForm = () => {
+				const data = getData();
+				const result = validate(data, constraints);
 
-				return true;
+				return [!result, result];
 			}
 
-			const resetMessage = () => {
+			const resetErrorMessage = () => {
 				formSection.querySelectorAll('.form-group span').forEach(element => {
 					element.innerHTML = '';
 				});
@@ -98,14 +113,40 @@
 				if (messageElement) messageElement.innerHTML = message;
 			};
 
-			const onSend = (event) => {
-				resetMessage();
-				if (!validate()) return;
+			const handleSetErrorMessage = (errorMessages) => {
+				const controls = formSection.querySelectorAll('.form-group input');
+				controls.forEach((element) => {
+					// Get key value form error message collection
+					const key = element.dataset['id'] || '';
+					const errorMessage = errorMessages[key] || '';
 
-				const url = '/mail/send-mail-to-operator';
+					// Set error message
+					setMessage(element, errorMessage[0]);
+				});
+			};
+
+			const clearFormData = () => {
+				const controls = formSection.querySelectorAll('.form-group input');
+				controls.forEach((element) => { element.value = '' });
+			};
+
+			const onSend = (event) => {
+				// Begin progress by clearing all error messages
+				resetErrorMessage();
+
+				// Handle validate form value
+				const [status, errorMessages] = validateForm();
+				if (!status) {
+					handleSetErrorMessage(errorMessages);
+					return;
+				};
+
+				// Send request to send mail
+				const url = '@(Constants.ENDPOINT_COMMON_MAIL_SENDMAIL_CONTACT_OPERATOR)';
 				const data = getData();
 				const onSuccess = (response) => {
 					toastr.success(response);
+					clearFormData();
 					btnClose?.click();
 				};
 				callAjax({ url, data, onSuccess });
@@ -113,6 +154,25 @@
 
 			// Execute when send form
 			btnSend.addEventListener('click', onSend);
+			const inputControls = formSection.querySelectorAll('.form-group input');
+			inputControls.forEach((input) => {
+				input.addEventListener('blur', (event) => {
+					// Get and set error message if there are any error message after validate
+					const [status, errorMessages] = validateForm();
+					if (!status) {
+						// Get key value form error message collection
+						const key = event.target.dataset['id'] || '';
+						const errorMessage = errorMessages[key] || '';
+
+						// Set error message for target input
+						setMessage(event.target, errorMessage[0]);
+						return;
+					};
+
+					// Clear error message when form validation ok
+					resetErrorMessage();
+				});
+			});
 		};
 		StoreWindowLoadCallback.push(handleFormContact);
 	</script>

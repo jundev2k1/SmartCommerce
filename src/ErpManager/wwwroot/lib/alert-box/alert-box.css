@@ -1,0 +1,238 @@
+:root {
+	--ab-success: #2dd284;
+	--ab-warning: #fc0;
+	--ab-danger: #e6352b;
+	--ab-dialog: #80549f;
+}
+
+@keyframes alertAnimation {
+	0% {
+		padding: 0;
+		opacity: 0;
+		border: 0px solid #ececec;
+	}
+
+	75% {
+		padding: 2px;
+		opacity: 1;
+		border: 8px solid #ececec;
+	}
+
+	100% {
+		padding: 10px;
+		border: 0px solid #ececec;
+		opacity: 0;
+	}
+}
+
+@keyframes showSmooth {
+	0% {
+		opacity: 0;
+		transform: scale(0);
+	}
+
+	75% {
+		opacity: 1;
+		transform: scale(1.2);
+	}
+
+	100% {
+		transform: scale(1);
+	}
+}
+
+#alert-box {
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 9999;
+	width: 100%;
+	height: 100%;
+}
+
+	#alert-box .overlay {
+		width: 100%;
+		height: 100%;
+		background: rgb(21 21 21 / 32%);
+		backdrop-filter: blur(1px);
+	}
+
+	#alert-box .content {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		width: 400px;
+		height: 350px;
+		background: #fff;
+		border-radius: 4px;
+		box-shadow: 0 0 2px rgb(121, 121, 121);
+	}
+
+		#alert-box .content .show-icon {
+			position: relative;
+			border-radius: 4px 4px 0 0;
+			width: 100%;
+			height: 40%;
+			background-color: var(--ab-dialog);
+			transition: 1s;
+		}
+
+			#alert-box .content .show-icon.success {
+				background-color: var(--ab-success);
+			}
+
+			#alert-box .content .show-icon.dialog {
+				background-color: var(--ab-dialog);
+			}
+
+			#alert-box .content .show-icon.warning {
+				background-color: var(--ab-warning);
+			}
+
+			#alert-box .content .show-icon.danger {
+				background-color: var(--ab-danger);
+			}
+
+			#alert-box .content .show-icon span {
+				position: absolute;
+				overflow: hidden;
+				width: 50px;
+				height: 50px;
+				border-radius: 100%;
+				border: 2px solid #fff;
+				top: 50%;
+				left: 50%;
+				padding: 20px;
+				transform: translate(-50%, -50%);
+				font-size: 3rem;
+				line-height: 36px;
+				-webkit-box-reflect: below 0 linear-gradient(0deg, rgba(2, 0, 36, 1) -60%, rgba(37, 37, 37, 0) 30%);
+			}
+
+				#alert-box .content .show-icon span.loader {
+					background: url('loader-dots.gif');
+					background-size: 100%;
+					background-position: center;
+				}
+
+				#alert-box .content .show-icon span::before {
+					content: "";
+					position: absolute;
+					width: 100%;
+					height: 100%;
+					top: 50%;
+					left: 50%;
+					transform: translate(-50%, -50%);
+					border-radius: 100%;
+					padding: 5px;
+					animation: alertAnimation 2s ease-in;
+					animation-delay: .5s;
+					animation-iteration-count: infinite;
+				}
+
+				#alert-box .content .show-icon span em {
+					position: absolute;
+					top: 50%;
+					left: 50%;
+					width: 36px;
+					height: 36px;
+					transform: translate(-50%, -50%);
+				}
+
+					#alert-box .content .show-icon span em::after {
+						content: attr(data-type);
+						position: absolute;
+						font-style: normal;
+						text-align: center;
+						top: 0;
+						left: 0;
+						width: 100%;
+						height: 100%;
+						color: #fff;
+						animation: showSmooth 1s ease-in-out;
+					}
+
+		#alert-box .content .alert-content {
+			width: 100%;
+			height: 50%;
+		}
+
+			#alert-box .content .alert-content .wrapper {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				flex-direction: column;
+				font-family: sans-serif;
+				text-align: center;
+				width: 100%;
+				height: 100%;
+			}
+
+			#alert-box .content .alert-content h4 {
+				display: block;
+				font-size: 20px;
+				font-weight: 600;
+				margin: 18px 0;
+				padding: 0 12px;
+			}
+
+			#alert-box .content .alert-content span {
+				display: block;
+				font-size: 14px;
+				font-weight: 400;
+				padding-top: 6px;
+				color: rgb(186, 186, 186);
+			}
+
+
+		#alert-box .content .button-group {
+			position: absolute;
+			width: 100%;
+			bottom: 5%;
+			text-align: center;
+		}
+
+			#alert-box .content .button-group button {
+				padding: 8px 16px;
+				width: 100px;
+				text-align: center;
+				border: none;
+				border-radius: 50px;
+				margin: 0 8px;
+				color: #fff;
+				transition: .25s;
+				cursor: pointer;
+			}
+
+			#alert-box .content .button-group .success {
+				background: var(--ab-success);
+			}
+
+				#alert-box .content .button-group .success:hover {
+					background: #239a62;
+				}
+
+			#alert-box .content .button-group .dialog {
+				background: var(--ab-dialog);
+			}
+
+				#alert-box .content .button-group .dialog:hover {
+					background: #583a6d;
+				}
+
+			#alert-box .content .button-group .warning {
+				background: var(--ab-warning);
+			}
+
+				#alert-box .content .button-group .warning:hover {
+					background: rgb(167, 65, 14)
+				}
+
+			#alert-box .content .button-group .danger {
+				background: var(--ab-danger);
+			}
+
+				#alert-box .content .button-group .danger:hover {
+					background: #ab251d;
+				}

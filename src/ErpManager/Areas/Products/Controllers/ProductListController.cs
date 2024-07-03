@@ -19,7 +19,7 @@ namespace ErpManager.ERP.Areas.Product.Controllers
 		}
 
 		[HttpGet]
-		[PermissionAttribute(Permission.CanReadListProduct)]
+		[Authorization(Permission.CanReadListProduct)]
 		[Route(Constants.MODULE_PRODUCT_PRODUCTLIST_PATH, Name = Constants.MODULE_PRODUCT_PRODUCTLIST_NAME)]
 		public IActionResult Index(int page = 1)
 		{
@@ -30,7 +30,7 @@ namespace ErpManager.ERP.Areas.Product.Controllers
 		}
 
 		[HttpPost]
-		[PermissionAttribute(Permission.CanReadListProduct)]
+		[Authorization(Permission.CanReadListProduct)]
 		[Route(Constants.MODULE_PRODUCT_PRODUCTLIST_PATH)]
 		public IActionResult Index(ProductListViewModel viewModel)
 		{

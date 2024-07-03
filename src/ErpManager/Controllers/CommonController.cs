@@ -18,7 +18,27 @@ namespace ErpManager.ERP.Controllers
 
 		[HttpGet]
 		[AllowAnonymous]
-		[Route("/common/get-provinces")]
+		[Route(Constants.ENDPOINT_COMMON_CHANGE_LANGUAGE_PATH)]
+		public IActionResult LanguageSwitcher(string culture, string returnUrl)
+		{
+			// Set cookie option
+			var cookieOption = new CookieOptions
+			{
+				Expires = DateTimeOffset.UtcNow.AddYears(1)
+			};
+
+			// Set cookie with chosen language
+			Response.Cookies.Append(
+				CookieRequestCultureProvider.DefaultCookieName,
+				CookieRequestCultureProvider.MakeCookieValue(new RequestCulture(culture)),
+				cookieOption);
+
+			return Redirect(returnUrl);
+		}
+
+		[HttpGet]
+		[AllowAnonymous]
+		[Route(Constants.ENDPOINT_COMMON_GET_PROVINCE_LIST)]
 		public IActionResult GetProvinces(string searchKey = "")
 		{
 			var provinces = AddressProvider.Instance.Provinces;
@@ -41,7 +61,7 @@ namespace ErpManager.ERP.Controllers
 
 		[HttpGet]
 		[AllowAnonymous]
-		[Route("/common/get-districts")]
+		[Route(Constants.ENDPOINT_COMMON_GET_DISTRICT_LIST)]
 		public IActionResult GetDistricts(string searchKey = "", string provinceId = "")
 		{
 			// Get list by province id
@@ -69,7 +89,7 @@ namespace ErpManager.ERP.Controllers
 
 		[HttpGet]
 		[AllowAnonymous]
-		[Route("/common/get-communes")]
+		[Route(Constants.ENDPOINT_COMMON_GET_COMMUNE_LIST)]
 		public IActionResult GetCommunes(string searchKey = "", string districtId = "")
 		{
 			// Get list by district id
@@ -95,23 +115,9 @@ namespace ErpManager.ERP.Controllers
 			return Json(modelList);
 		}
 
-		[HttpGet]
-		[AllowAnonymous]
-		[Route("/common/get-users")]
-		public IActionResult GetUsers(string searchKey = "")
-		{
-			var userSearch = new UserSearchDto
-			{
-				BranchId = this.OperatorBranchId,
-				Keywords = searchKey
-			};
-			var result = _serviceFacade.Users.Search(userSearch, pageIndex: 1, pageSize: 6).Items;
-			return Json(result);
-		}
-
 		[HttpPost]
-		[AllowAnonymous]
-		[Route("/common/upload-images")]
+		[Authorization(Permission.CanUploadImageProduct)]
+		[Route(Constants.ENDPOINT_COMMON_UPLOAD_IMAGES)]
 		public string UploadImages([FromForm] IFormFile[] files, string type, string uploadFileName = "", bool isClearTempImages = false)
 		{
 			var typeUpload = GetTypeUploadByString(type);
@@ -138,8 +144,8 @@ namespace ErpManager.ERP.Controllers
 		}
 
 		[HttpGet]
-		[AllowAnonymous]
-		[Route("/common/delete-image")]
+		[Authorization(Permission.CanDeleteImageProduct)]
+		[Route(Constants.ENDPOINT_COMMON_DELETE_IMAGE)]
 		public IActionResult DeleteImage(string filePath)
 		{
 			try
@@ -159,8 +165,8 @@ namespace ErpManager.ERP.Controllers
 		}
 
 		[HttpGet]
-		[AllowAnonymous]
-		[Route("/common/get-exist-and-delete-not-use-temp-images")]
+		[Authorization(Permission.CanReadDetailProduct)]
+		[Route(Constants.ENDPOINT_COMMON_GET_SRC_IMAGES)]
 		public IActionResult GetExistAndDeleteNotUseTemporaryImages(string type, string filePath = "")
 		{
 			var result = new List<string>();
@@ -188,8 +194,8 @@ namespace ErpManager.ERP.Controllers
 		}
 
 		[HttpPost]
-		[Permission(Permission.CanUploadImageProduct)]
-		[Route("/common/update-newest-image")]
+		[Authorization(Permission.CanUploadImageProduct)]
+		[Route(Constants.ENDPOINT_COMMON_UPDATE_NEWEST_IMAGES)]
 		public IActionResult UpdateNewestImage(string type, string primaryKey)
 		{
 			var typeUpload = GetTypeUploadByString(type);
@@ -204,6 +210,40 @@ namespace ErpManager.ERP.Controllers
 
 				default:
 					return Content(string.Empty);
+			}
+		}
+
+		[HttpGet]
+		[AllowAnonymous]
+		[Route(Constants.ENDPOINT_COMMON_GENERATE_QR_CODE)]
+		public IActionResult GenerateQRCode(string url)
+		{
+			if (string.IsNullOrEmpty(url)) return Content(string.Empty);
+			try
+			{
+				// Generate token by inserting new token
+				var token = _serviceFacade.Tokens.GenerateToken(
+					branchId: this.OperatorBranchId,
+					claims: new Dictionary<string, string>(),
+					type: TokenTypeEnum.ProductPreviewToken,
+					expirationDateCount: 7,
+					createdBy: this.OperatorId);
+				if (string.IsNullOrEmpty(token)) return NoContent();
+
+				// Create url
+				var uriBuilder = new UriBuilder(url);
+				var query = HttpUtility.ParseQueryString(uriBuilder.Query);
+				query["token"] = token;
+				uriBuilder.Query = query.ToString();
+				var urlResult = uriBuilder.ToString();
+
+				// Create QR code
+				var qrCode = QRCodeUtility.GetSrcImageQRCode(urlResult);
+				return Content(qrCode);
+			}
+			catch (Exception)
+			{
+				return Content(string.Empty);
 			}
 		}
 	}

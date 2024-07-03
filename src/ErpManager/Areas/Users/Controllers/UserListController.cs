@@ -18,7 +18,7 @@ namespace ErpManager.ERP.Areas.Users.Controllers
 		}
 
 		[HttpGet]
-		[PermissionAttribute(Permission.CanReadListUser)]
+		[Authorization(Permission.CanReadListUser)]
 		[Route(Constants.MODULE_USER_USERLIST_PATH, Name = Constants.MODULE_USER_USERLIST_NAME)]
 		public IActionResult Index(int page = 1)
 		{

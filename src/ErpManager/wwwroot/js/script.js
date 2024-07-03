@@ -526,7 +526,7 @@ const uploadImage = (element) => {
 		handleInitLoadImages() {
 			const initValues = this.valueControl?.value.split(',').filter(path => path != '') ?? [];
 			this.srcImages = this.isMultiple ? initValues : [...initValues[0]];
-			const url = '/common/get-exist-and-delete-not-use-temp-images';
+			const url = '/common/get-src-images';
 			const onSuccess = (response) => {
 				this.srcImages = response.split(',');
 				this.resetEvent();

@@ -76,6 +76,7 @@ const requestContentType = Object.freeze({
 });
 
 const createRequestOption = ({ data, type = requestType.json }) => {
+	debugger
 	const options = {
 		json: {
 			data: JSON.stringify(data),

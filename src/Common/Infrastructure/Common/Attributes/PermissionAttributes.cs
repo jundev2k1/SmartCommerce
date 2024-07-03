@@ -3,11 +3,11 @@
 namespace ErpManager.Infrastructure.Common.Attributes
 {
 	[AttributeUsage(AttributeTargets.Method, AllowMultiple = false, Inherited = true)]
-	public sealed class PermissionAttribute : Attribute
+	public sealed class AuthorizationAttribute : Attribute
 	{
 		public Permission[] Permissions { get; }
 
-		public PermissionAttribute(params Permission[] permissions)
+		public AuthorizationAttribute(params Permission[] permissions)
 		{
 			Permissions = permissions;
 		}

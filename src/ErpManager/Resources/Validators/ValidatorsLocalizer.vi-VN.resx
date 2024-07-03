@@ -123,6 +123,9 @@
   <data name="ErrorMsg_CannotNegative" xml:space="preserve">
     <value>Giá trị này phải là số dương</value>
   </data>
+  <data name="ErrorMsg_EmailInvalid" xml:space="preserve">
+    <value>Email không đúng định dạng</value>
+  </data>
   <data name="ErrorMsg_ExistSpecialCharacter" xml:space="preserve">
     <value>Không chấp nhận ký tự đặc biệt</value>
   </data>
@@ -155,6 +158,9 @@
   </data>
   <data name="ErrorMsg_ProductNotExist" xml:space="preserve">
     <value>ID sản phẩm [{Value}] không tồn tại. Hãy nhập đúng ID và cách nhau bằng dấu ","</value>
+  </data>
+  <data name="ErrorMsg_TelNotCorrect" xml:space="preserve">
+    <value>Số điện thoại không đúng định dạng</value>
   </data>
   <data name="ErrorMsg_UserNotExist" xml:space="preserve">
     <value>Người dùng này không tồn tại</value>

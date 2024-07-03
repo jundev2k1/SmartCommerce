@@ -22,7 +22,7 @@ namespace ErpManager.Controllers
 		/// <summary>
 		/// Dashboard page
 		/// </summary>
-		[PermissionAttribute(Permission.CanAccessDashBoard)]
+		[Authorization(Permission.CanAccessDashBoard)]
 		[Route("/")]
 		[Route(Constants.MODULE_HOME_DASHBOARD_PATH, Name = Constants.MODULE_HOME_DASHBOARD_NAME)]
 		public IActionResult Index()
@@ -42,26 +42,6 @@ namespace ErpManager.Controllers
 
 			_sessionManager.Remove(Constants.SESSION_KEY_LOGIN_MESSAGE);
 			ViewBag.LoginMessage = message;
-		}
-
-		[HttpGet]
-		[AllowAnonymous]
-		[Route(Constants.MODULE_COMMON_CHANGE_LANGUAGE_PATH, Name = Constants.MODULE_COMMON_CHANGE_LANGUAGE_NAME)]
-		public IActionResult LanguageSwitcher(string culture, string returnUrl)
-		{
-			// Set cookie option
-			var cookieOption = new CookieOptions
-			{
-				Expires = DateTimeOffset.UtcNow.AddYears(1)
-			};
-
-			// Set cookie with chosen language
-			Response.Cookies.Append(
-				CookieRequestCultureProvider.DefaultCookieName,
-				CookieRequestCultureProvider.MakeCookieValue(new RequestCulture(culture)),
-				cookieOption);
-
-			return Redirect(returnUrl);
 		}
 	}
 }

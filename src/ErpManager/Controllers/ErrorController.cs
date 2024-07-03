@@ -20,6 +20,7 @@ namespace ErpManager.ERP.Controllers
 		}
 
 		[HttpGet]
+		[AllowAnonymous]
 		[Route(Constants.MODULE_ERROR_ERROR_PATH, Name = Constants.MODULE_ERROR_ERROR_NAME)]
 		[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
 		public IActionResult Index()

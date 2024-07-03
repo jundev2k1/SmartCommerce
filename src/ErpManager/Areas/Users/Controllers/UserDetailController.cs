@@ -19,9 +19,9 @@ namespace ErpManager.ERP.Areas.Users.Controllers
 		}
 
 		[HttpGet]
-		[PermissionAttribute(Permission.CanReadListUser)]
-		[Route($"{Constants.MODULE_USER_USERDETAIL_PATH}/{{id}}", Name = Constants.MODULE_USER_USERDETAIL_NAME)]
-		public IActionResult Index()
+		[Authorization(Permission.CanReadListUser)]
+		[Route(Constants.MODULE_USER_USERDETAIL_PATH, Name = Constants.MODULE_USER_USERDETAIL_NAME)]
+		public IActionResult Index(string userId)
 		{
 			return View();
 		}

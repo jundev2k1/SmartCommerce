@@ -25,8 +25,8 @@ namespace ErpManager.Persistence.Seeders
 
 		private static List<MailTemplate> SeedList = new List<MailTemplate>()
 		{
-            // ERP Mail to operator
-            new MailTemplate()
+			// ERP Mail to operator
+			new MailTemplate()
 			{
 				BranchId = Constants.CONFIG_MASTER_BRANCH_ID,
 				MailId = Constants.FLG_MAIL_ID_CONTACT_ADMIN,
@@ -40,8 +40,8 @@ namespace ErpManager.Persistence.Seeders
 				DateCreated = DateTime.Now,
 				DateChanged = DateTime.Now
 			},
-            // ERP Mail to report
-            new MailTemplate()
+			// ERP Mail to report
+			new MailTemplate()
 			{
 				BranchId = Constants.CONFIG_MASTER_BRANCH_ID,
 				MailId = Constants.FLG_MAIL_ID_REPORT_MAIL,

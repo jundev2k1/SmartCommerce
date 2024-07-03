@@ -24,7 +24,7 @@ namespace ErpManager.ERP.Areas.Product.Controllers
 		}
 
 		[HttpGet]
-		[PermissionAttribute(Permission.CanCreateProduct)]
+		[Authorization(Permission.CanCreateProduct)]
 		[Route(Constants.MODULE_PRODUCT_PRODUCTREGISTER_PATH, Name = Constants.MODULE_PRODUCT_PRODUCTREGISTER_NAME)]
 		public IActionResult Index(string id = "")
 		{
@@ -40,7 +40,7 @@ namespace ErpManager.ERP.Areas.Product.Controllers
 		}
 
 		[HttpPost]
-		[PermissionAttribute(Permission.CanCreateProduct)]
+		[Authorization(Permission.CanCreateProduct)]
 		[Route(Constants.MODULE_PRODUCT_PRODUCTREGISTER_PATH, Name = Constants.MODULE_PRODUCT_PRODUCTREGISTER_NAME)]
 		public IActionResult Index(ProductModel formInput)
 		{

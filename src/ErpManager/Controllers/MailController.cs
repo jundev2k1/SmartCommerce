@@ -20,7 +20,8 @@ namespace ErpManager.ERP.Controllers
 		}
 
 		[HttpPost]
-		[Route("/mail/send-mail-to-operator")]
+		[AllowAnonymous]
+		[Route(Constants.ENDPOINT_COMMON_MAIL_SENDMAIL_CONTACT_OPERATOR)]
 		public IActionResult SendMailToOperator([FromBody] FormContactRequestViewModel mailInfo)
 		{
 			var mailId = mailInfo.Type switch

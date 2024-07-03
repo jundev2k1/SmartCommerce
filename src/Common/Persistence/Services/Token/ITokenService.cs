@@ -22,6 +22,22 @@ namespace ErpManager.Persistence.Services
 		bool IsValid(string branchId, TokenTypeEnum type, string tokenId);
 
 		/// <summary>
+		/// Generate token
+		/// </summary>
+		/// <param name="branchId">Branch id</param>
+		/// <param name="claims">Claims</param>
+		/// <param name="type">Type</param>
+		/// <param name="expirationDateCount">Expiration date count</param>
+		/// <param name="createdBy">Created by</param>
+		/// <returns>Token id</returns>
+		string GenerateToken(
+			string branchId,
+			Dictionary<string, string> claims,
+			TokenTypeEnum type,
+			int expirationDateCount = 1,
+			string createdBy = "");
+
+		/// <summary>
 		/// Insert
 		/// </summary>
 		/// <param name="model">Token model</param>

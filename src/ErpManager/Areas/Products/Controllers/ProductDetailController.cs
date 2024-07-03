@@ -18,7 +18,7 @@ namespace ErpManager.ERP.Areas.Product.Controllers
 		}
 
 		[HttpGet]
-		[PermissionAttribute(Permission.CanReadDetailProduct)]
+		[Authorization(Permission.CanReadDetailProduct)]
 		[Route(Constants.MODULE_PRODUCT_PRODUCTDETAIL_PATH, Name = Constants.MODULE_PRODUCT_PRODUCTDETAIL_NAME)]
 		public IActionResult Index([FromRoute] string id)
 		{
@@ -29,7 +29,7 @@ namespace ErpManager.ERP.Areas.Product.Controllers
 		}
 
 		[HttpPost]
-		[PermissionAttribute(Permission.CanReadDetailProduct)]
+		[Authorization(Permission.CanReadDetailProduct)]
 		[Route(Constants.MODULE_PRODUCT_PRODUCTDETAIL_PATH, Name = Constants.MODULE_PRODUCT_PRODUCTDETAIL_NAME)]
 		public IActionResult Index(ProductModel model)
 		{

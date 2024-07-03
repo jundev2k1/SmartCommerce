@@ -85,7 +85,9 @@ namespace ErpManager.ERP.Controllers
 		protected void ResetOperatorSession()
 		{
 			this.IsLogin = _sessionManager.IsLogin;
-			this.OperatorBranchId = _sessionManager.OperatorBranchId;
+			this.OperatorBranchId = !string.IsNullOrEmpty(_sessionManager.OperatorBranchId)
+				? _sessionManager.OperatorBranchId
+				: Constants.CONFIG_MASTER_BRANCH_ID;
 			this.OperatorId = _sessionManager.OperatorId;
 			this.OperatorName = _sessionManager.OperatorName;
 			this.OperatorPermission = _sessionManager.OperatorPermission
@@ -132,7 +134,7 @@ namespace ErpManager.ERP.Controllers
 				.SelectMany(type => type
 					.GetMethods(BindingFlags.Instance | BindingFlags.Public)
 					.Where(childType =>
-						(childType.GetCustomAttribute<PermissionAttribute>() != null))
+						(childType.GetCustomAttribute<AuthorizationAttribute>() != null))
 					.Select(childType => childType
 						.GetCustomAttributes<RouteAttribute>()
 						.FirstOrDefault(route => route.Name != null)))
@@ -197,7 +199,7 @@ namespace ErpManager.ERP.Controllers
 		/// <summary>Is login</summary>
 		protected bool IsLogin { get; private set; }
 		/// <summary>Operator branch id</summary>
-		protected string OperatorBranchId { get; private set; } = string.Empty;
+		protected string OperatorBranchId { get; private set; } = Constants.CONFIG_MASTER_BRANCH_ID;
 		/// <summary>Operator id</summary>
 		protected string OperatorId { get; private set; } = string.Empty;
 		/// <summary>Operator name</summary>

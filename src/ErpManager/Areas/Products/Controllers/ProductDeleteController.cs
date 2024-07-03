@@ -21,7 +21,7 @@ namespace ErpManager.ERP.Areas.Product.Controllers
 		}
 
 		[HttpGet]
-		[PermissionAttribute(Permission.CanDeleteProduct)]
+		[Authorization(Permission.CanDeleteProduct)]
 		[Route(Constants.MODULE_PRODUCT_PRODUCTDELETE_PATH, Name = Constants.MODULE_PRODUCT_PRODUCTDELETE_NAME)]
 		public IActionResult Index(string id)
 		{

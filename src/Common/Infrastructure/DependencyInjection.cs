@@ -42,7 +42,6 @@ namespace ErpManager.Infrastructure
 			app.UseMiddleware<ExceptionHandlingMiddleware>();
 			app.UseMiddleware<RateLimitingMiddleware>();
 			app.UseMiddleware<CompressionMiddleware>();
-			app.UseMiddleware<SessionCheckMiddleware>();
 			app.UseMiddleware<ResetConstantHandlerMiddleware>();
 			return app;
 		}

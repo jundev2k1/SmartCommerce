@@ -17,6 +17,7 @@ namespace ErpManager.ERP.Controllers
 		}
 
 		[HttpGet]
+		[AllowAnonymous]
 		[Route(Constants.MODULE_AUTH_SIGNIN_PATH, Name = Constants.MODULE_AUTH_SIGNIN_NAME)]
 		public IActionResult Index()
 		{
@@ -26,6 +27,7 @@ namespace ErpManager.ERP.Controllers
 		}
 
 		[HttpPost]
+		[AllowAnonymous]
 		[Route(Constants.MODULE_AUTH_SIGNIN_PATH, Name = Constants.MODULE_AUTH_SIGNIN_NAME)]
 		public IActionResult Index(LoginViewModel login)
 		{
@@ -256,6 +258,7 @@ namespace ErpManager.ERP.Controllers
 		/// </summary>
 		/// <returns>Redirect to login page</returns>
 		[HttpGet]
+		[AllowAnonymous]
 		[Route(Constants.MODULE_AUTH_SIGNOUT_PATH, Name = Constants.MODULE_AUTH_SIGNOUT_NAME)]
 		public IActionResult LogOut()
 		{

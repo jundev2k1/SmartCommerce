@@ -20,19 +20,23 @@ namespace ErpManager.ERP.Common.Filters
 			var endpoint = context.HttpContext.GetEndpoint();
 			if (endpoint == null) return;
 
-			var routeInfo = endpoint.Metadata.GetMetadata<RouteAttribute>();
-			var isPublicRoute = (routeInfo != null) && this.PublicRoute.Contains(routeInfo.Template);
-			if (isPublicRoute) return;
-
 			var allowAnonymous = endpoint.Metadata.GetMetadata<AllowAnonymousAttribute>();
 			if (allowAnonymous != null) return;
 
-			var permission = endpoint.Metadata.GetMetadata<PermissionAttribute>();
+			var permission = endpoint.Metadata.GetMetadata<AuthorizationAttribute>();
 			if (permission != null)
 			{
 				this.OperatorPermission = _sessionManager.OperatorPermissionList;
 				this.RoutePermissions = permission.Permissions;
 				if (HasPermission()) return;
+			}
+
+			// In case of not logged in, redirect to authentication page
+			var isLogin = _sessionManager.IsLogin;
+			if (!isLogin)
+			{
+				context.Result = new RedirectResult(Constants.MODULE_AUTH_SIGNIN_PATH);
+				return;
 			}
 
 			// Get message
@@ -75,11 +79,5 @@ namespace ErpManager.ERP.Common.Filters
 		private string[] OperatorPermission { get; set; } = Array.Empty<string>();
 		/// <summary>Current route permission</summary>
 		private Permission[] RoutePermissions { get; set; } = Array.Empty<Permission>();
-		/// <summary>Public route</summary>
-		private string[] PublicRoute => new string[]
-		{
-			Constants.MODULE_AUTH_SIGNIN_PATH,
-			Constants.MODULE_ERROR_ERROR_PATH,
-		};
 	}
 }
