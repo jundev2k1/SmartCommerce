@@ -1,10 +1,10 @@
 ﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
 
 /**
- * Page base
+ * Application base
  * @class
  */
-class PageBase {
+class AppBase {
 	constructor() {
 	}
 }

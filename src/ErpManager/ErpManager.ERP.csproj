@@ -8,21 +8,26 @@
 
   <ItemGroup>
     <Compile Remove="%2a%2a\**" />
+    <Compile Remove="Scripts\NewFolder\**" />
     <Compile Remove="wwwroot\content\product-images\**" />
     <Compile Remove="wwwroot\content\user-images\**" />
     <Content Remove="%2a%2a\**" />
+    <Content Remove="Scripts\NewFolder\**" />
     <Content Remove="wwwroot\content\product-images\**" />
     <Content Remove="wwwroot\content\user-images\**" />
     <EmbeddedResource Remove="%2a%2a\**" />
+    <EmbeddedResource Remove="Scripts\NewFolder\**" />
     <EmbeddedResource Remove="wwwroot\content\product-images\**" />
     <EmbeddedResource Remove="wwwroot\content\user-images\**" />
     <EntityDeploy Remove="%2a%2a\**" />
     <EntityDeploy Remove="wwwroot\content\product-images\**" />
     <EntityDeploy Remove="wwwroot\content\user-images\**" />
     <None Remove="%2a%2a\**" />
+    <None Remove="Scripts\NewFolder\**" />
     <None Remove="wwwroot\content\product-images\**" />
     <None Remove="wwwroot\content\user-images\**" />
     <TypeScriptCompile Remove="%2a%2a\**" />
+    <TypeScriptCompile Remove="Scripts\NewFolder\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -103,6 +108,16 @@
 
   <ItemGroup>
     <None Include="wwwroot\lib\alert-box\alert-box.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Scripts\components\" />
+    <Folder Include="Scripts\https\response\" />
+    <Folder Include="Scripts\https\request\" />
+    <Folder Include="Scripts\https\services\product\" />
+    <Folder Include="Scripts\models\" />
+    <Folder Include="Scripts\pages\auth\otp-auth\" />
+    <Folder Include="Scripts\pages\auth\sign-in\" />
   </ItemGroup>
 
 </Project>

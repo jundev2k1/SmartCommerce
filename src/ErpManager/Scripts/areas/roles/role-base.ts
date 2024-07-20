@@ -4,7 +4,7 @@
  * Role feature page base
  * @class
  */
-class RoleBase extends PageBase {
+class RoleBase extends AppBase {
 	constructor() {
 		// Initialize page base
 		super();

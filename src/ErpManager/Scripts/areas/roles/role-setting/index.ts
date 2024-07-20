@@ -1,8 +1,5 @@
 ﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
 
-// Declare global variable
-declare const StoreWindowLoadCallback: any[];
-
 /**
  * Role setting page handler
  * @class

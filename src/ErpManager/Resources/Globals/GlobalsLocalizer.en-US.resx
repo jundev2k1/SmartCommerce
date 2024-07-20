@@ -418,4 +418,10 @@
   <data name="RoleList_Title_Status" xml:space="preserve">
     <value>Status</value>
   </data>
+  <data name="Btn_CopyQR" xml:space="preserve">
+    <value>Copy QR Code</value>
+  </data>
+  <data name="Btn_RefreshQR" xml:space="preserve">
+    <value>Refresh QR Code</value>
+  </data>
 </root>

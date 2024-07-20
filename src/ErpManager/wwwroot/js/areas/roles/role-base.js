@@ -26,5 +26,5 @@ var RoleBase = /** @class */ (function (_super) {
         return _super.call(this) || this;
     }
     return RoleBase;
-}(PageBase));
+}(AppBase));
 //# sourceMappingURL=role-base.js.map

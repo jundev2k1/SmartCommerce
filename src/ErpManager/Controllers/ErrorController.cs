@@ -41,6 +41,7 @@ namespace ErpManager.ERP.Controllers
 		{
 			// Get error message key
 			var errorMessageKey = _sessionManager.SystemPageErrorMessage;
+			var errorMessage = _localizer.Messages[errorMessageKey].Value;
 
 			// Get error code
 			var errorCodeString = _sessionManager.SystemPageErrorCode;
@@ -48,7 +49,7 @@ namespace ErpManager.ERP.Controllers
 				? EnumUtility.GetEnumValue<ErrorCodeEnum>(errorCodeString)
 				: ErrorCodeEnum.SystemError;
 
-			return Tuple.Create(errorCode, errorMessageKey);
+			return Tuple.Create(errorCode, errorMessage);
 		}
 
 		/// <summary>
@@ -59,15 +60,16 @@ namespace ErpManager.ERP.Controllers
 		/// <returns>Page content</returns>
 		private ErrorPageViewModel GetPageContent(ErrorCodeEnum code, string message)
 		{
-			var title = code switch
+			var keyCode = code switch
 			{
-				ErrorCodeEnum.SystemError => _localizer.Messages.GetString(Constants.ERRORMSG_KEY_SYSTEM_ERROR_CODE),
-				ErrorCodeEnum.NotPermission => _localizer.Messages.GetString(Constants.ERRORMSG_KEY_NO_HAS_PERMISSION_CODE),
-				ErrorCodeEnum.DataNotFound => _localizer.Messages.GetString(Constants.ERRORMSG_KEY_DATA_NOT_FOUND_CODE),
-				ErrorCodeEnum.TokenInvalid => _localizer.Messages.GetString(Constants.ERRORMSG_KEY_TOKEN_INVALID_CODE),
-				ErrorCodeEnum.AnonymousAccess => _localizer.Messages.GetString(Constants.ERRORMSG_KEY_ANONYMOUS_ACCESS_CODE),
-				_ => _localizer.Messages.GetString(Constants.ERRORMSG_KEY_SYSTEM_ERROR_CODE)
+				ErrorCodeEnum.SystemError => Constants.ERRORMSG_KEY_SYSTEM_ERROR_CODE,
+				ErrorCodeEnum.NotPermission => Constants.ERRORMSG_KEY_NO_HAS_PERMISSION_CODE,
+				ErrorCodeEnum.DataNotFound => Constants.ERRORMSG_KEY_DATA_NOT_FOUND_CODE,
+				ErrorCodeEnum.TokenInvalid => Constants.ERRORMSG_KEY_TOKEN_INVALID_CODE,
+				ErrorCodeEnum.AnonymousAccess => Constants.ERRORMSG_KEY_ANONYMOUS_ACCESS_CODE,
+				_ => Constants.ERRORMSG_KEY_SYSTEM_ERROR_CODE
 			};
+			var title = _localizer.Messages[keyCode].Value;
 
 			if (string.IsNullOrEmpty(message))
 			{

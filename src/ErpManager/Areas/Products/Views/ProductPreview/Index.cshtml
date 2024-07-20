@@ -102,13 +102,12 @@
 						<img class="img-fluid" src="@Model.QRCode" />
 						<button id="btnRefreshQRCode" class="d-block w-100 btn site-btn-primary mt-1">
 							<i class="fa-light fa-rotate-right"></i>
-							Làm mới QR code
+							@_localizer.Globals["Btn_RefreshQR"]
 						</button>
 						<button id="btnShareQRCode" class="d-block w-100 btn site-btn-secondary mt-1" data-bs-toggle="tooltip" title="@_localizer.Messages["Message_ClickCopy"]">
 							<i class="fa-light fa-copy"></i>
-							Copy QR code
+							@_localizer.Globals["Btn_CopyQR"]
 						</button>
-						<p class="text-center">@_localizer.Messages["Message_ClickCopy"]</p>
 					</div>
 				</div>
 			}

@@ -76,7 +76,6 @@ const requestContentType = Object.freeze({
 });
 
 const createRequestOption = ({ data, type = requestType.json }) => {
-	debugger
 	const options = {
 		json: {
 			data: JSON.stringify(data),
@@ -175,8 +174,7 @@ const callAjax = ({ url, data, type = requestType.json, method = 'POST', onSucce
 	success: (result) => {
 		onSuccess?.(result);
 	},
-	error: function (jqXHR, textStatus, errorThrown) {
-		debugger
+	error?: function (jqXHR, textStatus, errorThrown) {
 		console.error('AJAX request failed:', textStatus, errorThrown);
 	},
 });
