@@ -301,7 +301,7 @@ const handleLoadEditor = () => {
 
 		window.editor = {};
 		ClassicEditor
-			.create(element, { language: languageCode })
+			.create(element, { language: languageCode, mediaEmbed: { previewsInData: true } })
 			.then(editor => {
 				const targetInput = $(targetInputSelector);
 				if (targetInput) {

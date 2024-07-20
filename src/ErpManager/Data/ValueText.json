@@ -49,12 +49,55 @@
     "del_flg": [
       {
         "text": "-",
-        "localizer": "ValTxt_DelFlg_Deleted",
+        "localizer": "ValTxt_DelFlg_Normal",
         "value": "0"
       },
       {
         "text": "O",
+        "localizer": "ValTxt_DelFlg_Deleted",
+        "value": "1"
+      }
+    ]
+  },
+  "user": {
+    "status": [
+      {
+        "text": "Inactive",
+        "localizer": "ValTxt_User_Status_Inactive",
+        "value": "0"
+      },
+      {
+        "text": "Active",
+        "localizer": "ValTxt_User_Status_Active",
+        "value": "1"
+      }
+    ],
+    "sex": [
+      {
+        "text": "Male",
+        "localizer": "ValTxt_Sex_Male",
+        "value": "0"
+      },
+      {
+        "text": "Female",
+        "localizer": "ValTxt_Sex_Female",
+        "value": "1"
+      },
+      {
+        "text": "Other",
+        "localizer": "ValTxt_Sex_Other",
+        "value": "2"
+      }
+    ],
+    "del_flg": [
+      {
+        "text": "-",
         "localizer": "ValTxt_DelFlg_Normal",
+        "value": "0"
+      },
+      {
+        "text": "O",
+        "localizer": "ValTxt_DelFlg_Deleted",
         "value": "1"
       }
     ]

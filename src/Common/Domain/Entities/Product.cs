@@ -53,7 +53,7 @@ public partial class Product
 	[StringLength(30)]
 	public string TakeOverId { get; set; } = string.Empty;
 
-	[StringLength(4000)]
+	[Column(TypeName = "nvarchar(max)")]
 	public string Description { get; set; } = string.Empty;
 
 	[StringLength(4000)]

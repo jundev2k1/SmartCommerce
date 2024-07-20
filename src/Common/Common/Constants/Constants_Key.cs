@@ -39,8 +39,6 @@ namespace ErpManager.Common
 
 		/// <summary>View data key: Auth error message</summary>
 		public const string VIEWDATA_KEY_AUTH_ERROR_MESSAGE = "Auth_Error_Message";
-		/// <summary>View data key: Page index</summary>
-		public const string VIEWDATA_KEY_PAGE_INDEX = "pageIndex";
 
 		/// <summary>Param key: For page index</summary>
 		public const string PARAM_KEY_PAGE_INDEX = "page";

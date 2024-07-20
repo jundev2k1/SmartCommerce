@@ -9,15 +9,15 @@ namespace ErpManager.Infrastructure.Middleware
 		private readonly int _limitInSeconds = 1;
 		private readonly int _maxRequests = 24;
 
-		public RateLimitingMiddleware(RequestDelegate next)
+		public RateLimitingMiddleware(RequestDelegate next, IFileLogger logger, IHostingEnvironment environment)
+			: base(next, logger, environment)
 		{
 			_next = next;
 		}
 
-		public async Task InvokeAsync(HttpContext context)
+		protected override async Task Invoke(HttpContext context)
 		{
 			var userIP = context.Connection.RemoteIpAddress.ToString();
-
 			if (UserAccess.ContainsKey(userIP))
 			{
 				var rateLimitInfo = UserAccess[userIP];
@@ -47,7 +47,7 @@ namespace ErpManager.Infrastructure.Middleware
 				};
 			}
 
-			await _next(context);
+			await Task.CompletedTask;
 		}
 	}
 }

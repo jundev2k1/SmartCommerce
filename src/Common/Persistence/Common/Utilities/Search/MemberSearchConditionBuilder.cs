@@ -20,7 +20,7 @@ namespace ErpManager.Persistence.Common.Utilities.Search
 
 			if (string.IsNullOrEmpty(searchDto.BranchId) == false)
 			{
-				predicate.And(u => u.BranchId.Contains(searchDto.BranchId));
+				predicate.And(u => u.BranchId.Equals(searchDto.BranchId));
 			}
 
 			if (string.IsNullOrEmpty(searchDto.MemberId) == false)

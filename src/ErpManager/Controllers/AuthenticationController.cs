@@ -167,7 +167,15 @@ namespace ErpManager.ERP.Controllers
 				return;
 			}
 
+			// Create login information cookie with remember me status
 			CreateCookies(@operator);
+
+			// Refresh last login date
+			var updateAction = (Domain.Entities.User userEntity) =>
+			{
+				userEntity.LastLogin = DateTime.Now;
+			};
+			_serviceFacade.Users.Update(@operator.BranchId, @operator.Profile.UserId, updateAction);
 		}
 
 		/// <summary>
@@ -253,10 +261,6 @@ namespace ErpManager.ERP.Controllers
 			ViewData[Constants.VIEWDATA_KEY_AUTH_ERROR_MESSAGE] = errorMessage;
 		}
 
-		/// <summary>
-		/// Sign out
-		/// </summary>
-		/// <returns>Redirect to login page</returns>
 		[HttpGet]
 		[AllowAnonymous]
 		[Route(Constants.MODULE_AUTH_SIGNOUT_PATH, Name = Constants.MODULE_AUTH_SIGNOUT_NAME)]
@@ -282,6 +286,22 @@ namespace ErpManager.ERP.Controllers
 					RememberMe = (string.IsNullOrEmpty(rememberMeCookie) == false),
 				};
 			}
+		}
+
+		[HttpGet]
+		[AllowAnonymous]
+		[Route(Constants.MODULE_AUTH_OTP_PATH, Name = Constants.MODULE_AUTH_OTP_NAME)]
+		public IActionResult OtpAuth()
+		{
+			var view = new LoginViewModel();
+			return View(view);
+		}
+		[HttpPost]
+		[AllowAnonymous]
+		[Route(Constants.MODULE_AUTH_OTP_PATH, Name = Constants.MODULE_AUTH_OTP_NAME)]
+		public IActionResult OtpAuth(LoginViewModel model)
+		{
+			return View(model);
 		}
 	}
 }

@@ -20,9 +20,11 @@ namespace ErpManager.ERP.ViewComponents
 				ProductStatusEnum.GoodPrice => "text-bg-warning",
 				_ => throw new ArgumentNullException(),
 			};
-			className += isPill ? " rounded-pill" : "";
+			var @class = isPill
+				? $"{className} rounded-pill"
+				: className;
 
-			ViewBag.ClassName = className.Trim();
+			ViewBag.ClassName = @class;
 			ViewBag.Content = ProductUtilities.GetStatus(_localizer.Dictionary, status);
 			return View();
 		}

@@ -25,8 +25,8 @@ namespace ErpManager.ERP.Controllers
 		[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
 		public IActionResult Index()
 		{
-			var (errorCode, errorMessageKey) = GetErrorSession();
-			var content = GetPageContent(errorCode, errorMessageKey);
+			var (errorCode, errorMessage) = GetErrorSession();
+			var content = GetPageContent(errorCode, errorMessage);
 
 			_logger.LogError(content.Message);
 			ClearErrorInfoSession();
@@ -55,9 +55,9 @@ namespace ErpManager.ERP.Controllers
 		/// Get page content
 		/// </summary>
 		/// <param name="code">Error code</param>
-		/// <param name="messageKey">Error message key</param>
+		/// <param name="message">Error message</param>
 		/// <returns>Page content</returns>
-		private ErrorPageViewModel GetPageContent(ErrorCodeEnum code, string messageKey)
+		private ErrorPageViewModel GetPageContent(ErrorCodeEnum code, string message)
 		{
 			var title = code switch
 			{
@@ -65,15 +65,17 @@ namespace ErpManager.ERP.Controllers
 				ErrorCodeEnum.NotPermission => _localizer.Messages.GetString(Constants.ERRORMSG_KEY_NO_HAS_PERMISSION_CODE),
 				ErrorCodeEnum.DataNotFound => _localizer.Messages.GetString(Constants.ERRORMSG_KEY_DATA_NOT_FOUND_CODE),
 				ErrorCodeEnum.TokenInvalid => _localizer.Messages.GetString(Constants.ERRORMSG_KEY_TOKEN_INVALID_CODE),
+				ErrorCodeEnum.AnonymousAccess => _localizer.Messages.GetString(Constants.ERRORMSG_KEY_ANONYMOUS_ACCESS_CODE),
 				_ => _localizer.Messages.GetString(Constants.ERRORMSG_KEY_SYSTEM_ERROR_CODE)
 			};
 
-			var message = _localizer.Messages.GetString(messageKey).ToStringOrEmpty();
 			if (string.IsNullOrEmpty(message))
 			{
 				var feature = HttpContext.Features.Get<Microsoft.AspNetCore.Diagnostics.IExceptionHandlerPathFeature>();
 				var exception = feature?.Error;
-				message = (exception?.Message).ToStringOrEmpty();
+				message = string.IsNullOrEmpty(exception?.Message)
+					? _localizer.Messages.GetString(Constants.ERRORMSG_KEY_SYSTEM_ERROR)
+					: exception.Message;
 			}
 
 			return new ErrorPageViewModel

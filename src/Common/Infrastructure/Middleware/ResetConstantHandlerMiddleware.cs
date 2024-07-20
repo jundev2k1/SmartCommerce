@@ -10,7 +10,10 @@ namespace ErpManager.Infrastructure.Middleware
 		/// <summary>
 		/// Constructor
 		/// </summary>
-		public ResetConstantHandlerMiddleware(RequestDelegate next)
+		public ResetConstantHandlerMiddleware(
+			RequestDelegate next,
+			IFileLogger logger,
+			IHostingEnvironment environment) : base(next, logger, environment)
 		{
 			_next = next;
 		}
@@ -19,10 +22,10 @@ namespace ErpManager.Infrastructure.Middleware
 		/// Invoke
 		/// </summary>
 		/// <param name="context">Context</param>
-		public async Task Invoke(HttpContext context)
+		protected override async Task Invoke(HttpContext context)
 		{
 			ResetConstants(context);
-			await _next(context);
+			await Task.CompletedTask;
 		}
 
 		private void ResetConstants(HttpContext context)

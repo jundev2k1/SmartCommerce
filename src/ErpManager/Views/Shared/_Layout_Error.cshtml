@@ -9,6 +9,8 @@
 	@await Component.InvokeAsync(Constants.ERP_COMPONENT_NAME_SITE_META)
 	@* Css import render *@
 	@await Component.InvokeAsync(Constants.ERP_COMPONENT_NAME_STYLE_SHEET)
+	@* Render view section: css *@
+	@RenderSection(Constants.ERP_SECTION_NAME_VIEW_CSS, required: false)
 	@* Add common js *@
 	<script src="~/js/store.js" asp-append-version="true"></script>
 	<script src="~/js/common.js" asp-append-version="true"></script>

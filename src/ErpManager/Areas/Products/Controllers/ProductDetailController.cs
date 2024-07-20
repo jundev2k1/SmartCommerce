@@ -35,11 +35,5 @@ namespace ErpManager.ERP.Areas.Product.Controllers
 		{
 			return View();
 		}
-
-		private int GetPageIndex()
-		{
-			var isSuccess = int.TryParse(Request.Query[Constants.PARAM_KEY_PAGE_INDEX].ToStringOrEmpty(), out var page);
-			return isSuccess ? page : 1;
-		}
 	}
 }

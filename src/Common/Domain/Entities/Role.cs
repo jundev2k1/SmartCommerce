@@ -18,6 +18,9 @@ public partial class Role
 	[StringLength(60)]
 	public string Name { get; set; }
 
+	[StringLength(256)]
+	public string Description { get; set; }
+
 	[StringLength(4000)]
 	public string Permission { get; set; }
 

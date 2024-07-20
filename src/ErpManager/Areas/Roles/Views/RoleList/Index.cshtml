@@ -1,0 +1,131 @@
+﻿@* // Copyright (c) 2024 - Jun Dev. All rights reserved *@
+
+@{
+	ViewData[Constants.GLOBAL_KEY_TITLE] = _localizer.Globals["Nav_User_Role"];
+	ViewData[Constants.GLOBAL_KEY_CURRENT_PAGE] = "UserRole_Page";
+
+	// Page Breadcrumb
+	var breadcrumbs = new Breadcrumb[]
+	{
+		new Breadcrumb { Title = _localizer.Globals["Nav_Home"].Value, Href = Constants.MODULE_HOME_HOME_PATH },
+		new Breadcrumb { Title = _localizer.Globals["Nav_User_Role"].Value, IsDisabled = true }
+	};
+
+	var hasResult = Model.PageData.Items.Any();
+	var hasData = Model.PageData.TotalPage > 0;
+}
+
+@model RoleListViewModel
+
+@await Component.InvokeAsync(Constants.ERP_COMPONENT_NAME_BREADCRUMB, breadcrumbs)
+
+<section id="searchBar" class="site-card">
+	<form id="advanceSearchForm" name="searchForm" asp-route="@Constants.MODULE_ROLE_ROLELIST_NAME" method="post">
+		<div class="row g-md-2 gx-1 gy-2">
+			<div class="col-md-8 col-12">
+				<div class="d-flex gap-1 search-bar-group">
+					<div class="flex-grow-1">
+						@await Component.InvokeAsync(Constants.ERP_COMPONENT_NAME_SEARCH_INPUT, new SearchInputViewModel { Name = "SearchFields.Keywords", Value = Model.SearchFields.Keywords, ClassName = "search-bar-input" })
+					</div>
+				</div>
+				<div class="hidden-field-area d-none">
+					<input id="totalPage" type="hidden" asp-for="PageData.TotalPage" />
+					<input id="pageIndex" type="hidden" asp-for="PageIndex" />
+				</div>
+			</div>
+			<div class="col-md-4 col-12 d-flex justify-content-end gap-2">
+				@* <button type="button" class="btn site-btn-outline-theme" data-bs-toggle="modal" data-bs-target="#exportModal">
+				<i class="fa-light fa-file-export"></i>
+				@_localizer.Globals["Btn_Export"]
+				</button> *@
+				@* <a asp-route="@Constants.MODULE_PRODUCT_PRODUCTREGISTER_NAME" class="btn site-btn-success">
+				<i class="fa-light fa-plus"></i>
+				@_localizer.Globals["Btn_Create"]
+				</a> *@
+			</div>
+		</div>
+	</form>
+</section>
+<section id="bodyPageLoad" class="site-card mt-2">
+	<div class="row">
+		<div class="col-12">
+			<table class="site-table site-table-hover site-border site-rounded-layout">
+				<thead>
+					<tr>
+						<th scope="col">@_localizer.Globals["RoleList_Title_Name"]</th>
+						<th class="only-desktop" width="300" scope="col">@_localizer.Globals["RoleList_Title_Description"]</th>
+						<th class="text-center" width="15%" scope="col">@_localizer.Globals["RoleList_Title_Priority"]</th>
+						<th class="text-center" scope="col" width="20%">@_localizer.Globals["RoleList_Title_Status"]</th>
+					</tr>
+				</thead>
+				<tbody>
+					@foreach (var item in Model.PageData.Items)
+					{
+						<tr>
+							<td>
+								<div class="mb-1">
+									<a class="fw-bold" asp-route="@Constants.MODULE_ROLE_ROLESETTING_NAME" asp-route-id="@item.RoleId">
+										@item.Name
+									</a>
+								</div>
+								<div class="d-block only-desktop">
+									@await Component.InvokeAsync(
+										Constants.ERP_COMPONENT_NAME_CREATED_BY_BADGE,
+										new { BranchId = item.BranchId, CreatedBy = item.CreatedBy, DateCreated = item.DateCreated })
+								</div>
+							</td>
+							<td class="only-desktop">
+								<p class="only-desktop">@item.Description</p>
+							</td>
+							<td class="text-center">@item.Priority</td>
+							<td class="text-center">@item.Status</td>
+						</tr>
+					}
+				</tbody>
+				<tfoot>
+					<tr>
+						<td colspan="5">
+							<div class="d-flex justify-content-between align-items-center">
+								<p class="mb-0">
+									@(_localizer.Globals["ListPage_TotalResult"]): @(Constants.DEFAULT_PAGE_SIZE * (Model.PageIndex - 1) + Model.PageData.Items.Length)/@(Model.PageData.TotalRecord)
+								</p>
+								<nav aria-label="Page navigation">
+									<ul class="pagination">
+										<li class="page-item">
+											<a class="page-link @(Model.PageIndex == 1 ? "disabled" : string.Empty)" onclick="handlePaging(event, @CommonUtility.HandleLimitPage(Model.PageIndex, Model.PageData.TotalPage))" aria-label="Previous">
+												<span aria-hidden="true">&laquo;</span>
+											</a>
+										</li>
+										@for (var index = 1; index <= Model.PageData.TotalPage; index++)
+										{
+											<li class="page-item">
+												<a class="page-link @(Model.PageIndex == index ? "disabled" : string.Empty)" onclick="handlePaging(event, @index)">@index</a>
+											</li>
+										}
+										<li class="page-item">
+											<a class="page-link @(Model.PageIndex == Model.PageData.TotalPage ? "disabled" : string.Empty)" onclick="handlePaging(event, @CommonUtility.HandleLimitPage(Model.PageIndex, Model.PageData.TotalPage, isPrevious: false))" asp- aria-label="Next">
+												<span aria-hidden="true">&raquo;</span>
+											</a>
+										</li>
+									</ul>
+								</nav>
+							</div>
+						</td>
+					</tr>
+				</tfoot>
+			</table>
+		</div>
+	</div>
+</section>
+@section ViewScript {
+	<script>
+		const handlePaging = (event, page = 1) => {
+			event.preventDefault();
+
+			const pageIndexInput = document.querySelector("#pageIndex");
+			pageIndexInput.value = page;
+			const searchForm = document.getElementsByName("searchForm")[0];
+			searchForm.submit();
+		}
+	</script>
+}

@@ -18,7 +18,7 @@ namespace ErpManager.Persistence.Services
 		/// </summary>
 		/// <param name="branchId">Branch id</param>
 		/// <returns>Role model list</returns>
-		RoleModel[] GetAllRole(string branchId);
+		RoleModel[] GetAll(string branchId);
 
 		/// <summary>
 		/// Get role
@@ -26,7 +26,7 @@ namespace ErpManager.Persistence.Services
 		/// <param name="branchId">Branch id</param>
 		/// <param name="roleId">Role id</param>
 		/// <returns>Role model</returns>
-		RoleModel? GetRole(string branchId, int roleId);
+		RoleModel? Get(string branchId, int roleId);
 
 		/// <summary>
 		/// Insert

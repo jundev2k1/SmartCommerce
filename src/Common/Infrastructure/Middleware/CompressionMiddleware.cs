@@ -6,14 +6,15 @@ namespace ErpManager.Infrastructure.Middleware
 	{
 		private readonly RequestDelegate _next;
 
-		public CompressionMiddleware(RequestDelegate next)
+		public CompressionMiddleware(RequestDelegate next, IFileLogger logger, IHostingEnvironment environment)
+			: base(next, logger, environment)
 		{
 			_next = next;
 		}
 
-		public async Task InvokeAsync(HttpContext context)
+		protected override async Task Invoke(HttpContext context)
 		{
-			await _next(context);
+			await Task.CompletedTask;
 		}
 	}
 }

@@ -33,6 +33,7 @@ public partial class DBContext : DbContext
 	{
 		modelBuilder.Entity<Branch>(entity =>
 		{
+			entity.HasIndex(e => e.BranchId);
 			entity.HasKey(e => e.BranchId).HasName("PK_Branch_1");
 
 			entity.Property(e => e.BranchId).HasDefaultValueSql("(('0'))");
@@ -45,10 +46,12 @@ public partial class DBContext : DbContext
 
 		modelBuilder.Entity<Role>(entity =>
 		{
+			entity.HasIndex(e => e.RoleId);
 			entity.HasKey(e => new { e.BranchId, e.RoleId }).HasName("PK_Role_1");
 
 			entity.Property(e => e.RoleId).UseIdentityColumn<int>(seed: 1, increment: 1);
 			entity.Property(e => e.Name).HasDefaultValueSql("('')");
+			entity.Property(e => e.Description).HasDefaultValueSql("('')");
 			entity.Property(e => e.Permission).HasDefaultValueSql("('')");
 			entity.Property(e => e.Priority).HasDefaultValueSql("(0)");
 			entity.Property(e => e.DateCreated).HasDefaultValueSql("(getdate())");
@@ -59,6 +62,7 @@ public partial class DBContext : DbContext
 
 		modelBuilder.Entity<User>(entity =>
 		{
+			entity.HasIndex(e => e.UserId);
 			entity.HasKey(e => new { e.BranchId, e.UserId }).HasName("PK_User_1");
 
 			entity.Property(e => e.UserName).HasDefaultValueSql("('')");
@@ -86,6 +90,7 @@ public partial class DBContext : DbContext
 
 		modelBuilder.Entity<Product>(entity =>
 		{
+			entity.HasIndex(e => e.ProductId);
 			entity.HasKey(e => new { e.BranchId, e.ProductId }).HasName("PK_Product_1");
 
 			entity.Property(e => e.Name).HasDefaultValueSql("('')");
@@ -104,7 +109,7 @@ public partial class DBContext : DbContext
 			entity.Property(e => e.Size2).HasColumnType("decimal(18,2)");
 			entity.Property(e => e.Size3).HasColumnType("decimal(18,2)");
 			entity.Property(e => e.TakeOverId).HasDefaultValueSql("('')");
-			entity.Property(e => e.Description).HasDefaultValueSql("('')");
+			entity.Property(e => e.Description).HasColumnType("nvarchar(max)").HasDefaultValueSql("('')");
 			entity.Property(e => e.EmbeddedLink).HasDefaultValueSql("('')");
 			entity.Property(e => e.RelatedProductId).HasDefaultValueSql("('')");
 			entity.Property(e => e.DateCreated).HasDefaultValueSql("(getdate())");
@@ -115,6 +120,7 @@ public partial class DBContext : DbContext
 
 		modelBuilder.Entity<Member>(entity =>
 		{
+			entity.HasIndex(e => e.MemberId);
 			entity.HasKey(e => new { e.BranchId, e.MemberId }).HasName("PK_Member_1");
 
 			entity.Property(e => e.FirstName).HasDefaultValueSql("('')");
@@ -144,6 +150,7 @@ public partial class DBContext : DbContext
 
 		modelBuilder.Entity<Token>(entity =>
 		{
+			entity.HasIndex(e => e.TokenId);
 			entity.HasKey(e => new { e.BranchId, e.TokenId }).HasName("PK_Token_1");
 
 			entity.Property(e => e.ExpirationDate);
@@ -155,6 +162,7 @@ public partial class DBContext : DbContext
 
 		modelBuilder.Entity<MailTemplate>(entity =>
 		{
+			entity.HasIndex(e => e.MailId);
 			entity.HasKey(e => new { e.BranchId, e.MailId }).HasName("PK_MailTemplate_1");
 
 			entity.Property(e => e.Subject);
@@ -170,6 +178,7 @@ public partial class DBContext : DbContext
 
 		modelBuilder.Entity<Notification>(entity =>
 		{
+			entity.HasIndex(e => e.Id);
 			entity.HasKey(e => new { e.BranchId, e.Id, e.UserId }).HasName("PK_Notification_1");
 
 			entity.Property(e => e.Id).UseIdentityColumn<long>(seed: 1, increment: 1);

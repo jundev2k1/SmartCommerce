@@ -12,6 +12,8 @@ namespace ErpManager.Common
 		public const string ERRORMSG_KEY_DATA_NOT_FOUND_CODE = "ErrorCode_DataNotFound";
 		/// <summary>Error message key: token invalid code</summary>
 		public const string ERRORMSG_KEY_TOKEN_INVALID_CODE = "ErrorCode_TokenInvalid";
+		/// <summary>Error message key: anonymous access code</summary>
+		public const string ERRORMSG_KEY_ANONYMOUS_ACCESS_CODE = "ErrorCode_AnonymousAccess";
 
 		/// <summary>Error message key: system error</summary>
 		public const string ERRORMSG_KEY_SYSTEM_ERROR = "ErrorMessage_SystemError";

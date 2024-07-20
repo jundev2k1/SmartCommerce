@@ -7,6 +7,7 @@ namespace ErpManager.ERP.Common.Enum
 		SystemError,
 		NotPermission,
 		DataNotFound,
-		TokenInvalid
+		TokenInvalid,
+		AnonymousAccess
 	}
 }

@@ -44,6 +44,32 @@ namespace ErpManager.Domain.Mapping
 		}
 
 		/// <summary>
+		/// Map search to model
+		/// </summary>
+		/// <param name="searchDto">Search Dto</param>
+		/// <returns>Model</returns>
+		public static ProductModel MapSearchToModel(this ProductSearchDto searchDto)
+		{
+			var model = new ProductModel
+			{
+				BranchId = searchDto.BranchId,
+				ProductId = searchDto.ProductId,
+				Name = searchDto.ProductName,
+				Address1 = searchDto.Address1,
+				Address2 = searchDto.Address2,
+				Address3 = searchDto.Address3,
+				Address4 = searchDto.Address4,
+				DisplayPrice = searchDto.DisplayPrice ?? DisplayPriceEnum.Price1,
+				Status = searchDto.Status ?? ProductStatusEnum.Normal,
+				DelFlg = searchDto.DelFlg,
+				TakeOverId = searchDto.TakeOverId,
+				CreatedBy = searchDto.CreatedBy,
+			};
+
+			return model;
+		}
+
+		/// <summary>
 		/// Map to entity
 		/// </summary>
 		/// <param name="model">Model</param>
@@ -72,6 +98,7 @@ namespace ErpManager.Domain.Mapping
 				TakeOverId = model.TakeOverId,
 				Description = model.Description,
 				EmbeddedLink = model.EmbeddedLink,
+				RelatedProductId = model.RelatedProductId,
 				DateCreated = model.DateCreated,
 				DateChanged = model.DateCreated,
 				CreatedBy = model.CreatedBy,
@@ -105,6 +132,7 @@ namespace ErpManager.Domain.Mapping
 			entity.TakeOverId = model.TakeOverId;
 			entity.Description = model.Description;
 			entity.EmbeddedLink = model.EmbeddedLink;
+			entity.RelatedProductId = model.RelatedProductId;
 			entity.DateChanged = DateTime.Now;
 			entity.CreatedBy = model.CreatedBy;
 			entity.LastChanged = model.LastChanged;

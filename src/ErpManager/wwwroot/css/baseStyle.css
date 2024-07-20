@@ -115,7 +115,8 @@
 	--site-pink-800: #9D174D;
 	--site-pink-900: #831843;
 	--site-black: #000;
-	--site-color-shadow: #00000076;
+	--site-color-overlay: #00000076;
+	--site-color-shadow: rgb(0, 0, 0, .25);
 	--site-primary: ##512DA8;
 	--site-secondary: #889d9c;
 	--site-danger: #DD2476;

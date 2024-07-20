@@ -1,5 +1,6 @@
 @import 'baseStyle.css';
 @import 'animation.css';
+@import 'component/index.css';
 
 /*#region Page style */
 #page-load {
@@ -115,7 +116,7 @@
 			align-items: center;
 			height: 30%;
 			border-radius: var(--site-border-rounded);
-			box-shadow: 0 0 6px var(--site-color-shadow);
+			box-shadow: 0 0 6px var(--site-color-overlay);
 		}
 
 			.theme-settings .theme-settings-popup .theme-settings-header h2 {
@@ -704,8 +705,8 @@
 
 /*#region Responsive */
 @media (min-width: 769px) {
-	.is-mobile {
-		display: none;
+	.only-mobile {
+		display: none!important;
 	}
 }
 
@@ -729,8 +730,8 @@
 		font-size: .875rem;
 	}
 
-	.is-desktop {
-		display: none;
+	.only-desktop {
+		display: none!important;
 	}
 	/*#endregion */
 

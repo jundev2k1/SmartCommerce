@@ -24,7 +24,7 @@ namespace ErpManager.Persistence.Repositories
 			var query = _dbContext.Roles
 				.AsQueryable()
 				.Where(expression)
-				.OrderByDescending(role => role.DateCreated);
+				.OrderBy(role => role.Priority);
 
 			var queryCount = query.Count();
 			var isSurplus = (queryCount % pageSize) > 0;

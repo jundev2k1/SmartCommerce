@@ -12,12 +12,13 @@ namespace ErpManager.Persistence.Common.Utilities.Search
 
 			if (string.IsNullOrEmpty(searchDto.Keywords) == false)
 			{
-				predicate.And(p => p.ProductId.Contains(searchDto.Keywords) || p.Name.Contains(searchDto.Keywords));
+				predicate.And(p => p.ProductId.Contains(searchDto.Keywords)
+					|| p.Name.Contains(searchDto.Keywords));
 			}
 
 			if (string.IsNullOrEmpty(searchDto.BranchId) == false)
 			{
-				predicate.And(p => p.BranchId.Contains(searchDto.BranchId));
+				predicate.And(p => p.BranchId.Equals(searchDto.BranchId));
 			}
 
 			if (string.IsNullOrEmpty(searchDto.ProductId) == false)

@@ -18,7 +18,7 @@ namespace ErpManager.ERP.Controllers
 
 		[HttpGet]
 		[AllowAnonymous]
-		[Route(Constants.ENDPOINT_COMMON_CHANGE_LANGUAGE_PATH)]
+		[Route(Constants.ENDPOINT_COMMON_CHANGE_LANGUAGE_PATH, Name = Constants.ENDPOINT_COMMON_CHANGE_LANGUAGE_NAME)]
 		public IActionResult LanguageSwitcher(string culture, string returnUrl)
 		{
 			// Set cookie option
@@ -196,7 +196,7 @@ namespace ErpManager.ERP.Controllers
 		[HttpPost]
 		[Authorization(Permission.CanUploadImageProduct)]
 		[Route(Constants.ENDPOINT_COMMON_UPDATE_NEWEST_IMAGES)]
-		public IActionResult UpdateNewestImage(string type, string primaryKey)
+		public async Task<IActionResult> UpdateNewestImage(string type, string primaryKey)
 		{
 			var typeUpload = GetTypeUploadByString(type);
 			if (typeUpload == UploadEnum.None)
@@ -205,7 +205,8 @@ namespace ErpManager.ERP.Controllers
 			switch (typeUpload)
 			{
 				case UploadEnum.ProductImage:
-					var result = _serviceFacade.Products.UpdateNewestProductImages(this.OperatorBranchId, primaryKey);
+					var result = await Task.Run(() => _serviceFacade.Products
+						.UpdateNewestProductImages(this.OperatorBranchId, primaryKey));
 					return Content(result ?? string.Empty);
 
 				default:

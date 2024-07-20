@@ -28,13 +28,13 @@ namespace ErpManager.Domain.Dtos.SearchDtos
 
 		public string Address4 { get; set; } = string.Empty;
 
-		public int MinAge { get; set; }
+		public int? MinAge { get; set; }
 
-		public int MaxAge { get; set; }
+		public int? MaxAge { get; set; }
 
-		public UserStatusEnum Status { get; set; }
+		public UserStatusEnum Status { get; set; } = UserStatusEnum.Active;
 
-		public bool DelFlg { get; set; } = false;
+		public bool DelFlg { get; set; }
 
 		public UserSexEnum? Sex { get; set; }
 

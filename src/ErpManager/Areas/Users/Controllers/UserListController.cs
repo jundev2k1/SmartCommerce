@@ -1,6 +1,6 @@
 ﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
 
-using ErpManager.ERP.Areas.Products.ViewModels;
+using ErpManager.ERP.Areas.Users.ViewModels;
 
 namespace ErpManager.ERP.Areas.Users.Controllers
 {
@@ -22,15 +22,36 @@ namespace ErpManager.ERP.Areas.Users.Controllers
 		[Route(Constants.MODULE_USER_USERLIST_PATH, Name = Constants.MODULE_USER_USERLIST_NAME)]
 		public IActionResult Index(int page = 1)
 		{
-			ViewData[Constants.VIEWDATA_KEY_PAGE_INDEX] = page;
-
-			var condition = new UserSearchDto
+			var condition = new UserSearchDto { BranchId = this.OperatorBranchId };
+			var userList = _serviceFacade.Users.Search(condition, page, Constants.DEFAULT_PAGE_SIZE);
+			var data = new UserListViewModel
 			{
-				BranchId = this.OperatorBranchId,
+				PageIndex = page,
+				PageData = userList,
+				InputOption = GetInitDropdownListItems(new UserModel())
 			};
-			var data = _serviceFacade.Users.Search(condition, page, Constants.DEFAULT_PAGE_SIZE);
+			return View(data);
+		}
+		[HttpPost]
+		[Authorization(Permission.CanReadListUser)]
+		[Route(Constants.MODULE_USER_USERLIST_PATH, Name = Constants.MODULE_USER_USERLIST_NAME)]
+		public IActionResult Index(UserListViewModel viewModel)
+		{
+			var searchParams = viewModel.SearchFields;
+			searchParams.BranchId = this.OperatorBranchId;
 
-			return View(new UserListViewModel { PageData = data, PageIndex = page });
+			// Set initial value for dropdown list
+			viewModel.InputOption = GetInitDropdownListItems(viewModel.SearchFields.MapSearchToModel());
+
+			// Check page index out of range data collection
+			if (viewModel.PageData.TotalPage < viewModel.PageIndex)
+				viewModel.PageIndex = 1;
+
+			viewModel.PageData = _serviceFacade.Users.Search(
+				searchParams,
+				viewModel.PageIndex,
+				viewModel.PageSize);
+			return View(viewModel);
 		}
 	}
 }

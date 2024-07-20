@@ -199,14 +199,14 @@ namespace ErpManager.ERP
 		{
 			if (app.Environment.IsDevelopment())
 			{
-				app.UseExceptionHandler(Constants.MODULE_ERROR_ERROR_PATH);
-				// app.UseDeveloperExceptionPage();
+				app.UseDeveloperExceptionPage();
 			}
 			else
 			{
 				app.UseExceptionHandler(Constants.MODULE_ERROR_ERROR_PATH);
 				app.UseHsts();
 			}
+
 			return app;
 		}
 

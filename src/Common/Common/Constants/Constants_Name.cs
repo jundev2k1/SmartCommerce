@@ -7,6 +7,8 @@ namespace ErpManager.Common
 		#region Erp: Layout Section name
 		/// <summary>ERP section name: View script</summary>
 		public const string ERP_SECTION_NAME_VIEW_SCRIPT = "ViewScript";
+		/// <summary>ERP section name: View stylesheet</summary>
+		public const string ERP_SECTION_NAME_VIEW_CSS = "ViewCss";
 		#endregion
 
 		#region ERP: Layout Component Name
@@ -48,6 +50,8 @@ namespace ErpManager.Common
 		#region ERP: Features Component Name
 		/// <summary>ERP component name: Product status badge</summary>
 		public const string ERP_COMPONENT_NAME_PRODUCT_STATUS_BADGE = "ProductStatusBadge";
+		/// <summary>ERP component name: Created by badge</summary>
+		public const string ERP_COMPONENT_NAME_CREATED_BY_BADGE = "CreatedByBadge";
 		#endregion
 
 		#region Hub Config

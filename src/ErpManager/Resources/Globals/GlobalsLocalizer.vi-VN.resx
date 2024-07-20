@@ -153,8 +153,14 @@
   <data name="Btn_Filter" xml:space="preserve">
     <value>Lọc dữ liệu</value>
   </data>
+  <data name="Btn_OtpAuth" xml:space="preserve">
+    <value>Xác minh</value>
+  </data>
   <data name="Btn_Preview" xml:space="preserve">
     <value>Xem trước</value>
+  </data>
+  <data name="Btn_ResendOtpAuth" xml:space="preserve">
+    <value>Gửi lại mã xác thực</value>
   </data>
   <data name="Btn_ResetForm" xml:space="preserve">
     <value>Làm mới</value>
@@ -176,28 +182,6 @@
   </data>
   <data name="ListPage_TotalResult" xml:space="preserve">
     <value>Kết quả tìm kiếm</value>
-  </data>
-  <data name="Login_Button_ForgetPassword" xml:space="preserve">
-    <value>Quên mật khẩu?</value>
-  </data>
-  <data name="Login_Button_Login" xml:space="preserve">
-    <value>Đăng nhập</value>
-  </data>
-  <data name="Login_Button_Register" xml:space="preserve">
-    <value>Không có tài khoản? Đăng ký</value>
-  </data>
-  <data name="Login_Field_ID" xml:space="preserve">
-    <value>Tên đăng nhập</value>
-  </data>
-  <data name="Login_Field_Password" xml:space="preserve">
-    <value>Mật khẩu</value>
-  </data>
-  <data name="Login_Label_RememberMe" xml:space="preserve">
-    <value>Nhớ tài khoản</value>
-  </data>
-  <data name="Login_Title_SubTitle" xml:space="preserve">
-    <value>Đăng nhập vào tài khoản của bạn.</value>
-    <comment>sign in to your account.</comment>
   </data>
   <data name="Nav_Auth_SignIn" xml:space="preserve">
     <value>Đăng Nhập</value>
@@ -262,6 +246,12 @@
   <data name="Notification_MarkAllRead" xml:space="preserve">
     <value>Đánh dấu đọc tất cả</value>
   </data>
+  <data name="OtpAuth_Title_Description" xml:space="preserve">
+    <value>Bạn sẽ nhận được 1 mã OTP qua email</value>
+  </data>
+  <data name="OtpAuth_Title_SubTitle" xml:space="preserve">
+    <value>Xác thực</value>
+  </data>
   <data name="PlaceHolder_Date" xml:space="preserve">
     <value>Chọn 1 ngày</value>
   </data>
@@ -315,6 +305,43 @@
   </data>
   <data name="PlaceHolder_Url" xml:space="preserve">
     <value>Cung cấp đường link chính xác</value>
+  </data>
+  <data name="RoleList_Title_Description" xml:space="preserve">
+    <value>Mô tả</value>
+  </data>
+  <data name="RoleList_Title_Id" xml:space="preserve">
+    <value>ID</value>
+  </data>
+  <data name="RoleList_Title_Name" xml:space="preserve">
+    <value>Tên vai trò</value>
+  </data>
+  <data name="RoleList_Title_Priority" xml:space="preserve">
+    <value>Độ ưu tiên</value>
+  </data>
+  <data name="RoleList_Title_Status" xml:space="preserve">
+    <value>Trạng thái</value>
+  </data>
+  <data name="SignIn_Btn_ForgetPassword" xml:space="preserve">
+    <value>Quên mật khẩu?</value>
+  </data>
+  <data name="SignIn_Btn_Register" xml:space="preserve">
+    <value>Không có tài khoản? Đăng ký</value>
+  </data>
+  <data name="SignIn_Btn_Submit" xml:space="preserve">
+    <value>Đăng nhập</value>
+  </data>
+  <data name="SignIn_Field_ID" xml:space="preserve">
+    <value>Tên đăng nhập</value>
+  </data>
+  <data name="SignIn_Field_Password" xml:space="preserve">
+    <value>Mật khẩu</value>
+  </data>
+  <data name="SignIn_Label_RememberMe" xml:space="preserve">
+    <value>Nhớ tài khoản</value>
+  </data>
+  <data name="SignIn_Title_SubTitle" xml:space="preserve">
+    <value>Đăng nhập vào tài khoản của bạn.</value>
+    <comment>sign in to your account.</comment>
   </data>
   <data name="ThemeSettings_Leave" xml:space="preserve">
     <value>Rời khỏi</value>
@@ -377,5 +404,20 @@
   </data>
   <data name="Title_Tel" xml:space="preserve">
     <value>Số Điện thoại</value>
+  </data>
+  <data name="UserList_Title_Contact" xml:space="preserve">
+    <value>Thông tin liên hệ</value>
+  </data>
+  <data name="UserList_Title_Name" xml:space="preserve">
+    <value>Tên người dùng</value>
+  </data>
+  <data name="UserList_Title_Sex" xml:space="preserve">
+    <value>Giới tính</value>
+  </data>
+  <data name="UserList_Title_Status" xml:space="preserve">
+    <value>Trạng thái</value>
+  </data>
+  <data name="UserList_Title_UserId" xml:space="preserve">
+    <value>ID</value>
   </data>
 </root>

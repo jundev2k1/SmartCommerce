@@ -1,0 +1,15 @@
+﻿.created-by-badge .date-info em {
+	padding-right: .5rem;
+}
+
+	.created-by-badge .date-info em.only-hover {
+		display: none;
+	}
+
+.created-by-badge .date-info:hover em:not(.only-hover) {
+	display: none;
+}
+
+.created-by-badge .date-info:hover em.only-hover {
+	display: inline-block;
+}

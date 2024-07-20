@@ -195,4 +195,40 @@
   <data name="Product_TakeOverId" xml:space="preserve">
     <value>Người tiếp nhận</value>
   </data>
+  <data name="User_Address" xml:space="preserve">
+    <value>Địa điểm</value>
+  </data>
+  <data name="User_Address1" xml:space="preserve">
+    <value>Tỉnh/Thành phố</value>
+  </data>
+  <data name="User_Address2" xml:space="preserve">
+    <value>Quận/Huyện</value>
+  </data>
+  <data name="User_Address3" xml:space="preserve">
+    <value>Xã/Phường</value>
+  </data>
+  <data name="User_Address4" xml:space="preserve">
+    <value>Đường/Số nhà</value>
+  </data>
+  <data name="User_Email" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="User_FirstName" xml:space="preserve">
+    <value>Họ</value>
+  </data>
+  <data name="User_FullName" xml:space="preserve">
+    <value>Tên người dùng</value>
+  </data>
+  <data name="User_LastName" xml:space="preserve">
+    <value>Tên</value>
+  </data>
+  <data name="User_Status" xml:space="preserve">
+    <value>Trạng thái</value>
+  </data>
+  <data name="User_UserId" xml:space="preserve">
+    <value>Mã người dùng</value>
+  </data>
+  <data name="User_Username" xml:space="preserve">
+    <value>Username</value>
+  </data>
 </root>

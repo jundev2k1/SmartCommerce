@@ -1,0 +1,34 @@
+﻿#roleTabs {
+	box-shadow: 0 1px 2px var(--site-color-shadow);
+}
+
+	#roleTabs .nav {
+		margin: 0 .875rem;
+	}
+		#roleTabs .nav .nav-link {
+			font-size: 1rem;
+		}
+
+	#roleTabs .nav-underline .nav-link:not(.active) {
+		color: var(--site-gray-500);
+	}
+
+
+#roleInformation {
+	padding: .875rem;
+}
+
+#roleSetting .accordion-item:first-of-type {
+	border-top-left-radius: 0;
+	border-top-right-radius: 0;
+}
+
+/* Dark mode style */
+
+.dark-mode #roleTabs .nav-underline .nav-link:not(.active) {
+	color: var(--site-gray-400);
+}
+
+.dark-mode #roleTabs .nav-underline .nav-link.active {
+	color: var(--site-title-operating) !important;
+}

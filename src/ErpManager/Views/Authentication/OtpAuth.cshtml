@@ -1,0 +1,54 @@
+﻿@* // Copyright (c) 2024 - Jun Dev. All rights reserved *@
+
+@model LoginViewModel
+@{
+	Layout = "_Layout_Login";
+	ViewData[Constants.GLOBAL_KEY_TITLE] = _localizer.Globals["Nav_Auth_SignIn"];
+}
+
+<div class="background">
+	<div class="otp-auth">
+		<div class="title">
+			<div class="logo">
+				<img src="~/images/system/logo.png" />
+			</div>
+			<div class="content">
+				<h2>@_localizer.Globals["OtpAuth_Title_SubTitle"]</h2>
+				<h3>@_localizer.Globals["OtpAuth_Title_Description"]</h3>
+			</div>
+		</div>
+		<form name="otp-auth" asp-route="@Constants.MODULE_AUTH_OTP_NAME" method="post">
+			<div class="otp-auth-form">
+				<div class="input-group">
+					<input type="text" asp-for="@Model.OtpCode" value="@Model.OtpCode" maxlength="6" />
+					<span class="otp-auth-message"></span>
+				</div>
+				<div class="otp-auth-submit">
+					<span class="otp-auth-message"></span>
+					<button type="submit">@_localizer.Globals["Btn_OtpAuth"]</button>
+				</div>
+				<div class="otp-auth-back">
+					<a asp-route="@Constants.MODULE_AUTH_SIGNIN_NAME">
+						@_localizer.Globals["Btn_Back"]
+					</a>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+
+@section ViewCss {
+	<link rel="stylesheet" href="~/css/view/global/auth-otp.css" asp-append-version="true" />
+}
+
+@section ViewScript {
+	<script>
+		const initPage = () => {
+			const errorMessage = '@ViewData[Constants.VIEWDATA_KEY_AUTH_ERROR_MESSAGE]';
+			if (errorMessage) {
+				toastr.error(errorMessage);
+			}
+		};
+		StoreWindowLoadCallback.push(initPage);
+	</script>
+}

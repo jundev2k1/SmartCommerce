@@ -8,6 +8,8 @@ namespace ErpManager.ERP.Areas.Products.ViewModels
 
 		public ProductSearchDto SearchFields { get; set; } = new ProductSearchDto();
 
+		public ProductInputOptionViewModel InputOption { get; set; } = new ProductInputOptionViewModel();
+
 		public int PageIndex { get; set; } = 1;
 
 		public int PageSize { get; set; } = Constants.DEFAULT_PAGE_SIZE;

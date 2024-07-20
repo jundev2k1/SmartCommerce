@@ -20,7 +20,7 @@ namespace ErpManager.Domain.Dtos.SearchDtos
 
 		public string Address4 { get; set; } = string.Empty;
 
-		public DisplayPriceEnum? DisplayPrice { get; set; }
+		public DisplayPriceEnum? DisplayPrice { get; set; } = DisplayPriceEnum.Price1;
 
 		public decimal? MinPrice1 { get; set; }
 
@@ -58,7 +58,7 @@ namespace ErpManager.Domain.Dtos.SearchDtos
 
 		public string CreatedBy { get; set; } = string.Empty;
 
-		public ProductStatusEnum? Status { get; set; }
+		public ProductStatusEnum? Status { get; set; } = ProductStatusEnum.Normal;
 
 		public bool DelFlg { get; set; } = false;
 	}

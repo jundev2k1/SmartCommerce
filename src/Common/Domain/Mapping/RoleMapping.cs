@@ -16,12 +16,37 @@ namespace ErpManager.Domain.Mapping
 				BranchId = entity.BranchId,
 				RoleId = entity.RoleId,
 				Name = entity.Name,
+				Description = entity.Description,
 				Permission = entity.Permission,
 				Priority = entity.Priority,
 				Status = entity.Status,
 				DateCreated = entity.DateCreated,
 				DateChanged = entity.DateChanged,
 				CreatedBy = entity.CreatedBy,
+			};
+
+			return model;
+		}
+
+		/// <summary>
+		/// Map search to model
+		/// </summary>
+		/// <param name="searchDto">Search Dto</param>
+		/// <returns>Model</returns>
+		public static RoleModel MapSearchToModel(this RoleSearchDto searchDto)
+		{
+			var model = new RoleModel
+			{
+				BranchId = searchDto.BranchId,
+				RoleId = searchDto.RoleId,
+				Name = searchDto.Name,
+				Description = searchDto.Description,
+				Permission = searchDto.Permission,
+				Priority = searchDto.Priority,
+				Status = searchDto.Status,
+				DateCreated = searchDto.DateCreated,
+				DateChanged = searchDto.DateChanged,
+				CreatedBy = searchDto.CreatedBy,
 			};
 
 			return model;
@@ -39,6 +64,7 @@ namespace ErpManager.Domain.Mapping
 				BranchId = model.BranchId,
 				RoleId = model.RoleId,
 				Name = model.Name,
+				Description = model.Description,
 				Permission = model.Permission,
 				Priority = model.Priority,
 				Status = model.Status,
@@ -60,6 +86,7 @@ namespace ErpManager.Domain.Mapping
 			entity.BranchId = model.BranchId;
 			entity.RoleId = model.RoleId;
 			entity.Name = model.Name;
+			entity.Description = model.Description;
 			entity.Permission = model.Permission;
 			entity.Priority = model.Priority;
 			entity.Status = model.Status;

@@ -1,0 +1,158 @@
+﻿@* // Copyright (c) 2024 - Jun Dev. All rights reserved *@
+
+@model RoleSettingViewModel
+@{
+	ViewData[Constants.GLOBAL_KEY_TITLE] = _localizer.Globals["Nav_User_Role"];
+	ViewData[Constants.GLOBAL_KEY_CURRENT_PAGE] = "UserRole_Page";
+
+	// Page Breadcrumb
+	var breadcrumbs = new Breadcrumb[]
+	{
+		new Breadcrumb { Title = _localizer.Globals["Nav_Home"].Value, Href = Constants.MODULE_HOME_HOME_PATH },
+		new Breadcrumb { Title = _localizer.Globals["Nav_User_Role"].Value, IsDisabled = true }
+	};
+}
+
+@section ViewCss {
+	<link rel="stylesheet" href="~/css/view/role/role-setting.css" asp-append-version="true" />
+}
+
+@await Component.InvokeAsync(Constants.ERP_COMPONENT_NAME_BREADCRUMB, breadcrumbs)
+
+<div class="d-flex flex-column site-card p-0">
+	<aside id="roleTabs">
+		<ul class="nav nav-underline" role="tablist">
+			<li class="nav-item" role="presentation">
+				<a class="nav-link active" href="#roleInformation" role="tab" data-bs-toggle="tab" aria-controls="role-information" aria-selected="true">
+					<i class="fa-light fa-circle-info fa-fw me-2"></i>
+					Infomation
+				</a>
+			</li>
+			<li class="nav-item" role="presentation">
+				<a class="nav-link" href="#roleSetting" role="tab" data-bs-toggle="tab" aria-controls="role-setting" aria-selected="false">
+					<i class="fa-light fa-screwdriver-wrench fa-fw me-2"></i>
+					Setting
+				</a>
+			</li>
+		</ul>
+	</aside>
+	<div id="roleTabContent" class="tab-content py-2">
+		<section id="roleInformation" class="tab-pane fade show active" role="tabpanel" aria-labelledby="role-information-tab">
+			<form id="formRoleInfo" method="post">
+				<div class="row g-md-2 gx-2 gy-2 px-md-5 my-2">
+					<div class="col-md-7 col-12">
+						<div class="form-group">
+							<label asp-for="Information.Name">Role Name</label>
+							<input asp-for="Information.Name" type="text" class="form-control" placeholder="@_localizer.Globals["PlaceHolder_TextBox"] @_localizer.Fields["Product_ProductId"]..." />
+							<span asp-validation-for="Information.Name" class="text-danger"></span>
+						</div>
+					</div>
+					<div class="col-md-2 col-6">
+						<div class="form-group">
+							<label asp-for="Information.Priority">Priority</label>
+							<input asp-for="Information.Priority" type="text" class="form-control" placeholder="@_localizer.Globals["PlaceHolder_TextBox"] @_localizer.Fields["Product_ProductId"]..." />
+							<span asp-validation-for="Information.Priority" class="text-danger"></span>
+						</div>
+					</div>
+					<div class="col-md-3 col-6">
+						<div class="form-group">
+							<label asp-for="Information.Status">Status</label>
+							<input asp-for="Information.Status" type="text" class="form-control" placeholder="@_localizer.Globals["PlaceHolder_TextBox"] @_localizer.Fields["Product_ProductId"]..." />
+							<span asp-validation-for="Information.Status" class="text-danger"></span>
+						</div>
+					</div>
+					<div class="col-12">
+						<div class="form-group">
+							<label asp-for="Information.Description">Role Description</label>
+							<textarea asp-for="Information.Description" type="text" class="form-control" placeholder="@_localizer.Globals["PlaceHolder_TextBox"] @_localizer.Fields["Product_ProductId"]..." rows="3"></textarea>
+							<span asp-validation-for="Information.Description" class="text-danger"></span>
+						</div>
+					</div>
+					<div class="col-12 d-flex justify-content-end form-submit">
+						<button type="submit" class="btn site-btn-primary">
+							<i class="fa-light fa-pencil"></i>
+							@_localizer.Globals["Btn_Edit"]
+						</button>
+					</div>
+				</div>
+			</form>
+		</section>
+		<section id="roleSetting" class="tab-pane fade" role="tabpanel" aria-labelledby="role-setting-tab">
+			<form>
+				<div class="p-1 mb-2 d-flex justify-content-end form-submit">
+					<button type="submit" class="btn site-btn-primary">
+						<i class="fa-light fa-pencil"></i>
+						@_localizer.Globals["Btn_Edit"]
+					</button>
+				</div>
+				<div class="page-error-message px-2">
+					<div class="error-message alert alert-danger" role="alert">
+						A simple danger alert—check it out!
+					</div>
+				</div>
+				<div class="role-wrapper">
+					<div class="accordion">
+						@for (var groupIndex = 0; groupIndex < Model.PermissionGroups.Count; groupIndex++)
+						{
+							var permissionGroup = Model.PermissionGroups[groupIndex];
+							var permissionList = permissionGroup.PermissionList;
+							var groupTargetId = $"roleSelectGroup{groupIndex}";
+
+							<div class="accordion-item">
+								<h2 class="accordion-header d-flex gap-2 align-items-center">
+									<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#@(groupTargetId)" aria-expanded="false">
+										@permissionGroup.GroupName
+									</button>
+								</h2>
+								<div id="@(groupTargetId)" class="accordion-collapse collapse">
+									<ul class="accordion-body row">
+										@* Set default page input (redirect to this page after login success) *@
+										<li class="col-md-4 col-6">
+											<div class="form-check">
+												<input id="@($"btnDefaultPage_{groupIndex}")" class="form-check-input default-page-checkbox" type="radio" name="defaultPage" value="@(groupIndex)">
+												<label class="form-check-label" for="@($"btnDefaultPage_{groupIndex}")">Default page</label>
+											</div>
+										</li>
+										@* Just display if exist any permission *@
+										@if (permissionList.Count > 0)
+										{
+											<li class="col-md-8 col-6">
+												<div class="form-check form-switch">
+													<input class="form-check-input select-all-check" type="checkbox" role="switch" id="@($"selectAll_{groupIndex}")">
+													<label class="form-check-label" for="@($"selectAll_{groupIndex}")">Select all</label>
+												</div>
+											</li>
+										}
+										@* Show permission list *@
+										@for (var permIndex = 0; permIndex < permissionList.Count; permIndex++)
+										{
+											var permissionItem = permissionList[permIndex];
+											var itemTargetId = $"item_{groupIndex}_{permIndex}";
+
+											<li class="col-md-4 col-12">
+												<div class="form-check form-switch">
+													<input class="form-check-input permission-select-input" type="checkbox" role="switch" id="@(itemTargetId)" value="@(permissionItem.Value)">
+													<label class="form-check-label" for="@(itemTargetId)">@permissionItem.Name</label>
+												</div>
+											</li>
+										}
+									</ul>
+								</div>
+							</div>
+						}
+					</div>
+				</div>
+				<div class="p-1 mt-2 d-flex justify-content-end form-submit">
+					<button type="button" class="btn site-btn-primary">
+						<i class="fa-light fa-pencil"></i>
+						@_localizer.Globals["Btn_Edit"]
+					</button>
+				</div>
+			</form>
+		</section>
+	</div>
+</div>
+
+@section ViewScript {
+	<script src="~/js/areas/roles/role-setting/index.js" asp-append-version="true"></script>
+}

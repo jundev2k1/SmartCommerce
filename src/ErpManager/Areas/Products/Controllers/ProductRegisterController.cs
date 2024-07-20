@@ -1,6 +1,7 @@
 ﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
 
 using ErpManager.ERP.Areas.Products.Controllers;
+using ErpManager.ERP.Areas.Products.ViewModels;
 
 namespace ErpManager.ERP.Areas.Product.Controllers
 {
@@ -28,38 +29,40 @@ namespace ErpManager.ERP.Areas.Product.Controllers
 		[Route(Constants.MODULE_PRODUCT_PRODUCTREGISTER_PATH, Name = Constants.MODULE_PRODUCT_PRODUCTREGISTER_NAME)]
 		public IActionResult Index(string id = "")
 		{
-			var product = new ProductModel();
+			var viewModel = new ProductRegisterViewModel();
 			if (string.IsNullOrEmpty(id) == false)
 			{
-				product = _serviceFacade.Products.Get(this.OperatorBranchId, id) ?? new ProductModel();
-				product.Images = string.Empty;
+				viewModel.PageData = _serviceFacade.Products.Get(this.OperatorBranchId, id) ?? new ProductModel();
+				viewModel.PageData.Images = string.Empty;
 			}
 
-			ViewBag.DropdownItems = GetInitDropdownListItems(product);
-			return View(product);
+			viewModel.InputOptions = GetInitDropdownListItems(viewModel.PageData);
+			return View(viewModel);
 		}
 
 		[HttpPost]
 		[Authorization(Permission.CanCreateProduct)]
 		[Route(Constants.MODULE_PRODUCT_PRODUCTREGISTER_PATH, Name = Constants.MODULE_PRODUCT_PRODUCTREGISTER_NAME)]
-		public IActionResult Index(ProductModel formInput)
+		public IActionResult Index(ProductRegisterViewModel viewModel)
 		{
+			var pageData = viewModel.PageData;
+
 			// Set default value for form input
-			formInput.BranchId = this.OperatorBranchId;
-			formInput.CreatedBy = this.OperatorId;
-			formInput.LastChanged = this.OperatorName;
-			formInput.TrimStringInput();
+			pageData.BranchId = this.OperatorBranchId;
+			pageData.CreatedBy = this.OperatorId;
+			pageData.LastChanged = this.OperatorName;
+			pageData.TrimStringInput();
 
 			// Set initial value for dropdown list
-			ViewBag.DropdownItems = GetInitDropdownListItems(formInput);
+			viewModel.InputOptions = GetInitDropdownListItems(pageData);
 
 			// Validate form input
 			ModelState.Clear();
-			var validateResult = _validatorFacade.ProductValidate(formInput);
+			var validateResult = _validatorFacade.ProductValidate(pageData);
 			if (validateResult.IsValid == false)
 			{
 				AddErrorToModelState(validateResult);
-				return View(formInput);
+				return View(viewModel);
 			}
 
 			// Convert temp images to actual images
@@ -67,13 +70,13 @@ namespace ErpManager.ERP.Areas.Product.Controllers
 				files: Array.Empty<IFormFile>(),
 				@enum: UploadEnum.ProductImage,
 				sessionToken: this.SessionToken,
-				fileName: formInput.ProductId);
+				fileName: pageData.ProductId);
 			fileUpload.ChangeToActualImages();
-			formInput.Images = string.Join(",", fileUpload.Result);
+			pageData.Images = string.Join(",", fileUpload.Result);
 
 			// Handle create new product
-			var isSuccess = _serviceFacade.Products.Insert(formInput);
-			if (isSuccess == false) return View(formInput);
+			var isSuccess = _serviceFacade.Products.Insert(pageData);
+			if (isSuccess == false) return View(viewModel);
 
 			return RedirectToRoute(Constants.MODULE_PRODUCT_PRODUCTLIST_NAME);
 		}

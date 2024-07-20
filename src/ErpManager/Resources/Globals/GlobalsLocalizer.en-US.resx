@@ -159,25 +159,16 @@
   <data name="ListPage_TotalResult" xml:space="preserve">
     <value>Total Result</value>
   </data>
-  <data name="Login_Button_ForgetPassword" xml:space="preserve">
+  <data name="SignIn_Btn_ForgetPassword" xml:space="preserve">
     <value>Forget password?</value>
   </data>
-  <data name="Login_Button_Login" xml:space="preserve">
+  <data name="SignIn_Btn_Submit" xml:space="preserve">
     <value>Sign In</value>
   </data>
-  <data name="Login_Button_Register" xml:space="preserve">
+  <data name="SignIn_Btn_Register" xml:space="preserve">
     <value>Don't have an account? Sign up</value>
   </data>
-  <data name="Login_Field_ID" xml:space="preserve">
-    <value>Login ID</value>
-  </data>
-  <data name="Login_Field_Password" xml:space="preserve">
-    <value>Password</value>
-  </data>
-  <data name="Login_Label_RememberMe" xml:space="preserve">
-    <value>Remember Me</value>
-  </data>
-  <data name="Login_Title_SubTitle" xml:space="preserve">
+  <data name="SignIn_Title_SubTitle" xml:space="preserve">
     <value>Sign In to your account.</value>
     <comment>sign in to your account.</comment>
   </data>
@@ -375,5 +366,56 @@
   </data>
   <data name="Title_FormContact" xml:space="preserve">
     <value>Contact Form</value>
+  </data>
+  <data name="Btn_OtpAuth" xml:space="preserve">
+    <value>Verify</value>
+  </data>
+  <data name="Btn_ResendOtpAuth" xml:space="preserve">
+    <value>Re-send my OTP code</value>
+  </data>
+  <data name="OtpAuth_Title_Description" xml:space="preserve">
+    <value>You will get a OTP via Email</value>
+  </data>
+  <data name="OtpAuth_Title_SubTitle" xml:space="preserve">
+    <value>Verification</value>
+  </data>
+  <data name="SignIn_Field_ID" xml:space="preserve">
+    <value>Login ID</value>
+  </data>
+  <data name="SignIn_Field_Password" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="SignIn_Label_RememberMe" xml:space="preserve">
+    <value>Remember Me</value>
+  </data>
+  <data name="UserList_Title_Contact" xml:space="preserve">
+    <value>Contact Information</value>
+  </data>
+  <data name="UserList_Title_Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="UserList_Title_Sex" xml:space="preserve">
+    <value>Sex</value>
+  </data>
+  <data name="UserList_Title_Status" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="UserList_Title_UserId" xml:space="preserve">
+    <value>ID</value>
+  </data>
+  <data name="RoleList_Title_Description" xml:space="preserve">
+    <value>Role Description</value>
+  </data>
+  <data name="RoleList_Title_Id" xml:space="preserve">
+    <value>ID</value>
+  </data>
+  <data name="RoleList_Title_Name" xml:space="preserve">
+    <value>Role Name</value>
+  </data>
+  <data name="RoleList_Title_Priority" xml:space="preserve">
+    <value>Priority</value>
+  </data>
+  <data name="RoleList_Title_Status" xml:space="preserve">
+    <value>Status</value>
   </data>
 </root>

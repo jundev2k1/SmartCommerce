@@ -7,8 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="FluentValidation" Version="11.9.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="7.0.11" />
+    <PackageReference Include="FluentValidation" Version="11.9.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.11">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -21,6 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Using Include="ErpManager.Domain.Dtos.SearchDtos" />
     <Using Include="ErpManager.Domain.Entities" />
     <Using Include="ErpManager.Domain.Enum" />
     <Using Include="ErpManager.Domain.Models" />

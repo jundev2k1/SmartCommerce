@@ -36,6 +36,8 @@ namespace ErpManager.Common
 			Constants.FLG_GLOBAL_CULTURE_ENG
 		};
 
+		/// <summary>Format datetime: short date</summary>
+		public static readonly string DATE_FORMAT_SHORT_DATE = "yyyy/MM/dd";
 		/// <summary>Format datetime: short date time</summary>
 		public static readonly string DATE_FORMAT_SHORT_DATE_TIME = "yyyy-MM-dd HH:mm:ss";
 	}

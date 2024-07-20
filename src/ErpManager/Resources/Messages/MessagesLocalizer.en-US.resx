@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ErrorCode_AnonymousAccess" xml:space="preserve">
+    <value>Warning!</value>
+  </data>
   <data name="ErrorCode_DataNotFound" xml:space="preserve">
     <value>Not Found</value>
   </data>
@@ -128,6 +131,9 @@
   </data>
   <data name="ErrorCode_TokenInvalid" xml:space="preserve">
     <value>Token Invalid</value>
+  </data>
+  <data name="ErrorMessage_AnonymousAccess" xml:space="preserve">
+    <value>Detecting suspicion of hacking...</value>
   </data>
   <data name="ErrorMessage_BlockAccount" xml:space="preserve">
     <value>You are blocked because you failed to log in more than 3 times. Please try again in 5 minutes</value>
@@ -145,7 +151,7 @@
     <value>Your account does not have permission to access this content. Please contact the manager for help.</value>
   </data>
   <data name="ErrorMessage_SystemError" xml:space="preserve">
-    <value>A system error has occurred, please contact the administrator for help @@operator_phone_number@@</value>
+    <value>A system error has occurred, please contact the administrator for help</value>
     <comment>Setting in config</comment>
   </data>
   <data name="ErrorMessage_TokenInvalid" xml:space="preserve">

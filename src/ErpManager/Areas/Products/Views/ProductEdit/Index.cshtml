@@ -10,10 +10,8 @@
 		new Breadcrumb { Title = _localizer.Globals["Nav_Product_List"].Value, Href = Constants.MODULE_PRODUCT_PRODUCTLIST_PATH },
 		new Breadcrumb { Title = _localizer.Globals["Nav_Product_Edit"].Value, IsDisabled = true }
 	};
-
-	var dropdownItems = (Dictionary<string, List<SelectListItem>>)ViewBag.DropdownItems;
 }
-@model ProductModel
+@model ProductEditViewModel
 
 @await Component.InvokeAsync(Constants.ERP_COMPONENT_NAME_BREADCRUMB, breadcrumbs)
 
@@ -24,11 +22,11 @@
 				<div class="d-flex justify-content-start mb-2">
 					<h3>@_localizer.Globals["Title_Product_Images"]</h3>
 				</div>
-				@await Component.InvokeAsync(Constants.ERP_COMPONENT_NAME_UPLOAD_IMAGE_INPUT, new UploadImageInputViewModel { Name = "Images", Value = Model.Images, UploadType = "product", IsMultiple = true, UploadFileName = Model.ProductId })
+				@await Component.InvokeAsync(Constants.ERP_COMPONENT_NAME_UPLOAD_IMAGE_INPUT, new UploadImageInputViewModel { Name = "Images", Value = Model.PageData.Images, UploadType = "product", IsMultiple = true, UploadFileName = Model.PageData.ProductId })
 			</div>
 		</div>
 		<div class="col-md-7 col-12">
-			<form id="productRegisterForm" asp-area="@Constants.MODULE_PRODUCT_AREA" asp-route="@Constants.MODULE_PRODUCT_PRODUCTEDIT_NAME" asp-route-id="@Model.ProductId" method="post">
+			<form id="productRegisterForm" asp-area="@Constants.MODULE_PRODUCT_AREA" asp-route="@Constants.MODULE_PRODUCT_PRODUCTEDIT_NAME" asp-route-id="@Model.PageData.ProductId" method="post">
 				<div class="site-card">
 					<div class="d-flex justify-content-start mb-2">
 						<h3>@_localizer.Globals["Title_Product_Info"]</h3>
@@ -36,132 +34,131 @@
 					<div class="row g-md-3 gx-1 gy-2">
 						<div class="col-md-4 col-6">
 							<div class="form-group">
-								<label asp-for="ProductId">@_localizer.Fields["Product_ProductId"]</label>
-								<input asp-for="ProductId" type="text" class="form-control" placeholder="@_localizer.Globals["PlaceHolder_TextBox"] @_localizer.Fields["Product_ProductId"]..." disabled />
-								<span asp-validation-for="ProductId" class="text-danger"></span>
+								<label asp-for="PageData.ProductId">@_localizer.Fields["Product_ProductId"]</label>
+								<input asp-for="PageData.ProductId" type="text" class="form-control" placeholder="@_localizer.Globals["PlaceHolder_TextBox"] @_localizer.Fields["Product_ProductId"]..." disabled />
 							</div>
 						</div>
 						<div class="col-md-8 col-6">
 							<div class="form-group">
-								<label asp-for="Name">@_localizer.Fields["Product_Name"]</label>
-								<input asp-for="Name" type="text" class="form-control" placeholder="@_localizer.Globals["PlaceHolder_TextBox"] @_localizer.Fields["Product_Name"]..." />
-								<span asp-validation-for="Name" class="text-danger"></span>
+								<label asp-for="PageData.Name">@_localizer.Fields["Product_Name"]</label>
+								<input asp-for="PageData.Name" type="text" class="form-control" placeholder="@_localizer.Globals["PlaceHolder_TextBox"] @_localizer.Fields["Product_Name"]..." />
+								<span asp-validation-for="PageData.Name" class="text-danger"></span>
 							</div>
 						</div>
 						<div class="col-12">
 							<div class="row g-md-3 gx-1 gy-2">
 								<div class="form-group col-md-4 col-6">
-									<label asp-for="Status">@_localizer.Fields["Product_Status"]</label>
-									@{
-										var statusDropdown = dropdownItems.FirstOrDefault(item => item.Key == new ProductModel().Properties.GetName(model => model.Status)).Value;
-									}
-									@Html.DropDownListFor(model => model.Status, statusDropdown, string.Empty, new { Id = "productStatusForInsert", Class = "form-select" })
-									<span asp-validation-for="Status" class="text-danger"></span>
+									<label asp-for="PageData.Status">@_localizer.Fields["Product_Status"]</label>
+									@Html.DropDownListFor(
+										model => model.PageData.Status,
+										Model.InputOptions.Status,
+										new { Class = "form-select" })
+									<span asp-validation-for="PageData.Status" class="text-danger"></span>
 								</div>
 								<div class="form-group col-md-4 col-6">
-									<label asp-for="DisplayPrice">@_localizer.Fields["Product_DisplayPrice"]</label>
-									@{
-										var displayPriceDropdown = dropdownItems.FirstOrDefault(item => item.Key == new ProductModel().Properties.GetName(model => model.DisplayPrice)).Value;
-									}
-									@Html.DropDownListFor(model => model.DisplayPrice, displayPriceDropdown, string.Empty, new { Id = "displayPriceForInsert", Class = "form-select" })
-									<span asp-validation-for="DisplayPrice" class="text-danger"></span>
+									<label asp-for="PageData.DisplayPrice">@_localizer.Fields["Product_DisplayPrice"]</label>
+									@Html.DropDownListFor(
+										model => model.PageData.DisplayPrice,
+										Model.InputOptions.DisplayPrice,
+										new { Class = "form-select" })
+									<span asp-validation-for="PageData.DisplayPrice" class="text-danger"></span>
 								</div>
 								<div class="form-group col-md-4 col-12">
-									<label asp-for="TakeOverId">@_localizer.Fields["Product_TakeOverId"]</label>
-									<select asp-for="TakeOverId" class="form-select select-search-user">
-										@if (string.IsNullOrEmpty(Model.TakeOverId) == false)
-										{
-											<option value="@Model.TakeOverId"></option>
+									<label asp-for="PageData.TakeOverId">@_localizer.Fields["Product_TakeOverId"]</label>
+									<select asp-for="PageData.TakeOverId" class="form-select select-search-user">
+										@{
+											var takeOverIdItem = Model.InputOptions.TakeOverId.FirstOrDefault();
 										}
+										<option value="@(takeOverIdItem?.Value)">@takeOverIdItem?.Text</option>
 									</select>
-									<span asp-validation-for="TakeOverId" class="text-danger"></span>
+									<span asp-validation-for="PageData.TakeOverId" class="text-danger"></span>
 								</div>
 							</div>
 						</div>
 						<div class="col-12">
 							<div class="row g-md-3 gx-1 gy-2">
 								<div class="form-group col-md-4 col-12">
-									<label asp-for="Price1">@_localizer.Fields["Product_Price1"]</label>
-									<input asp-for="Price1" type="text" class="form-control" placeholder="@_localizer.Globals["PlaceHolder_TextBox"] @_localizer.Fields["Product_Price1"]..." />
-									<span asp-validation-for="Price1" class="text-danger"></span>
+									<label asp-for="PageData.Price1">@_localizer.Fields["Product_Price1"]</label>
+									<input asp-for="PageData.Price1" type="text" class="form-control" placeholder="@_localizer.Globals["PlaceHolder_TextBox"] @_localizer.Fields["Product_Price1"]..." />
+									<span asp-validation-for="PageData.Price1" class="text-danger"></span>
 								</div>
 								<div class="form-group col-md-4 col-12">
-									<label asp-for="Price2">@_localizer.Fields["Product_Price2"]</label>
-									<input asp-for="Price2" type="text" class="form-control" placeholder="@_localizer.Globals["PlaceHolder_TextBox"] @_localizer.Fields["Product_Price2"]..." />
-									<span asp-validation-for="Price2" class="text-danger"></span>
+									<label asp-for="PageData.Price2">@_localizer.Fields["Product_Price2"]</label>
+									<input asp-for="PageData.Price2" type="text" class="form-control" placeholder="@_localizer.Globals["PlaceHolder_TextBox"] @_localizer.Fields["Product_Price2"]..." />
+									<span asp-validation-for="PageData.Price2" class="text-danger"></span>
 								</div>
 								<div class="form-group col-md-4 col-12">
-									<label asp-for="Price3">@_localizer.Fields["Product_Price3"]</label>
-									<input asp-for="Price3" type="text" class="form-control" placeholder="@_localizer.Globals["PlaceHolder_TextBox"] @_localizer.Fields["Product_Price3"]..." />
-									<span asp-validation-for="Price3" class="text-danger"></span>
+									<label asp-for="PageData.Price3">@_localizer.Fields["Product_Price3"]</label>
+									<input asp-for="PageData.Price3" type="text" class="form-control" placeholder="@_localizer.Globals["PlaceHolder_TextBox"] @_localizer.Fields["Product_Price3"]..." />
+									<span asp-validation-for="PageData.Price3" class="text-danger"></span>
 								</div>
 							</div>
 						</div>
 						<div class="col-12">
 							<div class="row g-md-3 gx-1 gy-2">
 								<div class="form-group col-md-4 col-12">
-									<label asp-for="Size1">@_localizer.Fields["Product_Size1"]</label>
-									<input asp-for="Size1" type="text" class="form-control" placeholder="@_localizer.Globals["PlaceHolder_TextBox"] @_localizer.Fields["Product_Size1"]..." />
-									<span asp-validation-for="Size1" class="text-danger"></span>
+									<label asp-for="PageData.Size1">@_localizer.Fields["Product_Size1"]</label>
+									<input asp-for="PageData.Size1" type="text" class="form-control" placeholder="@_localizer.Globals["PlaceHolder_TextBox"] @_localizer.Fields["Product_Size1"]..." />
+									<span asp-validation-for="PageData.Size1" class="text-danger"></span>
 								</div>
 								<div class="form-group col-md-4 col-12">
-									<label asp-for="Size2">@_localizer.Fields["Product_Size2"]</label>
-									<input asp-for="Size2" type="text" class="form-control" placeholder="@_localizer.Globals["PlaceHolder_TextBox"] @_localizer.Fields["Product_Size2"]..." />
-									<span asp-validation-for="Size2" class="text-danger"></span>
+									<label asp-for="PageData.Size2">@_localizer.Fields["Product_Size2"]</label>
+									<input asp-for="PageData.Size2" type="text" class="form-control" placeholder="@_localizer.Globals["PlaceHolder_TextBox"] @_localizer.Fields["Product_Size2"]..." />
+									<span asp-validation-for="PageData.Size2" class="text-danger"></span>
 								</div>
 								<div class="form-group col-md-4 col-12">
-									<label asp-for="Size3">@_localizer.Fields["Product_Size3"]</label>
-									<input asp-for="Size3" type="text" class="form-control" placeholder="@_localizer.Globals["PlaceHolder_TextBox"] @_localizer.Fields["Product_Size3"]..." />
-									<span asp-validation-for="Size3" class="text-danger"></span>
+									<label asp-for="PageData.Size3">@_localizer.Fields["Product_Size3"]</label>
+									<input asp-for="PageData.Size3" type="text" class="form-control" placeholder="@_localizer.Globals["PlaceHolder_TextBox"] @_localizer.Fields["Product_Size3"]..." />
+									<span asp-validation-for="PageData.Size3" class="text-danger"></span>
 								</div>
 							</div>
 						</div>
 						<div class="col-12">
 							<div class="row g-md-3 gx-1 gy-2">
 								<div class="form-group col-md-4 col-12">
-									<label asp-for="Address1">@_localizer.Fields["Product_Address1"]</label>
-									<select asp-for="Address1" class="form-select select-search-address-1" id="address1ForInsert">
-										@if (string.IsNullOrEmpty(@Model.Address1) == false)
+									<label asp-for="PageData.Address1">@_localizer.Fields["Product_Address1"]</label>
+									<select asp-for="PageData.Address1" class="form-select select-search-address-1" id="address1ForInsert">
+										@if (string.IsNullOrEmpty(@Model.PageData.Address1) == false)
 										{
-											<option value="@Model.Address1" selected></option>
+											<option value="@Model.PageData.Address1" selected></option>
 										}
 									</select>
-									<span asp-validation-for="Address1" class="text-danger"></span>
+									<span asp-validation-for="PageData.Address1" class="text-danger"></span>
 								</div>
 								<div class="form-group col-md-4 col-12">
-									<label asp-for="Address2">@_localizer.Fields["Product_Address2"]</label>
-									<select asp-for="Address2" class="form-select select-search-address-2" id="address2ForInsert" data-parent-id="address1ForInsert">
-										@if (string.IsNullOrEmpty(@Model.Address2) == false)
+									<label asp-for="PageData.Address2">@_localizer.Fields["Product_Address2"]</label>
+									<select asp-for="PageData.Address2" class="form-select select-search-address-2" id="address2ForInsert" data-parent-id="address1ForInsert">
+										@if (string.IsNullOrEmpty(@Model.PageData.Address2) == false)
 										{
-											<option value="@Model.Address2" selected></option>
+											<option value="@Model.PageData.Address2" selected></option>
 										}
 									</select>
-									<span asp-validation-for="Address2" class="text-danger"></span>
+									<span asp-validation-for="PageData.Address2" class="text-danger"></span>
 								</div>
 								<div class="form-group col-md-4 col-12">
-									<label asp-for="Address3">@_localizer.Fields["Product_Address3"]</label>
-									<select asp-for="Address3" class="form-select select-search-address-3" id="address3ForInsert" data-parent-id="address2ForInsert">
-										@if (string.IsNullOrEmpty(@Model.Address3) == false)
+									<label asp-for="PageData.Address3">@_localizer.Fields["Product_Address3"]</label>
+									<select asp-for="PageData.Address3" class="form-select select-search-address-3" id="address3ForInsert" data-parent-id="address2ForInsert">
+										@if (string.IsNullOrEmpty(@Model.PageData.Address3) == false)
 										{
-											<option value="@Model.Address3" selected></option>
+											<option value="@Model.PageData.Address3" selected></option>
 										}
 									</select>
-									<span asp-validation-for="Address3" class="text-danger"></span>
+									<span asp-validation-for="PageData.Address3" class="text-danger"></span>
 								</div>
 								<div class="form-group col-12">
-									<label asp-for="Address4">@_localizer.Fields["Product_Address4"]</label>
-									<input asp-for="Address4" type="text" class="form-control" placeholder="@_localizer.Globals["PlaceHolder_TextBox"] @_localizer.Fields["Product_Address4"]..." />
-									<span asp-validation-for="Address4" class="text-danger"></span>
+									<label asp-for="PageData.Address4">@_localizer.Fields["Product_Address4"]</label>
+									<input asp-for="PageData.Address4" type="text" class="form-control" placeholder="@_localizer.Globals["PlaceHolder_TextBox"] @_localizer.Fields["Product_Address4"]..." />
+									<span asp-validation-for="PageData.Address4" class="text-danger"></span>
 								</div>
 								<div class="form-group col-12">
-									<label asp-for="EmbeddedLink">@_localizer.Fields["Product_EmbeddedLink"]</label>
-									<input asp-for="EmbeddedLink" type="text" class="form-control" placeholder="@_localizer.Globals["PlaceHolder_TextBox"]..." />
-									<span asp-validation-for="EmbeddedLink" class="text-danger"></span>
+									<label asp-for="PageData.EmbeddedLink">@_localizer.Fields["Product_EmbeddedLink"]</label>
+									<input asp-for="PageData.EmbeddedLink" type="text" class="form-control" placeholder="@_localizer.Globals["PlaceHolder_TextBox"]..." />
+									<span asp-validation-for="PageData.EmbeddedLink" class="text-danger"></span>
 								</div>
 								<div class="form-group col-12">
-									<label asp-for="RelatedProductId">@_localizer.Fields["Product_RelatedProduct"]</label>
-									<input asp-for="RelatedProductId" type="text" class="form-control" placeholder="@_localizer.Globals["PlaceHolder_TextBox"]..." />
-									<span asp-validation-for="RelatedProductId" class="text-danger"></span>
+									<label asp-for="PageData.RelatedProductId">@_localizer.Fields["Product_RelatedProduct"]</label>
+									<input asp-for="PageData.RelatedProductId" type="text" class="form-control" placeholder="@_localizer.Globals["PlaceHolder_TextBox"]..." />
+									<span asp-validation-for="PageData.RelatedProductId" class="text-danger"></span>
 								</div>
 							</div>
 						</div>
@@ -184,7 +181,7 @@
 				<div class="d-flex justify-content-between mb-2">
 					<h3>@_localizer.Globals["Title_Product_Description"]</h3>
 					<div>
-						<a asp-route="@Constants.MODULE_PRODUCT_PRODUCTDETAIL_NAME" asp-route-id="@Model.ProductId" class="btn site-btn-outline-secondary">
+						<a asp-route="@Constants.MODULE_PRODUCT_PRODUCTDETAIL_NAME" asp-route-id="@Model.PageData.ProductId" class="btn site-btn-outline-secondary">
 							<i class="fa-regular fa-arrow-left"></i>
 							@_localizer.Globals["Btn_BackToDetail"]
 						</a>
@@ -195,7 +192,7 @@
 					</div>
 				</div>
 				<textarea id="form-editor" data-target-selector=".description-input" data-editor-key="productDescription"></textarea>
-				<input class="description-input" type="hidden" value="@Model.Description" />
+				<input id="descriptionInput" type="hidden" value="@Model.PageData.Description" />
 			</div>
 		</div>
 	</div>
@@ -212,8 +209,8 @@
 		};
 
 		const handleUpdateDescription = () => {
-			const hfElement = document.querySelector('.description-input');
-			if (!hfElement) return;
+			const descInput = document.querySelector('#descriptionInput');
+			if (!descInput) return;
 
 			const handleSuccess = (response) => {
 				if (response === false) {
@@ -223,9 +220,9 @@
 
 				toastr.success('success');
 			}
-			const productId = '@(Model.ProductId)'
-			const url = '@(Constants.MODULE_PRODUCT_PRODUCTEDIT_DESCRIPTION_PATH.Replace("{id}", Model.ProductId))';
-			callAjax({ url, data: JSON.stringify(hfElement.value), onSuccess: handleSuccess });
+			const productId = '@(Model.PageData.ProductId)';
+			const url = '@(Constants.MODULE_PRODUCT_PRODUCTEDIT_DESCRIPTION_PATH.Replace("{id}", Model.PageData.ProductId))';
+			callAjax({ url, data: JSON.stringify(descInput.value), onSuccess: handleSuccess });
 		}
 
 		$(document).ready(() => {

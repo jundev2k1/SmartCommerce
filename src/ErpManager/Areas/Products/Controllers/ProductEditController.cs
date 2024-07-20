@@ -1,6 +1,7 @@
 ﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
 
 using ErpManager.ERP.Areas.Products.Controllers;
+using ErpManager.ERP.Areas.Products.ViewModels;
 
 namespace ErpManager.ERP.Areas.Product.Controllers
 {
@@ -29,39 +30,50 @@ namespace ErpManager.ERP.Areas.Product.Controllers
 		public IActionResult Index(string id)
 		{
 			var product = _serviceFacade.Products.Get(this.OperatorBranchId, id);
-			if (product == null) return RedirectToRoute(Constants.MODULE_PRODUCT_PRODUCTLIST_NAME);
+			if (product == null)
+			{
+				return RedirectToErrorPage(
+					_localizer.Messages["ErrorMessage_DataNotFound"].Value,
+					ErrorCodeEnum.DataNotFound);
+			}
 
-			ViewBag.DropdownItems = GetInitDropdownListItems(new ProductModel());
-			return View(product);
+			var viewModel = new ProductEditViewModel
+			{
+				PageData = product,
+				InputOptions = GetInitDropdownListItems(new ProductModel()),
+			};
+			return View(viewModel);
 		}
 
 		[HttpPost]
 		[Authorization(Permission.CanEditProduct)]
 		[Route(Constants.MODULE_PRODUCT_PRODUCTEDIT_PATH, Name = Constants.MODULE_PRODUCT_PRODUCTEDIT_NAME)]
-		public IActionResult Index([FromRoute] string id, ProductModel formInput)
+		public IActionResult Index([FromRoute] string id, ProductEditViewModel viewModel)
 		{
+			var pageData = viewModel.PageData;
+
 			// Set default value for form input
-			formInput.ProductId = id;
-			formInput.TrimStringInput();
-			SetDataForUpdate(ref formInput);
+			pageData.ProductId = id;
+			pageData.TrimStringInput();
+			SetDataForUpdate(ref pageData);
 
 			// Set initial value for dropdown list
-			ViewBag.DropdownItems = GetInitDropdownListItems(formInput);
+			viewModel.InputOptions = GetInitDropdownListItems(pageData);
 
 			// Validate form input
 			ModelState.Clear();
-			var validateResult = _validatorFacade.ProductValidate(formInput);
+			var validateResult = _validatorFacade.ProductValidate(pageData);
 			if (validateResult.IsValid == false)
 			{
 				AddErrorToModelState(validateResult);
-				return View(formInput);
+				return View(viewModel);
 			}
 
-			// Handle create new product
-			var isSuccess = _serviceFacade.Products.Update(formInput);
-			if (isSuccess == false) return View(formInput);
+			// Handle update product
+			var isSuccess = _serviceFacade.Products.Update(pageData);
+			if (isSuccess == false) return View(viewModel);
 
-			return RedirectToRoute(Constants.MODULE_PRODUCT_PRODUCTDETAIL_NAME, new { id = formInput.ProductId });
+			return RedirectToRoute(Constants.MODULE_PRODUCT_PRODUCTDETAIL_NAME, new { id = pageData.ProductId });
 		}
 
 		/// <summary>
@@ -79,7 +91,7 @@ namespace ErpManager.ERP.Areas.Product.Controllers
 			input.BranchId = this.OperatorBranchId;
 			input.Images = productImages;
 			input.Description = product.Description;
-			input.LastChanged = this.OperatorId;
+			input.LastChanged = this.OperatorName;
 			input.DateChanged = DateTime.Now;
 			input.DateCreated = product?.DateCreated;
 			input.CreatedBy = product?.CreatedBy ?? this.OperatorId;

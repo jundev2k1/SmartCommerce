@@ -184,14 +184,14 @@ namespace ErpManager.ERP.Controllers
 		/// <summary>
 		/// Redirect to error page
 		/// </summary>
-		/// <param name="errorMessageKey">Error message key</param>
+		/// <param name="errorMessage">Error message</param>
 		/// <param name="errorCode">Error code</param>
 		protected IActionResult RedirectToErrorPage(
-			string errorMessageKey = Constants.ERRORMSG_KEY_SYSTEM_ERROR,
+			string errorMessage,
 			ErrorCodeEnum errorCode = ErrorCodeEnum.SystemError)
 		{
 			_sessionManager.SystemPageErrorCode = errorCode.GetStringValue();
-			_sessionManager.SystemPageErrorMessage = errorMessageKey;
+			_sessionManager.SystemPageErrorMessage = errorMessage;
 
 			return RedirectToRoute(Constants.MODULE_ERROR_ERROR_NAME);
 		}

@@ -24,9 +24,14 @@ namespace ErpManager.ERP.Areas.Product.Controllers
 		public IActionResult Index(int page = 1)
 		{
 			var condition = new ProductSearchDto { BranchId = this.OperatorBranchId };
-			var data = _serviceFacade.Products.Search(condition, page, Constants.DEFAULT_PAGE_SIZE);
-
-			return View(new ProductListViewModel { PageData = data, PageIndex = page });
+			var productList = _serviceFacade.Products.Search(condition, page, Constants.DEFAULT_PAGE_SIZE);
+			var data = new ProductListViewModel
+			{
+				PageData = productList,
+				PageIndex = page,
+				InputOption = GetInitDropdownListItems(new ProductModel()),
+			};
+			return View(data);
 		}
 
 		[HttpPost]
@@ -34,17 +39,21 @@ namespace ErpManager.ERP.Areas.Product.Controllers
 		[Route(Constants.MODULE_PRODUCT_PRODUCTLIST_PATH)]
 		public IActionResult Index(ProductListViewModel viewModel)
 		{
+			// Set default search data
 			var searchParams = viewModel.SearchFields;
 			searchParams.BranchId = this.OperatorBranchId;
-			viewModel.PageData = _serviceFacade.Products.Search(searchParams, viewModel.PageIndex, viewModel.PageSize);
+
+			// Set initial value for dropdown list
+			viewModel.InputOption = GetInitDropdownListItems(viewModel.SearchFields.MapSearchToModel());
 
 			// Check page index out of range data collection
 			if (viewModel.PageData.TotalPage < viewModel.PageIndex)
-			{
-				viewModel.PageData = _serviceFacade.Products.Search(searchParams, 1, viewModel.PageSize);
 				viewModel.PageIndex = 1;
-			}
 
+			viewModel.PageData = _serviceFacade.Products.Search(
+				searchParams,
+				viewModel.PageIndex,
+				viewModel.PageSize);
 			return View(viewModel);
 		}
 	}

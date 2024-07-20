@@ -8,18 +8,18 @@ namespace ErpManager.Persistence.Common.Utilities.Search
 	{
 		public static Expression<Func<Role, bool>> RoleSearch(RoleSearchDto searchDto)
 		{
-			var predicate = PredicateBuilder.True<Role>();
+			var predicate = PredicateBuilder.New<Role>();
 
 			if (string.IsNullOrEmpty(searchDto.Keywords) == false)
 			{
-				predicate.And(p =>
-					p.RoleId.ToString().Contains(searchDto.Keywords)
-					|| p.Name.Contains(searchDto.Keywords));
+				predicate.And(role =>
+					role.RoleId.ToString().Contains(searchDto.Keywords)
+					|| role.Name.Contains(searchDto.Keywords));
 			}
 
 			if (string.IsNullOrEmpty(searchDto.BranchId) == false)
 			{
-				predicate.And(u => u.BranchId.Contains(searchDto.BranchId));
+				predicate.And(role => role.BranchId.Equals(searchDto.BranchId));
 			}
 
 			return predicate;

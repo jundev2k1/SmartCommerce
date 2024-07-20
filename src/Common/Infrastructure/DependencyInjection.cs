@@ -39,7 +39,6 @@ namespace ErpManager.Infrastructure
 
 		private static IApplicationBuilder UseMiddleWare(this IApplicationBuilder app)
 		{
-			app.UseMiddleware<ExceptionHandlingMiddleware>();
 			app.UseMiddleware<RateLimitingMiddleware>();
 			app.UseMiddleware<CompressionMiddleware>();
 			app.UseMiddleware<ResetConstantHandlerMiddleware>();

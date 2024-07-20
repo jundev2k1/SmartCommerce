@@ -10,6 +10,9 @@ namespace ErpManager.Common
 		// Auth module: sign out
 		public const string MODULE_AUTH_SIGNOUT_PATH = "/sign-out";
 		public const string MODULE_AUTH_SIGNOUT_NAME = "SignOut";
+		// Auth module: OTP authentication
+		public const string MODULE_AUTH_OTP_PATH = "/otp-auth";
+		public const string MODULE_AUTH_OTP_NAME = "OtpAuth";
 
 		// Error module: error
 		public const string MODULE_ERROR_ERROR_PATH = "/error-page";
@@ -26,13 +29,22 @@ namespace ErpManager.Common
 		public const string MODULE_USER_USERLIST_PATH = "/user/list";
 		public const string MODULE_USER_USERLIST_NAME = "UserList";
 		// User module: user detail
-		public const string MODULE_USER_USERDETAIL_PATH = "/user/detail/{userId}";
+		public const string MODULE_USER_USERDETAIL_PATH = "/user/detail/{id}";
 		public const string MODULE_USER_USERDETAIL_NAME = "UserDetail";
-		// User module: user role
-		public const string MODULE_USER_USERROLE_PATH = "/user/role";
-		public const string MODULE_USER_USERROLE_NAME = "UserRole";
 		// User endpoint
 		public const string ENDPOINT_COMMON_USER_GET_USER_LIST = "/common/get-users";
+
+		// Role module: role area
+		public const string MODULE_ROLE_AREA = "roles";
+		// Role module: role list
+		public const string MODULE_ROLE_ROLELIST_PATH = "/role/list";
+		public const string MODULE_ROLE_ROLELIST_NAME = "RoleList";
+		// Role module: role setting
+		public const string MODULE_ROLE_ROLESETTING_PATH = "/role/setting/{id}";
+		public const string MODULE_ROLE_ROLESETTING_NAME = "RoleSetting";
+		// Role module: role detail
+		public const string MODULE_ROLE_ROLEDETAIL_PATH = "/role/detail/{id}";
+		public const string MODULE_ROLE_ROLEDETAIL_NAME = "RoleDetail";
 
 		// Product module
 		public const string MODULE_PRODUCT_AREA = "products";

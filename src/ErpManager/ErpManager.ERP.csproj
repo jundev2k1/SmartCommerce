@@ -8,27 +8,21 @@
 
   <ItemGroup>
     <Compile Remove="%2a%2a\**" />
-    <Compile Remove="Scripts\NewFolder\**" />
     <Compile Remove="wwwroot\content\product-images\**" />
     <Compile Remove="wwwroot\content\user-images\**" />
     <Content Remove="%2a%2a\**" />
-    <Content Remove="Scripts\NewFolder\**" />
     <Content Remove="wwwroot\content\product-images\**" />
     <Content Remove="wwwroot\content\user-images\**" />
     <EmbeddedResource Remove="%2a%2a\**" />
-    <EmbeddedResource Remove="Scripts\NewFolder\**" />
     <EmbeddedResource Remove="wwwroot\content\product-images\**" />
     <EmbeddedResource Remove="wwwroot\content\user-images\**" />
     <EntityDeploy Remove="%2a%2a\**" />
-    <EntityDeploy Remove="Scripts\NewFolder\**" />
     <EntityDeploy Remove="wwwroot\content\product-images\**" />
     <EntityDeploy Remove="wwwroot\content\user-images\**" />
     <None Remove="%2a%2a\**" />
-    <None Remove="Scripts\NewFolder\**" />
     <None Remove="wwwroot\content\product-images\**" />
     <None Remove="wwwroot\content\user-images\**" />
     <TypeScriptCompile Remove="%2a%2a\**" />
-    <TypeScriptCompile Remove="Scripts\NewFolder\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -76,6 +70,7 @@
     <Using Include="ErpManager.Common.Utilities" />
     <Using Include="ErpManager.Domain.Dtos.SearchDtos" />
     <Using Include="ErpManager.Domain.Enum" />
+    <Using Include="ErpManager.Domain.Mapping" />
     <Using Include="ErpManager.Domain.Models" />
     <Using Include="ErpManager.ERP.Common" />
     <Using Include="ErpManager.ERP.Common.Enum" />
@@ -104,10 +99,6 @@
     <Using Include="Newtonsoft.Json" />
     <Using Include="System.Collections" />
     <Using Include="System.Web" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="wwwroot\css\component\" />
   </ItemGroup>
 
   <ItemGroup>

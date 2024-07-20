@@ -25,14 +25,14 @@
 					<div class="flex-grow-1">
 						@await Component.InvokeAsync(Constants.ERP_COMPONENT_NAME_SEARCH_INPUT, new SearchInputViewModel { Name = "SearchFields.Keywords", Value = Model.SearchFields.Keywords, ClassName = "search-bar-input" })
 					</div>
-					<button id="btnExport" type="button" class="btn site-btn-outline-info is-desktop" data-bs-toggle="collapse" href="#filterAdvancedCollapse">
+					<button id="btnExport" type="button" class="btn site-btn-outline-info only-desktop" data-bs-toggle="collapse" href="#filterAdvancedCollapse">
 						<i class="fa-light fa-filter-list"></i>
 						@_localizer.Globals["Btn_Filter"]
 					</button>
 				</div>
 			</div>
 			<div class="col-md-4 col-12 d-flex justify-content-end gap-2">
-				<button id="btnExport" type="button" class="btn site-btn-outline-info is-mobile" data-bs-toggle="collapse" href="#filterAdvancedCollapse">
+				<button id="btnExport" type="button" class="btn site-btn-outline-info only-mobile" data-bs-toggle="collapse" href="#filterAdvancedCollapse">
 					<i class="fa-light fa-filter-list"></i>
 					@_localizer.Globals["Btn_Filter"]
 				</button>
@@ -59,7 +59,10 @@
 							<li class="col-md-4 col-6">
 								<div class="form-group">
 									<label asp-for="SearchFields.Status" class="form-label">@_localizer.Fields["Product_Status"]</label>
-									<input type="text" asp-for="SearchFields.Status" class="form-control" id="statusForSearch" placeholder="@_localizer.Globals["PlaceHolder_SearchWith"] @_localizer.Fields["Product_Status"]...">
+									@Html.DropDownListFor(
+										model => model.SearchFields.Status,
+										Model.InputOption.Status,
+										new { Class = "form-select" })
 								</div>
 							</li>
 							<li class="col-md-4 col-12">
@@ -79,29 +82,42 @@
 							<li class="col-md-4 col-12">
 								<div class="form-group">
 									<label asp-for="SearchFields.DisplayPrice" class="form-label">@_localizer.Fields["Product_DisplayPrice"]</label>
-									<select asp-for="SearchFields.DisplayPrice" class="form-select" id="displayPriceForSearch" aria-label="Display Price">
-										<option value="" selected>@_localizer.Globals["PlaceHolder_Select"]</option>
-										<option value="0">@_localizer.Fields["Product_Price1"]</option>
-										<option value="1">@_localizer.Fields["Product_Price2"]</option>
-										<option value="2">@_localizer.Fields["Product_Price3"]</option>
-									</select>
+									@Html.DropDownListFor(
+										model => model.SearchFields.DisplayPrice,
+										Model.InputOption.DisplayPrice,
+										new { Class = "form-select" })
 								</div>
 							</li>
 							<li class="col-12">
 								<div class="row g-md-2 gx-1 gy-2">
 									<div class="col-md-3 col-12">
 										<label asp-for="SearchFields.Address1" class="form-label">@_localizer.Fields["Product_Address1"]</label>
-										<select asp-for="SearchFields.Address1" class="form-select select-search-address-1" id="address1ForSearch"></select>
+										<select asp-for="SearchFields.Address1" class="form-select select-search-address-1" id="address1ForSearch">
+											@if (string.IsNullOrEmpty(Model.SearchFields.Address1) == false)
+											{
+												<option value="@Model.SearchFields.Address1" selected></option>
+											}
+										</select>
 									</div>
 									<div class="col-md-3 col-12">
 										<div>
 											<label asp-for="SearchFields.Address2" class="form-label">@_localizer.Fields["Product_Address2"]</label>
-											<select asp-for="SearchFields.Address2" class="form-select select-search-address-2" id="address2ForSearch" data-parent-id="address1ForSearch"></select>
+											<select asp-for="SearchFields.Address2" class="form-select select-search-address-2" id="address2ForSearch" data-parent-id="address1ForSearch">
+												@if (string.IsNullOrEmpty(Model.SearchFields.Address2) == false)
+												{
+													<option value="@Model.SearchFields.Address2" selected></option>
+												}
+											</select>
 										</div>
 									</div>
 									<div class="col-md-3 col-12">
 										<label asp-for="SearchFields.Address3" class="form-label">@_localizer.Fields["Product_Address3"]</label>
-										<select asp-for="SearchFields.Address3" class="form-select select-search-address-3" id="address3ForSearch" data-parent-id="address2ForSearch"></select>
+										<select asp-for="SearchFields.Address3" class="form-select select-search-address-3" id="address3ForSearch" data-parent-id="address2ForSearch">
+											@if (string.IsNullOrEmpty(Model.SearchFields.Address3) == false)
+											{
+												<option value="@Model.SearchFields.Address3" selected></option>
+											}
+										</select>
 									</div>
 									<div class="col-md-3 col-12">
 										<label asp-for="SearchFields.Address4" class="form-label">@_localizer.Fields["Product_Address4"]</label>
@@ -191,15 +207,16 @@
 							</li>
 						</ul>
 						<div class="hidden-field-area d-none">
+							<input id="totalPage" type="hidden" asp-for="PageData.TotalPage" />
 							<input id="pageIndex" type="hidden" asp-for="PageIndex" />
 						</div>
 						<div id="searchControl" class="d-flex justify-content-md-end mt-4">
 							<div class="group-control w-auto row g-md-2 gx-1 gy-2">
 								<div class="form-group col-md-auto col-12">
-									<select asp-for="SearchFields.DelFlg" id="delFlgSearchInput" class="form-select w-auto" aria-label="DeleteFlg">
-										<option selected value="false">@_localizer.ValueTexts["ValTxt_DelFlg_Normal"]</option>
-										<option value="true">@_localizer.ValueTexts["ValTxt_DelFlg_Deleted"]</option>
-									</select>
+									@Html.DropDownListFor(
+										model => model.SearchFields.DelFlg,
+										Model.InputOption.DeleteFlg,
+										new { Class = "form-select w-auto" })
 								</div>
 								<div class="form-group col-md-auto col-8">
 									<button id="btnSubmitAdvanced" type="submit" class="btn site-btn-theme">
@@ -227,11 +244,11 @@
 			<table class="site-table site-table-hover site-border site-rounded-layout">
 				<thead>
 					<tr>
-						<th class="is-desktop" scope="col" width="10%">@_localizer.Fields["Product_ProductId"]</th>
+						<th class="only-desktop" scope="col" width="10%">@_localizer.Fields["Product_ProductId"]</th>
 						<th scope="col" width="25%">@_localizer.Fields["Product_Name"]</th>
 						<th class="text-center" scope="col" width="15%">@_localizer.Fields["Product_Price"]</th>
 						<th class="text-center" scope="col" width="10%">@_localizer.Fields["Product_Status"]</th>
-						<th class="text-center is-desktop" scope="col" width="40%">@_localizer.Fields["Product_Address"]</th>
+						<th class="text-center only-desktop" scope="col" width="40%">@_localizer.Fields["Product_Address"]</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -240,7 +257,7 @@
 						@foreach (var item in Model.PageData.Items)
 						{
 							<tr>
-								<td class="is-desktop">
+								<td class="only-desktop">
 									<p class="mb-0">
 										@item.ProductId
 									</p>
@@ -248,6 +265,11 @@
 								<td>
 									<a asp-route="@Constants.MODULE_PRODUCT_PRODUCTDETAIL_NAME" asp-route-id="@item.ProductId">
 										<p class="mb-0">@item.Name</p>
+										<div class="d-block only-desktop">
+											@await Component.InvokeAsync(
+												Constants.ERP_COMPONENT_NAME_CREATED_BY_BADGE,
+												new { BranchId = item.BranchId, CreatedBy = item.CreatedBy, DateCreated = item.DateCreated })
+										</div>
 									</a>
 								</td>
 								<td class="text-end">
@@ -258,7 +280,7 @@
 								<td class="text-center">
 									@await Component.InvokeAsync(Constants.ERP_COMPONENT_NAME_PRODUCT_STATUS_BADGE, new { status = item.Status })
 								</td>
-								<td class="text-start is-desktop">
+								<td class="text-start only-desktop">
 									<p class="mb-0">
 										@AddressUtilities.GetProductAddress(item)
 									</p>

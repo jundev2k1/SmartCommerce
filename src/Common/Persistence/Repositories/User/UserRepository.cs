@@ -23,7 +23,8 @@ namespace ErpManager.Persistence.Repositories
 		{
 			var query = _dbContext.Users
 				.AsQueryable()
-				.Where(expression);
+				.Where(expression)
+				.OrderByDescending(user => user.DateCreated);
 
 			var queryCount = query.Count();
 			var isSurplus = (queryCount % pageSize) > 0;

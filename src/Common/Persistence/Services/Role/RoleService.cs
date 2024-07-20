@@ -41,7 +41,7 @@ namespace ErpManager.Persistence.Services
 		/// </summary>
 		/// <param name="branchId"></param>
 		/// <returns>A collection of role</returns>
-		public RoleModel[] GetAllRole(string branchId)
+		public RoleModel[] GetAll(string branchId)
 		{
 			return _roleRepository.GetAll(branchId);
 		}
@@ -52,7 +52,7 @@ namespace ErpManager.Persistence.Services
 		/// <param name="branchID"></param>
 		/// <param name="roleId"></param>
 		/// <returns>Role model</returns>
-		public RoleModel? GetRole(string branchId, int roleId)
+		public RoleModel? Get(string branchId, int roleId)
 		{
 			return _roleRepository.Get(branchId, roleId);
 		}

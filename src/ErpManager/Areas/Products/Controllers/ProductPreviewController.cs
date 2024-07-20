@@ -27,12 +27,15 @@ namespace ErpManager.ERP.Areas.Product.Controllers
 		[Route(Constants.MODULE_PRODUCT_PRODUCTPREVIEW_PATH, Name = Constants.MODULE_PRODUCT_PRODUCTPREVIEW_NAME)]
 		public IActionResult Index([FromQuery] string branchId, string id, string token = "")
 		{
+			// Check token if not logged in
 			if (!this.IsLogin)
 			{
 				var isValid = string.IsNullOrEmpty(token) == false
 					&& _serviceFacade.Tokens.IsValid(branchId, TokenTypeEnum.ProductPreviewToken, token);
 				if (!isValid) return RedirectToErrorPage(Constants.ERRORMSG_KEY_TOKEN_INVALID, ErrorCodeEnum.TokenInvalid);
 			}
+
+			// Check exist product
 			var product = _serviceFacade.Products.Get(branchId, id);
 			if (product == null) return RedirectToErrorPage(Constants.ERRORMSG_KEY_DATA_NOT_FOUND, ErrorCodeEnum.DataNotFound);
 

@@ -42,6 +42,36 @@ namespace ErpManager.Domain.Mapping
 		}
 
 		/// <summary>
+		/// Map search to model
+		/// </summary>
+		/// <param name="searchDto">Search Dto</param>
+		/// <returns>Model</returns>
+		public static UserModel MapSearchToModel(this UserSearchDto searchDto)
+		{
+			var model = new UserModel
+			{
+				BranchId = searchDto.BranchId,
+				UserId = searchDto.UserId,
+				UserName = searchDto.UserName,
+				FirstName= searchDto.FirstName,
+				LastName= searchDto.LastName,
+				Email = searchDto.Email,
+				PhoneNumber = searchDto.PhoneNumber,
+				Address1 = searchDto.Address1,
+				Address2 = searchDto.Address2,
+				Address3 = searchDto.Address3,
+				Address4 = searchDto.Address4,
+				Status = searchDto.Status,
+				CreatedBy= searchDto.CreatedBy,
+				LastLogin = searchDto.LastLogin,
+				DelFlg = searchDto.DelFlg,
+				RoleId= searchDto.RoleId,
+			};
+
+			return model;
+		}
+
+		/// <summary>
 		/// Map to entity
 		/// </summary>
 		/// <param name="model">Model</param>

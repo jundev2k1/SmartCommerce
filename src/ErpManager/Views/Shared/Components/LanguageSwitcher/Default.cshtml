@@ -3,7 +3,7 @@
 @model LanguageSwitcherViewModel
 
 <section id="languageButton">
-	<form id="languageSwitcherForm" asp-controller="Home" asp-action="LanguageSwitcher" method="get">
+	<form id="languageSwitcherForm" asp-route="@(Constants.ENDPOINT_COMMON_CHANGE_LANGUAGE_NAME)" method="get">
 		<select name="culture" class="form-select form-select-sm site-rounded-full ps-3 pr-4" id="languageDropdown" onchange="formSubmit()">
 			@foreach (var culture in Model.AvailableCultures)
 			{

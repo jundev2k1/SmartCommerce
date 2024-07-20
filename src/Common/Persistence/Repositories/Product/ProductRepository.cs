@@ -23,15 +23,18 @@ namespace ErpManager.Persistence.Repositories
 		/// <returns>Search result model</returns>
 		public SearchResultModel<ProductModel> Search(Expression<Func<Product, bool>> expression, int pageIndex, int pageSize)
 		{
+			// Search with query
 			var query = _dbContext.Products
 				.AsQueryable()
 				.Where(expression)
 				.OrderByDescending(product => product.DateCreated);
 
+			// Handle get page information
 			var queryCount = query.Count();
 			var isSurplus = (queryCount % pageSize) > 0;
 			var totalPage = queryCount / pageSize + (isSurplus ? 1 : 0);
 
+			// Handle get data with paging
 			var pageSkip = (pageIndex - 1) * pageSize;
 			var data = query
 				.Skip(pageSkip)
@@ -44,7 +47,6 @@ namespace ErpManager.Persistence.Repositories
 				TotalPage = totalPage,
 				TotalRecord = queryCount
 			};
-
 			return result;
 		}
 
@@ -63,7 +65,6 @@ namespace ErpManager.Persistence.Repositories
 				.OrderByDescending(product => product.DateCreated)
 				.Select(product => product.MapToModel())
 				.ToArray();
-
 			return result;
 		}
 
@@ -75,19 +76,27 @@ namespace ErpManager.Persistence.Repositories
 		/// <returns>A collection of related products</returns>
 		public ProductModel[] GetRelatedProducts(string branchId, string productId)
 		{
-			var product = _dbContext.Products.FirstOrDefault(product =>
-				(product.BranchId == branchId)
-				&& (product.ProductId == productId));
-			var relatedIds = product?.RelatedProductId.Split(',', StringSplitOptions.RemoveEmptyEntries);
-			if ((relatedIds == null) || (relatedIds.Any() == false)) return Array.Empty<ProductModel>();
+			// Get target product
+			var product = _dbContext.Products
+				.AsNoTracking()
+				.FirstOrDefault(product =>
+					(product.BranchId == branchId)
+					&& (product.ProductId == productId));
 
-			var relatedProducts = _dbContext.Products
+			// Convert related product to hashset for contrain condition
+			var relatedIds = product?.RelatedProductId
+				.Split(',', StringSplitOptions.RemoveEmptyEntries)
+				.ToHashSet();
+			if ((relatedIds == null) || (relatedIds.Any() == false))
+				return Array.Empty<ProductModel>();
+
+			var result = _dbContext.Products
 				.Where(item => item.DelFlg == false
 					&& item.Status != ProductStatusEnum.Pending
 					&& relatedIds.Contains(item.ProductId))
 				.Select(product => product.MapToModel())
 				.ToArray();
-			return relatedProducts;
+			return result;
 		}
 
 		/// <summary>
@@ -102,7 +111,6 @@ namespace ErpManager.Persistence.Repositories
 				.Where(product => (product.BranchId == branchId) && productIds.Contains(product.ProductId))
 				.Select(product => product.MapToModel())
 				.ToArray();
-
 			return result;
 		}
 
@@ -118,9 +126,9 @@ namespace ErpManager.Persistence.Repositories
 				.FirstOrDefault(product =>
 					(product.BranchId == branchId)
 					&& (product.ProductId == productId)
-					&& product.DelFlg == false);
-
-			return result?.MapToModel();
+					&& product.DelFlg == false)
+				?.MapToModel();
+			return result;
 		}
 
 		/// <summary>
