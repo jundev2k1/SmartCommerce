@@ -110,7 +110,7 @@
 	}
 
 		.theme-settings .theme-settings-popup .theme-settings-header {
-			background: url('../images/background/theme-setting-background.jpg');
+			background: url('../content/images/background/theme-setting-background.jpg');
 			background-size: cover;
 			background-position: center center;
 			display: flex;

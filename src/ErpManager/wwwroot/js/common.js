@@ -174,7 +174,7 @@ const callAjax = ({ url, data, type = requestType.json, method = 'POST', onSucce
 	success: (result) => {
 		onSuccess?.(result);
 	},
-	error?: function (jqXHR, textStatus, errorThrown) {
+	error: function (jqXHR, textStatus, errorThrown) {
 		console.error('AJAX request failed:', textStatus, errorThrown);
 	},
 });
