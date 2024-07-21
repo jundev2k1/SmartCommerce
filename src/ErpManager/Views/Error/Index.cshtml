@@ -5,46 +5,11 @@
 	Layout = "_Layout_Error";
 	ViewData[Constants.GLOBAL_KEY_TITLE] = _localizer.Globals["Nav_Error_ErrorPage"];
 }
-<style>
-	.error-page {
-		width: 100%;
-		height: 100%;
-		position: relative;
-	}
 
-		.error-page .wrapper {
-			position: absolute;
-			top: 50%;
-			left: 50%;
-			transform: translate(-50%, -50%);
-			text-align: center;
-		}
+@section ViewCss {
+	<link rel="stylesheet" href="~/css/view/global//error.css" asp-append-version="true" />
+}
 
-			.error-page .wrapper .content {
-				display: flex;
-				flex-direction: column;
-				gap: 8px;
-			}
-
-				.error-page .wrapper .content h2 {
-					font-size: 60px;
-					font-weight: bold;
-					text-transform: uppercase;
-					background: linear-gradient(to right, #30CFD0 0%, #330867 100%);
-					-webkit-background-clip: text;
-					-webkit-text-fill-color: transparent;
-				}
-
-				.error-page .wrapper .content p {
-					font-size: 16px;
-				}
-
-				.error-page .wrapper .content .error-control {
-					display: flex;
-					justify-content: center;
-					gap: 4px;
-				}
-</style>
 <section class="error-page">
 	<div class="wrapper">
 		<div class="content">
@@ -53,7 +18,7 @@
 				<p>@Model.Message</p>
 			</div>
 			<div class="error-control">
-				<button id="btnBack" class="btn site-btn-success">@_localizer.Globals["Btn_Back"]</button>
+				<button id="btnBack" class="btn site-btn-success" onclick="backPreviousPage()">@_localizer.Globals["Btn_Back"]</button>
 				<button id="btnContact" class="btn site-btn-outline-success" data-bs-toggle="modal" data-bs-target="#btnContactUs">@_localizer.Globals["Btn_ContactAdmin"]</button>
 			</div>
 		</div>
@@ -62,7 +27,14 @@
 @await Component.InvokeAsync(Constants.ERP_COMPONENT_NAME_FORMCONTACT, new FormContactViewModel { TargetButtonId = "btnContactUs", IsShowType = true, TypeForm = FormContactTypeEnum.ContactAdmin })
 @section ViewScript {
 	<script>
-		const btnBack = document.querySelector('#btnBack');
-		btnBack?.addEventListener('click', () => { history.back() });
+		function backPreviousPage() {
+			const currentUrl = window.location.href;
+			const previousUrl = document.referrer;
+			if (currentUrl == previousUrl) {
+				window.location.href = '@(Constants.MODULE_AUTH_SIGNIN_PATH)';
+			}
+
+			history.back();
+		}
 	</script>
 }

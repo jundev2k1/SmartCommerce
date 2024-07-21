@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.Extensions.Options;
 using Serilog;
+using Serilog.Events;
 using System.Globalization;
 using System.IO.Compression;
 
@@ -61,6 +62,7 @@ namespace ErpManager.ERP
 
 			// Init handler
 			ConstantHandler.Initialize(configuration);
+			SetConfigurationFileLogger();
 
 			return services;
 		}
@@ -150,6 +152,32 @@ namespace ErpManager.ERP
 			});
 
 			return services;
+		}
+
+		/// <summary>
+		/// Set configuration file logger
+		/// </summary>
+		private static void SetConfigurationFileLogger()
+		{
+			var config = new LoggerConfiguration()
+				.MinimumLevel.Verbose()
+				.WriteTo.File(Constants.CONFIG_APP_LOG_PATH_ERROR,
+					restrictedToMinimumLevel: LogEventLevel.Error,
+					rollingInterval: RollingInterval.Day)
+				.WriteTo.File(Constants.CONFIG_APP_LOG_PATH_WARNING,
+					restrictedToMinimumLevel: LogEventLevel.Warning,
+					rollingInterval: RollingInterval.Day)
+				.WriteTo.File(Constants.CONFIG_APP_LOG_PATH_INFO,
+					restrictedToMinimumLevel: LogEventLevel.Information,
+					rollingInterval: RollingInterval.Day)
+				.WriteTo.File(Constants.CONFIG_APP_LOG_PATH_DEBUG,
+					restrictedToMinimumLevel: LogEventLevel.Debug,
+					rollingInterval: RollingInterval.Day)
+				.WriteTo.File(Constants.CONFIG_APP_LOG_PATH_VERBOSE,
+					restrictedToMinimumLevel: LogEventLevel.Verbose,
+					rollingInterval: RollingInterval.Day)
+				.CreateLogger();
+			Log.Logger = config;
 		}
 
 		/// <summary>

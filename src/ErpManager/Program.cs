@@ -11,8 +11,7 @@ var builder = WebApplication.CreateBuilder(args);
 		.AddPersistence()
 		.AddInfrastructure()
 		.AddApplication(builder.Configuration);
-	builder.Host.UseSerilog((context, configuration) =>
-		configuration.ReadFrom.Configuration(context.Configuration));
+	builder.Host.UseSerilog();
 }
 
 var app = builder.Build();
