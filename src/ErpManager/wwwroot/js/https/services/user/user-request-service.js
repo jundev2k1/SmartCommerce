@@ -1,4 +1,3 @@
-"use strict";
 // Copyright (c) 2024 - Jun Dev. All rights reserved
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = function (d, b) {
@@ -15,7 +14,6 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
-Object.defineProperty(exports, "__esModule", { value: true });
 /**
  * User request service
  * @class
@@ -28,5 +26,5 @@ var UserRequestService = /** @class */ (function (_super) {
     }
     return UserRequestService;
 }(RequestServiceBase));
-exports.default = UserRequestService;
+export default UserRequestService;
 //# sourceMappingURL=user-request-service.js.map

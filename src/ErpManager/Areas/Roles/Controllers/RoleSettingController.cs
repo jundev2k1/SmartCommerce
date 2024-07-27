@@ -20,21 +20,38 @@ namespace ErpManager.ERP.Areas.Roles.Controllers
 		[HttpGet]
 		[AllowAnonymous]
 		[Route(Constants.MODULE_ROLE_ROLESETTING_PATH, Name = Constants.MODULE_ROLE_ROLESETTING_NAME)]
-		public IActionResult Index(int? roleId)
+		public IActionResult Index(int id)
 		{
-			var roleInfo = roleId.HasValue
-				? _serviceFacade.Roles.Get(this.OperatorBranchId, roleId.Value)
-				: new RoleModel();
+			var roleInfo = _serviceFacade.Roles.Get(this.OperatorBranchId, id);
+			if (roleInfo == null)
+			{
+				var errorMessage = _localizer.Messages["ErrorMessage_DataNotFound"].Value;
+				return RedirectToErrorPage(errorMessage, ErrorCodeEnum.DataNotFound);
+			}
 
-			var data = new RoleSettingViewModel { PermissionGroups = GetPermissionGroupCollection() };
+			var data = new RoleSettingViewModel()
+			{
+				Information = roleInfo,
+				PermissionGroups = GetPermissionGroupCollection(),
+				InputOption = GetInitDropdownListItems(roleInfo),
+			};
 			return View(data);
 		}
+
 		[HttpPost]
 		[AllowAnonymous]
-		[Route(Constants.MODULE_ROLE_ROLESETTING_PATH, Name = Constants.MODULE_ROLE_ROLESETTING_NAME)]
-		public IActionResult Index(RoleSettingViewModel viewModel)
+		[Route("/role/setting/update-information", Name = "RoleUpdateInfo")]
+		public string UpdateRoleInfo(RoleSettingInfoRequestViewModel input)
 		{
-			return View(viewModel);
+			return "";
+		}
+
+		[HttpPost]
+		[AllowAnonymous]
+		[Route("/role/setting/update-settings", Name = "RoleUpdateSettings")]
+		public string UpdateRoleSettings(RoleModel input)
+		{
+			return string.Empty;
 		}
 	}
 }

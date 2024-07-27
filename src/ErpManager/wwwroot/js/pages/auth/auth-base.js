@@ -1,4 +1,3 @@
-"use strict";
 // Copyright (c) 2024 - Jun Dev. All rights reserved
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = function (d, b) {
@@ -15,6 +14,7 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
+import { AppBase } from '../../app-base.js';
 /**
  * Authentication base
  * @class

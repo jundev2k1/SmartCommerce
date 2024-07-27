@@ -17,6 +17,7 @@ namespace ErpManager.Domain.Mapping
 				RoleId = entity.RoleId,
 				Name = entity.Name,
 				Description = entity.Description,
+				PageDefault = entity.PageDefault,
 				Permission = entity.Permission,
 				Priority = entity.Priority,
 				Status = entity.Status,
@@ -65,6 +66,7 @@ namespace ErpManager.Domain.Mapping
 				RoleId = model.RoleId,
 				Name = model.Name,
 				Description = model.Description,
+				PageDefault = model.PageDefault,
 				Permission = model.Permission,
 				Priority = model.Priority,
 				Status = model.Status,
@@ -87,6 +89,7 @@ namespace ErpManager.Domain.Mapping
 			entity.RoleId = model.RoleId;
 			entity.Name = model.Name;
 			entity.Description = model.Description;
+			entity.PageDefault = model.PageDefault;
 			entity.Permission = model.Permission;
 			entity.Priority = model.Priority;
 			entity.Status = model.Status;

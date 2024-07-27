@@ -106,7 +106,7 @@ const typeLoading = {
 	text: 'loading-text',
 };
 const showLoading = function (type, selector = 'global') {
-	const isGlobal = (selector === 'global' || document.querySelector(selector) === null) || false;
+	const isGlobal = (selector === 'global' || document.querySelector(selector) === undefined) || false;
 	if (Object.values(typeLoading).includes(type) === false)
 		type = typeLoading.spinner;
 

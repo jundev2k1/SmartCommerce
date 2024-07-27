@@ -102,6 +102,20 @@
       }
     ]
   },
+  "role": {
+    "status": [
+      {
+        "text": "Inactive",
+        "localizer": "ValTxt_Role_Status_Inactive",
+        "value": "0"
+      },
+      {
+        "text": "Active",
+        "localizer": "ValTxt_Role_Status_Active",
+        "value": "1"
+      }
+    ]
+  },
   "common": {
     "form_contact": [
       {

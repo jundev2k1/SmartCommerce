@@ -12,6 +12,8 @@ namespace ErpManager.Domain.Models
 
 		public string Description { get; set; } = string.Empty;
 
+		public string PageDefault { get; set; } = string.Empty;
+
 		public string Permission { get; set; } = string.Empty;
 
 		public int Priority { get; set; } = 0;

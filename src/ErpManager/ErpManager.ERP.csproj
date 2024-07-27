@@ -8,26 +8,22 @@
 
   <ItemGroup>
     <Compile Remove="%2a%2a\**" />
-    <Compile Remove="Scripts\NewFolder\**" />
     <Compile Remove="wwwroot\content\product-images\**" />
     <Compile Remove="wwwroot\content\user-images\**" />
     <Content Remove="%2a%2a\**" />
-    <Content Remove="Scripts\NewFolder\**" />
     <Content Remove="wwwroot\content\product-images\**" />
     <Content Remove="wwwroot\content\user-images\**" />
     <EmbeddedResource Remove="%2a%2a\**" />
-    <EmbeddedResource Remove="Scripts\NewFolder\**" />
     <EmbeddedResource Remove="wwwroot\content\product-images\**" />
     <EmbeddedResource Remove="wwwroot\content\user-images\**" />
     <EntityDeploy Remove="%2a%2a\**" />
     <EntityDeploy Remove="wwwroot\content\product-images\**" />
     <EntityDeploy Remove="wwwroot\content\user-images\**" />
     <None Remove="%2a%2a\**" />
-    <None Remove="Scripts\NewFolder\**" />
     <None Remove="wwwroot\content\product-images\**" />
     <None Remove="wwwroot\content\user-images\**" />
     <TypeScriptCompile Remove="%2a%2a\**" />
-    <TypeScriptCompile Remove="Scripts\NewFolder\**" />
+    <TypeScriptCompile Remove="node_modules\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -106,6 +102,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="wwwroot\js\areas\roles\role-base.js" />
+    <None Include="wwwroot\js\areas\roles\role-base.js.map" />
+    <None Include="wwwroot\js\areas\roles\role-setting\role-setting-handler.js" />
+    <None Include="wwwroot\js\areas\roles\role-setting\role-setting-handler.js.map" />
     <None Include="wwwroot\lib\alert-box\alert-box.js" />
   </ItemGroup>
 
@@ -118,5 +118,9 @@
     <Folder Include="Scripts\pages\auth\otp-auth\" />
     <Folder Include="Scripts\pages\auth\sign-in\" />
   </ItemGroup>
+
+  <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
+    <Exec Command="npm run build" />
+  </Target>
 
 </Project>

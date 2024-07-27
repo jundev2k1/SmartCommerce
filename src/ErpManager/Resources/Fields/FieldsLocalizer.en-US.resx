@@ -195,6 +195,27 @@
   <data name="Product_TakeOverId" xml:space="preserve">
     <value>Take Over ID</value>
   </data>
+  <data name="Role_DateChanged" xml:space="preserve">
+    <value>Date Changed</value>
+  </data>
+  <data name="Role_DateCreated" xml:space="preserve">
+    <value>Date Created</value>
+  </data>
+  <data name="Role_Description" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="Role_Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="Role_Priority" xml:space="preserve">
+    <value>Priority</value>
+  </data>
+  <data name="Role_RoleId" xml:space="preserve">
+    <value>Role ID</value>
+  </data>
+  <data name="Role_Status" xml:space="preserve">
+    <value>Status</value>
+  </data>
   <data name="User_Address" xml:space="preserve">
     <value>Address</value>
   </data>

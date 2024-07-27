@@ -17,15 +17,16 @@ namespace ErpManager.Persistence.Seeders
 
 		private static List<Role> SeedList = new List<Role>()
 		{
-            // ERP admin role
-            new Role()
+			// ERP admin role
+			new Role()
 			{
 				BranchId = Constants.CONFIG_MASTER_BRANCH_ID,
 				Name = "Administrator",
-				Permission = "9999",
+				PageDefault = Constants.PAGE_DEFAULT,
+				Permission = Permission.HasAllPermission.GetStringValue(),
 				Priority = 1,
 				Status = RoleStatusEnum.Active,
-				CreatedBy = "System",
+				CreatedBy = Constants.DEFAULT_FLG_CREATED_BY_SYSTEM,
 				DateCreated = DateTime.Now,
 			},
 		};

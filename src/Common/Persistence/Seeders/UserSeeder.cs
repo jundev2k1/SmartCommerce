@@ -18,8 +18,8 @@ namespace ErpManager.Persistence.Seeders
 
 		private static List<User> SeedList = new List<User>()
 		{
-            // ERP administrator
-            new User()
+			// ERP administrator
+			new User()
 			{
 				BranchId = Constants.CONFIG_MASTER_BRANCH_ID,
 				UserId = Constants.CONFIG_MASTER_OPERATOR_ID,
@@ -38,7 +38,7 @@ namespace ErpManager.Persistence.Seeders
 				CreatedBy = "System",
 				DateCreated = DateTime.Now,
 				DateChanged = DateTime.Now,
-				RoleId = 0,
+				RoleId = 1,
 				DelFlg = false
 			},
 		};

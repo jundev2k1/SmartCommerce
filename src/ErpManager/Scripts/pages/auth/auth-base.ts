@@ -1,5 +1,7 @@
 ﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
 
+import { AppBase } from '../../app-base';
+
 /**
  * Authentication base
  * @class

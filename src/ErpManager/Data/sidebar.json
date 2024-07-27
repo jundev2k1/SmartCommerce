@@ -89,13 +89,6 @@
         "name": "UserList_Page",
         "permission": "51",
         "url": "/user/list"
-      },
-      {
-        "label": "User Role",
-        "localizer": "Nav_User_Role",
-        "name": "UserRole_Page",
-        "permission": "",
-        "url": "/role/list"
       }
     ]
   },
@@ -106,6 +99,14 @@
     "name": "system-page",
     "permission": "",
     "icon": "fa-light fa-gear fa-fw",
-    "url": "#"
+    "items": [
+      {
+        "label": "Role List",
+        "localizer": "Nav_Role_List",
+        "name": "RoleList_Page",
+        "permission": "9999",
+        "url": "/role/list"
+      }
+    ]
   }
 ]

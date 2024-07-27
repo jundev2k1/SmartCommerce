@@ -4,7 +4,7 @@
  * Application base
  * @class
  */
-class AppBase {
+export class AppBase {
 	constructor() {
 	}
 }

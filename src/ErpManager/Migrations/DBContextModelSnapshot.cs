@@ -379,8 +379,7 @@ namespace ErpManager.ERP.Migrations
 
                     b.Property<string>("Description")
                         .ValueGeneratedOnAdd()
-                        .HasMaxLength(4000)
-                        .HasColumnType("nvarchar(4000)")
+                        .HasColumnType("nvarchar(max)")
                         .HasDefaultValueSql("('')");
 
                     b.Property<int>("DisplayPrice")
@@ -492,6 +491,12 @@ namespace ErpManager.ERP.Migrations
                         .ValueGeneratedOnAdd()
                         .HasMaxLength(60)
                         .HasColumnType("nvarchar(60)")
+                        .HasDefaultValueSql("('')");
+
+                    b.Property<string>("PageDefault")
+                        .ValueGeneratedOnAdd()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)")
                         .HasDefaultValueSql("('')");
 
                     b.Property<string>("Permission")

@@ -21,6 +21,9 @@ public partial class Role
 	[StringLength(256)]
 	public string Description { get; set; }
 
+	[StringLength(255)]
+	public string PageDefault { get; set; }
+
 	[StringLength(4000)]
 	public string Permission { get; set; }
 

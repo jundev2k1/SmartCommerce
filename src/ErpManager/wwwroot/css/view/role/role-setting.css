@@ -21,8 +21,11 @@
 }
 
 #roleSetting .accordion-item:first-of-type {
-	border-top-left-radius: 0;
-	border-top-right-radius: 0;
+	border-bottom-right-radius: 0;
+	border-bottom-left-radius: 0;
+}
+
+#roleSetting .accordion-item:last-of-type .accordion-button.collapsed {
 }
 
 /* Dark mode style */

@@ -52,6 +52,7 @@ public partial class DBContext : DbContext
 			entity.Property(e => e.RoleId).UseIdentityColumn<int>(seed: 1, increment: 1);
 			entity.Property(e => e.Name).HasDefaultValueSql("('')");
 			entity.Property(e => e.Description).HasDefaultValueSql("('')");
+			entity.Property(e => e.PageDefault).HasDefaultValueSql("('')");
 			entity.Property(e => e.Permission).HasDefaultValueSql("('')");
 			entity.Property(e => e.Priority).HasDefaultValueSql("(0)");
 			entity.Property(e => e.DateCreated).HasDefaultValueSql("(getdate())");

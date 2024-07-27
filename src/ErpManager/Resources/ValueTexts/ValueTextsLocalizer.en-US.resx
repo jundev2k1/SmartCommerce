@@ -159,6 +159,12 @@
   <data name="ValTxt_Product_Status_UrgentSale" xml:space="preserve">
     <value>Urgent Sale</value>
   </data>
+  <data name="ValTxt_Role_Status_Active" xml:space="preserve">
+    <value>Active</value>
+  </data>
+  <data name="ValTxt_Role_Status_Inactive" xml:space="preserve">
+    <value>Inactive</value>
+  </data>
   <data name="ValTxt_Sex_Female" xml:space="preserve">
     <value>Female</value>
   </data>

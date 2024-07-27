@@ -9,5 +9,6 @@ namespace ErpManager.ERP.Areas.Roles.ViewModels
 		public List<RolePermissionGroupViewModel> PermissionGroups { get; set; } = new List<RolePermissionGroupViewModel>();
 
 		public string SelectPermission { get; set; } = string.Empty;
+		public RoleInputOptionViewModel InputOption { get; set; } = new RoleInputOptionViewModel();
 	}
 }

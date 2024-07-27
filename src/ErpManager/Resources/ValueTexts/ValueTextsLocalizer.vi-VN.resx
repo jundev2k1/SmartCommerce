@@ -159,6 +159,12 @@
   <data name="ValTxt_Product_Status_UrgentSale" xml:space="preserve">
     <value>Cần bán gấp</value>
   </data>
+  <data name="ValTxt_Role_Status_Active" xml:space="preserve">
+    <value>Kích hoạt</value>
+  </data>
+  <data name="ValTxt_Role_Status_Inactive" xml:space="preserve">
+    <value>Khóa</value>
+  </data>
   <data name="ValTxt_Sex_Female" xml:space="preserve">
     <value>Nữ</value>
   </data>

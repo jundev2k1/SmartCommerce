@@ -2,7 +2,7 @@
 
 namespace ErpManager.ERP.Areas.Roles.ViewModels
 {
-	public class RoleListViewModel
+	public sealed class RoleListViewModel
 	{
 		public SearchResultModel<RoleModel> PageData { get; set; } = new SearchResultModel<RoleModel>();
 

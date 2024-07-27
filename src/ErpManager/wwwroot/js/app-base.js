@@ -1,4 +1,3 @@
-"use strict";
 // Copyright (c) 2024 - Jun Dev. All rights reserved
 /**
  * Application base
@@ -9,4 +8,5 @@ var AppBase = /** @class */ (function () {
     }
     return AppBase;
 }());
+export { AppBase };
 //# sourceMappingURL=app-base.js.map

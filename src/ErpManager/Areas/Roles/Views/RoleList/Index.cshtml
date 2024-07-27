@@ -1,14 +1,14 @@
 ﻿@* // Copyright (c) 2024 - Jun Dev. All rights reserved *@
 
 @{
-	ViewData[Constants.GLOBAL_KEY_TITLE] = _localizer.Globals["Nav_User_Role"];
-	ViewData[Constants.GLOBAL_KEY_CURRENT_PAGE] = "UserRole_Page";
+	ViewData[Constants.GLOBAL_KEY_TITLE] = _localizer.Globals["Nav_Role_List"];
+	ViewData[Constants.GLOBAL_KEY_CURRENT_PAGE] = "RoleList_Page";
 
 	// Page Breadcrumb
 	var breadcrumbs = new Breadcrumb[]
 	{
 		new Breadcrumb { Title = _localizer.Globals["Nav_Home"].Value, Href = Constants.MODULE_HOME_HOME_PATH },
-		new Breadcrumb { Title = _localizer.Globals["Nav_User_Role"].Value, IsDisabled = true }
+		new Breadcrumb { Title = _localizer.Globals["Nav_Role_List"].Value, IsDisabled = true }
 	};
 
 	var hasResult = Model.PageData.Items.Any();

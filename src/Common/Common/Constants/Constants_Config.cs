@@ -75,6 +75,8 @@ namespace ErpManager.Common
 		/// <summary>Authentication limit login count</summary>
 		public const int AUTH_LOGIN_COUNT_LIMIT = 3;
 
+		/// <summary>Page default</summary>
+		public const string PAGE_DEFAULT = "/";
 		/// <summary>Default page size</summary>
 		public const int DEFAULT_PAGE_SIZE = 20;
 		/// <summary>Default flag is OFF</summary>
@@ -82,8 +84,6 @@ namespace ErpManager.Common
 		/// <summary>Default flag is ON</summary>
 		public const string DEFAULT_FLG_ON = "1";
 
-		/// <summary>Default system ID</summary>
-		public const string DEFAULT_CREATED_BY_SYSTEM_ID = "System001";
 		/// <summary>Created by default flag: System</summary>
 		public const string DEFAULT_FLG_CREATED_BY_SYSTEM = "System";
 	}

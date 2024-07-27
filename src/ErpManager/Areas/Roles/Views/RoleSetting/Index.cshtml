@@ -2,14 +2,15 @@
 
 @model RoleSettingViewModel
 @{
-	ViewData[Constants.GLOBAL_KEY_TITLE] = _localizer.Globals["Nav_User_Role"];
-	ViewData[Constants.GLOBAL_KEY_CURRENT_PAGE] = "UserRole_Page";
+	ViewData[Constants.GLOBAL_KEY_TITLE] = _localizer.Globals["Nav_Role_List"];
+	ViewData[Constants.GLOBAL_KEY_CURRENT_PAGE] = "RoleList_Page";
 
 	// Page Breadcrumb
 	var breadcrumbs = new Breadcrumb[]
 	{
 		new Breadcrumb { Title = _localizer.Globals["Nav_Home"].Value, Href = Constants.MODULE_HOME_HOME_PATH },
-		new Breadcrumb { Title = _localizer.Globals["Nav_User_Role"].Value, IsDisabled = true }
+		new Breadcrumb { Title = _localizer.Globals["Nav_Role_List"].Value, Href = Constants.MODULE_ROLE_ROLELIST_PATH },
+		new Breadcrumb { Title = Model.Information.Name, IsDisabled = true }
 	};
 }
 
@@ -25,13 +26,13 @@
 			<li class="nav-item" role="presentation">
 				<a class="nav-link active" href="#roleInformation" role="tab" data-bs-toggle="tab" aria-controls="role-information" aria-selected="true">
 					<i class="fa-light fa-circle-info fa-fw me-2"></i>
-					Infomation
+					@_localizer.Globals["RoleSetting_TabTitle_Info"]
 				</a>
 			</li>
 			<li class="nav-item" role="presentation">
 				<a class="nav-link" href="#roleSetting" role="tab" data-bs-toggle="tab" aria-controls="role-setting" aria-selected="false">
 					<i class="fa-light fa-screwdriver-wrench fa-fw me-2"></i>
-					Setting
+					@_localizer.Globals["RoleSetting_TabTitle_Setting"]
 				</a>
 			</li>
 		</ul>
@@ -42,36 +43,36 @@
 				<div class="row g-md-2 gx-2 gy-2 px-md-5 my-2">
 					<div class="col-md-7 col-12">
 						<div class="form-group">
-							<label asp-for="Information.Name">Role Name</label>
+							<label asp-for="Information.Name">@_localizer.Fields["Role_Name"]</label>
 							<input asp-for="Information.Name" type="text" class="form-control" placeholder="@_localizer.Globals["PlaceHolder_TextBox"] @_localizer.Fields["Product_ProductId"]..." />
 							<span asp-validation-for="Information.Name" class="text-danger"></span>
 						</div>
 					</div>
 					<div class="col-md-2 col-6">
 						<div class="form-group">
-							<label asp-for="Information.Priority">Priority</label>
+							<label asp-for="Information.Priority">@_localizer.Fields["Role_Priority"]</label>
 							<input asp-for="Information.Priority" type="text" class="form-control" placeholder="@_localizer.Globals["PlaceHolder_TextBox"] @_localizer.Fields["Product_ProductId"]..." />
 							<span asp-validation-for="Information.Priority" class="text-danger"></span>
 						</div>
 					</div>
 					<div class="col-md-3 col-6">
 						<div class="form-group">
-							<label asp-for="Information.Status">Status</label>
+							<label asp-for="Information.Status">@_localizer.Fields["Role_Status"]</label>
 							<input asp-for="Information.Status" type="text" class="form-control" placeholder="@_localizer.Globals["PlaceHolder_TextBox"] @_localizer.Fields["Product_ProductId"]..." />
 							<span asp-validation-for="Information.Status" class="text-danger"></span>
 						</div>
 					</div>
 					<div class="col-12">
 						<div class="form-group">
-							<label asp-for="Information.Description">Role Description</label>
+							<label asp-for="Information.Description">@_localizer.Fields["Role_Description"]</label>
 							<textarea asp-for="Information.Description" type="text" class="form-control" placeholder="@_localizer.Globals["PlaceHolder_TextBox"] @_localizer.Fields["Product_ProductId"]..." rows="3"></textarea>
 							<span asp-validation-for="Information.Description" class="text-danger"></span>
 						</div>
 					</div>
 					<div class="col-12 d-flex justify-content-end form-submit">
 						<button type="submit" class="btn site-btn-primary">
-							<i class="fa-light fa-pencil"></i>
-							@_localizer.Globals["Btn_Edit"]
+							<i class="fa-light fa-floppy-disk"></i>
+							@_localizer.Globals["Btn_SaveChanges"]
 						</button>
 					</div>
 				</div>
@@ -82,12 +83,11 @@
 				<div class="p-1 mb-2 d-flex justify-content-end form-submit">
 					<button type="submit" class="btn site-btn-primary">
 						<i class="fa-light fa-pencil"></i>
-						@_localizer.Globals["Btn_Edit"]
+						@_localizer.Globals["Btn_SaveChanges"]
 					</button>
 				</div>
 				<div class="page-error-message px-2">
-					<div class="error-message alert alert-danger" role="alert">
-						A simple danger alert—check it out!
+					<div class="role-error-message alert alert-danger" role="alert">
 					</div>
 				</div>
 				<div class="role-wrapper">
@@ -144,8 +144,8 @@
 				</div>
 				<div class="p-1 mt-2 d-flex justify-content-end form-submit">
 					<button type="button" class="btn site-btn-primary">
-						<i class="fa-light fa-pencil"></i>
-						@_localizer.Globals["Btn_Edit"]
+						<i class="fa-light fa-floppy-disk"></i>
+						@_localizer.Globals["Btn_SaveChanges"]
 					</button>
 				</div>
 			</form>
@@ -154,5 +154,5 @@
 </div>
 
 @section ViewScript {
-	<script src="~/js/areas/roles/role-setting/index.js" asp-append-version="true"></script>
+	<script src="~/js/areas/roles/role-setting/role-setting-handler.js" type="module" asp-append-version="true"></script>
 }

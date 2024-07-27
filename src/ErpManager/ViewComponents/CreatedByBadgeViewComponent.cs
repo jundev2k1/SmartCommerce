@@ -19,7 +19,7 @@ namespace ErpManager.ERP.ViewComponents
 			string className = "",
 			bool isPill = false)
 		{
-			var createdByName = (createdBy == Constants.DEFAULT_CREATED_BY_SYSTEM_ID)
+			var createdByName = (createdBy == Constants.DEFAULT_FLG_CREATED_BY_SYSTEM)
 				? Constants.DEFAULT_FLG_CREATED_BY_SYSTEM
 				: _serviceFacade.Users.Get(branchId, createdBy)?.FullName;
 			var data = new CreatedByBadgeViewModel
