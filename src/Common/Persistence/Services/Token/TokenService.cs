@@ -40,8 +40,8 @@ namespace ErpManager.Persistence.Services
 		{
 			var token = _tokenRepository.Get(branchId, tokenId);
 			var result = token != null
-				|| token.Type == type
-				|| token.ExpirationDate > DateTime.Now;
+				&& token.Type == type
+				&& token.ExpirationDate > DateTime.Now;
 			return result;
 		}
 		#endregion

@@ -60,7 +60,7 @@ namespace ErpManager.ERP.Areas.Product.Controllers
 			var validateResult = _validatorFacade.ProductValidate(pageData);
 			if (validateResult.IsValid == false)
 			{
-				AddErrorToModelState(validateResult);
+				AddErrorToModelState(validateResult, preName: "PageData.");
 				return View(viewModel);
 			}
 

@@ -14,7 +14,7 @@
 				</option>
 			}
 		</select>
-		<input type="hidden" name="returnUrl" value="@Context.Request.Path" />
+		<input type="hidden" name="returnUrl" value="@ViewUtilities.GetFullRequestUrl(Context.Request)" />
 	</form>
 	<script>
 		const formSubmit = (culture) => {

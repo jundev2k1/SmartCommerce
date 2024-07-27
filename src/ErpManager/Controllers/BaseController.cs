@@ -170,26 +170,14 @@ namespace ErpManager.ERP.Controllers
 		/// Add error to model state
 		/// </summary>
 		/// <param name="validationResult">Validation result</param>
-		protected void AddErrorToModelState(ValidationResult validationResult)
+		protected void AddErrorToModelState(ValidationResult validationResult, string preName = "")
 		{
-			var errorMessageList = new List<(string PropertyName, string ErrorMessage)>();
-
-			// Add message fluent validate to Error Message List
+			ModelState.Clear();
+			// Set error message validate to Model State
 			foreach (var error in validationResult.Errors)
 			{
-				var targetState = ModelState.FirstOrDefault(state => state.Key.Split('.').LastOrDefault() == error.PropertyName);
-				if ((targetState.Key == null)
-					|| errorMessageList.Any(errorMessage => errorMessage.PropertyName == targetState.Key))
-					continue;
-
-				errorMessageList.Add((targetState.Key, error.ErrorMessage));
-			}
-
-			// Clear and reset error message to Model State
-			ModelState.Clear();
-			foreach(var errorMessage in errorMessageList)
-			{
-				ModelState.AddModelError(errorMessage.PropertyName, errorMessage.ErrorMessage);
+				var propName = $"{preName}{error.PropertyName}";
+				ModelState.AddModelError(propName, error.ErrorMessage);
 			}
 		}
 

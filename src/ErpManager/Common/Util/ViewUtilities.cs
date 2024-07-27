@@ -15,5 +15,16 @@ namespace ErpManager.ERP.Common.Util
 
 			return string.Empty;
 		}
+
+		/// <summary>
+		/// Get full request URL
+		/// </summary>
+		/// <param name="request">Current request</param>
+		/// <returns>Full request URL</returns>
+		public static string GetFullRequestUrl(HttpRequest request)
+		{
+			var url = $"{request.Path}{request.QueryString}";
+			return url;
+		}
 	}
 }

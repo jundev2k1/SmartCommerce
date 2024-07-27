@@ -58,8 +58,14 @@ const themeList = Object.freeze([
 	},
 ]);
 const ThemeSetting = (function () {
-	// Element selector
+	// Move modal as last item
 	const root = document.body;
+	const modal = document.querySelector(".theme-settings");
+	if (modal) {
+		root.appendChild(modal);
+	}
+
+	// Element selector
 	const contentElement = document.querySelector(".theme-settings");
 	const remoteElement = document.querySelector(".btn-theme-settings button");
 	const btnClose = contentElement.querySelector("#btnCloseSetting");
