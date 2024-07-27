@@ -2,6 +2,7 @@
 
 using FluentValidation.Results;
 using System.Reflection;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace ErpManager.ERP.Controllers
 {
@@ -171,13 +172,24 @@ namespace ErpManager.ERP.Controllers
 		/// <param name="validationResult">Validation result</param>
 		protected void AddErrorToModelState(ValidationResult validationResult)
 		{
-			// Clear model state
-			ModelState.Clear();
+			var errorMessageList = new List<(string PropertyName, string ErrorMessage)>();
 
-			// Add message fluent validate for model state
+			// Add message fluent validate to Error Message List
 			foreach (var error in validationResult.Errors)
 			{
-				ModelState.AddModelError(error.PropertyName, error.ErrorMessage);
+				var targetState = ModelState.FirstOrDefault(state => state.Key.Split('.').LastOrDefault() == error.PropertyName);
+				if ((targetState.Key == null)
+					|| errorMessageList.Any(errorMessage => errorMessage.PropertyName == targetState.Key))
+					continue;
+
+				errorMessageList.Add((targetState.Key, error.ErrorMessage));
+			}
+
+			// Clear and reset error message to Model State
+			ModelState.Clear();
+			foreach(var errorMessage in errorMessageList)
+			{
+				ModelState.AddModelError(errorMessage.PropertyName, errorMessage.ErrorMessage);
 			}
 		}
 

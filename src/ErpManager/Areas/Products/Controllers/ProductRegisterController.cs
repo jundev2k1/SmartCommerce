@@ -57,7 +57,6 @@ namespace ErpManager.ERP.Areas.Product.Controllers
 			viewModel.InputOptions = GetInitDropdownListItems(pageData);
 
 			// Validate form input
-			ModelState.Clear();
 			var validateResult = _validatorFacade.ProductValidate(pageData);
 			if (validateResult.IsValid == false)
 			{

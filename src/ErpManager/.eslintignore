@@ -1,0 +1,4 @@
+﻿# Copyright (c) 2024 - Jun Dev. All rights reserved
+
+# Ignore jquery validation library warning
+wwwroot/lib/jquery-validation/
