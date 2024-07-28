@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace ErpManager.ERP.Migrations
+namespace ErpManager.Manager.Migrations
 {
 	/// <inheritdoc />
 	public partial class _20240614_ErpManagerMigration : Migration

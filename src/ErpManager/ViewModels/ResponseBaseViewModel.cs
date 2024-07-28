@@ -1,4 +1,4 @@
-﻿namespace ErpManager.ERP.ViewModels
+﻿namespace ErpManager.Manager.ViewModels
 {
 	public class ResponseBaseViewModel<TResponse>
 	{

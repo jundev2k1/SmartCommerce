@@ -1,8 +1,8 @@
 ﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
 
-using ErpManager.ERP.Areas.Users.ViewModels;
+using ErpManager.Manager.Areas.Users.ViewModels;
 
-namespace ErpManager.ERP.Areas.Users.Controllers
+namespace ErpManager.Manager.Areas.Users.Controllers
 {
 	[Area(Constants.MODULE_USER_AREA)]
 	public sealed class UserListController : UserBaseController

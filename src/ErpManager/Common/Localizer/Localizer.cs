@@ -1,14 +1,14 @@
 ﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
 
-using ErpManager.ERP.Common.Mapping;
-using ErpManager.ERP.Fields;
-using ErpManager.ERP.Globals;
-using ErpManager.ERP.Messages;
-using ErpManager.ERP.StringFormats;
-using ErpManager.ERP.Validators;
-using ErpManager.ERP.ValueTexts;
+using ErpManager.Manager.Common.Mapping;
+using ErpManager.Manager.Fields;
+using ErpManager.Manager.Globals;
+using ErpManager.Manager.Messages;
+using ErpManager.Manager.StringFormats;
+using ErpManager.Manager.Validators;
+using ErpManager.Manager.ValueTexts;
 
-namespace ErpManager.ERP.Common.Localizer
+namespace ErpManager.Manager.Common.Localizer
 {
 	public sealed class Localizer : ILocalizer
 	{

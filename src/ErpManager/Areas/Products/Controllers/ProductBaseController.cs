@@ -1,9 +1,9 @@
 ﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
 
 using ErpManager.Domain.Mapping;
-using ErpManager.ERP.Areas.Products.ViewModels;
+using ErpManager.Manager.Areas.Products.ViewModels;
 
-namespace ErpManager.ERP.Areas.Products.Controllers
+namespace ErpManager.Manager.Areas.Products.Controllers
 {
 	public class ProductBaseController : BaseController
 	{

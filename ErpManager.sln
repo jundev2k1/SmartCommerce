@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.33516.290
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ErpManager.ERP", "src\ErpManager\ErpManager.ERP.csproj", "{6575DB13-9679-4638-A127-8F91E738D75C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ErpManager.Manager", "src\ErpManager\ErpManager.Manager.csproj", "{6575DB13-9679-4638-A127-8F91E738D75C}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ErpManager.Persistence", "src\Common\Persistence\ErpManager.Persistence.csproj", "{1EF0AB07-920A-4B68-AB72-00A014574F44}"
 EndProject

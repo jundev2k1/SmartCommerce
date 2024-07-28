@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
@@ -76,15 +76,15 @@
     <Using Include="ErpManager.Domain.Enum" />
     <Using Include="ErpManager.Domain.Mapping" />
     <Using Include="ErpManager.Domain.Models" />
-    <Using Include="ErpManager.ERP.Common" />
-    <Using Include="ErpManager.ERP.Common.Enum" />
-    <Using Include="ErpManager.ERP.Common.Extensions" />
-    <Using Include="ErpManager.ERP.Common.Filters" />
-    <Using Include="ErpManager.ERP.Common.Session" />
-    <Using Include="ErpManager.ERP.Common.Util" />
-    <Using Include="ErpManager.ERP.Common.ValueText" />
-    <Using Include="ErpManager.ERP.Controllers" />
-    <Using Include="ErpManager.ERP.ViewModels" />
+    <Using Include="ErpManager.Manager.Common" />
+    <Using Include="ErpManager.Manager.Common.Enum" />
+    <Using Include="ErpManager.Manager.Common.Extensions" />
+    <Using Include="ErpManager.Manager.Common.Filters" />
+    <Using Include="ErpManager.Manager.Common.Session" />
+    <Using Include="ErpManager.Manager.Common.Util" />
+    <Using Include="ErpManager.Manager.Common.ValueText" />
+    <Using Include="ErpManager.Manager.Controllers" />
+    <Using Include="ErpManager.Manager.ViewModels" />
     <Using Include="ErpManager.Infrastructure.Common.Attributes" />
     <Using Include="ErpManager.Infrastructure.Common.Enum" />
     <Using Include="ErpManager.Infrastructure.Common.Models" />

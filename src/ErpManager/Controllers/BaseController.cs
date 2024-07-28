@@ -2,9 +2,8 @@
 
 using FluentValidation.Results;
 using System.Reflection;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
-namespace ErpManager.ERP.Controllers
+namespace ErpManager.Manager.Controllers
 {
 	public class BaseController : Controller
 	{

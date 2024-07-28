@@ -1,6 +1,6 @@
 ﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
 
-namespace ErpManager.ERP.Common.Util
+namespace ErpManager.Manager.Common.Util
 {
 	public static class ViewUtilities
 	{

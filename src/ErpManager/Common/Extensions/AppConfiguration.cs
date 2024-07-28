@@ -1,6 +1,6 @@
 ﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
 
-namespace ErpManager.ERP.Common.Extensions
+namespace ErpManager.Manager.Common.Extensions
 {
 	public sealed class AppConfiguration
 	{

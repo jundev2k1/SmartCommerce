@@ -1,6 +1,6 @@
 ﻿using Microsoft.CodeAnalysis.CSharp.Syntax;
 
-namespace ErpManager.ERP.Common.Mapping
+namespace ErpManager.Manager.Common.Mapping
 {
 	public static class CommonMapping
 	{

@@ -1,6 +1,6 @@
 ﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
 
-namespace ErpManager.ERP.Common.Session
+namespace ErpManager.Manager.Common.Session
 {
 	public class SessionManagerBase
 	{

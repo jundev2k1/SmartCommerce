@@ -1,6 +1,6 @@
 ﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
 
-namespace ErpManager.ERP.Areas.Users.Controllers
+namespace ErpManager.Manager.Areas.Users.Controllers
 {
 	[Area(Constants.MODULE_USER_AREA)]
 	public sealed class UserDetailController : UserBaseController

@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace ErpManager.ERP.Migrations
+namespace ErpManager.Manager.Migrations
 {
     /// <inheritdoc />
     public partial class _20240725_ErpManager : Migration

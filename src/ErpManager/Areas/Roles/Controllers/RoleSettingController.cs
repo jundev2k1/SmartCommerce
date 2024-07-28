@@ -1,8 +1,8 @@
 ﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
 
-using ErpManager.ERP.Areas.Roles.ViewModels;
+using ErpManager.Manager.Areas.Roles.ViewModels;
 
-namespace ErpManager.ERP.Areas.Roles.Controllers
+namespace ErpManager.Manager.Areas.Roles.Controllers
 {
 	[Area(Constants.MODULE_ROLE_AREA)]
 	public sealed class RoleSettingController : RoleBaseController

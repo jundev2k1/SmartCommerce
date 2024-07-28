@@ -1,12 +1,12 @@
 ﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
 
-using ErpManager.ERP.Fields;
-using ErpManager.ERP.Globals;
-using ErpManager.ERP.Messages;
-using ErpManager.ERP.Validators;
-using ErpManager.ERP.ValueTexts;
+using ErpManager.Manager.Fields;
+using ErpManager.Manager.Globals;
+using ErpManager.Manager.Messages;
+using ErpManager.Manager.Validators;
+using ErpManager.Manager.ValueTexts;
 
-namespace ErpManager.ERP.Common
+namespace ErpManager.Manager.Common
 {
 	public interface ILocalizer
 	{

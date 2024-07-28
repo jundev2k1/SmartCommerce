@@ -2,7 +2,7 @@
 
 using FluentValidation.Results;
 
-namespace ErpManager.ERP.Common
+namespace ErpManager.Manager.Common
 {
 	public interface IValidatorFacade
 	{

@@ -1,9 +1,9 @@
 ﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
 
-using ErpManager.ERP.Areas.Products.Controllers;
-using ErpManager.ERP.Areas.Products.ViewModels;
+using ErpManager.Manager.Areas.Products.Controllers;
+using ErpManager.Manager.Areas.Products.ViewModels;
 
-namespace ErpManager.ERP.Areas.Product.Controllers
+namespace ErpManager.Manager.Areas.Product.Controllers
 {
 	[Area(Constants.MODULE_PRODUCT_AREA)]
 	public sealed class ProductRegisterController : ProductBaseController

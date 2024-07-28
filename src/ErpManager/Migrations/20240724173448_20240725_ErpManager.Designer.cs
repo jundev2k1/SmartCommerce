@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace ErpManager.ERP.Migrations
+namespace ErpManager.Manager.Migrations
 {
     [DbContext(typeof(DBContext))]
     [Migration("20240724173448_20240725_ErpManager")]

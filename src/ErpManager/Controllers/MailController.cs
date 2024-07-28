@@ -2,7 +2,7 @@
 
 using ErpManager.Infrastructure.Common.Utilities;
 
-namespace ErpManager.ERP.Controllers
+namespace ErpManager.Manager.Controllers
 {
 	public sealed class MailController : BaseController
 	{

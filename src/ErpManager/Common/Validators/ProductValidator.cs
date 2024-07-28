@@ -1,6 +1,6 @@
 ﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
 
-namespace ErpManager.ERP.Common.Validators
+namespace ErpManager.Manager.Common.Validators
 {
 	public sealed class ProductValidator : ValidatorBase<ProductModel>
 	{

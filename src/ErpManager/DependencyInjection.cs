@@ -1,7 +1,7 @@
 ﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
 
-using ErpManager.ERP.Common.Localizer;
-using ErpManager.ERP.Common.Validators;
+using ErpManager.Manager.Common.Localizer;
+using ErpManager.Manager.Common.Validators;
 using ErpManager.Infrastructure.Hubs;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Http.Features;
@@ -13,7 +13,7 @@ using Serilog.Events;
 using System.Globalization;
 using System.IO.Compression;
 
-namespace ErpManager.ERP
+namespace ErpManager.Manager
 {
 	public static class DependencyInjection
 	{
@@ -24,7 +24,7 @@ namespace ErpManager.ERP
 		{
 			// Connection database
 			var connection = configuration.GetConnectionString("ErpManager");
-			services.AddDbContext<DBContext>(x => x.UseSqlServer(connection, b => b.MigrationsAssembly("ErpManager.ERP")));
+			services.AddDbContext<DBContext>(x => x.UseSqlServer(connection, b => b.MigrationsAssembly("ErpManager.Manager")));
 
 			// Add application service
 			services

@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace ErpManager.ERP.Migrations
+namespace ErpManager.Manager.Migrations
 {
     [DbContext(typeof(DBContext))]
     [Migration("20240613232751_20240614_ErpManagerMigration")]

@@ -1,6 +1,6 @@
 ﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
 
-namespace ErpManager.ERP.Areas.Users.ViewModels
+namespace ErpManager.Manager.Areas.Users.ViewModels
 {
 	public sealed class UserListViewModel
 	{

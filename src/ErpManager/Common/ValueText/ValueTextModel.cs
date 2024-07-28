@@ -1,6 +1,6 @@
 ﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
 
-namespace ErpManager.ERP.Common.ValueText
+namespace ErpManager.Manager.Common.ValueText
 {
 	public sealed class ValueTextModel
 	{
