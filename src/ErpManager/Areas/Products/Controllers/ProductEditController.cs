@@ -99,8 +99,10 @@ namespace ErpManager.ERP.Areas.Product.Controllers
 		[HttpPost]
 		[Authorization(Permission.CanEditProduct)]
 		[Route(Constants.MODULE_PRODUCT_PRODUCTEDIT_DESCRIPTION_PATH, Name = Constants.MODULE_PRODUCT_PRODUCTEDIT_DESCRIPTION_NAME)]
-		public bool UpdateDescription([FromRoute] string id, [FromBody] string description)
+		public bool UpdateDescription([FromBody] Hashtable data)
 		{
+			var id = data["id"].ToStringOrEmpty();
+			var description = data["description"].ToStringOrEmpty();
 			var product = _serviceFacade.Products.Get(this.OperatorBranchId, id);
 			if (product == null) return false;
 

@@ -191,7 +191,7 @@
 						</button>
 					</div>
 				</div>
-				<textarea id="form-editor" data-target-selector=".description-input" data-editor-key="productDescription"></textarea>
+				<textarea id="form-editor" data-target-selector="#descriptionInput" data-editor-key="productDescription"></textarea>
 				<input id="descriptionInput" type="hidden" value="@Model.PageData.Description" />
 			</div>
 		</div>
@@ -221,8 +221,8 @@
 				toastr.success('success');
 			}
 			const productId = '@(Model.PageData.ProductId)';
-			const url = '@(Constants.MODULE_PRODUCT_PRODUCTEDIT_DESCRIPTION_PATH.Replace("{id}", Model.PageData.ProductId))';
-			callAjax({ url, data: JSON.stringify(descInput.value), onSuccess: handleSuccess });
+			const url = '@(Constants.MODULE_PRODUCT_PRODUCTEDIT_DESCRIPTION_PATH)';
+			callAjax({ url, data: { id: productId, description: JSON.parse(descInput.value) }, onSuccess: handleSuccess });
 		}
 
 		$(document).ready(() => {
