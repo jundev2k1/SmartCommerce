@@ -231,6 +231,7 @@ namespace ErpManager.Manager
 			}
 			else
 			{
+				app.UsePathBase(Constants.CONFIG_APP_BASE_PATH);
 				app.UseExceptionHandler(Constants.MODULE_ERROR_ERROR_PATH);
 				app.UseHsts();
 			}

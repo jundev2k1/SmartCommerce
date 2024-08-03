@@ -40,8 +40,8 @@ namespace ErpManager.Common
 		public const string ERP_FILE_PATH_JS_COMPONENT_SEARCH_INPUT = "~/js/component-script/SearchInput/index.js";
 
 		/// <summary>File path: Public no image placeholder</summary>
-		public const string ERP_FILE_PATH_PUBLIC_LOGO = "/content/images/system/logo.png";
-		public const string ERP_FILE_PATH_PUBLIC_NO_IMAGE = "/content/images/system/no-image-placeholder.jpg";
-		public const string ERP_FILE_PATH_PUBLIC_NO_AVATAR = "/content/images/system/no-user-placeholder.jpg";
+		public const string ERP_FILE_PATH_PUBLIC_LOGO = "~/content/images/system/logo.png";
+		public const string ERP_FILE_PATH_PUBLIC_NO_IMAGE = "~/content/images/system/no-image-placeholder.jpg";
+		public const string ERP_FILE_PATH_PUBLIC_NO_AVATAR = "~/content/images/system/no-user-placeholder.jpg";
 	}
 }

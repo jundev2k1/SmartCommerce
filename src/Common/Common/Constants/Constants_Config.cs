@@ -9,6 +9,7 @@ namespace ErpManager.Common
 		public const string CONST_PROTOCOL_HTTPS = "https://";
 
 		// Application: Application setting
+		public static string CONFIG_APP_BASE_PATH = string.Empty;
 		public static string CONFIG_APP_DOMAIN = string.Empty;
 		public static string CONFIG_APP_PORT = string.Empty;
 		public static string CONFIG_APP_NAME = string.Empty;

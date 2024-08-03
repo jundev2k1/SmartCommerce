@@ -1,25 +1,21 @@
 // Copyright (c) 2024 - Jun Dev. All rights reserved
 
+using ErpManager.Infrastructure;
+using ErpManager.Manager;
+using ErpManager.Persistence;
+
 var builder = WebApplication.CreateBuilder(args);
+builder.Services
+	.AddPersistence()
+	.AddInfrastructure()
+	.AddApplication(builder.Configuration);
 
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
-
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-	app.UseSwagger();
-	app.UseSwaggerUI();
-}
-
-app.UseHttpsRedirection();
-
+app.Configure();
+app.UseCors("AllowSpecificOrigin");
 app.UseAuthorization();
-
-app.MapControllers();
-
 app.Run();

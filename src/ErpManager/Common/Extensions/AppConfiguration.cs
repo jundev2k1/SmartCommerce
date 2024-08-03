@@ -23,6 +23,7 @@ namespace ErpManager.Manager.Common.Extensions
 		/// </summary>
 		private void AppSettingInititalize()
 		{
+			Constants.CONFIG_APP_BASE_PATH = _configuration["ApplicationSetting:BasePath"].ToStringOrEmpty();
 			Constants.CONFIG_APP_DOMAIN = _configuration["ApplicationSetting:AppDomain"].ToStringOrEmpty();
 			Constants.CONFIG_APP_PORT = _configuration["ApplicationSetting:AppPort"].ToStringOrEmpty();
 			Constants.CONFIG_APP_NAME = _configuration["ApplicationSetting:AppName"].ToStringOrEmpty();

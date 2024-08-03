@@ -20,4 +20,8 @@
     <ProjectReference Include="..\Common\Persistence\ErpManager.Persistence.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Using Include="Microsoft.AspNetCore.Mvc" />
+  </ItemGroup>
+
 </Project>

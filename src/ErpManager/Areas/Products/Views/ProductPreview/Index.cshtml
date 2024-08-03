@@ -74,7 +74,7 @@
 				@if (Model.AgentDetail != null)
 				{
 					<div class="avatar">
-						<img class="img-fluid" src="/images/system/no-user-placeholder.jpg" />
+						<img class="img-fluid" src="@Url.Content(Constants.ERP_FILE_PATH_PUBLIC_NO_AVATAR)" />
 					</div>
 					<p>@(_localizer.Globals["Title_Name"]): @Model.AgentDetail?.FullName</p>
 					<p>@(_localizer.Globals["Title_Tel"]): @Model.AgentDetail?.PhoneNumber</p>
@@ -135,7 +135,7 @@
 							<li class="col-md-3 col-6">
 								<a asp-route="@Constants.MODULE_PRODUCT_PRODUCTPREVIEW_NAME" asp-route-branchId="@relatedProduct.BranchId" asp-route-id="@relatedProduct.ProductId">
 									<div class="product-thumbnail mb-2">
-										<img class="img-fluid" src="@relatedImage" />
+										<img class="img-fluid" src="@Url.Content(relatedImage)" />
 									</div>
 									<h3>@relatedProduct.Name</h3>
 									<p><i class="fa-regular fa-circle-dollar"></i> @_localizer.Globals["Title_Price"]: @relatedPrice</p>

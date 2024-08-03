@@ -3,7 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34728.123
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAPI", "WebAPI.csproj", "{E2811347-C088-4D38-9AD1-117F58601B48}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ErpManager.WebAPI", "ErpManager.WebAPI.csproj", "{E2811347-C088-4D38-9AD1-117F58601B48}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ErpManager.Infrastructure", "..\Common\Infrastructure\ErpManager.Infrastructure.csproj", "{CA40CA09-12B2-4B32-966A-BE1BD452EBBF}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ErpManager.Persistence", "..\Common\Persistence\ErpManager.Persistence.csproj", "{12F18BE8-199B-490D-9188-A07BDBDFBDBE}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ErpManager.Domain", "..\Common\Domain\ErpManager.Domain.csproj", "{2F01F46D-3692-4CAE-BE2C-28DAD3DE9CFF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +21,18 @@ Global
 		{E2811347-C088-4D38-9AD1-117F58601B48}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E2811347-C088-4D38-9AD1-117F58601B48}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E2811347-C088-4D38-9AD1-117F58601B48}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CA40CA09-12B2-4B32-966A-BE1BD452EBBF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CA40CA09-12B2-4B32-966A-BE1BD452EBBF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CA40CA09-12B2-4B32-966A-BE1BD452EBBF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CA40CA09-12B2-4B32-966A-BE1BD452EBBF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{12F18BE8-199B-490D-9188-A07BDBDFBDBE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{12F18BE8-199B-490D-9188-A07BDBDFBDBE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{12F18BE8-199B-490D-9188-A07BDBDFBDBE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{12F18BE8-199B-490D-9188-A07BDBDFBDBE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2F01F46D-3692-4CAE-BE2C-28DAD3DE9CFF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2F01F46D-3692-4CAE-BE2C-28DAD3DE9CFF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2F01F46D-3692-4CAE-BE2C-28DAD3DE9CFF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2F01F46D-3692-4CAE-BE2C-28DAD3DE9CFF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

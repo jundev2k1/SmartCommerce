@@ -35,7 +35,7 @@ namespace ErpManager.Manager.Common.Filters
 			var isLogin = _sessionManager.IsLogin;
 			if (!isLogin)
 			{
-				context.Result = new RedirectResult(Constants.MODULE_AUTH_SIGNIN_PATH);
+				context.Result = new RedirectToRouteResult(routeName: Constants.MODULE_AUTH_SIGNIN_NAME, routeValues: null);
 				return;
 			}
 
@@ -45,7 +45,7 @@ namespace ErpManager.Manager.Common.Filters
 
 			// Clear and set error message for error page
 			SetErrorMessage(errorMessage);
-			context.Result = new RedirectResult(Constants.MODULE_ERROR_ERROR_PATH);
+			context.Result = new RedirectToRouteResult(routeName: Constants.MODULE_ERROR_ERROR_NAME, routeValues: null);
 		}
 
 		public void OnActionExecuted(ActionExecutedContext context)
@@ -60,8 +60,7 @@ namespace ErpManager.Manager.Common.Filters
 		{
 			var result = this.OperatorPermission
 				.Select(permission => EnumUtility.GetEnumValue<Permission>(permission))
-				.Any(permission =>
-					permission == Permission.HasAllPermission
+				.Any(permission => (permission == Permission.HasAllPermission)
 					|| this.RoutePermissions.Contains(permission));
 			return result;
 		}

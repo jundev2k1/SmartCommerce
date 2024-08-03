@@ -14,7 +14,7 @@
 			@for (var index = 0; index < Model.Images.Length; index++)
 			{
 				<div class="carousel-item @(index == 0 ? "active" : string.Empty)">
-					<img src="@ProductUtilities.GetProductImage(Model.Images[index])" class="d-block w-100">
+					<img src="@Url.Content(ProductUtilities.GetProductImage(Model.Images[index]))" class="d-block w-100">
 				</div>
 			}
 		</div>

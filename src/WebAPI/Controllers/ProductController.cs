@@ -1,15 +1,19 @@
 ﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
 
-using Microsoft.AspNetCore.Mvc;
+using ErpManager.Persistence.Common;
 
 namespace ErpManager.WebAPI.Controllers
 {
 	[ApiController]
-	public class ProductController : Controller
+	public sealed class ProductController(IServiceFacade services) : BaseController
 	{
-		public IActionResult Index()
+		private readonly IServiceFacade _services = services;
+
+		[HttpGet("Search")]
+		public async Task<IActionResult> Search()
 		{
-			return View();
+			var products = await Task.Run(() => _services.Products.GetAll("0"));
+			return Ok(products);
 		}
 	}
 }
