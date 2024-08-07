@@ -1,0 +1,92 @@
+// Copyright (c) 2024 - Jun Dev. All rights reserved
+
+.nav {
+  width: 100vw;
+  padding: 0.5rem;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999999;
+  transition: 0.5s ease-in;
+  -webkit-transition: 0.5s ease-in;
+  -moz-transition: 0.5s ease-in;
+  -ms-transition: 0.5s ease-in;
+  -o-transition: 0.5s ease-in;
+  background-color: transparent;
+
+  &--scroll {
+    background-color: rgba(255, 255, 255, 1);
+    transition: 0.5s ease-out;
+    -webkit-transition: 0.5s ease-out;
+    -moz-transition: 0.5s ease-out;
+    -ms-transition: 0.5s ease-out;
+    -o-transition: 0.5s ease-out;
+
+    .nav__menu__item {
+      color: rgba(0, 0, 0) !important;
+      transition: 0.5s ease-in-out;
+      -webkit-transition: 0.5s ease-in-out;
+      -moz-transition: 0.5s ease-in-out;
+      -ms-transition: 0.5s ease-in-out;
+      -o-transition: 0.5s ease-in-out;
+    }
+  }
+
+  &__wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__logo {
+    height: 80px;
+    flex-shrink: 1;
+    overflow: hidden;
+
+    & img {
+      height: 100%;
+    }
+  }
+
+  &__menu {
+    flex-grow: 1;
+
+    &__list {
+      display: flex;
+      justify-content: flex-end;
+      gap: 30px;
+    }
+
+    $inactiveColor: #e6e6e6;
+    $activeColor: rgba(255, 255, 255, 1);
+
+    &__item {
+      padding: 4px;
+      color: $inactiveColor;
+      transition: 0.5s ease-in;
+      -webkit-transition: 0.5s ease-in;
+      -moz-transition: 0.5s ease-in;
+      -ms-transition: 0.5s ease-in;
+      -o-transition: 0.5s ease-in;
+
+      &:hover {
+        color: $activeColor;
+        transition: 0.5s ease-out;
+        -webkit-transition: 0.5s ease-out;
+        -moz-transition: 0.5s ease-out;
+        -ms-transition: 0.5s ease-out;
+        -o-transition: 0.5s ease-out;
+      }
+
+      &--active {
+        color: $activeColor;
+      }
+    }
+
+    &__link {
+      color: inherit;
+      font-size: 18px;
+      font-weight: 600;
+    }
+  }
+}

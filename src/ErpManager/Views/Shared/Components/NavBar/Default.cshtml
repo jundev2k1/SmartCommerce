@@ -59,7 +59,7 @@
 										@if (!hasAllPermission && HasPermission(subItem.Permission) == false) continue;
 
 										<li class="sub-menu-item @(currentPage == subItem.Name ? "active" : string.Empty)">
-											<a href="@subItem.Url">
+											<a href="@Url.Content(subItem.Url)">
 												<i class="fa-solid fa-chevron-right fa-fw" style="opacity: 0"></i>
 												<span class="title">
 													@(Constants.CONFIG_DEFAULT_SIDEBAR_OPTION ? subItem.Label : _localizer.Globals[subItem.Localizer])
@@ -74,7 +74,7 @@
 					else
 					{
 						<div class="menu-item @(currentPage == item.Name ? "active" : string.Empty)">
-							<a href="@item.Url" class="collapsed" type="button">
+							<a href="@Url.Content(item.Url)" class="collapsed" type="button">
 								<i class="@item.Icon"></i>
 								<span class="title">
 									@(Constants.CONFIG_DEFAULT_SIDEBAR_OPTION ? item.Label : _localizer.Globals[item.Localizer])

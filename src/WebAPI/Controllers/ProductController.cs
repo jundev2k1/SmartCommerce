@@ -9,11 +9,18 @@ namespace ErpManager.WebAPI.Controllers
 	{
 		private readonly IServiceFacade _services = services;
 
-		[HttpGet("Search")]
+		[HttpGet("search")]
 		public async Task<IActionResult> Search()
 		{
 			var products = await Task.Run(() => _services.Products.GetAll("0"));
 			return Ok(products);
+		}
+
+		[HttpGet("get")]
+		public async Task<IActionResult> Get(string branchId, string productId)
+		{
+			var product = await Task.Run(() => _services.Products.Get(branchId, productId));
+			return Ok(product);
 		}
 	}
 }

@@ -1,0 +1,22 @@
+// Copyright (c) 2024 - Jun Dev. All rights reserved
+
+.homeCarousel {
+  width: 100vw;
+  height: 100vh;
+  background: url('../../../../public/images/background/home-background.jpg');
+  background-size: 100%;
+  background-repeat: no-repeat;
+  position: relative;
+
+  .homeCarousel__textBox {
+    position: absolute;
+    top: 50%;
+    left: calc(calc(100vw - 1280px) / 2);
+    max-width: calc(1280px / 2);
+    transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    -o-transform: translateY(-50%);
+  }
+}

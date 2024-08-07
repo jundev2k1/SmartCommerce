@@ -1,0 +1,8 @@
+{
+  "hello_world" : "Chào thế giới",
+  
+  "navbar_home": "Home",
+  "navbar_project": "Project",
+  "navbar_aboutUs": "About Us",
+  "navbar_contactUs": "Contact Us"
+}
