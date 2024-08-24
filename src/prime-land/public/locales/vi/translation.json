@@ -1,0 +1,20 @@
+{
+  "hello_world" : "Chào thế giới",
+
+  "meta_home_title": "Trang chủ - {site_name}",
+  "meta_home_desc": "Chào mừng đã đến với {site_name}",
+
+  "navbar_home": "Trang chủ",
+  "navbar_project": "Dự án",
+  "navbar_project_projectLand": "Đất dự án",
+  "navbar_project_socialHouse": "Nhà ở xã hội",
+  "navbar_project_apartment": "Căn hộ chung cư",
+  "navbar_product": "Đất bán",
+  "navbar_product_goodPrice": "Đất giá tốt",
+  "navbar_product_urgentSale": "Đất cần bán gấp",
+  "navbar_aboutUs": "Giới thiệu",
+  "navbar_contactUs": "Liên lạc",
+
+  "navbar_lang_vi": "Tiếng Việt",
+  "navbar_lang_en": "Tiếng Anh"
+}

@@ -1,0 +1,20 @@
+{
+  "hello_world" : "Chào thế giới",
+  
+  "meta_home_title": "Home - {site_name}",
+  "meta_home_desc": "Welcome to the home page of {site_name}",
+
+  "navbar_home": "Home",
+  "navbar_project": "Project",
+  "navbar_project_projectLand": "Project Land",
+  "navbar_project_socialHouse": "Social House",
+  "navbar_project_apartment": "Apartment",
+  "navbar_product": "Buy",
+  "navbar_product_goodPrice": "Good Price",
+  "navbar_product_urgentSale": "Urgent Sale",
+  "navbar_aboutUs": "About Us",
+  "navbar_contactUs": "Contact Us",
+
+  "navbar_lang_vi": "Vietnamese",
+  "navbar_lang_en": "English"
+}

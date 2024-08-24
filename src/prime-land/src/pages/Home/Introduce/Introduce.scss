@@ -1,0 +1,26 @@
+// Copyright (c) 2024 - Jun Dev. All rights reserved
+
+@use '../../../index.global.scss' as *;
+
+.homeIntroduce {
+  padding: 1rem 0;
+
+  &__picture {
+    padding: 0.5rem;
+    border-radius: $siteBorderRadius;
+    -webkit-border-radius: $siteBorderRadius;
+    -moz-border-radius: $siteBorderRadius;
+    -ms-border-radius: $siteBorderRadius;
+    -o-border-radius: $siteBorderRadius;
+
+    img {
+      width: 100%;
+      box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+      border-radius: $siteBorderRadius;
+      -webkit-border-radius: $siteBorderRadius;
+      -moz-border-radius: $siteBorderRadius;
+      -ms-border-radius: $siteBorderRadius;
+      -o-border-radius: $siteBorderRadius;
+}
+  }
+}
