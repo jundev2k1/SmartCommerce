@@ -1,0 +1,24 @@
+{
+    "version": "0.2",
+    "ignorePaths": [
+        "**/node_modules/**",
+        "**/dist/**",
+        "**/build/**"
+    ],
+    "dictionaryDefinitions": [],
+    "dictionaries": [
+        "en",
+        "vi"
+    ],
+    "words": [
+        "mừng",
+        "Tiếng",
+        "Việt"
+    ],
+    "ignoreWords": [],
+    "import": [],
+    "enableFiletypes": [
+        "!typescript",
+        "jsonc"
+    ]
+}

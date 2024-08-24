@@ -180,6 +180,9 @@
   <data name="Product_RelatedProduct" xml:space="preserve">
     <value>Related Product</value>
   </data>
+  <data name="Product_ShortDesc" xml:space="preserve">
+    <value>Short Description</value>
+  </data>
   <data name="Product_Size1" xml:space="preserve">
     <value>Length</value>
   </data>

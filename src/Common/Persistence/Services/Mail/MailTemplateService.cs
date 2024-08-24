@@ -17,25 +17,23 @@ namespace ErpManager.Persistence.Services
 		}
 		#endregion
 
-		#region Search
+		#region Queries
 		/// <summary>
-		/// Search
+		/// Get by criteria
 		/// </summary>
 		/// <param name="searchParams">Search parameters</param>
 		/// <param name="pageIndex">Page index</param>
 		/// <param name="pageSize">Page size</param>
 		/// <returns>Search result model</returns>
-		public SearchResultModel<MailTemplateModel> Search(MailTemplateSearchDto searchParams, int pageIndex, int pageSize = Constants.DEFAULT_PAGE_SIZE)
+		public SearchResultModel<MailTemplateModel> GetByCriteria(MailTemplateFilterModel searchParams, int pageIndex, int pageSize = Constants.DEFAULT_PAGE_SIZE)
 		{
 			if (string.IsNullOrEmpty(searchParams.BranchId)) return new SearchResultModel<MailTemplateModel>();
 
-			var condition = SearchConditionBuilder.MailTemplateSearch(searchParams);
+			var condition = FilterConditionBuilder.GetMailTemplateFilters(searchParams);
 			var result = _mailTemplateRepository.Search(condition, pageIndex, pageSize);
 			return result;
 		}
-		#endregion
 
-		#region Queries
 		/// <summary>
 		/// Get mail template
 		/// </summary>

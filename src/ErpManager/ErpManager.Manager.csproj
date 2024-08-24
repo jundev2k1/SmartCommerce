@@ -72,8 +72,8 @@
   <ItemGroup>
     <Using Include="ErpManager.Common" />
     <Using Include="ErpManager.Common.Utilities" />
-    <Using Include="ErpManager.Domain.Dtos.SearchDtos" />
     <Using Include="ErpManager.Domain.Enum" />
+    <Using Include="ErpManager.Domain.Extensions.FilterModels" />
     <Using Include="ErpManager.Domain.Mapping" />
     <Using Include="ErpManager.Domain.Models" />
     <Using Include="ErpManager.Manager.Common" />
@@ -93,6 +93,7 @@
     <Using Include="ErpManager.Infrastructure.Securiry" />
     <Using Include="ErpManager.Infrastructure.Upload" />
     <Using Include="ErpManager.Persistence.Common" />
+    <Using Include="ErpManager.Persistence.Extensions.FilterBuilders" />
     <Using Include="FluentValidation" />
     <Using Include="Microsoft.AspNetCore.Localization" />
     <Using Include="Microsoft.AspNetCore.Mvc" />

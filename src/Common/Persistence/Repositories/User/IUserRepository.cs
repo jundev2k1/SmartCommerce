@@ -5,13 +5,13 @@ namespace ErpManager.Persistence.Repositories
 	public interface IUserRepository
 	{
 		/// <summary>
-		/// Search
+		/// Get by criteria
 		/// </summary>
 		/// <param name="expression">Expression</param>
 		/// <param name="pageIndex">Page index</param>
 		/// <param name="pageSize">Page size</param>
 		/// <returns>Search result model</returns>
-		SearchResultModel<UserModel> Search(Expression<Func<User, bool>> expression, int pageIndex, int pageSize);
+		SearchResultModel<UserModel> GetByCriteria(Expression<Func<User, bool>> expression, int pageIndex, int pageSize);
 
 		/// <summary>
 		/// Get all

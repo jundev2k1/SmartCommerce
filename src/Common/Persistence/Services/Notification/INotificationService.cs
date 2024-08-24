@@ -5,13 +5,13 @@ namespace ErpManager.Persistence.Services
 	public interface INotificationService
 	{
 		/// <summary>
-		/// Search
+		/// Get by criteria
 		/// </summary>
 		/// <param name="searchParams">Search parameters</param>
 		/// <param name="pageIndex">Page index</param>
 		/// <param name="pageSize">Page size</param>
 		/// <returns>Search result model</returns>
-		SearchResultModel<NotificationModel> Search(NotificationSearchDto searchParams, int pageIndex, int pageSize = Constants.DEFAULT_PAGE_SIZE);
+		SearchResultModel<NotificationModel> GetByCriteria(NotificationFilterModel searchParams, int pageIndex, int pageSize = Constants.DEFAULT_PAGE_SIZE);
 
 		/// <summary>
 		/// Get mail template

@@ -5,21 +5,27 @@ namespace ErpManager.Persistence.Repositories
 	public interface IProductRepository
 	{
 		/// <summary>
-		/// Search
+		/// Get by criteria
 		/// </summary>
 		/// <param name="expression">Expression</param>
 		/// <param name="pageIndex">Page index</param>
 		/// <param name="pageSize">Page size</param>
 		/// <returns>Search result model</returns>
-		SearchResultModel<ProductModel> Search(Expression<Func<Product, bool>> expression, int pageIndex, int pageSize);
-
+		SearchResultModel<ProductModel> GetByCriteria(
+			Expression<Func<Product, bool>> expression,
+			int pageIndex,
+			int pageSize);
 		/// <summary>
-		/// Get all
+		/// Get by criteria async
 		/// </summary>
-		/// <param name="branchId">Branch id</param>
-		/// <param name="isDeleted">Delete flag of product</param>
-		/// <returns>Product model list</returns>
-		ProductModel[] GetAll(string branchId, bool isDeleted);
+		/// <param name="expression">Expression</param>
+		/// <param name="pageIndex">Page index</param>
+		/// <param name="pageSize">Page size</param>
+		/// <returns>Search result model</returns>
+		Task<SearchResultModel<ProductModel>> GetByCriteriaAsync(
+			Expression<Func<Product, bool>> expression,
+			int pageIndex,
+			int pageSize);
 
 		/// <summary>
 		/// Get related products
@@ -28,6 +34,13 @@ namespace ErpManager.Persistence.Repositories
 		/// <param name="productId">Product id</param>
 		/// <returns>Related products</returns>
 		ProductModel[] GetRelatedProducts(string branchId, string productId);
+		/// <summary>
+		/// Get related products async
+		/// </summary>
+		/// <param name="branchId">Branch id</param>
+		/// <param name="productId">Product id</param>
+		/// <returns>Related products</returns>
+		Task<ProductModel[]> GetRelatedProductsAsync(string branchId, string productId);
 
 		/// <summary>
 		/// Gets
@@ -37,12 +50,27 @@ namespace ErpManager.Persistence.Repositories
 		/// <returns>Product model list</returns>
 		ProductModel[] Gets(string branchId, string[] productIds);
 		/// <summary>
+		/// Gets async
+		/// </summary>
+		/// <param name="branchId">Branch id</param>
+		/// <param name="productIds">Product id list</param>
+		/// <returns>Product model list</returns>
+		Task<ProductModel[]> GetsAsync(string branchId, string[] productIds);
+
+		/// <summary>
 		/// Get
 		/// </summary>
 		/// <param name="branchId">Branch id</param>
 		/// <param name="productId">Product id</param>
 		/// <returns>Product model</returns>
 		ProductModel? Get(string branchId, string productId);
+		/// <summary>
+		/// Get async
+		/// </summary>
+		/// <param name="branchId">Branch id</param>
+		/// <param name="productId">Product id</param>
+		/// <returns>Product model</returns>
+		Task<ProductModel?> GetAsync(string branchId, string productId);
 
 		/// <summary>
 		/// Insert
@@ -81,5 +109,12 @@ namespace ErpManager.Persistence.Repositories
 		/// <param name="productId">Product id</param>
 		/// <returns>Is exist?</returns>
 		bool IsExist(string branchId, string productId);
+		/// <summary>
+		/// Check is exist async
+		/// </summary>
+		/// <param name="branchId">Branch id</param>
+		/// <param name="productId">Product id</param>
+		/// <returns>Is exist?</returns>
+		Task<bool> IsExistAsync(string branchId, string productId);
 	}
 }

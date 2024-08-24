@@ -5,13 +5,13 @@ namespace ErpManager.Persistence.Services
 	public interface IMemberService
 	{
 		/// <summary>
-		/// Search
+		/// Get by criteria
 		/// </summary>
 		/// <param name="searchParams">Search parameters</param>
 		/// <param name="pageIndex">Page index</param>
 		/// <param name="pageSize">Page size</param>
 		/// <returns>Search result model</returns>
-		SearchResultModel<MemberModel> Search(MemberSearchDto searchParams, int pageIndex, int pageSize = Constants.DEFAULT_PAGE_SIZE);
+		SearchResultModel<MemberModel> GetByCriteria(MemberFilterModel searchParams, int pageIndex, int pageSize = Constants.DEFAULT_PAGE_SIZE);
 
 		/// <summary>
 		/// Get all

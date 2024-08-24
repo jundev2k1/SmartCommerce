@@ -1,10 +1,8 @@
 ﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
 
-using System.Buffers;
-
 namespace ErpManager.Persistence.Repositories
 {
-	public sealed class ProductRepository : RepositoryBase, IProductRepository
+	public partial class ProductRepository : RepositoryBase, IProductRepository
 	{
 		/// <summary>
 		/// Constructor
@@ -15,13 +13,16 @@ namespace ErpManager.Persistence.Repositories
 		}
 
 		/// <summary>
-		/// Search
+		/// Get by criteria
 		/// </summary>
 		/// <param name="expression">Expression</param>
 		/// <param name="pageIndex">Page index</param>
 		/// <param name="pageSize">Page size</param>
 		/// <returns>Search result model</returns>
-		public SearchResultModel<ProductModel> Search(Expression<Func<Product, bool>> expression, int pageIndex, int pageSize)
+		public SearchResultModel<ProductModel> GetByCriteria(
+			Expression<Func<Product, bool>> expression,
+			int pageIndex,
+			int pageSize)
 		{
 			// Search with query
 			var query = _dbContext.Products
@@ -51,24 +52,6 @@ namespace ErpManager.Persistence.Repositories
 		}
 
 		/// <summary>
-		/// Get all
-		/// </summary>
-		/// <param name="branchId">Branch id</param>
-		/// <param name="isDeleted">Delete flag of product</param>
-		/// <returns>A collection of product</returns>
-		public ProductModel[] GetAll(string branchId, bool isDeleted)
-		{
-			var result = _dbContext.Products
-				.Where(product =>
-					product.BranchId == branchId
-					&& product.DelFlg == isDeleted)
-				.OrderByDescending(product => product.DateCreated)
-				.Select(product => product.MapToModel())
-				.ToArray();
-			return result;
-		}
-
-		/// <summary>
 		/// Get related products
 		/// </summary>
 		/// <param name="branchId">Branch id</param>
@@ -79,9 +62,8 @@ namespace ErpManager.Persistence.Repositories
 			// Get target product
 			var product = _dbContext.Products
 				.AsNoTracking()
-				.FirstOrDefault(product =>
-					(product.BranchId == branchId)
-					&& (product.ProductId == productId));
+				.FirstOrDefault(product => product.BranchId == branchId
+					&& product.ProductId == productId);
 
 			// Convert related product to hashset for contrain condition
 			var relatedIds = product?.RelatedProductId
@@ -108,7 +90,8 @@ namespace ErpManager.Persistence.Repositories
 		public ProductModel[] Gets(string branchId, string[] productIds)
 		{
 			var result = _dbContext.Products
-				.Where(product => (product.BranchId == branchId) && productIds.Contains(product.ProductId))
+				.Where(product => (product.BranchId == branchId)
+					&& productIds.Contains(product.ProductId))
 				.Select(product => product.MapToModel())
 				.ToArray();
 			return result;
@@ -123,9 +106,8 @@ namespace ErpManager.Persistence.Repositories
 		public ProductModel? Get(string branchId, string productId)
 		{
 			var result = _dbContext.Products
-				.FirstOrDefault(product =>
-					(product.BranchId == branchId)
-					&& (product.ProductId == productId)
+				.FirstOrDefault(product => product.BranchId == branchId
+					&& product.ProductId == productId
 					&& product.DelFlg == false)
 				?.MapToModel();
 			return result;
@@ -159,9 +141,10 @@ namespace ErpManager.Persistence.Repositories
 		{
 			var result = BeginTransaction(() =>
 			{
-				var product = _dbContext.Products
-					.FirstOrDefault(product => (product.BranchId == model.BranchId) && (product.ProductId == model.ProductId));
-				if (product == null) throw new NotExistInDBException();
+				var product = _dbContext.Products.FirstOrDefault(item =>
+					item.BranchId == model.BranchId
+					&& item.ProductId == model.ProductId);
+				if (product == null) throw new NotExistInDBException() { ItemInfo = model.ProductId };
 
 				product.MapToEntity(model);
 				_dbContext.Update(product);
@@ -180,10 +163,10 @@ namespace ErpManager.Persistence.Repositories
 		{
 			var result = BeginTransaction(() =>
 			{
-				var product = _dbContext.Products.FirstOrDefault(product =>
-					(product.BranchId == branchId)
-					&& (product.ProductId == productId));
-				if (product == null) throw new NotExistInDBException();
+				var product = _dbContext.Products.FirstOrDefault(item =>
+					item.BranchId == branchId
+					&& item.ProductId == productId);
+				if (product == null) throw new NotExistInDBException() { ItemInfo = productId };
 
 				UpdateAction(product);
 				_dbContext.SaveChanges();
@@ -219,9 +202,10 @@ namespace ErpManager.Persistence.Repositories
 		/// <returns>Is exist?</returns>
 		public bool IsExist(string branchId, string productId)
 		{
-			return _dbContext.Products.Any(item =>
-				(item.BranchId == branchId)
-				&& (item.ProductId == productId));
+			var result = _dbContext.Products.Any(item =>
+				item.BranchId == branchId
+				&& item.ProductId == productId);
+			return result;
 		}
 	}
 }

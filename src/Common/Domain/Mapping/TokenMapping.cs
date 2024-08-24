@@ -5,10 +5,10 @@ namespace ErpManager.Domain.Mapping
 	public static class TokenMapping
 	{
 		/// <summary>
-		/// Map to model
+		/// Map to token model
 		/// </summary>
-		/// <param name="entity">Entity</param>
-		/// <returns>Model</returns>
+		/// <param name="entity">Token entity</param>
+		/// <returns>Token model</returns>
 		public static TokenModel MapToModel(this Token entity)
 		{
 			var model = new TokenModel
@@ -26,10 +26,10 @@ namespace ErpManager.Domain.Mapping
 		}
 
 		/// <summary>
-		/// Map to entity
+		/// Map to token entity
 		/// </summary>
-		/// <param name="model">Model</param>
-		/// <returns>Entity</returns>
+		/// <param name="model">Token model</param>
+		/// <returns>Token entity</returns>
 		public static Token MapToEntity(this TokenModel model)
 		{
 			var entity = new Token
@@ -46,11 +46,11 @@ namespace ErpManager.Domain.Mapping
 			return entity;
 		}
 		/// <summary>
-		/// Map to entity
+		/// Map to token entity
 		/// </summary>
-		/// <param name="entity">Entity</param>
-		/// <param name="model">Model</param>
-		/// <returns>Entity</returns>
+		/// <param name="entity">Token entity</param>
+		/// <param name="model">Token model</param>
+		/// <returns>Token entity</returns>
 		public static Token MapToEntity(this Token entity, TokenModel model)
 		{
 			entity.BranchId = model.BranchId;

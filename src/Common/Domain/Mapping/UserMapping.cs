@@ -5,10 +5,10 @@ namespace ErpManager.Domain.Mapping
 	public static class UserMapping
 	{
 		/// <summary>
-		/// Map to model
+		/// Map to user model
 		/// </summary>
-		/// <param name="entity">Entity</param>
-		/// <returns>Model</returns>
+		/// <param name="entity">User entity</param>
+		/// <returns>User model</returns>
 		public static UserModel MapToModel(this User entity)
 		{
 			var model = new UserModel
@@ -42,40 +42,40 @@ namespace ErpManager.Domain.Mapping
 		}
 
 		/// <summary>
-		/// Map search to model
+		/// Map filter to user model
 		/// </summary>
-		/// <param name="searchDto">Search Dto</param>
-		/// <returns>Model</returns>
-		public static UserModel MapSearchToModel(this UserSearchDto searchDto)
+		/// <param name="filterModel">Filter model</param>
+		/// <returns>User model</returns>
+		public static UserModel MapSearchToModel(this UserFilterModel filterModel)
 		{
 			var model = new UserModel
 			{
-				BranchId = searchDto.BranchId,
-				UserId = searchDto.UserId,
-				UserName = searchDto.UserName,
-				FirstName= searchDto.FirstName,
-				LastName= searchDto.LastName,
-				Email = searchDto.Email,
-				PhoneNumber = searchDto.PhoneNumber,
-				Address1 = searchDto.Address1,
-				Address2 = searchDto.Address2,
-				Address3 = searchDto.Address3,
-				Address4 = searchDto.Address4,
-				Status = searchDto.Status,
-				CreatedBy= searchDto.CreatedBy,
-				LastLogin = searchDto.LastLogin,
-				DelFlg = searchDto.DelFlg,
-				RoleId= searchDto.RoleId,
+				BranchId = filterModel.BranchId,
+				UserId = filterModel.UserId,
+				UserName = filterModel.UserName,
+				FirstName= filterModel.FirstName,
+				LastName= filterModel.LastName,
+				Email = filterModel.Email,
+				PhoneNumber = filterModel.PhoneNumber,
+				Address1 = filterModel.Address1,
+				Address2 = filterModel.Address2,
+				Address3 = filterModel.Address3,
+				Address4 = filterModel.Address4,
+				Status = filterModel.Status,
+				CreatedBy= filterModel.CreatedBy,
+				LastLogin = filterModel.LastLogin,
+				DelFlg = filterModel.DelFlg,
+				RoleId= filterModel.RoleId,
 			};
 
 			return model;
 		}
 
 		/// <summary>
-		/// Map to entity
+		/// Map to user entity
 		/// </summary>
-		/// <param name="model">Model</param>
-		/// <returns>Entity</returns>
+		/// <param name="model">User model</param>
+		/// <returns>User entity</returns>
 		public static User MapToEntity(this UserModel model)
 		{
 			var entity = new User
@@ -108,11 +108,11 @@ namespace ErpManager.Domain.Mapping
 			return entity;
 		}
 		/// <summary>
-		/// Map to entity
+		/// Map to user entity
 		/// </summary>
-		/// <param name="entity">Entity</param>
-		/// <param name="model">Model</param>
-		/// <returns>Entity</returns>
+		/// <param name="entity">User entity</param>
+		/// <param name="model">User model</param>
+		/// <returns>User entity</returns>
 		public static User MapToEntity(this User entity, UserModel model)
 		{
 			entity.BranchId = model.BranchId;

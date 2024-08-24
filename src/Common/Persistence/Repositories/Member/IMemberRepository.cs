@@ -5,13 +5,13 @@ namespace ErpManager.Persistence.Repositories
 	public interface IMemberRepository
 	{
 		/// <summary>
-		/// Search
+		/// Get by criteria
 		/// </summary>
 		/// <param name="expression">Expression</param>
 		/// <param name="pageIndex">Page index</param>
 		/// <param name="pageSize">Page size</param>
 		/// <returns>Search result model</returns>
-		SearchResultModel<MemberModel> Search(Expression<Func<Member, bool>> expression, int pageIndex, int pageSize);
+		SearchResultModel<MemberModel> GetByCriteria(Expression<Func<Member, bool>> expression, int pageIndex, int pageSize);
 
 		/// <summary>
 		/// Get all

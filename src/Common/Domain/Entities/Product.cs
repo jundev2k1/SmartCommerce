@@ -53,6 +53,9 @@ public partial class Product
 	[StringLength(30)]
 	public string TakeOverId { get; set; } = string.Empty;
 
+	[Column(TypeName = "nvarchar(4000)")]
+	public string ShortDescription { get; set; } = string.Empty;
+
 	[Column(TypeName = "nvarchar(max)")]
 	public string Description { get; set; } = string.Empty;
 
@@ -61,6 +64,36 @@ public partial class Product
 
 	[StringLength(4000)]
 	public string RelatedProductId { get; set; } = string.Empty;
+
+	[StringLength(60)]
+	public string CategoryId1 { get; set; } = string.Empty;
+
+	[StringLength(60)]
+	public string CategoryId2 { get; set; } = string.Empty;
+
+	[StringLength(60)]
+	public string CategoryId3 { get; set; } = string.Empty;
+
+	[StringLength(60)]
+	public string CategoryId4 { get; set; } = string.Empty;
+
+	[StringLength(60)]
+	public string CategoryId5 { get; set; } = string.Empty;
+
+	[StringLength(60)]
+	public string CategoryId6 { get; set; } = string.Empty;
+
+	[StringLength(60)]
+	public string CategoryId7 { get; set; } = string.Empty;
+
+	[StringLength(60)]
+	public string CategoryId8 { get; set; } = string.Empty;
+
+	[StringLength(60)]
+	public string CategoryId9 { get; set; } = string.Empty;
+
+	[StringLength(60)]
+	public string CategoryId10 { get; set; } = string.Empty;
 
 	[Column(TypeName = "datetime")]
 	public DateTime? DateCreated { get; set; }

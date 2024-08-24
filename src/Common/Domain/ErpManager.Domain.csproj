@@ -20,9 +20,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Using Include="ErpManager.Domain.Dtos.SearchDtos" />
     <Using Include="ErpManager.Domain.Entities" />
     <Using Include="ErpManager.Domain.Enum" />
+    <Using Include="ErpManager.Domain.Extensions.FilterModels" />
     <Using Include="ErpManager.Domain.Models" />
     <Using Include="FluentValidation" />
     <Using Include="System.ComponentModel.DataAnnotations" />

@@ -2,7 +2,7 @@
 
 namespace ErpManager.Persistence.Services
 {
-	public sealed class ProductService : ServiceBase, IProductService
+	public partial class ProductService : ServiceBase, IProductService
 	{
 		#region Constructor
 		/// <summary>Context singleton</summary>
@@ -17,34 +17,21 @@ namespace ErpManager.Persistence.Services
 		}
 		#endregion
 
-		#region Search
+		#region Queries
 		/// <summary>
-		/// Search
+		/// Get by criteria
 		/// </summary>
-		/// <param name="searchParams">Search parameters</param>
+		/// <param name="inputParams">Input parameters</param>
 		/// <param name="pageIndex">Page index</param>
 		/// <param name="pageSize">Page size</param>
 		/// <returns>Search result model</returns>
-		public SearchResultModel<ProductModel> Search(ProductSearchDto searchParams, int pageIndex, int pageSize = Constants.DEFAULT_PAGE_SIZE)
+		public SearchResultModel<ProductModel> GetByCriteria(ProductFilterModel inputParams, int pageIndex, int pageSize = Constants.DEFAULT_PAGE_SIZE)
 		{
-			if (string.IsNullOrEmpty(searchParams.BranchId)) return new SearchResultModel<ProductModel>();
+			if (string.IsNullOrEmpty(inputParams.BranchId)) return new SearchResultModel<ProductModel>();
 
-			var condition = SearchConditionBuilder.ProductSearch(searchParams);
-			var result = _productRepository.Search(condition, pageIndex, pageSize);
+			var condition = FilterConditionBuilder.GetProductFilters(inputParams);
+			var result = _productRepository.GetByCriteria(condition, pageIndex, pageSize);
 			return result;
-		}
-		#endregion
-
-		#region Queries
-		/// <summary>
-		/// Get all product
-		/// </summary>
-		/// <param name="branchId">Branch id</param>
-		/// <param name="isDeleted">Delete flag of product</param>
-		/// <returns>Product list</returns>
-		public ProductModel[] GetAll(string branchId, bool isDeleted = false)
-		{
-			return _productRepository.GetAll(branchId, isDeleted);
 		}
 
 		/// <summary>

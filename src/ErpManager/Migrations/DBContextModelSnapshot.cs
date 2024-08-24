@@ -66,6 +66,76 @@ namespace ErpManager.Manager.Migrations
                     b.ToTable("Branch");
                 });
 
+            modelBuilder.Entity("ErpManager.Domain.Entities.Category", b =>
+                {
+                    b.Property<string>("BranchId")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<string>("CategoryId")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<string>("Avatar")
+                        .ValueGeneratedOnAdd()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)")
+                        .HasDefaultValueSql("('')");
+
+                    b.Property<string>("CategoryName")
+                        .ValueGeneratedOnAdd()
+                        .HasMaxLength(60)
+                        .HasColumnType("nvarchar(60)")
+                        .HasDefaultValueSql("('')");
+
+                    b.Property<string>("CreatedBy")
+                        .ValueGeneratedOnAdd()
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)")
+                        .HasDefaultValueSql("('')");
+
+                    b.Property<DateTime?>("DateChanged")
+                        .HasColumnType("datetime");
+
+                    b.Property<DateTime>("DateCreated")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime")
+                        .HasDefaultValueSql("(getdate())");
+
+                    b.Property<bool>("DelFlg")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Description")
+                        .ValueGeneratedOnAdd()
+                        .HasMaxLength(4000)
+                        .HasColumnType("nvarchar(4000)")
+                        .HasDefaultValueSql("('')");
+
+                    b.Property<string>("LastChanged")
+                        .ValueGeneratedOnAdd()
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)")
+                        .HasDefaultValueSql("('')");
+
+                    b.Property<string>("ParentCategoryId")
+                        .ValueGeneratedOnAdd()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)")
+                        .HasDefaultValueSql("('root')");
+
+                    b.Property<int>("Status")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValueSql("(1)");
+
+                    b.HasKey("BranchId", "CategoryId")
+                        .HasName("PK_Category_1");
+
+                    b.HasIndex("CategoryId");
+
+                    b.ToTable("Category");
+                });
+
             modelBuilder.Entity("ErpManager.Domain.Entities.MailTemplate", b =>
                 {
                     b.Property<string>("BranchId")
@@ -360,6 +430,66 @@ namespace ErpManager.Manager.Migrations
                         .HasColumnType("nvarchar(60)")
                         .HasDefaultValueSql("('')");
 
+                    b.Property<string>("CategoryId1")
+                        .ValueGeneratedOnAdd()
+                        .HasMaxLength(60)
+                        .HasColumnType("nvarchar(60)")
+                        .HasDefaultValueSql("('')");
+
+                    b.Property<string>("CategoryId10")
+                        .ValueGeneratedOnAdd()
+                        .HasMaxLength(60)
+                        .HasColumnType("nvarchar(60)")
+                        .HasDefaultValueSql("('')");
+
+                    b.Property<string>("CategoryId2")
+                        .ValueGeneratedOnAdd()
+                        .HasMaxLength(60)
+                        .HasColumnType("nvarchar(60)")
+                        .HasDefaultValueSql("('')");
+
+                    b.Property<string>("CategoryId3")
+                        .ValueGeneratedOnAdd()
+                        .HasMaxLength(60)
+                        .HasColumnType("nvarchar(60)")
+                        .HasDefaultValueSql("('')");
+
+                    b.Property<string>("CategoryId4")
+                        .ValueGeneratedOnAdd()
+                        .HasMaxLength(60)
+                        .HasColumnType("nvarchar(60)")
+                        .HasDefaultValueSql("('')");
+
+                    b.Property<string>("CategoryId5")
+                        .ValueGeneratedOnAdd()
+                        .HasMaxLength(60)
+                        .HasColumnType("nvarchar(60)")
+                        .HasDefaultValueSql("('')");
+
+                    b.Property<string>("CategoryId6")
+                        .ValueGeneratedOnAdd()
+                        .HasMaxLength(60)
+                        .HasColumnType("nvarchar(60)")
+                        .HasDefaultValueSql("('')");
+
+                    b.Property<string>("CategoryId7")
+                        .ValueGeneratedOnAdd()
+                        .HasMaxLength(60)
+                        .HasColumnType("nvarchar(60)")
+                        .HasDefaultValueSql("('')");
+
+                    b.Property<string>("CategoryId8")
+                        .ValueGeneratedOnAdd()
+                        .HasMaxLength(60)
+                        .HasColumnType("nvarchar(60)")
+                        .HasDefaultValueSql("('')");
+
+                    b.Property<string>("CategoryId9")
+                        .ValueGeneratedOnAdd()
+                        .HasMaxLength(60)
+                        .HasColumnType("nvarchar(60)")
+                        .HasDefaultValueSql("('')");
+
                     b.Property<string>("CreatedBy")
                         .ValueGeneratedOnAdd()
                         .HasMaxLength(30)
@@ -423,6 +553,11 @@ namespace ErpManager.Manager.Migrations
                     b.Property<string>("RelatedProductId")
                         .ValueGeneratedOnAdd()
                         .HasMaxLength(4000)
+                        .HasColumnType("nvarchar(4000)")
+                        .HasDefaultValueSql("('')");
+
+                    b.Property<string>("ShortDescription")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("nvarchar(4000)")
                         .HasDefaultValueSql("('')");
 

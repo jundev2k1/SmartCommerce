@@ -19,9 +19,9 @@
   <ItemGroup>
     <Using Include="ErpManager.Common" />
     <Using Include="ErpManager.Common.Utilities" />
-    <Using Include="ErpManager.Domain.Dtos.SearchDtos" />
     <Using Include="ErpManager.Domain.Entities" />
     <Using Include="ErpManager.Domain.Enum" />
+    <Using Include="ErpManager.Domain.Extensions.FilterModels" />
     <Using Include="ErpManager.Domain.Mapping" />
     <Using Include="ErpManager.Domain.Models" />
     <Using Include="ErpManager.Infrastructure.Common.Enum" />
@@ -30,7 +30,7 @@
     <Using Include="ErpManager.Infrastructure.Securiry" />
     <Using Include="ErpManager.Infrastructure.Upload" />
     <Using Include="ErpManager.Persistence.Common" />
-    <Using Include="ErpManager.Persistence.Common.Utilities.Search" />
+    <Using Include="ErpManager.Persistence.Extensions.FilterBuilders" />
     <Using Include="ErpManager.Persistence.Repositories" />
     <Using Include="ErpManager.Persistence.Seeders" />
     <Using Include="ErpManager.Persistence.Services" />
@@ -39,6 +39,10 @@
     <Using Include="Microsoft.EntityFrameworkCore" />
     <Using Include="Microsoft.Extensions.DependencyInjection" />
     <Using Include="System.Linq.Expressions" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Common\Utilities\" />
   </ItemGroup>
 
 </Project>

@@ -5,13 +5,13 @@ namespace ErpManager.Persistence.Services
 	public interface IRoleService
 	{
 		/// <summary>
-		/// Search
+		/// Get by criteria
 		/// </summary>
 		/// <param name="searchParams">Search parameters</param>
 		/// <param name="pageIndex">Page index</param>
 		/// <param name="pageSize">Page size</param>
 		/// <returns>Search result model</returns>
-		SearchResultModel<RoleModel> Search(RoleSearchDto searchParams, int pageIndex, int pageSize = Constants.DEFAULT_PAGE_SIZE);
+		SearchResultModel<RoleModel> GetByCriteria(RoleFilterModel searchParams, int pageIndex, int pageSize = Constants.DEFAULT_PAGE_SIZE);
 
 		/// <summary>
 		/// Get all

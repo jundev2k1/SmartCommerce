@@ -13,13 +13,13 @@ namespace ErpManager.Persistence.Repositories
 		}
 
 		/// <summary>
-		/// Search
+		/// Get by criteria
 		/// </summary>
 		/// <param name="expression">Expression</param>
 		/// <param name="pageIndex">Page index</param>
 		/// <param name="pageSize">Page size</param>
 		/// <returns>Search result model</returns>
-		public SearchResultModel<UserModel> Search(Expression<Func<User, bool>> expression, int pageIndex, int pageSize)
+		public SearchResultModel<UserModel> GetByCriteria(Expression<Func<User, bool>> expression, int pageIndex, int pageSize)
 		{
 			var query = _dbContext.Users
 				.AsQueryable()

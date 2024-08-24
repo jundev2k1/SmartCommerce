@@ -5,13 +5,13 @@ namespace ErpManager.Persistence.Repositories
 	public interface IRoleRepository
 	{
 		/// <summary>
-		/// Search
+		/// Get by criteria
 		/// </summary>
 		/// <param name="expression">Expression</param>
 		/// <param name="pageIndex">Page index</param>
 		/// <param name="pageSize">Page size</param>
 		/// <returns>Search result model</returns>
-		SearchResultModel<RoleModel> Search(Expression<Func<Role, bool>> expression, int pageIndex, int pageSize);
+		SearchResultModel<RoleModel> GetByCriteria(Expression<Func<Role, bool>> expression, int pageIndex, int pageSize);
 
 		/// <summary>
 		/// Get all

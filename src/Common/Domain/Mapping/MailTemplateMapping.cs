@@ -1,16 +1,14 @@
 ﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
 
-using System.Security.Cryptography;
-
 namespace ErpManager.Domain.Mapping
 {
 	public static class MailTemplateMapping
 	{
 		/// <summary>
-		/// Map to model
+		/// Map to mail template model
 		/// </summary>
-		/// <param name="entity">Entity</param>
-		/// <returns>Model</returns>
+		/// <param name="entity">Mail template entity</param>
+		/// <returns>Model mail template mail template </returns>
 		public static MailTemplateModel MapToModel(this MailTemplate entity)
 		{
 			var model = new MailTemplateModel
@@ -32,10 +30,10 @@ namespace ErpManager.Domain.Mapping
 		}
 
 		/// <summary>
-		/// Map to entity
+		/// Map to mail template entity
 		/// </summary>
-		/// <param name="model">Model</param>
-		/// <returns>Entity</returns>
+		/// <param name="model">Model mail template</param>
+		/// <returns>Mail template entity</returns>
 		public static MailTemplate MapToEntity(this MailTemplateModel model)
 		{
 			var entity = new MailTemplate
@@ -56,11 +54,11 @@ namespace ErpManager.Domain.Mapping
 			return entity;
 		}
 		/// <summary>
-		/// Map to entity
+		/// Map to mail template entity
 		/// </summary>
-		/// <param name="entity">Entity</param>
-		/// <param name="model">Model</param>
-		/// <returns>Entity</returns>
+		/// <param name="entity">Mail template entity</param>
+		/// <param name="model">Model mail template</param>
+		/// <returns>Mail template entity</returns>
 		public static MailTemplate MapToEntity(this MailTemplate entity, MailTemplateModel model)
 		{
 			entity.BranchId = model.BranchId;

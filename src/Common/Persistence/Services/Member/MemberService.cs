@@ -17,25 +17,23 @@ namespace ErpManager.Persistence.Services
 		}
 		#endregion
 
-		#region Search
+		#region Queries
 		/// <summary>
-		/// Search
+		/// Get by criteria
 		/// </summary>
 		/// <param name="searchParams">Search parameters</param>
 		/// <param name="pageIndex">Page index</param>
 		/// <param name="pageSize">Page size</param>
 		/// <returns>Search result model</returns>
-		public SearchResultModel<MemberModel> Search(MemberSearchDto searchParams, int pageIndex, int pageSize = Constants.DEFAULT_PAGE_SIZE)
+		public SearchResultModel<MemberModel> GetByCriteria(MemberFilterModel searchParams, int pageIndex, int pageSize = Constants.DEFAULT_PAGE_SIZE)
 		{
 			if (string.IsNullOrEmpty(searchParams.BranchId)) return new SearchResultModel<MemberModel>();
 
-			var condition = SearchConditionBuilder.MemberSearch(searchParams);
-			var result = _memberRepository.Search(condition, pageIndex, pageSize);
+			var condition = FilterConditionBuilder.GetMemberFilters(searchParams);
+			var result = _memberRepository.GetByCriteria(condition, pageIndex, pageSize);
 			return result;
 		}
-		#endregion
 
-		#region Queries
 		/// <summary>
 		/// Get all member
 		/// </summary>

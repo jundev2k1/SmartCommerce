@@ -19,6 +19,8 @@ public partial class DBContext : DbContext
 
 	public virtual DbSet<User> Users { get; set; }
 
+	public virtual DbSet<Category> Categories { get; set; }
+
 	public virtual DbSet<Product> Products { get; set; }
 
 	public virtual DbSet<Member> Members { get; set; }
@@ -89,6 +91,23 @@ public partial class DBContext : DbContext
 			entity.Property(e => e.RoleId);
 		});
 
+		modelBuilder.Entity<Category>(entity =>
+		{
+			entity.HasIndex(e => e.CategoryId);
+			entity.HasKey(e => new { e.BranchId, e.CategoryId }).HasName("PK_Category_1");
+
+			entity.Property(e => e.CategoryName).HasDefaultValueSql("('')");
+			entity.Property(e => e.Avatar).HasDefaultValueSql("('')");
+			entity.Property(e => e.Description).HasDefaultValueSql("('')");
+			entity.Property(e => e.ParentCategoryId).HasDefaultValueSql("('root')");
+			entity.Property(e => e.Status).HasConversion<int>().HasDefaultValueSql("(1)");
+			entity.Property(e => e.DelFlg);
+			entity.Property(e => e.DateCreated).HasDefaultValueSql("(getdate())");
+			entity.Property(e => e.DateChanged);
+			entity.Property(e => e.CreatedBy).HasDefaultValueSql("('')");
+			entity.Property(e => e.LastChanged).HasDefaultValueSql("('')");
+		});
+
 		modelBuilder.Entity<Product>(entity =>
 		{
 			entity.HasIndex(e => e.ProductId);
@@ -110,9 +129,20 @@ public partial class DBContext : DbContext
 			entity.Property(e => e.Size2).HasColumnType("decimal(18,2)");
 			entity.Property(e => e.Size3).HasColumnType("decimal(18,2)");
 			entity.Property(e => e.TakeOverId).HasDefaultValueSql("('')");
+			entity.Property(e => e.ShortDescription).HasColumnType("nvarchar(4000)").HasDefaultValueSql("('')");
 			entity.Property(e => e.Description).HasColumnType("nvarchar(max)").HasDefaultValueSql("('')");
 			entity.Property(e => e.EmbeddedLink).HasDefaultValueSql("('')");
 			entity.Property(e => e.RelatedProductId).HasDefaultValueSql("('')");
+			entity.Property(e => e.CategoryId1).HasDefaultValueSql("('')");
+			entity.Property(e => e.CategoryId2).HasDefaultValueSql("('')");
+			entity.Property(e => e.CategoryId3).HasDefaultValueSql("('')");
+			entity.Property(e => e.CategoryId4).HasDefaultValueSql("('')");
+			entity.Property(e => e.CategoryId5).HasDefaultValueSql("('')");
+			entity.Property(e => e.CategoryId6).HasDefaultValueSql("('')");
+			entity.Property(e => e.CategoryId7).HasDefaultValueSql("('')");
+			entity.Property(e => e.CategoryId8).HasDefaultValueSql("('')");
+			entity.Property(e => e.CategoryId9).HasDefaultValueSql("('')");
+			entity.Property(e => e.CategoryId10).HasDefaultValueSql("('')");
 			entity.Property(e => e.DateCreated).HasDefaultValueSql("(getdate())");
 			entity.Property(e => e.DateChanged);
 			entity.Property(e => e.CreatedBy).HasDefaultValueSql("('')");

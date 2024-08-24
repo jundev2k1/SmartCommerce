@@ -5,10 +5,10 @@ namespace ErpManager.Domain.Mapping
 	public static class RoleMapping
 	{
 		/// <summary>
-		/// Map to model
+		/// Map to role model
 		/// </summary>
-		/// <param name="entity">Entity</param>
-		/// <returns>Model</returns>
+		/// <param name="entity">Role entity</param>
+		/// <returns>Role model</returns>
 		public static RoleModel MapToModel(this Role entity)
 		{
 			var model = new RoleModel
@@ -30,34 +30,10 @@ namespace ErpManager.Domain.Mapping
 		}
 
 		/// <summary>
-		/// Map search to model
+		/// Map to role entity
 		/// </summary>
-		/// <param name="searchDto">Search Dto</param>
-		/// <returns>Model</returns>
-		public static RoleModel MapSearchToModel(this RoleSearchDto searchDto)
-		{
-			var model = new RoleModel
-			{
-				BranchId = searchDto.BranchId,
-				RoleId = searchDto.RoleId,
-				Name = searchDto.Name,
-				Description = searchDto.Description,
-				Permission = searchDto.Permission,
-				Priority = searchDto.Priority,
-				Status = searchDto.Status,
-				DateCreated = searchDto.DateCreated,
-				DateChanged = searchDto.DateChanged,
-				CreatedBy = searchDto.CreatedBy,
-			};
-
-			return model;
-		}
-
-		/// <summary>
-		/// Map to entity
-		/// </summary>
-		/// <param name="model">Model</param>
-		/// <returns>Entity</returns>
+		/// <param name="model">Role model</param>
+		/// <returns>Role entity</returns>
 		public static Role MapToEntity(this RoleModel model)
 		{
 			var entity = new Role
@@ -78,11 +54,11 @@ namespace ErpManager.Domain.Mapping
 			return entity;
 		}
 		/// <summary>
-		/// Map to entity
+		/// Map to role entity
 		/// </summary>
-		/// <param name="entity">Entity</param>
-		/// <param name="model">Model</param>
-		/// <returns>Entity</returns>
+		/// <param name="entity">Role entity</param>
+		/// <param name="model">Role model</param>
+		/// <returns>Role entity</returns>
 		public static Role MapToEntity(this Role entity, RoleModel model)
 		{
 			entity.BranchId = model.BranchId;

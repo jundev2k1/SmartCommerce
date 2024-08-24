@@ -5,10 +5,10 @@ namespace ErpManager.Domain.Mapping
 	public static class BranchMapping
 	{
 		/// <summary>
-		/// Map to model
+		/// Map to branch model
 		/// </summary>
-		/// <param name="entity">Entity</param>
-		/// <returns>Model</returns>
+		/// <param name="entity">Branch entity</param>
+		/// <returns>Branch model</returns>
 		public static BranchModel MapToModel(this Branch entity)
 		{
 			var model = new BranchModel
@@ -25,10 +25,10 @@ namespace ErpManager.Domain.Mapping
 		}
 
 		/// <summary>
-		/// Map to entity
+		/// Map to branch entity
 		/// </summary>
-		/// <param name="model">Model</param>
-		/// <returns>Entity</returns>
+		/// <param name="model">Branch model</param>
+		/// <returns>Branch entity</returns>
 		public static Branch MapToEntity(this BranchModel model)
 		{
 			var entity = new Branch
@@ -44,11 +44,11 @@ namespace ErpManager.Domain.Mapping
 			return entity;
 		}
 		/// <summary>
-		/// Map to entity
+		/// Map to branch entity
 		/// </summary>
-		/// <param name="entity">Entity</param>
-		/// <param name="model">Model</param>
-		/// <returns>Entity</returns>
+		/// <param name="entity">Branch entity</param>
+		/// <param name="model">Branch model</param>
+		/// <returns>Branch entity</returns>
 		public static Branch MapToEntity(this Branch entity, BranchModel model)
 		{
 			entity.BranchId = model.BranchId;

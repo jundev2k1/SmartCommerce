@@ -1,6 +1,4 @@
-﻿
-
-namespace ErpManager.Manager.Areas.Users.Controllers
+﻿namespace ErpManager.Manager.Areas.Users.Controllers
 {
 	[Area(Constants.MODULE_USER_AREA)]
 	public class UserCommonController : UserBaseController
@@ -22,12 +20,12 @@ namespace ErpManager.Manager.Areas.Users.Controllers
 		[Route(Constants.ENDPOINT_COMMON_USER_GET_USER_LIST)]
 		public IActionResult GetUsers(string searchKey = "")
 		{
-			var userSearch = new UserSearchDto
+			var userSearch = new UserFilterModel
 			{
 				BranchId = this.OperatorBranchId,
 				Keywords = searchKey
 			};
-			var result = _serviceFacade.Users.Search(userSearch, pageIndex: 1, pageSize: 6).Items;
+			var result = _serviceFacade.Users.GetByCriteria(userSearch, pageIndex: 1, pageSize: 6).Items;
 			return Json(result);
 		}
 	}

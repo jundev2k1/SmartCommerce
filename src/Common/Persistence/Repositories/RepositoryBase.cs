@@ -48,6 +48,7 @@ namespace ErpManager.Persistence.Repositories
 			{
 				_logger.LogError(ex.InnerException.Message);
 			}
+
 			transaction.Rollback();
 			return false;
 		}

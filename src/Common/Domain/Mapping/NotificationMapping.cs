@@ -5,10 +5,10 @@ namespace ErpManager.Domain.Mapping
 	public static class NotificationMapping
 	{
 		/// <summary>
-		/// Map to model
+		/// Map to notification model
 		/// </summary>
-		/// <param name="entity">Entity</param>
-		/// <returns>Model</returns>
+		/// <param name="entity">Notification entity</param>
+		/// <returns>Notification model</returns>
 		public static NotificationModel MapToModel(this Notification entity)
 		{
 			var model = new NotificationModel
@@ -30,10 +30,10 @@ namespace ErpManager.Domain.Mapping
 		}
 
 		/// <summary>
-		/// Map to entity
+		/// Map to notification entity
 		/// </summary>
-		/// <param name="model">Model</param>
-		/// <returns>Entity</returns>
+		/// <param name="model">Notification model</param>
+		/// <returns>Notification entity</returns>
 		public static Notification MapToEntity(this NotificationModel model)
 		{
 			var entity = new Notification

@@ -40,11 +40,33 @@ namespace ErpManager.Domain.Models
 
 		public string TakeOverId { get; set; } = string.Empty;
 
+		public string ShortDescription { get; set; } = string.Empty;
+
 		public string Description { get; set; } = string.Empty;
 
 		public string EmbeddedLink { get; set; } = string.Empty;
 
 		public string RelatedProductId { get; set; } = string.Empty;
+
+		public string CategoryId1 { get; set; } = string.Empty;
+
+		public string CategoryId2 { get; set; } = string.Empty;
+
+		public string CategoryId3 { get; set; } = string.Empty;
+
+		public string CategoryId4 { get; set; } = string.Empty;
+
+		public string CategoryId5 { get; set; } = string.Empty;
+
+		public string CategoryId6 { get; set; } = string.Empty;
+
+		public string CategoryId7 { get; set; } = string.Empty;
+
+		public string CategoryId8 { get; set; } = string.Empty;
+
+		public string CategoryId9 { get; set; } = string.Empty;
+
+		public string CategoryId10 { get; set; } = string.Empty;
 
 		public DateTime? DateCreated { get; set; }
 

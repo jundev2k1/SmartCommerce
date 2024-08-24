@@ -23,8 +23,8 @@ namespace ErpManager.Manager.Areas.Product.Controllers
 		[Route(Constants.MODULE_PRODUCT_PRODUCTLIST_PATH, Name = Constants.MODULE_PRODUCT_PRODUCTLIST_NAME)]
 		public IActionResult Index(int page = 1)
 		{
-			var condition = new ProductSearchDto { BranchId = this.OperatorBranchId };
-			var productList = _serviceFacade.Products.Search(condition, page, Constants.DEFAULT_PAGE_SIZE);
+			var condition = new ProductFilterModel { BranchId = this.OperatorBranchId };
+			var productList = _serviceFacade.Products.GetByCriteria(condition, page, Constants.DEFAULT_PAGE_SIZE);
 			var data = new ProductListViewModel
 			{
 				PageData = productList,
@@ -50,7 +50,7 @@ namespace ErpManager.Manager.Areas.Product.Controllers
 			if (viewModel.PageData.TotalPage < viewModel.PageIndex)
 				viewModel.PageIndex = 1;
 
-			viewModel.PageData = _serviceFacade.Products.Search(
+			viewModel.PageData = _serviceFacade.Products.GetByCriteria(
 				searchParams,
 				viewModel.PageIndex,
 				viewModel.PageSize);

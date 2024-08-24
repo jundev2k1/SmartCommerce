@@ -1,16 +1,14 @@
 ﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
 
-using ErpManager.Domain.Entities;
-
 namespace ErpManager.Domain.Mapping
 {
 	public static class MemberMapping
 	{
 		/// <summary>
-		/// Map to model
+		/// Map to member model
 		/// </summary>
-		/// <param name="entity">Entity</param>
-		/// <returns>Model</returns>
+		/// <param name="entity">Member entity</param>
+		/// <returns>Member model</returns>
 		public static MemberModel MapToModel(this Member entity)
 		{
 			var model = new MemberModel
@@ -48,10 +46,10 @@ namespace ErpManager.Domain.Mapping
 		}
 
 		/// <summary>
-		/// Map to entity
+		/// Map to member entity
 		/// </summary>
-		/// <param name="model">Model</param>
-		/// <returns>Entity</returns>
+		/// <param name="model">Member model</param>
+		/// <returns>Member entity</returns>
 		public static Member MapToEntity(this MemberModel model)
 		{
 			var entity = new Member
@@ -88,11 +86,11 @@ namespace ErpManager.Domain.Mapping
 			return entity;
 		}
 		/// <summary>
-		/// Map to entity
+		/// Map to member entity
 		/// </summary>
-		/// <param name="entity">Entity</param>
-		/// <param name="model">Model</param>
-		/// <returns>Entity</returns>
+		/// <param name="entity">Member entity</param>
+		/// <param name="model">Member model</param>
+		/// <returns>Member entity</returns>
 		public static Member MapToEntity(this Member entity, MemberModel model)
 		{
 			entity.BranchId = model.BranchId;

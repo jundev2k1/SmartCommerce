@@ -5,13 +5,13 @@ namespace ErpManager.Persistence.Repositories
 	public interface INotificationRepository
 	{
 		/// <summary>
-		/// Search
+		/// Get by criteria
 		/// </summary>
 		/// <param name="expression">Expression</param>
 		/// <param name="pageIndex">Page index</param>
 		/// <param name="pageSize">Page size</param>
 		/// <returns>Search result model</returns>
-		SearchResultModel<NotificationModel> Search(Expression<Func<Notification, bool>> expression, int pageIndex, int pageSize);
+		SearchResultModel<NotificationModel> GetByCriteria(Expression<Func<Notification, bool>> expression, int pageIndex, int pageSize);
 
 		/// <summary>
 		/// Get

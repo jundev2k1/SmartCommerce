@@ -6,6 +6,9 @@ namespace ErpManager.Persistence
 {
 	public static class DependencyInjection
 	{
+		/// <summary>
+		/// Add persistence service
+		/// </summary>
 		public static IServiceCollection AddPersistence(this IServiceCollection services)
 		{
 			services
@@ -34,6 +37,7 @@ namespace ErpManager.Persistence
 			services.AddScoped<IBranchRepository, BranchRepository>();
 			services.AddScoped<IRoleRepository, RoleRepository>();
 			services.AddScoped<IUserRepository, UserRepository>();
+			services.AddScoped<ICategoryRepository, CategoryRepository>();
 			services.AddScoped<IProductRepository, ProductRepository>();
 			services.AddScoped<ITokenRepository, TokenRepository>();
 			services.AddScoped<IMemberRepository, MemberRepository>();
@@ -50,6 +54,7 @@ namespace ErpManager.Persistence
 			services.AddScoped<IBranchService, BranchService>();
 			services.AddScoped<IRoleService, RoleService>();
 			services.AddScoped<IUserService, UserService>();
+			services.AddScoped<ICategoryService, CategoryService>();
 			services.AddScoped<IProductService, ProductService>();
 			services.AddScoped<ITokenService, TokenService>();
 			services.AddScoped<IMemberService, MemberService>();
@@ -58,6 +63,9 @@ namespace ErpManager.Persistence
 			return services;
 		}
 
+		/// <summary>
+		/// Use persistence service
+		/// </summary>
 		public static IApplicationBuilder UsePersistence(this IApplicationBuilder app)
 		{
 			// Add database seeder

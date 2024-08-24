@@ -87,5 +87,8 @@ namespace ErpManager.Common
 
 		/// <summary>Created by default flag: System</summary>
 		public const string DEFAULT_FLG_CREATED_BY_SYSTEM = "System";
+
+		/// <summary>Category flag: Root category</summary>
+		public const string FLG_CATEGORY_PARENT_CATEGORY_ROOT = "root";
 	}
 }

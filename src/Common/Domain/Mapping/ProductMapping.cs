@@ -5,10 +5,10 @@ namespace ErpManager.Domain.Mapping
 	public static class ProductMapping
 	{
 		/// <summary>
-		/// Map to model
+		/// Map to product model
 		/// </summary>
-		/// <param name="entity">Entity</param>
-		/// <returns>Model</returns>
+		/// <param name="entity">Product entity</param>
+		/// <returns>Product model</returns>
 		public static ProductModel MapToModel(this Product entity)
 		{
 			var model = new ProductModel
@@ -31,9 +31,20 @@ namespace ErpManager.Domain.Mapping
 				Size2 = entity.Size2,
 				Size3 = entity.Size3,
 				TakeOverId = entity.TakeOverId,
+				ShortDescription = entity.ShortDescription,
 				Description = entity.Description,
 				EmbeddedLink = entity.EmbeddedLink,
 				RelatedProductId = entity.RelatedProductId,
+				CategoryId1 = entity.CategoryId1,
+				CategoryId2 = entity.CategoryId2,
+				CategoryId3 = entity.CategoryId3,
+				CategoryId4 = entity.CategoryId4,
+				CategoryId5 = entity.CategoryId5,
+				CategoryId6 = entity.CategoryId6,
+				CategoryId7 = entity.CategoryId7,
+				CategoryId8 = entity.CategoryId8,
+				CategoryId9 = entity.CategoryId9,
+				CategoryId10 = entity.CategoryId10,
 				DateCreated = entity.DateCreated,
 				DateChanged = entity.DateCreated,
 				CreatedBy = entity.CreatedBy,
@@ -44,36 +55,36 @@ namespace ErpManager.Domain.Mapping
 		}
 
 		/// <summary>
-		/// Map search to model
+		/// Map search to product model
 		/// </summary>
-		/// <param name="searchDto">Search Dto</param>
-		/// <returns>Model</returns>
-		public static ProductModel MapSearchToModel(this ProductSearchDto searchDto)
+		/// <param name="filterModel">Filter model</param>
+		/// <returns>Product model</returns>
+		public static ProductModel MapSearchToModel(this ProductFilterModel filterModel)
 		{
 			var model = new ProductModel
 			{
-				BranchId = searchDto.BranchId,
-				ProductId = searchDto.ProductId,
-				Name = searchDto.ProductName,
-				Address1 = searchDto.Address1,
-				Address2 = searchDto.Address2,
-				Address3 = searchDto.Address3,
-				Address4 = searchDto.Address4,
-				DisplayPrice = searchDto.DisplayPrice ?? DisplayPriceEnum.Price1,
-				Status = searchDto.Status ?? ProductStatusEnum.Normal,
-				DelFlg = searchDto.DelFlg,
-				TakeOverId = searchDto.TakeOverId,
-				CreatedBy = searchDto.CreatedBy,
+				BranchId = filterModel.BranchId,
+				ProductId = filterModel.ProductId,
+				Name = filterModel.ProductName,
+				Address1 = filterModel.Address1,
+				Address2 = filterModel.Address2,
+				Address3 = filterModel.Address3,
+				Address4 = filterModel.Address4,
+				DisplayPrice = filterModel.DisplayPrice ?? DisplayPriceEnum.Price1,
+				Status = filterModel.Status ?? ProductStatusEnum.Normal,
+				DelFlg = filterModel.DelFlg,
+				TakeOverId = filterModel.TakeOverId,
+				CreatedBy = filterModel.CreatedBy,
 			};
 
 			return model;
 		}
 
 		/// <summary>
-		/// Map to entity
+		/// Map to product entity
 		/// </summary>
-		/// <param name="model">Model</param>
-		/// <returns>Entity</returns>
+		/// <param name="model">Product model</param>
+		/// <returns>Product entity</returns>
 		public static Product MapToEntity(this ProductModel model)
 		{
 			var entity = new Product
@@ -96,9 +107,20 @@ namespace ErpManager.Domain.Mapping
 				Size2 = model.Size2,
 				Size3 = model.Size3,
 				TakeOverId = model.TakeOverId,
+				ShortDescription = model.ShortDescription,
 				Description = model.Description,
 				EmbeddedLink = model.EmbeddedLink,
 				RelatedProductId = model.RelatedProductId,
+				CategoryId1 = model.CategoryId1,
+				CategoryId2 = model.CategoryId2,
+				CategoryId3 = model.CategoryId3,
+				CategoryId4 = model.CategoryId4,
+				CategoryId5 = model.CategoryId5,
+				CategoryId6 = model.CategoryId6,
+				CategoryId7 = model.CategoryId7,
+				CategoryId8 = model.CategoryId8,
+				CategoryId9 = model.CategoryId9,
+				CategoryId10 = model.CategoryId10,
 				DateCreated = model.DateCreated,
 				DateChanged = model.DateCreated,
 				CreatedBy = model.CreatedBy,
@@ -108,11 +130,11 @@ namespace ErpManager.Domain.Mapping
 			return entity;
 		}
 		/// <summary>
-		/// Map to product
+		/// Map to product entity
 		/// </summary>
-		/// <param name="entity">Entity</param>
-		/// <param name="model">Model</param>
-		/// <returns>Entity</returns>
+		/// <param name="entity">Product entity</param>
+		/// <param name="model">Product model</param>
+		/// <returns>Product entity</returns>
 		public static Product MapToEntity(this Product entity, ProductModel model)
 		{
 			entity.Name = model.Name;
@@ -130,10 +152,21 @@ namespace ErpManager.Domain.Mapping
 			entity.Size2 = model.Size2;
 			entity.Size3 = model.Size3;
 			entity.TakeOverId = model.TakeOverId;
+			entity.ShortDescription = model.ShortDescription;
 			entity.Description = model.Description;
 			entity.EmbeddedLink = model.EmbeddedLink;
 			entity.RelatedProductId = model.RelatedProductId;
-			entity.DateChanged = DateTime.Now;
+			entity.CategoryId1 = model.CategoryId1;
+			entity.CategoryId2 = model.CategoryId2;
+			entity.CategoryId3 = model.CategoryId3;
+			entity.CategoryId4 = model.CategoryId4;
+			entity.CategoryId5 = model.CategoryId5;
+			entity.CategoryId6 = model.CategoryId6;
+			entity.CategoryId7 = model.CategoryId7;
+			entity.CategoryId8 = model.CategoryId8;
+			entity.CategoryId9 = model.CategoryId9;
+			entity.CategoryId10 = model.CategoryId10;
+			entity.DateChanged = model.DateChanged ?? DateTime.Now;
 			entity.CreatedBy = model.CreatedBy;
 			entity.LastChanged = model.LastChanged;
 

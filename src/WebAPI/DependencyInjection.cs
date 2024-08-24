@@ -39,7 +39,7 @@ namespace ErpManager.Manager
 			services.AddCors(options =>
 			{
 				options.AddPolicy("AllowSpecificOrigin",
-					builder => builder.WithOrigins("http://localhost:3000")
+					builder => builder.WithOrigins("*")
 						.AllowAnyMethod()
 						.AllowAnyHeader());
 			});

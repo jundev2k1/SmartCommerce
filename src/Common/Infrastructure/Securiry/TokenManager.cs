@@ -8,6 +8,7 @@ namespace ErpManager.Infrastructure.Securiry
 	{
 		private static TokenManager? _instance { get; set; }
 		private static readonly object _lockObject = new object();
+
 		private TokenManager()
 		{
 		}

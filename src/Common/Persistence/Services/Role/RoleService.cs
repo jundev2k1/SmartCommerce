@@ -17,25 +17,23 @@ namespace ErpManager.Persistence.Services
 		}
 		#endregion
 
-		#region Search
+		#region Queries
 		/// <summary>
-		/// Search
+		/// Get by criteria
 		/// </summary>
 		/// <param name="searchParams">Search parameters</param>
 		/// <param name="pageIndex">Page index</param>
 		/// <param name="pageSize">Page size</param>
 		/// <returns>Search result model</returns>
-		public SearchResultModel<RoleModel> Search(RoleSearchDto searchParams, int pageIndex, int pageSize = Constants.DEFAULT_PAGE_SIZE)
+		public SearchResultModel<RoleModel> GetByCriteria(RoleFilterModel searchParams, int pageIndex, int pageSize = Constants.DEFAULT_PAGE_SIZE)
 		{
 			if (string.IsNullOrEmpty(searchParams.BranchId)) return new SearchResultModel<RoleModel>();
 
-			var condition = SearchConditionBuilder.RoleSearch(searchParams);
-			var result = _roleRepository.Search(condition, pageIndex, pageSize);
+			var condition = FilterConditionBuilder.GetRoleFilters(searchParams);
+			var result = _roleRepository.GetByCriteria(condition, pageIndex, pageSize);
 			return result;
 		}
-		#endregion
 
-		#region Queries
 		/// <summary>
 		/// Get all role
 		/// </summary>

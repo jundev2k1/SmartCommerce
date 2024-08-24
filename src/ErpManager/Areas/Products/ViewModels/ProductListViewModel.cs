@@ -1,12 +1,14 @@
 ﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
 
+using ErpManager.Domain.Extensions.FilterModels;
+
 namespace ErpManager.Manager.Areas.Products.ViewModels
 {
-	public sealed class ProductListViewModel
+    public sealed class ProductListViewModel
 	{
 		public SearchResultModel<ProductModel> PageData { get; set; } = new SearchResultModel<ProductModel>();
 
-		public ProductSearchDto SearchFields { get; set; } = new ProductSearchDto();
+		public ProductFilterModel SearchFields { get; set; } = new ProductFilterModel();
 
 		public ProductInputOptionViewModel InputOption { get; set; } = new ProductInputOptionViewModel();
 

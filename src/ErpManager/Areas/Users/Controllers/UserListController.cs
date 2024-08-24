@@ -22,8 +22,8 @@ namespace ErpManager.Manager.Areas.Users.Controllers
 		[Route(Constants.MODULE_USER_USERLIST_PATH, Name = Constants.MODULE_USER_USERLIST_NAME)]
 		public IActionResult Index(int page = 1)
 		{
-			var condition = new UserSearchDto { BranchId = this.OperatorBranchId };
-			var userList = _serviceFacade.Users.Search(condition, page, Constants.DEFAULT_PAGE_SIZE);
+			var condition = new UserFilterModel { BranchId = this.OperatorBranchId };
+			var userList = _serviceFacade.Users.GetByCriteria(condition, page, Constants.DEFAULT_PAGE_SIZE);
 			var data = new UserListViewModel
 			{
 				PageIndex = page,
@@ -47,7 +47,7 @@ namespace ErpManager.Manager.Areas.Users.Controllers
 			if (viewModel.PageData.TotalPage < viewModel.PageIndex)
 				viewModel.PageIndex = 1;
 
-			viewModel.PageData = _serviceFacade.Users.Search(
+			viewModel.PageData = _serviceFacade.Users.GetByCriteria(
 				searchParams,
 				viewModel.PageIndex,
 				viewModel.PageSize);

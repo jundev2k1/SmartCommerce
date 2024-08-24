@@ -17,25 +17,23 @@ namespace ErpManager.Persistence.Services
 		}
 		#endregion
 
-		#region Search
+		#region Queries
 		/// <summary>
-		/// Search
+		/// Get by criteria
 		/// </summary>
 		/// <param name="searchParams">Search parameters</param>
 		/// <param name="pageIndex">Page index</param>
 		/// <param name="pageSize">Page size</param>
 		/// <returns>Search result model</returns>
-		public SearchResultModel<NotificationModel> Search(NotificationSearchDto searchParams, int pageIndex, int pageSize = Constants.DEFAULT_PAGE_SIZE)
+		public SearchResultModel<NotificationModel> GetByCriteria(NotificationFilterModel searchParams, int pageIndex, int pageSize = Constants.DEFAULT_PAGE_SIZE)
 		{
 			if (string.IsNullOrEmpty(searchParams.BranchId)) return new SearchResultModel<NotificationModel>();
 
-			var condition = SearchConditionBuilder.NotificationSearch(searchParams);
-			var result = _notificationRepository.Search(condition, pageIndex, pageSize);
+			var condition = FilterConditionBuilder.GetNotificationFilters(searchParams);
+			var result = _notificationRepository.GetByCriteria(condition, pageIndex, pageSize);
 			return result;
 		}
-		#endregion
 
-		#region Queries
 		/// <summary>
 		/// Get mail template
 		/// </summary>

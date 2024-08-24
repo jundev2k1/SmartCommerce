@@ -22,8 +22,8 @@ namespace ErpManager.Manager.Areas.Roles.Controllers
 		[Route(Constants.MODULE_ROLE_ROLELIST_PATH, Name = Constants.MODULE_ROLE_ROLELIST_NAME)]
 		public IActionResult Index(int page = 1)
 		{
-			var condition = new RoleSearchDto { BranchId = OperatorBranchId };
-			var data = _serviceFacade.Roles.Search(condition, page, Constants.DEFAULT_PAGE_SIZE);
+			var condition = new RoleFilterModel { BranchId = OperatorBranchId };
+			var data = _serviceFacade.Roles.GetByCriteria(condition, page, Constants.DEFAULT_PAGE_SIZE);
 
 			return View(new RoleListViewModel { PageData = data, PageIndex = page });
 		}
@@ -39,7 +39,7 @@ namespace ErpManager.Manager.Areas.Roles.Controllers
 			if (viewModel.PageData.TotalPage < viewModel.PageIndex)
 				viewModel.PageIndex = 1;
 
-			viewModel.PageData = _serviceFacade.Roles.Search(
+			viewModel.PageData = _serviceFacade.Roles.GetByCriteria(
 				searchParams,
 				viewModel.PageIndex,
 				viewModel.PageSize);

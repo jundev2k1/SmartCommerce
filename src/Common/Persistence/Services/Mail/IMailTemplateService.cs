@@ -5,13 +5,13 @@ namespace ErpManager.Persistence.Services
 	public interface IMailTemplateService
 	{
 		/// <summary>
-		/// Search
+		/// Get by criteria
 		/// </summary>
 		/// <param name="searchParams">Search parameters</param>
 		/// <param name="pageIndex">Page index</param>
 		/// <param name="pageSize">Page size</param>
 		/// <returns>Search result model</returns>
-		SearchResultModel<MailTemplateModel> Search(MailTemplateSearchDto searchParams, int pageIndex, int pageSize = Constants.DEFAULT_PAGE_SIZE);
+		SearchResultModel<MailTemplateModel> GetByCriteria(MailTemplateFilterModel searchParams, int pageIndex, int pageSize = Constants.DEFAULT_PAGE_SIZE);
 
 		/// <summary>
 		/// Get mail template
