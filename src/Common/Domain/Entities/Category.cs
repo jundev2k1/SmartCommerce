@@ -26,6 +26,8 @@ public partial class Category
 	[StringLength(20)]
 	public string ParentCategoryId { get; set; } = string.Empty;
 
+	public int Priority { get; set; }
+
 	public CategoryStatusEnum Status { get; set; }
 
 	public bool DelFlg { get; set; }

@@ -1,6 +1,9 @@
 ﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
 
 import { RoleBase } from '../role-base';
+import { RoleSettingAction } from '../models/role-setting-model';
+import { RoleRequestService } from '../../../https/index';
+import { OnRequestSuccess } from '../../../https/services/base-model';
 
 /**
  * Role setting page handler
@@ -11,22 +14,31 @@ class RoleSettingHandler extends RoleBase {
 	 * Role setting selector list
 	 */
 	private selector = Object.freeze({
+		// Tab button selector
+		roleInfoTab: '#roleTabs #roleInfoTab',
+		roleSettingTab: '#roleTabs #roleSettingTab',
+
+		// Role permission setting selector
 		permissions: '#roleSetting .role-wrapper .permission-select-input',
 		innerPermissions: '.permission-select-input',
 		pageDefaults: '#roleSetting .role-wrapper .default-page-checkbox',
 		selectAllPerms: '#roleSetting .role-wrapper .select-all-check',
 		innerSelectAllPerms: '.select-all-check',
-		buttonUpdates: '#roleSetting .form-submit',
+		buttonCreates: '.form-group-control .btn-create',
+		buttonUpdates: '.form-group-control .btn-update',
 		permissionGroup: '.accordion-item',
 		errorMessage: '#roleSetting .role-error-message'
 	});
 
 	/**
-	 * Role setting endpoint
+	 * Role information fields selector
 	 */
-	private endpoint = Object.freeze({
-		updateInfo: '/role/setting/update-information',
-		updateSettings: '/role/setting/update-settings'
+	private roleInfoSelector = Object.freeze({
+		roleId: '#roleInformation input#roleId',
+		name: '#roleInformation input#roleName',
+		priority: '#roleInformation input#rolePriority',
+		status: '#roleInformation input#roleStatus',
+		desc: '#roleInformation textarea#roleDesc',
 	});
 
 	/**
@@ -36,29 +48,79 @@ class RoleSettingHandler extends RoleBase {
 		// Initialize Role Base
 		super();
 
-		// Initialize
+		// Set tab element
+		this.btnInfoTab = document.querySelector(this.selector.roleInfoTab);
+		this.btnSettingTab = document.querySelector(this.selector.roleSettingTab);
+
+		// Initialize role information selector
+		this.roleIdInput = document.querySelector<HTMLInputElement>(this.roleInfoSelector.roleId);
+		this.roleNameInput = document.querySelector<HTMLInputElement>(this.roleInfoSelector.name);
+		this.rolePriorityInput = document.querySelector<HTMLInputElement>(this.roleInfoSelector.priority);
+		this.roleStatusInput = document.querySelector<HTMLInputElement>(this.roleInfoSelector.status);
+		this.roleDescriptionInput = document.querySelector<HTMLInputElement>(this.roleInfoSelector.desc);
+
+		// Set current action status
+		this.actionStatus = this.roleIdInput && (this.roleIdInput?.value !== '0')
+			? RoleSettingAction.Update
+			: RoleSettingAction.Register;
+
+		// Initialize role permission selector
 		this.permissionCheckList = document.querySelectorAll(this.selector.permissions);
 		this.selectAllCheckList = document.querySelectorAll(this.selector.selectAllPerms);
 		this.pageDefaultRadioList = document.querySelectorAll(this.selector.pageDefaults);
+		this.btnCreates = document.querySelectorAll(this.selector.buttonCreates);
 		this.btnUpdates = document.querySelectorAll(this.selector.buttonUpdates);
-		this.errorMessage = document.querySelector(this.selector.errorMessage) as HTMLDivElement;
+		this.permissionErrorMessage = document.querySelector(this.selector.errorMessage) as HTMLDivElement;
 	}
 
 	// Declare class local properties
+	private actionStatus: RoleSettingAction = RoleSettingAction.Register;
+	// Tab button
+	private btnInfoTab: HTMLAnchorElement | null;
+	private btnSettingTab: HTMLAnchorElement | null;
+
+	// Role information element
+	private roleIdInput: HTMLInputElement | null;
+	private roleNameInput: HTMLInputElement | null;
+	private rolePriorityInput: HTMLInputElement | null;
+	private roleStatusInput: HTMLInputElement | null;
+	private roleDescriptionInput: HTMLInputElement | null;
+
+	// Permission element
 	private permissionCheckList: NodeListOf<HTMLInputElement>;
 	private selectAllCheckList: NodeListOf<HTMLInputElement>;
 	private pageDefaultRadioList: NodeListOf<HTMLInputElement>;
+	private btnCreates: NodeListOf<HTMLButtonElement>;
 	private btnUpdates: NodeListOf<HTMLButtonElement>;
-	private errorMessage: HTMLDivElement;
+	private permissionErrorMessage: HTMLDivElement;
 
 	/**
-	 * Initialize class
+	 * Initialize
 	 */
 	public init(): void {
+		this.handleCheckIsAction();
+
 		this.hideMessage();
 		this.setPermissionItemSelectEvent();
 		this.setSelectAllChooseEvent();
+		this.setCreateEvent();
 		this.setUpdateEvent();
+	}
+
+	private handleCheckIsAction(): void {
+		switch (this.actionStatus) {
+			case RoleSettingAction.Register:
+				this.btnSettingTab?.classList.add('disabled');
+				this.btnUpdates.forEach(element => element.style.display = 'none');
+				this.btnCreates.forEach(element => element.style.display = 'block');
+				break;
+
+			case RoleSettingAction.Update:
+				this.btnSettingTab?.classList.remove('disabled');
+				this.btnUpdates.forEach(element => element.style.display = 'block');
+				this.btnCreates.forEach(element => element.style.display = 'none');
+				break;
+		}
 	}
 
 	/**
@@ -119,10 +181,52 @@ class RoleSettingHandler extends RoleBase {
 	/**
 	 * Set update button handler
 	 */
-	private setUpdateEvent(): void {
-		const onUpdate = (event: Event): void => {
+	private setCreateEvent(): void {
+		const onRequestSuccess = (response: ResponseBase<string>): void => {
+			this.actionStatus = RoleSettingAction.Update;
+			this.btnCreates.forEach(element => element.style.display = 'none');
+			this.btnUpdates.forEach(element => element.style.display = 'block');
+			this.btnSettingTab?.classList.remove('disabled');
+			this.btnSettingTab?.click();
+
+			console.log(response);
+		}
+
+		const onCreate = (event: Event): void => {
+			if (this.actionStatus === RoleSettingAction.Update) {
+				event.preventDefault();
+				location.reload();
+				return;
+			}
+
 			const targetElement = event.target as HTMLButtonElement;
-			this.updateSettingInfo();
+			this.createUpdateRoleInfo(onRequestSuccess);
+			this.showMessage('This is my error message');
+		};
+
+		// Add click event
+		this.btnCreates.forEach((button) => {
+			button.addEventListener('click', onCreate);
+		});
+	}
+
+	/**
+	 * Set update button handler
+	 */
+	private setUpdateEvent(): void {
+		const onRequestSuccess = (response: ResponseBase<string>): void => {
+			console.log(response);
+		}
+
+		const onUpdate = (event: Event): void => {
+			if (this.actionStatus === RoleSettingAction.Register) {
+				event.preventDefault();
+				location.reload();
+				return;
+			}
+
+			const targetElement = event.target as HTMLButtonElement;
+			this.createUpdateRoleInfo(onRequestSuccess);
 			this.showMessage('This is my error message');
 		};
 
@@ -132,16 +236,35 @@ class RoleSettingHandler extends RoleBase {
 		});
 	}
 
-	private updateSettingInfo(): void {
-		// RequestServiceBase.callRequest();
+	/**
+	 * Create role information request
+	 */
+	private createRoleInfoRequest() : RoleInfoRequest {
+		const result : RoleInfoRequest = {
+			roleId: Number(this.roleIdInput?.value),
+			name: this.roleNameInput?.value || '',
+			priority: Number(this.rolePriorityInput?.value),
+			status: Number(this.roleStatusInput?.value),
+			description: this.roleDescriptionInput?.value || '',
+		};
+		return result;
+	}
+	type 
+
+	/**
+	 * Update role info
+	 */
+	private createUpdateRoleInfo(onSuccess: OnRequestSuccess<ResponseBase<string>>): void {
+		const request: RoleInfoRequest = this.createRoleInfoRequest();
+		RoleRequestService.updateRoleInfo(request, onSuccess);
 	}
 
 	/**
 	 * Hide page message
 	 */
 	private hideMessage(): void {
-		this.errorMessage.innerHTML = '';
-		this.errorMessage.style.display = 'none';
+		this.permissionErrorMessage.innerHTML = '';
+		this.permissionErrorMessage.style.display = 'none';
 	}
 
 	/**
@@ -154,8 +277,8 @@ class RoleSettingHandler extends RoleBase {
 			return;
 		}
 
-		this.errorMessage.innerHTML = message;
-		this.errorMessage.style.display = 'block';
+		this.permissionErrorMessage.innerHTML = message;
+		this.permissionErrorMessage.style.display = 'block';
 	}
 
 	/**

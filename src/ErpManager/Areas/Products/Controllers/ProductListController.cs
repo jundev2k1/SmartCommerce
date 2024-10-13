@@ -21,10 +21,13 @@ namespace ErpManager.Manager.Areas.Product.Controllers
 		[HttpGet]
 		[Authorization(Permission.CanReadListProduct)]
 		[Route(Constants.MODULE_PRODUCT_PRODUCTLIST_PATH, Name = Constants.MODULE_PRODUCT_PRODUCTLIST_NAME)]
-		public IActionResult Index(int page = 1)
+		public async Task<IActionResult> Index(int page = 1)
 		{
 			var condition = new ProductFilterModel { BranchId = this.OperatorBranchId };
-			var productList = _serviceFacade.Products.GetByCriteria(condition, page, Constants.DEFAULT_PAGE_SIZE);
+			var productList = await _serviceFacade.Products.GetByCriteriaAsync(
+				condition,
+				page,
+				Constants.DEFAULT_PAGE_SIZE);
 			var data = new ProductListViewModel
 			{
 				PageData = productList,
@@ -37,7 +40,7 @@ namespace ErpManager.Manager.Areas.Product.Controllers
 		[HttpPost]
 		[Authorization(Permission.CanReadListProduct)]
 		[Route(Constants.MODULE_PRODUCT_PRODUCTLIST_PATH)]
-		public IActionResult Index(ProductListViewModel viewModel)
+		public async Task<IActionResult> Index(ProductListViewModel viewModel)
 		{
 			// Set default search data
 			var searchParams = viewModel.SearchFields;
@@ -50,7 +53,7 @@ namespace ErpManager.Manager.Areas.Product.Controllers
 			if (viewModel.PageData.TotalPage < viewModel.PageIndex)
 				viewModel.PageIndex = 1;
 
-			viewModel.PageData = _serviceFacade.Products.GetByCriteria(
+			viewModel.PageData = await _serviceFacade.Products.GetByCriteriaAsync(
 				searchParams,
 				viewModel.PageIndex,
 				viewModel.PageSize);

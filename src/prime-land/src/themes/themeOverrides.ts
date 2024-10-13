@@ -34,6 +34,13 @@ const themeOverrides: Components = {
       },
     },
   },
+  MuiCard: {
+    styleOverrides: {
+      root: {
+        borderRadius: '8px',
+      },
+    },
+  },
 };
 
 export default themeOverrides;

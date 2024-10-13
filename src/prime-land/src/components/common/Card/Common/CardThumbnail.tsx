@@ -37,7 +37,7 @@ const CardThumbnailComponent = (props: CardProductThumbnailProps) => {
       component="div"
       className={createClassName('card__thumbnail', classNameWrapper)}
     >
-      <CardActions onClick={onClick}>
+      <CardActions onClick={onClick} sx={{ padding: 0, overflow: 'hidden' }}>
         <CardMedia
           component="img"
           className={createClassName('card__thumbnail__picture', className)}

@@ -10,6 +10,8 @@ namespace ErpManager.Persistence.Common
 
 		IUserService Users { get; }
 
+		ICategoryService Categories { get; }
+
 		IProductService Products { get; }
 
 		ITokenService Tokens { get; }

@@ -14,7 +14,24 @@ import './WhyChooseUs.scss';
 
 const HomeWhyChooseUs: React.FC = () => {
   return (
-    <Box component="section" className="whyChooseUs">
+    <Box
+      component="section"
+      className="whyChooseUs"
+      sx={{ margin: '3.5rem 0', paddingTop: '3.5rem' }}
+    >
+      <Box sx={{ textAlign: 'center', marginBottom: '2rem' }}>
+        <Typography
+          variant="h2"
+          sx={{ textAlign: 'center', marginBottom: '2rem' }}
+        >
+          TẠI SAO CHỌN CHÚNG TÔI?
+        </Typography>
+        <Typography variant="body1" maxWidth="768px" margin="auto">
+          Với đội ngũ chuyên viên dày dặn kinh nghiệm trong lĩnh vực Bất Động
+          Sản, chúng tôi cam kết mang đến những lựa chọn tối ưu, đáp ứng hoàn
+          hảo nhu cầu riêng của từng khách hàng.
+        </Typography>
+      </Box>
       <Container>
         <Grid container spacing={3}>
           {whyChooseUsContent.map(([title, content], index) => (

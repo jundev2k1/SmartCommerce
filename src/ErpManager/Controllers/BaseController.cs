@@ -33,8 +33,6 @@ namespace ErpManager.Manager.Controllers
 		/// </summary>
 		private void Initialize()
 		{
-			SetDefaultViewValue();
-			ResetOperatorSession();
 		}
 
 		/// <summary>
@@ -77,22 +75,6 @@ namespace ErpManager.Manager.Controllers
 			var result = this.OperatorPermission.Contains(Permission.HasAllPermission.GetStringValue())
 				|| this.OperatorPermission.Contains(permission.GetStringValue());
 			return result;
-		}
-
-		/// <summary>
-		/// Reset operator session
-		/// </summary>
-		protected void ResetOperatorSession()
-		{
-			this.IsLogin = _sessionManager.IsLogin;
-			this.OperatorBranchId = !string.IsNullOrEmpty(_sessionManager.OperatorBranchId)
-				? _sessionManager.OperatorBranchId
-				: Constants.CONFIG_MASTER_BRANCH_ID;
-			this.OperatorId = _sessionManager.OperatorId;
-			this.OperatorName = _sessionManager.OperatorName;
-			this.OperatorPermission = _sessionManager.OperatorPermission
-				?.Split(',', StringSplitOptions.RemoveEmptyEntries)
-				?? Array.Empty<string>();
 		}
 
 		/// <summary>
@@ -159,13 +141,6 @@ namespace ErpManager.Manager.Controllers
 		}
 
 		/// <summary>
-		/// Set default view value
-		/// </summary>
-		private void SetDefaultViewValue()
-		{
-		}
-
-		/// <summary>
 		/// Add error to model state
 		/// </summary>
 		/// <param name="validationResult">Validation result</param>
@@ -196,15 +171,17 @@ namespace ErpManager.Manager.Controllers
 		}
 
 		/// <summary>Is login</summary>
-		protected bool IsLogin { get; private set; }
+		protected bool IsLogin => _sessionManager.IsLogin;
 		/// <summary>Operator branch id</summary>
-		protected string OperatorBranchId { get; private set; } = Constants.CONFIG_MASTER_BRANCH_ID;
+		protected string OperatorBranchId => _sessionManager.OperatorBranchId;
 		/// <summary>Operator id</summary>
-		protected string OperatorId { get; private set; } = string.Empty;
+		protected string OperatorId => _sessionManager.OperatorId;
 		/// <summary>Operator name</summary>
-		protected string OperatorName { get; private set; } = string.Empty;
+		protected string OperatorName => _sessionManager.OperatorName;
 		/// <summary>Operator Permission</summary>
-		protected string[] OperatorPermission { get; private set; } = Array.Empty<string>();
+		protected string[] OperatorPermission => _sessionManager.OperatorPermission
+			?.Split(',', StringSplitOptions.RemoveEmptyEntries)
+			?? Array.Empty<string>();
 		/// <summary>Session token</summary>
 		protected string SessionToken => GetOrResetSessionId();
 	}

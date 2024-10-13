@@ -62,14 +62,14 @@ namespace ErpManager.Persistence.Services
 		/// </summary>
 		/// <param name="model">Product model</param>
 		/// <returns>Insert status</returns>
-		bool Insert(ProductModel model);
+		Task<bool> Insert(ProductModel model);
 
 		/// <summary>
 		/// Update
 		/// </summary>
 		/// <param name="model">Product model</param>
 		/// <returns>Update status</returns>
-		bool Update(ProductModel model);
+		Task<bool> Update(ProductModel model);
 		/// <summary>
 		/// Update
 		/// </summary>

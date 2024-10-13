@@ -19,6 +19,7 @@ namespace ErpManager.Domain.Mapping
 				Avatar = entity.Avatar,
 				Description = entity.Description,
 				ParentCategoryId = entity.ParentCategoryId,
+				Priority = entity.Priority,
 				Status = entity.Status,
 				DelFlg = entity.DelFlg,
 				DateCreated = entity.DateCreated,
@@ -66,6 +67,7 @@ namespace ErpManager.Domain.Mapping
 				Avatar = model.Avatar,
 				Description = model.Description,
 				ParentCategoryId = model.ParentCategoryId,
+				Priority = model.Priority,
 				Status = model.Status,
 				DelFlg = model.DelFlg,
 				DateCreated = model.DateCreated,
@@ -90,6 +92,7 @@ namespace ErpManager.Domain.Mapping
 			entity.Avatar = model.Avatar;
 			entity.Description = model.Description;
 			entity.ParentCategoryId = model.ParentCategoryId;
+			entity.Priority = model.Priority;
 			entity.Status = model.Status;
 			entity.DelFlg = model.DelFlg;
 			entity.DateCreated = model.DateCreated;

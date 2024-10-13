@@ -40,7 +40,7 @@ namespace ErpManager.Common
 		public const string MODULE_ROLE_ROLELIST_PATH = "/role/list";
 		public const string MODULE_ROLE_ROLELIST_NAME = "RoleList";
 		// Role module: role setting
-		public const string MODULE_ROLE_ROLESETTING_PATH = "/role/setting/{id}";
+		public const string MODULE_ROLE_ROLESETTING_PATH = "/role/setting/{id?}";
 		public const string MODULE_ROLE_ROLESETTING_NAME = "RoleSetting";
 		// Role module: role detail
 		public const string MODULE_ROLE_ROLEDETAIL_PATH = "/role/detail/{id}";

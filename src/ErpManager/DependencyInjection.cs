@@ -186,6 +186,7 @@ namespace ErpManager.Manager
 		private static IServiceCollection RegisterValidations(this IServiceCollection services)
 		{
 			services.AddTransient<IValidator<UserModel>, UserValidator>();
+			services.AddTransient<IValidator<RoleModel>, RoleValidator>();
 			services.AddTransient<IValidator<ProductModel>, ProductValidator>();
 
 			return services;

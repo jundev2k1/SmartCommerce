@@ -80,6 +80,22 @@ namespace ErpManager.Persistence.Repositories
 		}
 
 		/// <summary>
+		/// Get async
+		/// </summary>
+		/// <param name="branchId">Branch id</param>
+		/// <param name="roleId">Role id</param>
+		/// <returns>Role model</returns>
+		public async Task<RoleModel?> GetAsync(string branchId, int roleId)
+		{
+			var result = await _dbContext.Roles
+				.FirstOrDefaultAsync(role =>
+					(role.BranchId == branchId)
+					&& (role.RoleId == roleId));
+
+			return result?.MapToModel();
+		}
+
+		/// <summary>
 		/// Insert
 		/// </summary>
 		/// <param name="model">Role model</param>

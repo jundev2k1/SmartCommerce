@@ -19,11 +19,8 @@ const CardProductComponent = ({
 }: CardProductProps) => {
   return (
     <Card {...props}>
-      <CardThumbnail
-        src={GetProductImage(data.images)[0]}
-        sx={{ borderRadius: 2 }}
-      />
-      <CardBody>{children}</CardBody>
+      <CardThumbnail src={GetProductImage(data.images)[0]} />
+      <CardBody padding=".875rem">{children}</CardBody>
       <CardFooter padding=".875rem">
         <Divider />
         <Stack

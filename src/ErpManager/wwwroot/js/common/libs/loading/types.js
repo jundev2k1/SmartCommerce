@@ -18,4 +18,3 @@ var TypeClearLoading;
     TypeClearLoading[TypeClearLoading["all"] = 1] = "all";
     TypeClearLoading[TypeClearLoading["target"] = 2] = "target";
 })(TypeClearLoading || (TypeClearLoading = {}));
-//# sourceMappingURL=types.js.map

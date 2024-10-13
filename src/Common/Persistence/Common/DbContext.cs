@@ -99,7 +99,8 @@ public partial class DBContext : DbContext
 			entity.Property(e => e.CategoryName).HasDefaultValueSql("('')");
 			entity.Property(e => e.Avatar).HasDefaultValueSql("('')");
 			entity.Property(e => e.Description).HasDefaultValueSql("('')");
-			entity.Property(e => e.ParentCategoryId).HasDefaultValueSql("('root')");
+			entity.Property(e => e.ParentCategoryId).HasDefaultValueSql("(1)");
+			entity.Property(e => e.Priority).HasDefaultValueSql("('root')");
 			entity.Property(e => e.Status).HasConversion<int>().HasDefaultValueSql("(1)");
 			entity.Property(e => e.DelFlg);
 			entity.Property(e => e.DateCreated).HasDefaultValueSql("(getdate())");
@@ -184,7 +185,7 @@ public partial class DBContext : DbContext
 			entity.HasIndex(e => e.TokenId);
 			entity.HasKey(e => new { e.BranchId, e.TokenId }).HasName("PK_Token_1");
 
-			entity.Property(e => e.ExpirationDate);
+			entity.Property(e => e.ExpirationDate).HasDefaultValueSql("(getdate())");
 			entity.Property(e => e.Type).HasConversion<int>();
 			entity.Property(e => e.DateCreated).HasDefaultValueSql("(getdate())");
 			entity.Property(e => e.DateChanged);

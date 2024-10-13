@@ -118,16 +118,18 @@ namespace ErpManager.Persistence.Repositories
 		/// </summary>
 		/// <param name="model">Model</param>
 		/// <returns>Status insert</returns>
-		public bool Insert(ProductModel model)
+		public async Task<bool> Insert(ProductModel model)
 		{
-			var product = Get(model.BranchId, model.ProductId);
-			if (product != null) return false;
-
-			var result = BeginTransaction(() =>
+			var result = await BeginTransactionAsync(async () =>
 			{
+				var product = await _dbContext.Products.FirstOrDefaultAsync(item =>
+					item.BranchId == model.BranchId
+					&& item.ProductId == model.ProductId);
+				if (product != null) throw new NotExistInDBException() { ItemInfo = model.ProductId };
+
 				var insertModel = model.MapToEntity();
-				_dbContext.Add(insertModel);
-				_dbContext.SaveChanges();
+				await _dbContext.AddAsync(insertModel);
+				await _dbContext.SaveChangesAsync();
 			});
 			return result;
 		}
@@ -137,18 +139,17 @@ namespace ErpManager.Persistence.Repositories
 		/// </summary>
 		/// <param name="model">Model</param>
 		/// <returns>Status update</returns>
-		public bool Update(ProductModel model)
+		public async Task<bool> Update(ProductModel model)
 		{
-			var result = BeginTransaction(() =>
+			var result = await BeginTransactionAsync(async () =>
 			{
-				var product = _dbContext.Products.FirstOrDefault(item =>
+				var product = await _dbContext.Products.FirstOrDefaultAsync(item =>
 					item.BranchId == model.BranchId
 					&& item.ProductId == model.ProductId);
 				if (product == null) throw new NotExistInDBException() { ItemInfo = model.ProductId };
 
 				product.MapToEntity(model);
-				_dbContext.Update(product);
-				_dbContext.SaveChanges();
+				await _dbContext.SaveChangesAsync();
 			});
 			return result;
 		}

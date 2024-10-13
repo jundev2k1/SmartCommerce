@@ -2,3 +2,4 @@
 
 export * from './Common';
 export { CardProduct } from './CardProduct';
+export { CardCategory } from './CardCategory';

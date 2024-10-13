@@ -1,9 +1,11 @@
 ﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
 
+import { RequestMethod, RequestType, BodyRequest, OnRequestSuccess, OnRequestError } from './base-model'
+
 /**
- * Request Service base
+ * Service base
  */
-class RequestServiceBase {
+export class ServiceBase {
 	constructor() {
 	}
 
@@ -13,7 +15,14 @@ class RequestServiceBase {
 	 */
 	public static callRequest<T>(request: BodyRequest<T>) {
 		// Get and set default request data
-		const { endpoint, data, type = RequestType.Json, method = 'POST', onSuccess, onError } = request;
+		const {
+			endpoint,
+			data,
+			type = RequestType.Json,
+			method = RequestMethod.Post,
+			onSuccess,
+			onError,
+		} = request;
 
 		// Use default if onError not set
 		const onErrorDefault: OnRequestError = function (jqXHR, textStatus, errorThrown) {
@@ -79,4 +88,6 @@ class RequestServiceBase {
 				throw new DOMException('Request type not exist');
 		}
 	};
+
+	public static requestMethod
 }

@@ -4,7 +4,7 @@ namespace ErpManager.Manager.Areas.Roles.ViewModels
 {
 	public sealed class RoleSettingViewModel
 	{
-		public RoleModel Information { get; set; } = new RoleModel();
+		public RoleModel? Information { get; set; } = new RoleModel();
 
 		public List<RolePermissionGroupViewModel> PermissionGroups { get; set; } = new List<RolePermissionGroupViewModel>();
 

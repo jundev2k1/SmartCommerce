@@ -47,12 +47,22 @@ namespace ErpManager.Persistence.Services
 		/// <summary>
 		/// Get role
 		/// </summary>
-		/// <param name="branchID"></param>
-		/// <param name="roleId"></param>
+		/// <param name="branchId">Branch ID</param>
+		/// <param name="roleId">Role ID</param>
 		/// <returns>Role model</returns>
 		public RoleModel? Get(string branchId, int roleId)
 		{
 			return _roleRepository.Get(branchId, roleId);
+		}
+		/// <summary>
+		/// Get role async
+		/// </summary>
+		/// <param name="branchId">Branch ID</param>
+		/// <param name="roleId">Role ID</param>
+		/// <returns>Role model</returns>
+		public async Task<RoleModel?> GetAsync(string branchId, int roleId)
+		{
+			return await _roleRepository.GetAsync(branchId, roleId);
 		}
 		#endregion
 

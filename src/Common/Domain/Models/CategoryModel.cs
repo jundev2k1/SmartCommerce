@@ -16,6 +16,8 @@ namespace ErpManager.Domain.Models
 
 		public string ParentCategoryId { get; set;} = string.Empty;
 
+		public int Priority { get; set;}
+
 		public CategoryStatusEnum Status { get; set; } = CategoryStatusEnum.Active;
 
 		public bool DelFlg { get; set; }

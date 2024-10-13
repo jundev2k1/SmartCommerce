@@ -1,6 +1,5 @@
-"use strict";
 // Copyright (c) 2024 - Jun Dev. All rights reserved
-var RequestType;
+export var RequestType;
 (function (RequestType) {
     RequestType["Json"] = "json";
     RequestType["FormUrlEncoded"] = "form-url-encoded";
@@ -8,4 +7,8 @@ var RequestType;
     RequestType["TextPlain"] = "text-plain";
 })(RequestType || (RequestType = {}));
 ;
-//# sourceMappingURL=base-model.js.map
+export var RequestMethod;
+(function (RequestMethod) {
+    RequestMethod["Get"] = "GET";
+    RequestMethod["Post"] = "POST";
+})(RequestMethod || (RequestMethod = {}));

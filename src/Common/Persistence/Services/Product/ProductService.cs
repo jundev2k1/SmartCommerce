@@ -63,11 +63,11 @@ namespace ErpManager.Persistence.Services
 		/// </summary>
 		/// <param name="model">Product model</param>
 		/// <returns>Insert status</returns>
-		public bool Insert(ProductModel model)
+		public async Task<bool> Insert(ProductModel model)
 		{
 			model.DateCreated = DateTime.Now;
 			model.DateChanged = null;
-			return _productRepository.Insert(model);
+			return await _productRepository.Insert(model);
 		}
 
 		/// <summary>
@@ -75,10 +75,10 @@ namespace ErpManager.Persistence.Services
 		/// </summary>
 		/// <param name="model">Product model</param>
 		/// <returns>Update status</returns>
-		public bool Update(ProductModel model)
+		public async Task<bool> Update(ProductModel model)
 		{
 			model.DateChanged = DateTime.Now;
-			return _productRepository.Update(model);
+			return await _productRepository.Update(model);
 		}
 		/// <summary>
 		/// Update
@@ -142,11 +142,11 @@ namespace ErpManager.Persistence.Services
 		/// <returns>Update status</returns>
 		public bool TempDelete(string branchId, string productId)
 		{
-			var product = _productRepository.Get(branchId, productId);
-			if (product == null) return false;
-
-			product.DelFlg = true;
-			return _productRepository.Update(product);
+			var result = _productRepository.Update(
+				branchId,
+				productId,
+				(product) => product.DelFlg = true);
+			return result;
 		}
 
 		/// <summary>

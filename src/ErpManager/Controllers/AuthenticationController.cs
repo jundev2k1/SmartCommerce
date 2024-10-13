@@ -158,7 +158,6 @@ namespace ErpManager.Manager.Controllers
 
 			// Set session login for operator
 			SetSessionForLogin(@operator);
-			ResetOperatorSession();
 
 			// Handle with cookies
 			if (isRememberMe == false)

@@ -4,10 +4,9 @@
  * Language code
  * @type {string}
  */
-var languageCode = 'en';
+let languageCode = 'en';
 /**
  * Mobile flag
  * @type {boolean}
  */
-var isMobile = window.innerWidth < 768;
-//# sourceMappingURL=global-scope.js.map
+let isMobile = window.innerWidth < 768;

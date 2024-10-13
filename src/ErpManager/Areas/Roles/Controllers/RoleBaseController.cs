@@ -23,7 +23,7 @@ namespace ErpManager.Manager.Areas.Roles.Controllers
 		/// </summary>
 		/// <param name="formInput">Form input</param>
 		/// <returns>Dropdown list item collection</returns>
-		protected RoleInputOptionViewModel GetInitDropdownListItems(RoleModel formInput)
+		protected RoleInputOptionViewModel GetInitDropdownListItems(RoleModel? formInput)
 		{
 			return new RoleInputOptionViewModel();
 		}

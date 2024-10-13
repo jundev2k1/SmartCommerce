@@ -11,6 +11,7 @@ interface ApiState<TResponse> {
 export const useApiService = <TRequest, TResponse>(
   apiService: (request?: TRequest) => Promise<TResponse>,
   params?: TRequest,
+  defaultValue?: TResponse[] | null,
   isInitExecute = true,
 ) => {
   const [executeState, setExecuteState] = useState(0);

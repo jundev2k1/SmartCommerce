@@ -27,6 +27,13 @@ namespace ErpManager.Persistence.Services
 		/// <param name="roleId">Role id</param>
 		/// <returns>Role model</returns>
 		RoleModel? Get(string branchId, int roleId);
+		/// <summary>
+		/// Get role async
+		/// </summary>
+		/// <param name="branchId">Branch id</param>
+		/// <param name="roleId">Role id</param>
+		/// <returns>Role model</returns>
+		Task<RoleModel?> GetAsync(string branchId, int roleId);
 
 		/// <summary>
 		/// Insert

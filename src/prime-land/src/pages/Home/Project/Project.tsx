@@ -3,11 +3,12 @@
 import { useProject } from './project.logic';
 import {
   Box,
-  CardProduct,
-  Container,
   Grid,
   Skeleton,
   Typography,
+  Carousel,
+  CarouselItem,
+  CardCategory,
 } from '../../../components';
 
 const HomeProject: React.FC = () => {
@@ -16,36 +17,46 @@ const HomeProject: React.FC = () => {
     <Box
       component="section"
       className="homeProject"
-      sx={{ margin: '.875rem 0' }}
+      sx={{ margin: '3.5rem 0', padding: '0 .875rem' }}
     >
-      <Container maxWidth="lg">
-        <Box className="homeProject__wrapper">
-          <Grid container spacing={2}>
-            {isLoading
-              ? Array<number>(3).map((num: number) => (
-                  <Grid key={num} item md={4}>
-                    <Skeleton />
-                  </Grid>
-                ))
-              : data?.items.map((product, index) => (
-                  <Grid key={index} item md={4}>
-                    <CardProduct data={product}>
-                      <Box>
-                        <Typography variant="h3">{product.name}</Typography>
-                        <Typography
-                          variant="body1"
-                          dangerouslySetInnerHTML={{
-                            __html: product.description,
-                          }}
-                        ></Typography>
-                        <Typography variant="body1">{product.price1}</Typography>
-                      </Box>
-                    </CardProduct>
-                  </Grid>
-                ))}
-          </Grid>
-        </Box>
-      </Container>
+      <Typography
+        variant="h2"
+        sx={{ textAlign: 'center', marginBottom: '2rem' }}
+      >
+        DANH SÁCH DỰ ÁN
+      </Typography>
+      {isLoading ? (
+        <Grid container>
+          {Array<number>(3).map((num: number) => (
+            <Grid key={num} item md={4} sm={6}>
+              <Skeleton />
+            </Grid>
+          ))}
+        </Grid>
+      ) : (
+        <Carousel
+          spaceBetween={30}
+          slidesPerView={3}
+          breakpoints={{
+            640: { slidesPerView: 1 },
+            768: { slidesPerView: 2 },
+            1024: { slidesPerView: 3 },
+          }}
+        >
+          {data?.map((category, index) => (
+            <CarouselItem key={index} style={{ padding: '4px 0' }}>
+              <CardCategory data={category}>
+                <Box>
+                  <Typography variant="h3">{category.categoryName}</Typography>
+                  <Typography variant="body1">
+                    {category.description}
+                  </Typography>
+                </Box>
+              </CardCategory>
+            </CarouselItem>
+          ))}
+        </Carousel>
+      )}
     </Box>
   );
 };

@@ -31,10 +31,9 @@ Array.prototype.chunk = function (size) {
     if (size <= 0) {
         throw new Error("Chunk size must be greater than zero");
     }
-    var result = [];
-    for (var index = 0; index < this.length; index += size) {
+    const result = [];
+    for (let index = 0; index < this.length; index += size) {
         result.push(this.slice(index, index + size));
     }
     return result;
 };
-//# sourceMappingURL=array-prototype.js.map

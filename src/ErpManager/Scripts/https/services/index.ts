@@ -1,3 +1,4 @@
 ﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
 
-import UserRequestService from './user/user-request-service';
+export { default as UserRequestService } from './user/user-service';
+export { default as RoleRequestService } from './role/role-service';

@@ -11,6 +11,7 @@ import { routeConfigs } from './config';
 import { languageSelector, themeSelector } from './redux/selectors';
 import { ThemeEnum } from './redux/slices/themeSlice';
 import { lightTheme, darkTheme } from './themes';
+import 'swiper/css';
 import './App.scss';
 
 function App() {
@@ -42,7 +43,6 @@ function App() {
     return input;
   };
 
-  //const { data, isLoading } = useApiService<getProductByCriteriaRequest, IProduct[]>(getProductByCriteria);
   return (
     <ThemeProvider theme={theme === ThemeEnum.Light ? lightTheme : darkTheme}>
       <CssBaseline />

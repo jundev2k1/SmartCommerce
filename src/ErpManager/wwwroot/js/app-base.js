@@ -3,10 +3,7 @@
  * Application base
  * @class
  */
-var AppBase = /** @class */ (function () {
-    function AppBase() {
+export class AppBase {
+    constructor() {
     }
-    return AppBase;
-}());
-export { AppBase };
-//# sourceMappingURL=app-base.js.map
+}

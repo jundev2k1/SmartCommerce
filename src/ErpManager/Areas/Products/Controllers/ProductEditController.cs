@@ -48,7 +48,7 @@ namespace ErpManager.Manager.Areas.Product.Controllers
 		[HttpPost]
 		[Authorization(Permission.CanEditProduct)]
 		[Route(Constants.MODULE_PRODUCT_PRODUCTEDIT_PATH, Name = Constants.MODULE_PRODUCT_PRODUCTEDIT_NAME)]
-		public IActionResult Index([FromRoute] string id, ProductEditViewModel viewModel)
+		public async Task<IActionResult> Index([FromRoute] string id, ProductEditViewModel viewModel)
 		{
 			var pageData = viewModel.PageData;
 
@@ -61,7 +61,7 @@ namespace ErpManager.Manager.Areas.Product.Controllers
 			viewModel.InputOptions = GetInitDropdownListItems(pageData);
 
 			// Validate form input
-			var validateResult = _validatorFacade.ProductValidate(pageData);
+			var validateResult = await _validatorFacade.ProductValidate(pageData);
 			if (validateResult.IsValid == false)
 			{
 				AddErrorToModelState(validateResult, preName: "PageData.");
@@ -69,7 +69,7 @@ namespace ErpManager.Manager.Areas.Product.Controllers
 			}
 
 			// Handle update product
-			var isSuccess = _serviceFacade.Products.Update(pageData);
+			var isSuccess = await _serviceFacade.Products.Update(pageData);
 			if (isSuccess == false) return View(viewModel);
 
 			return RedirectToRoute(Constants.MODULE_PRODUCT_PRODUCTDETAIL_NAME, new { id = pageData.ProductId });

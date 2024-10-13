@@ -7,17 +7,17 @@ namespace ErpManager.Manager.Areas.Roles.ViewModels
 		[JsonProperty("roleId")]
 		public int RoleId { get; set; }
 
-		[JsonProperty("roleName")]
+		[JsonProperty("name")]
 		public string Name { get; set; } = string.Empty;
 
-		[JsonProperty("roleDescription")]
+		[JsonProperty("description")]
 		public string Description { get; set; } = string.Empty;
 
-		[JsonProperty("roleStatus")]
-		public string Status { get; set; } = string.Empty;
+		[JsonProperty("status")]
+		public int Status { get; set; }
 
-		[JsonProperty("rolePriority")]
-		public string Priority { get; set; } = string.Empty;
+		[JsonProperty("priority")]
+		public int Priority { get; set; }
 	}
 
 	public sealed class RoleSettingPermissionRequestViewModel
@@ -25,10 +25,10 @@ namespace ErpManager.Manager.Areas.Roles.ViewModels
 		[JsonProperty("roleId")]
 		public int RoleId { get; set; }
 
-		[JsonProperty("rolePageDefault")]
+		[JsonProperty("pageDefault")]
 		public string PageDefault { get; set; } = Constants.PAGE_DEFAULT;
 
-		[JsonProperty("rolePermission")]
+		[JsonProperty("permission")]
 		public string Permission { get; set; } = string.Empty;
 	}
 }

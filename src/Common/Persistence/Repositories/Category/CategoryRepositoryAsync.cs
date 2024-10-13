@@ -52,7 +52,7 @@ namespace ErpManager.Persistence.Repositories
 		{
 			var result = await _dbContext.Categories
 				.Where(item => item.BranchId == branchId
-					&& item.CategoryId == Constants.FLG_CATEGORY_PARENT_CATEGORY_ROOT)
+					&& item.ParentCategoryId == Constants.FLG_CATEGORY_PARENT_CATEGORY_ROOT)
 				.Select(item => item.MapToModel())
 				.ToArrayAsync();
 			return result;

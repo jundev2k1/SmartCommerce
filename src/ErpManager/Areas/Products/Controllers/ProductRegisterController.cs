@@ -43,7 +43,7 @@ namespace ErpManager.Manager.Areas.Product.Controllers
 		[HttpPost]
 		[Authorization(Permission.CanCreateProduct)]
 		[Route(Constants.MODULE_PRODUCT_PRODUCTREGISTER_PATH, Name = Constants.MODULE_PRODUCT_PRODUCTREGISTER_NAME)]
-		public IActionResult Index(ProductRegisterViewModel viewModel)
+		public async Task<IActionResult> Index(ProductRegisterViewModel viewModel)
 		{
 			var pageData = viewModel.PageData;
 
@@ -57,7 +57,7 @@ namespace ErpManager.Manager.Areas.Product.Controllers
 			viewModel.InputOptions = GetInitDropdownListItems(pageData);
 
 			// Validate form input
-			var validateResult = _validatorFacade.ProductValidate(pageData);
+			var validateResult = await _validatorFacade.ProductValidate(pageData);
 			if (validateResult.IsValid == false)
 			{
 				AddErrorToModelState(validateResult, preName: "PageData.");
@@ -74,7 +74,7 @@ namespace ErpManager.Manager.Areas.Product.Controllers
 			pageData.Images = string.Join(",", fileUpload.Result);
 
 			// Handle create new product
-			var isSuccess = _serviceFacade.Products.Insert(pageData);
+			var isSuccess = await _serviceFacade.Products.Insert(pageData);
 			if (isSuccess == false) return View(viewModel);
 
 			return RedirectToRoute(Constants.MODULE_PRODUCT_PRODUCTLIST_NAME);

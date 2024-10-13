@@ -33,6 +33,12 @@ namespace ErpManager.Persistence.Services
 		/// <param name="branchId">Branch id</param>
 		/// <returns>Root category model list</returns>
 		CategoryModel[] GetAllRootCategories(string branchId);
+		/// <summary>
+		/// Get all root categories async
+		/// </summary>
+		/// <param name="branchId">Branch id</param>
+		/// <returns>Root category model list</returns>
+		Task<CategoryModel[]> GetAllRootCategoriesAsync(string branchId);
 
 		/// <summary>
 		/// Get category
@@ -41,6 +47,13 @@ namespace ErpManager.Persistence.Services
 		/// <param name="categoryId">Category id</param>
 		/// <returns>Category model</returns>
 		CategoryModel? Get(string branchId, string categoryId);
+		/// <summary>
+		/// Get category async
+		/// </summary>
+		/// <param name="branchId">Branch id</param>
+		/// <param name="categoryId">Category id</param>
+		/// <returns>Category model</returns>
+		Task<CategoryModel?> GetAsync(string branchId, string categoryId);
 
 		/// <summary>
 		/// Insert

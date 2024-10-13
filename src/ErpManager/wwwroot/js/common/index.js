@@ -1,6 +1,5 @@
 // Copyright (c) 2024 - Jun Dev. All rights reserved
-import './global';
-import './libs';
-import './prototype';
-import './utility';
-//# sourceMappingURL=index.js.map
+import './global.js';
+import './libs.js';
+import './prototype.js';
+import './utility.js';
