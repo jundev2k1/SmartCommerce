@@ -1,6 +1,6 @@
 ﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
 
-namespace ErpManager.Infrastructure.Hubs
+namespace SmartCommerce.Infrastructure.Hubs
 {
 	public class NotificationHub : Hub
 	{

@@ -1,6 +1,6 @@
 ﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
 
-namespace ErpManager.Domain.Mapping
+namespace SmartCommerce.Domain.Mapping
 {
 	public static class UserMapping
 	{

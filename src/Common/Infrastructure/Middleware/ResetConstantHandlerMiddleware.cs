@@ -1,6 +1,6 @@
 ﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
 
-namespace ErpManager.Infrastructure.Middleware
+namespace SmartCommerce.Infrastructure.Middleware
 {
 	internal sealed class ResetConstantHandlerMiddleware : HandlerMiddlewareBase
 	{

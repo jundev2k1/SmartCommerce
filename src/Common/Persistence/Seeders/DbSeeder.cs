@@ -1,11 +1,11 @@
 ﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
 
-namespace ErpManager.Persistence.Seeders
+namespace SmartCommerce.Persistence.Seeders
 {
 	internal class DbSeeder : IDbSeeder
 	{
-		private readonly DBContext _dbContext;
-		public DbSeeder(DBContext dbContext)
+		private readonly ApplicationDBContext _dbContext;
+		public DbSeeder(ApplicationDBContext dbContext)
 		{
 			_dbContext = dbContext;
 		}

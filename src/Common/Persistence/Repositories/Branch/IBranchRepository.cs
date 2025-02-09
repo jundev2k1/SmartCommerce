@@ -1,6 +1,6 @@
 ﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
 
-namespace ErpManager.Persistence.Repositories
+namespace SmartCommerce.Persistence.Repositories
 {
 	public interface IBranchRepository
 	{

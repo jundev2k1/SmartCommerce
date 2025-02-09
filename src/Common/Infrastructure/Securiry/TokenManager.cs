@@ -2,7 +2,7 @@
 
 using System.Text.Json;
 
-namespace ErpManager.Infrastructure.Securiry
+namespace SmartCommerce.Infrastructure.Securiry
 {
 	public class TokenManager
 	{

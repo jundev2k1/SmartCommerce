@@ -1,7 +1,7 @@
 ﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
 
 #nullable disable
-namespace ErpManager.Persistence.Services
+namespace SmartCommerce.Persistence.Services
 {
 	public sealed class ServiceFacade : IServiceFacade
 	{

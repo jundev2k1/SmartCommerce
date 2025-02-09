@@ -1,6 +1,6 @@
 ﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
 
-namespace ErpManager.Persistence.Repositories
+namespace SmartCommerce.Persistence.Repositories
 {
 	public sealed class TokenRepository : RepositoryBase, ITokenRepository
 	{
@@ -8,7 +8,7 @@ namespace ErpManager.Persistence.Repositories
 		/// Constructor
 		/// </summary>
 		/// <param name="dbContext">Context</param>
-		public TokenRepository(DBContext dbContext, IFileLogger logger) : base(dbContext, logger)
+		public TokenRepository(ApplicationDBContext dbContext, IFileLogger logger) : base(dbContext, logger)
 		{
 		}
 

@@ -1,13 +1,13 @@
 ﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
 
-namespace ErpManager.Persistence.Repositories
+namespace SmartCommerce.Persistence.Repositories
 {
 	public sealed class NotificationRepository : RepositoryBase, INotificationRepository
 	{
 		/// <summary>
 		/// Constructor
 		/// </summary>
-		public NotificationRepository(DBContext dbContext, IFileLogger logger) : base(dbContext, logger)
+		public NotificationRepository(ApplicationDBContext dbContext, IFileLogger logger) : base(dbContext, logger)
 		{
 		}
 

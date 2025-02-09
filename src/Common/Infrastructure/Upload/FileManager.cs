@@ -1,6 +1,6 @@
 ﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
 
-namespace ErpManager.Infrastructure.Upload
+namespace SmartCommerce.Infrastructure.Upload
 {
 	public class FileManager
 	{

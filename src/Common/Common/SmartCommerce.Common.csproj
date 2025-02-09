@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="QRCoder" Version="1.5.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Domain\SmartCommerce.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Using Include="SmartCommerce.Domain.Enum" />
+    <Using Include="SmartCommerce.Domain.Models" />
+    <Using Include="QRCoder" />
+    <Using Include="System.Collections" />
+    <Using Include="System.Globalization" />
+    <Using Include="System.Text" />
+    <Using Include="System.Text.RegularExpressions" />
+  </ItemGroup>
+
+</Project>

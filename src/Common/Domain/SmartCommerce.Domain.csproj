@@ -1,0 +1,33 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FluentValidation" Version="11.9.2" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.11">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.11" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.11">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Using Include="SmartCommerce.Domain.Extensions" />
+    <Using Include="SmartCommerce.Domain.Models" />
+    <Using Include="FluentValidation" />
+    <Using Include="SmartCommerce.Domain.Entities" />
+    <Using Include="SmartCommerce.Domain.Enum" />
+    <Using Include="SmartCommerce.Domain.Extensions.FilterModels" />
+    <Using Include="System.ComponentModel.DataAnnotations" />
+    <Using Include="System.ComponentModel.DataAnnotations.Schema" />
+  </ItemGroup>
+
+</Project>

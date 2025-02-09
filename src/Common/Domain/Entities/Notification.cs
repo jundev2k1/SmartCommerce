@@ -1,7 +1,7 @@
 ﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
 
 #nullable disable
-namespace ErpManager.Domain.Entities;
+namespace SmartCommerce.Domain.Entities;
 
 [Table("Notification")]
 public partial class Notification

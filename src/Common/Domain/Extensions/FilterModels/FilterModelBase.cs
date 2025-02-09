@@ -1,6 +1,6 @@
 ﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
 
-namespace ErpManager.Domain.Extensions.FilterModels
+namespace SmartCommerce.Domain.Extensions.FilterModels
 {
 	public class FilterModelBase<TModel> : ModelBase<TModel>
 	{

@@ -1,8 +1,6 @@
 ﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
 
-using ErpManager.Domain.Extensions;
-
-namespace ErpManager.Domain.Models
+namespace SmartCommerce.Domain.Models
 {
 	public class ModelBase<TModel>
 	{

@@ -1,6 +1,6 @@
 ﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
 
-namespace ErpManager.Infrastructure.Common.Utilities
+namespace SmartCommerce.Infrastructure.Common.Utilities
 {
 	public static class MailUtility
 	{

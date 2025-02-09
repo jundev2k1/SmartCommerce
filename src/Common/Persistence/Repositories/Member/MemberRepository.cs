@@ -1,13 +1,13 @@
 ﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
 
-namespace ErpManager.Persistence.Repositories
+namespace SmartCommerce.Persistence.Repositories
 {
 	public sealed class MemberRepository : RepositoryBase, IMemberRepository
 	{
 		/// <summary>
 		/// Constructor
 		/// </summary>
-		public MemberRepository(DBContext dbContext, IFileLogger logger) : base(dbContext, logger)
+		public MemberRepository(ApplicationDBContext dbContext, IFileLogger logger) : base(dbContext, logger)
 		{
 		}
 

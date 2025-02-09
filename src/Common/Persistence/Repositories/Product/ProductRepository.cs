@@ -1,6 +1,6 @@
 ﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
 
-namespace ErpManager.Persistence.Repositories
+namespace SmartCommerce.Persistence.Repositories
 {
 	public partial class ProductRepository : RepositoryBase, IProductRepository
 	{
@@ -8,7 +8,7 @@ namespace ErpManager.Persistence.Repositories
 		/// Constructor
 		/// </summary>
 		/// <param name="dbContext">Context</param>
-		public ProductRepository(DBContext dbContext, IFileLogger logger) : base(dbContext, logger)
+		public ProductRepository(ApplicationDBContext dbContext, IFileLogger logger) : base(dbContext, logger)
 		{
 		}
 

@@ -1,6 +1,8 @@
 ﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
 
-namespace ErpManager.Domain.Extensions.FilterModels
+using SmartCommerce.Domain.Enum;
+
+namespace SmartCommerce.Domain.Extensions.FilterModels
 {
 	public sealed class UserFilterModel : FilterModelBase<UserFilterModel>
 	{

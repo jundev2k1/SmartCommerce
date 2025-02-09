@@ -2,7 +2,7 @@
 
 using Microsoft.AspNetCore.Builder;
 
-namespace ErpManager.Persistence
+namespace SmartCommerce.Persistence
 {
 	public static class DependencyInjection
 	{

@@ -2,7 +2,7 @@
 
 using Microsoft.Extensions.Logging;
 
-namespace ErpManager.Infrastructure.Logging
+namespace SmartCommerce.Infrastructure.Logging
 {
 	public sealed class FileLogger : IFileLogger
 	{

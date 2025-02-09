@@ -2,13 +2,13 @@
 
 using System.Data.SqlClient;
 
-namespace ErpManager.Persistence.Repositories
+namespace SmartCommerce.Persistence.Repositories
 {
 	public class RepositoryBase
 	{
-		protected DBContext _dbContext;
+		protected ApplicationDBContext _dbContext;
 		protected IFileLogger _logger;
-		public RepositoryBase(DBContext dbContext, IFileLogger logger)
+		public RepositoryBase(ApplicationDBContext dbContext, IFileLogger logger)
 		{
 			_dbContext = dbContext;
 			_logger = logger;

@@ -1,11 +1,11 @@
 ﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
 
-using ErpManager.Infrastructure.BackgroundServices;
-using ErpManager.Infrastructure.Logging;
-using ErpManager.Infrastructure.Mail;
 using Microsoft.AspNetCore.Builder;
+using SmartCommerce.Infrastructure.BackgroundServices;
+using SmartCommerce.Infrastructure.Logging;
+using SmartCommerce.Infrastructure.Mail;
 
-namespace ErpManager.Infrastructure
+namespace SmartCommerce.Infrastructure
 {
 	public static class DependencyInjection
 	{

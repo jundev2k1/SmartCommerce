@@ -1,6 +1,6 @@
 ﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
 
-namespace ErpManager.Domain.Models
+namespace SmartCommerce.Domain.Models
 {
 	public sealed class MemberModel : ModelBase<MemberModel>
 	{

@@ -1,6 +1,6 @@
 ﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
 
-namespace ErpManager.Infrastructure.Interface
+namespace SmartCommerce.Infrastructure.Interface
 {
 	public interface IMailSender
 	{

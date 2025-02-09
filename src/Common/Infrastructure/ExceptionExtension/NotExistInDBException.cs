@@ -1,6 +1,6 @@
 ﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
 
-namespace ErpManager.Infrastructure.ExceptionExtension
+namespace SmartCommerce.Infrastructure.ExceptionExtension
 {
 	public sealed class NotExistInDBException : Exception
 	{

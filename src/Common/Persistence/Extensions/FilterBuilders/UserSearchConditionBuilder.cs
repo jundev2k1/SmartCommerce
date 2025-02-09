@@ -1,7 +1,7 @@
 ﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
 
 #pragma warning disable CS0618
-namespace ErpManager.Persistence.Extensions.FilterBuilders
+namespace SmartCommerce.Persistence.Extensions.FilterBuilders
 {
 	public partial class FilterConditionBuilder
 	{

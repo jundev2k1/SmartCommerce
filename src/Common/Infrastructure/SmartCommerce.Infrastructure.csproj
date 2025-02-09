@@ -1,0 +1,63 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Common\Filters\" />
+    <Folder Include="IO\" />
+    <Folder Include="Configuration\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="HtmlAgilityPack" Version="1.11.61" />
+    <PackageReference Include="MailKit" Version="4.6.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.1.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Localization" Version="2.1.1" />
+    <PackageReference Include="Microsoft.AspNetCore.SignalR" Version="1.0.4" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Localization.Abstractions" Version="7.0.11" />
+    <PackageReference Include="MimeKit" Version="4.7.1" />
+    <PackageReference Include="Serilog" Version="3.1.1" />
+    <PackageReference Include="Serilog.Sinks.Email" Version="3.0.0" />
+    <PackageReference Include="Serilog.Sinks.File" Version="5.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Common\SmartCommerce.Common.csproj" />
+    <ProjectReference Include="..\Domain\SmartCommerce.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Using Include="SmartCommerce.Common" />
+    <Using Include="SmartCommerce.Common.Utilities" />
+    <Using Include="SmartCommerce.Domain.Enum" />
+    <Using Include="SmartCommerce.Infrastructure.Common.Enum" />
+    <Using Include="SmartCommerce.Infrastructure.Common.Models" />
+    <Using Include="SmartCommerce.Infrastructure.Common.Utilities" />
+    <Using Include="SmartCommerce.Infrastructure.ExceptionExtension" />
+    <Using Include="SmartCommerce.Infrastructure.Hubs" />
+    <Using Include="SmartCommerce.Infrastructure.Interface" />
+    <Using Include="SmartCommerce.Infrastructure.Middleware" />
+    <Using Include="HtmlAgilityPack" />
+    <Using Include="MailKit.Net.Imap" />
+    <Using Include="MailKit.Net.Smtp" />
+    <Using Include="MailKit.Search" />
+    <Using Include="MailKit.Security" />
+    <Using Include="Microsoft.AspNetCore.Http" />
+    <Using Include="Microsoft.AspNetCore.Localization" />
+    <Using Include="Microsoft.AspNetCore.SignalR" />
+    <Using Include="Microsoft.Extensions.DependencyInjection" />
+    <Using Include="Microsoft.Extensions.Hosting" />
+    <Using Include="MimeKit" />
+    <Using Include="System.Collections" />
+    <Using Include="System.IO.Compression" />
+    <Using Include="System.Security.Cryptography" />
+    <Using Include="System.Text" />
+    <Using Include="System.Text.RegularExpressions" />
+  </ItemGroup>
+
+</Project>

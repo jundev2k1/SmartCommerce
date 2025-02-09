@@ -2,7 +2,7 @@
 
 using System.Linq.Expressions;
 
-namespace ErpManager.Domain.Extensions
+namespace SmartCommerce.Domain.Extensions
 {
 	public sealed class PropertyExtensions<TModel>
 	{

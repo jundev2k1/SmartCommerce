@@ -1,10 +1,10 @@
 ﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
 
-namespace ErpManager.Persistence.Seeders
+namespace SmartCommerce.Persistence.Seeders
 {
 	internal sealed class MailTemplateSeeder
 	{
-		public static void Seed(DBContext context)
+		public static void Seed(ApplicationDBContext context)
 		{
 			var needExecute = context.MailTemplates.Any(user =>
 				(user.BranchId == Constants.CONFIG_MASTER_BRANCH_ID)) == false;
