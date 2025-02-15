@@ -170,6 +170,28 @@ namespace SmartCommerce.Manager.Controllers
 			return RedirectToRoute(Constants.MODULE_ERROR_ERROR_NAME);
 		}
 
+		/// <summary>
+		/// Get request parameter value
+		/// </summary>
+		/// <typeparam name="T">Type of value</typeparam>
+		/// <param name="key">Request key</param>
+		/// <param name="defaultValue">Default value</param>
+		/// <returns>Request parameter value</returns>
+		protected T GetRequestParam<T>(string key, T defaultValue)
+		{
+			var hasParam = Request.Query.ContainsKey(key);
+			if (!hasParam) return defaultValue;
+
+			try
+			{
+				return (T)Convert.ChangeType(Request.Query[key].ToStringOrEmpty(), typeof(T));
+			}
+			catch
+			{
+				return defaultValue;
+			}
+		}
+
 		/// <summary>Is login</summary>
 		protected bool IsLogin => _sessionManager.IsLogin;
 		/// <summary>Operator branch id</summary>

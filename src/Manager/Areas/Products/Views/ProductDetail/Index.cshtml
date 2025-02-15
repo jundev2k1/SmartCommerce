@@ -13,7 +13,7 @@
 	};
 }
 
-@await Component.InvokeAsync(Constants.ERP_COMPONENT_NAME_BREADCRUMB, breadcrumbs)
+@await Component.InvokeAsync(Constants.MANAGER_COMPONENT_NAME_BREADCRUMB, breadcrumbs)
 
 <section id="bodyPageLoad">
 	<div class="row g-md-2 g-1">
@@ -22,7 +22,7 @@
 				<div class="d-flex justify-content-start mb-2">
 					<h3>@_localizer.Globals["Title_Product_Images"]</h3>
 				</div>
-				@await Component.InvokeAsync(Constants.ERP_COMPONENT_NAME_CAROUSEL, new { images = Model.Images, idTarget = "ProductDetailImage" })
+				@await Component.InvokeAsync(Constants.MANAGER_COMPONENT_NAME_CAROUSEL, new { images = Model.Images, idTarget = "ProductDetailImage" })
 			</div>
 		</div>
 		<div class="col-md-6 col-12">
@@ -58,7 +58,7 @@
 					<div class="col-6">
 						<div class="d-flex flex-column gap-1">
 							<label class="fw-semibold">@_localizer.Fields["Product_Status"]:</label>
-							<p>@await Component.InvokeAsync(Constants.ERP_COMPONENT_NAME_PRODUCT_STATUS_BADGE, new { status = Model.Status })</p>
+							<p>@await Component.InvokeAsync(Constants.MANAGER_COMPONENT_NAME_PRODUCT_STATUS_BADGE, new { status = Model.Status })</p>
 						</div>
 					</div>
 					<div class="col-12">

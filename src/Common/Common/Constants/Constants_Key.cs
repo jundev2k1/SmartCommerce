@@ -75,5 +75,35 @@ namespace SmartCommerce.Common
 		public const string MAILTAG_MAIL_LOOP = "mail-loops";
 		public const string MAILTAG_MAIL_LOOP_LAST_ITEM_IGNORE = "mail-loop-last-item-ignore";
 		public const string MAILTAG_MAIL_PARAGRAPH_ITEM = "mail-paragraph-item";
+
+		// Request key: Common
+		public const string REQUEST_KEY_PAGE_NO = "page";
+		public const string REQUEST_KEY_PAGE_SIZE = "cnt";
+
+		// Request key: Product module
+		public const string REQUEST_KEY_PRODUCT_SEARCH_WORD = "keyword";
+		public const string REQUEST_KEY_PRODUCT_BRAND_ID = "bid";
+		public const string REQUEST_KEY_PRODUCT_PRODUCT_ID = "pid";
+		public const string REQUEST_KEY_PRODUCT_PRODUCT_NAME = "pname";
+		public const string REQUEST_KEY_PRODUCT_ADDRESS1 = "addr1";
+		public const string REQUEST_KEY_PRODUCT_ADDRESS2 = "addr2";
+		public const string REQUEST_KEY_PRODUCT_ADDRESS3 = "addr3";
+		public const string REQUEST_KEY_PRODUCT_ADDRESS4 = "addr4";
+		public const string REQUEST_KEY_PRODUCT_PRICE_TYPE = "pt";
+		public const string REQUEST_KEY_PRODUCT_MIN_PRICE1 = "minpr1";
+		public const string REQUEST_KEY_PRODUCT_MAX_PRICE1 = "maxpr1";
+		public const string REQUEST_KEY_PRODUCT_MIN_PRICE2 = "minpr2";
+		public const string REQUEST_KEY_PRODUCT_MAX_PRICE2 = "maxpr2";
+		public const string REQUEST_KEY_PRODUCT_MIN_PRICE3 = "minpr3";
+		public const string REQUEST_KEY_PRODUCT_MAX_PRICE3 = "maxpr3";
+		public const string REQUEST_KEY_PRODUCT_MIN_SIZE1 = "minsz1";
+		public const string REQUEST_KEY_PRODUCT_MAX_SIZE1 = "maxsz1";
+		public const string REQUEST_KEY_PRODUCT_MIN_SIZE2 = "minsz2";
+		public const string REQUEST_KEY_PRODUCT_MAX_SIZE2 = "maxsz2";
+		public const string REQUEST_KEY_PRODUCT_MIN_SIZE3 = "minsz3";
+		public const string REQUEST_KEY_PRODUCT_MAX_SIZE3 = "maxsz3";
+		public const string REQUEST_KEY_PRODUCT_TAKE_OVER_ID = "toid";
+		public const string REQUEST_KEY_PRODUCT_STATUS = "status";
+		public const string REQUEST_KEY_PRODUCT_CATEGORY_ID = "cateid";
 	}
 }

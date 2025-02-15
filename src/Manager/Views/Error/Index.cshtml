@@ -24,7 +24,7 @@
 		</div>
 	</div>
 </section>
-@await Component.InvokeAsync(Constants.ERP_COMPONENT_NAME_FORMCONTACT, new FormContactViewModel { TargetButtonId = "btnContactUs", IsShowType = true, TypeForm = FormContactTypeEnum.ContactAdmin })
+@await Component.InvokeAsync(Constants.MANAGER_COMPONENT_NAME_FORMCONTACT, new FormContactViewModel { TargetButtonId = "btnContactUs", IsShowType = true, TypeForm = FormContactTypeEnum.ContactAdmin })
 @section ViewScript {
 	<script>
 		function backPreviousPage() {

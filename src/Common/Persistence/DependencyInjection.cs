@@ -14,7 +14,7 @@ namespace SmartCommerce.Persistence
 			services
 				.RegisterServices()
 				.RegisterRepository()
-				.AddUtility();
+				.RegisterCustomServices();
 
 			return services;
 		}
@@ -22,7 +22,7 @@ namespace SmartCommerce.Persistence
 		/// <summary>
 		/// Add singleton
 		/// </summary>
-		private static IServiceCollection AddUtility(this IServiceCollection services)
+		private static IServiceCollection RegisterCustomServices(this IServiceCollection services)
 		{
 			services.AddScoped<IServiceFacade, ServiceFacade>();
 			services.AddScoped<IDbSeeder, DbSeeder>();
