@@ -22,7 +22,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Using Include="MediatR" />
     <Using Include="Microsoft.AspNetCore.Mvc" />
+    <Using Include="SmartCommerce.Common" />
+    <Using Include="SmartCommerce.Domain.Extensions.FilterModels" />
   </ItemGroup>
 
 </Project>

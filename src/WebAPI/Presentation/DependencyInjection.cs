@@ -11,9 +11,9 @@ namespace SmartCommerce.WebAPI
 	public static class DependencyInjection
 	{
 		/// <summary>
-		/// Add application
+		/// Add web api
 		/// </summary>
-		public static IServiceCollection AddApplication(this IServiceCollection services, ConfigurationManager configuration)
+		public static IServiceCollection AddWebApi(this IServiceCollection services, ConfigurationManager configuration)
 		{
 			// Connection database
 			var connection = configuration.GetConnectionString("ApplicationDb");
