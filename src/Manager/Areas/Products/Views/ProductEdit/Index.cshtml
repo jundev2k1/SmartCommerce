@@ -13,7 +13,7 @@
 }
 @model ProductEditViewModel
 
-@await Component.InvokeAsync(Constants.ERP_COMPONENT_NAME_BREADCRUMB, breadcrumbs)
+@await Component.InvokeAsync(Constants.MANAGER_COMPONENT_NAME_BREADCRUMB, breadcrumbs)
 
 <section id="bodyPageLoad">
 	<div class="row g-md-2 gx-1 gy-2">
@@ -22,7 +22,7 @@
 				<div class="d-flex justify-content-start mb-2">
 					<h3>@_localizer.Globals["Title_Product_Images"]</h3>
 				</div>
-				@await Component.InvokeAsync(Constants.ERP_COMPONENT_NAME_UPLOAD_IMAGE_INPUT, new UploadImageInputViewModel { Name = "Images", Value = Model.PageData.Images, UploadType = "product", IsMultiple = true, UploadFileName = Model.PageData.ProductId })
+				@await Component.InvokeAsync(Constants.MANAGER_COMPONENT_NAME_UPLOAD_IMAGE_INPUT, new UploadImageInputViewModel { Name = "Images", Value = Model.PageData.Images, UploadType = "product", IsMultiple = true, UploadFileName = Model.PageData.ProductId })
 			</div>
 		</div>
 		<div class="col-md-7 col-12">

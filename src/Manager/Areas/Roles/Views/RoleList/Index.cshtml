@@ -17,7 +17,7 @@
 
 @model RoleListViewModel
 
-@await Component.InvokeAsync(Constants.ERP_COMPONENT_NAME_BREADCRUMB, breadcrumbs)
+@await Component.InvokeAsync(Constants.MANAGER_COMPONENT_NAME_BREADCRUMB, breadcrumbs)
 
 <section id="searchBar" class="site-card">
 	<form id="advanceSearchForm" name="searchForm" asp-route="@Constants.MODULE_ROLE_ROLELIST_NAME" method="post">
@@ -25,7 +25,7 @@
 			<div class="col-md-8 col-12">
 				<div class="d-flex gap-1 search-bar-group">
 					<div class="flex-grow-1">
-						@await Component.InvokeAsync(Constants.ERP_COMPONENT_NAME_SEARCH_INPUT, new SearchInputViewModel { Name = "SearchFields.Keywords", Value = Model.SearchFields.Keywords, ClassName = "search-bar-input" })
+						@await Component.InvokeAsync(Constants.MANAGER_COMPONENT_NAME_SEARCH_INPUT, new SearchInputViewModel { Name = "SearchFields.Keywords", Value = Model.SearchFields.Keywords, ClassName = "search-bar-input" })
 					</div>
 				</div>
 				<div class="hidden-field-area d-none">
@@ -70,7 +70,7 @@
 								</div>
 								<div class="d-block only-desktop">
 									@await Component.InvokeAsync(
-										Constants.ERP_COMPONENT_NAME_CREATED_BY_BADGE,
+										Constants.MANAGER_COMPONENT_NAME_CREATED_BY_BADGE,
 										new { BranchId = item.BranchId, CreatedBy = item.CreatedBy, DateCreated = item.DateCreated })
 								</div>
 							</td>

@@ -6,9 +6,9 @@
 	<meta charset="@Constants.PAGE_CHARSET_OPTIONS" />
 	<title>@ViewData[Constants.GLOBAL_KEY_TITLE] - @Constants.CONFIG_APP_NAME</title>
 	@* Render meta *@
-	@await Component.InvokeAsync(Constants.ERP_COMPONENT_NAME_SITE_META)
+	@await Component.InvokeAsync(Constants.MANAGER_COMPONENT_NAME_SITE_META)
 	@* Css import render *@
-	@await Component.InvokeAsync(Constants.ERP_COMPONENT_NAME_STYLE_SHEET)
+	@await Component.InvokeAsync(Constants.MANAGER_COMPONENT_NAME_STYLE_SHEET)
 	@* Render view section: css *@
 	@RenderSection(Constants.ERP_SECTION_NAME_VIEW_CSS, required: false)
 	@* Add common js *@
@@ -20,20 +20,20 @@
 	@* Main content *@
 	<main id="page-load">
 		<div class="render-content">
-			@await Component.InvokeAsync(Constants.ERP_COMPONENT_NAME_HEADER, new HeaderViewModel())
+			@await Component.InvokeAsync(Constants.MANAGER_COMPONENT_NAME_HEADER, new HeaderViewModel())
 			<div class="main-content">
 				@RenderBody()
 			</div>
-			@await Component.InvokeAsync(Constants.ERP_COMPONENT_NAME_FOOTER)
+			@await Component.InvokeAsync(Constants.MANAGER_COMPONENT_NAME_FOOTER)
 		</div>
 		<aside id="utilitySideBar">
-			@await Component.InvokeAsync(Constants.ERP_COMPONENT_NAME_THEME_SETTING)
-			@await Component.InvokeAsync(Constants.ERP_COMPONENT_NAME_BACK_TOP)
+			@await Component.InvokeAsync(Constants.MANAGER_COMPONENT_NAME_THEME_SETTING)
+			@await Component.InvokeAsync(Constants.MANAGER_COMPONENT_NAME_BACK_TOP)
 		</aside>
 	</main>
 
 	@* Script import render *@
-	@await Component.InvokeAsync(Constants.ERP_COMPONENT_NAME_SCRIPT)
+	@await Component.InvokeAsync(Constants.MANAGER_COMPONENT_NAME_SCRIPT)
 	<section id="viewScript">
 		@RenderSection(Constants.ERP_SECTION_NAME_VIEW_SCRIPT, required: false)
 	</section>

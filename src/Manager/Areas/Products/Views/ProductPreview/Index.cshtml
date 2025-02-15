@@ -28,7 +28,7 @@
 							<h1 class="title">@Model.Product.Name</h1>
 							<div class="price">
 								<h3>@_localizer.Globals["Title_Price"]: @ProductUtilities.GetDisplayPrice(Model.Product) VNĐ</h3>
-								<span>@await Component.InvokeAsync(Constants.ERP_COMPONENT_NAME_PRODUCT_STATUS_BADGE, new { status = Model.Product.Status })</span>
+								<span>@await Component.InvokeAsync(Constants.MANAGER_COMPONENT_NAME_PRODUCT_STATUS_BADGE, new { status = Model.Product.Status })</span>
 							</div>
 							<div class="address">
 								<p>
@@ -139,7 +139,7 @@
 									</div>
 									<h3>@relatedProduct.Name</h3>
 									<p><i class="fa-regular fa-circle-dollar"></i> @_localizer.Globals["Title_Price"]: @relatedPrice</p>
-									<p>@await Component.InvokeAsync(Constants.ERP_COMPONENT_NAME_PRODUCT_STATUS_BADGE, new { status = relatedProduct.Status })</p>
+									<p>@await Component.InvokeAsync(Constants.MANAGER_COMPONENT_NAME_PRODUCT_STATUS_BADGE, new { status = relatedProduct.Status })</p>
 									@if (!string.IsNullOrEmpty(relatedAddress))
 									{
 										<span><i class="fa-regular fa-map"></i> @relatedAddress</span>
@@ -162,13 +162,13 @@
 					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 				</div>
 				<div class="modal-body">
-					@await Component.InvokeAsync(Constants.ERP_COMPONENT_NAME_CAROUSEL, new { Images = Model.Product.Images, idTarget = "productPreviewImage" })
+					@await Component.InvokeAsync(Constants.MANAGER_COMPONENT_NAME_CAROUSEL, new { Images = Model.Product.Images, idTarget = "productPreviewImage" })
 				</div>
 			</div>
 		</div>
 	</div>
 </section>
-@await Component.InvokeAsync(Constants.ERP_COMPONENT_NAME_FORMCONTACT, new FormContactViewModel { TargetButtonId = "btnContactUs", IsShowType = false, TypeForm = FormContactTypeEnum.ContactAdmin })
+@await Component.InvokeAsync(Constants.MANAGER_COMPONENT_NAME_FORMCONTACT, new FormContactViewModel { TargetButtonId = "btnContactUs", IsShowType = false, TypeForm = FormContactTypeEnum.ContactAdmin })
 
 @section ViewScript {
 	<script>

@@ -50,6 +50,6 @@ namespace SmartCommerce.Domain.Extensions.FilterModels
 
 		public ProductStatusEnum? Status { get; set; } = ProductStatusEnum.Normal;
 
-		public string categoryIds { get; set; } = string.Empty;
+		public string categoryId { get; set; } = string.Empty;
 	}
 }

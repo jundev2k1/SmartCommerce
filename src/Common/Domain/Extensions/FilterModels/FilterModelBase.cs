@@ -15,5 +15,9 @@ namespace SmartCommerce.Domain.Extensions.FilterModels
 		public string CreatedBy { get; set; } = string.Empty;
 
 		public bool DelFlg { get; set; }
+
+		public int PageNumber { get; set; } = 1;
+
+		public int PageSize { get; set; } = 20;
 	}
 }
