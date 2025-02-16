@@ -414,7 +414,7 @@
 		left: 0;
 		bottom: -4px;
 		filter: brightness(.8);
-		animation: IrisInX .3s ease-in, FadeIn .3s ease-in;
+		animation: FadeIn .5s ease-in;
 	}
 
 	.nav-bar .active {
