@@ -2,12 +2,15 @@
 
 namespace SmartCommerce.Manager.ViewComponents
 {
-	public sealed class ProductStatusBadgeViewComponent : ViewComponent
+	public sealed class ProductStatusBadgeViewComponent : ViewComponentBase
 	{
-		private readonly ILocalizer _localizer;
-		public ProductStatusBadgeViewComponent(ILocalizer localizer)
+		public ProductStatusBadgeViewComponent(
+			ILocalizer localizer,
+			IServiceFacade serviceFacade,
+			ValueTextManager valueTextManager,
+			SessionManager sessionManager)
+			: base(localizer, serviceFacade, valueTextManager, sessionManager)
 		{
-			_localizer = localizer;
 		}
 
 		public IViewComponentResult Invoke(ProductStatusEnum status, bool isPill = true)

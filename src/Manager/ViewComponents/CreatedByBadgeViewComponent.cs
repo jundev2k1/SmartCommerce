@@ -2,14 +2,15 @@
 
 namespace SmartCommerce.Manager.ViewComponents
 {
-	public sealed class CreatedByBadgeViewComponent : ViewComponent
+	public sealed class CreatedByBadgeViewComponent : ViewComponentBase
 	{
-		private readonly ILocalizer _localizer;
-		private readonly IServiceFacade _serviceFacade;
-		public CreatedByBadgeViewComponent(ILocalizer localizer, IServiceFacade serviceFacade)
+		public CreatedByBadgeViewComponent(
+			ILocalizer localizer,
+			IServiceFacade serviceFacade,
+			ValueTextManager valueTextManager,
+			SessionManager sessionManager)
+			: base(localizer, serviceFacade, valueTextManager, sessionManager)
 		{
-			_localizer = localizer;
-			_serviceFacade = serviceFacade;
 		}
 
 		public IViewComponentResult Invoke(

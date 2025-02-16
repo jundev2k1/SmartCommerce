@@ -2,13 +2,15 @@
 
 namespace SmartCommerce.Manager.ViewComponents
 {
-	public sealed class FormContactViewComponent : ViewComponent
+	public sealed class FormContactViewComponent : ViewComponentBase
 	{
-		private readonly ValueTextManager _valueTextManager;
-
-		public FormContactViewComponent(ValueTextManager valueTextManager)
+		public FormContactViewComponent(
+			ILocalizer localizer,
+			IServiceFacade serviceFacade,
+			ValueTextManager valueTextManager,
+			SessionManager sessionManager)
+			: base(localizer, serviceFacade, valueTextManager, sessionManager)
 		{
-			_valueTextManager = valueTextManager;
 		}
 
 		public IViewComponentResult Invoke(FormContactViewModel model)

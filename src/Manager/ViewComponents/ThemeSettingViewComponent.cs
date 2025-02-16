@@ -2,8 +2,17 @@
 
 namespace SmartCommerce.Manager.ViewComponents
 {
-	public sealed class ThemeSettingViewComponent : ViewComponent
+	public sealed class ThemeSettingViewComponent : ViewComponentBase
 	{
+		public ThemeSettingViewComponent(
+			ILocalizer localizer,
+			IServiceFacade serviceFacade,
+			ValueTextManager valueTextManager,
+			SessionManager sessionManager)
+			: base(localizer, serviceFacade, valueTextManager, sessionManager)
+		{
+		}
+
 		public IViewComponentResult Invoke()
 		{
 			return View();

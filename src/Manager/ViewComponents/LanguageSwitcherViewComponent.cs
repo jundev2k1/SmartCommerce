@@ -2,8 +2,17 @@
 
 namespace SmartCommerce.Manager.ViewComponents
 {
-	public sealed class LanguageSwitcherViewComponent : ViewComponent
+	public sealed class LanguageSwitcherViewComponent : ViewComponentBase
 	{
+		public LanguageSwitcherViewComponent(
+			ILocalizer localizer,
+			IServiceFacade serviceFacade,
+			ValueTextManager valueTextManager,
+			SessionManager sessionManager)
+			: base(localizer, serviceFacade, valueTextManager, sessionManager)
+		{
+		}
+
 		public IViewComponentResult Invoke()
 		{
 			var model = new LanguageSwitcherViewModel

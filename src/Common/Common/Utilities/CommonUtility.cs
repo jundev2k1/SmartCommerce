@@ -5,13 +5,13 @@ namespace SmartCommerce.Common.Utilities
 	public static class CommonUtility
 	{
 		/// <summary>
-		/// Handle limit page
+		/// Get limit page number
 		/// </summary>
 		/// <param name="pageIndex">Page index</param>
 		/// <param name="totalPage">Total page</param>
 		/// <param name="isPrevious">Is handle for previous button, otherwise for next button</param>
 		/// <returns>Next page or previous page with current page</returns>
-		public static int HandleLimitPage(int pageIndex, int totalPage, bool isPrevious = true)
+		public static int GetLimitPageNo(int pageIndex, int totalPage, bool isPrevious = true)
 		{
 			if (isPrevious)
 			{

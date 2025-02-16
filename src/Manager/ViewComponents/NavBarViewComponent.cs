@@ -2,8 +2,17 @@
 
 namespace SmartCommerce.Manager.ViewComponents
 {
-	public sealed class NavBarViewComponent : ViewComponent
+	public sealed class NavBarViewComponent : ViewComponentBase
 	{
+		public NavBarViewComponent(
+			ILocalizer localizer,
+			IServiceFacade serviceFacade,
+			ValueTextManager valueTextManager,
+			SessionManager sessionManager)
+			: base(localizer, serviceFacade, valueTextManager, sessionManager)
+		{
+		}
+
 		public IViewComponentResult Invoke(string currentMenu)
 		{
 			var sidebarJson = File.ReadAllText($"{Environment.CurrentDirectory}{Constants.ERP_FILE_PATH_SIDEBAR_SETTING}");

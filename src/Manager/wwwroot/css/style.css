@@ -48,6 +48,7 @@
 	display: flex;
 	flex-direction: column;
 	gap: 4px;
+	z-index: 9999999999;
 }
 /*#endregion */
 
@@ -56,6 +57,54 @@
 /*#endregion */
 
 /*#region Component */
+/*#region Single Site On Component */
+#singleSiteOn {
+	background: var(--site-gray-800);
+}
+
+	#singleSiteOn ul li {
+		padding: 1rem .25rem;
+		color: var(--site-gray-500);
+		border-top: 1px solid var(--site-gray-700);
+		border-right: 1px solid var(--site-gray-700);
+		transition: .25s ease-in-out;
+	}
+
+		#singleSiteOn ul li:first-child {
+			padding: 1rem .25rem;
+			color: var(--site-gray-500);
+			border-top: none;
+		}
+
+		#singleSiteOn ul li:last-child {
+			padding: 1rem .25rem;
+			color: var(--site-gray-500);
+			border-bottom: 1px solid var(--site-gray-700);
+		}
+
+		#singleSiteOn ul li.active {
+			background: var(--site-mode-operating);
+			color: var(--site-theme-operating);
+			font-weight: 900;
+			border: none;
+		}
+
+		#singleSiteOn ul li:hover:not(.active) {
+			background: var(--site-mode-operating);
+			color: var(--site-gray-400);
+			font-weight: 900;
+			transition: .25s ease-in-out;
+		}
+
+		#singleSiteOn ul li > a {
+			display: block;
+			writing-mode: vertical-rl;
+			text-orientation: mixed;
+			font-size: 1.15rem;
+			font-family: Roboto;
+			text-transform: uppercase;
+		}
+/*#endregion */
 /*#region Theme Component */
 .btn-theme-settings {
 	opacity: .5;
@@ -710,7 +759,7 @@
 /*#region Responsive */
 @media (min-width: 769px) {
 	.only-mobile {
-		display: none!important;
+		display: none !important;
 	}
 }
 
@@ -735,7 +784,7 @@
 	}
 
 	.only-desktop {
-		display: none!important;
+		display: none !important;
 	}
 	/*#endregion */
 

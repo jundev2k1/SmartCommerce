@@ -1,10 +1,10 @@
-﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
+﻿// Copyright (c) 2025 - Jun Dev. All rights reserved
 
 namespace SmartCommerce.Manager.ViewComponents
 {
-	public sealed class HeaderViewComponent : ViewComponentBase
+	public sealed class SingleSiteOnViewComponent : ViewComponentBase
 	{
-		public HeaderViewComponent(
+		public SingleSiteOnViewComponent(
 			ILocalizer localizer,
 			IServiceFacade serviceFacade,
 			ValueTextManager valueTextManager,
@@ -13,9 +13,9 @@ namespace SmartCommerce.Manager.ViewComponents
 		{
 		}
 
-		public IViewComponentResult Invoke(HeaderViewModel viewData)
+		public IViewComponentResult Invoke()
 		{
-			return View(viewData);
+			return View();
 		}
 	}
 }

@@ -2,8 +2,17 @@
 
 namespace SmartCommerce.Manager.ViewComponents
 {
-	public sealed class BreadcrumbViewComponent : ViewComponent
+	public sealed class BreadcrumbViewComponent : ViewComponentBase
 	{
+		public BreadcrumbViewComponent(
+			ILocalizer localizer,
+			IServiceFacade serviceFacade,
+			ValueTextManager valueTextManager,
+			SessionManager sessionManager)
+			: base(localizer, serviceFacade, valueTextManager, sessionManager)
+		{
+		}
+
 		/// <summary>
 		/// Breadcrumb view component
 		/// </summary>
