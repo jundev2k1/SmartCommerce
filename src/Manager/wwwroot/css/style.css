@@ -1,4 +1,4 @@
-/* Copyright (c) 2024 - Jun Dev. All rights reserved */
+﻿/* Copyright (c) 2024 - Jun Dev. All rights reserved */
 
 @import 'baseStyle.css';
 @import 'animation.css';
@@ -346,6 +346,7 @@
 		margin-right: 1rem;
 		height: calc(100% - 185px);
 		overflow-y: auto;
+		overflow-x: hidden;
 	}
 
 	.nav-bar .profile::before {
@@ -374,7 +375,7 @@
 
 	.nav-bar .menu-item > button,
 	.nav-bar .menu-item > a {
-		padding: 8px 4px 8px 16px;
+		padding: 8px 1rem 8px 16px;
 		width: 100%;
 		display: flex;
 		gap: 12px;
@@ -384,6 +385,18 @@
 	.nav-bar .menu-item .title {
 		font-weight: 600;
 	}
+
+	.nav-bar .menu-item.has-active > button.collapsed {
+		position: relative;
+	}
+
+		.nav-bar .menu-item.has-active > button.collapsed::after {
+			content: '\2022';
+			position: absolute;
+			left: .3rem;
+			transform: scale(1.25);
+			text-shadow: 0 0 4px var(--site-theme-operating);
+		}
 
 	.nav-bar .menu-item > button > span,
 	.nav-bar .menu-item > a > span,
@@ -844,6 +857,12 @@
 			z-index: 999999;
 		}
 
+		.nav-bar .menu-item.has-active > button.collapsed::after {
+			padding-right: 1rem;
+			left: inherit;
+			right: 0;
+			transform: scale(1.5);
+		}
 
 	/*#endregion */
 	/*#region Theme setting */
