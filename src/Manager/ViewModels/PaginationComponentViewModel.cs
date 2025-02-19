@@ -23,7 +23,7 @@ namespace SmartCommerce.Manager.ViewModels
 		public int SearchHitCount { get; set; }
 
 		/// <summary>Total number of possible pages</summary>
-		public int TotalPage => MathUtilitiy.DivRoundUp(this.SearchHitCount, this.PageSize);
+		public int TotalPage { get; set; }
 
 		/// <summary>Page items information</summary>
 		public string PaginationItemInfo

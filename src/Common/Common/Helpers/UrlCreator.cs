@@ -46,7 +46,7 @@ namespace SmartCommerce.Common.Helpers
 			var pathRoot = _uri.GetLeftPart(UriPartial.Path);
 			var strParameter = _parameters.AllKeys
 				.Select(key => $"{Uri.EscapeDataString(key!)}={Uri.EscapeDataString(_parameters[key]!)}")
-				.JoinToString(",");
+				.JoinToString("&");
 			return $"{pathRoot}?{strParameter}";
 		}
 	}

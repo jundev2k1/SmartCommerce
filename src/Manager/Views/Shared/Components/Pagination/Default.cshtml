@@ -13,7 +13,16 @@
 					<span aria-hidden="true">&laquo;</span>
 				</a>
 			</li>
-			@for (var index = 1; index <= Model.TotalPage; index++)
+			@{
+				var pageRange = 3;
+				var pageStart = Model.PageIndex - pageRange > 0
+					? Model.PageIndex - pageRange
+					: 1;
+				var pageEnd = Model.PageIndex + pageRange <= Model.TotalPage
+					? Model.PageIndex + pageRange
+					: Model.TotalPage;
+			}
+			@for (var index = pageStart; index <= pageEnd; index++)
 			{
 				<li class="page-item">
 					<a  href="@Model.CreatePaginationUrl(index)" class="page-link @(Model.PageIndex == index ? "disabled" : string.Empty)">@index</a>
