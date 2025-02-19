@@ -15,6 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Using Include="SmartCommerce.Common.Utilities" />
     <Using Include="SmartCommerce.Domain.Enum" />
     <Using Include="SmartCommerce.Domain.Models" />
     <Using Include="QRCoder" />

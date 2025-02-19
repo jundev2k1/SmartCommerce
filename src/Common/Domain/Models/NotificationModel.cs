@@ -2,7 +2,7 @@
 
 namespace SmartCommerce.Domain.Models
 {
-	public sealed class NotificationModel : ModelBase<NotificationModel>
+	public sealed class NotificationModel : ModelBase
 	{
 		public string BranchId { get; set; } = string.Empty;
 

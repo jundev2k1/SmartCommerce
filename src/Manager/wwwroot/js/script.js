@@ -290,6 +290,7 @@ $(document).ready(function () {
 const handleSwitchNavbar = () => {
 	$('.btn-navbar-switch').on('click', (event) => {
 		$('#navBar').fadeToggle('fast', 'linear');
+		$('#singleSiteOn').fadeToggle('fast', 'linear');
 	});
 }
 

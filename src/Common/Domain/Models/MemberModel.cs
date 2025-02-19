@@ -2,7 +2,7 @@
 
 namespace SmartCommerce.Domain.Models
 {
-	public sealed class MemberModel : ModelBase<MemberModel>
+	public sealed class MemberModel : ModelBase
 	{
 		public string BranchId { get; set; } = string.Empty;
 

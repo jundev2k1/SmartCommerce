@@ -2,14 +2,15 @@
 
 namespace SmartCommerce.Manager.ViewComponents
 {
-	public sealed class UserNotificationViewComponent : ViewComponent
+	public sealed class UserNotificationViewComponent : ViewComponentBase
 	{
-		private readonly SessionManager _sessionManager;
-		private readonly IServiceFacade _serviceFacade;
-		public UserNotificationViewComponent(IServiceFacade serviceFacade, SessionManager sessionManager)
+		public UserNotificationViewComponent(
+			ILocalizer localizer,
+			IServiceFacade serviceFacade,
+			ValueTextManager valueTextManager,
+			SessionManager sessionManager)
+			: base(localizer, serviceFacade, valueTextManager, sessionManager)
 		{
-			_serviceFacade = serviceFacade;
-			_sessionManager = sessionManager;
 		}
 
 		public IViewComponentResult Invoke()

@@ -2,8 +2,17 @@
 
 namespace SmartCommerce.Manager.ViewComponents
 {
-	public sealed class SearchInputViewComponent : ViewComponent
+	public sealed class SearchInputViewComponent : ViewComponentBase
 	{
+		public SearchInputViewComponent(
+			ILocalizer localizer,
+			IServiceFacade serviceFacade,
+			ValueTextManager valueTextManager,
+			SessionManager sessionManager)
+			: base(localizer, serviceFacade, valueTextManager, sessionManager)
+		{
+		}
+
 		/// <summary>
 		/// Search input view component
 		/// </summary>

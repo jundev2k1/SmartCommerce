@@ -1,0 +1,29 @@
+﻿@* // Copyright (c) 2025 - Jun Dev. All rights reserved *@
+
+@model PaginationComponentViewModel
+
+<div class="d-flex justify-content-between align-items-center">
+	<p class="mb-0">
+		@(_localizer.Globals["ListPage_TotalResult"]): @Model.PaginationItemInfo
+	</p>
+	<nav aria-label="Page navigation">
+		<ul class="pagination">
+			<li class="page-item">
+				<a  href="@Model.CreatePaginationUrl(1)" class="page-link @(Model.PageIndex == 1 ? "disabled" : string.Empty)" aria-label="Previous">
+					<span aria-hidden="true">&laquo;</span>
+				</a>
+			</li>
+			@for (var index = 1; index <= Model.TotalPage; index++)
+			{
+				<li class="page-item">
+					<a  href="@Model.CreatePaginationUrl(index)" class="page-link @(Model.PageIndex == index ? "disabled" : string.Empty)">@index</a>
+				</li>
+			}
+			<li class="page-item">
+				<a href="@Model.CreatePaginationUrl(Model.TotalPage)" class="page-link @(Model.PageIndex == Model.TotalPage ? "disabled" : string.Empty)" asp-aria-label="Next">
+					<span aria-hidden="true">&raquo;</span>
+				</a>
+			</li>
+		</ul>
+	</nav>
+</div>

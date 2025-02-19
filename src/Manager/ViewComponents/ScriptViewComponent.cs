@@ -2,8 +2,17 @@
 
 namespace SmartCommerce.Manager.ViewComponents
 {
-	public sealed class ScriptViewComponent : ViewComponent
+	public sealed class ScriptViewComponent : ViewComponentBase
 	{
+		public ScriptViewComponent(
+			ILocalizer localizer,
+			IServiceFacade serviceFacade,
+			ValueTextManager valueTextManager,
+			SessionManager sessionManager)
+			: base(localizer, serviceFacade, valueTextManager, sessionManager)
+		{
+		}
+
 		public IViewComponentResult Invoke()
 		{
 			return View();

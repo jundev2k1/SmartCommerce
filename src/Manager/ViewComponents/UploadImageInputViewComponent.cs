@@ -2,9 +2,14 @@
 
 namespace SmartCommerce.Manager.ViewComponents
 {
-	public sealed class UploadImageInputViewComponent : ViewComponent
+	public sealed class UploadImageInputViewComponent : ViewComponentBase
 	{
-		public UploadImageInputViewComponent()
+		public UploadImageInputViewComponent(
+			ILocalizer localizer,
+			IServiceFacade serviceFacade,
+			ValueTextManager valueTextManager,
+			SessionManager sessionManager)
+			: base(localizer, serviceFacade, valueTextManager, sessionManager)
 		{
 		}
 

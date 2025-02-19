@@ -241,98 +241,61 @@
 <section id="bodyPageLoad" class="site-card mt-2">
 	<div class="row">
 		<div class="col-12">
-			<table class="site-table site-table-hover site-border site-rounded-layout">
-				<thead>
-					<tr>
-						<th class="only-desktop" scope="col" width="10%">@_localizer.Fields["Product_ProductId"]</th>
-						<th scope="col" width="25%">@_localizer.Fields["Product_Name"]</th>
-						<th class="text-center" scope="col" width="15%">@_localizer.Fields["Product_Price"]</th>
-						<th class="text-center" scope="col" width="10%">@_localizer.Fields["Product_Status"]</th>
-						<th class="text-center only-desktop" scope="col" width="40%">@_localizer.Fields["Product_Address"]</th>
-					</tr>
-				</thead>
-				<tbody>
-					@if (hasResult)
+			@await Component.InvokeAsync(Constants.MANAGER_COMPONENT_NAME_DYNAMIC_LIST, new DynamicListViewModel
+			{
+				DataSource = Model.PageData.Items,
+				PlaceholderText = _localizer.Globals["ListPage_NoResult"],
+				// Set pagination
+				PageInfo = new PageInfo(
+					PageIndex: Model.PageIndex,
+					PageSize: Model.PageSize,
+					SearchCount: Model.PageData.Items.Length,
+					SearchHitCount: Model.PageData.TotalRecord,
+					TotalPage: Model.PageData.TotalPage),
+					RowAttributes = new()
 					{
-						@foreach (var item in Model.PageData.Items)
-						{
-							<tr>
-								<td class="only-desktop">
-									<p class="mb-0">
-										@item.ProductId
-									</p>
-								</td>
-								<td>
-									<a asp-route="@Constants.MODULE_PRODUCT_PRODUCTDETAIL_NAME" asp-route-id="@item.ProductId">
-										<p class="mb-0">@item.Name</p>
-										<div class="d-block only-desktop">
-											@await Component.InvokeAsync(
-												Constants.MANAGER_COMPONENT_NAME_CREATED_BY_BADGE,
-												new { BranchId = item.BranchId, CreatedBy = item.CreatedBy, DateCreated = item.DateCreated })
-										</div>
-									</a>
-								</td>
-								<td class="text-end">
-									<p class="mb-0">
-										@CommonUtility.GetProductDisplayPrice(item, Constants.CONFIG_CURRENCY_IN_USE)
-									</p>
-								</td>
-								<td class="text-center">
-									@await Component.InvokeAsync(Constants.MANAGER_COMPONENT_NAME_PRODUCT_STATUS_BADGE, new { status = item.Status })
-								</td>
-								<td class="text-start only-desktop">
-									<p class="mb-0">
-										@AddressUtilities.GetProductAddress(item)
-									</p>
-								</td>
-							</tr>
-						}
-					}
-					else
-					{
-						<tr>
-							<td align="center" colspan="5">
-								@(_localizer.Globals["ListPage_NoResult"])
-							</td>
-						</tr>
-					}
-				</tbody>
-
-				@if (hasData)
+						{ "onclick", model => $"redirectPage('{Url.RouteUrl(Constants.MODULE_PRODUCT_PRODUCTDETAIL_NAME, new { id = ((ProductModel?)model).ProductId })}')" },
+						{ "style", model => $"cursor: pointer;" }
+					},
+				// Set header rendering
+				Columns = new []
 				{
-					<tfoot>
-						<tr>
-							<td colspan="5">
-								<div class="d-flex justify-content-between align-items-center">
-									<p class="mb-0">
-										@(_localizer.Globals["ListPage_TotalResult"]): @(Constants.DEFAULT_PAGE_SIZE * (Model.PageIndex - 1) + Model.PageData.Items.Length)/@(Model.PageData.TotalRecord)
-									</p>
-									<nav aria-label="Page navigation">
-										<ul class="pagination">
-											<li class="page-item">
-												<a class="page-link @(Model.PageIndex == 1 ? "disabled" : string.Empty)" onclick="handlePaging(event, @CommonUtility.HandleLimitPage(Model.PageIndex, Model.PageData.TotalPage))" aria-label="Previous">
-													<span aria-hidden="true">&laquo;</span>
-												</a>
-											</li>
-											@for (var index = 1; index <= Model.PageData.TotalPage; index++)
-											{
-												<li class="page-item">
-													<a class="page-link @(Model.PageIndex == index ? "disabled" : string.Empty)" onclick="handlePaging(event, @index)">@index</a>
-												</li>
-											}
-											<li class="page-item">
-												<a class="page-link @(Model.PageIndex == Model.PageData.TotalPage ? "disabled" : string.Empty)" onclick="handlePaging(event, @CommonUtility.HandleLimitPage(Model.PageIndex, Model.PageData.TotalPage, isPrevious: false))" asp- aria-label="Next">
-													<span aria-hidden="true">&raquo;</span>
-												</a>
-											</li>
-										</ul>
-									</nav>
-								</div>
-							</td>
-						</tr>
-					</tfoot>
+					new CellInfo().SetCell(() => _localizer.Fields["Product_ProductId"], new { @class = "only-desktop", width = "10%" }),
+					new CellInfo().SetCell(() => _localizer.Fields["Product_Name"], new { width = "25%" }),
+					new CellInfo().SetCell(() => _localizer.Fields["Product_Price"], new { @class = "text-center", width = "15%" }),
+					new CellInfo().SetCell(() => _localizer.Fields["Product_Status"], new { @class = "text-center", width = "10%" }),
+					new CellInfo().SetCell(() => _localizer.Fields["Product_Address"], new { @class = "text-center only-desktop", width = "40%" }),
+				},
+				// Set body rendering
+				Cells = new []
+				{
+					// Column: Product ID
+					new CellInfo().SetCell<ProductModel>(model => model.ProductId),
+					// Column: Product information
+					new CellInfo().SetCell<ProductModel>(async model =>
+						$@"<p class='mb-0'>{model.Name}</p>
+							<div class='d-block only-desktop'>
+								{
+									await ViewUtilities.RenderComponent(
+										_viewComponentHelper ,
+										Constants.MANAGER_COMPONENT_NAME_CREATED_BY_BADGE,
+										new { BranchId = model.BranchId, CreatedBy = model.CreatedBy, DateCreated = model.DateCreated })
+								}
+							</div>"),
+					// Column: Product price
+					new CellInfo().SetCell<ProductModel>(
+						model => CommonUtility.GetProductDisplayPrice(model!, Constants.CONFIG_CURRENCY_IN_USE),
+						attribute: new { @class="text-end" }),
+					// Column: Product status
+					new CellInfo().SetCell<ProductModel>(
+						async model => await ViewUtilities.RenderComponent(_viewComponentHelper, Constants.MANAGER_COMPONENT_NAME_PRODUCT_STATUS_BADGE, new { status = model.Status }),
+						attribute: new { @class="text-center" }),
+					// Column: Product address
+					new CellInfo().SetCell<ProductModel>(
+						model => AddressUtilities.GetProductAddress(model!),
+						attribute: new { @class="text-end only-desktop" }),
 				}
-			</table>
+			})
 		</div>
 	</div>
 </section>
@@ -362,16 +325,7 @@
 </section>
 @section ViewScript {
 	<script>
-		const handlePaging = (event, page = 1) => {
-			event.preventDefault();
-
-			const pageIndexInput = document.querySelector("#pageIndex");
-			pageIndexInput.value = page;
-			const searchForm = document.getElementsByName("searchForm")[0];
-			searchForm.submit();
-		}
-
-		const resetSearchForm = (formId) => {
+		var resetSearchForm = (formId) => {
 			if (!formId) return;
 
 			const formTarget = $(`#${formId}`);

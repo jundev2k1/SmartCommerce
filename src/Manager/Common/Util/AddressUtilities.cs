@@ -108,19 +108,19 @@ namespace SmartCommerce.Manager.Common.Util
 		{
 			var addressParts = new List<string>();
 
-			var provinceName = GetProvinceName(provinceId, culture);
-			if (string.IsNullOrEmpty(provinceName) == false) addressParts.Add(provinceName);
+			var addressEx = GetAddressExtend(addressExtend);
+			if (string.IsNullOrEmpty(addressExtend) == false) addressParts.Add(addressEx);
+
+			var cummuneName = GetCommuneName(communeId, culture);
+			if (string.IsNullOrEmpty(cummuneName) == false) addressParts.Add(cummuneName);
 
 			var districtName = GetDistrictName(districtId, culture);
 			if (string.IsNullOrEmpty(districtName) == false) addressParts.Add(districtName);
 
-			var cummuneName = GetCommuneName(communeId, culture);
-			if (string.IsNullOrEmpty(districtName) == false) addressParts.Add(cummuneName);
+			var provinceName = GetProvinceName(provinceId, culture);
+			if (string.IsNullOrEmpty(provinceName) == false) addressParts.Add(provinceName);
 
-			var addressEx = GetAddressExtend(addressExtend);
-			if (string.IsNullOrEmpty(addressExtend) == false) addressParts.Add(addressEx);
-
-			return String.Join(", ", addressParts);
+			return addressParts.JoinToString(", ");
 		}
 
 		/// <summary>

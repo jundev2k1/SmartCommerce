@@ -45,7 +45,7 @@
 
 					@if (item.Items.Any())
 					{
-						<div class="menu-item @(currentPage == item.Name ? "active" : string.Empty)">
+						<div class="menu-item @(currentPage == item.Name ? "active" : string.Empty) @(item.Items.Any(subItem => (hasAllPermission || HasPermission(subItem.Permission)) && (subItem.Name == currentPage)) ? "has-active" : string.Empty)">
 							<button type="button" data-bs-toggle="collapse" data-bs-target="#@item.Name">
 								<i class="@item.Icon"></i>
 								<span class="title">
