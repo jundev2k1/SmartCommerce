@@ -2,7 +2,7 @@
 
 namespace SmartCommerce.Domain.Models
 {
-	public sealed class TokenModel : ModelBase<TokenModel>
+	public sealed class TokenModel : ModelBase
 	{
 		public string BranchId { get; set; } = string.Empty;
 

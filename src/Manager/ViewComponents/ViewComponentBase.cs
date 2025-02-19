@@ -4,11 +4,14 @@ namespace SmartCommerce.Manager.ViewComponents
 {
 	public abstract class ViewComponentBase : ViewComponent
 	{
-		protected readonly ILocalizer _localizer;
-		protected readonly IServiceFacade _serviceFacade;
-		protected readonly ValueTextManager _valueTextManager;
-		protected readonly SessionManager _sessionManager;
+		protected readonly ILocalizer? _localizer;
+		protected readonly IServiceFacade? _serviceFacade;
+		protected readonly ValueTextManager? _valueTextManager;
+		protected readonly SessionManager? _sessionManager;
 
+		protected ViewComponentBase()
+		{
+		}
 		protected ViewComponentBase(
 			ILocalizer localizer,
 			IServiceFacade serviceFacade,

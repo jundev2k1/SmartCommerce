@@ -212,3 +212,11 @@ const copyImageToClipboard = async function (element) {
 		console.error("Failed to load image");
 	};
 }
+
+/**
+ * Redirect page
+ * @param {string} url Redirect URL
+ */
+const redirectPage = (url = '/') => {
+	window.location.href = url;
+}

@@ -2,15 +2,15 @@
 
 namespace SmartCommerce.Domain.Models
 {
-	public class ModelBase<TModel>
+	public abstract class ModelBase
 	{
 		/// <summary>
 		/// Clone model
 		/// </summary>
 		/// <returns>A copy of the model</returns>
-		public virtual ModelBase<TModel> Clone()
+		public virtual ModelBase Clone()
 		{
-			return (ModelBase<TModel>)this.MemberwiseClone();
+			return (ModelBase)this.MemberwiseClone();
 		}
 
 		/// <summary>
@@ -18,14 +18,12 @@ namespace SmartCommerce.Domain.Models
 		/// </summary>
 		/// <param name="model">Order model</param>
 		/// <returns>Is equal?</returns>
-		public virtual bool IsEqual(ModelBase<TModel> model)
+		public virtual bool IsEqual(ModelBase model)
 		{
 			var result = (model != null)
 				? this.Equals(model)
 				: false;
 			return result;
 		}
-
-		public PropertyExtensions<TModel> Properties { get; } = new PropertyExtensions<TModel>();
 	}
 }

@@ -1,24 +1,16 @@
 ﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
 
-using Microsoft.AspNetCore.Mvc.Routing;
 using SmartCommerce.Common.Helpers;
 
 namespace SmartCommerce.Manager.ViewComponents
 {
 	public sealed class PaginationViewComponent : ViewComponentBase
 	{
-		public PaginationViewComponent(
-			ILocalizer localizer,
-			IServiceFacade serviceFacade,
-			ValueTextManager valueTextManager,
-			SessionManager sessionManager)
-			: base(localizer, serviceFacade, valueTextManager, sessionManager)
-		{
-		}
-
 		public IViewComponentResult Invoke(
-			int itemCount,
-			int totalCount,
+			int pageIndex,
+			int pageSize,
+			int searchCount,
+			int searchHitCount,
 			Func<int, string>? createUrl = null)
 		{
 			// Get request parameters
@@ -40,8 +32,10 @@ namespace SmartCommerce.Manager.ViewComponents
 			// Set data to view model
 			var data = new PaginationComponentViewModel()
 			{
-				ItemCount = itemCount,
-				TotalHitCount = totalCount,
+				PageIndex = pageIndex,
+				PageSize = pageSize,
+				SearchCount = searchCount,
+				SearchHitCount = searchHitCount,
 				RequestParameters = requestParams,
 				CreatePaginationUrl = createUrl,
 			};

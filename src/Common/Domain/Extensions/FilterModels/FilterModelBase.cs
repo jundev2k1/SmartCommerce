@@ -2,7 +2,7 @@
 
 namespace SmartCommerce.Domain.Extensions.FilterModels
 {
-	public class FilterModelBase<TModel> : ModelBase<TModel>
+	public class FilterModelBase<TModel> : ModelBase
 	{
 		public DateTime? DateCreatedFrom { get; set; }
 

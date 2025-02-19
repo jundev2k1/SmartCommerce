@@ -40,6 +40,8 @@ namespace SmartCommerce.Common
 		public const string MANAGER_COMPONENT_NAME_NOTIFICATION = "UserNotification";
 		/// <summary>Manager component name: Form contact</summary>
 		public const string MANAGER_COMPONENT_NAME_FORMCONTACT = "FormContact";
+		/// <summary>Manager component name: Dynamic list</summary>
+		public const string MANAGER_COMPONENT_NAME_DYNAMIC_LIST = "DynamicList";
 		#endregion
 
 		#region Manager: Form Control Component Name

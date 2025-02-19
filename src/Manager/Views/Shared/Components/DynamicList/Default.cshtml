@@ -1,0 +1,65 @@
+﻿@* // Copyright (c) 2025 - Jun Dev. All rights reserved *@
+
+@model DynamicListViewModel
+
+@if (Model != null)
+{
+	<table class="site-table site-table-hover site-border site-rounded-layout">
+		@if (Model.Columns.Any())
+		{
+			<thead>
+				<tr>
+					@foreach (var cellData in Model.Columns)
+					{
+						<th @(cellData.GetAttribute()) scope="col">
+							@await cellData.RenderCellView.Invoke(null)
+						</th>
+					}
+				</tr>
+			</thead>
+		}
+		<tbody>
+			@if (Model.HasData)
+			{
+				@foreach (var rowData in Model.DataSource)
+				{
+					<tr @Html.Raw(Model.GetRowAttribute(rowData))>
+						@foreach (var cellData in Model.Cells)
+						{
+							<td @cellData.GetAttribute()>
+								@await cellData.RenderCellView.Invoke(rowData)
+							</td>
+						}
+					</tr>
+				}
+			}
+			else
+			{
+				<tr>
+					<td align="center" colspan="5">
+						@Model.PlaceholderText
+					</td>
+				</tr>
+			}
+		</tbody>
+
+		@if (Model.HasData)
+		{
+			<tfoot>
+				<tr>
+					<td colspan="5">
+						@await Component.InvokeAsync(
+							Constants.MANAGER_COMPONENT_NAME_PAGINATION,
+							new
+							{
+								pageIndex = Model.PageInfo.PageIndex,
+								pageSize = Model.PageInfo.PageSize,
+								searchCount = Model.PageInfo.SearchCount,
+								searchHitCount = Model.PageInfo.SearchHitCount,
+							})
+					</td>
+				</tr>
+			</tfoot>
+		}
+	</table>
+}
