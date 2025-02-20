@@ -2,6 +2,7 @@
 
 using SmartCommerce.Manager.Areas.Products.Controllers;
 using SmartCommerce.Manager.Areas.Products.ViewModels;
+using System.Collections.Generic;
 
 namespace SmartCommerce.Manager.Areas.Product.Controllers
 {
@@ -21,7 +22,7 @@ namespace SmartCommerce.Manager.Areas.Product.Controllers
 		[HttpGet]
 		[Authorization(Permission.CanReadListProduct)]
 		[Route(Constants.MODULE_PRODUCT_PRODUCTLIST_PATH, Name = Constants.MODULE_PRODUCT_PRODUCTLIST_NAME)]
-		public async Task<IActionResult> Index(int page = 1)
+		public async Task<IActionResult> Index()
 		{
 			var condition = GetFiltersByRequest();
 			var productList = await _serviceFacade.Products.GetByCriteriaAsync(
@@ -32,7 +33,6 @@ namespace SmartCommerce.Manager.Areas.Product.Controllers
 			{
 				SearchFields = condition,
 				PageData = productList,
-				PageIndex = page,
 				InputOption = GetInitDropdownListItems(new ProductModel()),
 			};
 			return View(data);
@@ -73,6 +73,11 @@ namespace SmartCommerce.Manager.Areas.Product.Controllers
 				PageNumber = GetRequestParam<int>(Constants.REQUEST_KEY_PAGE_NO, 1),
 				PageSize = GetRequestParam<int>(Constants.REQUEST_KEY_PAGE_SIZE, Constants.DEFAULT_PAGE_SIZE),
 			};
+
+			// Reset value if limit is exceeded
+			if (parameter.PageSize <= 0) parameter.PageSize = Constants.DEFAULT_PAGE_SIZE;
+			if (parameter.PageNumber <= 0) parameter.PageNumber = 1;
+
 			return parameter;
 		}
 	}

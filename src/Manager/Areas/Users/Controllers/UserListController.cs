@@ -20,38 +20,50 @@ namespace SmartCommerce.Manager.Areas.Users.Controllers
 		[HttpGet]
 		[Authorization(Permission.CanReadListUser)]
 		[Route(Constants.MODULE_USER_USERLIST_PATH, Name = Constants.MODULE_USER_USERLIST_NAME)]
-		public IActionResult Index(int page = 1)
+		public IActionResult Index()
 		{
-			var condition = new UserFilterModel { BranchId = this.OperatorBranchId };
-			var userList = _serviceFacade.Users.GetByCriteria(condition, page, Constants.DEFAULT_PAGE_SIZE);
+			var condition = GetFiltersByRequest();
+			var userList = _serviceFacade.Users.GetByCriteria(
+				condition,
+				condition.PageNumber,
+				condition.PageSize);
 			var data = new UserListViewModel
 			{
-				PageIndex = page,
 				PageData = userList,
 				InputOption = GetInitDropdownListItems(new UserModel())
 			};
 			return View(data);
 		}
-		[HttpPost]
-		[Authorization(Permission.CanReadListUser)]
-		[Route(Constants.MODULE_USER_USERLIST_PATH, Name = Constants.MODULE_USER_USERLIST_NAME)]
-		public IActionResult Index(UserListViewModel viewModel)
+
+		/// <summary>
+		/// Get filters by request
+		/// </summary>
+		/// <returns>User filters</returns>
+		private UserFilterModel GetFiltersByRequest()
 		{
-			var searchParams = viewModel.SearchFields;
-			searchParams.BranchId = this.OperatorBranchId;
+			var parameter = new UserFilterModel()
+			{
+				Keywords = GetRequestParam<string>(Constants.REQUEST_KEY_KEYWORD, string.Empty),
+				BranchId = this.OperatorBranchId,
+				UserId = GetRequestParam<string>(Constants.REQUEST_KEY_USER_USER_ID, string.Empty),
+				UserName = GetRequestParam<string>(Constants.REQUEST_KEY_USER_USERNAME, string.Empty),
+				FirstName = GetRequestParam<string>(Constants.REQUEST_KEY_USER_FIRSTNAME, string.Empty),
+				LastName = GetRequestParam<string>(Constants.REQUEST_KEY_USER_LASTNAME, string.Empty),
+				Email = GetRequestParam<string>(Constants.REQUEST_KEY_USER_EMAIL, string.Empty),
+				Status = GetRequestParam<UserStatusEnum>(Constants.REQUEST_KEY_USER_STATUS, UserStatusEnum.Active),
+				Address1 = GetRequestParam<string>(Constants.REQUEST_KEY_USER_ADDRESS1, string.Empty),
+				Address2 = GetRequestParam<string>(Constants.REQUEST_KEY_USER_ADDRESS2, string.Empty),
+				Address3 = GetRequestParam<string>(Constants.REQUEST_KEY_USER_ADDRESS3, string.Empty),
+				Address4 = GetRequestParam<string>(Constants.REQUEST_KEY_USER_ADDRESS4, string.Empty),
+				PageNumber = GetRequestParam<int>(Constants.REQUEST_KEY_PAGE_NO, 1),
+				PageSize = GetRequestParam<int>(Constants.REQUEST_KEY_PAGE_SIZE, Constants.DEFAULT_PAGE_SIZE),
+			};
 
-			// Set initial value for dropdown list
-			viewModel.InputOption = GetInitDropdownListItems(viewModel.SearchFields.MapSearchToModel());
+			// Reset value if limit is exceeded
+			if (parameter.PageSize <= 0) parameter.PageSize = Constants.DEFAULT_PAGE_SIZE;
+			if (parameter.PageNumber <= 0) parameter.PageNumber = 1;
 
-			// Check page index out of range data collection
-			if (viewModel.PageData.TotalPage < viewModel.PageIndex)
-				viewModel.PageIndex = 1;
-
-			viewModel.PageData = _serviceFacade.Users.GetByCriteria(
-				searchParams,
-				viewModel.PageIndex,
-				viewModel.PageSize);
-			return View(viewModel);
+			return parameter;
 		}
 	}
 }

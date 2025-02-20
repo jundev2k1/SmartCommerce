@@ -388,21 +388,6 @@
   <data name="SignIn_Label_RememberMe" xml:space="preserve">
     <value>Remember Me</value>
   </data>
-  <data name="UserList_Title_Contact" xml:space="preserve">
-    <value>Contact Information</value>
-  </data>
-  <data name="UserList_Title_Name" xml:space="preserve">
-    <value>Name</value>
-  </data>
-  <data name="UserList_Title_Sex" xml:space="preserve">
-    <value>Sex</value>
-  </data>
-  <data name="UserList_Title_Status" xml:space="preserve">
-    <value>Status</value>
-  </data>
-  <data name="UserList_Title_UserId" xml:space="preserve">
-    <value>ID</value>
-  </data>
   <data name="RoleList_Title_Description" xml:space="preserve">
     <value>Role Description</value>
   </data>
@@ -432,5 +417,14 @@
   </data>
   <data name="RoleSetting_TabTitle_Setting" xml:space="preserve">
     <value>Settings</value>
+  </data>
+  <data name="ListPage_DisplaySearchCount" xml:space="preserve">
+    <value>Show</value>
+  </data>
+  <data name="Title_Contact" xml:space="preserve">
+    <value>Contact</value>
+  </data>
+  <data name="Title_Information" xml:space="preserve">
+    <value>Information</value>
   </data>
 </root>

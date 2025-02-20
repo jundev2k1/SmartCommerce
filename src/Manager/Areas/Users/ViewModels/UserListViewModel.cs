@@ -11,9 +11,5 @@ namespace SmartCommerce.Manager.Areas.Users.ViewModels
 		public UserFilterModel SearchFields { get; set; } = new UserFilterModel();
 
 		public UserInputOptionViewModel InputOption { get; set; } = new UserInputOptionViewModel();
-
-		public int PageIndex { get; set; } = 1;
-
-		public int PageSize { get; set; } = Constants.DEFAULT_PAGE_SIZE;
 	}
 }

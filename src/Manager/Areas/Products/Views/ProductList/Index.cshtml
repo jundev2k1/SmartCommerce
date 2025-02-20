@@ -243,8 +243,8 @@
 				PlaceholderText = _localizer.Globals["ListPage_NoResult"],
 				// Set pagination
 				PageInfo = new PageInfo(
-					PageIndex: Model.PageIndex,
-					PageSize: Model.PageSize,
+					PageIndex: Model.SearchFields.PageNumber,
+					PageSize: Model.SearchFields.PageSize,
 					SearchCount: Model.PageData.Items.Length,
 					SearchHitCount: Model.PageData.TotalRecord,
 					TotalPage: Model.PageData.TotalPage),
@@ -257,7 +257,7 @@
 				Columns = new []
 				{
 					new CellInfo().SetCell(() => _localizer.Fields["Product_ProductId"], new { @class = "only-desktop", width = "10%" }),
-					new CellInfo().SetCell(() => _localizer.Fields["Product_Name"], new { width = "25%" }),
+					new CellInfo().SetCell(() => _localizer.Globals["Title_Information"], new { width = "25%" }),
 					new CellInfo().SetCell(() => _localizer.Fields["Product_Price"], new { @class = "text-center", width = "15%" }),
 					new CellInfo().SetCell(() => _localizer.Fields["Product_Status"], new { @class = "text-center", width = "10%" }),
 					new CellInfo().SetCell(() => _localizer.Fields["Product_Address"], new { @class = "text-center only-desktop", width = "40%" }),
@@ -268,16 +268,16 @@
 					// Column: Product ID
 					new CellInfo().SetCell<ProductModel>(model => model.ProductId),
 					// Column: Product information
-					new CellInfo().SetCell<ProductModel>(async model =>
-						$@"<p class='mb-0'>{model.Name}</p>
-							<div class='d-block only-desktop'>
-								{
-									await ViewUtilities.RenderComponent(
-										_viewComponentHelper ,
-										Constants.MANAGER_COMPONENT_NAME_CREATED_BY_BADGE,
-										new { BranchId = model.BranchId, CreatedBy = model.CreatedBy, DateCreated = model.DateCreated })
-								}
-							</div>"),
+					new CellInfo().SetCell<ProductModel>(async model => $@"
+						<p class='mb-0'>{model.Name}</p>
+						<div class='d-block only-desktop'>
+							{
+								await ViewUtilities.RenderComponent(
+									_viewComponentHelper ,
+									Constants.MANAGER_COMPONENT_NAME_CREATED_BY_BADGE,
+									new { BranchId = model.BranchId, CreatedBy = model.CreatedBy, DateCreated = model.DateCreated })
+							}
+						</div>"),
 					// Column: Product price
 					new CellInfo().SetCell<ProductModel>(
 						model => CommonUtility.GetProductDisplayPrice(model!, Constants.CONFIG_CURRENCY_IN_USE),
@@ -329,8 +329,8 @@
 			targetSelector: '#searchBar',
 			searchUrl: '@Url.RouteUrl(Constants.MODULE_PRODUCT_PRODUCTLIST_NAME)',
 			defaultParameters: {
-				'@Constants.REQUEST_KEY_PAGE_NO': '@Model.PageIndex',
-				'@Constants.REQUEST_KEY_PAGE_SIZE': '@Model.PageSize',
+				'@Constants.REQUEST_KEY_PAGE_NO': '@Model.SearchFields.PageNumber',
+				'@Constants.REQUEST_KEY_PAGE_SIZE': '@Model.SearchFields.PageSize',
 			},
 			searchSettings: [
 				{
@@ -422,15 +422,15 @@
 					requestKey: '@Constants.REQUEST_KEY_PRODUCT_DATE_CHANGED_FROM',
 				},
 				{
-					selector: '#dateCreatedToForSearch',
+					selector: '#dateChangedToForSearch',
 					requestKey: '@Constants.REQUEST_KEY_PRODUCT_DATE_CHANGED_TO',
 				},
 				{
-					selector: '#dateChangedFromForSearch',
+					selector: '#dateCreatedFromForSearch',
 					requestKey: '@Constants.REQUEST_KEY_PRODUCT_DATE_CREATED_FROM',
 				},
 				{
-					selector: '#dateChangedToForSearch',
+					selector: '#dateCreatedToForSearch',
 					requestKey: '@Constants.REQUEST_KEY_PRODUCT_DATE_CREATED_TO',
 				},
 				{
@@ -447,8 +447,8 @@
 			targetSelector: '',
 			searchUrl: '@Url.RouteUrl(Constants.MODULE_PRODUCT_PRODUCTLIST_NAME)',
 			defaultParameters: {
-				'@Constants.REQUEST_KEY_PAGE_NO': '@Model.PageIndex',
-				'@Constants.REQUEST_KEY_PAGE_SIZE': '@Model.PageSize',
+				'@Constants.REQUEST_KEY_PAGE_NO': '@Model.SearchFields.PageNumber',
+				'@Constants.REQUEST_KEY_PAGE_SIZE': '@Model.SearchFields.PageSize',
 				'@Constants.REQUEST_KEY_PRODUCT_DELETE_FLG': '@Constants.DEFAULT_FLG_OFF',
 			},
 			searchSettings: [

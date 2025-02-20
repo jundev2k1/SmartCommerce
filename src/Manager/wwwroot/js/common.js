@@ -220,3 +220,16 @@ const copyImageToClipboard = async function (element) {
 const redirectPage = (url = '/') => {
 	window.location.href = url;
 }
+
+/**
+ * Set request params
+ * @param {string} url Current URL
+ * @param {[string, string][]} params A list of Request parameters
+ */
+const setAndRedirectRequestParams = (url, params = []) => {
+	const urlObj = new URL(url);
+	params.forEach(([key, value]) => {
+		urlObj.searchParams.set(key, value);
+	})
+	redirectPage(urlObj.href);
+}

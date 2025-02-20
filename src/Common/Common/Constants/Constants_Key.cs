@@ -110,5 +110,22 @@ namespace SmartCommerce.Common
 		public const string REQUEST_KEY_PRODUCT_DATE_CHANGED_TO = "dcht";
 		public const string REQUEST_KEY_PRODUCT_DATE_CREATED_FROM = "dcrt";
 		public const string REQUEST_KEY_PRODUCT_DATE_CREATED_TO = "dcrt";
+
+		// Request key: User module
+		public const string REQUEST_KEY_USER_USER_ID = "uid";
+		public const string REQUEST_KEY_USER_STATUS = "status";
+		public const string REQUEST_KEY_USER_EMAIL = "mail";
+		public const string REQUEST_KEY_USER_USERNAME = "uname";
+		public const string REQUEST_KEY_USER_FIRSTNAME = "fname";
+		public const string REQUEST_KEY_USER_LASTNAME = "lname";
+		public const string REQUEST_KEY_USER_ADDRESS1 = "addr1";
+		public const string REQUEST_KEY_USER_ADDRESS2 = "addr2";
+		public const string REQUEST_KEY_USER_ADDRESS3 = "addr3";
+		public const string REQUEST_KEY_USER_ADDRESS4 = "addr4";
+		public const string REQUEST_KEY_USER_DELETE_FLG = "del";
+		public const string REQUEST_KEY_USER_DATE_CHANGED_FROM = "dchf";
+		public const string REQUEST_KEY_USER_DATE_CHANGED_TO = "dcht";
+		public const string REQUEST_KEY_USER_DATE_CREATED_FROM = "dcrt";
+		public const string REQUEST_KEY_USER_DATE_CREATED_TO = "dcrt";
 	}
 }

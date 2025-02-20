@@ -52,19 +52,19 @@
 						<ul class="row g-md-2 gx-1 gy-2">
 							<li class="col-md-4 col-6">
 								<div class="form-group">
-									<label asp-for="SearchFields.UserId" class="form-label">@_localizer.Fields["User_UserId"]</label>
-									<input type="text" asp-for="SearchFields.UserId" class="form-control" id="userIdForSearch" placeholder="@_localizer.Globals["PlaceHolder_SearchWith"] @_localizer.Fields["User_UserId"]...">
+									<label for="userIdForSearch" class="form-label">@_localizer.Fields["User_UserId"]</label>
+									<input type="text" class="form-control" id="userIdForSearch" placeholder="@_localizer.Globals["PlaceHolder_SearchWith"] @_localizer.Fields["User_UserId"]...">
 								</div>
 							</li>
 							<li class="col-md-4 col-6">
 								<div class="form-group">
-									<label asp-for="SearchFields.Email" class="form-label">@_localizer.Fields["User_Email"]</label>
-									<input type="text" asp-for="SearchFields.Email" class="form-control" id="statusForSearch" placeholder="@_localizer.Globals["PlaceHolder_SearchWith"] @_localizer.Fields["User_Email"]...">
+									<label for="emailForSearch" class="form-label">@_localizer.Fields["User_Email"]</label>
+									<input type="text" class="form-control" id="emailForSearch" placeholder="@_localizer.Globals["PlaceHolder_SearchWith"] @_localizer.Fields["User_Email"]...">
 								</div>
 							</li>
 							<li class="col-md-4 col-6">
 								<div class="form-group">
-									<label asp-for="SearchFields.Status" class="form-label">@_localizer.Fields["User_Status"]</label>
+									<label for="statusForSearch" class="form-label">@_localizer.Fields["User_Status"]</label>
 									@Html.DropDownListFor(
 										model => model.SearchFields.Status,
 										Model.InputOption.Status,
@@ -73,27 +73,27 @@
 							</li>
 							<li class="col-md-4 col-12">
 								<div class="form-group">
-									<label asp-for="SearchFields.UserName" class="form-label">@_localizer.Fields["User_Username"]</label>
-									<input type="text" asp-for="SearchFields.UserName" class="form-control" id="statusForSearch" placeholder="@_localizer.Globals["PlaceHolder_SearchWith"] @_localizer.Fields["User_Username"]...">
+									<label for="userNameForSearch" class="form-label">@_localizer.Fields["User_Username"]</label>
+									<input type="text" class="form-control" id="userNameForSearch" placeholder="@_localizer.Globals["PlaceHolder_SearchWith"] @_localizer.Fields["User_Username"]...">
 								</div>
 							</li>
 							<li class="col-md-4 col-12">
 								<div class="form-group">
-									<label asp-for="SearchFields.FirstName" class="form-label">@_localizer.Fields["User_FirstName"]</label>
-									<input asp-for="SearchFields.FirstName" type="text" class="form-control" id="firstNameForSearch" placeholder="@_localizer.Globals["PlaceHolder_SearchWith"] @_localizer.Fields["User_FirstName"]...">
+									<label for="firstNameForSearch" class="form-label">@_localizer.Fields["User_FirstName"]</label>
+									<input type="text" class="form-control" id="firstNameForSearch" placeholder="@_localizer.Globals["PlaceHolder_SearchWith"] @_localizer.Fields["User_FirstName"]...">
 								</div>
 							</li>
 							<li class="col-md-4 col-12">
 								<div class="form-group">
-									<label asp-for="SearchFields.LastName" class="form-label">@_localizer.Fields["User_LastName"]</label>
-									<input asp-for="SearchFields.LastName" type="text" class="form-control" id="lastNameForSearch" placeholder="@_localizer.Globals["PlaceHolder_SearchWith"] @_localizer.Fields["User_LastName"]...">
+									<label for="lastNameForSearch" class="form-label">@_localizer.Fields["User_LastName"]</label>
+									<input type="text" class="form-control" id="lastNameForSearch" placeholder="@_localizer.Globals["PlaceHolder_SearchWith"] @_localizer.Fields["User_LastName"]...">
 								</div>
 							</li>
 							<li class="col-12">
 								<div class="row g-md-2 gx-1 gy-2">
 									<div class="col-md-3 col-12">
-										<label asp-for="SearchFields.Address1" class="form-label">@_localizer.Fields["User_Address1"]</label>
-										<select asp-for="SearchFields.Address1" class="form-select select-search-address-1" id="address1ForSearch">
+										<label for="address1ForSearch" class="form-label">@_localizer.Fields["User_Address1"]</label>
+										<select class="form-select select-search-address-1" id="address1ForSearch">
 											@if (string.IsNullOrEmpty(Model.SearchFields.Address1) == false)
 											{
 												<option value="@Model.SearchFields.Address1" selected></option>
@@ -102,8 +102,8 @@
 									</div>
 									<div class="col-md-3 col-12">
 										<div>
-											<label asp-for="SearchFields.Address2" class="form-label">@_localizer.Fields["User_Address2"]</label>
-											<select asp-for="SearchFields.Address2" class="form-select select-search-address-2" id="address2ForSearch" data-parent-id="address1ForSearch">
+											<label for="address2ForSearch" class="form-label">@_localizer.Fields["User_Address2"]</label>
+											<select class="form-select select-search-address-2" id="address2ForSearch" data-parent-id="address1ForSearch">
 												@if (string.IsNullOrEmpty(Model.SearchFields.Address2) == false)
 												{
 													<option value="@Model.SearchFields.Address2" selected></option>
@@ -112,8 +112,8 @@
 										</div>
 									</div>
 									<div class="col-md-3 col-12">
-										<label asp-for="SearchFields.Address3" class="form-label">@_localizer.Fields["User_Address3"]</label>
-										<select asp-for="SearchFields.Address3" class="form-select select-search-address-3" id="address3ForSearch" data-parent-id="address2ForSearch">
+										<label for="address3ForSearch" class="form-label">@_localizer.Fields["User_Address3"]</label>
+										<select class="form-select select-search-address-3" id="address3ForSearch" data-parent-id="address2ForSearch">
 											@if (string.IsNullOrEmpty(Model.SearchFields.Address3) == false)
 											{
 												<option value="@Model.SearchFields.Address3" selected></option>
@@ -121,8 +121,8 @@
 										</select>
 									</div>
 									<div class="col-md-3 col-12">
-										<label asp-for="SearchFields.Address4" class="form-label">@_localizer.Fields["User_Address4"]</label>
-										<input type="text" asp-for="SearchFields.Address4" class="form-control" id="address4ForSearch" placeholder="@_localizer.Globals["PlaceHolder_SearchWith"] @_localizer.Fields["User_Address"]...">
+										<label for="address4ForSearch" class="form-label">@_localizer.Fields["User_Address4"]</label>
+										<input type="text" class="form-control" id="address4ForSearch" placeholder="@_localizer.Globals["PlaceHolder_SearchWith"] @_localizer.Fields["User_Address"]...">
 									</div>
 								</div>
 							</li>
@@ -130,9 +130,9 @@
 								<div class="form-group">
 									<label class="form-label">@_localizer.Fields["Product_DateCreated"]</label>
 									<div class="d-flex gap-1 align-items-center">
-										<input type="datetime" asp-for="SearchFields.DateCreatedFrom" class="form-control datetime-picker" id="dateCreatedFromForSearch" placeholder="@_localizer.Globals["PlaceHolder_From"]...">
+										<input type="datetime" class="form-control datetime-picker" id="dateCreatedFromForSearch" placeholder="@_localizer.Globals["PlaceHolder_From"]...">
 										~
-										<input type="datetime" asp-for="SearchFields.DateCreatedTo" class="form-control datetime-picker" id="dateCreatedToForSearch" placeholder="@_localizer.Globals["PlaceHolder_To"]...">
+										<input type="datetime" class="form-control datetime-picker" id="dateCreatedToForSearch" placeholder="@_localizer.Globals["PlaceHolder_To"]...">
 									</div>
 								</div>
 							</li>
@@ -140,21 +140,17 @@
 								<div class="form-group">
 									<label class="form-label">@_localizer.Fields["Product_DateChanged"]</label>
 									<div class="d-flex gap-1 align-items-center">
-										<input type="datetime" asp-for="SearchFields.DateChangedFrom" class="form-control datetime-picker" id="dateChangedFromForSearch" placeholder="@_localizer.Globals["PlaceHolder_From"]...">
+										<input type="datetime" class="form-control datetime-picker" id="dateChangedFromForSearch" placeholder="@_localizer.Globals["PlaceHolder_From"]...">
 										~
-										<input type="datetime" asp-for="SearchFields.DateChangedTo" class="form-control datetime-picker" id="dateChangedToForSearch" placeholder="@_localizer.Globals["PlaceHolder_To"]...">
+										<input type="datetime" class="form-control datetime-picker" id="dateChangedToForSearch" placeholder="@_localizer.Globals["PlaceHolder_To"]...">
 									</div>
 								</div>
 							</li>
 						</ul>
-						<div class="hidden-field-area d-none">
-							<input id="totalPage" type="hidden" asp-for="PageData.TotalPage" />
-							<input id="pageIndex" type="hidden" asp-for="PageIndex" />
-						</div>
 						<div id="searchControl" class="d-flex justify-content-md-end mt-4">
 							<div class="group-control w-auto row g-md-2 gx-1 gy-2">
 								<div class="form-group col-md-auto col-12">
-									<select asp-for="SearchFields.DelFlg" id="delFlgSearchInput" class="form-select w-auto" aria-label="DeleteFlg">
+									<select id="delFlgSearchInput" class="form-select w-auto" aria-label="DeleteFlg">
 										<option selected value="false">@_localizer.ValueTexts["ValTxt_DelFlg_Normal"]</option>
 										<option value="true">@_localizer.ValueTexts["ValTxt_DelFlg_Deleted"]</option>
 									</select>
@@ -182,93 +178,157 @@
 <section id="bodyPageLoad" class="site-card mt-2">
 	<div class="row">
 		<div class="col-12">
-			<table class="site-table site-table-hover site-border site-rounded-layout">
-				<thead>
-					<tr>
-						<th scope="col" width="10%">@_localizer.Globals["UserList_Title_UserId"]</th>
-						<th scope="col" width="25%">@_localizer.Globals["UserList_Title_Name"]</th>
-						<th class="only-desktop text-center" scope="col">@_localizer.Globals["UserList_Title_Contact"]</th>
-						<th class="text-center" scope="col" width="10%">@_localizer.Globals["UserList_Title_Sex"]</th>
-						<th class="text-center only-desktop" scope="col" width="10%">@_localizer.Globals["UserList_Title_Status"]</th>
-					</tr>
-				</thead>
-				<tbody>
-					@foreach (var item in Model.PageData.Items)
-					{
-						<tr>
-							<td>@item.UserId</td>
-							<td>
-								<a asp-route="@Constants.MODULE_USER_USERDETAIL_NAME" asp-route-id="@item.UserId">
-									@item.FullName
-								</a>
-								<div class="d-block only-desktop">
-									@await Component.InvokeAsync(
-										Constants.MANAGER_COMPONENT_NAME_CREATED_BY_BADGE,
-										new { BranchId = item.BranchId, CreatedBy = item.CreatedBy, DateCreated = item.DateCreated })
-								</div>
-							</td>
-							<td>
-								<p class="mb-1">@item.Email</p>
-								<p>@item.PhoneNumber</p>
-							</td>
-							<td class="text-center">@item.Sex</td>
-							<td class="text-center">@item.Status</td>
-						</tr>
-					}
-				</tbody>
-				<tfoot>
-					<tr>
-						<td colspan="5">
-							<div class="d-flex justify-content-between align-items-center">
-								<p class="mb-0">
-									@(_localizer.Globals["ListPage_TotalResult"]): @(Constants.DEFAULT_PAGE_SIZE * (Model.PageIndex - 1) + Model.PageData.Items.Length)/@(Model.PageData.TotalRecord)
-								</p>
-								<nav aria-label="Page navigation">
-									<ul class="pagination">
-										<li class="page-item">
-											<a class="page-link @(Model.PageIndex == 1 ? "disabled" : string.Empty)" onclick="handlePaging(event, @CommonUtility.GetLimitPageNo(Model.PageIndex, Model.PageData.TotalPage))" aria-label="Previous">
-												<span aria-hidden="true">&laquo;</span>
-											</a>
-										</li>
-										@for (var index = 1; index <= Model.PageData.TotalPage; index++)
-										{
-											<li class="page-item">
-												<a class="page-link @(Model.PageIndex == index ? "disabled" : string.Empty)" onclick="handlePaging(event, @index)">@index</a>
-											</li>
-										}
-										<li class="page-item">
-											<a class="page-link @(Model.PageIndex == Model.PageData.TotalPage ? "disabled" : string.Empty)" onclick="handlePaging(event, @CommonUtility.GetLimitPageNo(Model.PageIndex, Model.PageData.TotalPage, isPrevious: false))" asp- aria-label="Next">
-												<span aria-hidden="true">&raquo;</span>
-											</a>
-										</li>
-									</ul>
-								</nav>
-							</div>
-						</td>
-					</tr>
-				</tfoot>
-			</table>
+			@await Component.InvokeAsync(Constants.MANAGER_COMPONENT_NAME_DYNAMIC_LIST, new DynamicListViewModel
+			{
+				DataSource = Model.PageData.Items,
+				PlaceholderText = _localizer.Globals["ListPage_NoResult"],
+				// Set pagination
+				PageInfo = new PageInfo(
+					PageIndex: Model.SearchFields.PageNumber,
+					PageSize: Model.SearchFields.PageSize,
+					SearchCount: Model.PageData.Items.Length,
+					SearchHitCount: Model.PageData.TotalRecord,
+					TotalPage: Model.PageData.TotalPage),
+				RowAttributes = new()
+				{
+					{ "style", model => $"cursor: pointer;" }
+				},
+				// Set header rendering
+				Columns = new[]
+				{
+					new CellInfo().SetCell(() => _localizer.Fields["User_UserId"], new { width = "10%" }),
+					new CellInfo().SetCell(() => _localizer.Globals["Title_Information"], new { width = "25%" }),
+					new CellInfo().SetCell(() => _localizer.Globals["Title_Contact"], new { @class = "text-center only-desktop", width = "45%" }),
+					new CellInfo().SetCell(() => _localizer.Fields["User_Sex"], new { @class = "text-center", width = "10%" }),
+					new CellInfo().SetCell(() => _localizer.Fields["User_Status"], new { @class = "text-center only-desktop", width = "10%" }),
+				},
+				// Set body rendering
+				Cells = new[]
+				{
+					// Column: User ID
+					new CellInfo().SetCell<UserModel>(model => model.UserId),
+					// Column: User information
+					new CellInfo().SetCell<UserModel>(async model =>
+						$@"<p class='mb-0'>{model.UserName}</p>
+							<div class='d-block only-desktop'>
+							{
+								await ViewUtilities.RenderComponent(
+									_viewComponentHelper ,
+									Constants.MANAGER_COMPONENT_NAME_CREATED_BY_BADGE,
+									new { BranchId = model.BranchId, CreatedBy = model.CreatedBy, DateCreated = model.DateCreated })
+							}
+						</div>"),
+					// Column: User contact information
+					new CellInfo().SetCell<UserModel>(model => $@"
+						<p class='mb-1'>{model.Email}</p>
+						<p class='mb-0'>{model.PhoneNumber}</p>"),
+					// Column: User sex
+					new CellInfo().SetCell<UserModel>(model => model.Sex,
+						attribute: new { @class="text-center" }),
+					// Column: User status
+					new CellInfo().SetCell<UserModel>(
+						model => model.Status,
+						attribute: new { @class="text-center" }),
+				}
+			})
 		</div>
 	</div>
 </section>
 @section ViewScript {
-	<script>
-		const handlePaging = (event, page = 1) => {
-			event.preventDefault();
+	<script type="module">
+		import { SearchFormHandler } from "@Url.Content("~/js/common/form/index.js")";
 
-			const pageIndexInput = document.querySelector("#pageIndex");
-			pageIndexInput.value = page;
-			const searchForm = document.getElementsByName("searchForm")[0];
-			searchForm.submit();
-		}
-
-		const resetSearchForm = (formId) => {
-			if (!formId) return;
-
-			const formTarget = $(`#${formId}`);
-			if (!formTarget) return;
-
-			formTarget.find('select').val('').change();
+		// Set search advance setting
+		const searchAdvanceSetting = {
+			btnSearchSelector: '#btnSubmitAdvanced',
+			targetSelector: '#searchBar',
+			searchUrl: '@Url.RouteUrl(Constants.MODULE_USER_USERLIST_NAME)',
+			defaultParameters: {
+				'@Constants.REQUEST_KEY_PAGE_NO': '@Model.SearchFields.PageNumber',
+				'@Constants.REQUEST_KEY_PAGE_SIZE': '@Model.SearchFields.PageSize',
+			},
+			searchSettings: [
+				{
+					selector: '#userIdForSearch',
+					requestKey: '@Constants.REQUEST_KEY_USER_USER_ID',
+				},
+				{
+					selector: '#emailForSearch',
+					requestKey: '@Constants.REQUEST_KEY_USER_EMAIL',
+				},
+				{
+					selector: '#statusForSearch',
+					requestKey: '@Constants.REQUEST_KEY_USER_STATUS',
+				},
+				{
+					selector: '#userNameForSearch',
+					requestKey: '@Constants.REQUEST_KEY_USER_USERNAME',
+				},
+				{
+					selector: '#firstNameForSearch',
+					requestKey: '@Constants.REQUEST_KEY_USER_FIRSTNAME',
+				},
+				{
+					selector: '#lastNameForSearch',
+					requestKey: '@Constants.REQUEST_KEY_USER_LASTNAME',
+				},
+				{
+					selector: '#address1ForSearch',
+					requestKey: '@Constants.REQUEST_KEY_USER_ADDRESS1',
+				},
+				{
+					selector: '#address2ForSearch',
+					requestKey: '@Constants.REQUEST_KEY_USER_ADDRESS2',
+				},
+				{
+					selector: '#address3ForSearch',
+					requestKey: '@Constants.REQUEST_KEY_USER_ADDRESS3',
+				},
+				{
+					selector: '#address4ForSearch',
+					requestKey: '@Constants.REQUEST_KEY_USER_ADDRESS4',
+				},
+				{
+					selector: '#dateChangedFromForSearch',
+					requestKey: '@Constants.REQUEST_KEY_USER_DATE_CHANGED_FROM',
+				},
+				{
+					selector: '#dateChangedToForSearch',
+					requestKey: '@Constants.REQUEST_KEY_USER_DATE_CHANGED_TO',
+				},
+				{
+					selector: '#dateCreatedFromForSearch',
+					requestKey: '@Constants.REQUEST_KEY_USER_DATE_CREATED_FROM',
+				},
+				{
+					selector: '#dateCreatedToForSearch',
+					requestKey: '@Constants.REQUEST_KEY_USER_DATE_CREATED_TO',
+				},
+				{
+					selector: '#delFlgForSearch',
+					requestKey: '@Constants.REQUEST_KEY_USER_DELETE_FLG',
+				},
+			],
 		};
+		StoreWindowLoadCallback.push(() => new SearchFormHandler(searchAdvanceSetting).init());
+
+		// Set search with keyword setting
+		const searchKeywordSetting = {
+			btnSearchSelector: '#searchBar .search-button',
+			targetSelector: '',
+			searchUrl: '@Url.RouteUrl(Constants.MODULE_USER_USERLIST_NAME)',
+			defaultParameters: {
+				'@Constants.REQUEST_KEY_PAGE_NO': '@Model.SearchFields.PageNumber',
+				'@Constants.REQUEST_KEY_PAGE_SIZE': '@Model.SearchFields.PageSize',
+				'@Constants.REQUEST_KEY_USER_DELETE_FLG': '@Constants.DEFAULT_FLG_OFF',
+			},
+			searchSettings: [
+				{
+					selector: '#searchBar .search-input',
+					requestKey: '@Constants.REQUEST_KEY_KEYWORD',
+				},
+			]
+		};
+		StoreWindowLoadCallback.push(() => new SearchFormHandler(searchKeywordSetting).init());
 	</script>
 }
