@@ -7,6 +7,30 @@ namespace SmartCommerce.Manager.ViewModels
 	/// </summary>
 	public sealed class PaginationComponentViewModel
 	{
+		/// <summary>
+		/// Get limit pagination number
+		/// </summary>
+		/// <param name="isEnd">Is end limit number?</param>
+		/// <returns>Limit number</returns>
+		private int GetLimitPaginationNumber(bool isEnd = false)
+		{
+			// Returns valid limit number if the page number is out of limit
+			if (this.IsOutOfLimit) return isEnd ? this.TotalPage : 1;
+
+			if (isEnd)
+			{
+				var endPageNo = this.PageIndex + 3;
+				return endPageNo <= this.TotalPage ? endPageNo : this.TotalPage;
+			}
+			else
+			{
+				var startPageNo = this.PageIndex - 3;
+				return startPageNo > 0 ? startPageNo : 1;
+			}
+		}
+
+		public bool IsOutOfLimit => (this.SearchCount == 0) && (this.PageIndex > this.TotalPage);
+
 		/// <summary>Request parameters</summary>
 		public Dictionary<string, string> RequestParameters { get; set; } = new Dictionary<string, string>();
 
@@ -23,11 +47,15 @@ namespace SmartCommerce.Manager.ViewModels
 		public int SearchHitCount { get; set; }
 
 		/// <summary>Total number of possible pages</summary>
-		public int TotalPage => MathUtilitiy.DivRoundUp(this.SearchHitCount, this.PageSize);
+		public int TotalPage { get; set; }
 
 		/// <summary>Page items information</summary>
 		public string PaginationItemInfo
 			=> $"{(this.PageSize * (this.PageIndex - 1)) + this.SearchCount}/{this.SearchHitCount}";
+
+		public int StartPage => GetLimitPaginationNumber();
+
+		public int EndPage => GetLimitPaginationNumber(true);
 
 		/// <summary>Method to create redirect page</summary>
 		public Func<int, string>? CreatePaginationUrl = null;

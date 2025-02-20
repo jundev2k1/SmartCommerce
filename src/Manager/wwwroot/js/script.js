@@ -560,3 +560,35 @@ const uploadImage = (element) => {
 		},
 	};
 };
+
+
+/**
+ * Check number input value
+ * @param {HTMLInputElement} element Input element
+ */
+const checkNumberInputValue = (element) => {
+	const maxLength = Number(element.dataset['maxLength'] || 1);
+
+	element.addEventListener('input', (event) => {
+		const _this = event.target;
+		_this.value = _this.value.replace(/[^0-9.]/g, '');
+
+
+		if (_this.value.length > maxLength) {
+			_this.value = _this.value.slice(0, maxLength);
+		}
+	});
+
+	element.addEventListener("paste", (event) => {
+		event.preventDefault();
+		const _this = event.target;
+
+		const pasteData = (event.clipboardData || window.clipboardData).getData("text");
+		const sanitizedData = pasteData.replace(/[^0-9.]/g, '').slice(0, maxLength);
+		document.execCommand("insertText", false, sanitizedData);
+	});
+}
+StoreWindowLoadCallback.push(() => {
+	const targetNumberInputs = document.querySelectorAll('input[type="number"].number-input');
+	targetNumberInputs.forEach(elem => checkNumberInputValue(elem));
+});

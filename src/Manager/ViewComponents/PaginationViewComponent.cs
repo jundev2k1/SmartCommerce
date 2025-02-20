@@ -11,6 +11,7 @@ namespace SmartCommerce.Manager.ViewComponents
 			int pageSize,
 			int searchCount,
 			int searchHitCount,
+			int totalPage,
 			Func<int, string>? createUrl = null)
 		{
 			// Get request parameters
@@ -36,6 +37,7 @@ namespace SmartCommerce.Manager.ViewComponents
 				PageSize = pageSize,
 				SearchCount = searchCount,
 				SearchHitCount = searchHitCount,
+				TotalPage = totalPage,
 				RequestParameters = requestParams,
 				CreatePaginationUrl = createUrl,
 			};

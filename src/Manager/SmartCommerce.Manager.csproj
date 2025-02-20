@@ -4,6 +4,8 @@
     <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>a84b8408-7b2e-4535-a414-b5f90bb2129e</UserSecretsId>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
   </PropertyGroup>
 
   <ItemGroup>
@@ -52,6 +54,7 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.19.6" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.2" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="QRCoder" Version="1.5.1" />
@@ -116,7 +119,6 @@
   <ItemGroup>
     <Folder Include="Scripts\components\" />
     <Folder Include="Scripts\https\services\product\" />
-    <Folder Include="Scripts\models\" />
     <Folder Include="Scripts\pages\auth\otp-auth\" />
     <Folder Include="Scripts\pages\auth\sign-in\" />
   </ItemGroup>

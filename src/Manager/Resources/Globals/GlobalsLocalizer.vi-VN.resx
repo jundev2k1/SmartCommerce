@@ -186,6 +186,9 @@
   <data name="Btn_Send" xml:space="preserve">
     <value>Gửi đi</value>
   </data>
+  <data name="ListPage_DisplaySearchCount" xml:space="preserve">
+    <value>Hiển thị</value>
+  </data>
   <data name="ListPage_NoResult" xml:space="preserve">
     <value>Không tìm thấy kết quả</value>
   </data>
@@ -381,8 +384,14 @@
   <data name="Title_Address" xml:space="preserve">
     <value>Địa chỉ</value>
   </data>
+  <data name="Title_Contact" xml:space="preserve">
+    <value>Liên hệ</value>
+  </data>
   <data name="Title_FormContact" xml:space="preserve">
     <value>Liên Hệ Quản Trị Viên</value>
+  </data>
+  <data name="Title_Information" xml:space="preserve">
+    <value>Thông tin</value>
   </data>
   <data name="Title_Name" xml:space="preserve">
     <value>Tên</value>
@@ -419,20 +428,5 @@
   </data>
   <data name="Title_Tel" xml:space="preserve">
     <value>Số Điện thoại</value>
-  </data>
-  <data name="UserList_Title_Contact" xml:space="preserve">
-    <value>Thông tin liên hệ</value>
-  </data>
-  <data name="UserList_Title_Name" xml:space="preserve">
-    <value>Tên người dùng</value>
-  </data>
-  <data name="UserList_Title_Sex" xml:space="preserve">
-    <value>Giới tính</value>
-  </data>
-  <data name="UserList_Title_Status" xml:space="preserve">
-    <value>Trạng thái</value>
-  </data>
-  <data name="UserList_Title_UserId" xml:space="preserve">
-    <value>ID</value>
   </data>
 </root>

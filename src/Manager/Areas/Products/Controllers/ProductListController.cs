@@ -2,6 +2,7 @@
 
 using SmartCommerce.Manager.Areas.Products.Controllers;
 using SmartCommerce.Manager.Areas.Products.ViewModels;
+using System.Collections.Generic;
 
 namespace SmartCommerce.Manager.Areas.Product.Controllers
 {
@@ -21,7 +22,7 @@ namespace SmartCommerce.Manager.Areas.Product.Controllers
 		[HttpGet]
 		[Authorization(Permission.CanReadListProduct)]
 		[Route(Constants.MODULE_PRODUCT_PRODUCTLIST_PATH, Name = Constants.MODULE_PRODUCT_PRODUCTLIST_NAME)]
-		public async Task<IActionResult> Index(int page = 1)
+		public async Task<IActionResult> Index()
 		{
 			var condition = GetFiltersByRequest();
 			var productList = await _serviceFacade.Products.GetByCriteriaAsync(
@@ -30,34 +31,11 @@ namespace SmartCommerce.Manager.Areas.Product.Controllers
 				condition.PageSize);
 			var data = new ProductListViewModel
 			{
+				SearchFields = condition,
 				PageData = productList,
-				PageIndex = page,
 				InputOption = GetInitDropdownListItems(new ProductModel()),
 			};
 			return View(data);
-		}
-
-		[HttpPost]
-		[Authorization(Permission.CanReadListProduct)]
-		[Route(Constants.MODULE_PRODUCT_PRODUCTLIST_PATH)]
-		public async Task<IActionResult> Index(ProductListViewModel viewModel)
-		{
-			// Set default search data
-			var searchParams = viewModel.SearchFields;
-			searchParams.BranchId = this.OperatorBranchId;
-
-			// Set initial value for dropdown list
-			viewModel.InputOption = GetInitDropdownListItems(viewModel.SearchFields.MapSearchToModel());
-
-			// Check page index out of range data collection
-			if (viewModel.PageData.TotalPage < viewModel.PageIndex)
-				viewModel.PageIndex = 1;
-
-			viewModel.PageData = await _serviceFacade.Products.GetByCriteriaAsync(
-				searchParams,
-				viewModel.PageIndex,
-				viewModel.PageSize);
-			return View(viewModel);
 		}
 
 		/// <summary>
@@ -68,7 +46,7 @@ namespace SmartCommerce.Manager.Areas.Product.Controllers
 		{
 			var parameter = new ProductFilterModel()
 			{
-				Keywords = GetRequestParam<string>(Constants.REQUEST_KEY_PRODUCT_SEARCH_WORD, string.Empty),
+				Keywords = GetRequestParam<string>(Constants.REQUEST_KEY_KEYWORD, string.Empty),
 				BranchId = this.OperatorBranchId,
 				ProductId = GetRequestParam<string>(Constants.REQUEST_KEY_PRODUCT_PRODUCT_ID, string.Empty),
 				ProductName = GetRequestParam<string>(Constants.REQUEST_KEY_PRODUCT_PRODUCT_NAME, string.Empty),
@@ -95,6 +73,11 @@ namespace SmartCommerce.Manager.Areas.Product.Controllers
 				PageNumber = GetRequestParam<int>(Constants.REQUEST_KEY_PAGE_NO, 1),
 				PageSize = GetRequestParam<int>(Constants.REQUEST_KEY_PAGE_SIZE, Constants.DEFAULT_PAGE_SIZE),
 			};
+
+			// Reset value if limit is exceeded
+			if (parameter.PageSize <= 0) parameter.PageSize = Constants.DEFAULT_PAGE_SIZE;
+			if (parameter.PageNumber <= 0) parameter.PageNumber = 1;
+
 			return parameter;
 		}
 	}

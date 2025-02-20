@@ -42,24 +42,21 @@
 				</tr>
 			}
 		</tbody>
-
-		@if (Model.HasData)
-		{
-			<tfoot>
-				<tr>
-					<td colspan="5">
-						@await Component.InvokeAsync(
-							Constants.MANAGER_COMPONENT_NAME_PAGINATION,
-							new
-							{
-								pageIndex = Model.PageInfo.PageIndex,
-								pageSize = Model.PageInfo.PageSize,
-								searchCount = Model.PageInfo.SearchCount,
-								searchHitCount = Model.PageInfo.SearchHitCount,
-							})
-					</td>
-				</tr>
-			</tfoot>
-		}
+		<tfoot>
+			<tr>
+				<td colspan="5">
+					@await Component.InvokeAsync(
+						Constants.MANAGER_COMPONENT_NAME_PAGINATION,
+						new
+						{
+							pageIndex = Model.PageInfo.PageIndex,
+							pageSize = Model.PageInfo.PageSize,
+							searchCount = Model.PageInfo.SearchCount,
+							searchHitCount = Model.PageInfo.SearchHitCount,
+							totalPage = Model.PageInfo.TotalPage,
+						})
+				</td>
+			</tr>
+		</tfoot>
 	</table>
 }
