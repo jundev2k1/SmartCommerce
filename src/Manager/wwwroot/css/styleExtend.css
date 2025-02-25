@@ -1,0 +1,252 @@
+﻿/* Copyright (c) 2024 - Jun Dev. All rights reserved */
+
+@import 'baseStyle.css';
+@import 'animation.css';
+@import 'component/index.css';
+
+/* ====================================== */
+/*         Responsive: Desktop            */
+/* ====================================== */
+@media (min-width: 768px) {
+	/*#region Css utility: Common class */
+	.only-mobile {
+		display: none !important;
+	}
+	/*#endregion */
+
+	/*#region Css utility: Flex */
+	.flex-wrap {
+		flex-wrap: wrap;
+	}
+
+	.flex-nowrap {
+		flex-wrap: nowrap;
+	}
+	/*#endregion */
+}
+
+/* ====================================== */
+/*         Responsive: Smartphone         */
+/* ====================================== */
+@media (max-width: 768px) {
+	/*#region Overwrite setting */
+	body {
+		font-size: .875rem;
+	}
+
+	.form-control,
+	.form-select {
+		font-size: 0.875rem;
+	}
+
+	.btn {
+		font-size: 0.875rem;
+	}
+	/*#endregion */
+
+	/*#region Css utility: Common class */
+	.only-desktop {
+		display: none !important;
+	}
+	/*#endregion */
+
+	/*#region Css utility: Display */
+	.d-sm-none {
+		display: none;
+	}
+
+	.d-sm-block {
+		display: block;
+	}
+
+	.d-sm-flex {
+		display: flex;
+	}
+	/*#endregion */
+
+	/*#region Css utility: Flex */
+	.flex-sm-wrap {
+		flex-wrap: wrap;
+	}
+
+	.flex-sm-nowrap {
+		flex-wrap: nowrap;
+	}
+
+	.align-items-sm-center {
+		align-items: center !important;
+	}
+
+	.justify-content-sm-center {
+		justify-content: center !important;
+	}
+
+	.justify-content-sm-between {
+		justify-content: space-between !important;
+	}
+	/*#endregion */
+
+	/*#region Css utility: Margin */
+	/*@media (max-width: var(--site-sm-max-size)) {
+	.mx-sm-1 {
+		margin-left: .25rem !important;
+		margin-right: .25rem !important;
+	}
+
+	.mx-sm-2 {
+		margin-left: .5rem !important;
+		margin-right: .5rem !important;
+	}
+
+	.mx-sm-3 {
+		margin-left: 1rem !important;
+		margin-right: 1rem !important;
+	}
+
+	.my-sm-1 {
+		margin-top: .25rem !important;
+		margin-bottom: .25rem !important;
+	}
+
+	.my-sm-2 {
+		margin-top: .5rem !important;
+		margin-bottom: .5rem !important;
+	}
+
+	.my-sm-3 {
+		margin-top: 1rem !important;
+		margin-bottom: 1rem !important;
+	}
+
+	.mt-sm-1 {
+		margin-top: .25rem !important;
+	}
+
+	.mt-sm-2 {
+		margin-top: .5rem !important;
+	}
+
+	.mt-sm-3 {
+		margin-top: 1rem !important;
+	}
+
+	.mb-sm-1 {
+		margin-bottom: .25rem !important;
+	}
+
+	.mb-sm-2 {
+		margin-bottom: .5rem !important;
+	}
+
+	.mb-sm-3 {
+		margin-bottom: 1rem !important;
+	}
+
+	.ms-sm-1 {
+		margin-left: .25rem !important;
+	}
+
+	.ms-sm-2 {
+		margin-left: .5rem !important;
+	}
+
+	.ms-sm-3 {
+		margin-left: 1rem !important;
+	}
+
+	.me-sm-1 {
+		margin-right: .25rem !important;
+	}
+
+	.me-sm-2 {
+		margin-right: .5rem !important;
+	}
+
+	.me-sm-3 {
+		margin-right: 1rem !important;
+	}
+}*/
+	/*#endregion */
+
+	/*#region Css utility: Padding */
+	/*@media (max-width: var(--site-sm-max-size)) {
+	.px-sm-1 {
+		padding-left: .25rem !important;
+		padding-right: .25rem !important;
+	}
+
+	.px-sm-2 {
+		padding-left: .5rem !important;
+		padding-right: .5rem !important;
+	}
+
+	.px-sm-3 {
+		padding-left: 1rem !important;
+		padding-right: 1rem !important;
+	}
+
+	.py-sm-1 {
+		padding-top: .25rem !important;
+		padding-bottom: .25rem !important;
+	}
+
+	.py-sm-2 {
+		padding-top: .5rem !important;
+		padding-bottom: .5rem !important;
+	}
+
+	.py-sm-3 {
+		padding-top: 1rem !important;
+		padding-bottom: 1rem !important;
+	}
+
+	.pt-sm-1 {
+		padding-top: .25rem !important;
+	}
+
+	.pt-sm-2 {
+		padding-top: .5rem !important;
+	}
+
+	.pt-sm-3 {
+		padding-top: 1rem !important;
+	}
+
+	.pb-sm-1 {
+		padding-bottom: .25rem !important;
+	}
+
+	.pb-sm-2 {
+		padding-bottom: .5rem !important;
+	}
+
+	.pb-sm-3 {
+		padding-bottom: 1rem !important;
+	}
+
+	.ps-sm-1 {
+		padding-left: .25rem !important;
+	}
+
+	.ps-sm-2 {
+		padding-left: .5rem !important;
+	}
+
+	.ps-sm-3 {
+		padding-left: 1rem !important;
+	}
+
+	.pe-sm-1 {
+		padding-right: .25rem !important;
+	}
+
+	.pe-sm-2 {
+		padding-right: .5rem !important;
+	}
+
+	.pe-sm-3 {
+		padding-right: 1rem !important;
+	}
+}*/
+	/*#endregion */
+}

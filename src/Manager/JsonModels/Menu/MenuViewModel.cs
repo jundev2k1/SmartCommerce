@@ -1,6 +1,6 @@
 ﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
 
-namespace SmartCommerce.Manager.ViewModels
+namespace SmartCommerce.Manager.JsonModels
 {
 	public sealed class MenuViewModel
 	{
@@ -26,7 +26,7 @@ namespace SmartCommerce.Manager.ViewModels
 		public string Url { get; set; } = string.Empty;
 
 		[JsonProperty("items")]
-		public List<SubMenuViewModel> Items { get; set; } = new List<SubMenuViewModel>();
+		public List<SubMenuViewModel> Items { get; set; } = new ();
 	}
 
 	public sealed class SubMenuViewModel

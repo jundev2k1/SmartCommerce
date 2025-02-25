@@ -23,8 +23,7 @@ namespace SmartCommerce.Manager.ViewComponents
 			{
 				createUrl = (pageNo) =>
 				{
-					var currentUrl = $"{Request.Scheme}://{Request.Host}{Request.Path}{Request.QueryString}";
-					var urlCreator = new UrlCreator(currentUrl);
+					var urlCreator = new UrlCreator(this.RequestUrl);
 					urlCreator.AddParam(Constants.REQUEST_KEY_PAGE_NO, pageNo.ToString());
 					return urlCreator.CreateUrl();
 				};

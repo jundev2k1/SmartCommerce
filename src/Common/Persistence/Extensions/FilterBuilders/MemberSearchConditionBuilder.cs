@@ -3,7 +3,7 @@
 #pragma warning disable CS0618
 namespace SmartCommerce.Persistence.Extensions.FilterBuilders
 {
-	public partial class FilterConditionBuilder
+	public static partial class FilterConditionBuilder
 	{
 		public static Expression<Func<Member, bool>> GetMemberFilters(MemberFilterModel searchDto)
 		{

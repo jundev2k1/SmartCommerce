@@ -161,7 +161,7 @@ namespace SmartCommerce.Manager.Controllers
 		/// <param name="errorMessage">Error message</param>
 		/// <param name="errorCode">Error code</param>
 		protected IActionResult RedirectToErrorPage(
-			string errorMessage,
+			string errorMessage = "",
 			ErrorCodeEnum errorCode = ErrorCodeEnum.SystemError)
 		{
 			_sessionManager.SystemPageErrorCode = errorCode.GetStringValue();

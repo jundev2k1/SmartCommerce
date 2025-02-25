@@ -2,7 +2,7 @@
 
 namespace SmartCommerce.Manager.ViewModels
 {
-	public sealed class LoginViewModel
+	public sealed class LoginPageViewModel
 	{
 		public string LoginID { get; set; } = string.Empty;
 

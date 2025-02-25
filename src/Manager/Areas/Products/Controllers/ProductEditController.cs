@@ -27,9 +27,9 @@ namespace SmartCommerce.Manager.Areas.Product.Controllers
 		[HttpGet]
 		[Authorization(Permission.CanEditProduct)]
 		[Route(Constants.MODULE_PRODUCT_PRODUCTEDIT_PATH, Name = Constants.MODULE_PRODUCT_PRODUCTEDIT_NAME)]
-		public IActionResult Index(string id)
+		public async Task<IActionResult> Index(string id)
 		{
-			var product = _serviceFacade.Products.Get(this.OperatorBranchId, id);
+			var product = await _serviceFacade.Products.Get(this.OperatorBranchId, id);
 			if (product == null)
 			{
 				return RedirectToErrorPage(
@@ -55,7 +55,7 @@ namespace SmartCommerce.Manager.Areas.Product.Controllers
 			// Set default value for form input
 			pageData.ProductId = id;
 			pageData.TrimStringInput();
-			SetDataForUpdate(ref pageData);
+			await SetDataForUpdate(pageData);
 
 			// Set initial value for dropdown list
 			viewModel.InputOptions = GetInitDropdownListItems(pageData);
@@ -79,12 +79,13 @@ namespace SmartCommerce.Manager.Areas.Product.Controllers
 		/// Set data for update
 		/// </summary>
 		/// <param name="input">Input</param>
-		private void SetDataForUpdate(ref ProductModel input)
+		private async Task SetDataForUpdate(ProductModel input)
 		{
-			var product = _serviceFacade.Products.Get(this.OperatorBranchId, input.ProductId);
+			var product = await _serviceFacade.Products.Get(this.OperatorBranchId, input.ProductId);
 			if (product == null) return;
 
-			var productImages = _serviceFacade.Products.UpdateNewestProductImages(product.BranchId, product.ProductId);
+			var productImages = await _serviceFacade.Products
+				.UpdateNewestProductImages(product.BranchId, product.ProductId);
 			if (productImages == null) throw new NotExistInDBException();
 
 			input.BranchId = this.OperatorBranchId;
@@ -99,15 +100,15 @@ namespace SmartCommerce.Manager.Areas.Product.Controllers
 		[HttpPost]
 		[Authorization(Permission.CanEditProduct)]
 		[Route(Constants.MODULE_PRODUCT_PRODUCTEDIT_DESCRIPTION_PATH, Name = Constants.MODULE_PRODUCT_PRODUCTEDIT_DESCRIPTION_NAME)]
-		public bool UpdateDescription([FromBody] Hashtable data)
+		public async Task<bool> UpdateDescription([FromBody] Hashtable data)
 		{
 			var id = data["id"].ToStringOrEmpty();
 			var description = data["description"].ToStringOrEmpty();
-			var product = _serviceFacade.Products.Get(this.OperatorBranchId, id);
+			var product = await _serviceFacade.Products.Get(this.OperatorBranchId, id);
 			if (product == null) return false;
 
 			product.Description = description;
-			return _serviceFacade.Products.UpdateDescription(product);
+			return await _serviceFacade.Products.UpdateDescription(product);
 		}
 	}
 }

@@ -47,7 +47,7 @@ namespace SmartCommerce.Manager.Areas.Roles.Controllers
 				option => option.IncludeRuleSets("Create"));
 			if (validate.Errors.Any())
 			{
-				var response = new ResponseResultViewModel<string, string>()
+				var response = new ResponseResultModel<string, string>()
 				{
 					IsSuccess = false,
 					Message = string.Empty

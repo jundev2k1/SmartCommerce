@@ -1,8 +1,5 @@
 ﻿@* // Copyright (c) 2024 - Jun Dev. All rights reserved *@
 
-@{
-	var componentScript = Url.Content(Constants.ERP_FILE_PATH_JS_COMPONENT_SEARCH_INPUT);
-}
 @model SearchInputViewModel
 
 <div class="search-form @Model.ClassName">
@@ -11,5 +8,5 @@
 		<i class="fa-light fa-magnifying-glass"></i>
 		@_localizer.Globals["Btn_Search"]
 	</button>
-	<script src="@componentScript"></script>
+	<script src="@Url.Content(Constants.ERP_FILE_PATH_JS_COMPONENT_SEARCH_INPUT)"></script>
 </div>

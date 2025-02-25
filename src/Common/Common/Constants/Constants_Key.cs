@@ -80,6 +80,8 @@ namespace SmartCommerce.Common
 		public const string REQUEST_KEY_PAGE_NO = "page";
 		public const string REQUEST_KEY_PAGE_SIZE = "cnt";
 		public const string REQUEST_KEY_KEYWORD = "kwrd";
+		public const string REQUEST_KEY_SORT_BY = "sort";
+		public const string REQUEST_KEY_SORT_DIRECTION = "order";
 
 		// Request key: Product module
 		public const string REQUEST_KEY_PRODUCT_BRAND_ID = "bid";

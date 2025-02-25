@@ -1,7 +1,5 @@
 ﻿// Copyright (c) 2025 - Jun Dev. All rights reserved
 
-using System.Reflection;
-
 namespace SmartCommerce.Manager.ViewModels
 {
 	public sealed class DynamicListViewModel
@@ -13,18 +11,22 @@ namespace SmartCommerce.Manager.ViewModels
 		/// <returns>String as row attribute</returns>
 		public string GetRowAttribute(object rowData)
 		{
-			var srtAttribute = this.RowAttributes
+			var srtAttribute = RowAttributes
 				.Select(kvp => $"{kvp.Key}=\"{kvp.Value(rowData)}\"")
 				.JoinToString(" ");
 			return srtAttribute;
 		}
 
+		/// <summary>A collection of data per row</summary>
 		public IEnumerable<object> DataSource { get; set; } = Array.Empty<object>();
 
+		/// <summary>A collection of column to display</summary>
 		public CellInfo[] Columns { get; set; } = Array.Empty<CellInfo>();
 
+		/// <summary>A collection of cells to display</summary>
 		public CellInfo[] Cells { get; set; } = Array.Empty<CellInfo>();
 
+		/// <summary>Row attributes</summary>
 		public Dictionary<string, Func<object?, string>> RowAttributes { get; set; } = new();
 
 		/// <summary>Returns false if there is no item in <see cref="DataSource"/></summary>
@@ -38,45 +40,63 @@ namespace SmartCommerce.Manager.ViewModels
 	}
 
 	/// <summary>
-	/// An object that includes cell information to render HTML for a cell
+	/// An object that includes cell information to render HTML
 	/// </summary>
 	public sealed class CellInfo
 	{
-		public CellInfo SetCell(
+		/// <summary>
+		/// Set column information
+		/// </summary>
+		/// <param name="renderView">A callback to render HTML</param>
+		/// <param name="attribute">Column attribute</param>
+		/// <param name="sortBy">Sort by key (hide sort if not set)</param>
+		/// <returns><see cref="CellInfo"/> class</returns>
+		public CellInfo SetColumn(
 			Func<object> renderView,
 			dynamic? attribute = null,
-			bool isShowFilter = true)
+			string sortBy = "")
 		{
-			this.RenderCellView = (object? rowData) =>
+			RenderCellView = (rowData) =>
 				Task.FromResult<IHtmlContent>(
 					new HtmlString(renderView().ToStringOrEmpty()));
-			this.AttributeInfo = attribute;
-			this.IsShowFilter = isShowFilter;
+			Attribute = attribute;
+			SortBy = sortBy;
 
 			return this;
 		}
+
+		/// <summary>
+		/// Set cell information
+		/// </summary>
+		/// <typeparam name="T">Type of datasource</typeparam>
+		/// <param name="renderView">A callback to render HTML</param>
+		/// <param name="attribute">Cell attribute</param>
+		/// <returns><see cref="CellInfo"/> class</returns>
 		public CellInfo SetCell<T>(
 			Func<T?, object> renderView,
-			dynamic? attribute = null,
-			bool isShowFilter = true)
+			dynamic? attribute = null)
 		{
-			this.RenderCellView = (object? rowData) =>
+			RenderCellView = (rowData) =>
 				Task.FromResult<IHtmlContent>(
 					new HtmlString(renderView((T?)rowData).ToStringOrEmpty()));
-			this.AttributeInfo = attribute;
-			this.IsShowFilter = isShowFilter;
+			Attribute = attribute;
 
 			return this;
 		}
+		/// <summary>
+		/// Set cell information (for asynchronous HTML)
+		/// </summary>
+		/// <typeparam name="T">Type of datasource</typeparam>
+		/// <param name="renderView">A callback to render HTML (for asynchronous)</param>
+		/// <param name="attribute">Cell attribute</param>
+		/// <returns><see cref="CellInfo"/> class</returns>
 		public CellInfo SetCell<T>(
 			Func<T?, Task<string>> renderView,
-			dynamic? attribute = null,
-			bool isShowFilter = true)
+			dynamic? attribute = null)
 		{
-			this.RenderCellView = async (object? rowData) =>
+			RenderCellView = async (rowData) =>
 				new HtmlString(await renderView((T?)rowData));
-			this.AttributeInfo = attribute;
-			this.IsShowFilter = isShowFilter;
+			Attribute = attribute;
 
 			return this;
 		}
@@ -87,20 +107,22 @@ namespace SmartCommerce.Manager.ViewModels
 		/// <returns>Cell attribute</returns>
 		public string GetAttribute()
 		{
-			var attribute = this.AttributeInfo != null
-				? ((PropertyInfo[])this.AttributeInfo.GetType().GetProperties())
-					.Select(i => $"{i.Name}={i.GetValue(this.AttributeInfo)}")
+			var attribute = Attribute != null
+				? ((PropertyInfo[])Attribute.GetType().GetProperties())
+					.Select(i => $"{i.Name}=\"{i.GetValue(Attribute)}\"")
 					.JoinToString(" ")
 				: string.Empty;
 			return attribute;
 		}
 
-		public bool IsShowFilter { get; set; }
+		/// <summary>Sort by key (set for column only)</summary>
+		public string SortBy { get; private set; } = string.Empty;
 
 		/// <summary>Cell HTML rendering</summary>
 		public Func<object?, Task<IHtmlContent>>? RenderCellView { get; set; }
 
-		public dynamic? AttributeInfo { get; set; }
+		/// <summary>Cell attribute</summary>
+		public dynamic? Attribute { get; private set; }
 	}
 
 	/// <summary>
@@ -111,5 +133,10 @@ namespace SmartCommerce.Manager.ViewModels
 	/// <param name="SearchCount">Search display count</param>
 	/// <param name="SearchHitCount">Search hit count</param>
 	/// <param name="TotalPage">Total page</param>
-	public record PageInfo (int PageIndex, int PageSize, int SearchCount, int SearchHitCount, int TotalPage);
+	public record PageInfo(
+		int PageIndex,
+		int PageSize,
+		int SearchCount,
+		int SearchHitCount,
+		int TotalPage);
 }

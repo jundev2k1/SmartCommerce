@@ -144,7 +144,7 @@ namespace SmartCommerce.Manager.Common.Validators
 		public bool BeProductRelatedFormat(string branchId, string value)
 		{
 			var productIds = value.Split(',', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
-			var result = productIds.All(id => _serviceFacade.Products.IsExist(branchId, id));
+			var result = productIds.All(id => _serviceFacade.Products.IsExist(branchId, id).Result);
 			return result;
 		}
 	}

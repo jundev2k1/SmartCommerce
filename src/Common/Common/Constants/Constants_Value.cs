@@ -4,6 +4,10 @@ namespace SmartCommerce.Common
 {
 	public static partial class Constants
 	{
+		//============================================
+		// Value text flag
+		//============================================
+
 		/// <summary>Flag global culture: Vietnamese</summary>
 		public const string FLG_GLOBAL_CULTURE_VN = "vi-VN";
 		/// <summary>Flag global culture: English</summary>
@@ -76,5 +80,33 @@ namespace SmartCommerce.Common
 		public const string FLG_COMMON_FORMCONTACT_REPORT = "0";
 		/// <summary>Common form contact flag: Contact the administrator</summary>
 		public const string FLG_COMMON_FORMCONTACT_CONTACTADMIN = "1";
+
+		//============================================
+		// Order by flag
+		//============================================
+		/// <summary>Order by ascending</summary>
+		public const string FLG_ORDER_BY_ASCENDING = "asc";
+		/// <summary>Order by descending</summary>
+		public const string FLG_ORDER_BY_DESCENDING = "desc";
+
+		/// <summary>User Module: order by product ID</summary>
+		public const string FLG_ORDER_BY_PRODUCT_PRODUCT_ID = "0";
+		/// <summary>User Module: order by name</summary>
+		public const string FLG_ORDER_BY_PRODUCT_NAME = "1";
+		/// <summary>User Module: order by price</summary>
+		public const string FLG_ORDER_BY_PRODUCT_PRICE = "2";
+		/// <summary>User Module: order by sale status</summary>
+		public const string FLG_ORDER_BY_PRODUCT_SALE_STATUS = "3";
+
+		/// <summary>User Module: order by user ID</summary>
+		public const string FLG_ORDER_BY_USER_USER_ID = "0";
+		/// <summary>User Module: order by user name</summary>
+		public const string FLG_ORDER_BY_USER_NAME = "1";
+		/// <summary>User Module: order by email</summary>
+		public const string FLG_ORDER_BY_USER_EMAIL = "2";
+		/// <summary>User Module: order by sex</summary>
+		public const string FLG_ORDER_BY_USER_SEX = "3";
+		/// <summary>User Module: order by status</summary>
+		public const string FLG_ORDER_BY_USER_STATUS = "4";
 	}
 }

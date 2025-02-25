@@ -34,12 +34,17 @@ document.addEventListener('DOMContentLoaded', () => {
 const handleResizeForMobileLayout = (event) => {
 	const minitorWidth = event.target.innerWidth;
 	if (minitorWidth < 768) {
+		const isChangeMonitor = isMobile === false;
 		isMobile = true;
-		window.location.reload();
-		return;
-	}
 
-	isMobile = false;
+		isChangeMonitor && window.location.reload();
+		return;
+	} else {
+		const isChangeMonitor = isMobile === true;
+		isMobile = false;
+
+		isChangeMonitor && window.location.reload();
+	}
 };
 StoreWindowResizeCallback.push(handleResizeForMobileLayout);
 
@@ -289,8 +294,13 @@ $(document).ready(function () {
 
 const handleSwitchNavbar = () => {
 	$('.btn-navbar-switch').on('click', (event) => {
-		$('#navBar').fadeToggle('fast', 'linear');
-		$('#singleSiteOn').fadeToggle('fast', 'linear');
+		if (!isMobile) {
+			$('#navBar').fadeToggle('fast', 'linear');
+			$('#singleSiteOn').fadeToggle('fast', 'linear');
+		} else {
+			$('#navBar').toggle();
+			$('#singleSiteOn').toggle();
+		}
 	});
 }
 
@@ -441,8 +451,6 @@ const uploadImage = (element) => {
 			const targetItem = this.srcImages[element.itemIndex];
 			const url = '/common/delete-image';
 			callAjax({ url, data: { filePath: targetItem }, method: 'GET', onSuccess });
-
-
 		},
 		setSrcImages(strImages) {
 			const resultArr = strImages.split(",");
@@ -560,7 +568,6 @@ const uploadImage = (element) => {
 		},
 	};
 };
-
 
 /**
  * Check number input value

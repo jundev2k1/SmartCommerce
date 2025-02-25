@@ -23,13 +23,13 @@ namespace SmartCommerce.Manager.Areas.Product.Controllers
 		[HttpGet]
 		[Authorization(Permission.CanDeleteProduct)]
 		[Route(Constants.MODULE_PRODUCT_PRODUCTDELETE_PATH, Name = Constants.MODULE_PRODUCT_PRODUCTDELETE_NAME)]
-		public IActionResult Index(string id)
+		public async Task<IActionResult> Index(string id)
 		{
-			var product = _serviceFacade.Products.Get(this.OperatorBranchId, id);
+			var product = await _serviceFacade.Products.Get(this.OperatorBranchId, id);
 			if (product == null) return RedirectToRoute(Constants.MODULE_ERROR_ERROR_NAME);
 
-			var isSuccess = _serviceFacade.Products.Delete(this.OperatorBranchId, product.ProductId);
-			if (!isSuccess) RedirectToRoute(Constants.MODULE_ERROR_ERROR_NAME);
+			var isSuccess = await _serviceFacade.Products.Delete(this.OperatorBranchId, product.ProductId);
+			if (!isSuccess) RedirectToErrorPage(string.Empty);
 
 			return RedirectToRoute(Constants.MODULE_PRODUCT_PRODUCTLIST_NAME);
 		}

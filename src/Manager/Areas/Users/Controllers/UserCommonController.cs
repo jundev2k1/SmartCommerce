@@ -18,15 +18,17 @@
 		[HttpGet]
 		[AllowAnonymous]
 		[Route(Constants.ENDPOINT_COMMON_USER_GET_USER_LIST)]
-		public IActionResult GetUsers(string searchKey = "")
+		public async Task<IActionResult> GetUsers(string searchKey = "")
 		{
 			var userSearch = new UserFilterModel
 			{
 				BranchId = this.OperatorBranchId,
-				Keywords = searchKey
+				Keywords = searchKey,
+				PageNumber = 1,
+				PageSize = 6,
 			};
-			var result = _serviceFacade.Users.GetByCriteria(userSearch, pageIndex: 1, pageSize: 6).Items;
-			return Json(result);
+			var searchResult = await _serviceFacade.Users.GetByCriteria(userSearch);
+			return Json(searchResult.Items);
 		}
 	}
 }

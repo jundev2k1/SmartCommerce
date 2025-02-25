@@ -32,5 +32,7 @@ namespace SmartCommerce.Manager.ViewComponents
 		protected string OperatorName => _sessionManager.OperatorName;
 		/// <summary>Current operator permission list</summary>
 		protected string[] OperatorPermissions => _sessionManager.OperatorPermissionList;
+		/// <summary>Request URL</summary>
+		protected string RequestUrl => $"{Request.Scheme}://{Request.Host}{Request.Path}{Request.QueryString}";
 	}
 }

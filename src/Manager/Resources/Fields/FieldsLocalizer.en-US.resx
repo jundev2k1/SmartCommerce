@@ -246,6 +246,9 @@
   <data name="User_LastName" xml:space="preserve">
     <value>Last Name</value>
   </data>
+  <data name="User_Sex" xml:space="preserve">
+    <value>Sex</value>
+  </data>
   <data name="User_Status" xml:space="preserve">
     <value>Status</value>
   </data>

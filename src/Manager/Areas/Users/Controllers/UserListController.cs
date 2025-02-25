@@ -20,13 +20,10 @@ namespace SmartCommerce.Manager.Areas.Users.Controllers
 		[HttpGet]
 		[Authorization(Permission.CanReadListUser)]
 		[Route(Constants.MODULE_USER_USERLIST_PATH, Name = Constants.MODULE_USER_USERLIST_NAME)]
-		public IActionResult Index()
+		public async Task<IActionResult> Index()
 		{
 			var condition = GetFiltersByRequest();
-			var userList = _serviceFacade.Users.GetByCriteria(
-				condition,
-				condition.PageNumber,
-				condition.PageSize);
+			var userList = await _serviceFacade.Users.GetByCriteria(condition);
 			var data = new UserListViewModel
 			{
 				PageData = userList,
@@ -57,6 +54,8 @@ namespace SmartCommerce.Manager.Areas.Users.Controllers
 				Address4 = GetRequestParam<string>(Constants.REQUEST_KEY_USER_ADDRESS4, string.Empty),
 				PageNumber = GetRequestParam<int>(Constants.REQUEST_KEY_PAGE_NO, 1),
 				PageSize = GetRequestParam<int>(Constants.REQUEST_KEY_PAGE_SIZE, Constants.DEFAULT_PAGE_SIZE),
+				OrderBy = GetRequestParam<string>(Constants.REQUEST_KEY_SORT_BY, string.Empty),
+				OrderByDirection = GetRequestParam<string>(Constants.REQUEST_KEY_SORT_DIRECTION, string.Empty),
 			};
 
 			// Reset value if limit is exceeded

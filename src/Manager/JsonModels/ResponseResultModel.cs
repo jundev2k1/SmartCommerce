@@ -1,8 +1,8 @@
 ﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
 
-namespace SmartCommerce.Manager.ViewModels
+namespace SmartCommerce.Manager.JsonModels
 {
-	public class ResponseResultViewModel<TResponse, TMessage>
+	public class ResponseResultModel<TResponse, TMessage>
 	{
 		public TResponse? Result { get; set; }
 

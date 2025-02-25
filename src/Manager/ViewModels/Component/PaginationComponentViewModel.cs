@@ -15,20 +15,21 @@ namespace SmartCommerce.Manager.ViewModels
 		private int GetLimitPaginationNumber(bool isEnd = false)
 		{
 			// Returns valid limit number if the page number is out of limit
-			if (this.IsOutOfLimit) return isEnd ? this.TotalPage : 1;
+			if (IsOutOfLimit) return isEnd ? TotalPage : 1;
 
 			if (isEnd)
 			{
-				var endPageNo = this.PageIndex + 3;
-				return endPageNo <= this.TotalPage ? endPageNo : this.TotalPage;
+				var endPageNo = PageIndex + 3;
+				return endPageNo <= TotalPage ? endPageNo : TotalPage;
 			}
 			else
 			{
-				var startPageNo = this.PageIndex - 3;
+				var startPageNo = PageIndex - 3;
 				return startPageNo > 0 ? startPageNo : 1;
 			}
 		}
 
+		/// <returns>True if the current page count exceeds the total searchable page count limit</returns>
 		public bool IsOutOfLimit => (this.SearchCount == 0) && (this.PageIndex > this.TotalPage);
 
 		/// <summary>Request parameters</summary>
@@ -51,10 +52,12 @@ namespace SmartCommerce.Manager.ViewModels
 
 		/// <summary>Page items information</summary>
 		public string PaginationItemInfo
-			=> $"{(this.PageSize * (this.PageIndex - 1)) + this.SearchCount}/{this.SearchHitCount}";
+			=> $"{PageSize * (PageIndex - 1) + SearchCount}/{SearchHitCount}";
 
+		/// <summary>Start page</summary>
 		public int StartPage => GetLimitPaginationNumber();
 
+		/// <summary>End page</summary>
 		public int EndPage => GetLimitPaginationNumber(true);
 
 		/// <summary>Method to create redirect page</summary>

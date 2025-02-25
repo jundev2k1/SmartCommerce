@@ -1,9 +1,11 @@
 ﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
 
 #pragma warning disable CS0618
+using System;
+
 namespace SmartCommerce.Persistence.Extensions.FilterBuilders
 {
-	public partial class FilterConditionBuilder
+	public static partial class FilterConditionBuilder
 	{
 		public static Expression<Func<Product, bool>> GetProductFilters(ProductFilterModel searchDto)
 		{
@@ -91,6 +93,43 @@ namespace SmartCommerce.Persistence.Extensions.FilterBuilders
 			predicate.And(p => p.DelFlg == searchDto.DelFlg);
 
 			return predicate;
+		}
+
+		public static IOrderedQueryable<Product> OrderByDynamic(
+			this IQueryable<Product> query,
+			ProductFilterModel searchDto)
+		{
+			IOrderedQueryable<Product> OrderByDynamic<T>(Expression<Func<Product, T>> selector)
+			{
+				var isAscending = searchDto.OrderByDirection == Constants.FLG_ORDER_BY_ASCENDING;
+				return isAscending
+					? query.OrderBy(selector)
+					: query.OrderByDescending(selector);
+			}
+
+			switch (searchDto.OrderBy)
+			{
+				case Constants.FLG_ORDER_BY_PRODUCT_PRODUCT_ID:
+					return OrderByDynamic<string>(model => model.ProductId);
+
+				case Constants.FLG_ORDER_BY_PRODUCT_NAME:
+					return OrderByDynamic<string>(model => model.Name);
+
+				case Constants.FLG_ORDER_BY_PRODUCT_PRICE:
+					return OrderByDynamic<decimal>(model => model.DisplayPrice == DisplayPriceEnum.Price1
+						? model.Price1
+						: model.DisplayPrice == DisplayPriceEnum.Price2
+							? model.Price2
+							: model.DisplayPrice == DisplayPriceEnum.Price3
+								? model.Price3
+								: model.Price1);
+
+				case Constants.FLG_ORDER_BY_PRODUCT_SALE_STATUS:
+					return OrderByDynamic<ProductStatusEnum>(model => model.Status);
+
+				default:
+					return OrderByDynamic<DateTime?>(model => model.DateCreated);
+			}
 		}
 	}
 }

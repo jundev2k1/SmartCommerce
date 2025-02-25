@@ -246,6 +246,9 @@
   <data name="User_LastName" xml:space="preserve">
     <value>Tên</value>
   </data>
+  <data name="User_Sex" xml:space="preserve">
+    <value>Giới tính</value>
+  </data>
   <data name="User_Status" xml:space="preserve">
     <value>Trạng thái</value>
   </data>
@@ -253,6 +256,6 @@
     <value>Mã người dùng</value>
   </data>
   <data name="User_Username" xml:space="preserve">
-    <value>Username</value>
+    <value>Tài khoản</value>
   </data>
 </root>

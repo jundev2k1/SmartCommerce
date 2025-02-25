@@ -21,7 +21,7 @@ namespace SmartCommerce.Manager.Controllers
 		[Route(Constants.MODULE_AUTH_SIGNIN_PATH, Name = Constants.MODULE_AUTH_SIGNIN_NAME)]
 		public IActionResult Index()
 		{
-			if (!this.LoginCookieInput.RememberMe) return View(new LoginViewModel());
+			if (!this.LoginCookieInput.RememberMe) return View(new LoginPageViewModel());
 
 			return View(this.LoginCookieInput);
 		}
@@ -29,12 +29,20 @@ namespace SmartCommerce.Manager.Controllers
 		[HttpPost]
 		[AllowAnonymous]
 		[Route(Constants.MODULE_AUTH_SIGNIN_PATH, Name = Constants.MODULE_AUTH_SIGNIN_NAME)]
-		public IActionResult Index(LoginViewModel login)
+		public IActionResult Index(LoginPageViewModel viewModel)
 		{
-			var isSuccess = HandleTryLogin(login);
+			var isSuccess = HandleTryLogin(viewModel);
 			if (isSuccess)
 			{
 				var featuresPage = GetFeaturesPagePermission();
+				// Redirect to previous page if has permission
+				var prevUrl = Request.Query["prevURL"].ToStringOrEmpty();
+				if (string.IsNullOrEmpty(prevUrl) == false)
+				{
+					this.Response.Redirect(prevUrl);
+				}
+
+				// Redirect to dashboard if has permission
 				if (featuresPage.Any(page => page?.Name.ToStringOrEmpty() == Constants.MODULE_HOME_DASHBOARD_NAME))
 				{
 					return RedirectToRoute(Constants.MODULE_HOME_DASHBOARD_NAME);
@@ -44,7 +52,7 @@ namespace SmartCommerce.Manager.Controllers
 				if (route != null) return RedirectToRoute(route);
 			}
 
-			return View(login);
+			return View(viewModel);
 		}
 
 		/// <summary>
@@ -110,15 +118,15 @@ namespace SmartCommerce.Manager.Controllers
 		/// <summary>
 		/// Handle try login
 		/// </summary>
-		/// <param name="input">Login input</param>
+		/// <param name="viewModel">Login input</param>
 		/// <returns>Is login success</returns>
-		private bool HandleTryLogin(LoginViewModel input)
+		private bool HandleTryLogin(LoginPageViewModel viewModel)
 		{
 			var isBlock = false;
 			try
 			{
 				// Check login id is wrong
-				var user = _serviceFacade.Users.GetUserByUsername(Constants.CONFIG_MASTER_BRANCH_ID, input.LoginID);
+				var user = _serviceFacade.Users.GetUserByUsername(Constants.CONFIG_MASTER_BRANCH_ID, viewModel.LoginID);
 				if (user == null) throw new Exception();
 
 				// Check block account
@@ -131,12 +139,12 @@ namespace SmartCommerce.Manager.Controllers
 				IncreaseLoginCount(user.UserId);
 
 				// Try login, throw error if login fail
-				var passwordEncrypt = Authentication.Instance.PasswordEncrypt(input.Password);
-				var @operator = _serviceFacade.Users.TryLogin(Constants.CONFIG_MASTER_BRANCH_ID, input.LoginID, passwordEncrypt);
+				var passwordEncrypt = Authentication.Instance.PasswordEncrypt(viewModel.Password);
+				var @operator = _serviceFacade.Users.TryLogin(Constants.CONFIG_MASTER_BRANCH_ID, viewModel.LoginID, passwordEncrypt);
 				if (@operator == null) throw new Exception(_localizer.Messages["ErrorMessage_LoginFailed"]);
 
 				// Handle login success
-				HandleLoginSuccess(@operator, input.RememberMe);
+				HandleLoginSuccess(@operator, viewModel.RememberMe);
 				return true;
 			}
 			catch
@@ -270,14 +278,14 @@ namespace SmartCommerce.Manager.Controllers
 		}
 
 		/// <summary>Login cookie input</summary>
-		private LoginViewModel LoginCookieInput
+		private LoginPageViewModel LoginCookieInput
 		{
 			get
 			{
 				var cookies = Request.Cookies;
 				var rememberMeCookie = cookies[Constants.COOKIE_KEY_LOGIN_REMEMBER_ME].ToStringOrEmpty();
 
-				return new LoginViewModel
+				return new LoginPageViewModel
 				{
 					LoginID = cookies[Constants.COOKIE_KEY_LOGIN_USERNAME].ToStringOrEmpty(),
 					Password = Authentication.Instance.PasswordDecrypt(
@@ -292,15 +300,15 @@ namespace SmartCommerce.Manager.Controllers
 		[Route(Constants.MODULE_AUTH_OTP_PATH, Name = Constants.MODULE_AUTH_OTP_NAME)]
 		public IActionResult OtpAuth()
 		{
-			var view = new LoginViewModel();
-			return View(view);
+			var viewModel = new LoginPageViewModel();
+			return View(viewModel);
 		}
 		[HttpPost]
 		[AllowAnonymous]
 		[Route(Constants.MODULE_AUTH_OTP_PATH, Name = Constants.MODULE_AUTH_OTP_NAME)]
-		public IActionResult OtpAuth(LoginViewModel model)
+		public IActionResult OtpAuth(LoginPageViewModel viewModel)
 		{
-			return View(model);
+			return View(viewModel);
 		}
 	}
 }
