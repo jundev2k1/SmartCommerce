@@ -7,11 +7,9 @@ namespace SmartCommerce.Persistence.Services
 		/// <summary>
 		/// Get by criteria
 		/// </summary>
-		/// <param name="searchParams">Search parameters</param>
-		/// <param name="pageIndex">Page index</param>
-		/// <param name="pageSize">Page size</param>
+		/// <param name="condition">Search condition</param>
 		/// <returns>Search result model</returns>
-		SearchResultModel<UserModel> GetByCriteria(UserFilterModel searchParams, int pageIndex, int pageSize = Constants.DEFAULT_PAGE_SIZE);
+		Task<SearchResultModel<UserModel>> GetByCriteria(UserFilterModel condition);
 
 		/// <summary>
 		/// Get all user

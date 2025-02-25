@@ -69,7 +69,7 @@ namespace SmartCommerce.Manager.Controllers
 			var modelList = (string.IsNullOrEmpty(provinceId) == false)
 				? districtGroups.FirstOrDefault(group => group.ProvinceId == provinceId)?.Items
 				: districtGroups.SelectMany(group => group.Items);
-			if (modelList == null) return Json(Array.Empty<AddressDistrictViewModel>());
+			if (modelList == null) return Json(Array.Empty<AddressDistrictJsonModel>());
 
 			// Check search key 
 			if ((string.IsNullOrEmpty(searchKey.Trim()))) return Json(modelList);
@@ -97,7 +97,7 @@ namespace SmartCommerce.Manager.Controllers
 			var modelList = (string.IsNullOrEmpty(districtId) == false)
 				? modelGroupList.SelectMany(groups => groups.Items).FirstOrDefault(group => group.DistrictId == districtId)?.Items
 				: modelGroupList.SelectMany(groups => groups.Items).SelectMany(group => group.Items);
-			if (modelList == null) return Json(Array.Empty<AddressCommuneViewModel>());
+			if (modelList == null) return Json(Array.Empty<AddressCommuneJsonModel>());
 
 			// Check search key 
 			if ((string.IsNullOrEmpty(searchKey.Trim())) || (modelList == null)) return Json(modelList);
@@ -118,7 +118,11 @@ namespace SmartCommerce.Manager.Controllers
 		[HttpPost]
 		[Authorization(Permission.CanUploadImageProduct)]
 		[Route(Constants.ENDPOINT_COMMON_UPLOAD_IMAGES)]
-		public string UploadImages([FromForm] IFormFile[] files, string type, string uploadFileName = "", bool isClearTempImages = false)
+		public async Task<string> UploadImages(
+			[FromForm] IFormFile[] files,
+			string type,
+			string uploadFileName = "",
+			bool isClearTempImages = false)
 		{
 			var typeUpload = GetTypeUploadByString(type);
 			if (typeUpload == UploadEnum.None) throw new NotExistInEnumException();
@@ -132,10 +136,10 @@ namespace SmartCommerce.Manager.Controllers
 			switch (typeUpload)
 			{
 				case UploadEnum.ProductImage:
-					var product = _serviceFacade.Products.Get(this.OperatorBranchId, uploadFileName);
+					var product = await _serviceFacade.Products.Get(this.OperatorBranchId, uploadFileName);
 					if (product == null) break;
 
-					var productImage = _serviceFacade.Products.UpdateNewestProductImages(this.OperatorBranchId, uploadFileName);
+					var productImage = await _serviceFacade.Products.UpdateNewestProductImages(this.OperatorBranchId, uploadFileName);
 					if (productImage != null) return productImage;
 					break;
 			}

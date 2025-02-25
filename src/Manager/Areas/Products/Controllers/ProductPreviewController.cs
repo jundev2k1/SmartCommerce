@@ -25,7 +25,7 @@ namespace SmartCommerce.Manager.Areas.Product.Controllers
 		[HttpGet]
 		[AllowAnonymous]
 		[Route(Constants.MODULE_PRODUCT_PRODUCTPREVIEW_PATH, Name = Constants.MODULE_PRODUCT_PRODUCTPREVIEW_NAME)]
-		public IActionResult Index([FromQuery] string branchId, string id, string token = "")
+		public async Task<IActionResult> Index([FromQuery] string branchId, string id, string token = "")
 		{
 			// Check token if not logged in
 			if (!this.IsLogin)
@@ -36,10 +36,10 @@ namespace SmartCommerce.Manager.Areas.Product.Controllers
 			}
 
 			// Check exist product
-			var product = _serviceFacade.Products.Get(branchId, id);
+			var product = await _serviceFacade.Products.Get(branchId, id);
 			if (product == null) return RedirectToErrorPage(Constants.ERRORMSG_KEY_DATA_NOT_FOUND, ErrorCodeEnum.DataNotFound);
 
-			var data = GetProductViewData(product);
+			var data = await GetProductViewData(product);
 			return View(data);
 		}
 
@@ -48,10 +48,10 @@ namespace SmartCommerce.Manager.Areas.Product.Controllers
 		/// </summary>
 		/// <param name="product">Product model</param>
 		/// <returns>View model</returns>
-		private ProductPreviewViewModel GetProductViewData(ProductModel product)
+		private async Task<ProductPreviewViewModel> GetProductViewData(ProductModel product)
 		{
 			var user = _serviceFacade.Users.Get(this.OperatorBranchId, product.TakeOverId);
-			var relatedProduct = _serviceFacade.Products
+			var relatedProduct = await _serviceFacade.Products
 				.GetRelatedProducts(this.OperatorBranchId, product.ProductId);
 			var currentPath = Path.Combine(
 				this.Request.Host.Value,

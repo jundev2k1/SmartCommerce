@@ -1,0 +1,51 @@
+﻿@* // Copyright (c) 2025 - Jun Dev. All rights reserved *@
+
+@model SortButtonViewModel
+@{
+	// Icons displayed on the column
+	var iconClass = Model.IsSorting == false
+		? "fa-solid fa-sort"
+		: Model.SortDirection switch
+		{
+			Constants.FLG_ORDER_BY_ASCENDING => "fa-solid fa-arrow-down-short-wide",
+			Constants.FLG_ORDER_BY_DESCENDING => "fa-solid fa-arrow-up-short-wide",
+			_ => "fa-solid fa-sort"
+		};
+
+	// A function to set the selected item
+	var isTargetItem = (string sortDirection) =>
+	{
+		return ((Model.IsSorting == false) && string.IsNullOrEmpty(sortDirection))
+			|| (Model.IsSorting && (Model.SortDirection == sortDirection))
+				? "disabled"
+				: string.Empty;
+	};
+}
+
+@if (string.IsNullOrEmpty(Model.SortBy) == false)
+{
+	<div class="btn-group">
+		<button class="btn btn-sm dropdown-single" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+			<i class="@iconClass"></i>
+		</button>
+		<ul class="dropdown-menu">
+			<li>
+				<a class="dropdown-item @(isTargetItem(string.Empty))" href="@Model.OnSelectItem(string.Empty)">
+					@_localizer.ValueTexts["ValTxt_Sort_None"]
+				</a>
+			</li>
+			<li>
+				<a class="dropdown-item @(isTargetItem("asc"))" href="@Model.OnSelectItem(Constants.FLG_ORDER_BY_ASCENDING)">
+					<i class="fa-solid fa-arrow-down-short-wide me-1"></i>
+					@_localizer.ValueTexts["ValTxt_Sort_Asc"]
+				</a>
+			</li>
+			<li>
+				<a class="dropdown-item @(isTargetItem("desc"))" href="@Model.OnSelectItem(Constants.FLG_ORDER_BY_DESCENDING)">
+					<i class="fa-solid fa-arrow-up-short-wide me-1"></i>
+					@_localizer.ValueTexts["ValTxt_Sort_Desc"]
+				</a>
+			</li>
+		</ul>
+	</div>
+}

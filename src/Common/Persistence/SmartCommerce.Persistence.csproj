@@ -7,6 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Common\Utilities\**" />
+    <EmbeddedResource Remove="Common\Utilities\**" />
+    <None Remove="Common\Utilities\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="LinqKit" Version="1.3.0" />
   </ItemGroup>
 
@@ -39,10 +45,6 @@
     <Using Include="Microsoft.EntityFrameworkCore" />
     <Using Include="Microsoft.Extensions.DependencyInjection" />
     <Using Include="System.Linq.Expressions" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Common\Utilities\" />
   </ItemGroup>
 
 </Project>

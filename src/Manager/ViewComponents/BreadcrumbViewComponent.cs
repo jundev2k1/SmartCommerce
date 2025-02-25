@@ -18,7 +18,7 @@ namespace SmartCommerce.Manager.ViewComponents
 		/// </summary>
 		/// <param name="breadcrumbs">Breadcrumb content list</param>
 		/// <returns>Breadcrumb component</returns>
-		public IViewComponentResult Invoke(Breadcrumb[] breadcrumbs)
+		public IViewComponentResult Invoke(BreadcrumbViewModel[] breadcrumbs)
 		{
 			return View(breadcrumbs);
 		}

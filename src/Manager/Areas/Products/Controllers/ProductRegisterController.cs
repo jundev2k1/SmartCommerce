@@ -27,12 +27,13 @@ namespace SmartCommerce.Manager.Areas.Product.Controllers
 		[HttpGet]
 		[Authorization(Permission.CanCreateProduct)]
 		[Route(Constants.MODULE_PRODUCT_PRODUCTREGISTER_PATH, Name = Constants.MODULE_PRODUCT_PRODUCTREGISTER_NAME)]
-		public IActionResult Index(string id = "")
+		public async Task<IActionResult> Index(string id = "")
 		{
 			var viewModel = new ProductRegisterViewModel();
 			if (string.IsNullOrEmpty(id) == false)
 			{
-				viewModel.PageData = _serviceFacade.Products.Get(this.OperatorBranchId, id) ?? new ProductModel();
+				viewModel.PageData = await _serviceFacade.Products
+					.Get(this.OperatorBranchId, id) ?? new ProductModel();
 				viewModel.PageData.Images = string.Empty;
 			}
 

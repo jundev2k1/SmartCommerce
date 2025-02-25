@@ -11,8 +11,9 @@
 				<tr>
 					@foreach (var cellData in Model.Columns)
 					{
-						<th @(cellData.GetAttribute()) scope="col">
+						<th @Html.Raw(cellData.GetAttribute()) scope="col">
 							@await cellData.RenderCellView.Invoke(null)
+							@await Component.InvokeAsync("SortButton", new { sortBy = cellData.SortBy })
 						</th>
 					}
 				</tr>
@@ -26,7 +27,7 @@
 					<tr @Html.Raw(Model.GetRowAttribute(rowData))>
 						@foreach (var cellData in Model.Cells)
 						{
-							<td @cellData.GetAttribute()>
+							<td @Html.Raw(cellData.GetAttribute())>
 								@await cellData.RenderCellView.Invoke(rowData)
 							</td>
 						}

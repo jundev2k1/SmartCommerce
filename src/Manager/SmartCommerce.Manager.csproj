@@ -75,6 +75,7 @@
   <ItemGroup>
     <Using Include="Microsoft.AspNetCore.Html" />
     <Using Include="SmartCommerce.Common" />
+    <Using Include="SmartCommerce.Common.Helpers" />
     <Using Include="SmartCommerce.Common.Utilities" />
     <Using Include="SmartCommerce.Domain.Enum" />
     <Using Include="SmartCommerce.Domain.Extensions.FilterModels" />
@@ -88,6 +89,7 @@
     <Using Include="SmartCommerce.Manager.Common.Util" />
     <Using Include="SmartCommerce.Manager.Common.ValueText" />
     <Using Include="SmartCommerce.Manager.Controllers" />
+    <Using Include="SmartCommerce.Manager.JsonModels" />
     <Using Include="SmartCommerce.Manager.ViewModels" />
     <Using Include="SmartCommerce.Infrastructure.Common.Attributes" />
     <Using Include="SmartCommerce.Infrastructure.Common.Enum" />
@@ -107,6 +109,7 @@
     <Using Include="Microsoft.Extensions.Localization" />
     <Using Include="Newtonsoft.Json" />
     <Using Include="System.Collections" />
+    <Using Include="System.Reflection" />
     <Using Include="System.Web" />
   </ItemGroup>
 

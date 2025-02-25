@@ -7,9 +7,9 @@ namespace SmartCommerce.Manager.Common.Extensions
 		private static AddressProvider? _instance;
 		private static readonly object lockObject = new object();
 
-		private readonly List<AddressProvinceViewModel> _provinces;
-		private readonly List<AddressDistrictGroupViewModel> _districts;
-		private readonly List<AddressCommuneGroupListViewModel> _communes;
+		private readonly List<AddressProvinceJsonModel> _provinces;
+		private readonly List<AddressDistrictGroupJsonModel> _districts;
+		private readonly List<AddressCommuneGroupListJsonModel> _communes;
 		private AddressProvider()
 		{
 			_provinces = GetProvinces();
@@ -37,40 +37,40 @@ namespace SmartCommerce.Manager.Common.Extensions
 		/// Get provinces
 		/// </summary>
 		/// <returns>A collection of province</returns>
-		private List<AddressProvinceViewModel> GetProvinces()
+		private List<AddressProvinceJsonModel> GetProvinces()
 		{
 			var provinceRawData = System.IO.File.ReadAllText(
 				$"{Environment.CurrentDirectory}{Constants.ERP_FILE_PATH_DATA_ADDRESS_VN_PROVINCES}");
-			var result = JsonConvert.DeserializeObject<List<AddressProvinceViewModel>>(provinceRawData);
-			return result ?? new List<AddressProvinceViewModel>();
+			var result = JsonConvert.DeserializeObject<List<AddressProvinceJsonModel>>(provinceRawData);
+			return result ?? new List<AddressProvinceJsonModel>();
 		}
 
 		/// <summary>
 		/// Get districts
 		/// </summary>
 		/// <returns>A collection of group district</returns>
-		private List<AddressDistrictGroupViewModel> GetDistricts()
+		private List<AddressDistrictGroupJsonModel> GetDistricts()
 		{
 			var provinceRawData = System.IO.File.ReadAllText(
 				$"{Environment.CurrentDirectory}{Constants.ERP_FILE_PATH_DATA_ADDRESS_VN_DISTRICTS}");
-			var result = JsonConvert.DeserializeObject<List<AddressDistrictGroupViewModel>>(provinceRawData);
-			return result ?? new List<AddressDistrictGroupViewModel>();
+			var result = JsonConvert.DeserializeObject<List<AddressDistrictGroupJsonModel>>(provinceRawData);
+			return result ?? new List<AddressDistrictGroupJsonModel>();
 		}
 
 		/// <summary>
 		/// Get communes
 		/// </summary>
 		/// <returns>A collection of group list commune</returns>
-		private List<AddressCommuneGroupListViewModel> GetCommunes()
+		private List<AddressCommuneGroupListJsonModel> GetCommunes()
 		{
 			var provinceRawData = System.IO.File.ReadAllText(
 				$"{Environment.CurrentDirectory}{Constants.ERP_FILE_PATH_DATA_ADDRESS_VN_COMMUNES}");
-			var result = JsonConvert.DeserializeObject<List<AddressCommuneGroupListViewModel>>(provinceRawData);
-			return result ?? new List<AddressCommuneGroupListViewModel>();
+			var result = JsonConvert.DeserializeObject<List<AddressCommuneGroupListJsonModel>>(provinceRawData);
+			return result ?? new List<AddressCommuneGroupListJsonModel>();
 		}
 
-		public List<AddressProvinceViewModel> Provinces => _provinces;
-		public List<AddressDistrictGroupViewModel> Districts => _districts;
-		public List<AddressCommuneGroupListViewModel> Communes => _communes;
+		public List<AddressProvinceJsonModel> Provinces => _provinces;
+		public List<AddressDistrictGroupJsonModel> Districts => _districts;
+		public List<AddressCommuneGroupListJsonModel> Communes => _communes;
 	}
 }

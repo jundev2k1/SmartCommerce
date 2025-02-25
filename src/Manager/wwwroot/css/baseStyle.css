@@ -2,6 +2,9 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap');
 
+/* ====================================== */
+/*       Root: declare css variable       */
+/* ====================================== */
 :root {
 	/* Operating */
 	--site-mode-operating: #0b2c31;
@@ -140,6 +143,10 @@
 	--site-border-full: 99999px;
 }
 
+
+/* ====================================== */
+/*        Customize: reset value          */
+/* ====================================== */
 /*#region Theme-Setting */
 /* Mode */
 .dark-mode {
@@ -454,7 +461,7 @@
 		transition: .25s ease-in;
 	}
 /*#endregion */
-/* ========[CSS Customize]======= */
+
 /*#region Loading-Spinner */
 .loading-spinner {
 	position: absolute;
@@ -535,10 +542,11 @@
 }
 /*#endregion */
 
-/* =======[Default customize]========= */
 
+/* ====================================== */
+/*          Customize: scrollbar          */
+/* ====================================== */
 /*#region Scroll style */
-
 ::-webkit-scrollbar-track {
 	-webkit-box-shadow: inset 0 0 10px rgba(0,0,0,0.2);
 	border-radius: 10px;
@@ -555,11 +563,9 @@
 	-webkit-box-shadow: inset 0 0 4px rgba(0,0,0,.2);
 	background-color: var(--site-theme-operating);
 }
-
 /*#endregion */
 
-/*#region Tag setting */
-
+/*#region Default tag setting */
 * {
 	box-sizing: border-box;
 	margin: 0;
@@ -595,8 +601,11 @@ ul, li {
 }
 /*#endregion */
 
-/*#region Class Customize */
 
+/* ====================================== */
+/*            Site custom CSS             */
+/* ====================================== */
+/*#region Class Customize */
 .show {
 	display: block !important;
 }
@@ -706,4 +715,7 @@ ul, li {
 	margin: .5rem;
 }
 
+.dropdown-single {
+	border-radius: var(--bs-btn-border-radius) !important;
+}
 /*#endregion */

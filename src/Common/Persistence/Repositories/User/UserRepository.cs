@@ -8,34 +8,35 @@ namespace SmartCommerce.Persistence.Repositories
 		/// Constructor
 		/// </summary>
 		/// <param name="dbContext">Context</param>
-		public UserRepository(ApplicationDBContext dbContext, IFileLogger logger) : base(dbContext, logger)
+		public UserRepository(ApplicationDBContext dbContext, IFileLogger logger)
+			: base(dbContext, logger)
 		{
 		}
 
 		/// <summary>
 		/// Get by criteria
 		/// </summary>
-		/// <param name="expression">Expression</param>
-		/// <param name="pageIndex">Page index</param>
-		/// <param name="pageSize">Page size</param>
+		/// <param name="condition">Search condition</param>
 		/// <returns>Search result model</returns>
-		public SearchResultModel<UserModel> GetByCriteria(Expression<Func<User, bool>> expression, int pageIndex, int pageSize)
+		public async Task<SearchResultModel<UserModel>> GetByCriteria(UserFilterModel condition)
 		{
+			var filterCondition = FilterConditionBuilder.GetUserFilters(condition);
+
 			var query = _dbContext.Users
 				.AsQueryable()
-				.Where(expression)
-				.OrderByDescending(user => user.DateCreated);
+				.Where(filterCondition)
+				.OrderByDynamic(condition);
 
-			var queryCount = query.Count();
-			var isSurplus = (queryCount % pageSize) > 0;
-			var totalPage = queryCount / pageSize + (isSurplus ? 1 : 0);
+			var queryCount = await query.CountAsync();
+			var isSurplus = (queryCount % condition.PageSize) > 0;
+			var totalPage = queryCount / condition.PageSize + (isSurplus ? 1 : 0);
 
-			var pageSkip = (pageIndex - 1) * pageSize;
-			var data = query
+			var pageSkip = (condition.PageNumber - 1) * condition.PageSize;
+			var data = await query
 				.Skip(pageSkip)
-				.Take(pageSize)
+				.Take(condition.PageSize)
 				.Select(user => user.MapToModel())
-				.ToArray();
+				.ToArrayAsync();
 
 			var result = new SearchResultModel<UserModel>
 			{

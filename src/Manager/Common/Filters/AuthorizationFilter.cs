@@ -10,11 +10,6 @@ namespace SmartCommerce.Manager.Common.Filters
 			_sessionManager = sessionManager;
 		}
 
-		private enum PermissionStatus
-		{
-
-		}
-
 		public void OnActionExecuting(ActionExecutingContext context)
 		{
 			var endpoint = context.HttpContext.GetEndpoint();
@@ -35,7 +30,12 @@ namespace SmartCommerce.Manager.Common.Filters
 			var isLogin = _sessionManager.IsLogin;
 			if (!isLogin)
 			{
-				context.Result = new RedirectToRouteResult(routeName: Constants.MODULE_AUTH_SIGNIN_NAME, routeValues: null);
+				context.Result = new RedirectToRouteResult(
+					routeName: Constants.MODULE_AUTH_SIGNIN_NAME,
+					routeValues: new RouteValueDictionary
+					{
+						{ "prevURL", context.HttpContext.Request.Path }
+					});
 				return;
 			}
 
@@ -45,7 +45,9 @@ namespace SmartCommerce.Manager.Common.Filters
 
 			// Clear and set error message for error page
 			SetErrorMessage(errorMessage);
-			context.Result = new RedirectToRouteResult(routeName: Constants.MODULE_ERROR_ERROR_NAME, routeValues: null);
+			context.Result = new RedirectToRouteResult(
+				routeName: Constants.MODULE_ERROR_ERROR_NAME,
+				routeValues: null);
 		}
 
 		public void OnActionExecuted(ActionExecutedContext context)
@@ -71,8 +73,8 @@ namespace SmartCommerce.Manager.Common.Filters
 		/// <param name="message">Message</param>
 		private void SetErrorMessage(string message)
 		{
-			_sessionManager.Set(Constants.SESSION_KEY_PAGE_ERROR_CODE, ErrorCodeEnum.NotPermission.GetStringValue());
-			_sessionManager.Set(Constants.SESSION_KEY_PAGE_ERROR_MESSAGE, message);
+			_sessionManager.SystemPageErrorCode = ErrorCodeEnum.NotPermission.GetStringValue();
+			_sessionManager.SystemPageErrorMessage = message;
 		}
 
 		private string[] OperatorPermission { get; set; } = Array.Empty<string>();

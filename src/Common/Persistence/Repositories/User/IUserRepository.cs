@@ -7,11 +7,9 @@ namespace SmartCommerce.Persistence.Repositories
 		/// <summary>
 		/// Get by criteria
 		/// </summary>
-		/// <param name="expression">Expression</param>
-		/// <param name="pageIndex">Page index</param>
-		/// <param name="pageSize">Page size</param>
+		/// <param name="condition">Search condition</param>
 		/// <returns>Search result model</returns>
-		SearchResultModel<UserModel> GetByCriteria(Expression<Func<User, bool>> expression, int pageIndex, int pageSize);
+		Task<SearchResultModel<UserModel>> GetByCriteria(UserFilterModel condition);
 
 		/// <summary>
 		/// Get all

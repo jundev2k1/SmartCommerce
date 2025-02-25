@@ -3,95 +3,130 @@
 #pragma warning disable CS0618
 namespace SmartCommerce.Persistence.Extensions.FilterBuilders
 {
-	public partial class FilterConditionBuilder
+	public static partial class FilterConditionBuilder
 	{
-		public static Expression<Func<User, bool>> GetUserFilters(UserFilterModel searchDto)
+		public static Expression<Func<User, bool>> GetUserFilters(UserFilterModel searchCondition)
 		{
 			var predicate = PredicateBuilder.New<User>();
 
-			if (string.IsNullOrEmpty(searchDto.Keywords) == false)
+			if (string.IsNullOrEmpty(searchCondition.Keywords) == false)
 			{
-				predicate.And(user => user.UserId.Contains(searchDto.Keywords)
-					|| (user.FirstName.StartsWith(searchDto.Keywords) || user.LastName.StartsWith(searchDto.Keywords))
-					|| user.Email.StartsWith(searchDto.Keywords));
+				predicate.And(user => user.UserId.Contains(searchCondition.Keywords)
+					|| (user.FirstName.StartsWith(searchCondition.Keywords) || user.LastName.StartsWith(searchCondition.Keywords))
+					|| user.Email.StartsWith(searchCondition.Keywords));
 			}
 
-			if (string.IsNullOrEmpty(searchDto.BranchId) == false)
+			if (string.IsNullOrEmpty(searchCondition.BranchId) == false)
 			{
-				predicate.And(user => user.BranchId.Equals(searchDto.BranchId));
+				predicate.And(user => user.BranchId.Equals(searchCondition.BranchId));
 			}
 
-			if (string.IsNullOrEmpty(searchDto.UserId) == false)
+			if (string.IsNullOrEmpty(searchCondition.UserId) == false)
 			{
-				predicate.And(user => user.UserId.StartsWith(searchDto.UserId));
+				predicate.And(user => user.UserId.StartsWith(searchCondition.UserId));
 			}
 
-			if (string.IsNullOrEmpty(searchDto.UserName) == false)
+			if (string.IsNullOrEmpty(searchCondition.UserName) == false)
 			{
-				predicate.And(user => user.UserName.StartsWith(searchDto.UserName));
+				predicate.And(user => user.UserName.StartsWith(searchCondition.UserName));
 			}
 
-			if (string.IsNullOrEmpty(searchDto.FirstName) == false)
+			if (string.IsNullOrEmpty(searchCondition.FirstName) == false)
 			{
-				predicate.And(user => user.FirstName.Contains(searchDto.FirstName));
+				predicate.And(user => user.FirstName.Contains(searchCondition.FirstName));
 			}
 
-			if (string.IsNullOrEmpty(searchDto.LastName) == false)
+			if (string.IsNullOrEmpty(searchCondition.LastName) == false)
 			{
-				predicate.And(user => user.LastName.Contains(searchDto.LastName));
+				predicate.And(user => user.LastName.Contains(searchCondition.LastName));
 			}
 
-			if (string.IsNullOrEmpty(searchDto.Email) == false)
+			if (string.IsNullOrEmpty(searchCondition.Email) == false)
 			{
-				predicate.And(user => user.Email.Contains(searchDto.Email));
+				predicate.And(user => user.Email.Contains(searchCondition.Email));
 			}
 
-			if (string.IsNullOrEmpty(searchDto.PhoneNumber) == false)
+			if (string.IsNullOrEmpty(searchCondition.PhoneNumber) == false)
 			{
-				predicate.And(user => user.PhoneNumber.Contains(searchDto.PhoneNumber));
+				predicate.And(user => user.PhoneNumber.Contains(searchCondition.PhoneNumber));
 			}
 
-			if (string.IsNullOrEmpty(searchDto.Address1) == false)
+			if (string.IsNullOrEmpty(searchCondition.Address1) == false)
 			{
-				predicate.And(user => user.Address1.Contains(searchDto.Address1));
+				predicate.And(user => user.Address1.Contains(searchCondition.Address1));
 			}
 
-			if (string.IsNullOrEmpty(searchDto.Address2) == false)
+			if (string.IsNullOrEmpty(searchCondition.Address2) == false)
 			{
-				predicate.And(user => user.Address2.Contains(searchDto.Address2));
+				predicate.And(user => user.Address2.Contains(searchCondition.Address2));
 			}
 
-			if (string.IsNullOrEmpty(searchDto.Address3) == false)
+			if (string.IsNullOrEmpty(searchCondition.Address3) == false)
 			{
-				predicate.And(user => user.Address3.Contains(searchDto.Address3));
+				predicate.And(user => user.Address3.Contains(searchCondition.Address3));
 			}
 
-			if (string.IsNullOrEmpty(searchDto.Address4) == false)
+			if (string.IsNullOrEmpty(searchCondition.Address4) == false)
 			{
-				predicate.And(user => user.Address4.Contains(searchDto.Address4));
+				predicate.And(user => user.Address4.Contains(searchCondition.Address4));
 			}
 
-			if (string.IsNullOrEmpty(searchDto.CreatedBy) == false)
+			if (string.IsNullOrEmpty(searchCondition.CreatedBy) == false)
 			{
-				predicate.And(user => user.CreatedBy.Equals(searchDto.CreatedBy));
+				predicate.And(user => user.CreatedBy.Equals(searchCondition.CreatedBy));
 			}
 
-			if (searchDto.MinAge > 0) predicate.And(user => searchDto.MinAge <= CommonUtility.CalculateTime(user.Birthday).Years);
-			if (searchDto.MaxAge > 0) predicate.And(user => searchDto.MaxAge >= CommonUtility.CalculateTime(user.Birthday).Years);
+			if (searchCondition.MinAge > 0) predicate.And(user => searchCondition.MinAge <= CommonUtility.CalculateTime(user.Birthday).Years);
+			if (searchCondition.MaxAge > 0) predicate.And(user => searchCondition.MaxAge >= CommonUtility.CalculateTime(user.Birthday).Years);
 
-			predicate.And(user => user.Status.Equals(searchDto.Status));
-			predicate.And(user => user.DelFlg.Equals(searchDto.DelFlg));
+			predicate.And(user => user.Status.Equals(searchCondition.Status));
+			predicate.And(user => user.DelFlg.Equals(searchCondition.DelFlg));
 
-			if (searchDto.BirthdayFrom.HasValue) predicate.And(user => searchDto.BirthdayFrom >= user.Birthday);
-			if (searchDto.BirthdayTo.HasValue) predicate.And(user => searchDto.BirthdayTo <= user.Birthday);
+			if (searchCondition.BirthdayFrom.HasValue) predicate.And(user => searchCondition.BirthdayFrom >= user.Birthday);
+			if (searchCondition.BirthdayTo.HasValue) predicate.And(user => searchCondition.BirthdayTo <= user.Birthday);
 
-			if (searchDto.DateCreatedFrom.HasValue) predicate.And(user => user.DateCreated >= searchDto.DateCreatedFrom);
-			if (searchDto.DateCreatedTo.HasValue) predicate.And(user => user.DateCreated <= searchDto.DateCreatedTo);
+			if (searchCondition.DateCreatedFrom.HasValue) predicate.And(user => user.DateCreated >= searchCondition.DateCreatedFrom);
+			if (searchCondition.DateCreatedTo.HasValue) predicate.And(user => user.DateCreated <= searchCondition.DateCreatedTo);
 
-			if (searchDto.DateChangedFrom.HasValue) predicate.And(user => user.DateChanged <= searchDto.DateCreatedFrom);
-			if (searchDto.DateChangedTo.HasValue) predicate.And(user => user.DateChanged >= searchDto.DateCreatedTo);
+			if (searchCondition.DateChangedFrom.HasValue) predicate.And(user => user.DateChanged <= searchCondition.DateCreatedFrom);
+			if (searchCondition.DateChangedTo.HasValue) predicate.And(user => user.DateChanged >= searchCondition.DateCreatedTo);
 
 			return predicate;
+		}
+
+		public static IOrderedQueryable<User> OrderByDynamic(
+			this IQueryable<User> query,
+			UserFilterModel searchCondition)
+		{
+			IOrderedQueryable<User> OrderByDynamic<T>(Expression<Func<User, T>> selector)
+			{
+				var isAscending = searchCondition.OrderByDirection == Constants.FLG_ORDER_BY_ASCENDING;
+				return isAscending
+					? query.OrderBy(selector)
+					: query.OrderByDescending(selector);
+			}
+
+			switch (searchCondition.OrderBy)
+			{
+				case Constants.FLG_ORDER_BY_USER_USER_ID:
+					return OrderByDynamic<string>(model => model.UserId);
+
+				case Constants.FLG_ORDER_BY_USER_NAME:
+					return OrderByDynamic<string>(model => model.FirstName)
+						.ThenBy(model => model.LastName);
+
+				case Constants.FLG_ORDER_BY_USER_EMAIL:
+					return OrderByDynamic<string>(model => model.Email);
+
+				case Constants.FLG_ORDER_BY_USER_SEX:
+					return OrderByDynamic<UserSexEnum>(model => model.Sex);
+
+				case Constants.FLG_ORDER_BY_USER_STATUS:
+					return OrderByDynamic<UserStatusEnum>(model => model.Status);
+
+				default:
+					return OrderByDynamic<DateTime?>(model => model.DateCreated);
+			}
 		}
 	}
 }

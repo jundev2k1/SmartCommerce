@@ -4,10 +4,10 @@
 	ViewData[Constants.GLOBAL_KEY_TITLE] = _localizer.Globals["Nav_User_List"];
 	ViewData[Constants.GLOBAL_KEY_CURRENT_PAGE] = "UserList_Page";
 
-	var breadcrumbs = new Breadcrumb[]
+	var breadcrumbs = new BreadcrumbViewModel[]
 	{
-		new Breadcrumb { Title = _localizer.Globals["Nav_Home"].Value, Href = Constants.MODULE_HOME_HOME_PATH },
-		new Breadcrumb { Title = _localizer.Globals["Nav_User_List"].Value, IsDisabled = true }
+		new BreadcrumbViewModel { Title = _localizer.Globals["Nav_Home"].Value, Href = Constants.MODULE_HOME_HOME_PATH },
+		new BreadcrumbViewModel { Title = _localizer.Globals["Nav_User_List"].Value, IsDisabled = true }
 	};
 
 	var hasResult = Model.PageData.Items.Any();
@@ -196,11 +196,11 @@
 				// Set header rendering
 				Columns = new[]
 				{
-					new CellInfo().SetCell(() => _localizer.Fields["User_UserId"], new { width = "10%" }),
-					new CellInfo().SetCell(() => _localizer.Globals["Title_Information"], new { width = "25%" }),
-					new CellInfo().SetCell(() => _localizer.Globals["Title_Contact"], new { @class = "text-center only-desktop", width = "45%" }),
-					new CellInfo().SetCell(() => _localizer.Fields["User_Sex"], new { @class = "text-center", width = "10%" }),
-					new CellInfo().SetCell(() => _localizer.Fields["User_Status"], new { @class = "text-center only-desktop", width = "10%" }),
+					new CellInfo().SetColumn(() => _localizer.Fields["User_UserId"], new { width = "15%" }, sortBy: Constants.FLG_ORDER_BY_USER_USER_ID),
+					new CellInfo().SetColumn(() => _localizer.Globals["Title_Information"], new { width = "25%" }, sortBy: Constants.FLG_ORDER_BY_USER_NAME),
+					new CellInfo().SetColumn(() => _localizer.Globals["Title_Contact"], new { @class = "text-center only-desktop", width = "30%" }),
+					new CellInfo().SetColumn(() => _localizer.Fields["User_Sex"], new { @class = "text-center", width = "15%" }, sortBy: Constants.FLG_ORDER_BY_USER_SEX),
+					new CellInfo().SetColumn(() => _localizer.Fields["User_Status"], new { @class = "text-center only-desktop", width = "15%" }, sortBy: Constants.FLG_ORDER_BY_USER_STATUS),
 				},
 				// Set body rendering
 				Cells = new[]

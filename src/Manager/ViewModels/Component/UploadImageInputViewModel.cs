@@ -8,7 +8,7 @@ namespace SmartCommerce.Manager.ViewModels
 
 		public string Value { get; set; } = string.Empty;
 
-		public string[] Images => this.Value.Split(',');
+		public string[] Images => Value.Split(',');
 
 		public string PlaceHolderText { get; set; } = string.Empty;
 

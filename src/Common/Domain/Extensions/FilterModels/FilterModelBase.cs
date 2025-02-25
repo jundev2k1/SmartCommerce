@@ -4,6 +4,10 @@ namespace SmartCommerce.Domain.Extensions.FilterModels
 {
 	public class FilterModelBase<TModel> : ModelBase
 	{
+		public string OrderBy { get; set; } = string.Empty;
+
+		public string OrderByDirection { get; set; } = string.Empty;
+
 		public DateTime? DateCreatedFrom { get; set; }
 
 		public DateTime? DateCreatedTo { get; set; }

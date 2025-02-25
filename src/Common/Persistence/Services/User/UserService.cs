@@ -23,16 +23,13 @@ namespace SmartCommerce.Persistence.Services
 		/// <summary>
 		/// Get by criteria
 		/// </summary>
-		/// <param name="searchParams">Search parameters</param>
-		/// <param name="pageIndex">Page index</param>
-		/// <param name="pageSize">Page size</param>
+		/// <param name="condition">Search condition</param>
 		/// <returns>Search result model</returns>
-		public SearchResultModel<UserModel> GetByCriteria(UserFilterModel searchParams, int pageIndex, int pageSize = Constants.DEFAULT_PAGE_SIZE)
+		public async Task<SearchResultModel<UserModel>> GetByCriteria(UserFilterModel condition)
 		{
-			if (string.IsNullOrEmpty(searchParams.BranchId)) return new SearchResultModel<UserModel>();
+			if (string.IsNullOrEmpty(condition.BranchId)) return new ();
 
-			var condition = FilterConditionBuilder.GetUserFilters(searchParams);
-			var result = _userRepository.GetByCriteria(condition, pageIndex, pageSize);
+			var result = await _userRepository.GetByCriteria(condition);
 			return result;
 		}
 

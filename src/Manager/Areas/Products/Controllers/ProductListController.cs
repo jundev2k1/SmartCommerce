@@ -25,10 +25,7 @@ namespace SmartCommerce.Manager.Areas.Product.Controllers
 		public async Task<IActionResult> Index()
 		{
 			var condition = GetFiltersByRequest();
-			var productList = await _serviceFacade.Products.GetByCriteriaAsync(
-				condition,
-				condition.PageNumber,
-				condition.PageSize);
+			var productList = await _serviceFacade.Products.GetByCriteria(condition);
 			var data = new ProductListViewModel
 			{
 				SearchFields = condition,
@@ -72,6 +69,8 @@ namespace SmartCommerce.Manager.Areas.Product.Controllers
 				categoryId = GetRequestParam<string>(Constants.REQUEST_KEY_PRODUCT_CATEGORY_ID, string.Empty),
 				PageNumber = GetRequestParam<int>(Constants.REQUEST_KEY_PAGE_NO, 1),
 				PageSize = GetRequestParam<int>(Constants.REQUEST_KEY_PAGE_SIZE, Constants.DEFAULT_PAGE_SIZE),
+				OrderBy = GetRequestParam<string>(Constants.REQUEST_KEY_SORT_BY, string.Empty),
+				OrderByDirection = GetRequestParam<string>(Constants.REQUEST_KEY_SORT_DIRECTION, string.Empty),
 			};
 
 			// Reset value if limit is exceeded

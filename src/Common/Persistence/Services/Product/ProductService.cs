@@ -2,7 +2,7 @@
 
 namespace SmartCommerce.Persistence.Services
 {
-	public partial class ProductService : ServiceBase, IProductService
+	public sealed class ProductService : ServiceBase, IProductService
 	{
 		#region Constructor
 		/// <summary>Context singleton</summary>
@@ -21,16 +21,13 @@ namespace SmartCommerce.Persistence.Services
 		/// <summary>
 		/// Get by criteria
 		/// </summary>
-		/// <param name="inputParams">Input parameters</param>
-		/// <param name="pageIndex">Page index</param>
-		/// <param name="pageSize">Page size</param>
+		/// <param name="condition">Search condition</param>
 		/// <returns>Search result model</returns>
-		public SearchResultModel<ProductModel> GetByCriteria(ProductFilterModel inputParams, int pageIndex, int pageSize = Constants.DEFAULT_PAGE_SIZE)
+		public async Task<SearchResultModel<ProductModel>> GetByCriteria(ProductFilterModel condition)
 		{
-			if (string.IsNullOrEmpty(inputParams.BranchId)) return new SearchResultModel<ProductModel>();
+			if (string.IsNullOrEmpty(condition.BranchId)) return new ();
 
-			var condition = FilterConditionBuilder.GetProductFilters(inputParams);
-			var result = _productRepository.GetByCriteria(condition, pageIndex, pageSize);
+			var result = await _productRepository.GetByCriteria(condition);
 			return result;
 		}
 
@@ -40,9 +37,9 @@ namespace SmartCommerce.Persistence.Services
 		/// <param name="branchId">Branch id</param>
 		/// <param name="productId">Product id</param>
 		/// <returns>A collection of related products</returns>
-		public ProductModel[] GetRelatedProducts(string branchId, string productId)
+		public async Task<ProductModel[]> GetRelatedProducts(string branchId, string productId)
 		{
-			return _productRepository.GetRelatedProducts(branchId, productId);
+			return await _productRepository.GetRelatedProducts(branchId, productId);
 		}
 
 		/// <summary>
@@ -51,9 +48,9 @@ namespace SmartCommerce.Persistence.Services
 		/// <param name="branchId">Branch id</param>
 		/// <param name="productId">Product id</param>
 		/// <returns>Product model</returns>
-		public ProductModel? Get(string branchId, string productId)
+		public async Task<ProductModel?> Get(string branchId, string productId)
 		{
-			return _productRepository.Get(branchId, productId);
+			return await _productRepository.Get(branchId, productId);
 		}
 		#endregion
 
@@ -87,9 +84,9 @@ namespace SmartCommerce.Persistence.Services
 		/// <param name="productId">Product id</param>
 		/// <param name="updateAction">Update action</param>
 		/// <returns>Update status</returns>
-		public bool Update(string branchId, string productId, Action<Product> updateAction)
+		public async Task<bool> Update(string branchId, string productId, Action<Product> updateAction)
 		{
-			return _productRepository.Update(branchId, productId, updateAction);
+			return await _productRepository.Update(branchId, productId, updateAction);
 		}
 
 		/// <summary>
@@ -97,14 +94,14 @@ namespace SmartCommerce.Persistence.Services
 		/// </summary>
 		/// <param name="model">Product model</param>
 		/// <returns>Is success</returns>
-		public bool UpdateDescription(ProductModel model)
+		public async Task<bool> UpdateDescription(ProductModel model)
 		{
 			var updateAction = (Product entity) =>
 			{
 				entity.Description = model.Description;
 				entity.DateChanged = DateTime.Now;
 			};
-			return _productRepository.Update(model.BranchId, model.ProductId, updateAction);
+			return await _productRepository.Update(model.BranchId, model.ProductId, updateAction);
 		}
 
 		/// <summary>
@@ -113,9 +110,9 @@ namespace SmartCommerce.Persistence.Services
 		/// <param name="branchId">Branch id</param>
 		/// <param name="productId">Product id</param>
 		/// <returns>Actual product images</returns>
-		public string? UpdateNewestProductImages(string branchId, string productId)
+		public async Task<string?> UpdateNewestProductImages(string branchId, string productId)
 		{
-			var product = Get(branchId, productId);
+			var product = await Get(branchId, productId);
 			if (product == null) return null;
 
 			var fileManager = new FileManager(
@@ -130,7 +127,7 @@ namespace SmartCommerce.Persistence.Services
 				item.Images = productImages;
 				item.DateChanged = DateTime.Now;
 			};
-			var isSuccess = _productRepository.Update(branchId, productId, updateAction);
+			var isSuccess = await _productRepository.Update(branchId, productId, updateAction);
 			return isSuccess ? productImages : product.Images;
 		}
 
@@ -140,12 +137,12 @@ namespace SmartCommerce.Persistence.Services
 		/// <param name="branchId">Branch id</param>
 		/// <param name="productId">Product id</param>
 		/// <returns>Update status</returns>
-		public bool TempDelete(string branchId, string productId)
+		public async Task<bool> TempDelete(string branchId, string productId)
 		{
-			var result = _productRepository.Update(
+			var result = await _productRepository.Update(
 				branchId,
 				productId,
-				(product) => product.DelFlg = true);
+				product => product.DelFlg = true);
 			return result;
 		}
 
@@ -155,9 +152,9 @@ namespace SmartCommerce.Persistence.Services
 		/// <param name="branchId">Branch id</param>
 		/// <param name="productId">Product id</param>
 		/// <returns>Delete status</returns>
-		public bool Delete(string branchId, string productId)
+		public async Task<bool> Delete(string branchId, string productId)
 		{
-			return _productRepository.Delete(branchId, productId);
+			return await _productRepository.Delete(branchId, productId);
 		}
 		#endregion
 
@@ -168,9 +165,9 @@ namespace SmartCommerce.Persistence.Services
 		/// <param name="branchId">Branch id</param>
 		/// <param name="productId">Product id</param>
 		/// <returns>Is exist?</returns>
-		public bool IsExist(string branchId, string productId)
+		public async Task<bool> IsExist(string branchId, string productId)
 		{
-			return _productRepository.IsExist(branchId, productId);
+			return await _productRepository.IsExist(branchId, productId);
 		}
 		#endregion
 	}

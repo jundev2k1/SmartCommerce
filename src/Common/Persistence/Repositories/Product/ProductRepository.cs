@@ -2,46 +2,44 @@
 
 namespace SmartCommerce.Persistence.Repositories
 {
-	public partial class ProductRepository : RepositoryBase, IProductRepository
+	public sealed class ProductRepository : RepositoryBase, IProductRepository
 	{
 		/// <summary>
 		/// Constructor
 		/// </summary>
 		/// <param name="dbContext">Context</param>
-		public ProductRepository(ApplicationDBContext dbContext, IFileLogger logger) : base(dbContext, logger)
+		public ProductRepository(ApplicationDBContext dbContext, IFileLogger logger)
+			: base(dbContext, logger)
 		{
 		}
 
 		/// <summary>
 		/// Get by criteria
 		/// </summary>
-		/// <param name="expression">Expression</param>
-		/// <param name="pageIndex">Page index</param>
-		/// <param name="pageSize">Page size</param>
+		/// <param name="condition">Search condition</param>
 		/// <returns>Search result model</returns>
-		public SearchResultModel<ProductModel> GetByCriteria(
-			Expression<Func<Product, bool>> expression,
-			int pageIndex,
-			int pageSize)
+		public async Task<SearchResultModel<ProductModel>> GetByCriteria(ProductFilterModel condition)
 		{
+			var filterCondition = FilterConditionBuilder.GetProductFilters(condition);
+
 			// Search with query
 			var query = _dbContext.Products
 				.AsQueryable()
-				.Where(expression)
-				.OrderByDescending(product => product.DateCreated);
+				.Where(filterCondition)
+				.OrderByDynamic(condition);
 
 			// Handle get page information
-			var queryCount = query.Count();
-			var isSurplus = (queryCount % pageSize) > 0;
-			var totalPage = queryCount / pageSize + (isSurplus ? 1 : 0);
+			var queryCount = await query.CountAsync();
+			var isSurplus = (queryCount % condition.PageSize) > 0;
+			var totalPage = queryCount / condition.PageSize + (isSurplus ? 1 : 0);
 
 			// Handle get data with paging
-			var pageSkip = (pageIndex - 1) * pageSize;
-			var data = query
+			var pageSkip = (condition.PageNumber - 1) * condition.PageSize;
+			var data = await query
 				.Skip(pageSkip)
-				.Take(pageSize)
+				.Take(condition.PageSize)
 				.Select(product => product.MapToModel())
-				.ToArray();
+				.ToArrayAsync();
 			var result = new SearchResultModel<ProductModel>
 			{
 				Items = data,
@@ -57,12 +55,12 @@ namespace SmartCommerce.Persistence.Repositories
 		/// <param name="branchId">Branch id</param>
 		/// <param name="productId">Product id</param>
 		/// <returns>A collection of related products</returns>
-		public ProductModel[] GetRelatedProducts(string branchId, string productId)
+		public async Task<ProductModel[]> GetRelatedProducts(string branchId, string productId)
 		{
 			// Get target product
-			var product = _dbContext.Products
+			var product = await _dbContext.Products
 				.AsNoTracking()
-				.FirstOrDefault(product => product.BranchId == branchId
+				.FirstOrDefaultAsync(product => product.BranchId == branchId
 					&& product.ProductId == productId);
 
 			// Convert related product to hashset for contrain condition
@@ -72,12 +70,12 @@ namespace SmartCommerce.Persistence.Repositories
 			if ((relatedIds == null) || (relatedIds.Any() == false))
 				return Array.Empty<ProductModel>();
 
-			var result = _dbContext.Products
+			var result = await _dbContext.Products
 				.Where(item => item.DelFlg == false
 					&& item.Status != ProductStatusEnum.Pending
 					&& relatedIds.Contains(item.ProductId))
 				.Select(product => product.MapToModel())
-				.ToArray();
+				.ToArrayAsync();
 			return result;
 		}
 
@@ -87,13 +85,13 @@ namespace SmartCommerce.Persistence.Repositories
 		/// <param name="branchId">Branch id</param>
 		/// <param name="productIds">Product id list</param>
 		/// <returns>Product model list</returns>
-		public ProductModel[] Gets(string branchId, string[] productIds)
+		public async Task<ProductModel[]> Gets(string branchId, string[] productIds)
 		{
-			var result = _dbContext.Products
+			var result = await _dbContext.Products
 				.Where(product => (product.BranchId == branchId)
 					&& productIds.Contains(product.ProductId))
 				.Select(product => product.MapToModel())
-				.ToArray();
+				.ToArrayAsync();
 			return result;
 		}
 
@@ -103,14 +101,13 @@ namespace SmartCommerce.Persistence.Repositories
 		/// <param name="branchId">Branch id</param>
 		/// <param name="productId">Product id</param>
 		/// <returns>User model</returns>
-		public ProductModel? Get(string branchId, string productId)
+		public async Task<ProductModel?> Get(string branchId, string productId)
 		{
-			var result = _dbContext.Products
-				.FirstOrDefault(product => product.BranchId == branchId
-					&& product.ProductId == productId
-					&& product.DelFlg == false)
-				?.MapToModel();
-			return result;
+			var result = await _dbContext.Products.FirstOrDefaultAsync(product =>
+				product.BranchId == branchId
+				&& product.ProductId == productId
+				&& product.DelFlg == false);
+			return (result != null) ? result.MapToModel() : null;
 		}
 
 		/// <summary>
@@ -160,17 +157,17 @@ namespace SmartCommerce.Persistence.Repositories
 		/// <param name="productId">Product id</param>
 		/// <param name="UpdateAction">Update action</param>
 		/// <returns>Update status</returns>
-		public bool Update(string branchId, string productId, Action<Product> UpdateAction)
+		public async Task<bool> Update(string branchId, string productId, Action<Product> UpdateAction)
 		{
-			var result = BeginTransaction(() =>
+			var result = await BeginTransactionAsync( async () =>
 			{
-				var product = _dbContext.Products.FirstOrDefault(item =>
+				var product = await _dbContext.Products.FirstOrDefaultAsync(item =>
 					item.BranchId == branchId
 					&& item.ProductId == productId);
 				if (product == null) throw new NotExistInDBException() { ItemInfo = productId };
 
 				UpdateAction(product);
-				_dbContext.SaveChanges();
+				await _dbContext.SaveChangesAsync();
 			});
 			return result;
 		}
@@ -181,16 +178,17 @@ namespace SmartCommerce.Persistence.Repositories
 		/// <param name="branchId">Branch id</param>
 		/// <param name="productId">Product id</param>
 		/// <returns>Delete status</returns>
-		public bool Delete(string branchId, string productId)
+		public async Task<bool> Delete(string branchId, string productId)
 		{
-			var result = BeginTransaction(() =>
+			var result = await BeginTransactionAsync(async () =>
 			{
-				var product = _dbContext.Products
-					.FirstOrDefault(item => (item.BranchId == branchId) && (item.ProductId == productId));
+				var product = await _dbContext.Products.FirstOrDefaultAsync(item =>
+					(item.BranchId == branchId)
+					&& (item.ProductId == productId));
 				if (product == null) throw new NotExistInDBException();
 
 				_dbContext.Remove(product);
-				_dbContext.SaveChanges();
+				await _dbContext.SaveChangesAsync();
 			});
 			return result;
 		}
@@ -201,9 +199,9 @@ namespace SmartCommerce.Persistence.Repositories
 		/// <param name="branchId">Branch id</param>
 		/// <param name="productId">Product id</param>
 		/// <returns>Is exist?</returns>
-		public bool IsExist(string branchId, string productId)
+		public async Task<bool> IsExist(string branchId, string productId)
 		{
-			var result = _dbContext.Products.Any(item =>
+			var result = await _dbContext.Products.AnyAsync(item =>
 				item.BranchId == branchId
 				&& item.ProductId == productId);
 			return result;
