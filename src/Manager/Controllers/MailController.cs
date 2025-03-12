@@ -22,7 +22,7 @@ namespace SmartCommerce.Manager.Controllers
 		[HttpPost]
 		[AllowAnonymous]
 		[Route(Constants.ENDPOINT_COMMON_MAIL_SENDMAIL_CONTACT_OPERATOR)]
-		public IActionResult SendMailToOperator([FromBody] FormContactRequestViewModel mailInfo)
+		public async Task<IActionResult> SendMailToOperator([FromBody] FormContactRequestViewModel mailInfo)
 		{
 			var mailId = mailInfo.Type switch
 			{
@@ -30,7 +30,7 @@ namespace SmartCommerce.Manager.Controllers
 				FormContactTypeEnum.Report => Constants.FLG_MAIL_ID_REPORT_MAIL,
 				_ => string.Empty
 			};
-			var mail = _serviceFacade.MailTemplates.Get(this.OperatorBranchId, mailId);
+			var mail = await _serviceFacade.MailTemplates.Get(this.OperatorBranchId, mailId);
 			if (mail == null) return BadRequest("Mail ID is not exists");
 
 			var mailInput = new Hashtable

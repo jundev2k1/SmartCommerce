@@ -8,16 +8,6 @@ namespace SmartCommerce.Domain.Extensions.FilterModels
 
 		public string BranchId { get; set; } = string.Empty;
 
-		public int RoleId { get; set; }
-
-		public string Name { get; set; } = string.Empty;
-
-		public string Description { get; set; } = string.Empty;
-
-		public string Permission { get; set; } = string.Empty;
-
-		public int? Priority { get; set; } = 0;
-
 		public RoleStatusEnum Status { get; set; }
 	}
 }

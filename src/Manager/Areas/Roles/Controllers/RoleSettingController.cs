@@ -26,7 +26,7 @@ namespace SmartCommerce.Manager.Areas.Roles.Controllers
 		public async Task<IActionResult> Index(int? id)
 		{
 			var roleInfo = id.HasValue
-				? await _serviceFacade.Roles.GetAsync(this.OperatorBranchId, id.Value)
+				? await _serviceFacade.Roles.Get(this.OperatorBranchId, id.Value)
 				: new RoleModel();
 			var data = new RoleSettingViewModel()
 			{

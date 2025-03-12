@@ -7,11 +7,9 @@ namespace SmartCommerce.Persistence.Services
 		/// <summary>
 		/// Get by criteria
 		/// </summary>
-		/// <param name="searchParams">Search parameters</param>
-		/// <param name="pageIndex">Page index</param>
-		/// <param name="pageSize">Page size</param>
+		/// <param name="input">Search condition input</param>
 		/// <returns>Search result model</returns>
-		SearchResultModel<MemberModel> GetByCriteria(MemberFilterModel searchParams, int pageIndex, int pageSize = Constants.DEFAULT_PAGE_SIZE);
+		Task<SearchResultModel<MemberModel>> GetByCriteria(MemberFilterModel input);
 
 		/// <summary>
 		/// Get all
@@ -20,7 +18,7 @@ namespace SmartCommerce.Persistence.Services
 		/// <param name="isDeleted">Delete flag of member</param>
 		/// <returns>A collection of member</returns>
 		/// <remarks>Use only when executing asynchronously</remarks>
-		MemberModel[] GetAll(string branchId, bool isDeleted = false);
+		Task<MemberModel[]> GetAll(string branchId, bool isDeleted = false);
 
 		/// <summary>
 		/// Gets
@@ -28,7 +26,7 @@ namespace SmartCommerce.Persistence.Services
 		/// <param name="branchId">Branch id</param>
 		/// <param name="memberIds">Member id list</param>
 		/// <returns>Member model list</returns>
-		MemberModel[] Gets(string branchId, string[] memberIds);
+		Task<MemberModel[]> Gets(string branchId, string[] memberIds);
 
 		/// <summary>
 		/// Get member
@@ -36,21 +34,21 @@ namespace SmartCommerce.Persistence.Services
 		/// <param name="branchId">Branch id</param>
 		/// <param name="memberId">Member id</param>
 		/// <returns>Member model</returns>
-		MemberModel? Get(string branchId, string memberId);
+		Task<MemberModel?> Get(string branchId, string memberId);
 
 		/// <summary>
 		/// Insert
 		/// </summary>
 		/// <param name="model">Member model</param>
 		/// <returns>Insert status</returns>
-		bool Insert(MemberModel model);
+		Task<bool> Insert(MemberModel model);
 
 		/// <summary>
 		/// Update
 		/// </summary>
 		/// <param name="model">Member model</param>
 		/// <returns>Update status</returns>
-		bool Update(MemberModel model);
+		Task<bool> Update(MemberModel model);
 		/// <summary>
 		/// Update
 		/// </summary>
@@ -58,7 +56,7 @@ namespace SmartCommerce.Persistence.Services
 		/// <param name="memberId">Member id</param>
 		/// <param name="updateAction">Update action</param>
 		/// <returns>Update status</returns>
-		bool Update(string branchId, string memberId, Action<Member> updateAction);
+		Task<bool> Update(string branchId, string memberId, Action<Member> updateAction);
 
 		/// <summary>
 		/// Delete temporary
@@ -67,7 +65,7 @@ namespace SmartCommerce.Persistence.Services
 		/// <param name="memberId">Member id</param>
 		/// <remarks>Update delete flag to "true"</remarks>
 		/// <returns>Delete status</returns>
-		bool TempDelete(string branchId, string memberId);
+		Task<bool> TempDelete(string branchId, string memberId);
 
 		/// <summary>
 		/// Delete temporary
@@ -75,6 +73,6 @@ namespace SmartCommerce.Persistence.Services
 		/// <param name="branchId">Branch id</param>
 		/// <param name="memberId">Member id</param>
 		/// <returns>Delete status</returns>
-		bool Delete(string branchId, string memberId);
+		Task<bool> Delete(string branchId, string memberId);
 	}
 }

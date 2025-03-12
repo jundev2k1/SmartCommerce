@@ -8,7 +8,8 @@ namespace SmartCommerce.Persistence.Repositories
 		/// Constructor
 		/// </summary>
 		/// <param name="dbContext">Context</param>
-		public TokenRepository(ApplicationDBContext dbContext, IFileLogger logger) : base(dbContext, logger)
+		public TokenRepository(ApplicationDBContext dbContext, IFileLogger logger)
+			: base(dbContext, logger)
 		{
 		}
 
@@ -18,13 +19,13 @@ namespace SmartCommerce.Persistence.Repositories
 		/// <param name="branchId">Branch id</param>
 		/// <param name="tokenId">Token id</param>
 		/// <returns>Token model</returns>
-		public TokenModel? Get(string branchId, string tokenId)
+		public async Task<TokenModel?> Get(string branchId, string tokenId)
 		{
-			var result = _dbContext.Tokens.FirstOrDefault(token =>
-				token.BranchId == branchId
-				&& token.TokenId == tokenId);
-
-			return result?.MapToModel();
+			var token = await _dbContext.Tokens
+				.FirstOrDefaultAsync(item =>
+					(item.BranchId == branchId)
+					&& (item.TokenId == tokenId));
+			return token?.MapToModel();
 		}
 
 		/// <summary>
@@ -32,18 +33,19 @@ namespace SmartCommerce.Persistence.Repositories
 		/// </summary>
 		/// <param name="model">Token model</param>
 		/// <returns>Status insert</returns>
-		public bool Insert(TokenModel model)
+		public async Task<bool> Insert(TokenModel model)
 		{
-			var result = BeginTransaction(() =>
+			var result = await BeginTransaction(async () =>
 			{
-				var token = _dbContext.Tokens.FirstOrDefault(item =>
-					(item.BranchId == model.BranchId)
-					&& (item.TokenId == model.TokenId));
+				var token = await _dbContext.Tokens
+					.FirstOrDefaultAsync(item =>
+						(item.BranchId == model.BranchId)
+						&& (item.TokenId == model.TokenId));
 				if (token != null) throw new NotExistInDBException();
 
 				var insertModel = model.MapToEntity();
-				_dbContext.Add(insertModel);
-				_dbContext.SaveChanges();
+				await _dbContext.AddAsync(insertModel);
+				await _dbContext.SaveChangesAsync();
 			});
 			return result;
 		}
@@ -53,18 +55,19 @@ namespace SmartCommerce.Persistence.Repositories
 		/// </summary>
 		/// <param name="model">Token model</param>
 		/// <returns>Status update</returns>
-		public bool Update(TokenModel model)
+		public async Task<bool> Update(TokenModel model)
 		{
-			var result = BeginTransaction(() =>
+			var result = await BeginTransaction(async () =>
 			{
-				var token = _dbContext.Tokens.FirstOrDefault(item =>
-					item.BranchId == model.BranchId
-					&& item.TokenId == model.TokenId);
+				var token = await _dbContext.Tokens
+					.FirstOrDefaultAsync(item =>
+						(item.BranchId == model.BranchId)
+						&& (item.TokenId == model.TokenId));
 				if (token == null) throw new Exception();
 
 				var updateModel = token.MapToEntity(model);
 				_dbContext.Update(updateModel);
-				_dbContext.SaveChanges();
+				await _dbContext.SaveChangesAsync();
 			});
 
 			return result;
@@ -76,17 +79,18 @@ namespace SmartCommerce.Persistence.Repositories
 		/// <param name="tokenId">Token id</param>
 		/// <param name="UpdateAction">Update action</param>
 		/// <returns>Update status</returns>
-		public bool Update(string branchId, string tokenId, Action<Token> UpdateAction)
+		public async Task<bool> Update(string branchId, string tokenId, Action<Token> UpdateAction)
 		{
-			var result = BeginTransaction(() =>
+			var result = await BeginTransaction(async () =>
 			{
-				var token = _dbContext.Tokens.FirstOrDefault(item =>
-					(item.BranchId == branchId)
-					&& (item.TokenId == tokenId));
+				var token = await _dbContext.Tokens
+					.FirstOrDefaultAsync(item =>
+						(item.BranchId == branchId)
+						&& (item.TokenId == tokenId));
 				if (token == null) throw new NotExistInDBException();
 
 				UpdateAction(token);
-				_dbContext.SaveChanges();
+				await _dbContext.SaveChangesAsync();
 			});
 			return result;
 		}
@@ -97,17 +101,18 @@ namespace SmartCommerce.Persistence.Repositories
 		/// <param name="branchId">Branch id</param>
 		/// <param name="tokenId">Token id</param>
 		/// <returns>Delete status</returns>
-		public bool Delete(string branchId, string tokenId)
+		public async Task<bool> Delete(string branchId, string tokenId)
 		{
-			var result = BeginTransaction(() =>
+			var result = await BeginTransaction(async () =>
 			{
-				var token = _dbContext.Tokens.FirstOrDefault(item =>
-					item.BranchId == branchId
-					&& item.TokenId == tokenId);
+				var token = await _dbContext.Tokens
+					.FirstOrDefaultAsync(item =>
+						(item.BranchId == branchId)
+						&& (item.TokenId == tokenId));
 				if (token == null) throw new NotExistInDBException();
 
 				_dbContext.Remove(token);
-				_dbContext.SaveChanges();
+				await _dbContext.SaveChangesAsync();
 			});
 
 			return result;

@@ -22,9 +22,9 @@ namespace SmartCommerce.Persistence.Services
 		/// Get all branch
 		/// </summary>
 		/// <returns>A collection of branch</returns>
-		public BranchModel[] GetAll()
+		public async Task<BranchModel[]> GetAll()
 		{
-			return _branchRepository.GetAll();
+			return await _branchRepository.GetAll();
 		}
 
 		/// <summary>
@@ -32,9 +32,9 @@ namespace SmartCommerce.Persistence.Services
 		/// </summary>
 		/// <param name="branchId">Branch id</param>
 		/// <returns>Branch model</returns>
-		public BranchModel? Get(string branchId)
+		public async Task<BranchModel?> Get(string branchId)
 		{
-			return _branchRepository.Get(branchId);
+			return await _branchRepository.Get(branchId);
 		}
 		#endregion
 	}

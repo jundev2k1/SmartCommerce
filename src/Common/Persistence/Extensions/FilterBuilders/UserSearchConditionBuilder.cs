@@ -5,91 +5,91 @@ namespace SmartCommerce.Persistence.Extensions.FilterBuilders
 {
 	public static partial class FilterConditionBuilder
 	{
-		public static Expression<Func<User, bool>> GetUserFilters(UserFilterModel searchCondition)
+		public static Expression<Func<User, bool>> GetUserFilters(UserFilterModel input)
 		{
 			var predicate = PredicateBuilder.New<User>();
 
-			if (string.IsNullOrEmpty(searchCondition.Keywords) == false)
+			if (string.IsNullOrEmpty(input.Keywords) == false)
 			{
-				predicate.And(user => user.UserId.Contains(searchCondition.Keywords)
-					|| (user.FirstName.StartsWith(searchCondition.Keywords) || user.LastName.StartsWith(searchCondition.Keywords))
-					|| user.Email.StartsWith(searchCondition.Keywords));
+				predicate.And(user => user.UserId.Contains(input.Keywords)
+					|| (user.FirstName.StartsWith(input.Keywords) || user.LastName.StartsWith(input.Keywords))
+					|| user.Email.StartsWith(input.Keywords));
 			}
 
-			if (string.IsNullOrEmpty(searchCondition.BranchId) == false)
+			if (string.IsNullOrEmpty(input.BranchId) == false)
 			{
-				predicate.And(user => user.BranchId.Equals(searchCondition.BranchId));
+				predicate.And(user => user.BranchId.Equals(input.BranchId));
 			}
 
-			if (string.IsNullOrEmpty(searchCondition.UserId) == false)
+			if (string.IsNullOrEmpty(input.UserId) == false)
 			{
-				predicate.And(user => user.UserId.StartsWith(searchCondition.UserId));
+				predicate.And(user => user.UserId.StartsWith(input.UserId));
 			}
 
-			if (string.IsNullOrEmpty(searchCondition.UserName) == false)
+			if (string.IsNullOrEmpty(input.UserName) == false)
 			{
-				predicate.And(user => user.UserName.StartsWith(searchCondition.UserName));
+				predicate.And(user => user.UserName.StartsWith(input.UserName));
 			}
 
-			if (string.IsNullOrEmpty(searchCondition.FirstName) == false)
+			if (string.IsNullOrEmpty(input.FirstName) == false)
 			{
-				predicate.And(user => user.FirstName.Contains(searchCondition.FirstName));
+				predicate.And(user => user.FirstName.Contains(input.FirstName));
 			}
 
-			if (string.IsNullOrEmpty(searchCondition.LastName) == false)
+			if (string.IsNullOrEmpty(input.LastName) == false)
 			{
-				predicate.And(user => user.LastName.Contains(searchCondition.LastName));
+				predicate.And(user => user.LastName.Contains(input.LastName));
 			}
 
-			if (string.IsNullOrEmpty(searchCondition.Email) == false)
+			if (string.IsNullOrEmpty(input.Email) == false)
 			{
-				predicate.And(user => user.Email.Contains(searchCondition.Email));
+				predicate.And(user => user.Email.Contains(input.Email));
 			}
 
-			if (string.IsNullOrEmpty(searchCondition.PhoneNumber) == false)
+			if (string.IsNullOrEmpty(input.PhoneNumber) == false)
 			{
-				predicate.And(user => user.PhoneNumber.Contains(searchCondition.PhoneNumber));
+				predicate.And(user => user.PhoneNumber.Contains(input.PhoneNumber));
 			}
 
-			if (string.IsNullOrEmpty(searchCondition.Address1) == false)
+			if (string.IsNullOrEmpty(input.Address1) == false)
 			{
-				predicate.And(user => user.Address1.Contains(searchCondition.Address1));
+				predicate.And(user => user.Address1.Contains(input.Address1));
 			}
 
-			if (string.IsNullOrEmpty(searchCondition.Address2) == false)
+			if (string.IsNullOrEmpty(input.Address2) == false)
 			{
-				predicate.And(user => user.Address2.Contains(searchCondition.Address2));
+				predicate.And(user => user.Address2.Contains(input.Address2));
 			}
 
-			if (string.IsNullOrEmpty(searchCondition.Address3) == false)
+			if (string.IsNullOrEmpty(input.Address3) == false)
 			{
-				predicate.And(user => user.Address3.Contains(searchCondition.Address3));
+				predicate.And(user => user.Address3.Contains(input.Address3));
 			}
 
-			if (string.IsNullOrEmpty(searchCondition.Address4) == false)
+			if (string.IsNullOrEmpty(input.Address4) == false)
 			{
-				predicate.And(user => user.Address4.Contains(searchCondition.Address4));
+				predicate.And(user => user.Address4.Contains(input.Address4));
 			}
 
-			if (string.IsNullOrEmpty(searchCondition.CreatedBy) == false)
+			if (string.IsNullOrEmpty(input.CreatedBy) == false)
 			{
-				predicate.And(user => user.CreatedBy.Equals(searchCondition.CreatedBy));
+				predicate.And(user => user.CreatedBy.Equals(input.CreatedBy));
 			}
 
-			if (searchCondition.MinAge > 0) predicate.And(user => searchCondition.MinAge <= CommonUtility.CalculateTime(user.Birthday).Years);
-			if (searchCondition.MaxAge > 0) predicate.And(user => searchCondition.MaxAge >= CommonUtility.CalculateTime(user.Birthday).Years);
+			if (input.MinAge > 0) predicate.And(user => input.MinAge <= CommonUtility.CalculateTime(user.Birthday).Years);
+			if (input.MaxAge > 0) predicate.And(user => input.MaxAge >= CommonUtility.CalculateTime(user.Birthday).Years);
 
-			predicate.And(user => user.Status.Equals(searchCondition.Status));
-			predicate.And(user => user.DelFlg.Equals(searchCondition.DelFlg));
+			predicate.And(user => user.Status.Equals(input.Status));
+			predicate.And(user => user.DelFlg.Equals(input.DelFlg));
 
-			if (searchCondition.BirthdayFrom.HasValue) predicate.And(user => searchCondition.BirthdayFrom >= user.Birthday);
-			if (searchCondition.BirthdayTo.HasValue) predicate.And(user => searchCondition.BirthdayTo <= user.Birthday);
+			if (input.BirthdayFrom.HasValue) predicate.And(user => input.BirthdayFrom >= user.Birthday);
+			if (input.BirthdayTo.HasValue) predicate.And(user => input.BirthdayTo <= user.Birthday);
 
-			if (searchCondition.DateCreatedFrom.HasValue) predicate.And(user => user.DateCreated >= searchCondition.DateCreatedFrom);
-			if (searchCondition.DateCreatedTo.HasValue) predicate.And(user => user.DateCreated <= searchCondition.DateCreatedTo);
+			if (input.DateCreatedFrom.HasValue) predicate.And(user => user.DateCreated >= input.DateCreatedFrom);
+			if (input.DateCreatedTo.HasValue) predicate.And(user => user.DateCreated <= input.DateCreatedTo);
 
-			if (searchCondition.DateChangedFrom.HasValue) predicate.And(user => user.DateChanged <= searchCondition.DateCreatedFrom);
-			if (searchCondition.DateChangedTo.HasValue) predicate.And(user => user.DateChanged >= searchCondition.DateCreatedTo);
+			if (input.DateChangedFrom.HasValue) predicate.And(user => user.DateChanged <= input.DateCreatedFrom);
+			if (input.DateChangedTo.HasValue) predicate.And(user => user.DateChanged >= input.DateCreatedTo);
 
 			return predicate;
 		}

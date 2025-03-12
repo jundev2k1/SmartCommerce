@@ -7,18 +7,16 @@ namespace SmartCommerce.Persistence.Repositories
 		/// <summary>
 		/// Get by criteria
 		/// </summary>
-		/// <param name="expression">Expression</param>
-		/// <param name="pageIndex">Page index</param>
-		/// <param name="pageSize">Page size</param>
+		/// <param name="input">Search condition input</param>
 		/// <returns>Search result model</returns>
-		SearchResultModel<RoleModel> GetByCriteria(Expression<Func<Role, bool>> expression, int pageIndex, int pageSize);
+		Task<SearchResultModel<RoleModel>> GetByCriteria(RoleFilterModel input);
 
 		/// <summary>
 		/// Get all
 		/// </summary>
 		/// <param name="branchId">Branch id</param>
 		/// <returns>Role model list</returns>
-		RoleModel[] GetAll(string branchId);
+		Task<RoleModel[]> GetAll(string branchId);
 
 		/// <summary>
 		/// Get
@@ -26,28 +24,21 @@ namespace SmartCommerce.Persistence.Repositories
 		/// <param name="branchID">Branch id</param>
 		/// <param name="roleId">Role id</param>
 		/// <returns>Role model</returns>
-		RoleModel? Get(string branchID, int roleId);
-		/// <summary>
-		/// Get Async
-		/// </summary>
-		/// <param name="branchID">Branch id</param>
-		/// <param name="roleId">Role id</param>
-		/// <returns>Role model</returns>
-		Task<RoleModel?> GetAsync(string branchID, int roleId);
+		Task<RoleModel?> Get(string branchID, int roleId);
 
 		/// <summary>
 		/// Insert
 		/// </summary>
 		/// <param name="model">Role model</param>
 		/// <returns>Insert status</returns>
-		bool Insert(RoleModel model);
+		Task<bool> Insert(RoleModel model);
 
 		/// <summary>
 		/// Update
 		/// </summary>
 		/// <param name="model">Role model</param>
 		/// <returns>Update status</returns>
-		bool Update(RoleModel model);
+		Task<bool> Update(RoleModel model);
 		/// <summary>
 		/// Update
 		/// </summary>
@@ -55,7 +46,7 @@ namespace SmartCommerce.Persistence.Repositories
 		/// <param name="roleId">Role id</param>
 		/// <param name="UpdateAction">Update action</param>
 		/// <returns>Update status</returns>
-		bool Update(string branchId, int roleId, Action<Role> UpdateAction);
+		Task<bool> Update(string branchId, int roleId, Action<Role> UpdateAction);
 
 		/// <summary>
 		/// Delete
@@ -63,6 +54,6 @@ namespace SmartCommerce.Persistence.Repositories
 		/// <param name="branchID">Branch id</param>
 		/// <param name="roleID">Role id</param>
 		/// <returns>Delete status</returns>
-		bool Delete(string branchID, int roleID);
+		Task<bool> Delete(string branchID, int roleID);
 	}
 }

@@ -30,8 +30,11 @@ namespace SmartCommerce.Manager.Areas.Product.Controllers
 			// Check token if not logged in
 			if (!this.IsLogin)
 			{
-				var isValid = string.IsNullOrEmpty(token) == false
-					&& _serviceFacade.Tokens.IsValid(branchId, TokenTypeEnum.ProductPreviewToken, token);
+				var isValid = (string.IsNullOrEmpty(token) == false)
+					&& await _serviceFacade.Tokens.IsValid(
+						branchId,
+						TokenTypeEnum.ProductPreviewToken,
+						token);
 				if (!isValid) return RedirectToErrorPage(Constants.ERRORMSG_KEY_TOKEN_INVALID, ErrorCodeEnum.TokenInvalid);
 			}
 
@@ -50,7 +53,7 @@ namespace SmartCommerce.Manager.Areas.Product.Controllers
 		/// <returns>View model</returns>
 		private async Task<ProductPreviewViewModel> GetProductViewData(ProductModel product)
 		{
-			var user = _serviceFacade.Users.Get(this.OperatorBranchId, product.TakeOverId);
+			var user = await _serviceFacade.Users.Get(this.OperatorBranchId, product.TakeOverId);
 			var relatedProduct = await _serviceFacade.Products
 				.GetRelatedProducts(this.OperatorBranchId, product.ProductId);
 			var currentPath = Path.Combine(

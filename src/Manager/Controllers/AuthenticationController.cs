@@ -29,9 +29,9 @@ namespace SmartCommerce.Manager.Controllers
 		[HttpPost]
 		[AllowAnonymous]
 		[Route(Constants.MODULE_AUTH_SIGNIN_PATH, Name = Constants.MODULE_AUTH_SIGNIN_NAME)]
-		public IActionResult Index(LoginPageViewModel viewModel)
+		public async Task<IActionResult> Index(LoginPageViewModel viewModel)
 		{
-			var isSuccess = HandleTryLogin(viewModel);
+			var isSuccess = await HandleTryLogin(viewModel);
 			if (isSuccess)
 			{
 				var featuresPage = GetFeaturesPagePermission();
@@ -120,13 +120,15 @@ namespace SmartCommerce.Manager.Controllers
 		/// </summary>
 		/// <param name="viewModel">Login input</param>
 		/// <returns>Is login success</returns>
-		private bool HandleTryLogin(LoginPageViewModel viewModel)
+		private async Task<bool> HandleTryLogin(LoginPageViewModel viewModel)
 		{
 			var isBlock = false;
 			try
 			{
 				// Check login id is wrong
-				var user = _serviceFacade.Users.GetUserByUsername(Constants.CONFIG_MASTER_BRANCH_ID, viewModel.LoginID);
+				var user = await _serviceFacade.Users.GetUserByUsername(
+					Constants.CONFIG_MASTER_BRANCH_ID,
+					viewModel.LoginID);
 				if (user == null) throw new Exception();
 
 				// Check block account
@@ -140,7 +142,10 @@ namespace SmartCommerce.Manager.Controllers
 
 				// Try login, throw error if login fail
 				var passwordEncrypt = Authentication.Instance.PasswordEncrypt(viewModel.Password);
-				var @operator = _serviceFacade.Users.TryLogin(Constants.CONFIG_MASTER_BRANCH_ID, viewModel.LoginID, passwordEncrypt);
+				var @operator = await _serviceFacade.Users.TryLogin(
+					Constants.CONFIG_MASTER_BRANCH_ID,
+					viewModel.LoginID,
+					passwordEncrypt);
 				if (@operator == null) throw new Exception(_localizer.Messages["ErrorMessage_LoginFailed"]);
 
 				// Handle login success

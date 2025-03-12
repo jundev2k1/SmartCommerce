@@ -8,41 +8,45 @@ namespace SmartCommerce.Persistence.Repositories
 		/// Constructor
 		/// </summary>
 		/// <param name="dbContext">Context</param>
-		public RoleRepository(ApplicationDBContext dbContext, IFileLogger logger) : base(dbContext, logger)
+		public RoleRepository(ApplicationDBContext dbContext, IFileLogger logger)
+			: base(dbContext, logger)
 		{
 		}
 
 		/// <summary>
 		/// Get by criteria
 		/// </summary>
-		/// <param name="expression">Expression</param>
-		/// <param name="pageIndex">Page index</param>
-		/// <param name="pageSize">Page size</param>
+		/// <param name="input">Search condition input</param>
 		/// <returns>Search result model</returns>
-		public SearchResultModel<RoleModel> GetByCriteria(Expression<Func<Role, bool>> expression, int pageIndex, int pageSize)
+		public async Task<SearchResultModel<RoleModel>> GetByCriteria(RoleFilterModel input)
 		{
+			var searchCondition = FilterConditionBuilder.GetRoleFilters(input);
+
+			// Search with query
 			var query = _dbContext.Roles
 				.AsQueryable()
-				.Where(expression)
-				.OrderBy(role => role.Priority);
+				.Where(searchCondition)
+				.OrderBy(role => role.Priority)
+				.ThenByDescending(role => role.DateCreated);
 
-			var queryCount = query.Count();
-			var isSurplus = (queryCount % pageSize) > 0;
-			var totalPage = queryCount / pageSize + (isSurplus ? 1 : 0);
+			// Handle get page information
+			var queryCount = await query.CountAsync();
+			var isSurplus = (queryCount % input.PageSize) > 0;
+			var totalPage = queryCount / input.PageSize + (isSurplus ? 1 : 0);
 
-			var pageSkip = (pageIndex - 1) * pageSize;
-			var data = query
-				.Skip(pageSkip)
-				.Take(pageSize)
+			// Handle get data with paging
+			var data = await query
+				.Skip(input.PageSkip)
+				.Take(input.PageSize)
 				.Select(role => role.MapToModel())
-				.ToArray();
+				.ToArrayAsync();
+
 			var result = new SearchResultModel<RoleModel>
 			{
 				Items = data,
 				TotalPage = totalPage,
 				TotalRecord = queryCount
 			};
-
 			return result;
 		}
 
@@ -51,14 +55,13 @@ namespace SmartCommerce.Persistence.Repositories
 		/// </summary>
 		/// <param name="branchId">Branch id</param>
 		/// <returns>A collection of role</returns>
-		public RoleModel[] GetAll(string branchId)
+		public async Task<RoleModel[]> GetAll(string branchId)
 		{
-			var result = _dbContext.Roles
-				.Where(role =>
-					(role.BranchId == branchId)
+			var result = await _dbContext.Roles
+				.Where(role => (role.BranchId == branchId)
 					&& (role.Status == RoleStatusEnum.Active))
 				.Select(role => role.MapToModel())
-				.ToArray();
+				.ToArrayAsync();
 
 			return result;
 		}
@@ -69,30 +72,13 @@ namespace SmartCommerce.Persistence.Repositories
 		/// <param name="branchId">Branch id</param>
 		/// <param name="roleId">Role id</param>
 		/// <returns>Role model</returns>
-		public RoleModel? Get(string branchId, int roleId)
+		public async Task<RoleModel?> Get(string branchId, int roleId)
 		{
-			var result = _dbContext.Roles
-				.FirstOrDefault(role =>
-					(role.BranchId == branchId)
-					&& (role.RoleId == roleId));
-
-			return result?.MapToModel();
-		}
-
-		/// <summary>
-		/// Get async
-		/// </summary>
-		/// <param name="branchId">Branch id</param>
-		/// <param name="roleId">Role id</param>
-		/// <returns>Role model</returns>
-		public async Task<RoleModel?> GetAsync(string branchId, int roleId)
-		{
-			var result = await _dbContext.Roles
+			var data = await _dbContext.Roles
 				.FirstOrDefaultAsync(role =>
 					(role.BranchId == branchId)
 					&& (role.RoleId == roleId));
-
-			return result?.MapToModel();
+			return data?.MapToModel();
 		}
 
 		/// <summary>
@@ -100,18 +86,19 @@ namespace SmartCommerce.Persistence.Repositories
 		/// </summary>
 		/// <param name="model">Role model</param>
 		/// <returns>Status insert</returns>
-		public bool Insert(RoleModel model)
+		public async Task<bool> Insert(RoleModel model)
 		{
-			var result = BeginTransaction(() =>
+			var result = await BeginTransaction(async () =>
 			{
-				var role = _dbContext.Roles.FirstOrDefault(item =>
-					(item.BranchId == model.BranchId)
-					&& (item.RoleId == model.RoleId));
+				var role = await _dbContext.Roles
+					.FirstOrDefaultAsync(item =>
+						(item.BranchId == model.BranchId)
+						&& (item.RoleId == model.RoleId));
 				if (role != null) throw new ExistInDBException();
 
 				var insertModel = model.MapToEntity();
-				_dbContext.Add(insertModel);
-				_dbContext.SaveChanges();
+				await _dbContext.AddAsync(insertModel);
+				await _dbContext.SaveChangesAsync();
 			});
 			return result;
 		}
@@ -121,18 +108,19 @@ namespace SmartCommerce.Persistence.Repositories
 		/// </summary>
 		/// <param name="model">Role model</param>
 		/// <returns>Status update</returns>
-		public bool Update(RoleModel model)
+		public Task<bool> Update(RoleModel model)
 		{
-			var result = BeginTransaction(() =>
+			var result = BeginTransaction(async () =>
 			{
-				var role = _dbContext.Roles.FirstOrDefault(item =>
-					(item.BranchId == model.BranchId)
-					&& (item.RoleId == model.RoleId));
+				var role = await _dbContext.Roles
+					.FirstOrDefaultAsync(item =>
+						(item.BranchId == model.BranchId)
+						&& (item.RoleId == model.RoleId));
 				if (role == null) throw new NotExistInDBException();
 
 				var updateModel = model.MapToEntity();
 				_dbContext.Update(updateModel);
-				_dbContext.SaveChanges();
+				await _dbContext.SaveChangesAsync();
 			});
 
 			return result;
@@ -144,17 +132,18 @@ namespace SmartCommerce.Persistence.Repositories
 		/// <param name="roleId">Role id</param>
 		/// <param name="UpdateAction">Update action</param>
 		/// <returns>Update status</returns>
-		public bool Update(string branchId, int roleId, Action<Role> UpdateAction)
+		public async Task<bool> Update(string branchId, int roleId, Action<Role> UpdateAction)
 		{
-			var result = BeginTransaction(() =>
+			var result = await BeginTransaction(async () =>
 			{
-				var role = _dbContext.Roles.FirstOrDefault(item =>
-					(item.BranchId == branchId)
-					&& (item.RoleId == roleId));
+				var role = await _dbContext.Roles
+					.FirstOrDefaultAsync(item =>
+						(item.BranchId == branchId)
+						&& (item.RoleId == roleId));
 				if (role == null) throw new NotExistInDBException();
 
 				UpdateAction(role);
-				_dbContext.SaveChanges();
+				await _dbContext.SaveChangesAsync();
 			});
 			return result;
 		}
@@ -165,17 +154,18 @@ namespace SmartCommerce.Persistence.Repositories
 		/// <param name="branchId">Branch id</param>
 		/// <param name="roleId">Role id</param>
 		/// <returns>Delete status</returns>
-		public bool Delete(string branchId, int roleId)
+		public async Task<bool> Delete(string branchId, int roleId)
 		{
-			var result = BeginTransaction(() =>
+			var result = await BeginTransaction(async () =>
 			{
-				var role = _dbContext.Roles.FirstOrDefault(item =>
-					(item.BranchId == branchId)
-					&& (item.RoleId == roleId));
+				var role = await _dbContext.Roles
+					.FirstOrDefaultAsync(item =>
+						(item.BranchId == branchId)
+						&& (item.RoleId == roleId));
 				if (role == null) throw new NotExistInDBException();
 
 				_dbContext.Remove(role);
-				_dbContext.SaveChanges();
+				await _dbContext.SaveChangesAsync();
 			});
 
 			return result;

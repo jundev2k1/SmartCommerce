@@ -16,13 +16,12 @@ namespace SmartCommerce.Persistence.Repositories
 		/// Get all
 		/// </summary>
 		/// <returns>A collection of branch</returns>
-		public BranchModel[] GetAll()
+		public async Task<BranchModel[]> GetAll()
 		{
-			var result = _dbContext.Branches
+			var result = await _dbContext.Branches
 				.Where(branch => branch.Status == BranchStatusEnum.Active)
 				.Select(branch => branch.MapToModel())
-				.ToArray();
-
+				.ToArrayAsync();
 			return result;
 		}
 
@@ -31,11 +30,10 @@ namespace SmartCommerce.Persistence.Repositories
 		/// </summary>
 		/// <param name="branchId">Branch id</param>
 		/// <returns>Branch model</returns>
-		public BranchModel? Get(string branchId)
+		public async Task<BranchModel?> Get(string branchId)
 		{
-			var result = _dbContext.Branches
-				.FirstOrDefault(branch => (branch.BranchId == branchId));
-
+			var result = await _dbContext.Branches
+				.FirstOrDefaultAsync(branch => branch.BranchId == branchId);
 			return result?.MapToModel();
 		}
 	}

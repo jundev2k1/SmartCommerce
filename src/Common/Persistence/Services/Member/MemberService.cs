@@ -21,16 +21,13 @@ namespace SmartCommerce.Persistence.Services
 		/// <summary>
 		/// Get by criteria
 		/// </summary>
-		/// <param name="searchParams">Search parameters</param>
-		/// <param name="pageIndex">Page index</param>
-		/// <param name="pageSize">Page size</param>
+		/// <param name="input">Search condition input</param>
 		/// <returns>Search result model</returns>
-		public SearchResultModel<MemberModel> GetByCriteria(MemberFilterModel searchParams, int pageIndex, int pageSize = Constants.DEFAULT_PAGE_SIZE)
+		public async Task<SearchResultModel<MemberModel>> GetByCriteria(MemberFilterModel input)
 		{
-			if (string.IsNullOrEmpty(searchParams.BranchId)) return new SearchResultModel<MemberModel>();
+			if (string.IsNullOrEmpty(input.BranchId)) return new SearchResultModel<MemberModel>();
 
-			var condition = FilterConditionBuilder.GetMemberFilters(searchParams);
-			var result = _memberRepository.GetByCriteria(condition, pageIndex, pageSize);
+			var result = await _memberRepository.GetByCriteria(input);
 			return result;
 		}
 
@@ -40,9 +37,9 @@ namespace SmartCommerce.Persistence.Services
 		/// <param name="branchId">Branch id</param>
 		/// <returns>Member list</returns>
 		/// <remarks>Use only when executing asynchronously</remarks>
-		public MemberModel[] GetAll(string branchId, bool isDeleted = false)
+		public async Task<MemberModel[]> GetAll(string branchId, bool isDeleted = false)
 		{
-			return _memberRepository.GetAll(branchId, isDeleted);
+			return await _memberRepository.GetAll(branchId, isDeleted);
 		}
 
 		/// <summary>
@@ -51,9 +48,9 @@ namespace SmartCommerce.Persistence.Services
 		/// <param name="branchId">Branch id</param>
 		/// <param name="memberIds">Member id list</param>
 		/// <returns>Member model list</returns>
-		public MemberModel[] Gets(string branchId, string[] memberIds)
+		public async Task<MemberModel[]> Gets(string branchId, string[] memberIds)
 		{
-			return _memberRepository.Gets(branchId, memberIds);
+			return await _memberRepository.Gets(branchId, memberIds);
 		}
 
 		/// <summary>
@@ -62,9 +59,9 @@ namespace SmartCommerce.Persistence.Services
 		/// <param name="branchId">Branch id</param>
 		/// <param name="memberId">Member id</param>
 		/// <returns>Member model</returns>
-		public MemberModel? Get(string branchId, string memberId)
+		public async Task<MemberModel?> Get(string branchId, string memberId)
 		{
-			return _memberRepository.Get(branchId, memberId);
+			return await _memberRepository.Get(branchId, memberId);
 		}
 		#endregion
 
@@ -74,9 +71,9 @@ namespace SmartCommerce.Persistence.Services
 		/// </summary>
 		/// <param name="model">Member model</param>
 		/// <returns>Insert status</returns>
-		public bool Insert(MemberModel model)
+		public async Task<bool> Insert(MemberModel model)
 		{
-			return _memberRepository.Insert(model);
+			return await _memberRepository.Insert(model);
 		}
 
 		/// <summary>
@@ -84,9 +81,9 @@ namespace SmartCommerce.Persistence.Services
 		/// </summary>
 		/// <param name="model">Member model</param>
 		/// <returns>Update status</returns>
-		public bool Update(MemberModel model)
+		public async Task<bool> Update(MemberModel model)
 		{
-			return _memberRepository.Update(model);
+			return await _memberRepository.Update(model);
 		}
 		/// <summary>
 		/// Update
@@ -95,9 +92,9 @@ namespace SmartCommerce.Persistence.Services
 		/// <param name="memberId">Member id</param>
 		/// <param name="updateAction">Update action</param>
 		/// <returns>Update status</returns>
-		public bool Update(string branchId, string memberId, Action<Member> updateAction)
+		public async Task<bool> Update(string branchId, string memberId, Action<Member> updateAction)
 		{
-			return _memberRepository.Update(branchId, memberId, updateAction);
+			return await _memberRepository.Update(branchId, memberId, updateAction);
 		}
 
 		/// <summary>
@@ -106,13 +103,13 @@ namespace SmartCommerce.Persistence.Services
 		/// <param name="branchId">Branch id</param>
 		/// <param name="memberId">Member id</param>
 		/// <returns>Update status</returns>
-		public bool TempDelete(string branchId, string memberId)
+		public async Task<bool> TempDelete(string branchId, string memberId)
 		{
 			var updateAction = (Member member) =>
 			{
 				member.DelFlg = true;
 			};
-			return _memberRepository.Update(branchId, memberId, updateAction);
+			return await _memberRepository.Update(branchId, memberId, updateAction);
 		}
 
 		/// <summary>
@@ -121,9 +118,9 @@ namespace SmartCommerce.Persistence.Services
 		/// <param name="branchId">Branch id</param>
 		/// <param name="memberId">Member id</param>
 		/// <returns>Delete status</returns>
-		public bool Delete(string branchId, string memberId)
+		public async Task<bool> Delete(string branchId, string memberId)
 		{
-			return _memberRepository.Delete(branchId, memberId);
+			return await _memberRepository.Delete(branchId, memberId);
 		}
 		#endregion
 	}

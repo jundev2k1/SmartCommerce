@@ -5,19 +5,19 @@ namespace SmartCommerce.Persistence.Extensions.FilterBuilders
 {
 	public static partial class FilterConditionBuilder
 	{
-		public static Expression<Func<Notification, bool>> GetNotificationFilters(NotificationFilterModel searchDto)
+		public static Expression<Func<Notification, bool>> GetNotificationFilters(NotificationFilterModel input)
 		{
 			var predicate = PredicateBuilder.True<Notification>();
 
-			if (string.IsNullOrEmpty(searchDto.Keywords) == false)
+			if (string.IsNullOrEmpty(input.Keywords) == false)
 			{
-				predicate.And(p => p.Id.ToString().Contains(searchDto.Keywords)
-					|| p.Title.Contains(searchDto.Keywords));
+				predicate.And(p => p.Id.ToString().Contains(input.Keywords)
+					|| p.Title.Contains(input.Keywords));
 			}
 
-			if (string.IsNullOrEmpty(searchDto.BranchId) == false)
+			if (string.IsNullOrEmpty(input.BranchId) == false)
 			{
-				predicate.And(u => u.BranchId.Equals(searchDto.BranchId));
+				predicate.And(u => u.BranchId.Equals(input.BranchId));
 			}
 
 			return predicate;

@@ -13,19 +13,21 @@ namespace SmartCommerce.Manager.ViewComponents
 		{
 		}
 
-		public IViewComponentResult Invoke(
+		public async Task<IViewComponentResult> InvokeAsync(
 			string branchId,
 			string createdBy,
 			DateTime dateCreated,
 			string className = "",
 			bool isPill = false)
 		{
-			var createdByName = (createdBy == Constants.DEFAULT_FLG_CREATED_BY_SYSTEM)
-				? Constants.DEFAULT_FLG_CREATED_BY_SYSTEM
-				: _serviceFacade.Users.Get(branchId, createdBy)?.FullName;
+			if (createdBy != Constants.DEFAULT_FLG_CREATED_BY_SYSTEM)
+			{
+				var user = await _serviceFacade.Users.Get(branchId, createdBy);
+				createdBy = user?.UserName ?? Constants.DEFAULT_FLG_CREATED_BY_SYSTEM;
+			}
 			var data = new CreatedByBadgeViewModel
 			{
-				CreatedName = createdByName,
+				CreatedName = createdBy,
 				DateCreated = dateCreated,
 				ClassName = className,
 				IsPill = isPill

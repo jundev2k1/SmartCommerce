@@ -18,14 +18,14 @@ namespace SmartCommerce.Persistence.Repositories
 		/// Begin transaction
 		/// </summary>
 		/// <returns>Status callback</returns>
-		public bool BeginTransaction(Action Invoke)
+		public async Task<bool> BeginTransaction(Func<Task> Invoke)
 		{
-			var transaction = _dbContext.Database.BeginTransaction();
+			var transaction = await _dbContext.Database.BeginTransactionAsync();
 			try
 			{
-				Invoke();
+				await Invoke();
 
-				transaction.Commit();
+				await transaction.CommitAsync();
 				return true;
 			}
 			catch (NotExistInDBException ex)

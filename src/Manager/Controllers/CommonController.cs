@@ -221,13 +221,13 @@ namespace SmartCommerce.Manager.Controllers
 		[HttpGet]
 		[AllowAnonymous]
 		[Route(Constants.ENDPOINT_COMMON_GENERATE_QR_CODE)]
-		public IActionResult GenerateQRCode(string url)
+		public async Task<IActionResult> GenerateQRCode(string url)
 		{
 			if (string.IsNullOrEmpty(url)) return Content(string.Empty);
 			try
 			{
 				// Generate token by inserting new token
-				var token = _serviceFacade.Tokens.GenerateToken(
+				var token = await _serviceFacade.Tokens.GenerateToken(
 					branchId: this.OperatorBranchId,
 					claims: new Dictionary<string, string>(),
 					type: TokenTypeEnum.ProductPreviewToken,

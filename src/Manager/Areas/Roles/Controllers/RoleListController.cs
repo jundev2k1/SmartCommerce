@@ -20,30 +20,38 @@ namespace SmartCommerce.Manager.Areas.Roles.Controllers
 		[HttpGet]
 		[Authorization(Permission.CanReadListRole)]
 		[Route(Constants.MODULE_ROLE_ROLELIST_PATH, Name = Constants.MODULE_ROLE_ROLELIST_NAME)]
-		public IActionResult Index(int page = 1)
+		public async Task<IActionResult> Index()
 		{
-			var condition = new RoleFilterModel { BranchId = OperatorBranchId };
-			var data = _serviceFacade.Roles.GetByCriteria(condition, page, Constants.DEFAULT_PAGE_SIZE);
-
-			return View(new RoleListViewModel { PageData = data, PageIndex = page });
+			var condition = GetFiltersByRequest();
+			var roleList = await _serviceFacade.Roles.GetByCriteria(condition);
+			var data = new RoleListViewModel
+			{
+				PageData = roleList,
+			};
+			return View(data);
 		}
-		[HttpPost]
-		[Authorization(Permission.CanReadListRole)]
-		[Route(Constants.MODULE_ROLE_ROLELIST_PATH, Name = Constants.MODULE_ROLE_ROLELIST_NAME)]
-		public IActionResult Index(RoleListViewModel viewModel)
+
+		/// <summary>
+		/// Get filters by request
+		/// </summary>
+		/// <returns>Role filters</returns>
+		private RoleFilterModel GetFiltersByRequest()
 		{
-			var searchParams = viewModel.SearchFields;
-			searchParams.BranchId = OperatorBranchId;
+			var parameter = new RoleFilterModel()
+			{
+				Keywords = GetRequestParam<string>(Constants.REQUEST_KEY_KEYWORD, string.Empty),
+				BranchId = this.OperatorBranchId,
+				PageNumber = GetRequestParam<int>(Constants.REQUEST_KEY_PAGE_NO, 1),
+				PageSize = GetRequestParam<int>(Constants.REQUEST_KEY_PAGE_SIZE, Constants.DEFAULT_PAGE_SIZE),
+				OrderBy = GetRequestParam<string>(Constants.REQUEST_KEY_SORT_BY, string.Empty),
+				OrderByDirection = GetRequestParam<string>(Constants.REQUEST_KEY_SORT_DIRECTION, string.Empty),
+			};
 
-			// Check page index out of range data collection
-			if (viewModel.PageData.TotalPage < viewModel.PageIndex)
-				viewModel.PageIndex = 1;
+			// Reset value if limit is exceeded
+			if (parameter.PageSize <= 0) parameter.PageSize = Constants.DEFAULT_PAGE_SIZE;
+			if (parameter.PageNumber <= 0) parameter.PageNumber = 1;
 
-			viewModel.PageData = _serviceFacade.Roles.GetByCriteria(
-				searchParams,
-				viewModel.PageIndex,
-				viewModel.PageSize);
-			return View(viewModel);
+			return parameter;
 		}
 	}
 }

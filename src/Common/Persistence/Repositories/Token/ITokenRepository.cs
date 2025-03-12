@@ -10,21 +10,21 @@ namespace SmartCommerce.Persistence.Repositories
 		/// <param name="branchID">Branch id</param>
 		/// <param name="tokenId">Token id</param>
 		/// <returns>Token model</returns>
-		TokenModel? Get(string branchID, string tokenId);
+		Task<TokenModel?> Get(string branchID, string tokenId);
 
 		/// <summary>
 		/// Insert
 		/// </summary>
 		/// <param name="model">Token model</param>
 		/// <returns>Insert status</returns>
-		bool Insert(TokenModel model);
+		Task<bool> Insert(TokenModel model);
 
 		/// <summary>
 		/// Update
 		/// </summary>
 		/// <param name="model">Token model</param>
 		/// <returns>Update status</returns>
-		bool Update(TokenModel model);
+		Task<bool> Update(TokenModel model);
 		/// <summary>
 		/// Update
 		/// </summary>
@@ -32,7 +32,7 @@ namespace SmartCommerce.Persistence.Repositories
 		/// <param name="tokenId">Token id</param>
 		/// <param name="updateAction">Update action</param>
 		/// <returns>Update status</returns>
-		bool Update(string branchId, string tokenId, Action<Token> updateAction);
+		Task<bool> Update(string branchId, string tokenId, Action<Token> updateAction);
 
 		/// <summary>
 		/// Delete
@@ -40,6 +40,6 @@ namespace SmartCommerce.Persistence.Repositories
 		/// <param name="branchID">Branch id</param>
 		/// <param name="tokenId">Token id</param>
 		/// <returns>Delete status</returns>
-		bool Delete(string branchID, string tokenId);
+		Task<bool> Delete(string branchID, string tokenId);
 	}
 }

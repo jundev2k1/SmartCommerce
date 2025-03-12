@@ -7,33 +7,36 @@ namespace SmartCommerce.Persistence.Repositories
 		/// <summary>
 		/// Constructor
 		/// </summary>
-		public MemberRepository(ApplicationDBContext dbContext, IFileLogger logger) : base(dbContext, logger)
+		public MemberRepository(ApplicationDBContext dbContext, IFileLogger logger)
+			: base(dbContext, logger)
 		{
 		}
 
 		/// <summary>
 		/// Get by criteria
 		/// </summary>
-		/// <param name="expression">Expression</param>
-		/// <param name="pageIndex">Page index</param>
-		/// <param name="pageSize">Page size</param>
+		/// <param name="input">Search condition input</param>
 		/// <returns>Search result model</returns>
-		public SearchResultModel<MemberModel> GetByCriteria(Expression<Func<Member, bool>> expression, int pageIndex, int pageSize)
+		public async Task<SearchResultModel<MemberModel>> GetByCriteria(MemberFilterModel input)
 		{
+			var searchCondition = FilterConditionBuilder.GetMemberFilters(input);
+
+			// Search with query
 			var query = _dbContext.Members
 				.AsQueryable()
-				.Where(expression);
+				.Where(searchCondition);
 
-			var queryCount = query.Count();
-			var isSurplus = (queryCount % pageSize) > 0;
-			var totalPage = queryCount / pageSize + (isSurplus ? 1 : 0);
+			// Handle get page information
+			var queryCount = await query.CountAsync();
+			var isSurplus = (queryCount % input.PageSize) > 0;
+			var totalPage = queryCount / input.PageSize + (isSurplus ? 1 : 0);
 
-			var pageSkip = (pageIndex - 1) * pageSize;
-			var data = query
-				.Skip(pageSkip)
-				.Take(pageSize)
+			// Handle get data with paging
+			var data = await query
+				.Skip(input.PageSkip)
+				.Take(input.PageSize)
 				.Select(member => member.MapToModel())
-				.ToArray();
+				.ToArrayAsync();
 
 			var result = new SearchResultModel<MemberModel>
 			{
@@ -50,15 +53,13 @@ namespace SmartCommerce.Persistence.Repositories
 		/// <param name="branchId">Branch id</param>
 		/// <param name="isDeleted">Delete flag of member</param>
 		/// <returns>A collection of member</returns>
-		public MemberModel[] GetAll(string branchId, bool isDeleted)
+		public async Task<MemberModel[]> GetAll(string branchId, bool isDeleted)
 		{
-			var result = _dbContext.Members
-				.Where(member =>
-					(member.BranchId == branchId)
+			var result = await _dbContext.Members
+				.Where(member => (member.BranchId == branchId)
 					&& (member.DelFlg == isDeleted))
 				.Select(member => member.MapToModel())
-				.ToArray();
-
+				.ToArrayAsync();
 			return result;
 		}
 
@@ -68,13 +69,12 @@ namespace SmartCommerce.Persistence.Repositories
 		/// <param name="branchId">Branch id</param>
 		/// <param name="memberIds">Member id list</param>
 		/// <returns>Member model list</returns>
-		public MemberModel[] Gets(string branchId, string[] memberIds)
+		public async Task<MemberModel[]> Gets(string branchId, string[] memberIds)
 		{
-			var result = _dbContext.Members
+			var result = await _dbContext.Members
 				.Where(member => (member.BranchId == branchId) && memberIds.Contains(member.MemberId))
 				.Select(member => member.MapToModel())
-				.ToArray();
-
+				.ToArrayAsync();
 			return result;
 		}
 
@@ -84,13 +84,13 @@ namespace SmartCommerce.Persistence.Repositories
 		/// <param name="branchId">Branch id</param>
 		/// <param name="memberId">Member id</param>
 		/// <returns>Member model</returns>
-		public MemberModel? Get(string branchId, string memberId)
+		public async Task<MemberModel?> Get(string branchId, string memberId)
 		{
-			var result = _dbContext.Members.FirstOrDefault(member =>
-				(member.BranchId == branchId)
-				&& (member.MemberId == memberId));
-
-			return result?.MapToModel();
+			var member = await _dbContext.Members
+				.FirstOrDefaultAsync(member =>
+					(member.BranchId == branchId)
+					&& (member.MemberId == memberId));
+			return member?.MapToModel();
 		}
 
 		/// <summary>
@@ -98,18 +98,19 @@ namespace SmartCommerce.Persistence.Repositories
 		/// </summary>
 		/// <param name="model">Model</param>
 		/// <returns>Status insert</returns>
-		public bool Insert(MemberModel model)
+		public async Task<bool> Insert(MemberModel model)
 		{
-			var result = BeginTransaction(() =>
+			var result = await BeginTransaction(async () =>
 			{
-				var member = _dbContext.Members.FirstOrDefault(item =>
-					(item.BranchId == model.BranchId)
-					&& (item.MemberId == model.MemberId));
+				var member = await _dbContext.Members
+					.FirstOrDefaultAsync(item =>
+						(item.BranchId == model.BranchId)
+						&& (item.MemberId == model.MemberId));
 				if (member != null) throw new ExistInDBException();
 
 				var insertModel = model.MapToEntity();
-				_dbContext.Add(insertModel);
-				_dbContext.SaveChanges();
+				await _dbContext.AddAsync(insertModel);
+				await _dbContext.SaveChangesAsync();
 			});
 			return result;
 		}
@@ -119,18 +120,19 @@ namespace SmartCommerce.Persistence.Repositories
 		/// </summary>
 		/// <param name="model">Model</param>
 		/// <returns>Status update</returns>
-		public bool Update(MemberModel model)
+		public async Task<bool> Update(MemberModel model)
 		{
-			var result = BeginTransaction(() =>
+			var result = await BeginTransaction(async () =>
 			{
-				var member = _dbContext.Members.FirstOrDefault(item =>
-					(item.BranchId == model.BranchId)
-					&& (item.MemberId == model.MemberId));
+				var member = await _dbContext.Members
+					.FirstOrDefaultAsync(item =>
+						(item.BranchId == model.BranchId)
+						&& (item.MemberId == model.MemberId));
 				if (member == null) throw new NotExistInDBException();
 
 				var updateModel = model.MapToEntity();
 				_dbContext.Update(updateModel);
-				_dbContext.SaveChanges();
+				await _dbContext.SaveChangesAsync();
 			});
 			return result;
 		}
@@ -141,17 +143,18 @@ namespace SmartCommerce.Persistence.Repositories
 		/// <param name="memberId">Member id</param>
 		/// <param name="UpdateAction">Update action</param>
 		/// <returns>Update status</returns>
-		public bool Update(string branchId, string memberId, Action<Member> UpdateAction)
+		public async Task<bool> Update(string branchId, string memberId, Action<Member> UpdateAction)
 		{
-			var result = BeginTransaction(() =>
+			var result = await BeginTransaction(async () =>
 			{
-				var member = _dbContext.Members.FirstOrDefault(item =>
-					(item.BranchId == branchId)
-					&& (item.MemberId == memberId));
+				var member = await _dbContext.Members
+					.FirstOrDefaultAsync(item =>
+						(item.BranchId == branchId)
+						&& (item.MemberId == memberId));
 				if (member == null) throw new NotExistInDBException();
 
 				UpdateAction(member);
-				_dbContext.SaveChanges();
+				await _dbContext.SaveChangesAsync();
 			});
 			return result;
 		}
@@ -162,17 +165,18 @@ namespace SmartCommerce.Persistence.Repositories
 		/// <param name="branchId">Branch id</param>
 		/// <param name="memberId">Member id</param>
 		/// <returns>Delete status</returns>
-		public bool Delete(string branchId, string memberId)
+		public async Task<bool> Delete(string branchId, string memberId)
 		{
-			var result = BeginTransaction(() =>
+			var result = await BeginTransaction(async () =>
 			{
-				var member = _dbContext.Members.FirstOrDefault(item =>
-					(item.BranchId == branchId)
-					&& (item.MemberId == memberId));
+				var member = await _dbContext.Members
+					.FirstOrDefaultAsync(item =>
+						(item.BranchId == branchId)
+						&& (item.MemberId == memberId));
 				if (member == null) throw new NotExistInDBException();
 
 				_dbContext.Remove(member);
-				_dbContext.SaveChanges();
+				await _dbContext.SaveChangesAsync();
 			});
 			return result;
 		}

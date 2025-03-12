@@ -77,6 +77,7 @@ namespace SmartCommerce.Common
 		public const string MAILTAG_MAIL_PARAGRAPH_ITEM = "mail-paragraph-item";
 
 		// Request key: Common
+		public const string REQUEST_KEY_BRAND_ID = "bid";
 		public const string REQUEST_KEY_PAGE_NO = "page";
 		public const string REQUEST_KEY_PAGE_SIZE = "cnt";
 		public const string REQUEST_KEY_KEYWORD = "kwrd";
@@ -84,7 +85,6 @@ namespace SmartCommerce.Common
 		public const string REQUEST_KEY_SORT_DIRECTION = "order";
 
 		// Request key: Product module
-		public const string REQUEST_KEY_PRODUCT_BRAND_ID = "bid";
 		public const string REQUEST_KEY_PRODUCT_PRODUCT_ID = "pid";
 		public const string REQUEST_KEY_PRODUCT_PRODUCT_NAME = "pname";
 		public const string REQUEST_KEY_PRODUCT_ADDRESS1 = "addr1";
@@ -129,5 +129,22 @@ namespace SmartCommerce.Common
 		public const string REQUEST_KEY_USER_DATE_CHANGED_TO = "dcht";
 		public const string REQUEST_KEY_USER_DATE_CREATED_FROM = "dcrt";
 		public const string REQUEST_KEY_USER_DATE_CREATED_TO = "dcrt";
+
+		// Request key: User module
+		public const string REQUEST_KEY_ROLE_USER_ID = "uid";
+		public const string REQUEST_KEY_ROLE_STATUS = "status";
+		public const string REQUEST_KEY_ROLE_EMAIL = "mail";
+		public const string REQUEST_KEY_ROLE_USERNAME = "uname";
+		public const string REQUEST_KEY_ROLE_FIRSTNAME = "fname";
+		public const string REQUEST_KEY_ROLE_LASTNAME = "lname";
+		public const string REQUEST_KEY_ROLE_ADDRESS1 = "addr1";
+		public const string REQUEST_KEY_ROLE_ADDRESS2 = "addr2";
+		public const string REQUEST_KEY_ROLE_ADDRESS3 = "addr3";
+		public const string REQUEST_KEY_ROLE_ADDRESS4 = "addr4";
+		public const string REQUEST_KEY_ROLE_DELETE_FLG = "del";
+		public const string REQUEST_KEY_ROLE_DATE_CHANGED_FROM = "dchf";
+		public const string REQUEST_KEY_ROLE_DATE_CHANGED_TO = "dcht";
+		public const string REQUEST_KEY_ROLE_DATE_CREATED_FROM = "dcrt";
+		public const string REQUEST_KEY_ROLE_DATE_CREATED_TO = "dcrt";
 	}
 }

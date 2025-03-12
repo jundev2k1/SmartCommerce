@@ -23,13 +23,13 @@ namespace SmartCommerce.Persistence.Services
 		/// <summary>
 		/// Get by criteria
 		/// </summary>
-		/// <param name="condition">Search condition</param>
+		/// <param name="input">Search condition input</param>
 		/// <returns>Search result model</returns>
-		public async Task<SearchResultModel<UserModel>> GetByCriteria(UserFilterModel condition)
+		public async Task<SearchResultModel<UserModel>> GetByCriteria(UserFilterModel input)
 		{
-			if (string.IsNullOrEmpty(condition.BranchId)) return new ();
+			if (string.IsNullOrEmpty(input.BranchId)) return new ();
 
-			var result = await _userRepository.GetByCriteria(condition);
+			var result = await _userRepository.GetByCriteria(input);
 			return result;
 		}
 
@@ -38,9 +38,9 @@ namespace SmartCommerce.Persistence.Services
 		/// </summary>
 		/// <param name="branchId">Branch id</param>
 		/// <returns>User list</returns>
-		public UserModel[] GetAll(string branchId, bool isDeleted = false)
+		public async Task<UserModel[]> GetAll(string branchId, bool isDeleted = false)
 		{
-			return _userRepository.GetAll(branchId, isDeleted);
+			return await _userRepository.GetAll(branchId, isDeleted);
 		}
 
 		/// <summary>
@@ -49,9 +49,9 @@ namespace SmartCommerce.Persistence.Services
 		/// <param name="branchId">Branch id</param>
 		/// <param name="userIds">User id list</param>
 		/// <returns>User model list</returns>
-		public UserModel[] Gets(string branchId, string[] userIds)
+		public async Task<UserModel[]> Gets(string branchId, string[] userIds)
 		{
-			return _userRepository.Gets(branchId, userIds);
+			return await _userRepository.Gets(branchId, userIds);
 		}
 
 		/// <summary>
@@ -60,9 +60,9 @@ namespace SmartCommerce.Persistence.Services
 		/// <param name="branchId">Branch id</param>
 		/// <param name="userId">User id</param>
 		/// <returns>User model</returns>
-		public UserModel? Get(string branchId, string userId)
+		public async Task<UserModel?> Get(string branchId, string userId)
 		{
-			return _userRepository.Get(branchId, userId);
+			return await _userRepository.Get(branchId, userId);
 		}
 
 		/// <summary>
@@ -71,9 +71,9 @@ namespace SmartCommerce.Persistence.Services
 		/// <param name="branchId">Branch id</param>
 		/// <param name="userName">User name</param>
 		/// <returns>User model</returns>
-		public UserModel? GetUserByUsername(string branchId, string userName)
+		public async Task<UserModel?> GetUserByUsername(string branchId, string userName)
 		{
-			return _userRepository.GetByUserName(branchId, userName);
+			return await _userRepository.GetByUserName(branchId, userName);
 		}
 
 		/// <summary>
@@ -83,9 +83,9 @@ namespace SmartCommerce.Persistence.Services
 		/// <param name="userName">User name</param>
 		/// <param name="password">Password</param>
 		/// <returns>User model</returns>
-		public OperatorModel? TryLogin(string branchId, string userName, string password)
+		public async Task<OperatorModel?> TryLogin(string branchId, string userName, string password)
 		{
-			var user = _userRepository.GetByUserName(branchId, userName);
+			var user = await _userRepository.GetByUserName(branchId, userName);
 			if ((user == null)
 				|| (user.Password != password)
 				|| (user.RoleId.HasValue == false))
@@ -93,7 +93,7 @@ namespace SmartCommerce.Persistence.Services
 				return null;
 			}
 
-			var role = _roleRepository.Get(user.BranchId, user.RoleId.Value);
+			var role = await _roleRepository.Get(user.BranchId, user.RoleId.Value);
 			if (role == null) return null;
 
 			return AuthMapping.MapToOperatorModel(user, role);
@@ -106,9 +106,9 @@ namespace SmartCommerce.Persistence.Services
 		/// </summary>
 		/// <param name="model">User model</param>
 		/// <returns>Insert status</returns>
-		public bool Insert(UserModel model)
+		public async Task<bool> Insert(UserModel model)
 		{
-			return _userRepository.Insert(model);
+			return await _userRepository.Insert(model);
 		}
 
 		/// <summary>
@@ -116,9 +116,9 @@ namespace SmartCommerce.Persistence.Services
 		/// </summary>
 		/// <param name="model">User model</param>
 		/// <returns>Update status</returns>
-		public bool Update(UserModel model)
+		public async Task<bool> Update(UserModel model)
 		{
-			return _userRepository.Update(model);
+			return await _userRepository.Update(model);
 		}
 		/// <summary>
 		/// Update
@@ -127,9 +127,9 @@ namespace SmartCommerce.Persistence.Services
 		/// <param name="userId">User id</param>
 		/// <param name="updateAction">Update action</param>
 		/// <returns>Update status</returns>
-		public bool Update(string branchId, string userId, Action<User> updateAction)
+		public async Task<bool> Update(string branchId, string userId, Action<User> updateAction)
 		{
-			return _userRepository.Update(branchId, userId, updateAction);
+			return await _userRepository.Update(branchId, userId, updateAction);
 		}
 
 		/// <summary>
@@ -138,13 +138,12 @@ namespace SmartCommerce.Persistence.Services
 		/// <param name="branchId">Branch id</param>
 		/// <param name="userId">User id</param>
 		/// <returns>Update status</returns>
-		public bool TempDelete(string branchId, string userId)
+		public async Task<bool> TempDelete(string branchId, string userId)
 		{
-			var user = _userRepository.Get(branchId, userId);
-			if (user == null) return false;
-
-			user.DelFlg = true;
-			return _userRepository.Update(user);
+			return await _userRepository.Update(branchId, userId, user =>
+			{
+				user.DelFlg = true;
+			});
 		}
 
 		/// <summary>
@@ -153,9 +152,9 @@ namespace SmartCommerce.Persistence.Services
 		/// <param name="branchId">Branch id</param>
 		/// <param name="userId">User id</param>
 		/// <returns>Delete status</returns>
-		public bool Delete(string branchId, string userId)
+		public async Task<bool> Delete(string branchId, string userId)
 		{
-			return _userRepository.Delete(branchId, userId);
+			return await _userRepository.Delete(branchId, userId);
 		}
 		#endregion
 	}

@@ -21,16 +21,13 @@ namespace SmartCommerce.Persistence.Services
 		/// <summary>
 		/// Get by criteria
 		/// </summary>
-		/// <param name="searchParams">Search parameters</param>
-		/// <param name="pageIndex">Page index</param>
-		/// <param name="pageSize">Page size</param>
+		/// <param name="input">Search condition input</param>
 		/// <returns>Search result model</returns>
-		public SearchResultModel<RoleModel> GetByCriteria(RoleFilterModel searchParams, int pageIndex, int pageSize = Constants.DEFAULT_PAGE_SIZE)
+		public async Task<SearchResultModel<RoleModel>> GetByCriteria(RoleFilterModel input)
 		{
-			if (string.IsNullOrEmpty(searchParams.BranchId)) return new SearchResultModel<RoleModel>();
+			if (string.IsNullOrEmpty(input.BranchId)) return new SearchResultModel<RoleModel>();
 
-			var condition = FilterConditionBuilder.GetRoleFilters(searchParams);
-			var result = _roleRepository.GetByCriteria(condition, pageIndex, pageSize);
+			var result = await _roleRepository.GetByCriteria(input);
 			return result;
 		}
 
@@ -39,9 +36,9 @@ namespace SmartCommerce.Persistence.Services
 		/// </summary>
 		/// <param name="branchId"></param>
 		/// <returns>A collection of role</returns>
-		public RoleModel[] GetAll(string branchId)
+		public async Task<RoleModel[]> GetAll(string branchId)
 		{
-			return _roleRepository.GetAll(branchId);
+			return await _roleRepository.GetAll(branchId);
 		}
 
 		/// <summary>
@@ -50,19 +47,9 @@ namespace SmartCommerce.Persistence.Services
 		/// <param name="branchId">Branch ID</param>
 		/// <param name="roleId">Role ID</param>
 		/// <returns>Role model</returns>
-		public RoleModel? Get(string branchId, int roleId)
+		public async Task<RoleModel?> Get(string branchId, int roleId)
 		{
-			return _roleRepository.Get(branchId, roleId);
-		}
-		/// <summary>
-		/// Get role async
-		/// </summary>
-		/// <param name="branchId">Branch ID</param>
-		/// <param name="roleId">Role ID</param>
-		/// <returns>Role model</returns>
-		public async Task<RoleModel?> GetAsync(string branchId, int roleId)
-		{
-			return await _roleRepository.GetAsync(branchId, roleId);
+			return await _roleRepository.Get(branchId, roleId);
 		}
 		#endregion
 
@@ -72,9 +59,9 @@ namespace SmartCommerce.Persistence.Services
 		/// </summary>
 		/// <param name="model">Role model</param>
 		/// <returns>Inser status</returns>
-		public bool Insert(RoleModel model)
+		public async Task<bool> Insert(RoleModel model)
 		{
-			return _roleRepository.Insert(model);
+			return await _roleRepository.Insert(model);
 		}
 
 		/// <summary>
@@ -82,9 +69,9 @@ namespace SmartCommerce.Persistence.Services
 		/// </summary>
 		/// <param name="model">Role model</param>
 		/// <returns>Update status</returns>
-		public bool Update(RoleModel model)
+		public async Task<bool> Update(RoleModel model)
 		{
-			return _roleRepository.Update(model);
+			return await _roleRepository.Update(model);
 		}
 		/// <summary>
 		/// Update
@@ -93,9 +80,9 @@ namespace SmartCommerce.Persistence.Services
 		/// <param name="roleId">Role id</param>
 		/// <param name="updateAction">Update action</param>
 		/// <returns>Update status</returns>
-		public bool Update(string branchId, int roleId, Action<Role> updateAction)
+		public async Task<bool> Update(string branchId, int roleId, Action<Role> updateAction)
 		{
-			return _roleRepository.Update(branchId, roleId, updateAction);
+			return await _roleRepository.Update(branchId, roleId, updateAction);
 		}
 
 		/// <summary>
@@ -104,13 +91,12 @@ namespace SmartCommerce.Persistence.Services
 		/// <param name="branchId">Branch id</param>
 		/// <param name="roleId">Role id</param>
 		/// <returns>Update status</returns>
-		public bool TempDelete(string branchId, int roleId)
+		public async Task<bool> TempDelete(string branchId, int roleId)
 		{
-			var role = _roleRepository.Get(branchId, roleId);
-			if (role == null) return false;
-
-			role.Status = RoleStatusEnum.Active;
-			return true;
+			return await _roleRepository.Update(branchId, roleId, item =>
+			{
+				item.Status = RoleStatusEnum.Active;
+			});
 		}
 
 		#endregion

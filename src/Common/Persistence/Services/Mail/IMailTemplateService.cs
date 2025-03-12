@@ -7,11 +7,9 @@ namespace SmartCommerce.Persistence.Services
 		/// <summary>
 		/// Get by criteria
 		/// </summary>
-		/// <param name="searchParams">Search parameters</param>
-		/// <param name="pageIndex">Page index</param>
-		/// <param name="pageSize">Page size</param>
+		/// <param name="input">Search condition input</param>
 		/// <returns>Search result model</returns>
-		SearchResultModel<MailTemplateModel> GetByCriteria(MailTemplateFilterModel searchParams, int pageIndex, int pageSize = Constants.DEFAULT_PAGE_SIZE);
+		Task<SearchResultModel<MailTemplateModel>> GetByCriteria(MailTemplateFilterModel input);
 
 		/// <summary>
 		/// Get mail template
@@ -19,21 +17,21 @@ namespace SmartCommerce.Persistence.Services
 		/// <param name="branchId">Branch id</param>
 		/// <param name="mailId">MailTemplate id</param>
 		/// <returns>MailTemplate model</returns>
-		MailTemplateModel? Get(string branchId, string mailId);
+		Task<MailTemplateModel?> Get(string branchId, string mailId);
 
 		/// <summary>
 		/// Insert
 		/// </summary>
 		/// <param name="model">Mail template model</param>
 		/// <returns>Insert status</returns>
-		bool Insert(MailTemplateModel model);
+		Task<bool> Insert(MailTemplateModel model);
 
 		/// <summary>
 		/// Update
 		/// </summary>
 		/// <param name="model">Mail template model</param>
 		/// <returns>Update status</returns>
-		bool Update(MailTemplateModel model);
+		Task<bool> Update(MailTemplateModel model);
 		/// <summary>
 		/// Update
 		/// </summary>
@@ -41,7 +39,7 @@ namespace SmartCommerce.Persistence.Services
 		/// <param name="mailId">Mail id</param>
 		/// <param name="updateAction">Update action</param>
 		/// <returns>Update status</returns>
-		bool Update(string branchId, string mailId, Action<MailTemplate> updateAction);
+		Task<bool> Update(string branchId, string mailId, Action<MailTemplate> updateAction);
 
 		/// <summary>
 		/// Update
@@ -49,6 +47,6 @@ namespace SmartCommerce.Persistence.Services
 		/// <param name="branchId">Branch id</param>
 		/// <param name="mailId">Mail id</param>
 		/// <returns>Update status</returns>
-		bool UpdateStatus(string branchId, string mailId);
+		Task<bool> UpdateStatus(string branchId, string mailId);
 	}
 }

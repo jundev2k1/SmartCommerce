@@ -16,30 +16,30 @@ namespace SmartCommerce.Persistence.Repositories
 		/// <summary>
 		/// Get by criteria
 		/// </summary>
-		/// <param name="condition">Search condition</param>
+		/// <param name="input">Search condition input</param>
 		/// <returns>Search result model</returns>
-		public async Task<SearchResultModel<ProductModel>> GetByCriteria(ProductFilterModel condition)
+		public async Task<SearchResultModel<ProductModel>> GetByCriteria(ProductFilterModel input)
 		{
-			var filterCondition = FilterConditionBuilder.GetProductFilters(condition);
+			var searchCondition = FilterConditionBuilder.GetProductFilters(input);
 
 			// Search with query
 			var query = _dbContext.Products
 				.AsQueryable()
-				.Where(filterCondition)
-				.OrderByDynamic(condition);
+				.Where(searchCondition)
+				.OrderByDynamic(input);
 
 			// Handle get page information
 			var queryCount = await query.CountAsync();
-			var isSurplus = (queryCount % condition.PageSize) > 0;
-			var totalPage = queryCount / condition.PageSize + (isSurplus ? 1 : 0);
+			var isSurplus = (queryCount % input.PageSize) > 0;
+			var totalPage = queryCount / input.PageSize + (isSurplus ? 1 : 0);
 
 			// Handle get data with paging
-			var pageSkip = (condition.PageNumber - 1) * condition.PageSize;
 			var data = await query
-				.Skip(pageSkip)
-				.Take(condition.PageSize)
+				.Skip(input.PageSkip)
+				.Take(input.PageSize)
 				.Select(product => product.MapToModel())
 				.ToArrayAsync();
+
 			var result = new SearchResultModel<ProductModel>
 			{
 				Items = data,
@@ -71,8 +71,8 @@ namespace SmartCommerce.Persistence.Repositories
 				return Array.Empty<ProductModel>();
 
 			var result = await _dbContext.Products
-				.Where(item => item.DelFlg == false
-					&& item.Status != ProductStatusEnum.Pending
+				.Where(item => (item.DelFlg == false)
+					&& (item.Status != ProductStatusEnum.Pending)
 					&& relatedIds.Contains(item.ProductId))
 				.Select(product => product.MapToModel())
 				.ToArrayAsync();

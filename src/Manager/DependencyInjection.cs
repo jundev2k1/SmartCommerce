@@ -23,7 +23,7 @@ namespace SmartCommerce.Manager
 		public static IServiceCollection AddApplication(this IServiceCollection services, ConfigurationManager configuration)
 		{
 			// Connection database
-			var connection = configuration.GetConnectionString("ErpManager");
+			var connection = configuration.GetConnectionString("SmartCommerceDB");
 			services.AddDbContext<ApplicationDBContext>(x => x.UseSqlServer(connection, b => b.MigrationsAssembly("SmartCommerce.Manager")));
 
 			// Add application service
