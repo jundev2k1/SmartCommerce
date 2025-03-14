@@ -2,7 +2,7 @@
 
 namespace SmartCommerce.Manager.ViewModels
 {
-	public sealed class SearchInputViewModel
+	public class InputBaseViewModel
 	{
 		public string Name { get; set; } = string.Empty;
 

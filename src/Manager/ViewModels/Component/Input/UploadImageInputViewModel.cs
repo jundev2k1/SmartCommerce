@@ -2,19 +2,11 @@
 
 namespace SmartCommerce.Manager.ViewModels
 {
-	public sealed class UploadImageInputViewModel
+	public sealed class UploadImageInputViewModel : InputBaseViewModel
 	{
-		public string Name { get; set; } = string.Empty;
-
-		public string Value { get; set; } = string.Empty;
-
 		public string[] Images => Value.Split(',');
 
-		public string PlaceHolderText { get; set; } = string.Empty;
-
 		public bool IsMultiple { get; set; }
-
-		public string ClassName { get; set; } = string.Empty;
 
 		public string UploadType = string.Empty;
 

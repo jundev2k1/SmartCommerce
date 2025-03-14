@@ -2,9 +2,9 @@
 
 namespace SmartCommerce.Manager.ViewComponents
 {
-	public sealed class SingleSiteOnViewComponent : ViewComponentBase
+	public sealed class SingleSignOnViewComponent : ViewComponentBase
 	{
-		public SingleSiteOnViewComponent(
+		public SingleSignOnViewComponent(
 			ILocalizer localizer,
 			IServiceFacade serviceFacade,
 			ValueTextManager valueTextManager,
