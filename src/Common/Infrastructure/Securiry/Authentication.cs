@@ -48,7 +48,7 @@ namespace SmartCommerce.Infrastructure.Securiry
 		/// </summary>
 		private void GetOrGenerateSecretKey()
 		{
-			var filePath = $"{Constants.ERP_REFRESH_DIR_PATH}/secret-key.txt";
+			var filePath = $"{Constants.SCM_REFRESH_DIR_PATH}/secret-key.txt";
 			if (File.Exists(filePath))
 			{
 				var texts = File.ReadAllText(filePath).Split();

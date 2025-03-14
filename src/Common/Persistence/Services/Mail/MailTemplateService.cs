@@ -21,16 +21,13 @@ namespace SmartCommerce.Persistence.Services
 		/// <summary>
 		/// Get by criteria
 		/// </summary>
-		/// <param name="searchParams">Search parameters</param>
-		/// <param name="pageIndex">Page index</param>
-		/// <param name="pageSize">Page size</param>
+		/// <param name="input">Search condition input</param>
 		/// <returns>Search result model</returns>
-		public SearchResultModel<MailTemplateModel> GetByCriteria(MailTemplateFilterModel searchParams, int pageIndex, int pageSize = Constants.DEFAULT_PAGE_SIZE)
+		public async Task<SearchResultModel<MailTemplateModel>> GetByCriteria(MailTemplateFilterModel input)
 		{
-			if (string.IsNullOrEmpty(searchParams.BranchId)) return new SearchResultModel<MailTemplateModel>();
+			if (string.IsNullOrEmpty(input.BranchId)) return new SearchResultModel<MailTemplateModel>();
 
-			var condition = FilterConditionBuilder.GetMailTemplateFilters(searchParams);
-			var result = _mailTemplateRepository.Search(condition, pageIndex, pageSize);
+			var result = await _mailTemplateRepository.Search(input);
 			return result;
 		}
 
@@ -40,9 +37,9 @@ namespace SmartCommerce.Persistence.Services
 		/// <param name="branchId">Branch id</param>
 		/// <param name="mailId">Mail id</param>
 		/// <returns>Mail template model</returns>
-		public MailTemplateModel? Get(string branchId, string mailId)
+		public async Task<MailTemplateModel?> Get(string branchId, string mailId)
 		{
-			return _mailTemplateRepository.Get(branchId, mailId);
+			return await _mailTemplateRepository.Get(branchId, mailId);
 		}
 		#endregion
 
@@ -52,9 +49,9 @@ namespace SmartCommerce.Persistence.Services
 		/// </summary>
 		/// <param name="model">Mail template model</param>
 		/// <returns>Update status</returns>
-		public bool Insert(MailTemplateModel model)
+		public async Task<bool> Insert(MailTemplateModel model)
 		{
-			return _mailTemplateRepository.Insert(model);
+			return await _mailTemplateRepository.Insert(model);
 		}
 
 		/// <summary>
@@ -62,9 +59,9 @@ namespace SmartCommerce.Persistence.Services
 		/// </summary>
 		/// <param name="model">Mail template model</param>
 		/// <returns>Update status</returns>
-		public bool Update(MailTemplateModel model)
+		public async Task<bool> Update(MailTemplateModel model)
 		{
-			return _mailTemplateRepository.Update(model);
+			return await _mailTemplateRepository.Update(model);
 		}
 		/// <summary>
 		/// Update
@@ -73,9 +70,9 @@ namespace SmartCommerce.Persistence.Services
 		/// <param name="mailId">Mail id</param>
 		/// <param name="updateAction">Update action</param>
 		/// <returns>Update status</returns>
-		public bool Update(string branchId, string mailId, Action<MailTemplate> updateAction)
+		public async Task<bool> Update(string branchId, string mailId, Action<MailTemplate> updateAction)
 		{
-			return _mailTemplateRepository.Update(branchId, mailId, updateAction);
+			return await _mailTemplateRepository.Update(branchId, mailId, updateAction);
 		}
 
 		/// <summary>
@@ -84,7 +81,7 @@ namespace SmartCommerce.Persistence.Services
 		/// <param name="branchId">Branch id</param>
 		/// <param name="mailId">Mail id</param>
 		/// <returns>Update status</returns>
-		public bool UpdateStatus(string branchId, string mailId)
+		public async Task<bool> UpdateStatus(string branchId, string mailId)
 		{
 			var updateAction = (MailTemplate mail) =>
 			{
@@ -93,7 +90,7 @@ namespace SmartCommerce.Persistence.Services
 					: MailTemplateStatusEnum.Active;
 				mail.DateChanged = DateTime.Now;
 			};
-			return _mailTemplateRepository.Update(branchId, mailId, updateAction);
+			return await _mailTemplateRepository.Update(branchId, mailId, updateAction);
 		}
 		#endregion
 	}

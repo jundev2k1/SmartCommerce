@@ -7,11 +7,9 @@ namespace SmartCommerce.Persistence.Repositories
 		/// <summary>
 		/// Get by criteria
 		/// </summary>
-		/// <param name="expression">Expression</param>
-		/// <param name="pageIndex">Page index</param>
-		/// <param name="pageSize">Page size</param>
+		/// <param name="input">Search condition input</param>
 		/// <returns>Search result model</returns>
-		SearchResultModel<NotificationModel> GetByCriteria(Expression<Func<Notification, bool>> expression, int pageIndex, int pageSize);
+		Task<SearchResultModel<NotificationModel>> GetByCriteria(NotificationFilterModel input);
 
 		/// <summary>
 		/// Get
@@ -20,14 +18,14 @@ namespace SmartCommerce.Persistence.Repositories
 		/// <param name="id">Id</param>
 		/// <param name="userId">User id</param>
 		/// <returns>Notification model</returns>
-		NotificationModel? Get(string branchId, long id, string userId);
+		Task<NotificationModel?> Get(string branchId, long id, string userId);
 
 		/// <summary>
 		/// Insert
 		/// </summary>
 		/// <param name="model">Notification model</param>
 		/// <returns>Insert status</returns>
-		bool Insert(NotificationModel model);
+		Task<bool> Insert(NotificationModel model);
 
 		/// <summary>
 		/// Update
@@ -37,6 +35,6 @@ namespace SmartCommerce.Persistence.Repositories
 		/// <param name="userId">User id</param>
 		/// <param name="updateAction">Update action</param>
 		/// <returns>Update status</returns>
-		bool Update(string branchId, long id, string userId, Action<Notification> updateAction);
+		Task<bool> Update(string branchId, long id, string userId, Action<Notification> updateAction);
 	}
 }

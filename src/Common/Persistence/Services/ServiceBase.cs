@@ -2,7 +2,7 @@
 
 namespace SmartCommerce.Persistence.Services
 {
-	public class ServiceBase
+	public abstract class ServiceBase
 	{
 		public ServiceBase()
 		{

@@ -16,6 +16,6 @@
     "lib": [ "ES2022", "DOM" ]
   },
   "include": [
-    "scripts/**/*"
+    "Scripts/**/*"
   ]
 }

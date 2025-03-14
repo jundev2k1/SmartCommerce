@@ -7,33 +7,36 @@ namespace SmartCommerce.Persistence.Repositories
 		/// <summary>
 		/// Constructor
 		/// </summary>
-		public MailTemplateRepository(ApplicationDBContext dbContext, IFileLogger logger) : base(dbContext, logger)
+		public MailTemplateRepository(ApplicationDBContext dbContext, IFileLogger logger)
+			: base(dbContext, logger)
 		{
 		}
 
 		/// <summary>
 		/// Search
 		/// </summary>
-		/// <param name="expression">Expression</param>
-		/// <param name="pageIndex">Page index</param>
-		/// <param name="pageSize">Page size</param>
+		/// <param name="input">Search condition input</param>
 		/// <returns>Search result model</returns>
-		public SearchResultModel<MailTemplateModel> Search(Expression<Func<MailTemplate, bool>> expression, int pageIndex, int pageSize)
+		public async Task<SearchResultModel<MailTemplateModel>> Search(MailTemplateFilterModel input)
 		{
+			var searchCondition = FilterConditionBuilder.GetMailTemplateFilters(input);
+
+			// Search with query
 			var query = _dbContext.MailTemplates
 				.AsQueryable()
-				.Where(expression);
+				.Where(searchCondition);
 
-			var queryCount = query.Count();
-			var isSurplus = (queryCount % pageSize) > 0;
-			var totalPage = queryCount / pageSize + (isSurplus ? 1 : 0);
+			// Handle get page information
+			var queryCount = await query.CountAsync();
+			var isSurplus = (queryCount % input.PageSize) > 0;
+			var totalPage = queryCount / input.PageSize + (isSurplus ? 1 : 0);
 
-			var pageSkip = (pageIndex - 1) * pageSize;
-			var data = query
-				.Skip(pageSkip)
-				.Take(pageSize)
+			// Handle get data with paging
+			var data = await query
+				.Skip(input.PageSkip)
+				.Take(input.PageSize)
 				.Select(mailTemplate => mailTemplate.MapToModel())
-				.ToArray();
+				.ToArrayAsync();
 
 			var result = new SearchResultModel<MailTemplateModel>
 			{
@@ -50,12 +53,11 @@ namespace SmartCommerce.Persistence.Repositories
 		/// <param name="branchId">Branch id</param>
 		/// <param name="mailId">Mail id</param>
 		/// <returns>Mail model</returns>
-		public MailTemplateModel? Get(string branchId, string mailId)
+		public async Task<MailTemplateModel?> Get(string branchId, string mailId)
 		{
-			var result = _dbContext.MailTemplates
-				.FirstOrDefault(user => (user.BranchId == branchId) && (user.MailId == mailId));
-
-			return result?.MapToModel();
+			var mail = await _dbContext.MailTemplates
+				.FirstOrDefaultAsync(user => (user.BranchId == branchId) && (user.MailId == mailId));
+			return mail?.MapToModel();
 		}
 
 		/// <summary>
@@ -63,18 +65,19 @@ namespace SmartCommerce.Persistence.Repositories
 		/// </summary>
 		/// <param name="model">Model</param>
 		/// <returns>Status insert</returns>
-		public bool Insert(MailTemplateModel model)
+		public async Task<bool> Insert(MailTemplateModel model)
 		{
-			var result = BeginTransaction(() =>
+			var result = await BeginTransaction(async () =>
 			{
-				var mailTemplate = _dbContext.MailTemplates.FirstOrDefault(item =>
-					(item.BranchId == model.BranchId)
-					&& (item.MailId == model.MailId));
+				var mailTemplate = await _dbContext.MailTemplates
+					.FirstOrDefaultAsync(item =>
+						(item.BranchId == model.BranchId)
+						&& (item.MailId == model.MailId));
 				if (mailTemplate != null) throw new ExistInDBException();
 
 				var insertModel = model.MapToEntity();
-				_dbContext.Add(insertModel);
-				_dbContext.SaveChanges();
+				await _dbContext.AddAsync(insertModel);
+				await _dbContext.SaveChangesAsync();
 			});
 			return result;
 		}
@@ -84,19 +87,21 @@ namespace SmartCommerce.Persistence.Repositories
 		/// </summary>
 		/// <param name="model">Model</param>
 		/// <returns>Status update</returns>
-		public bool Update(MailTemplateModel model)
+		public async Task<bool> Update(MailTemplateModel model)
 		{
-			var result = BeginTransaction(() =>
+			var result = await BeginTransaction(async () =>
 			{
-				var mailTemplate = _dbContext.MailTemplates.FirstOrDefault(item =>
-					(item.BranchId == model.BranchId)
-					&& (item.MailId == model.MailId));
+				var mailTemplate = await _dbContext.MailTemplates
+					.FirstOrDefaultAsync(item =>
+						(item.BranchId == model.BranchId)
+						&& (item.MailId == model.MailId));
 				if (mailTemplate == null) throw new NotExistInDBException();
 
 				var updateModel = model.MapToEntity();
 				updateModel.DateCreated = mailTemplate.DateCreated;
+
 				_dbContext.Update(updateModel);
-				_dbContext.SaveChanges();
+				await _dbContext.SaveChangesAsync();
 			});
 			return result;
 		}
@@ -107,17 +112,18 @@ namespace SmartCommerce.Persistence.Repositories
 		/// <param name="userId">Mail id</param>
 		/// <param name="UpdateAction">Update action</param>
 		/// <returns>Update status</returns>
-		public bool Update(string branchId, string userId, Action<MailTemplate> UpdateAction)
+		public async Task<bool> Update(string branchId, string userId, Action<MailTemplate> UpdateAction)
 		{
-			var result = BeginTransaction(() =>
+			var result = await BeginTransaction(async () =>
 			{
-				var user = _dbContext.MailTemplates.FirstOrDefault(item =>
-					(item.BranchId == branchId)
-					&& (item.MailId == userId));
+				var user = await _dbContext.MailTemplates
+					.FirstOrDefaultAsync(item =>
+						(item.BranchId == branchId)
+						&& (item.MailId == userId));
 				if (user == null) throw new NotExistInDBException();
 
 				UpdateAction(user);
-				_dbContext.SaveChanges();
+				await _dbContext.SaveChangesAsync();
 			});
 			return result;
 		}

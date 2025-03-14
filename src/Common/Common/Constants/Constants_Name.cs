@@ -49,6 +49,8 @@ namespace SmartCommerce.Common
 		public const string MANAGER_COMPONENT_NAME_LANGUAGE_SWITCHER = "LanguageSwitcher";
 		/// <summary>Manager component name: Search input</summary>
 		public const string MANAGER_COMPONENT_NAME_SEARCH_INPUT = "SearchInput";
+		/// <summary>Manager component name: Password input</summary>
+		public const string MANAGER_COMPONENT_NAME_PASSWORD_INPUT = "PasswordInput";
 		/// <summary>Manager component name: Search input</summary>
 		public const string MANAGER_COMPONENT_NAME_UPLOAD_IMAGE_INPUT = "UploadImageInput";
 		#endregion

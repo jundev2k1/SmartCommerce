@@ -7,90 +7,90 @@ namespace SmartCommerce.Persistence.Extensions.FilterBuilders
 {
 	public static partial class FilterConditionBuilder
 	{
-		public static Expression<Func<Product, bool>> GetProductFilters(ProductFilterModel searchDto)
+		public static Expression<Func<Product, bool>> GetProductFilters(ProductFilterModel input)
 		{
 			var predicate = PredicateBuilder.New<Product>();
 
-			if (string.IsNullOrEmpty(searchDto.Keywords) == false)
+			if (string.IsNullOrEmpty(input.Keywords) == false)
 			{
-				predicate.And(p => p.ProductId.Contains(searchDto.Keywords)
-					|| p.Name.Contains(searchDto.Keywords));
+				predicate.And(p => p.ProductId.Contains(input.Keywords)
+					|| p.Name.Contains(input.Keywords));
 			}
 
-			if (string.IsNullOrEmpty(searchDto.BranchId) == false)
+			if (string.IsNullOrEmpty(input.BranchId) == false)
 			{
-				predicate.And(p => p.BranchId.Equals(searchDto.BranchId));
+				predicate.And(p => p.BranchId.Equals(input.BranchId));
 			}
 
-			if (string.IsNullOrEmpty(searchDto.ProductId) == false)
+			if (string.IsNullOrEmpty(input.ProductId) == false)
 			{
-				predicate.And(p => p.ProductId.StartsWith(searchDto.ProductId));
+				predicate.And(p => p.ProductId.StartsWith(input.ProductId));
 			}
 
-			if (string.IsNullOrEmpty(searchDto.ProductName) == false)
+			if (string.IsNullOrEmpty(input.ProductName) == false)
 			{
-				predicate.And(p => p.Name.Contains(searchDto.ProductName));
+				predicate.And(p => p.Name.Contains(input.ProductName));
 			}
 
-			if (string.IsNullOrEmpty(searchDto.Address1) == false)
+			if (string.IsNullOrEmpty(input.Address1) == false)
 			{
-				predicate.And(p => p.Address1.Contains(searchDto.Address1));
+				predicate.And(p => p.Address1.Contains(input.Address1));
 			}
 
-			if (string.IsNullOrEmpty(searchDto.Address2) == false)
+			if (string.IsNullOrEmpty(input.Address2) == false)
 			{
-				predicate.And(p => p.Address2.Contains(searchDto.Address2));
+				predicate.And(p => p.Address2.Contains(input.Address2));
 			}
 
-			if (string.IsNullOrEmpty(searchDto.Address3) == false)
+			if (string.IsNullOrEmpty(input.Address3) == false)
 			{
-				predicate.And(p => p.Address3.Contains(searchDto.Address3));
+				predicate.And(p => p.Address3.Contains(input.Address3));
 			}
 
-			if (string.IsNullOrEmpty(searchDto.Address4) == false)
+			if (string.IsNullOrEmpty(input.Address4) == false)
 			{
-				predicate.And(p => p.Address4.Contains(searchDto.Address4));
+				predicate.And(p => p.Address4.Contains(input.Address4));
 			}
 
-			if (string.IsNullOrEmpty(searchDto.TakeOverId) == false)
+			if (string.IsNullOrEmpty(input.TakeOverId) == false)
 			{
-				predicate.And(p => p.TakeOverId.Equals(searchDto.TakeOverId));
+				predicate.And(p => p.TakeOverId.Equals(input.TakeOverId));
 			}
 
-			if (string.IsNullOrEmpty(searchDto.CreatedBy) == false)
+			if (string.IsNullOrEmpty(input.CreatedBy) == false)
 			{
-				predicate.And(p => p.CreatedBy.Equals(searchDto.CreatedBy));
+				predicate.And(p => p.CreatedBy.Equals(input.CreatedBy));
 			}
 
-			if (searchDto.DisplayPrice.HasValue) predicate.And(p => p.DisplayPrice.Equals(searchDto.DisplayPrice));
+			if (input.DisplayPrice.HasValue) predicate.And(p => p.DisplayPrice.Equals(input.DisplayPrice));
 
-			if (searchDto.MinSize1.HasValue) predicate.And(p => p.Size1 >= searchDto.MinSize1);
-			if (searchDto.MaxSize1.HasValue) predicate.And(p => p.Size1 <= searchDto.MaxSize1);
+			if (input.MinSize1.HasValue) predicate.And(p => p.Size1 >= input.MinSize1);
+			if (input.MaxSize1.HasValue) predicate.And(p => p.Size1 <= input.MaxSize1);
 
-			if (searchDto.MinSize2.HasValue) predicate.And(p => p.Size2 >= searchDto.MinSize2);
-			if (searchDto.MaxSize2.HasValue) predicate.And(p => p.Size2 <= searchDto.MaxSize2);
+			if (input.MinSize2.HasValue) predicate.And(p => p.Size2 >= input.MinSize2);
+			if (input.MaxSize2.HasValue) predicate.And(p => p.Size2 <= input.MaxSize2);
 
-			if (searchDto.MinSize3.HasValue) predicate.And(p => p.Size3 >= searchDto.MinSize3);
-			if (searchDto.MaxSize3.HasValue) predicate.And(p => p.Size3 <= searchDto.MaxSize3);
+			if (input.MinSize3.HasValue) predicate.And(p => p.Size3 >= input.MinSize3);
+			if (input.MaxSize3.HasValue) predicate.And(p => p.Size3 <= input.MaxSize3);
 
-			if (searchDto.MinPrice1.HasValue) predicate.And(p => p.Price1 >= searchDto.MinPrice1);
-			if (searchDto.MaxPrice1.HasValue) predicate.And(p => p.Price1 <= searchDto.MaxPrice1);
+			if (input.MinPrice1.HasValue) predicate.And(p => p.Price1 >= input.MinPrice1);
+			if (input.MaxPrice1.HasValue) predicate.And(p => p.Price1 <= input.MaxPrice1);
 
-			if (searchDto.MinPrice2.HasValue) predicate.And(p => p.Price2 >= searchDto.MinPrice2);
-			if (searchDto.MaxPrice2.HasValue) predicate.And(p => p.Price2 <= searchDto.MaxPrice2);
+			if (input.MinPrice2.HasValue) predicate.And(p => p.Price2 >= input.MinPrice2);
+			if (input.MaxPrice2.HasValue) predicate.And(p => p.Price2 <= input.MaxPrice2);
 
-			if (searchDto.MinPrice3.HasValue) predicate.And(p => p.Price3 >= searchDto.MinPrice3);
-			if (searchDto.MaxPrice3.HasValue) predicate.And(p => p.Price3 <= searchDto.MaxPrice3);
+			if (input.MinPrice3.HasValue) predicate.And(p => p.Price3 >= input.MinPrice3);
+			if (input.MaxPrice3.HasValue) predicate.And(p => p.Price3 <= input.MaxPrice3);
 
-			if (searchDto.DateCreatedFrom.HasValue) predicate.And(p => p.DateCreated >= searchDto.DateCreatedFrom);
-			if (searchDto.DateCreatedTo.HasValue) predicate.And(p => p.DateCreated <= searchDto.DateCreatedTo);
+			if (input.DateCreatedFrom.HasValue) predicate.And(p => p.DateCreated >= input.DateCreatedFrom);
+			if (input.DateCreatedTo.HasValue) predicate.And(p => p.DateCreated <= input.DateCreatedTo);
 
-			if (searchDto.DateChangedFrom.HasValue) predicate.And(p => p.DateChanged >= searchDto.DateChangedFrom);
-			if (searchDto.DateChangedTo.HasValue) predicate.And(p => p.DateChanged <= searchDto.DateChangedTo);
+			if (input.DateChangedFrom.HasValue) predicate.And(p => p.DateChanged >= input.DateChangedFrom);
+			if (input.DateChangedTo.HasValue) predicate.And(p => p.DateChanged <= input.DateChangedTo);
 
-			if (searchDto.Status.HasValue) predicate.And(p => p.Status == searchDto.Status);
+			if (input.Status.HasValue) predicate.And(p => p.Status == input.Status);
 
-			predicate.And(p => p.DelFlg == searchDto.DelFlg);
+			predicate.And(p => p.DelFlg == input.DelFlg);
 
 			return predicate;
 		}

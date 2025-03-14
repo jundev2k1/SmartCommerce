@@ -40,7 +40,7 @@ namespace SmartCommerce.Manager.Areas.Product.Controllers
 			var viewModel = new ProductEditViewModel
 			{
 				PageData = product,
-				InputOptions = GetInitDropdownListItems(new ProductModel()),
+				InputOptions = await GetInitDropdownListItems(new ProductModel()),
 			};
 			return View(viewModel);
 		}
@@ -58,7 +58,7 @@ namespace SmartCommerce.Manager.Areas.Product.Controllers
 			await SetDataForUpdate(pageData);
 
 			// Set initial value for dropdown list
-			viewModel.InputOptions = GetInitDropdownListItems(pageData);
+			viewModel.InputOptions = await GetInitDropdownListItems(pageData);
 
 			// Validate form input
 			var validateResult = await _validatorFacade.ProductValidate(pageData);

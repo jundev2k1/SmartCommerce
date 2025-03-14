@@ -101,7 +101,7 @@ namespace SmartCommerce.Manager.Common.Validators
 		/// <returns>Is district</returns>
 		public bool BeDistrict(ProductModel model, string value)
 		{
-			var districtGroups = AddressProvider.Instance.Districts;
+			var districtGroups = AddressManager.Instance.Districts;
 			if (string.IsNullOrEmpty(model.Address1) == false)
 			{
 				districtGroups = districtGroups.Where(address => address.ProvinceId.Equals(model.Address1)).ToList();
@@ -119,7 +119,7 @@ namespace SmartCommerce.Manager.Common.Validators
 		/// <returns>Is commune</returns>
 		public bool BeCommune(ProductModel model, string value)
 		{
-			var communeGroupList = AddressProvider.Instance.Communes;
+			var communeGroupList = AddressManager.Instance.Communes;
 			if (string.IsNullOrEmpty(model.Address1) == false)
 			{
 				communeGroupList = communeGroupList.Where(address => address.ProvinceId.Equals(model.Address1)).ToList();

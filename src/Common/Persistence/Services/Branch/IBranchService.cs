@@ -8,13 +8,13 @@ namespace SmartCommerce.Persistence.Services
 		/// Get all branch
 		/// </summary>
 		/// <returns>A collection of branch</returns>
-		BranchModel?[] GetAll();
+		Task<BranchModel?[]> GetAll();
 
 		/// <summary>
 		/// Get user
 		/// </summary>
 		/// <param name="branchId">Branch id</param>
 		/// <returns>Branch model</returns>
-		BranchModel? Get(string branchId);
+		Task<BranchModel?> Get(string branchId);
 	}
 }

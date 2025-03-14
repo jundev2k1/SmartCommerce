@@ -2,7 +2,6 @@
 
 using SmartCommerce.Manager.Areas.Products.Controllers;
 using SmartCommerce.Manager.Areas.Products.ViewModels;
-using System.Collections.Generic;
 
 namespace SmartCommerce.Manager.Areas.Product.Controllers
 {
@@ -30,7 +29,7 @@ namespace SmartCommerce.Manager.Areas.Product.Controllers
 			{
 				SearchFields = condition,
 				PageData = productList,
-				InputOption = GetInitDropdownListItems(new ProductModel()),
+				InputOption = await GetInitDropdownListItems(new ProductModel()),
 			};
 			return View(data);
 		}

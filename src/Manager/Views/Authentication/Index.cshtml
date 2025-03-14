@@ -10,7 +10,7 @@
 	<div class="sign-in">
 		<div class="title">
 			<div class="logo">
-				<img src="@(Url.Content(Constants.ERP_FILE_PATH_PUBLIC_LOGO))" />
+				<img src="@(Url.Content(Constants.SCM_FILE_PATH_PUBLIC_LOGO))" />
 			</div>
 			<div class="content">
 				<h2>@_localizer.Globals["SignIn_Title_SubTitle"]</h2>
@@ -23,7 +23,7 @@
 					<span class="sign-in-message"></span>
 				</div>
 				<div class="input-group">
-					<input type="password" asp-for="@Model.Password" value="@Model.Password" placeholder="@_localizer.Globals["SignIn_Field_Password"]" />
+					@await Component.InvokeAsync(Constants.MANAGER_COMPONENT_NAME_PASSWORD_INPUT, new PasswordInputViewModel { Name = "Password", Value = Model.Password })
 					<span class="sign-in-message"></span>
 				</div>
 				<div class="input-group">

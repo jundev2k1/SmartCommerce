@@ -7,7 +7,7 @@ namespace SmartCommerce.Persistence.Repositories
 		/// <summary>
 		/// Get by criteria
 		/// </summary>
-		/// <param name="condition">Search condition</param>
+		/// <param name="condition">Search condition input</param>
 		/// <returns>Search result model</returns>
 		Task<SearchResultModel<UserModel>> GetByCriteria(UserFilterModel condition);
 
@@ -17,7 +17,7 @@ namespace SmartCommerce.Persistence.Repositories
 		/// <param name="branchId">Branch id</param>
 		/// <param name="isDeleted">Delete flag of user</param>
 		/// <returns>User model list</returns>
-		UserModel[] GetAll(string branchId, bool isDeleted);
+		Task<UserModel[]> GetAll(string branchId, bool isDeleted);
 
 		/// <summary>
 		/// Gets
@@ -25,7 +25,7 @@ namespace SmartCommerce.Persistence.Repositories
 		/// <param name="branchId">Branch id</param>
 		/// <param name="userIds">User id list</param>
 		/// <returns>User model list</returns>
-		UserModel[] Gets(string branchId, string[] userIds);
+		Task<UserModel[]> Gets(string branchId, string[] userIds);
 
 		/// <summary>
 		/// Get
@@ -33,7 +33,7 @@ namespace SmartCommerce.Persistence.Repositories
 		/// <param name="branchId">Branch id</param>
 		/// <param name="userId">User id</param>
 		/// <returns>User model</returns>
-		UserModel? Get(string branchId, string userId);
+		Task<UserModel?> Get(string branchId, string userId);
 
 		/// <summary>
 		/// Get by user name
@@ -41,21 +41,21 @@ namespace SmartCommerce.Persistence.Repositories
 		/// <param name="branchId">Branch id</param>
 		/// <param name="username">Username</param>
 		/// <returns>User model</returns>
-		UserModel? GetByUserName(string branchId, string username);
+		Task<UserModel?> GetByUserName(string branchId, string username);
 
 		/// <summary>
 		/// Insert
 		/// </summary>
 		/// <param name="model">User model</param>
 		/// <returns>Insert status</returns>
-		bool Insert(UserModel model);
+		Task<bool> Insert(UserModel model);
 
 		/// <summary>
 		/// Update
 		/// </summary>
 		/// <param name="model">User model</param>
 		/// <returns>Update status</returns>
-		bool Update(UserModel model);
+		Task<bool> Update(UserModel model);
 		/// <summary>
 		/// Update
 		/// </summary>
@@ -63,7 +63,7 @@ namespace SmartCommerce.Persistence.Repositories
 		/// <param name="userId">User id</param>
 		/// <param name="updateAction">Update action</param>
 		/// <returns>Update status</returns>
-		bool Update(string branchId, string userId, Action<User> updateAction);
+		Task<bool> Update(string branchId, string userId, Action<User> updateAction);
 
 		/// <summary>
 		/// Delete
@@ -71,6 +71,6 @@ namespace SmartCommerce.Persistence.Repositories
 		/// <param name="branchId">Branch id</param>
 		/// <param name="userId">User id</param>
 		/// <returns>Delete status</returns>
-		bool Delete(string branchId, string userId);
+		Task<bool> Delete(string branchId, string userId);
 	}
 }

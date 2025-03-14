@@ -16,25 +16,27 @@ namespace SmartCommerce.Persistence.Repositories
 		/// <summary>
 		/// Get by criteria
 		/// </summary>
-		/// <param name="condition">Search condition</param>
+		/// <param name="input">Search condition input</param>
 		/// <returns>Search result model</returns>
-		public async Task<SearchResultModel<UserModel>> GetByCriteria(UserFilterModel condition)
+		public async Task<SearchResultModel<UserModel>> GetByCriteria(UserFilterModel input)
 		{
-			var filterCondition = FilterConditionBuilder.GetUserFilters(condition);
+			var searchCondition = FilterConditionBuilder.GetUserFilters(input);
 
+			// Search with query
 			var query = _dbContext.Users
 				.AsQueryable()
-				.Where(filterCondition)
-				.OrderByDynamic(condition);
+				.Where(searchCondition)
+				.OrderByDynamic(input);
 
+			// Handle get page information
 			var queryCount = await query.CountAsync();
-			var isSurplus = (queryCount % condition.PageSize) > 0;
-			var totalPage = queryCount / condition.PageSize + (isSurplus ? 1 : 0);
+			var isSurplus = (queryCount % input.PageSize) > 0;
+			var totalPage = queryCount / input.PageSize + (isSurplus ? 1 : 0);
 
-			var pageSkip = (condition.PageNumber - 1) * condition.PageSize;
+			// Handle get data with paging
 			var data = await query
-				.Skip(pageSkip)
-				.Take(condition.PageSize)
+				.Skip(input.PageSkip)
+				.Take(input.PageSize)
 				.Select(user => user.MapToModel())
 				.ToArrayAsync();
 
@@ -53,15 +55,13 @@ namespace SmartCommerce.Persistence.Repositories
 		/// <param name="branchId">Branch id</param>
 		/// <param name="isDeleted">Delete flag of user</param>
 		/// <returns>A collection of user</returns>
-		public UserModel[] GetAll(string branchId, bool isDeleted)
+		public async Task<UserModel[]> GetAll(string branchId, bool isDeleted)
 		{
-			var result = _dbContext.Users
-				.Where(user =>
-					(user.BranchId == branchId)
+			var result = await _dbContext.Users
+				.Where(user => (user.BranchId == branchId)
 					&& (user.DelFlg == isDeleted))
 				.Select(user => user.MapToModel())
-				.ToArray();
-
+				.ToArrayAsync();
 			return result;
 		}
 
@@ -71,13 +71,12 @@ namespace SmartCommerce.Persistence.Repositories
 		/// <param name="branchId">Branch id</param>
 		/// <param name="userIds">User id list</param>
 		/// <returns>User model list</returns>
-		public UserModel[] Gets(string branchId, string[] userIds)
+		public async Task<UserModel[]> Gets(string branchId, string[] userIds)
 		{
-			var result = _dbContext.Users
+			var result = await _dbContext.Users
 				.Where(user => (user.BranchId == branchId) && userIds.Contains(user.UserId))
 				.Select(user => user.MapToModel())
-				.ToArray();
-
+				.ToArrayAsync();
 			return result;
 		}
 
@@ -87,13 +86,13 @@ namespace SmartCommerce.Persistence.Repositories
 		/// <param name="branchId">Branch id</param>
 		/// <param name="userId">User id</param>
 		/// <returns>User model</returns>
-		public UserModel? Get(string branchId, string userId)
+		public async Task<UserModel?> Get(string branchId, string userId)
 		{
-			var result = _dbContext.Users.FirstOrDefault(user =>
-				(user.BranchId == branchId)
-				&& (user.UserId == userId));
-
-			return result?.MapToModel();
+			var user = await _dbContext.Users
+				.FirstOrDefaultAsync(user =>
+					(user.BranchId == branchId)
+					&& (user.UserId == userId));
+			return user?.MapToModel();
 		}
 
 		/// <summary>
@@ -102,14 +101,14 @@ namespace SmartCommerce.Persistence.Repositories
 		/// <param name="branchId">Branch id</param>
 		/// <param name="username">User name</param>
 		/// <returns>User model</returns>
-		public UserModel? GetByUserName(string branchId, string username)
+		public async Task<UserModel?> GetByUserName(string branchId, string username)
 		{
-			var result = _dbContext.Users.FirstOrDefault(user =>
-				(user.BranchId == branchId)
-				&& (user.UserName == username)
-				&& (user.DelFlg == false));
-
-			return result?.MapToModel();
+			var user = await _dbContext.Users
+				.FirstOrDefaultAsync(user =>
+					(user.BranchId == branchId)
+					&& (user.UserName == username)
+					&& (user.DelFlg == false));
+			return user?.MapToModel();
 		}
 
 		/// <summary>
@@ -117,18 +116,19 @@ namespace SmartCommerce.Persistence.Repositories
 		/// </summary>
 		/// <param name="model">Model</param>
 		/// <returns>Status insert</returns>
-		public bool Insert(UserModel model)
+		public async Task<bool> Insert(UserModel model)
 		{
-			var result = BeginTransaction(() =>
+			var result = await BeginTransaction(async () =>
 			{
-				var user = _dbContext.Users.FirstOrDefault(item =>
-					(item.BranchId == model.BranchId)
-					&& (item.UserId == model.UserId));
+				var user = await _dbContext.Users
+					.FirstOrDefaultAsync(item =>
+						(item.BranchId == model.BranchId)
+						&& (item.UserId == model.UserId));
 				if (user != null) throw new ExistInDBException();
 
 				var insertModel = model.MapToEntity();
-				_dbContext.Add(insertModel);
-				_dbContext.SaveChanges();
+				await _dbContext.AddAsync(insertModel);
+				await _dbContext.SaveChangesAsync();
 			});
 			return result;
 		}
@@ -138,19 +138,20 @@ namespace SmartCommerce.Persistence.Repositories
 		/// </summary>
 		/// <param name="model">Model</param>
 		/// <returns>Status update</returns>
-		public bool Update(UserModel model)
+		public async Task<bool> Update(UserModel model)
 		{
-			var result = BeginTransaction(() =>
+			var result = await BeginTransaction(async () =>
 			{
-				var user = _dbContext.Users.FirstOrDefault(item =>
-					(item.BranchId == model.BranchId)
-					&& (item.UserId == model.UserId));
+				var user = await _dbContext.Users
+					.FirstOrDefaultAsync(item =>
+						(item.BranchId == model.BranchId)
+						&& (item.UserId == model.UserId));
 				if (user == null) throw new NotExistInDBException();
 
 				var updateModel = model.MapToEntity();
 				updateModel.DateChanged = DateTime.Now;
 				_dbContext.Update(updateModel);
-				_dbContext.SaveChanges();
+				await _dbContext.SaveChangesAsync();
 			});
 			return result;
 		}
@@ -162,17 +163,18 @@ namespace SmartCommerce.Persistence.Repositories
 		/// <param name="userId">User id</param>
 		/// <param name="UpdateAction">Update action</param>
 		/// <returns>Update status</returns>
-		public bool Update(string branchId, string userId, Action<User> UpdateAction)
+		public async Task<bool> Update(string branchId, string userId, Action<User> UpdateAction)
 		{
-			var result = BeginTransaction(() =>
+			var result = await BeginTransaction(async () =>
 			{
-				var user = _dbContext.Users.FirstOrDefault(item =>
-					(item.BranchId == branchId)
-					&& (item.UserId == userId));
+				var user = await _dbContext.Users
+					.FirstOrDefaultAsync(item =>
+						(item.BranchId == branchId)
+						&& (item.UserId == userId));
 				if (user == null) throw new NotExistInDBException();
 
 				UpdateAction(user);
-				_dbContext.SaveChanges();
+				await _dbContext.SaveChangesAsync();
 			});
 			return result;
 		}
@@ -183,17 +185,18 @@ namespace SmartCommerce.Persistence.Repositories
 		/// <param name="branchId">Branch id</param>
 		/// <param name="userId">User id</param>
 		/// <returns>Delete status</returns>
-		public bool Delete(string branchId, string userId)
+		public async Task<bool> Delete(string branchId, string userId)
 		{
-			var result = BeginTransaction(() =>
+			var result = await BeginTransaction(async () =>
 			{
-				var user = _dbContext.Users.FirstOrDefault(item =>
-					(item.BranchId == branchId)
-					&& (item.UserId == userId));
+				var user = await _dbContext.Users
+					.FirstOrDefaultAsync(item =>
+						(item.BranchId == branchId)
+						&& (item.UserId == userId));
 				if (user == null) throw new NotExistInDBException();
 
 				_dbContext.Remove(user);
-				_dbContext.SaveChanges();
+				await _dbContext.SaveChangesAsync();
 			});
 			return result;
 		}

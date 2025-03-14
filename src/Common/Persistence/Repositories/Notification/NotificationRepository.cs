@@ -7,33 +7,36 @@ namespace SmartCommerce.Persistence.Repositories
 		/// <summary>
 		/// Constructor
 		/// </summary>
-		public NotificationRepository(ApplicationDBContext dbContext, IFileLogger logger) : base(dbContext, logger)
+		public NotificationRepository(ApplicationDBContext dbContext, IFileLogger logger)
+			: base(dbContext, logger)
 		{
 		}
 
 		/// <summary>
 		/// Get by criteria
 		/// </summary>
-		/// <param name="expression">Expression</param>
-		/// <param name="pageIndex">Page index</param>
-		/// <param name="pageSize">Page size</param>
+		/// <param name="input">Search condition input</param>
 		/// <returns>Search result model</returns>
-		public SearchResultModel<NotificationModel> GetByCriteria(Expression<Func<Notification, bool>> expression, int pageIndex, int pageSize)
+		public async Task<SearchResultModel<NotificationModel>> GetByCriteria(NotificationFilterModel input)
 		{
+			var searchCondition = FilterConditionBuilder.GetNotificationFilters(input);
+
+			// Search with query
 			var query = _dbContext.Notifications
 				.AsQueryable()
-				.Where(expression);
+				.Where(searchCondition);
 
-			var queryCount = query.Count();
-			var isSurplus = (queryCount % pageSize) > 0;
-			var totalPage = queryCount / pageSize + (isSurplus ? 1 : 0);
+			// Handle get page information
+			var queryCount = await query.CountAsync();
+			var isSurplus = (queryCount % input.PageSize) > 0;
+			var totalPage = queryCount / input.PageSize + (isSurplus ? 1 : 0);
 
-			var pageSkip = (pageIndex - 1) * pageSize;
-			var data = query
-				.Skip(pageSkip)
-				.Take(pageSize)
+			// Handle get data with paging
+			var data = await query
+				.Skip(input.PageSkip)
+				.Take(input.PageSize)
 				.Select(mailTemplate => mailTemplate.MapToModel())
-				.ToArray();
+				.ToArrayAsync();
 
 			var result = new SearchResultModel<NotificationModel>
 			{
@@ -51,14 +54,14 @@ namespace SmartCommerce.Persistence.Repositories
 		/// <param name="id">Id</param>
 		/// <param name="userId">User id</param>
 		/// <returns>Notification model</returns>
-		public NotificationModel? Get(string branchId, long id, string userId)
+		public async Task<NotificationModel?> Get(string branchId, long id, string userId)
 		{
-			var result = _dbContext.Notifications.FirstOrDefault(item =>
-				(item.BranchId == branchId)
-				&& (item.Id == id)
-				&& (item.UserId == userId));
-
-			return result?.MapToModel();
+			var notification = await _dbContext.Notifications
+				.FirstOrDefaultAsync(item =>
+					(item.BranchId == branchId)
+					&& (item.Id == id)
+					&& (item.UserId == userId));
+			return notification?.MapToModel();
 		}
 
 		/// <summary>
@@ -66,19 +69,20 @@ namespace SmartCommerce.Persistence.Repositories
 		/// </summary>
 		/// <param name="model">Model</param>
 		/// <returns>Status insert</returns>
-		public bool Insert(NotificationModel model)
+		public async Task<bool> Insert(NotificationModel model)
 		{
-			var result = BeginTransaction(() =>
+			var result = await BeginTransaction(async () =>
 			{
-				var notification = _dbContext.Notifications.FirstOrDefault(item =>
-					(item.BranchId == model.BranchId)
-					&& (item.Id == model.Id)
-					&& (item.UserId == model.UserId));
+				var notification = await _dbContext.Notifications
+					.FirstOrDefaultAsync(item =>
+						(item.BranchId == model.BranchId)
+						&& (item.Id == model.Id)
+						&& (item.UserId == model.UserId));
 				if (notification != null) throw new ExistInDBException();
 
 				var insertModel = model.MapToEntity();
-				_dbContext.Add(insertModel);
-				_dbContext.SaveChanges();
+				await _dbContext.AddAsync(insertModel);
+				await _dbContext.SaveChangesAsync();
 			});
 			return result;
 		}
@@ -88,20 +92,21 @@ namespace SmartCommerce.Persistence.Repositories
 		/// </summary>
 		/// <param name="model">Model</param>
 		/// <returns>Status update</returns>
-		public bool Update(NotificationModel model)
+		public async Task<bool> Update(NotificationModel model)
 		{
-			var result = BeginTransaction(() =>
+			var result = await BeginTransaction(async () =>
 			{
-				var notification = _dbContext.Notifications.FirstOrDefault(item =>
-					(item.BranchId == model.BranchId)
-					&& (item.Id == model.Id)
-					&& (item.UserId == model.UserId));
+				var notification = await _dbContext.Notifications
+					.FirstOrDefaultAsync(item =>
+						(item.BranchId == model.BranchId)
+						&& (item.Id == model.Id)
+						&& (item.UserId == model.UserId));
 				if (notification == null) throw new NotExistInDBException();
 
 				var updateModel = notification.MapToEntity(model);
 				updateModel.DateCreated = notification.DateCreated;
 				_dbContext.Update(updateModel);
-				_dbContext.SaveChanges();
+				await _dbContext.SaveChangesAsync();
 			});
 			return result;
 		}
@@ -113,18 +118,19 @@ namespace SmartCommerce.Persistence.Repositories
 		/// <param name="userId">User Id</param>
 		/// <param name="UpdateAction">Update action</param>
 		/// <returns>Update status</returns>
-		public bool Update(string branchId, long id, string userId, Action<Notification> UpdateAction)
+		public async Task<bool> Update(string branchId, long id, string userId, Action<Notification> UpdateAction)
 		{
-			var result = BeginTransaction(() =>
+			var result = await BeginTransaction(async () =>
 			{
-				var notification = _dbContext.Notifications.FirstOrDefault(item =>
-					(item.BranchId == branchId)
-					&& (item.Id == id)
-					&& (item.UserId == userId));
+				var notification = await _dbContext.Notifications
+					.FirstOrDefaultAsync(item =>
+						(item.BranchId == branchId)
+						&& (item.Id == id)
+						&& (item.UserId == userId));
 				if (notification == null) throw new NotExistInDBException();
 
 				UpdateAction(notification);
-				_dbContext.SaveChanges();
+				await _dbContext.SaveChangesAsync();
 			});
 			return result;
 		}

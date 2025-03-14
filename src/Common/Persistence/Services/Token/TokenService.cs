@@ -24,9 +24,9 @@ namespace SmartCommerce.Persistence.Services
 		/// <param name="branchId">Branch Id</param>
 		/// <param name="tokenId">Token id</param>
 		/// <returns>Token model</returns>
-		public TokenModel? Get(string branchId, string tokenId)
+		public async Task<TokenModel?> Get(string branchId, string tokenId)
 		{
-			return _tokenRepository.Get(branchId, tokenId);
+			return await _tokenRepository.Get(branchId, tokenId);
 		}
 
 		/// <summary>
@@ -36,18 +36,18 @@ namespace SmartCommerce.Persistence.Services
 		/// <param name="type">Type token</param>
 		/// <param name="tokenId">Token code</param>
 		/// <returns>Is valid?</returns>
-		public bool IsValid(string branchId, TokenTypeEnum type, string tokenId)
+		public async Task<bool> IsValid(string branchId, TokenTypeEnum type, string tokenId)
 		{
-			var token = _tokenRepository.Get(branchId, tokenId);
-			var result = token != null
-				&& token.Type == type
-				&& token.ExpirationDate > DateTime.Now;
+			var token = await _tokenRepository.Get(branchId, tokenId);
+			var result = (token != null)
+				&& (token.Type == type)
+				&& (token.ExpirationDate > DateTime.Now);
 			return result;
 		}
 		#endregion
 
 		#region Command
-		public string GenerateToken(
+		public async Task<string> GenerateToken(
 			string branchId,
 			Dictionary<string, string> claims,
 			TokenTypeEnum type,
@@ -64,7 +64,7 @@ namespace SmartCommerce.Persistence.Services
 				DateCreated = DateTime.Now,
 				CreatedBy = createdBy,
 			};
-			var isSuccess = Insert(tokenModel);
+			var isSuccess = await Insert(tokenModel);
 			return isSuccess ? tokenId : string.Empty;
 		}
 
@@ -73,9 +73,9 @@ namespace SmartCommerce.Persistence.Services
 		/// </summary>
 		/// <param name="model">Token model</param>
 		/// <returns>Inser status</returns>
-		public bool Insert(TokenModel model)
+		public async Task<bool> Insert(TokenModel model)
 		{
-			return _tokenRepository.Insert(model);
+			return await _tokenRepository.Insert(model);
 		}
 
 		/// <summary>
@@ -83,9 +83,9 @@ namespace SmartCommerce.Persistence.Services
 		/// </summary>
 		/// <param name="model">Token model</param>
 		/// <returns>Update status</returns>
-		public bool Update(TokenModel model)
+		public async Task<bool> Update(TokenModel model)
 		{
-			return _tokenRepository.Update(model);
+			return await _tokenRepository.Update(model);
 		}
 		/// <summary>
 		/// Update
@@ -94,9 +94,9 @@ namespace SmartCommerce.Persistence.Services
 		/// <param name="tokenId">Token id</param>
 		/// <param name="updateAction">Update action</param>
 		/// <returns>Update status</returns>
-		public bool Update(string branchId, string tokenId, Action<Token> updateAction)
+		public async Task<bool> Update(string branchId, string tokenId, Action<Token> updateAction)
 		{
-			return _tokenRepository.Update(branchId, tokenId, updateAction);
+			return await _tokenRepository.Update(branchId, tokenId, updateAction);
 		}
 
 		/// <summary>
@@ -105,9 +105,9 @@ namespace SmartCommerce.Persistence.Services
 		/// <param name="branchId">Branch id</param>
 		/// <param name="tokenId">Token id</param>
 		/// <returns>Update status</returns>
-		public bool Delete(string branchId, string tokenId)
+		public async Task<bool> Delete(string branchId, string tokenId)
 		{
-			return _tokenRepository.Delete(branchId, tokenId);
+			return await _tokenRepository.Delete(branchId, tokenId);
 		}
 
 		#endregion

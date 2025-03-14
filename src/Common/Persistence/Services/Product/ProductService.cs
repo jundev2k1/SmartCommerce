@@ -21,13 +21,13 @@ namespace SmartCommerce.Persistence.Services
 		/// <summary>
 		/// Get by criteria
 		/// </summary>
-		/// <param name="condition">Search condition</param>
+		/// <param name="input">Search condition input</param>
 		/// <returns>Search result model</returns>
-		public async Task<SearchResultModel<ProductModel>> GetByCriteria(ProductFilterModel condition)
+		public async Task<SearchResultModel<ProductModel>> GetByCriteria(ProductFilterModel input)
 		{
-			if (string.IsNullOrEmpty(condition.BranchId)) return new ();
+			if (string.IsNullOrEmpty(input.BranchId)) return new ();
 
-			var result = await _productRepository.GetByCriteria(condition);
+			var result = await _productRepository.GetByCriteria(input);
 			return result;
 		}
 

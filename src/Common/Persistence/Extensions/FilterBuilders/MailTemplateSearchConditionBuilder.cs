@@ -5,24 +5,24 @@ namespace SmartCommerce.Persistence.Extensions.FilterBuilders
 {
 	public static partial class FilterConditionBuilder
 	{
-		public static Expression<Func<MailTemplate, bool>> GetMailTemplateFilters(MailTemplateFilterModel filter)
+		public static Expression<Func<MailTemplate, bool>> GetMailTemplateFilters(MailTemplateFilterModel input)
 		{
 			var predicate = PredicateBuilder.True<MailTemplate>();
 
-			if (string.IsNullOrEmpty(filter.Keywords) == false)
+			if (string.IsNullOrEmpty(input.Keywords) == false)
 			{
-				predicate.And(mail => mail.MailId.ToString().Contains(filter.Keywords)
-					|| mail.Subject.Contains(filter.Keywords));
+				predicate.And(mail => mail.MailId.ToString().Contains(input.Keywords)
+					|| mail.Subject.Contains(input.Keywords));
 			}
 
-			if (string.IsNullOrEmpty(filter.BranchId) == false)
+			if (string.IsNullOrEmpty(input.BranchId) == false)
 			{
-				predicate.And(mail => mail.BranchId.Equals(filter.BranchId));
+				predicate.And(mail => mail.BranchId.Equals(input.BranchId));
 			}
 
-			if (string.IsNullOrEmpty(filter.MailId) == false)
+			if (string.IsNullOrEmpty(input.MailId) == false)
 			{
-				predicate.And(mail => mail.MailId.Equals(filter.MailId));
+				predicate.And(mail => mail.MailId.Equals(input.MailId));
 			}
 
 			return predicate;

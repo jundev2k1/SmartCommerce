@@ -21,19 +21,13 @@ namespace SmartCommerce.Persistence.Services
 		/// <summary>
 		/// Get by criteria
 		/// </summary>
-		/// <param name="filterParams">Filter parameters</param>
-		/// <param name="pageIndex">Page index</param>
-		/// <param name="pageSize">Page size</param>
+		/// <param name="input">Search condition input</param>
 		/// <returns>Search result model</returns>
-		public SearchResultModel<CategoryModel> GetByCriteria(
-			CategoryFilterModel filterParams,
-			int pageIndex,
-			int pageSize = Constants.DEFAULT_PAGE_SIZE)
+		public async Task<SearchResultModel<CategoryModel>> GetByCriteria(CategoryFilterModel input)
 		{
-			if (string.IsNullOrEmpty(filterParams.BranchId)) return new SearchResultModel<CategoryModel>();
+			if (string.IsNullOrEmpty(input.BranchId)) return new SearchResultModel<CategoryModel>();
 
-			var condition = FilterConditionBuilder.GetCategoryFilters(filterParams);
-			var result = _categoryRepository.GetByCriteria(condition, pageIndex, pageSize);
+			var result = await _categoryRepository.GetByCriteria(input);
 			return result;
 		}
 
@@ -42,9 +36,9 @@ namespace SmartCommerce.Persistence.Services
 		/// </summary>
 		/// <param name="branchId">Branch id</param>
 		/// <returns>Root category model list</returns>
-		public CategoryModel[] GetAllRootCategories(string branchId)
+		public async Task<CategoryModel[]> GetAllRootCategories(string branchId)
 		{
-			return _categoryRepository.GetAllRootCategories(branchId);
+			return await _categoryRepository.GetAllRootCategories(branchId);
 		}
 
 		/// <summary>
@@ -53,9 +47,9 @@ namespace SmartCommerce.Persistence.Services
 		/// <param name="branchId">Branch id</param>
 		/// <param name="categoryId">Category id</param>
 		/// <returns>Category model</returns>
-		public CategoryModel? Get(string branchId, string categoryId)
+		public async Task<CategoryModel?> Get(string branchId, string categoryId)
 		{
-			return _categoryRepository.Get(branchId, categoryId);
+			return await _categoryRepository.Get(branchId, categoryId);
 		}
 		#endregion
 
@@ -65,11 +59,11 @@ namespace SmartCommerce.Persistence.Services
 		/// </summary>
 		/// <param name="model">Category model</param>
 		/// <returns>Insert status</returns>
-		public bool Insert(CategoryModel model)
+		public async Task<bool> Insert(CategoryModel model)
 		{
 			model.DateCreated = DateTime.Now;
 			model.DateChanged = null;
-			var result = _categoryRepository.Insert(model);
+			var result = await _categoryRepository.Insert(model);
 			return result;
 		}
 
@@ -78,10 +72,10 @@ namespace SmartCommerce.Persistence.Services
 		/// </summary>
 		/// <param name="model">Category model</param>
 		/// <returns>Update status</returns>
-		public bool Update(CategoryModel model)
+		public async Task<bool> Update(CategoryModel model)
 		{
 			model.DateChanged = DateTime.Now;
-			return _categoryRepository.Update(model);
+			return await _categoryRepository.Update(model);
 		}
 		/// <summary>
 		/// Update
@@ -90,24 +84,23 @@ namespace SmartCommerce.Persistence.Services
 		/// <param name="categoryId">Category id</param>
 		/// <param name="updateAction">Update action</param>
 		/// <returns>Update status</returns>
-		public bool Update(string branchId, string categoryId, Action<Category> updateAction)
+		public async Task<bool> Update(string branchId, string categoryId, Action<Category> updateAction)
 		{
-			return _categoryRepository.Update(branchId, categoryId, updateAction);
+			return await _categoryRepository.Update(branchId, categoryId, updateAction);
 		}
 
 		/// <summary>
 		/// Delete temporary
 		/// </summary>
 		/// <param name="branchId">Branch id</param>
-		/// <param name="productId">Product id</param>
+		/// <param name="categoryId">Category ID</param>
 		/// <returns>Update status</returns>
-		public bool TempDelete(string branchId, string productId)
+		public async Task<bool> TempDelete(string branchId, string categoryId)
 		{
-			var product = _categoryRepository.Get(branchId, productId);
-			if (product == null) return false;
-
-			product.DelFlg = true;
-			return _categoryRepository.Update(product);
+			return await _categoryRepository.Update(
+				branchId,
+				categoryId,
+				cate => cate.DelFlg = true);
 		}
 
 		/// <summary>
@@ -116,9 +109,9 @@ namespace SmartCommerce.Persistence.Services
 		/// <param name="branchId">Branch id</param>
 		/// <param name="categoryIds">Category id list</param>
 		/// <returns>Delete status</returns>
-		public int Delete(string branchId, string[] categoryIds)
+		public async Task<int> Delete(string branchId, string[] categoryIds)
 		{
-			return _categoryRepository.Delete(branchId, categoryIds);
+			return await _categoryRepository.Delete(branchId, categoryIds);
 		}
 		#endregion
 
@@ -129,9 +122,9 @@ namespace SmartCommerce.Persistence.Services
 		/// <param name="branchId">Branch id</param>
 		/// <param name="categoryId">Category id</param>
 		/// <returns>Is exist?</returns>
-		public bool IsExist(string branchId, string categoryId)
+		public async Task<bool> IsExist(string branchId, string categoryId)
 		{
-			return _categoryRepository.IsExist(branchId, categoryId);
+			return await _categoryRepository.IsExist(branchId, categoryId);
 		}
 		#endregion
 	}

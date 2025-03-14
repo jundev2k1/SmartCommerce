@@ -1,7 +1,5 @@
 ﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
 
-using System.Text.Json;
-
 namespace SmartCommerce.Infrastructure.Securiry
 {
 	public class TokenManager
@@ -21,7 +19,7 @@ namespace SmartCommerce.Infrastructure.Securiry
 			claims.TryAdd(
 				Constants.TOKEN_KEY_EXPIRATION_DATE,
 				expirationDate.ToString(Constants.DATE_FORMAT_SHORT_DATE_TIME));
-			var strData = JsonSerializer.Serialize(claims);
+			var strData = System.Text.Json.JsonSerializer.Serialize(claims);
 			var result = Authentication.Instance.PasswordEncrypt(strData);
 			return result;
 		}
@@ -31,7 +29,8 @@ namespace SmartCommerce.Infrastructure.Securiry
 			try
 			{
 				var claims = Authentication.Instance.PasswordDecrypt(token);
-				var result = JsonSerializer.Deserialize<Dictionary<string, string>>(claims);
+				var result = System.Text.Json.JsonSerializer
+					.Deserialize<Dictionary<string, string>>(claims);
 				return result;
 			}
 			catch (Exception)

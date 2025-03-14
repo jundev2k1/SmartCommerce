@@ -41,7 +41,7 @@ namespace SmartCommerce.Manager.Common.Validators
 		/// <returns>Is province</returns>
 		protected bool BeProvince(string value)
 		{
-			return AddressProvider.Instance.Provinces.Any(address => address.ProvinceId.Equals(value));
+			return AddressManager.Instance.Provinces.Any(address => address.ProvinceId.Equals(value));
 		}
 
 		/// <summary>

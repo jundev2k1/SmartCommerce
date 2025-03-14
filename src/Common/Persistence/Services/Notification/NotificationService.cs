@@ -21,16 +21,13 @@ namespace SmartCommerce.Persistence.Services
 		/// <summary>
 		/// Get by criteria
 		/// </summary>
-		/// <param name="searchParams">Search parameters</param>
-		/// <param name="pageIndex">Page index</param>
-		/// <param name="pageSize">Page size</param>
+		/// <param name="input">Search condition input</param>
 		/// <returns>Search result model</returns>
-		public SearchResultModel<NotificationModel> GetByCriteria(NotificationFilterModel searchParams, int pageIndex, int pageSize = Constants.DEFAULT_PAGE_SIZE)
+		public async Task<SearchResultModel<NotificationModel>> GetByCriteria(NotificationFilterModel input)
 		{
-			if (string.IsNullOrEmpty(searchParams.BranchId)) return new SearchResultModel<NotificationModel>();
+			if (string.IsNullOrEmpty(input.BranchId)) return new SearchResultModel<NotificationModel>();
 
-			var condition = FilterConditionBuilder.GetNotificationFilters(searchParams);
-			var result = _notificationRepository.GetByCriteria(condition, pageIndex, pageSize);
+			var result = await _notificationRepository.GetByCriteria(input);
 			return result;
 		}
 
@@ -41,9 +38,9 @@ namespace SmartCommerce.Persistence.Services
 		/// <param name="id">Id</param>
 		/// <param name="userId">User id</param>
 		/// <returns>Notification model</returns>
-		public NotificationModel? Get(string branchId, long id, string userId)
+		public async Task<NotificationModel?> Get(string branchId, long id, string userId)
 		{
-			return _notificationRepository.Get(branchId, id, userId);
+			return await _notificationRepository.Get(branchId, id, userId);
 		}
 		#endregion
 
@@ -53,9 +50,9 @@ namespace SmartCommerce.Persistence.Services
 		/// </summary>
 		/// <param name="model">Notification model</param>
 		/// <returns>Update status</returns>
-		public bool Insert(NotificationModel model)
+		public async Task<bool> Insert(NotificationModel model)
 		{
-			return _notificationRepository.Insert(model);
+			return await _notificationRepository.Insert(model);
 		}
 
 		/// <summary>
@@ -66,9 +63,13 @@ namespace SmartCommerce.Persistence.Services
 		/// <param name="userId">User id</param>
 		/// <param name="updateAction">Update action</param>
 		/// <returns>Update status</returns>
-		public bool Update(string branchId, long id, string userId, Action<Notification> updateAction)
+		public async Task<bool> Update(
+			string branchId,
+			long id,
+			string userId,
+			Action<Notification> updateAction)
 		{
-			return _notificationRepository.Update(branchId, id, userId, updateAction);
+			return await _notificationRepository.Update(branchId, id, userId, updateAction);
 		}
 
 		/// <summary>
@@ -78,7 +79,7 @@ namespace SmartCommerce.Persistence.Services
 		/// <param name="id">Id</param>
 		/// <param name="userId">User id</param>
 		/// <returns>Update status</returns>
-		public bool UpdateStatus(string branchId, long id, string userId)
+		public async Task<bool> UpdateStatus(string branchId, long id, string userId)
 		{
 			var updateAction = (Notification mail) =>
 			{
@@ -86,7 +87,7 @@ namespace SmartCommerce.Persistence.Services
 					? NotificationStatusEnum.Read
 					: NotificationStatusEnum.UnRead;
 			};
-			return _notificationRepository.Update(branchId, id, userId, updateAction);
+			return await _notificationRepository.Update(branchId, id, userId, updateAction);
 		}
 		#endregion
 	}

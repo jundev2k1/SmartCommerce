@@ -7,11 +7,9 @@ namespace SmartCommerce.Persistence.Services
 		/// <summary>
 		/// Get by criteria
 		/// </summary>
-		/// <param name="searchParams">Search parameters</param>
-		/// <param name="pageIndex">Page index</param>
-		/// <param name="pageSize">Page size</param>
+		/// <param name="input">Search condition input</param>
 		/// <returns>Search result model</returns>
-		SearchResultModel<NotificationModel> GetByCriteria(NotificationFilterModel searchParams, int pageIndex, int pageSize = Constants.DEFAULT_PAGE_SIZE);
+		Task<SearchResultModel<NotificationModel>> GetByCriteria(NotificationFilterModel input);
 
 		/// <summary>
 		/// Get mail template
@@ -20,16 +18,16 @@ namespace SmartCommerce.Persistence.Services
 		/// <param name="id">Notification id</param>
 		/// <param name="userId">User id</param>
 		/// <returns>Notification model</returns>
-		NotificationModel? Get(string branchId, long id, string userId);
+		Task<NotificationModel?> Get(string branchId, long id, string userId);
 
 		/// <summary>
 		/// Insert
 		/// </summary>
 		/// <param name="model">Notification model</param>
 		/// <returns>Insert status</returns>
-		bool Insert(NotificationModel model);
+		Task<bool> Insert(NotificationModel model);
 
-		bool Update(string branchId, long Id, string userId, Action<Notification> updateAction);
+		Task<bool> Update(string branchId, long Id, string userId, Action<Notification> updateAction);
 
 		/// <summary>
 		/// Update
@@ -38,6 +36,6 @@ namespace SmartCommerce.Persistence.Services
 		/// <param name="Id">Notification id</param>
 		/// <param name="userId">User id</param>
 		/// <returns>Update status</returns>
-		bool UpdateStatus(string branchId, long Id, string userId);
+		Task<bool> UpdateStatus(string branchId, long Id, string userId);
 	}
 }

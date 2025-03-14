@@ -24,14 +24,14 @@ namespace SmartCommerce.Manager.Areas.Products.Controllers
 		/// </summary>
 		/// <param name="formInput">Form input</param>
 		/// <returns>Dropdown list item collection</returns>
-		protected ProductInputOptionViewModel GetInitDropdownListItems(ProductModel formInput)
+		protected async Task<ProductInputOptionViewModel> GetInitDropdownListItems(ProductModel formInput)
 		{
 			var inputOption = new ProductInputOptionViewModel();
 
 			// Add init for take over id
 			if (string.IsNullOrEmpty(formInput.TakeOverId) == false)
 			{
-				var user = _serviceFacade.Users.Get(this.OperatorBranchId, formInput.TakeOverId);
+				var user = await _serviceFacade.Users.Get(this.OperatorBranchId, formInput.TakeOverId);
 				if (user != null)
 				{
 					var ddlOptions = new List<SelectListItem>

@@ -7,6 +7,10 @@ EXPOSE 8080
 EXPOSE 8081
 
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
+RUN curl -fsSL https://deb.nodesource.com/setup_22.x | bash - \
+    && apt-get install -y nodejs \
+    && npm install -g npm@latest
+
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 COPY ["Manager/SmartCommerce.Manager.csproj", "Manager/"]
@@ -17,11 +21,15 @@ COPY ["Common/Persistence/SmartCommerce.Persistence.csproj", "Common/Persistence
 RUN dotnet restore "./Manager/SmartCommerce.Manager.csproj"
 COPY . .
 WORKDIR "/src/Manager"
-RUN dotnet build "./SmartCommerce.Manager.csproj" -c $BUILD_CONFIGURATION -o /app/build
+COPY Manager/package*.json ./
+RUN npm install
+RUN npm run build
+
+RUN dotnet build "SmartCommerce.Manager.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
 FROM build AS publish
 ARG BUILD_CONFIGURATION=Release
-RUN dotnet publish "./SmartCommerce.Manager.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "SmartCommerce.Manager.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
 
 FROM base AS final
 WORKDIR /app

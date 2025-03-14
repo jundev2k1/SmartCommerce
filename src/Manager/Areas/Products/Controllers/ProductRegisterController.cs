@@ -37,7 +37,7 @@ namespace SmartCommerce.Manager.Areas.Product.Controllers
 				viewModel.PageData.Images = string.Empty;
 			}
 
-			viewModel.InputOptions = GetInitDropdownListItems(viewModel.PageData);
+			viewModel.InputOptions = await GetInitDropdownListItems(viewModel.PageData);
 			return View(viewModel);
 		}
 
@@ -55,7 +55,7 @@ namespace SmartCommerce.Manager.Areas.Product.Controllers
 			pageData.TrimStringInput();
 
 			// Set initial value for dropdown list
-			viewModel.InputOptions = GetInitDropdownListItems(pageData);
+			viewModel.InputOptions = await GetInitDropdownListItems(pageData);
 
 			// Validate form input
 			var validateResult = await _validatorFacade.ProductValidate(pageData);

@@ -4,9 +4,9 @@ namespace SmartCommerce.Common
 {
 	public static partial class Constants
 	{
-		// Application: Protocol
-		public const string CONST_PROTOCOL_HTTP = "http://";
-		public const string CONST_PROTOCOL_HTTPS = "https://";
+		// System information
+		public static string CONST_RESOURCE_PHYSICAL_PATH = string.Empty;
+		public static string CONST_PROJECT_NAME = string.Empty;
 
 		// Application: Application setting
 		public static string CONFIG_APP_BASE_PATH = string.Empty;

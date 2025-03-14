@@ -37,7 +37,7 @@
     <PackageReference Include="HtmlAgilityPack" Version="1.11.61" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.Cookies" Version="2.1.34" />
     <PackageReference Include="Microsoft.AspNetCore.Cors" Version="2.1.1" />
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor" Version="2.1.3" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor" Version="2.3.0" />
     <PackageReference Include="Microsoft.AspNetCore.SignalR" Version="1.0.4" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.6" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.6">
@@ -49,7 +49,7 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.Extensions.Localization" Version="8.0.6" />
+    <PackageReference Include="Microsoft.Extensions.Localization" Version="9.0.3" />
     <PackageReference Include="Microsoft.TypeScript.MSBuild" Version="5.4.4">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -70,6 +70,7 @@
     <ProjectReference Include="..\Common\Domain\SmartCommerce.Domain.csproj" />
     <ProjectReference Include="..\Common\Infrastructure\SmartCommerce.Infrastructure.csproj" />
     <ProjectReference Include="..\Common\Persistence\SmartCommerce.Persistence.csproj" />
+    <ProjectReference Include="..\Common\Resource\SmartCommerce.Resource.csproj" />
   </ItemGroup>
 
   <ItemGroup>
@@ -79,8 +80,9 @@
     <Using Include="SmartCommerce.Common.Utilities" />
     <Using Include="SmartCommerce.Domain.Enum" />
     <Using Include="SmartCommerce.Domain.Extensions.FilterModels" />
-    <Using Include="SmartCommerce.Domain.Mapping" />
     <Using Include="SmartCommerce.Domain.Models" />
+    <Using Include="SmartCommerce.Infrastructure.Data" />
+    <Using Include="SmartCommerce.Infrastructure.Extensions.ExceptionExtension" />
     <Using Include="SmartCommerce.Manager.Common" />
     <Using Include="SmartCommerce.Manager.Common.Enum" />
     <Using Include="SmartCommerce.Manager.Common.Extensions" />
@@ -94,7 +96,6 @@
     <Using Include="SmartCommerce.Infrastructure.Common.Attributes" />
     <Using Include="SmartCommerce.Infrastructure.Common.Enum" />
     <Using Include="SmartCommerce.Infrastructure.Common.Models" />
-    <Using Include="SmartCommerce.Infrastructure.ExceptionExtension" />
     <Using Include="SmartCommerce.Infrastructure.Interface" />
     <Using Include="SmartCommerce.Infrastructure.Securiry" />
     <Using Include="SmartCommerce.Infrastructure.Upload" />

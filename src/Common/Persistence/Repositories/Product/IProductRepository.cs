@@ -7,9 +7,9 @@ namespace SmartCommerce.Persistence.Repositories
 		/// <summary>
 		/// Get by criteria
 		/// </summary>
-		/// <param name="condition">Search condition</param>
+		/// <param name="input">Search condition input</param>
 		/// <returns>Search result model</returns>
-		Task<SearchResultModel<ProductModel>> GetByCriteria(ProductFilterModel condition);
+		Task<SearchResultModel<ProductModel>> GetByCriteria(ProductFilterModel input);
 
 		/// <summary>
 		/// Get related products

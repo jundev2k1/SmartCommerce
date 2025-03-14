@@ -15,7 +15,7 @@ namespace SmartCommerce.Manager.ViewComponents
 
 		public IViewComponentResult Invoke(string currentMenu)
 		{
-			var sidebarJson = File.ReadAllText($"{Environment.CurrentDirectory}{Constants.ERP_FILE_PATH_SIDEBAR_SETTING}");
+			var sidebarJson = File.ReadAllText($"{Environment.CurrentDirectory}{Constants.SCM_FILE_PATH_SIDEBAR_SETTING}");
 			var menu = JsonConvert.DeserializeObject<List<MenuViewModel>>(sidebarJson);
 
 			ViewBag.OperatorPermisson = GetOperatorPermisson();

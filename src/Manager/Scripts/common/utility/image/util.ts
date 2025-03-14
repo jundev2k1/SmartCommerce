@@ -1,5 +1,7 @@
 ﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
 
+declare var toastr: Toastr;
+
 /**
  * Copy image to clipboard async
  * @param {HTMLImageElement} element DOM Image element

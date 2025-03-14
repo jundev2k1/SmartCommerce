@@ -5,20 +5,20 @@ namespace SmartCommerce.Persistence.Extensions.FilterBuilders
 {
 	public static partial class FilterConditionBuilder
 	{
-		public static Expression<Func<Role, bool>> GetRoleFilters(RoleFilterModel searchDto)
+		public static Expression<Func<Role, bool>> GetRoleFilters(RoleFilterModel input)
 		{
 			var predicate = PredicateBuilder.New<Role>();
 
-			if (string.IsNullOrEmpty(searchDto.Keywords) == false)
+			if (string.IsNullOrEmpty(input.Keywords) == false)
 			{
 				predicate.And(role =>
-					role.RoleId.ToString().Contains(searchDto.Keywords)
-					|| role.Name.Contains(searchDto.Keywords));
+					role.RoleId.ToString().Contains(input.Keywords)
+					|| role.Name.Contains(input.Keywords));
 			}
 
-			if (string.IsNullOrEmpty(searchDto.BranchId) == false)
+			if (string.IsNullOrEmpty(input.BranchId) == false)
 			{
-				predicate.And(role => role.BranchId.Equals(searchDto.BranchId));
+				predicate.And(role => role.BranchId.Equals(input.BranchId));
 			}
 
 			return predicate;

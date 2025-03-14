@@ -7,9 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Common\Filters\" />
     <Folder Include="IO\" />
-    <Folder Include="Configuration\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -18,8 +16,9 @@
     <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.1.1" />
     <PackageReference Include="Microsoft.AspNetCore.Localization" Version="2.1.1" />
     <PackageReference Include="Microsoft.AspNetCore.SignalR" Version="1.0.4" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.0" />
-    <PackageReference Include="Microsoft.Extensions.Localization.Abstractions" Version="7.0.11" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="9.0.3" />
+    <PackageReference Include="Microsoft.Extensions.Localization" Version="9.0.3" />
+    <PackageReference Include="Microsoft.Extensions.Localization.Abstractions" Version="9.0.3" />
     <PackageReference Include="MimeKit" Version="4.7.1" />
     <PackageReference Include="Serilog" Version="3.1.1" />
     <PackageReference Include="Serilog.Sinks.Email" Version="3.0.0" />
@@ -29,16 +28,18 @@
   <ItemGroup>
     <ProjectReference Include="..\Common\SmartCommerce.Common.csproj" />
     <ProjectReference Include="..\Domain\SmartCommerce.Domain.csproj" />
+    <ProjectReference Include="..\Resource\SmartCommerce.Resource.csproj" />
   </ItemGroup>
 
   <ItemGroup>
+    <Using Include="Microsoft.Extensions.Localization" />
+    <Using Include="Newtonsoft.Json" />
     <Using Include="SmartCommerce.Common" />
     <Using Include="SmartCommerce.Common.Utilities" />
     <Using Include="SmartCommerce.Domain.Enum" />
     <Using Include="SmartCommerce.Infrastructure.Common.Enum" />
     <Using Include="SmartCommerce.Infrastructure.Common.Models" />
     <Using Include="SmartCommerce.Infrastructure.Common.Utilities" />
-    <Using Include="SmartCommerce.Infrastructure.ExceptionExtension" />
     <Using Include="SmartCommerce.Infrastructure.Hubs" />
     <Using Include="SmartCommerce.Infrastructure.Interface" />
     <Using Include="SmartCommerce.Infrastructure.Middleware" />
