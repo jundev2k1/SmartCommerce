@@ -21,7 +21,7 @@ namespace SmartCommerce.Manager.Common.Util
 		{
 			culture = Constants.SupportedCulture.Contains(culture) ? culture : Constants.PAGE_LANGUAGE_OPTIONS;
 
-			var province = AddressProvider.Instance.Provinces.FirstOrDefault(address => address.ProvinceId == provinceId);
+			var province = AddressManager.Instance.Provinces.FirstOrDefault(address => address.ProvinceId == provinceId);
 			if (province == null) return string.Empty;
 
 			return culture switch
@@ -42,7 +42,7 @@ namespace SmartCommerce.Manager.Common.Util
 		{
 			culture = Constants.SupportedCulture.Contains(culture) ? culture : Constants.PAGE_LANGUAGE_OPTIONS;
 
-			var district = AddressProvider.Instance.Districts
+			var district = AddressManager.Instance.Districts
 				.SelectMany(address => address.Items)
 				.FirstOrDefault(address => address.DistrictId == districtId);
 			if (district == null) return string.Empty;
@@ -65,7 +65,7 @@ namespace SmartCommerce.Manager.Common.Util
 		{
 			culture = Constants.SupportedCulture.Contains(culture) ? culture : Constants.PAGE_LANGUAGE_OPTIONS;
 
-			var commune = AddressProvider.Instance.Communes
+			var commune = AddressManager.Instance.Communes
 				.SelectMany(address => address.Items)
 				.SelectMany(item => item.Items)
 				.FirstOrDefault(address => address.CommuneId == communeId);

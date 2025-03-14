@@ -41,7 +41,7 @@ namespace SmartCommerce.Manager.Controllers
 		[Route(Constants.ENDPOINT_COMMON_GET_PROVINCE_LIST)]
 		public IActionResult GetProvinces(string searchKey = "")
 		{
-			var provinces = AddressProvider.Instance.Provinces;
+			var provinces = AddressManager.Instance.Provinces;
 
 			if (string.IsNullOrEmpty(searchKey.Trim()) == false)
 			{
@@ -65,7 +65,7 @@ namespace SmartCommerce.Manager.Controllers
 		public IActionResult GetDistricts(string searchKey = "", string provinceId = "")
 		{
 			// Get list by province id
-			var districtGroups = AddressProvider.Instance.Districts;
+			var districtGroups = AddressManager.Instance.Districts;
 			var modelList = (string.IsNullOrEmpty(provinceId) == false)
 				? districtGroups.FirstOrDefault(group => group.ProvinceId == provinceId)?.Items
 				: districtGroups.SelectMany(group => group.Items);
@@ -93,7 +93,7 @@ namespace SmartCommerce.Manager.Controllers
 		public IActionResult GetCommunes(string searchKey = "", string districtId = "")
 		{
 			// Get list by district id
-			var modelGroupList = AddressProvider.Instance.Communes;
+			var modelGroupList = AddressManager.Instance.Communes;
 			var modelList = (string.IsNullOrEmpty(districtId) == false)
 				? modelGroupList.SelectMany(groups => groups.Items).FirstOrDefault(group => group.DistrictId == districtId)?.Items
 				: modelGroupList.SelectMany(groups => groups.Items).SelectMany(group => group.Items);

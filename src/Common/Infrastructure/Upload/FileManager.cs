@@ -309,9 +309,9 @@ namespace SmartCommerce.Infrastructure.Upload
 		{
 			return @enum switch
 			{
-				UploadEnum.ProductImage => Path.Combine(Constants.ERP_FILE_UPLOAD_DIRPATH_TEMP_PRODUCT_IMAGES, _sessionToken),
-				UploadEnum.UserAvatar => Path.Combine(Constants.ERP_FILE_UPLOAD_DIRPATH_TEMP_USER_AVATAR, _sessionToken),
-				UploadEnum.MemberAvatar => Path.Combine(Constants.ERP_FILE_UPLOAD_DIRPATH_TEMP_MEMBER_AVATAR, _sessionToken),
+				UploadEnum.ProductImage => Path.Combine(Constants.SCM_FILE_UPLOAD_DIRPATH_TEMP_PRODUCT_IMAGES, _sessionToken),
+				UploadEnum.UserAvatar => Path.Combine(Constants.SCM_FILE_UPLOAD_DIRPATH_TEMP_USER_AVATAR, _sessionToken),
+				UploadEnum.MemberAvatar => Path.Combine(Constants.SCM_FILE_UPLOAD_DIRPATH_TEMP_MEMBER_AVATAR, _sessionToken),
 				_ => throw new NotImplementedException()
 			};
 		}
@@ -325,9 +325,9 @@ namespace SmartCommerce.Infrastructure.Upload
 		{
 			return type switch
 			{
-				UploadEnum.ProductImage => Constants.ERP_FILE_UPLOAD_DIRPATH_PRODUCT_IMAGES,
-				UploadEnum.UserAvatar => Constants.ERP_FILE_UPLOAD_DIRPATH_USER_AVATAR,
-				UploadEnum.MemberAvatar => Constants.ERP_FILE_UPLOAD_DIRPATH_MEMBER_AVATAR,
+				UploadEnum.ProductImage => Constants.SCM_FILE_UPLOAD_DIRPATH_PRODUCT_IMAGES,
+				UploadEnum.UserAvatar => Constants.SCM_FILE_UPLOAD_DIRPATH_USER_AVATAR,
+				UploadEnum.MemberAvatar => Constants.SCM_FILE_UPLOAD_DIRPATH_MEMBER_AVATAR,
 				_ => string.Empty
 			};
 		}

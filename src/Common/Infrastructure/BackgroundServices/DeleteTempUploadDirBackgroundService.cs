@@ -52,9 +52,9 @@ namespace SmartCommerce.Infrastructure.BackgroundServices
 		/// <summary>File path to handle directory deletion</summary>
 		private (string name, string path)[] HandleFilePathModule = new (string name, string path)[]
 		{
-			(name: "Product Temporary Image", path: Constants.ERP_FILE_UPLOAD_DIRPATH_TEMP_PRODUCT_IMAGES),
-			(name: "User Temporary Image", path: Constants.ERP_FILE_UPLOAD_DIRPATH_TEMP_USER_AVATAR),
-			(name: "Member Temporary Image", path: Constants.ERP_FILE_UPLOAD_DIRPATH_TEMP_MEMBER_AVATAR)
+			(name: "Product Temporary Image", path: Constants.SCM_FILE_UPLOAD_DIRPATH_TEMP_PRODUCT_IMAGES),
+			(name: "User Temporary Image", path: Constants.SCM_FILE_UPLOAD_DIRPATH_TEMP_USER_AVATAR),
+			(name: "Member Temporary Image", path: Constants.SCM_FILE_UPLOAD_DIRPATH_TEMP_MEMBER_AVATAR)
 		};
 
 		private DateTime DateExecute => DateTime.Now.AddDays(-1);

@@ -28,11 +28,36 @@ namespace SmartCommerce.Manager.Common.Extensions
 			Constants.CONFIG_APP_PORT = _configuration["ApplicationSetting:AppPort"].ToStringOrEmpty();
 			Constants.CONFIG_APP_NAME = _configuration["ApplicationSetting:AppName"].ToStringOrEmpty();
 			Constants.CONFIG_APP_LOG_PATH = _configuration["ApplicationSetting:LogPath"].ToStringOrEmpty();
-			Constants.CONFIG_APP_LOG_PATH_INFO = Path.Combine(Constants.CONFIG_APP_LOG_PATH, "log-info-.txt");
-			Constants.CONFIG_APP_LOG_PATH_WARNING = Path.Combine(Constants.CONFIG_APP_LOG_PATH, "log-warning-.txt");
-			Constants.CONFIG_APP_LOG_PATH_ERROR = Path.Combine(Constants.CONFIG_APP_LOG_PATH, "log-error-.txt");
-			Constants.CONFIG_APP_LOG_PATH_DEBUG = Path.Combine(Constants.CONFIG_APP_LOG_PATH, "log-debug-.txt");
-			Constants.CONFIG_APP_LOG_PATH_VERBOSE = Path.Combine(Constants.CONFIG_APP_LOG_PATH, "log-verbose-.txt");
+			Constants.CONFIG_APP_LOG_PATH_INFO = string.Format(
+				"{0}{1}/{2}/{3}",
+				Constants.CONST_RESOURCE_PHYSICAL_PATH,
+				Constants.CONFIG_APP_LOG_PATH,
+				Constants.CONST_PROJECT_NAME,
+				"log-info-.txt");
+			Constants.CONFIG_APP_LOG_PATH_WARNING = string.Format(
+				"{0}{1}/{2}/{3}",
+				Constants.CONST_RESOURCE_PHYSICAL_PATH,
+				Constants.CONFIG_APP_LOG_PATH,
+				Constants.CONST_PROJECT_NAME,
+				"log-warning-.txt");
+			Constants.CONFIG_APP_LOG_PATH_ERROR = string.Format(
+				"{0}{1}/{2}/{3}",
+				Constants.CONST_RESOURCE_PHYSICAL_PATH,
+				Constants.CONFIG_APP_LOG_PATH,
+				Constants.CONST_PROJECT_NAME,
+				"log-error-.txt"); ;
+			Constants.CONFIG_APP_LOG_PATH_DEBUG = string.Format(
+				"{0}{1}/{2}/{3}",
+				Constants.CONST_RESOURCE_PHYSICAL_PATH,
+				Constants.CONFIG_APP_LOG_PATH,
+				Constants.CONST_PROJECT_NAME,
+				"log-debug-.txt"); ;
+			Constants.CONFIG_APP_LOG_PATH_VERBOSE = string.Format(
+				"{0}{1}/{2}/{3}",
+				Constants.CONST_RESOURCE_PHYSICAL_PATH,
+				Constants.CONFIG_APP_LOG_PATH,
+				Constants.CONST_PROJECT_NAME,
+				"log-verbose-.txt");
 		}
 
 		/// <summary>

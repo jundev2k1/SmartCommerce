@@ -1,15 +1,22 @@
 ﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
 
-using SmartCommerce.Manager.Common.Localizer;
-using SmartCommerce.Manager.Common.Validators;
-using SmartCommerce.Infrastructure.Hubs;
 using FluentValidation.AspNetCore;
+using LinqKit;
 using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.Extensions.Options;
 using Serilog;
 using Serilog.Events;
+using SmartCommerce.Infrastructure.Hubs;
+using SmartCommerce.Manager.Common.Localizer;
+using SmartCommerce.Manager.Common.Validators;
+using SmartCommerce.Resource.Localizers.Fields;
+using SmartCommerce.Resource.Localizers.Globals;
+using SmartCommerce.Resource.Localizers.Messages;
+using SmartCommerce.Resource.Localizers.StringFormats;
+using SmartCommerce.Resource.Localizers.Validators;
+using SmartCommerce.Resource.Localizers.ValueTexts;
 using System.Globalization;
 using System.IO.Compression;
 
@@ -29,7 +36,6 @@ namespace SmartCommerce.Manager
 			// Add application service
 			services
 				.AddSessionSetting()
-				.AddLocalizationSetting()
 				.AddResponseCompressionSetting();
 
 			// Set file size limits
@@ -104,27 +110,6 @@ namespace SmartCommerce.Manager
 				options.IdleTimeout = TimeSpan.FromMinutes(Constants.AUTH_EXPIRES_SESSION);
 			});
 			services.AddHttpContextAccessor();
-
-			return services;
-		}
-
-		/// <summary>
-		/// Add localization setting
-		/// </summary>
-		private static IServiceCollection AddLocalizationSetting(this IServiceCollection services)
-		{
-			services.AddLocalization(option => option.ResourcesPath = "Resources");
-			services.Configure<RequestLocalizationOptions>(options =>
-			{
-				var supportedLanguage = new[]
-				{
-					new CultureInfo(Constants.FLG_GLOBAL_CULTURE_VN),
-					new CultureInfo(Constants.FLG_GLOBAL_CULTURE_ENG),
-				};
-				options.DefaultRequestCulture = new RequestCulture(Constants.FLG_GLOBAL_CULTURE_VN);
-				options.SupportedCultures = supportedLanguage;
-				options.SupportedUICultures = supportedLanguage;
-			});
 
 			return services;
 		}

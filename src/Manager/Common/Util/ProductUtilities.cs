@@ -64,7 +64,7 @@ namespace SmartCommerce.Manager.Common.Util
 		/// <returns>Main product image</returns>
 		public static string GetMainProductImage(string images)
 		{
-			if (string.IsNullOrEmpty(images)) return Constants.ERP_FILE_PATH_PUBLIC_NO_IMAGE;
+			if (string.IsNullOrEmpty(images)) return Constants.SCM_FILE_PATH_PUBLIC_NO_IMAGE;
 
 			foreach (var image in images.Split(','))
 			{
@@ -72,7 +72,7 @@ namespace SmartCommerce.Manager.Common.Util
 				if (File.Exists(imagePath)) return image;
 			}
 
-			return Constants.ERP_FILE_PATH_PUBLIC_NO_IMAGE;
+			return Constants.SCM_FILE_PATH_PUBLIC_NO_IMAGE;
 		}
 
 		/// <summary>
@@ -83,7 +83,7 @@ namespace SmartCommerce.Manager.Common.Util
 		public static string GetProductImage(string path)
 		{
 			var imagePath = string.Format("{0}{1}", Constants.PHYSICAL_APPLICATION_ROOT_PATH, path);
-			return File.Exists(imagePath) ? path : Constants.ERP_FILE_PATH_PUBLIC_NO_IMAGE;
+			return File.Exists(imagePath) ? path : Constants.SCM_FILE_PATH_PUBLIC_NO_IMAGE;
 		}
 	}
 }

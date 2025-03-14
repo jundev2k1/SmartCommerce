@@ -20,7 +20,7 @@ namespace SmartCommerce.Manager.Common.ValueText
 
 		private void Initialize()
 		{
-			var jsonData = File.ReadAllText($"{Environment.CurrentDirectory}{Constants.ERP_FILE_PATH_VALUETEXT_SETTING}");
+			var jsonData = File.ReadAllText($"{Environment.CurrentDirectory}{Constants.SCM_FILE_PATH_VALUETEXT_SETTING}");
 			_datasource = JsonConvert.DeserializeObject<ValueTextModel>(jsonData) ?? new ValueTextModel();
 		}
 

@@ -1,5 +1,6 @@
 ﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
 
+using SmartCommerce.Infrastructure.Extensions.ExceptionExtension;
 using System.Data.SqlClient;
 
 namespace SmartCommerce.Persistence.Repositories
