@@ -82,6 +82,7 @@
     <Using Include="SmartCommerce.Domain.Extensions.FilterModels" />
     <Using Include="SmartCommerce.Domain.Models" />
     <Using Include="SmartCommerce.Infrastructure.Data" />
+    <Using Include="SmartCommerce.Infrastructure.Extensions" />
     <Using Include="SmartCommerce.Infrastructure.Extensions.ExceptionExtension" />
     <Using Include="SmartCommerce.Manager.Common" />
     <Using Include="SmartCommerce.Manager.Common.Enum" />
