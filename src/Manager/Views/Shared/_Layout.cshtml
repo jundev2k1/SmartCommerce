@@ -19,7 +19,7 @@
 	<script src="~/js/init-script.js" asp-append-version="true"></script>
 	@* Main content *@
 	<main id="page-load">
-		@await Component.InvokeAsync(Constants.MANAGER_COMPONENT_NAME_SINGLE_SITE_ON)
+		@await Component.InvokeAsync(Constants.MANAGER_COMPONENT_NAME_SINGLE_SIGN_ON)
 		@await Component.InvokeAsync(Constants.MANAGER_COMPONENT_NAME_NAVBAR)
 		<div class="render-content">
 			@await Component.InvokeAsync(Constants.MANAGER_COMPONENT_NAME_HEADER, new HeaderViewModel { IsShowNavbarSwitch = true, IsFullScreen = true })

@@ -125,6 +125,7 @@
     <Folder Include="Scripts\https\services\product\" />
     <Folder Include="Scripts\pages\auth\otp-auth\" />
     <Folder Include="Scripts\pages\auth\sign-in\" />
+    <Folder Include="wwwroot\js\components\" />
   </ItemGroup>
 
   <ItemGroup>

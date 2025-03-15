@@ -22,8 +22,8 @@ namespace SmartCommerce.Common
 		public const string MANAGER_COMPONENT_NAME_STYLE_SHEET = "StyleSheet";
 		/// <summary>Manager component name: Script</summary>
 		public const string MANAGER_COMPONENT_NAME_SCRIPT = "Script";
-		/// <summary>Manager component name: Single site on</summary>
-		public const string MANAGER_COMPONENT_NAME_SINGLE_SITE_ON = "SingleSiteOn";
+		/// <summary>Manager component name: Single sign on</summary>
+		public const string MANAGER_COMPONENT_NAME_SINGLE_SIGN_ON = "SingleSignOn";
 		/// <summary>Manager component name: Back to top</summary>
 		public const string MANAGER_COMPONENT_NAME_BACK_TOP = "BackToTop";
 		/// <summary>Manager component name: Breadcrumb</summary>
