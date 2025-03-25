@@ -268,7 +268,7 @@ const handleInitForUserInput = (defaultOptions) => {
 }
 
 // Handle load datetime picker
-import 'https://npmcdn.com/flatpickr/dist/l10n/vn.js';
+import 'https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/vn.js';
 $(document).ready(function () {
 	let config = {};
 	switch (languageCode) {

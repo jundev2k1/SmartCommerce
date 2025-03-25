@@ -3,27 +3,8 @@
 @model PasswordInputViewModel
 
 <div class="password-input @Model.ClassName">
-	<style>
-		.password-input {
-			position: relative;
-			display: inline;
-			width: 100%;
-		}
-
-			.password-input input {
-				padding-right: 12px;
-			}
-
-			.password-input span {
-				position: absolute;
-				top: 50%;
-				transform: translateY(-50%);
-				right: 4px;
-				cursor: pointer;
-			}
-	</style>
 	<input name="@Model.Name" type="password" value="@Model.Value" placeholder="@(string.IsNullOrEmpty(Model.PlaceHolderText) ? _localizer.Globals["PlaceHolder_TextBox"] : Model.PlaceHolderText)" />
-	<span onclick="showOrHidePassword(event)">
+	<span onclick="togglePasswordVisibility(event)">
 		<i class="fa-light fa-eye-slash"></i>
 	</span>
 	<script>
@@ -31,7 +12,7 @@
 		 * Show or hide password on input
 		 * @@param {MouseEvent} event Click event
 		 */
-		function showOrHidePassword(event) {
+		function togglePasswordVisibility(event) {
 			const input = event.target.closest('.password-input').querySelector('input');
 			const button = event.srcElement.parentElement;
 			const isPassword = input.type === 'password';

@@ -44,10 +44,9 @@ namespace SmartCommerce.Common.Helpers
 		public string CreateUrl()
 		{
 			var pathRoot = _uri.GetLeftPart(UriPartial.Path);
-			var strParameter = _parameters.AllKeys
-				.Select(key => $"{Uri.EscapeDataString(key!)}={Uri.EscapeDataString(_parameters[key]!)}")
-				.JoinToString("&");
-			return $"{pathRoot}?{strParameter}";
+			var parameters = _parameters.AllKeys
+				.Select(key => $"{Uri.EscapeDataString(key!)}={Uri.EscapeDataString(_parameters[key]!)}");
+			return $"{pathRoot}?{string.Join("&", parameters)}";
 		}
 	}
 }

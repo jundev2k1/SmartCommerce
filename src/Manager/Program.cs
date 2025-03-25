@@ -14,7 +14,7 @@ var builder = WebApplication.CreateBuilder(args);
 	var configPath = Constants.CONST_RESOURCE_PHYSICAL_PATH + "/Configs";
 	builder.Configuration.SetBasePath(configPath)
 		.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
-		.AddJsonFile($"overrides/{Constants.CONST_PROJECT_NAME}.json", optional: true, reloadOnChange: true)
+		.AddJsonFile($"overrides/{Constants.CONST_PROJECT_NAME}/appsettings.json", optional: true, reloadOnChange: true)
 		.AddEnvironmentVariables();
 
 	// Add services

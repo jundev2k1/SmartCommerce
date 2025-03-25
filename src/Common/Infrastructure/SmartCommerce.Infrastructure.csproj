@@ -40,6 +40,7 @@
     <Using Include="SmartCommerce.Infrastructure.Common.Enum" />
     <Using Include="SmartCommerce.Infrastructure.Common.Models" />
     <Using Include="SmartCommerce.Infrastructure.Common.Utilities" />
+    <Using Include="SmartCommerce.Infrastructure.Extensions" />
     <Using Include="SmartCommerce.Infrastructure.Hubs" />
     <Using Include="SmartCommerce.Infrastructure.Interface" />
     <Using Include="SmartCommerce.Infrastructure.Middleware" />
