@@ -2,7 +2,7 @@
 
 namespace SmartCommerce.Domain.Extensions.FilterModels
 {
-	public sealed class CategoryFilterModel : FilterModelBase<CategoryFilterModel>
+	public sealed class ProductCategoryFilterModel : FilterModelBase<ProductCategoryFilterModel>
 	{
 		public string Keywords { get; set; } = string.Empty;
 
@@ -10,10 +10,10 @@ namespace SmartCommerce.Domain.Extensions.FilterModels
 
 		public string CategoryId { get; set; } = string.Empty;
 
-		public string CategoryName { get; set; } = string.Empty;
+		public string Name { get; set; } = string.Empty;
 
 		public CategoryStatusEnum? Status { get; set; } = CategoryStatusEnum.Active;
 
-		public string ParentCategoryId { get; set; } = string.Empty;
+		public string ParentId { get; set; } = string.Empty;
 	}
 }

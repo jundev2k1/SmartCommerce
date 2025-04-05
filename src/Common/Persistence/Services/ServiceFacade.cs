@@ -17,7 +17,7 @@ namespace SmartCommerce.Persistence.Services
 
 		public IUserService Users => _serviceProvider.GetService<IUserService>();
 
-		public ICategoryService Categories => _serviceProvider.GetService<ICategoryService>();
+		public IProductCategoryService ProductCategories => _serviceProvider.GetService<IProductCategoryService>();
 
 		public IProductService Products => _serviceProvider.GetService<IProductService>();
 

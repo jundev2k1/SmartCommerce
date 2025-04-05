@@ -30,7 +30,7 @@
 		</button>
 		<ul class="dropdown-menu">
 			<li>
-				<a class="dropdown-item @(isTargetItem(string.Empty))" href="@Model.OnSelectItem(string.Empty)">
+				<a class="dropdown-item @(isTargetItem(string.Empty))" href="@Model.OnSelectItem!(string.Empty)">
 					@_localizer.ValueTexts["ValTxt_Sort_None"]
 				</a>
 			</li>

@@ -1,18 +1,18 @@
-﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
+﻿// Copyright (c) 2025 - Jun Dev. All rights reserved
 
 #pragma warning disable CS0618
 namespace SmartCommerce.Persistence.Extensions.FilterBuilders
 {
 	public static partial class FilterConditionBuilder
 	{
-		public static Expression<Func<Category, bool>> GetCategoryFilters(CategoryFilterModel input)
+		public static Expression<Func<ProductCategory, bool>> GetCategoryFilters(ProductCategoryFilterModel input)
 		{
-			var predicate = PredicateBuilder.New<Category>();
+			var predicate = PredicateBuilder.New<ProductCategory>();
 
 			if (string.IsNullOrEmpty(input.Keywords) == false)
 			{
 				predicate.And(cate => cate.CategoryId.Contains(input.Keywords)
-					|| cate.CategoryName.Contains(input.Keywords));
+					|| cate.Name.Contains(input.Keywords));
 			}
 
 			if (string.IsNullOrEmpty(input.BranchId) == false)
@@ -25,14 +25,14 @@ namespace SmartCommerce.Persistence.Extensions.FilterBuilders
 				predicate.And(cate => cate.CategoryId.StartsWith(input.CategoryId));
 			}
 
-			if (string.IsNullOrEmpty(input.CategoryName) == false)
+			if (string.IsNullOrEmpty(input.Name) == false)
 			{
-				predicate.And(cate => cate.CategoryName.Contains(input.CategoryName));
+				predicate.And(cate => cate.Name.Contains(input.Name));
 			}
 
-			if (string.IsNullOrEmpty(input.ParentCategoryId) == false)
+			if (string.IsNullOrEmpty(input.ParentId) == false)
 			{
-				predicate.And(cate => cate.ParentCategoryId.Contains(input.ParentCategoryId));
+				predicate.And(cate => cate.ParentId.Contains(input.ParentId));
 			}
 
 			if (string.IsNullOrEmpty(input.CreatedBy) == false)
@@ -45,8 +45,6 @@ namespace SmartCommerce.Persistence.Extensions.FilterBuilders
 
 			if (input.DateChangedFrom.HasValue) predicate.And(cate => cate.DateChanged >= input.DateChangedFrom);
 			if (input.DateChangedTo.HasValue) predicate.And(cate => cate.DateChanged <= input.DateChangedTo);
-
-			if (input.Status.HasValue) predicate.And(cate => cate.Status == input.Status);
 
 			return predicate;
 		}

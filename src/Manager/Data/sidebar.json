@@ -31,6 +31,13 @@
         "name": "ProductRegister_Page",
         "permission": "103",
         "url": "/product/register"
+      },
+      {
+        "label": "Product Category",
+        "localizer": "Nav_Product_Category",
+        "name": "ProductCategory_Page",
+        "permission": "103",
+        "url": "/product-category"
       }
     ]
   },

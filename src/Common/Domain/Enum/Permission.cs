@@ -41,5 +41,11 @@ namespace SmartCommerce.Domain.Enum
 		CanUploadImageProduct = 107,
 		CanDeleteImageProduct = 108,
 		CanSharePreviewProduct = 109,
+
+		// Product category permission
+		CanReadProductCategory = 120,
+		CanAddProductCategory = 121,
+		CanEditProductCategory = 122,
+		CanDeleteProductCategory = 123,
 	}
 }

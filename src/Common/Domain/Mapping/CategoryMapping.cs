@@ -1,26 +1,25 @@
-﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
+﻿// Copyright (c) 2025 - Jun Dev. All rights reserved
 
 namespace SmartCommerce.Domain.Mapping
 {
-	public static class CategoryMapping
+	public static class ProductCategoryMapping
 	{
 		/// <summary>
 		/// Map to category model
 		/// </summary>
-		/// <param name="entity">Category entity</param>
-		/// <returns>Category model</returns>
-		public static CategoryModel MapToModel(this Category entity)
+		/// <param name="entity">ProductCategory entity</param>
+		/// <returns>ProductCategory model</returns>
+		public static ProductCategoryModel MapToModel(this ProductCategory entity)
 		{
-			var model = new CategoryModel
-			{
+			var model = new ProductCategoryModel
+            {
 				BranchId = entity.BranchId,
 				CategoryId = entity.CategoryId,
-				CategoryName = entity.CategoryName,
+				Name = entity.Name,
 				Avatar = entity.Avatar,
 				Description = entity.Description,
-				ParentCategoryId = entity.ParentCategoryId,
+				ParentId = entity.ParentId,
 				Priority = entity.Priority,
-				Status = entity.Status,
 				DelFlg = entity.DelFlg,
 				DateCreated = entity.DateCreated,
 				DateChanged = entity.DateCreated,
@@ -35,16 +34,15 @@ namespace SmartCommerce.Domain.Mapping
 		/// Map search to category model
 		/// </summary>
 		/// <param name="filterModel">Filter model</param>
-		/// <returns>Category model</returns>
-		public static CategoryModel MapSearchToModel(this CategoryFilterModel filterModel)
+		/// <returns>ProductCategory model</returns>
+		public static ProductCategoryModel MapSearchToModel(this ProductCategoryFilterModel filterModel)
 		{
-			var model = new CategoryModel
+			var model = new ProductCategoryModel
 			{
 				BranchId = filterModel.BranchId,
 				CategoryId = filterModel.CategoryId,
-				CategoryName = filterModel.CategoryName,
-				ParentCategoryId = filterModel.ParentCategoryId,
-				Status = filterModel.Status ?? CategoryStatusEnum.Active,
+				Name = filterModel.Name,
+				ParentId = filterModel.ParentId,
 				DelFlg = filterModel.DelFlg,
 				CreatedBy = filterModel.CreatedBy,
 			};
@@ -55,20 +53,19 @@ namespace SmartCommerce.Domain.Mapping
 		/// <summary>
 		/// Map to category entity
 		/// </summary>
-		/// <param name="model">Category model</param>
-		/// <returns>Category entity</returns>
-		public static Category MapToEntity(this CategoryModel model)
+		/// <param name="model">Product category model</param>
+		/// <returns>Product category entity</returns>
+		public static ProductCategory MapToEntity(this ProductCategoryModel model)
 		{
-			var entity = new Category
+			var entity = new ProductCategory
 			{
 				BranchId = model.BranchId,
 				CategoryId = model.CategoryId,
-				CategoryName = model.CategoryName,
+				Name = model.Name,
 				Avatar = model.Avatar,
 				Description = model.Description,
-				ParentCategoryId = model.ParentCategoryId,
+				ParentId = model.ParentId,
 				Priority = model.Priority,
-				Status = model.Status,
 				DelFlg = model.DelFlg,
 				DateCreated = model.DateCreated,
 				DateChanged = model.DateCreated,
@@ -81,19 +78,18 @@ namespace SmartCommerce.Domain.Mapping
 		/// <summary>
 		/// Map to category entity
 		/// </summary>
-		/// <param name="entity">Category entity</param>
-		/// <param name="model">Category model</param>
-		/// <returns>Category entity</returns>
-		public static Category MapToEntity(this Category entity, CategoryModel model)
+		/// <param name="entity">Product category entity</param>
+		/// <param name="model">Product category model</param>
+		/// <returns>Product category entity</returns>
+		public static ProductCategory MapToEntity(this ProductCategory entity, ProductCategoryModel model)
 		{
 			entity.BranchId = model.BranchId;
 			entity.CategoryId = model.CategoryId;
-			entity.CategoryName = model.CategoryName;
+			entity.Name = model.Name;
 			entity.Avatar = model.Avatar;
 			entity.Description = model.Description;
-			entity.ParentCategoryId = model.ParentCategoryId;
+			entity.ParentId = model.ParentId;
 			entity.Priority = model.Priority;
-			entity.Status = model.Status;
 			entity.DelFlg = model.DelFlg;
 			entity.DateCreated = model.DateCreated;
 			entity.DateChanged = model.DateCreated;

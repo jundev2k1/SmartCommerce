@@ -122,6 +122,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Scripts\areas\product-categories\product-category-setting\" />
     <Folder Include="Scripts\components\" />
     <Folder Include="Scripts\https\services\product\" />
     <Folder Include="Scripts\pages\auth\otp-auth\" />

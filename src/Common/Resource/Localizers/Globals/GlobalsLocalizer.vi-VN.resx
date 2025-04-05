@@ -234,6 +234,9 @@
   <data name="Nav_Product_Register" xml:space="preserve">
     <value>Đăng Ký Sản Phẩm</value>
   </data>
+  <data name="ProductCategory_Page" xml:space="preserve">
+    <value>Danh Mục Sản Phẩm</value>
+  </data>
   <data name="Nav_Role_List" xml:space="preserve">
     <value>Phân Quyền</value>
   </data>

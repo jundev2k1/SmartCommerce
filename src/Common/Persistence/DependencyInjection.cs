@@ -37,7 +37,7 @@ namespace SmartCommerce.Persistence
 			services.AddScoped<IBranchRepository, BranchRepository>();
 			services.AddScoped<IRoleRepository, RoleRepository>();
 			services.AddScoped<IUserRepository, UserRepository>();
-			services.AddScoped<ICategoryRepository, CategoryRepository>();
+			services.AddScoped<IProductCategoryRepository, ProductCategoryRepository>();
 			services.AddScoped<IProductRepository, ProductRepository>();
 			services.AddScoped<ITokenRepository, TokenRepository>();
 			services.AddScoped<IMemberRepository, MemberRepository>();
@@ -54,7 +54,7 @@ namespace SmartCommerce.Persistence
 			services.AddScoped<IBranchService, BranchService>();
 			services.AddScoped<IRoleService, RoleService>();
 			services.AddScoped<IUserService, UserService>();
-			services.AddScoped<ICategoryService, CategoryService>();
+			services.AddScoped<IProductCategoryService, ProductCategoryService>();
 			services.AddScoped<IProductService, ProductService>();
 			services.AddScoped<ITokenService, TokenService>();
 			services.AddScoped<IMemberService, MemberService>();

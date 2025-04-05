@@ -11,10 +11,12 @@
 				<tr>
 					@foreach (var cellData in Model.Columns)
 					{
-						<th @Html.Raw(cellData.GetAttribute()) scope="col">
-							@await cellData.RenderCellView.Invoke(null)
-							@await Component.InvokeAsync("SortButton", new { sortBy = cellData.SortBy })
-						</th>
+						if (cellData != null) {
+							<th @Html.Raw(cellData.GetAttribute()) scope="col">
+								@await cellData.RenderCellView!.Invoke(null)
+								@await Component.InvokeAsync("SortButton", new { sortBy = cellData.SortBy })
+							</th>
+						}
 					}
 				</tr>
 			</thead>
@@ -27,9 +29,11 @@
 					<tr @Html.Raw(Model.GetRowAttribute(rowData))>
 						@foreach (var cellData in Model.Cells)
 						{
-							<td @Html.Raw(cellData.GetAttribute())>
-								@await cellData.RenderCellView.Invoke(rowData)
-							</td>
+							if (cellData != null) {
+								<td @Html.Raw(cellData.GetAttribute())>
+									@await cellData.RenderCellView!.Invoke(rowData)
+								</td>
+							}
 						}
 					</tr>
 				}
@@ -50,7 +54,7 @@
 						Constants.MANAGER_COMPONENT_NAME_PAGINATION,
 						new
 						{
-							pageIndex = Model.PageInfo.PageIndex,
+							pageIndex = Model.PageInfo!.PageIndex,
 							pageSize = Model.PageInfo.PageSize,
 							searchCount = Model.PageInfo.SearchCount,
 							searchHitCount = Model.PageInfo.SearchHitCount,

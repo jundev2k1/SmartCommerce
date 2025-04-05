@@ -2,16 +2,16 @@
 
 namespace SmartCommerce.Persistence.Services
 {
-	public partial class CategoryService : ServiceBase, ICategoryService
+	public partial class ProductCategoryService : ServiceBase, IProductCategoryService
 	{
 		#region Constructor
 		/// <summary>Context singleton</summary>
-		private readonly ICategoryRepository _categoryRepository;
+		private readonly IProductCategoryRepository _categoryRepository;
 
 		/// <summary>
 		/// Constructor
 		/// </summary>
-		public CategoryService(ICategoryRepository categoryRepository)
+		public ProductCategoryService(IProductCategoryRepository categoryRepository)
 		{
 			_categoryRepository = categoryRepository;
 		}
@@ -23,9 +23,9 @@ namespace SmartCommerce.Persistence.Services
 		/// </summary>
 		/// <param name="input">Search condition input</param>
 		/// <returns>Search result model</returns>
-		public async Task<SearchResultModel<CategoryModel>> GetByCriteria(CategoryFilterModel input)
+		public async Task<SearchResultModel<ProductCategoryModel>> GetByCriteria(ProductCategoryFilterModel input)
 		{
-			if (string.IsNullOrEmpty(input.BranchId)) return new SearchResultModel<CategoryModel>();
+			if (string.IsNullOrEmpty(input.BranchId)) return new SearchResultModel<ProductCategoryModel>();
 
 			var result = await _categoryRepository.GetByCriteria(input);
 			return result;
@@ -36,7 +36,7 @@ namespace SmartCommerce.Persistence.Services
 		/// </summary>
 		/// <param name="branchId">Branch id</param>
 		/// <returns>Root category model list</returns>
-		public async Task<CategoryModel[]> GetAllRootCategories(string branchId)
+		public async Task<ProductCategoryModel[]> GetWithChilds(string branchId)
 		{
 			return await _categoryRepository.GetAllRootCategories(branchId);
 		}
@@ -47,7 +47,7 @@ namespace SmartCommerce.Persistence.Services
 		/// <param name="branchId">Branch id</param>
 		/// <param name="categoryId">Category id</param>
 		/// <returns>Category model</returns>
-		public async Task<CategoryModel?> Get(string branchId, string categoryId)
+		public async Task<ProductCategoryModel?> Get(string branchId, string categoryId)
 		{
 			return await _categoryRepository.Get(branchId, categoryId);
 		}
@@ -59,7 +59,7 @@ namespace SmartCommerce.Persistence.Services
 		/// </summary>
 		/// <param name="model">Category model</param>
 		/// <returns>Insert status</returns>
-		public async Task<bool> Insert(CategoryModel model)
+		public async Task<bool> Insert(ProductCategoryModel model)
 		{
 			model.DateCreated = DateTime.Now;
 			model.DateChanged = null;
@@ -72,7 +72,7 @@ namespace SmartCommerce.Persistence.Services
 		/// </summary>
 		/// <param name="model">Category model</param>
 		/// <returns>Update status</returns>
-		public async Task<bool> Update(CategoryModel model)
+		public async Task<bool> Update(ProductCategoryModel model)
 		{
 			model.DateChanged = DateTime.Now;
 			return await _categoryRepository.Update(model);
@@ -84,7 +84,7 @@ namespace SmartCommerce.Persistence.Services
 		/// <param name="categoryId">Category id</param>
 		/// <param name="updateAction">Update action</param>
 		/// <returns>Update status</returns>
-		public async Task<bool> Update(string branchId, string categoryId, Action<Category> updateAction)
+		public async Task<bool> Update(string branchId, string categoryId, Action<ProductCategory> updateAction)
 		{
 			return await _categoryRepository.Update(branchId, categoryId, updateAction);
 		}

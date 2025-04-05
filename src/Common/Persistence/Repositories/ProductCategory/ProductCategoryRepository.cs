@@ -2,13 +2,13 @@
 
 namespace SmartCommerce.Persistence.Repositories
 {
-	public partial class CategoryRepository : RepositoryBase, ICategoryRepository
+	public partial class ProductCategoryRepository : RepositoryBase, IProductCategoryRepository
 	{
 		/// <summary>
 		/// Constructor
 		/// </summary>
 		/// <param name="dbContext">Context</param>
-		public CategoryRepository(ApplicationDBContext dbContext, IFileLogger logger)
+		public ProductCategoryRepository(ApplicationDBContext dbContext, IFileLogger logger)
 			: base(dbContext, logger)
 		{
 		}
@@ -18,12 +18,12 @@ namespace SmartCommerce.Persistence.Repositories
 		/// </summary>
 		/// <param name="input">Search condition input</param>
 		/// <returns>Search result model</returns>
-		public async Task<SearchResultModel<CategoryModel>> GetByCriteria(CategoryFilterModel input)
+		public async Task<SearchResultModel<ProductCategoryModel>> GetByCriteria(ProductCategoryFilterModel input)
 		{
 			var searchCondition = FilterConditionBuilder.GetCategoryFilters(input);
 
 			// Search with query
-			var query = _dbContext.Categories
+			var query = _dbContext.ProductCategories
 				.AsQueryable()
 				.Where(searchCondition)
 				.OrderByDescending(product => product.DateCreated);
@@ -39,7 +39,7 @@ namespace SmartCommerce.Persistence.Repositories
 				.Take(input.PageSize)
 				.Select(category => category.MapToModel())
 				.ToArrayAsync();
-			var result = new SearchResultModel<CategoryModel>
+			var result = new SearchResultModel<ProductCategoryModel>
 			{
 				Items = data,
 				TotalPage = totalPage,
@@ -53,11 +53,11 @@ namespace SmartCommerce.Persistence.Repositories
 		/// </summary>
 		/// <param name="branchId">Branch id</param>
 		/// <returns>Root category model list</returns>
-		public async Task<CategoryModel[]> GetAllRootCategories(string branchId)
+		public async Task<ProductCategoryModel[]> GetAllRootCategories(string branchId)
 		{
-			var result = await _dbContext.Categories
+			var result = await _dbContext.ProductCategories
 				.Where(item => item.BranchId == branchId
-					&& item.ParentCategoryId == Constants.FLG_CATEGORY_PARENT_CATEGORY_ROOT)
+					&& item.ParentId == Constants.FLG_CATEGORY_PARENT_CATEGORY_ROOT)
 				.Select(item => item.MapToModel())
 				.ToArrayAsync();
 			return result;
@@ -69,9 +69,9 @@ namespace SmartCommerce.Persistence.Repositories
 		/// <param name="branchId">Branch id</param>
 		/// <param name="categoryIds">Category id list</param>
 		/// <returns>Category model list</returns>
-		public async Task<CategoryModel[]> Gets(string branchId, string[] categoryIds)
+		public async Task<ProductCategoryModel[]> Gets(string branchId, string[] categoryIds)
 		{
-			var result = await _dbContext.Categories
+			var result = await _dbContext.ProductCategories
 				.Where(item => item.BranchId == branchId
 					&& categoryIds.Contains(item.CategoryId))
 				.Select(item => item.MapToModel())
@@ -85,9 +85,9 @@ namespace SmartCommerce.Persistence.Repositories
 		/// <param name="branchId">Branch id</param>
 		/// <param name="categoryId">Category id</param>
 		/// <returns>Category model</returns>
-		public async Task<CategoryModel?> Get(string branchId, string categoryId)
+		public async Task<ProductCategoryModel?> Get(string branchId, string categoryId)
 		{
-			var category = await _dbContext.Categories
+			var category = await _dbContext.ProductCategories
 				.FirstOrDefaultAsync(cate =>
 					(cate.DelFlg == false)
 					&& (cate.BranchId == branchId)
@@ -100,7 +100,7 @@ namespace SmartCommerce.Persistence.Repositories
 		/// </summary>
 		/// <param name="model">Category model</param>
 		/// <returns>Status insert</returns>
-		public async Task<bool> Insert(CategoryModel model)
+		public async Task<bool> Insert(ProductCategoryModel model)
 		{
 			var category = await Get(model.BranchId, model.CategoryId);
 			if (category != null) return false;
@@ -119,11 +119,11 @@ namespace SmartCommerce.Persistence.Repositories
 		/// </summary>
 		/// <param name="model">Model</param>
 		/// <returns>Status update</returns>
-		public async Task<bool> Update(CategoryModel model)
+		public async Task<bool> Update(ProductCategoryModel model)
 		{
 			var result = await BeginTransaction(async () =>
 			{
-				var category = await _dbContext.Categories
+				var category = await _dbContext.ProductCategories
 					.FirstOrDefaultAsync(cate =>
 						(cate.BranchId == model.BranchId)
 						&& (cate.CategoryId == model.CategoryId));
@@ -142,11 +142,11 @@ namespace SmartCommerce.Persistence.Repositories
 		/// <param name="categoryId">Category id</param>
 		/// <param name="UpdateAction">Update action</param>
 		/// <returns>Update status</returns>
-		public async Task<bool> Update(string branchId, string categoryId, Action<Category> UpdateAction)
+		public async Task<bool> Update(string branchId, string categoryId, Action<ProductCategory> UpdateAction)
 		{
 			var result = await BeginTransaction(async () =>
 			{
-				var category = await _dbContext.Categories
+				var category = await _dbContext.ProductCategories
 					.FirstOrDefaultAsync(item =>
 						(item.BranchId == branchId)
 						&& (item.CategoryId == categoryId));
@@ -169,7 +169,7 @@ namespace SmartCommerce.Persistence.Repositories
 			var deleteCount = 0;
 			var result = await BeginTransaction(async () =>
 			{
-				var categorys = await _dbContext.Categories
+				var categorys = await _dbContext.ProductCategories
 					.Where(item => item.BranchId == branchId
 						&& categoryIds.Contains(item.CategoryId))
 					.ToArrayAsync();
@@ -191,7 +191,7 @@ namespace SmartCommerce.Persistence.Repositories
 		/// <returns>Is exist?</returns>
 		public async Task<bool> IsExist(string branchId, string categoryId)
 		{
-			var result = await _dbContext.Categories
+			var result = await _dbContext.ProductCategories
 				.AnyAsync(item => (item.BranchId == branchId)
 					&& (item.CategoryId == categoryId));
 			return result;

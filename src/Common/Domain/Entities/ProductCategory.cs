@@ -1,39 +1,39 @@
-﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
+﻿// Copyright (c) 2025 - Jun Dev. All rights reserved
 
 #nullable disable
 namespace SmartCommerce.Domain.Entities;
 
-[Table("Category")]
-public partial class Category
+[Table("ProductCategory")]
+public partial class ProductCategory
 {
 	[Key, Required]
 	[StringLength(20)]
 	public string BranchId { get; set; }
 
 	[Key, Required]
-	[StringLength(20)]
+	[StringLength(256)]
 	public string CategoryId { get; set; }
 
-	[StringLength(60)]
-	public string CategoryName { get; set; }
+	[StringLength(256)]
+	public string ParentId { get; set; }
 
-	[StringLength(255)]
+	[StringLength(60)]
+	public string Name { get; set; }
+
+	[StringLength(256)]
 	public string Avatar { get; set; } = string.Empty;
 
-	[StringLength(4000)]
-	public string Description { get; set; } = string.Empty;
+    [Column(TypeName = "nvarchar(max)")]
+    public string Description { get; set; } = string.Empty;
 
-	[StringLength(20)]
-	public string ParentCategoryId { get; set; } = string.Empty;
+    public int Priority { get; set; }
 
-	public int Priority { get; set; }
-
-	public CategoryStatusEnum Status { get; set; }
+    public bool ValidFlg { get; set; }
 
 	public bool DelFlg { get; set; }
 
 	[Column(TypeName = "datetime")]
-	public DateTime DateCreated { get; set; }
+	public DateTime? DateCreated { get; set; }
 
 	[Column(TypeName = "datetime")]
 	public DateTime? DateChanged { get; set; }

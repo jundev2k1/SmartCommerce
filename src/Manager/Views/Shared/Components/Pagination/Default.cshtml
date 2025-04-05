@@ -10,7 +10,7 @@
 		<input id="searchDisplayCount"
 			class="form-control number-input"
 			style="width: 70px"
-			onchange="setAndRedirectRequestParams('@Model.CreatePaginationUrl(Model.PageIndex)', [['@Constants.REQUEST_KEY_PAGE_SIZE', event.target.value]])"
+			onchange="setAndRedirectRequestParams('@Model.CreatePaginationUrl!(Model.PageIndex)', [['@Constants.REQUEST_KEY_PAGE_SIZE', event.target.value]])"
 			type="number"
 			data-max-length="3"
 			value="@Model.PageSize" />

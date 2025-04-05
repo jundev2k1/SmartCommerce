@@ -10,7 +10,7 @@ namespace SmartCommerce.Persistence.Common
 
 		IUserService Users { get; }
 
-		ICategoryService Categories { get; }
+		IProductCategoryService ProductCategories { get; }
 
 		IProductService Products { get; }
 

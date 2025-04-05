@@ -1,0 +1,329 @@
+﻿@* // Copyright (c) 2025 - Jun Dev. All rights reserved *@
+
+@model ProductCategorySettingViewModel
+@{
+	ViewData[Constants.GLOBAL_KEY_TITLE] = _localizer.Globals["Nav_Product_Category"];
+	ViewData[Constants.GLOBAL_KEY_CURRENT_PAGE] = "ProductCategory_Page";
+
+	var breadcrumbs = new BreadcrumbViewModel[]
+	{
+		new BreadcrumbViewModel { Title = _localizer.Globals["Nav_Home"].Value, Href = Constants.MODULE_HOME_HOME_PATH },
+		new BreadcrumbViewModel { Title = _localizer.Globals["Nav_Product_Category"].Value, Href = Constants.MODULE_PRODUCT_PRODUCTLIST_PATH, IsDisabled = true }
+	};
+}
+
+@section ViewCss {
+	<link rel="stylesheet" href="~/css/view/product-category/product-category-setting.css" asp-append-version="true" />
+}
+
+@await Component.InvokeAsync(Constants.MANAGER_COMPONENT_NAME_BREADCRUMB, breadcrumbs)
+
+<section id="searchBar" class="site-card">
+	<form id="advanceSearchForm" name="searchForm" asp-route="@Constants.MODULE_PRODUCT_PRODUCTLIST_NAME" method="post">
+		<div class="row g-md-2 gx-1 gy-2">
+			<div class="col-md-8 col-12">
+				<div class="d-flex gap-1 search-bar-group">
+					<div class="flex-grow-1">
+						@await Component.InvokeAsync(Constants.MANAGER_COMPONENT_NAME_SEARCH_INPUT, new SearchInputViewModel { Name = "SearchFields.Keywords", Value = Model.SearchFields.Keywords, ClassName = "search-bar-input" })
+					</div>
+					<button id="btnExport" type="button" class="btn site-btn-outline-info only-desktop" data-bs-toggle="collapse" href="#filterAdvancedCollapse">
+						<i class="fa-light fa-filter-list"></i>
+						@_localizer.Globals["Btn_Filter"]
+					</button>
+				</div>
+			</div>
+			<div class="col-md-4 col-12 d-flex justify-content-end gap-2">
+				<button id="btnExport" type="button" class="btn site-btn-outline-info only-mobile" data-bs-toggle="collapse" href="#filterAdvancedCollapse">
+					<i class="fa-light fa-filter-list"></i>
+					@_localizer.Globals["Btn_Filter"]
+				</button>
+				<button type="button" class="btn site-btn-outline-theme" data-bs-toggle="modal" data-bs-target="#exportModal">
+					<i class="fa-light fa-file-export"></i>
+					@_localizer.Globals["Btn_Export"]
+				</button>
+				<a asp-route="@Constants.MODULE_PRODUCT_PRODUCTREGISTER_NAME" class="btn site-btn-success">
+					<i class="fa-light fa-plus"></i>
+					@_localizer.Globals["Btn_Create"]
+				</a>
+			</div>
+			<div class="col-12">
+				<div class="collapse" id="filterAdvancedCollapse">
+					<div class="card card-body">
+						<h2 class="fs-4">@_localizer.Globals["Title_SearchAdvanced"]</h2>
+						<ul class="row g-md-2 gx-1 gy-2">
+							<li class="col-md-4 col-6">
+								<div class="form-group">
+									<label asp-for="SearchFields.CategoryId" class="form-label">@_localizer.Fields["Product_ProductId"]</label>
+									<input type="text" asp-for="SearchFields.CategoryId" class="form-control" id="productIdForSearch" placeholder="@_localizer.Globals["PlaceHolder_SearchWith"] @_localizer.Fields["Product_ProductId"]...">
+								</div>
+							</li>
+							<li class="col-md-8 col-12">
+								<div class="form-group">
+									<label for="categoryNameForSearch" class="form-label">@_localizer.Fields["Product_Name"]</label>
+									<input asp-for="SearchFields.Name" type="text" class="form-control" id="categoryNameForSearch" placeholder="@_localizer.Globals["PlaceHolder_SearchWith"] @_localizer.Fields["Product_Name"]...">
+								</div>
+							</li>
+							<li class="col-md-6 col-12">
+								<div class="form-group">
+									<label for="dateCreatedFromForSearch" class="form-label">@_localizer.Fields["Product_DateCreated"]</label>
+									<div class="d-flex gap-1 align-items-center">
+										<input type="datetime" asp-for="SearchFields.DateCreatedFrom" class="form-control datetime-picker" id="dateCreatedFromForSearch" placeholder="@_localizer.Globals["PlaceHolder_From"]...">
+										~
+										<input type="datetime" asp-for="SearchFields.DateCreatedTo" class="form-control datetime-picker" id="dateCreatedToForSearch" placeholder="@_localizer.Globals["PlaceHolder_To"]...">
+									</div>
+								</div>
+							</li>
+							<li class="col-md-6 col-12">
+								<div class="form-group">
+									<label for="dateChangedFromForSearch" class="form-label">@_localizer.Fields["Product_DateChanged"]</label>
+									<div class="d-flex gap-1 align-items-center">
+										<input type="datetime" asp-for="SearchFields.DateChangedFrom" class="form-control datetime-picker" id="dateChangedFromForSearch" placeholder="@_localizer.Globals["PlaceHolder_From"]...">
+										~
+										<input type="datetime" asp-for="SearchFields.DateChangedTo" class="form-control datetime-picker" id="dateChangedToForSearch" placeholder="@_localizer.Globals["PlaceHolder_To"]...">
+									</div>
+								</div>
+							</li>
+						</ul>
+						<div id="searchControl" class="d-flex justify-content-md-end mt-4">
+							<div class="group-control w-auto row g-md-2 gx-1 gy-2">@* 
+								<div class="form-group col-md-auto col-12">
+									@Html.DropDownListFor(
+										model => model.SearchFields.DelFlg,
+										Model.InputOption.DeleteFlg,
+										new { id="delFlgForSearch", Class = "form-select w-auto" })
+								</div> *@
+								<div class="form-group col-md-auto col-8">
+									<button id="btnSubmitAdvanced" type="submit" class="btn site-btn-theme">
+										<i class="fa-light fa-magnifying-glass"></i>
+										@_localizer.Globals["Btn_SearchAdvanced"]
+									</button>
+								</div>
+								<div class="form-group col-md-auto col-4">
+									<button id="btnResetForm" type="reset" class="btn site-btn-outline-theme" onclick="resetSearchForm('advanceSearchForm')">
+										<i class="fa-light fa-arrow-rotate-left"></i>
+										@_localizer.Globals["Btn_ResetForm"]
+									</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+</section>
+<section id="bodyPageLoad" class="site-card mt-2">
+	<div class="wrapper">
+		<ul class="category-list root-category"></ul>
+		<div class="information-box" style="display: none">
+			<div class="box-header">
+				<button id="btnCloseInfo" class="btn btn-primary">
+					x
+				</button>
+				<h2>Information</h2>
+			</div>
+			<div class="box-body">
+				<form id="categoryForm">
+					<div class="row">
+						<div class="col-6 mb-2">
+							<label for="parentID" class="form-label">Parent ID</label>
+							<input name="parentID" type="text" id="parentID" class="form-control" maxlength="3" />
+							<span class="error-message"></span>
+						</div>
+						<div class="col-6 mb-2">
+							<label for="categoryID" class="form-label">ID</label>
+							<input name="categoryID" type="text" id="categoryID" class="form-control" maxlength="3" />
+							<span class="error-message"></span>
+						</div>
+						<div class="col-12 mb-2">
+							<label for="cateName" class="form-label">Name</label>
+							<input name="name" type="text" id="cateName" class="form-control" />
+							<span class="error-message"></span>
+						</div>
+						<div class="col-12 mb-2">
+							<label for="cateDesc" class="form-label">Description</label>
+							<input name="description" type="text" id="cateDesc" class="form-control" />
+							<span class="error-message"></span>
+						</div>
+						<div id="formControl" class="col-12">
+							<button class="btn btn-primary">Confirm</button>
+							<button class="btn btn-danger">Delete</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</section>
+<section id="ModalContent">
+	<div class="modal fade" id="exportModal" tabindex="-1" aria-labelledby="exportModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h1 class="modal-title fs-5" id="exportModalLabel">@_localizer.Globals["Btn_Export"]</h1>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<p>
+						Chức năng này đang được thiết kế và lên ý tưởng
+					</p>
+					<p>
+						This feature is being designed and conceptualized
+					</p>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn site-btn-secondary" data-bs-dismiss="modal">@_localizer.Globals["Btn_Close"]</button>
+					<button type="button" class="btn site-btn-primary">@_localizer.Globals["Btn_Export"]</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+@section ViewScript {
+	<script>
+		var localizer = @Html.Raw(JsonConvert.SerializeObject(_localizer.Dictionary));
+		var datasource = @Html.Raw(Model.PageData);
+	</script>
+	<script type="module" src="@Url.Content("~/js/areas/product-categories/product-category-setting/product-category-setting-handler.js")"></script>
+	<script type="module">
+		import { SearchFormHandler } from "@Url.Content("~/js/common/form/index.js")";
+
+		// Set search advance setting
+		const searchAdvanceSetting = {
+			btnSearchSelector: '#btnSubmitAdvanced',
+			targetSelector: '#searchBar',
+			searchUrl: '@Url.RouteUrl(Constants.MODULE_PRODUCT_PRODUCTLIST_NAME)',
+			defaultParameters: {
+				'@Constants.REQUEST_KEY_PAGE_NO': '@Model.SearchFields.PageNumber',
+				'@Constants.REQUEST_KEY_PAGE_SIZE': '@Model.SearchFields.PageSize',
+			},
+			searchSettings: [
+				{
+					selector: '#productIdForSearch',
+					requestKey: '@Constants.REQUEST_KEY_PRODUCT_PRODUCT_ID',
+				},
+				{
+					selector: '#StatusForSearch',
+					requestKey: '@Constants.REQUEST_KEY_PRODUCT_STATUS',
+				},
+				{
+					selector: '#productNameForSearch',
+					requestKey: '@Constants.REQUEST_KEY_PRODUCT_PRODUCT_NAME',
+				},
+				{
+					selector: '#takeOverByForSearch',
+					requestKey: '@Constants.REQUEST_KEY_PRODUCT_TAKE_OVER_ID',
+				},
+				{
+					selector: '#DisplayPriceForSearch',
+					requestKey: '@Constants.REQUEST_KEY_PRODUCT_PRICE_TYPE',
+				},
+				{
+					selector: '#address1ForSearch',
+					requestKey: '@Constants.REQUEST_KEY_PRODUCT_ADDRESS1',
+				},
+				{
+					selector: '#address2ForSearch',
+					requestKey: '@Constants.REQUEST_KEY_PRODUCT_ADDRESS2',
+				},
+				{
+					selector: '#address3ForSearch',
+					requestKey: '@Constants.REQUEST_KEY_PRODUCT_ADDRESS3',
+				},
+				{
+					selector: '#address4ForSearch',
+					requestKey: '@Constants.REQUEST_KEY_PRODUCT_ADDRESS4',
+				},
+				{
+					selector: '#minPrice1ForSearch',
+					requestKey: '@Constants.REQUEST_KEY_PRODUCT_MIN_PRICE1',
+				},
+				{
+					selector: '#maxPrice1ForSearch',
+					requestKey: '@Constants.REQUEST_KEY_PRODUCT_MAX_PRICE1',
+				},
+				{
+					selector: '#minPrice2ForSearch',
+					requestKey: '@Constants.REQUEST_KEY_PRODUCT_MIN_PRICE2',
+				},
+				{
+					selector: '#maxPrice2ForSearch',
+					requestKey: '@Constants.REQUEST_KEY_PRODUCT_MAX_PRICE2',
+				},
+				{
+					selector: '#minPrice3ForSearch',
+					requestKey: '@Constants.REQUEST_KEY_PRODUCT_MIN_PRICE3',
+				},
+				{
+					selector: '#maxPrice3ForSearch',
+					requestKey: '@Constants.REQUEST_KEY_PRODUCT_MAX_PRICE3',
+				},
+				{
+					selector: '#minSize1ForSearch',
+					requestKey: '@Constants.REQUEST_KEY_PRODUCT_MIN_SIZE1',
+				},
+				{
+					selector: '#maxSize1ForSearch',
+					requestKey: '@Constants.REQUEST_KEY_PRODUCT_MAX_SIZE1',
+				},
+				{
+					selector: '#minSize2ForSearch',
+					requestKey: '@Constants.REQUEST_KEY_PRODUCT_MIN_SIZE2',
+				},
+				{
+					selector: '#maxSize2ForSearch',
+					requestKey: '@Constants.REQUEST_KEY_PRODUCT_MAX_SIZE2',
+				},
+				{
+					selector: '#minSize3ForSearch',
+					requestKey: '@Constants.REQUEST_KEY_PRODUCT_MIN_SIZE3',
+				},
+				{
+					selector: '#maxSize3ForSearch',
+					requestKey: '@Constants.REQUEST_KEY_PRODUCT_MAX_SIZE3',
+				},
+				{
+					selector: '#dateChangedFromForSearch',
+					requestKey: '@Constants.REQUEST_KEY_PRODUCT_DATE_CHANGED_FROM',
+				},
+				{
+					selector: '#dateChangedToForSearch',
+					requestKey: '@Constants.REQUEST_KEY_PRODUCT_DATE_CHANGED_TO',
+				},
+				{
+					selector: '#dateCreatedFromForSearch',
+					requestKey: '@Constants.REQUEST_KEY_PRODUCT_DATE_CREATED_FROM',
+				},
+				{
+					selector: '#dateCreatedToForSearch',
+					requestKey: '@Constants.REQUEST_KEY_PRODUCT_DATE_CREATED_TO',
+				},
+				{
+					selector: '#delFlgForSearch',
+					requestKey: '@Constants.REQUEST_KEY_PRODUCT_DELETE_FLG',
+				},
+			],
+		};
+		StoreWindowLoadCallback.push(() => new SearchFormHandler(searchAdvanceSetting).init());
+
+		// Set search with keyword setting
+		const searchKeywordSetting = {
+			btnSearchSelector: '#searchBar .search-button',
+			targetSelector: '',
+			searchUrl: '@Url.RouteUrl(Constants.MODULE_PRODUCT_PRODUCTLIST_NAME)',
+			defaultParameters: {
+				'@Constants.REQUEST_KEY_PAGE_NO': '@Model.SearchFields.PageNumber',
+				'@Constants.REQUEST_KEY_PAGE_SIZE': '@Model.SearchFields.PageSize',
+				'@Constants.REQUEST_KEY_PRODUCT_DELETE_FLG': '@Constants.DEFAULT_FLG_OFF',
+			},
+			searchSettings: [
+				{
+					selector: '#searchBar .search-input',
+					requestKey: '@Constants.REQUEST_KEY_KEYWORD',
+				},
+			]
+		};
+		StoreWindowLoadCallback.push(() => new SearchFormHandler(searchKeywordSetting).init());
+	</script>
+}

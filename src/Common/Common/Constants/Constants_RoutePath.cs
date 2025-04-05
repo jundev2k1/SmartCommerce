@@ -46,6 +46,12 @@ namespace SmartCommerce.Common
 		public const string MODULE_ROLE_ROLEDETAIL_PATH = "/role/detail/{id}";
 		public const string MODULE_ROLE_ROLEDETAIL_NAME = "RoleDetail";
 
+		// Role module: product category
+		public const string MODULE_PRODUCT_CATEGORY_AREA = "productCategories";
+		// Role module: product category setting
+		public const string MODULE_PRODUCT_CATEGORY_SETTING_PATH = "/product-category";
+		public const string MODULE_PRODUCT_CATEGORY_SETTING_NAME = "CategorySetting";
+
 		// Product module
 		public const string MODULE_PRODUCT_AREA = "products";
 		// Product module: product list

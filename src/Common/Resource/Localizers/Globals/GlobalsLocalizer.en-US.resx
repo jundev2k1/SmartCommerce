@@ -211,6 +211,9 @@
   <data name="Nav_Product_Register" xml:space="preserve">
     <value>Product Register</value>
   </data>
+  <data name="ProductCategory_Page" xml:space="preserve">
+    <value>Product Category</value>
+  </data>
   <data name="Nav_Schedule" xml:space="preserve">
     <value>Schedule</value>
   </data>

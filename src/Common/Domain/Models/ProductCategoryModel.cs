@@ -1,28 +1,28 @@
-﻿// Copyright (c) 2024 - Jun Dev. All rights reserved
+﻿// Copyright (c) 2025 - Jun Dev. All rights reserved
 
 namespace SmartCommerce.Domain.Models
 {
-	public sealed class CategoryModel : ModelBase
+	public sealed class ProductCategoryModel
 	{
 		public string BranchId { get; set; } = string.Empty;
 
 		public string CategoryId { get; set; } = string.Empty;
 
-		public string CategoryName { get; set; } = string.Empty;
+		public string ParentId { get; set; } = string.Empty;
+
+		public string Name { get; set; } = string.Empty;
 
 		public string Avatar { get; set; } = string.Empty;
 
 		public string Description { get; set; } = string.Empty;
 
-		public string ParentCategoryId { get; set;} = string.Empty;
+        public int Priority { get; set; }
 
-		public int Priority { get; set;}
-
-		public CategoryStatusEnum Status { get; set; } = CategoryStatusEnum.Active;
+        public bool ValidFlg { get; set; }
 
 		public bool DelFlg { get; set; }
 
-		public DateTime DateCreated { get; set; }
+		public DateTime? DateCreated { get; set; }
 
 		public DateTime? DateChanged { get; set; }
 

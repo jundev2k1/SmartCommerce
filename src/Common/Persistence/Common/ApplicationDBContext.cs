@@ -19,7 +19,7 @@ public partial class ApplicationDBContext : DbContext
 
 	public virtual DbSet<User> Users { get; set; }
 
-	public virtual DbSet<Category> Categories { get; set; }
+	public virtual DbSet<ProductCategory> ProductCategories { get; set; }
 
 	public virtual DbSet<Product> Products { get; set; }
 
@@ -91,17 +91,16 @@ public partial class ApplicationDBContext : DbContext
 			entity.Property(e => e.RoleId);
 		});
 
-		modelBuilder.Entity<Category>(entity =>
+		modelBuilder.Entity<ProductCategory>(entity =>
 		{
 			entity.HasIndex(e => e.CategoryId);
-			entity.HasKey(e => new { e.BranchId, e.CategoryId }).HasName("PK_Category_1");
+			entity.HasKey(e => new { e.BranchId, e.CategoryId }).HasName("PK_ProductCategory_1");
 
-			entity.Property(e => e.CategoryName).HasDefaultValueSql("('')");
+			entity.Property(e => e.Name).HasDefaultValueSql("('')");
 			entity.Property(e => e.Avatar).HasDefaultValueSql("('')");
 			entity.Property(e => e.Description).HasDefaultValueSql("('')");
-			entity.Property(e => e.ParentCategoryId).HasDefaultValueSql("(1)");
-			entity.Property(e => e.Priority).HasDefaultValueSql("('root')");
-			entity.Property(e => e.Status).HasConversion<int>().HasDefaultValueSql("(1)");
+			entity.Property(e => e.ParentId).HasDefaultValueSql("(1)");
+			entity.Property(e => e.Priority).HasDefaultValueSql("('')");
 			entity.Property(e => e.DelFlg);
 			entity.Property(e => e.DateCreated).HasDefaultValueSql("(getdate())");
 			entity.Property(e => e.DateChanged);
